@@ -35,7 +35,12 @@ packer.startup(function(use)
 	use('nvim-telescope/telescope-***REMOVED***le-browser.nvim')
 	
 	-- Treesitter Syntax Highlighting
-	use('nvim-treesitter/nvim-treesitter') 
+	use({
+		'nvim-treesitter/nvim-treesitter',
+		con***REMOVED***g = function()
+			require('mm.plugins.treesitter')
+		end,
+	***REMOVED***) 
 
 	-- Colorschemes
 	use('wittyjudge/gruvbox-material.nvim')
