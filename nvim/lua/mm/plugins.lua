@@ -5,9 +5,9 @@
 -- * .dotfiles * --
 -- Neovim -- Plugins.lua -----------------------------
 
-local status, packer = pcall(require, "packer")
+local status, packer = pcall(require, 'packer')
 if not status then
-	print("Packer is not installed")
+	print('Packer is not installed')
 	return
 end
 
@@ -21,48 +21,50 @@ augroup END
 
 packer.startup(function(use)
 	-- Packer can manage itself
-	use("wbthomason/packer.nvim")
+	use('wbthomason/packer.nvim')
 
 	-- Dashboard is a nice start screen for nvim
-	use("glepnir/dashboard-nvim")
+	use('glepnir/dashboard-nvim')
 
 	-- Telescope
 	use({
-		"nvim-telescope/telescope.nvim",
-		tag = "0.1.0",
-		requires = { { "nvim-lua/plenary.nvim" } },
+		'nvim-telescope/telescope.nvim',
+		tag = '0.1.0',
+		requires = { { 'nvim-lua/plenary.nvim' } },
 	})
-	use("nvim-telescope/telescope-file-browser.nvim")
+	use('nvim-telescope/telescope-file-browser.nvim')
 	
 	-- Treesitter Syntax Highlighting
-	use("nvim-treesitter/nvim-treesitter") 
+	use('nvim-treesitter/nvim-treesitter') 
 
 	-- Colorschemes
-	use("wittyjudge/gruvbox-material.nvim")
-	use("olimorris/onedarkpro.nvim")
-	use("gruvbox-community/gruvbox")
-	use("martinsione/darkplus.nvim")
-	use("EdenEast/nightfox.nvim")
-	use("shaunsingh/nord.nvim")
-	use{"folke/tokyonight.nvim", branch = main }
-	use{"catppuccin/nvim", as = 'catppuccin' }
-	use("rose-pine/neovim")
-	use{"neanias/everforest-nvim", branch = main }
+	use('wittyjudge/gruvbox-material.nvim')
+	use('olimorris/onedarkpro.nvim')
+	use('gruvbox-community/gruvbox')
+	use('martinsione/darkplus.nvim')
+	use('EdenEast/nightfox.nvim')
+	use('shaunsingh/nord.nvim')
+	use{'folke/tokyonight.nvim', branch = main }
+	use{'catppuccin/nvim', as = 'catppuccin' }
+	use('rose-pine/neovim')
+	use{'sainnhe/everforest', background = 'hard'}
+	-- use{'neanias/everforest-nvim', branch = main }
 	
 	-- Autocompletion and Documentation
-	use{"neoclide/coc.nvim", 
+	use{'neoclide/coc.nvim', 
 		branch = 'release'}
 
 	-- Better editing
-	use("tpope/vim-surround")
-	use("tpope/vim-commentary")
-	use {
-		"windwp/nvim-autopairs",
-		config = function() require("nvim-autopairs").setup {} end
-	}
+	use('tpope/vim-surround')
+	use('tpope/vim-commentary')
+	use {'windwp/nvim-autopairs',
+		config = function() require('nvim-autopairs').setup {} end}
+	use{'norcalli/nvim-colorizer.lua',
+		config = function() require('colorizer').setup {} end}
+
 	-- Better UI/UX
-	use("ryanoasis/vim-devicons")
-	use("scrooloose/nerdtree")
+	use('ryanoasis/vim-devicons')
+	use('scrooloose/nerdtree')
 
 	-- Status line
 	use({
@@ -74,9 +76,9 @@ packer.startup(function(use)
 
 	-- Zen modes
 	use({
-		"Pocco81/true-zen.nvim",
+		'Pocco81/true-zen.nvim',
 		config = function()
-			require("true-zen").setup {
+			require('true-zen').setup {
 				-- your config goes here
 				-- or just leave it empty :)
 			}
@@ -85,11 +87,11 @@ packer.startup(function(use)
 
 	-- Live Server
 	use({
-		"aurum77/live-server.nvim",
+		'aurum77/live-server.nvim',
 		run = function()
-			require"live_server.util".install()
+			require'live_server.util'.install()
 		end,
-		cmd = { "LiveServer", "LiveServerStart", "LiveServerStop" },
+		cmd = { 'LiveServer', 'LiveServerStart', 'LiveServerStop' },
 	})
 
 	if packer_bootstrap then
