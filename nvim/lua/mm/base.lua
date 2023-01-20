@@ -57,3 +57,4 @@ o.updatetime = 200
 
 -- Remember 50 items in commandline history
 o.history = 50
+
