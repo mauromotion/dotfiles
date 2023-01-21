@@ -1,5 +1,6 @@
 # This ***REMOVED***le contains ***REMOVED***sh universal variable de***REMOVED***nitions.
 # VERSION: 3.0
+SETUVAR --export EDITOR:nvim
 SETUVAR __***REMOVED***sh_initialized:3100
 SETUVAR ***REMOVED***sh_color_autosuggestion:555\x1ebrblack
 SETUVAR ***REMOVED***sh_color_cancel:\x2dr
