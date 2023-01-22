@@ -36,12 +36,20 @@ packer.startup(function(use)
 	
 	-- Treesitter Syntax Highlighting
 	use({
-		'nvim-treesitter/nvim-treesitter',
-		config = function()
-			require('mm.plugins.treesitter')
-		end,
-	}) 
-
+            {
+                'nvim-treesitter/nvim-treesitter',
+                event = 'CursorHold',
+                run = ':TSUpdate',
+                config = function()
+                    require('mm.plugins.treesitter')
+                end,
+            },
+            { 'nvim-treesitter/playground', after = 'nvim-treesitter' },
+            { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' },
+            { 'nvim-treesitter/nvim-treesitter-refactor', after = 'nvim-treesitter' },
+            { 'windwp/nvim-ts-autotag', after = 'nvim-treesitter' },
+            { 'JoosepAlviste/nvim-ts-context-commentstring', after = 'nvim-treesitter' },
+        })
 	-- Colorschemes
 	use('wittyjudge/gruvbox-material.nvim')
 	use('olimorris/onedarkpro.nvim')
