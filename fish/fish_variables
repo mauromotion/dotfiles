@@ -26,7 +26,7 @@ SETUVAR ***REMOVED***sh_color_status:red
 SETUVAR ***REMOVED***sh_color_user:brgreen
 SETUVAR ***REMOVED***sh_color_valid_path:\x2d\x2dunderline
 SETUVAR ***REMOVED***sh_greeting:Welcome\x20to\x20***REMOVED***sh\x2c\x20the\x20friendly\x20interactive\x20shell\x0aType\x20\x60help\x60\x20for\x20instructions\x20on\x20how\x20to\x20use\x20***REMOVED***sh
-SETUVAR ***REMOVED***sh_key_bindings:***REMOVED***sh_default_key_bindings
+SETUVAR ***REMOVED***sh_key_bindings:***REMOVED***sh_vi_key_bindings
 SETUVAR ***REMOVED***sh_pager_color_completion:\x1d
 SETUVAR ***REMOVED***sh_pager_color_description:B3A06D\x1eyellow
 SETUVAR ***REMOVED***sh_pager_color_pre***REMOVED***x:white\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
