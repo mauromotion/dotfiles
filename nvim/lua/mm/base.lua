@@ -18,6 +18,7 @@ o.numberwidth = 5
 o.relativenumber = true
 o.signcolumn = 'yes:2'
 o.cursorline = true
+o.expandtab = true
 o.tabstop = 4
 o.shiftwidth = 4
 o.autoindent = true
