@@ -1,1 +1,0 @@
-/home/mauromotion/.local/share/omf/themes/sashimi/***REMOVED***sh_prompt.***REMOVED***sh
