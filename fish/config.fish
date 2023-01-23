@@ -8,10 +8,11 @@
 ## Aliases
 alias nv="nvim"
 alias vim="nvim"
-alias lg="lazygit"
-alias ..="cd.."
+alias ..="cd .."
 alias mv="mv -i"
 alias rm="rm -i"
+alias gs="git status"
+alias lg="lazygit"
 
 ## rbenv autostart & PATH
 set -x PATH $PATH ~/.rbenv/bin
@@ -31,7 +32,7 @@ end
 
 # note: this erases the default fish_mode_prompt, which adds a vi mode
 # indicator to the left of your prompt
-#function fish_mode_prompt; end
+function fish_mode_prompt; end
 
 # turn on vi mode when the shell starts
-fish_vi_mode
+#fish_vi_mode
