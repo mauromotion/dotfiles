@@ -9,67 +9,53 @@
 local status, db = pcall(require, "dashboard")
 local home = os.getenv("HOME")
 
-db.default_banner = {
-	"",
-	"",
-	" ███▄    █ ▓█████  ▒█████   ██▒   █▓ ██▓ ███▄ ▄███▓",
-	" ██ ▀█   █ ▓█   ▀ ▒██▒  ██▒▓██░   █▒▓██▒▓██▒▀█▀ ██▒",
-	"▓██  ▀█ ██▒▒███   ▒██░  ██▒ ▓██  █▒░▒██▒▓██    ▓██░",
-	"▓██▒  ▐▌██▒▒▓█  ▄ ▒██   ██░  ▒██ █░░░██░▒██    ▒██",
-	"▒██░   ▓██░░▒████▒░ ████▓▒░   ▒▀█░  ░██░▒██▒   ░██▒",
-	"░ ▒░   ▒ ▒ ░░ ▒░ ░░ ▒░▒░▒░    ░ ▐░  ░▓  ░ ▒░   ░  ░",
-	"░ ░░   ░ ▒░ ░ ░  ░  ░ ▒ ▒░    ░ ░░   ▒ ░░  ░      ░",
-	"   ░   ░ ░    ░   ░ ░ ░ ▒       ░░   ▒ ░░      ░",
-	"         ░    ░  ░    ░ ░        ░   ░         ░",
-	"                                ░",
-	"",
-	" [ TIP: To exit Neovim, just power off your computer. ] ",
-	"",
-}
--- linux
---db.preview_command = 'ueberzug'
---
---db.preview_file_path = home .. '/.config/nvim/static/neovim.cat'
-db.preview_file_height = 11
-db.preview_file_width = 70
-db.custom_center = {
-	{
-		icon = "  ",
-		desc = "Recent sessions                         ",
-		shortcut = "SPC s l",
-		action = "SessionLoad",
-	},
-	{
-		icon = "  ",
-		desc = "Find recent files                       ",
-		action = "Telescope oldfiles",
-		shortcut = "SPC f r",
-	},
-	{
-		icon = "  ",
-		desc = "Find files                              ",
-		action = "Telescope find_files find_command=rg,--hidden,--files",
-		shortcut = "SPC f f",
-	},
-	{
-		icon = "  ",
-		desc = "File browser                            ",
-		action = "Telescope file_browser",
-		shortcut = "SPC f b",
-	},
-	{
-		icon = "  ",
-		desc = "Find word                               ",
-		action = "Telescope live_grep",
-		shortcut = "SPC f w",
-	},
-	{
-		icon = "  ",
-		desc = "Load new theme                          ",
-		action = "Telescope colorscheme",
-		shortcut = "SPC h t",
-	},
-}
-db.custom_footer = { "", "  2023: The year of Linux on Desktop! (WSL)   " }
-db.session_directory = "/home/mauromotion/.config/nvim/session"
-db.session_auto_save_on_exit = true
+db.setup({
+  theme = 'hyper',
+  config = {
+    header = {
+    "",
+    "",
+    " ███▄    █ ▓█████  ▒█████   ██▒   █▓ ██▓ ███▄ ▄███▓",
+    " ██ ▀█   █ ▓█   ▀ ▒██▒  ██▒▓██░   █▒▓██▒▓██▒▀█▀ ██▒",
+    "▓██  ▀█ ██▒▒███   ▒██░  ██▒ ▓██  █▒░▒██▒▓██    ▓██░",
+    "▓██▒  ▐▌██▒▒▓█  ▄ ▒██   ██░  ▒██ █░░░██░▒██    ▒██",
+    "▒██░   ▓██░░▒████▒░ ████▓▒░   ▒▀█░  ░██░▒██▒   ░██▒",
+    "░ ▒░   ▒ ▒ ░░ ▒░ ░░ ▒░▒░▒░    ░ ▐░  ░▓  ░ ▒░   ░  ░",
+    "░ ░░   ░ ▒░ ░ ░  ░  ░ ▒ ▒░    ░ ░░   ▒ ░░  ░      ░",
+    "   ░   ░ ░    ░   ░ ░ ░ ▒       ░░   ▒ ░░      ░",
+    "         ░    ░  ░    ░ ░        ░   ░         ░",
+    "                                ░",
+    "",
+    " [ TIP: To exit Neovim, just power off your computer. ] ",
+    "",
+    },
+  shortcut = {
+        { desc = ' Update', 
+          group = '@property', 
+          action = 'Lazy update', 
+          key = 'u' },
+        {
+          desc = ' Files',
+          group = 'Label',
+          action = 'Telescope find_files',
+          key = 'f',
+        },
+        {
+          desc = ' Apps',
+          group = 'DiagnosticHint',
+          action = 'Telescope app',
+          key = 'a',
+        },
+        {
+          desc = ' dotfiles',
+          group = 'Number',
+          action = 'Telescope dotfiles',
+          key = 'd',
+        }, 
+  },
+  packages = { enable = true }, -- show how many plugins neovim loaded
+  project = { limit = 8, action = 'Telescope find_files cwd=' }, -- limit how many projects list, action when you press key or enter it will run this action.
+  mru = { limit = 10 }, -- how many files in list
+  footer = {'', '  2023: The year of Linux on Desktop! (WSL)   ' }, 
+}})
+

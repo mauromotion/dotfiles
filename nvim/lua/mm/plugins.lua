@@ -78,6 +78,7 @@ packer.startup(function(use)
 	-- Better UI/UX
 	use('ryanoasis/vim-devicons')
 	use('scrooloose/nerdtree')
+  use ('nvim-tree/nvim-web-devicons')
 
 	-- Status line
 	use({
