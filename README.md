@@ -1,10 +1,11 @@
+```
 ------------------------------------------------------
 -- ┌┬┐┌─┐┬ ┬┬─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌┐┌
 -- │││├─┤│ │├┬┘│ │││││ │ │ ││ ││││
 -- ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘
 -- * .dotfiles * --
 -- https://github.com/mauromotion/dotfiles -----------
-
+```
 My dotfiles repo
 
 These directories need to be symlinked from ~/.dotfiles to ~/.config with `ln -svf ~/.dotfiles/<DIR> ~/.config/`.
