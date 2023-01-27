@@ -6,7 +6,6 @@
 -- * .dot***REMOVED***les * --
 -- https://github.com/mauromotion/dot***REMOVED***les -----------
 ```
-My dot***REMOVED***les repo
 
 These directories need to be symlinked from ~/.dot***REMOVED***les to ~/.con***REMOVED***g with `ln -svf ~/.dot***REMOVED***les/<DIR> ~/.con***REMOVED***g/`.
 
