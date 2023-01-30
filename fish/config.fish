@@ -9,10 +9,13 @@
 alias nv="nvim"
 alias vim="nvim"
 alias ..="cd .."
+alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -i"
 alias gs="git status"
 alias lg="lazygit"
+alias grep="grep --color=auto"
+alias df="df -H"
 
 ## rbenv autostart & PATH
 set -x PATH $PATH ~/.rbenv/bin
