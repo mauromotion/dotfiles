@@ -98,6 +98,9 @@ source $ZSH/oh-my-zsh.sh
 
 # User con***REMOVED***guration
 
+# Rbenv setup
+eval "$(~/.rbenv/bin/rbenv init - zsh)"
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
