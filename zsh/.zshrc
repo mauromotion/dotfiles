@@ -88,6 +88,7 @@ plugins=(
   colorize
   themes
   compleat
+  ssh-agent
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
