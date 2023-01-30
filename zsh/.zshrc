@@ -98,6 +98,9 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+# Rbenv setup
+eval "$(~/.rbenv/bin/rbenv init - zsh)"
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment

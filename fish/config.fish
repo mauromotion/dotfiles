@@ -18,8 +18,12 @@ alias grep="grep --color=auto"
 alias df="df -H"
 
 ## rbenv autostart & PATH
-set -x PATH $PATH ~/.rbenv/bin
-rbenv init - | source
+## set -x PATH $PATH ~/.rbenv/bin
+## rbenv init - | source
+status --is-interactive; and ~/.rbenv/bin/rbenv init - fish | source
+
+## NodeJS PATH
+set PATH /home/mauromotion/.nvm/versions/node/v19.5.0/bin $PATH
 
 ## Zoxide
 zoxide init fish | source
