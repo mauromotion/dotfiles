@@ -2,6 +2,10 @@
 # VERSION: 3.0
 SETUVAR --export EDITOR:nvim
 SETUVAR __***REMOVED***sh_initialized:3100
+SETUVAR _***REMOVED***sh_abbr_za:zoxide\x20add
+SETUVAR _***REMOVED***sh_abbr_zq:zoxide\x20query
+SETUVAR _***REMOVED***sh_abbr_zqi:zoxide\x20query\x20\x2di
+SETUVAR _***REMOVED***sh_abbr_zr:zoxide\x20remove
 SETUVAR ***REMOVED***sh_color_autosuggestion:555\x1ebrblack
 SETUVAR ***REMOVED***sh_color_cancel:\x2dr
 SETUVAR ***REMOVED***sh_color_command:005fd7

@@ -21,6 +21,9 @@ alias df="df -H"
 set -x PATH $PATH ~/.rbenv/bin
 rbenv init - | source
 
+## Zoxide
+zoxide init ***REMOVED***sh | source
+
 ## Greeting message
 function ***REMOVED***sh_greeting
 	echo --------------------------------
