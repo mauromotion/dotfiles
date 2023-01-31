@@ -87,7 +87,7 @@ packer.startup(function(use)
   use {
     'nvim-tree/nvim-tree.lua',
     config = function()
-      require('nvim-tree').setup()
+      require('mm.plugins.nvimtree')
     end,
 
     requires = {
