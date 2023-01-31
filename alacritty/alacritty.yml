@@ -72,38 +72,66 @@ font:
 #  unfocused_hollow: true
 
 # Color Settings (Everforest)
+# colors:
+#   primary:
+#     background: '#2D353B'
+#     foreground: '#D3C6AA'
+
+#   normal:
+#     black:   '#232A2E'
+#     red:     '#E69875'
+#     green:   '#83C092'
+#     yellow:  '#DBBC7F'
+#     blue:    '#7FBBB3'
+#     magenta: '#514045'
+#     cyan:    '#7FBBB3'
+#     white:   '#D3C6AA'
+
+#   bright:
+#     black:   '#56635F'
+#     red:     '#E67E80'
+#     green:   '#A7C080'
+#     yellow:  '#DBBC7F'
+#     blue:    '#7FBBB3'
+#     magenta: '#D699B6'
+#     cyan:    '#7FBBB3'
+#     white:   '#D3C6AA'
+
+#   selection:
+#     text: '0xffffff'
+#     background: '#543A48'
+#     white:   '0xffffff'
+# cursor:
+#   style: 
+#     shape: Block
+#     blinking: on
+#     unfocused_hollow: false
+
+# Colors (One Dark)
 colors:
+  # Default colors
   primary:
-    background: '#2D353B'
-    foreground: '#D3C6AA'
+    background: '#282c34'
+    foreground: '#abb2bf'
 
+  # Normal colors
   normal:
-    black:   '#232A2E'
-    red:     '#E69875'
-    green:   '#83C092'
-    yellow:  '#DBBC7F'
-    blue:    '#7FBBB3'
-    magenta: '#514045'
-    cyan:    '#7FBBB3'
-    white:   '#D3C6AA'
+    black:   '#5c6370'
+    red:     '#e06c75'
+    green:   '#98c379'
+    yellow:  '#e5c07b'
+    blue:    '#61afef'
+    magenta: '#c678dd'
+    cyan:    '#56b6c2'
+    white:   '#abb2bf'
 
+  # Bright colors
   bright:
-    black:   '#56635F'
-    red:     '#E67E80'
-    green:   '#A7C080'
-    yellow:  '#DBBC7F'
-    blue:    '#7FBBB3'
-    magenta: '#D699B6'
-    cyan:    '#7FBBB3'
-    white:   '#D3C6AA'
-
-  selection:
-    text: '0xffffff'
-    background: '#543A48'
-    white:   '0xffffff'
-cursor:
-  style: 
-    shape: Block
-    blinking: on
-    unfocused_hollow: false
-
+    black:   '#5c6370'
+    red:     '#e06c75'
+    green:   '#98c379'
+    yellow:  '#e5c07b'
+    blue:    '#61afef'
+    magenta: '#c678dd'
+    cyan:    '#56b6c2'
+    white:   '#ffffff'
