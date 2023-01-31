@@ -12,6 +12,9 @@ local opt = vim.opt
 -- Enable theming
 o.termguicolors = true
 
+-- Default theme
+--vim.cmd.('colorscheme onedark')
+
 -- Better editing experience
 o.number = true
 o.numberwidth = 5
