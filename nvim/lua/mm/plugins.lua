@@ -52,7 +52,29 @@ packer.startup(function(use)
   })
   -- Colorschemes
   use('wittyjudge/gruvbox-material.nvim')
-  use('olimorris/onedarkpro.nvim')
+  use{'olimorris/onedarkpro.nvim',
+    config = function() 
+      require('onedarkpro').setup({
+      options = {
+        cursorline = true,
+        highlight_inactive_windows = true
+      },
+      styles = {
+        types = "NONE",
+        methods = "NONE",
+        numbers = "NONE",
+        strings = "NONE",
+        comments = "italic",
+        keywords = "bold,italic",
+        constants = "NONE",
+        functions = "italic",
+        operators = "NONE",
+        variables = "NONE",
+        parameters = "NONE",
+        conditionals = "italic",
+        virtual_text = "NONE",
+      }
+    }) end}
   use('gruvbox-community/gruvbox')
   use('martinsione/darkplus.nvim')
   use('EdenEast/nightfox.nvim')
@@ -61,7 +83,6 @@ packer.startup(function(use)
   use{'catppuccin/nvim', as = 'catppuccin' }
   use('rose-pine/neovim')
   use{'sainnhe/everforest', background = 'hard'}
-  -- use{'neanias/everforest-nvim', branch = main }
 
   -- Autocompletion and Documentation
   use{'neoclide/coc.nvim', 
