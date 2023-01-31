@@ -104,11 +104,6 @@ source $ZSH/oh-my-zsh.sh
 	echo ' │││├─┤│ │├┬┘│ │││││ │ │ ││ ││││  '
 	echo ' ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘  '
 	echo ' --------- ZSH Shell -----------	'
-	echo ' '
-#    echo The time is (set_color yellow; date +%T; set_color normal) and this machine is called $hostname
-	echo ' '
-
-
 
 # Rbenv setup
 eval "$(~/.rbenv/bin/rbenv init - zsh)"
