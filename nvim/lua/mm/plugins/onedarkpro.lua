@@ -1,7 +1,7 @@
 require('onedarkpro').setup({
   options = {
     cursorline = true,
-    highlight_inactive_windows = true
+    highlight_inactive_windows = false
   ***REMOVED***,
   styles = {
     types = "NONE",
