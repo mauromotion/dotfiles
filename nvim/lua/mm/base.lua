@@ -9,13 +9,14 @@ local g = vim.g
 local o = vim.o
 local opt = vim.opt
 
+-- Disable netrw
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
+
 -- Enable theming
 o.termguicolors = true
 
--- Default theme
---vim.cmd.('colorscheme onedark')
-
--- Better editing experience
+ -- Better editing experience
 o.number = true
 o.numberwidth = 5
 o.relativenumber = true
