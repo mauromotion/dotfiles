@@ -36,6 +36,10 @@ map('i','<A-k>', '<Esc>:m .-2<CR>==gi')
 map('v', '<A-j>', ":m '>+1<CR>gv-gv")
 map('v', '<A-k>', ":m '<-2<CR>gv-gv")
 
+-- Move current line / block with Alt-j/k ala vscode (Visual Block mode).
+map('x', '<A-j>', ":move '>+1<CR>gv-gv")
+map('x', '<A-k>', ":move '<-2<CR>gv-gv")
+
 -- Navigation
 map('i', '<A-Up>', '<C-\\><C-N><C-w>k')
 map('i', '<A-Down>', '<C-\\><C-N><C-w>j')
@@ -53,3 +57,12 @@ map('n', '<C-Up>', ':resize -2<CR>')
 map('n', '<C-Down>', ':resize +2<CR>')
 map('n', '<C-Left>', ':vertical resize -2<CR>')
 map('n', '<C-Right>', ':vertical resize +2<CR>')
+
+-- Navigate buffers
+map('n', '<S-l>', ':bnext<CR>')
+map('n', '<S-h>', ':bprevious<CR>')
+
+-- Visual mode -- Stay in indent mode
+map('v', '<', '<gv')
+map('v', '>', '>gv')
+
