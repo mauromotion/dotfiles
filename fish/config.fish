@@ -26,6 +26,7 @@ status --is-interactive; and ~/.rbenv/bin/rbenv init - ***REMOVED***sh | source
 set PATH /home/mauromotion/.nvm/versions/node/v19.5.0/bin $PATH
 
 ## Zoxide
+set PATH /home/mauromotion/.local/bin $PATH
 zoxide init ***REMOVED***sh | source
 
 ## Greeting message

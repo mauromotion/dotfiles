@@ -32,7 +32,7 @@ db.setup({
   shortcut = {
         { desc = ' Update', 
           group = '@property', 
-          action = 'Lazy update', 
+          action = 'PackerUpdate', 
           key = 'u' ***REMOVED***,
         {
           desc = ' Files',
@@ -41,13 +41,13 @@ db.setup({
           key = 'f',
         ***REMOVED***,
         {
-          desc = ' Apps',
+          desc = ' Health',
           group = 'DiagnosticHint',
-          action = 'Telescope app',
+          action = 'checkhealth',
           key = 'a',
         ***REMOVED***,
         {
-          desc = ' dot***REMOVED***les',
+          desc = ' dot***REMOVED***les',
           group = 'Number',
           action = 'Telescope dot***REMOVED***les',
           key = 'd',

@@ -8,7 +8,7 @@
 -- KEYBINDINGS
 
 local function map(m, k, v)
-	vim.keymap.set(m, k, v, { silent = true ***REMOVED***)
+	vim.keymap.set(m, k, v, { noremap = true, silent = true ***REMOVED***)
 end
 
 -- Load recent sessions
