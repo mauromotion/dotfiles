@@ -64,12 +64,13 @@ packer.startup(function(use)
     { 'windwp/nvim-ts-autotag', after = 'nvim-treesitter' ***REMOVED***,
     { 'JoosepAlviste/nvim-ts-context-commentstring', after = 'nvim-treesitter' ***REMOVED***,
   ***REMOVED***)
+
   -- Colorschemes
   use({
     'olimorris/onedarkpro.nvim',
     con***REMOVED***g = function()
       require('mm.plugins.onedarkpro')
-    end,
+    end
   ***REMOVED***)
   use'wittyjudge/gruvbox-material.nvim'
   use'shatur/neovim-ayu'
@@ -83,9 +84,6 @@ packer.startup(function(use)
   use{'sainnhe/everforest', background = 'hard'***REMOVED***
 
   -- Autocompletion and Documentation
-  --  use{'neoclide/coc.nvim', 
-  --    branch = 'release'***REMOVED***
-
   use'hrsh7th/nvim-cmp' -- The completion plugin
   use'hrsh7th/cmp-buffer' -- Buffer completion
   use'hrsh7th/cmp-path' -- Path completion
@@ -106,6 +104,13 @@ packer.startup(function(use)
   -- use "tamago324/nlsp-settings.nvim" -- language server settings de***REMOVED***ned in json
   use'jose-elias-alvarez/null-ls.nvim' -- LSP diagnostics and code actions
 
+  -- Git
+  use{
+  'lewis6991/gitsigns.nvim',
+  con***REMOVED***g = function()
+    require('mm.plugins.gitsigns')
+  end
+  ***REMOVED***
 
   -- Better editing
   use'tpope/vim-surround'
@@ -135,6 +140,7 @@ packer.startup(function(use)
     ***REMOVED***,
     tag = 'nightly' -- optional, updated every week. (see issue #1193)
   ***REMOVED***
+
   -- Status line
   use({
     'nvim-lualine/lualine.nvim',
