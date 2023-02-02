@@ -5,5 +5,5 @@ end
 
 require "mm.lsp.mason"
 require("mm.lsp.handlers").setup()
-require "mm.lsp.null-ls"
+-- require "mm.lsp.null-ls"
 
