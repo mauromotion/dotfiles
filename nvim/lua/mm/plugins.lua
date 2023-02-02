@@ -19,11 +19,25 @@ autocmd BufWritePost plugins.lua source <a***REMOVED***le> | PackerSync
 augroup END
 ]])
 
+-- Packer can manage itself
 packer.startup(function(use)
-  -- Packer can manage itself
   use('wbthomason/packer.nvim')
 
-  -- Dashboard is a nice start screen for nvim
+  -- Packer floating window
+  packer.init {
+    display = {
+      open_fn = function()
+        return require("packer.util").float { border = "rounded" ***REMOVED***
+      end,
+    ***REMOVED***,
+  ***REMOVED***
+
+  --* PLUGINS *--
+
+  -- Packer itself
+  use('wbthomason/packer.nvim')
+
+  -- Dashboard 
   use('glepnir/dashboard-nvim')
 
   -- Telescope
@@ -52,10 +66,10 @@ packer.startup(function(use)
   ***REMOVED***)
   -- Colorschemes
   use({
-      'olimorris/onedarkpro.nvim',
-      con***REMOVED***g = function()
-        require('mm.plugins.onedarkpro')
-      end,
+    'olimorris/onedarkpro.nvim',
+    con***REMOVED***g = function()
+      require('mm.plugins.onedarkpro')
+    end,
   ***REMOVED***)
   use('wittyjudge/gruvbox-material.nvim')
   use('shatur/neovim-ayu')
@@ -69,8 +83,26 @@ packer.startup(function(use)
   use{'sainnhe/everforest', background = 'hard'***REMOVED***
 
   -- Autocompletion and Documentation
-  use{'neoclide/coc.nvim', 
-    branch = 'release'***REMOVED***
+  --  use{'neoclide/coc.nvim', 
+  --    branch = 'release'***REMOVED***
+
+  use('hrsh7th/nvim-cmp') -- The completion plugin
+  use('hrsh7th/cmp-buffer') -- Buffer completion
+  use('hrsh7th/cmp-path') -- Path completion
+  use('hrsh7th/cmp-cmdline')  -- cmdline completion
+  use('saadparwaiz1/cmp_luasnip') -- Snippet completions
+  use('hrsh7th/cmp-nvim-lsp')
+  use('hrsh7th/cmp-nvim-lua')
+
+  -- Snippets
+  use('L3MON4D3/LuaSnip') -- Snippet engine
+  use('rafamadriz/friendly-snippets') -- A repo of snippets
+
+  -- LSP
+  use('neovim/nvim-lspcon***REMOVED***g') -- Enable LSP
+  use('williamboman/mason.nvim')
+  use('williamboman/mason-lspcon***REMOVED***g') -- simple to use language server installer 
+  use('jose-elias-alvarez/null-ls.nvim') -- LSP diagnostics and code actions
 
   -- Better editing
   use('tpope/vim-surround')
@@ -123,7 +155,8 @@ packer.startup(function(use)
     cmd = { 'LiveServer', 'LiveServerStart', 'LiveServerStop' ***REMOVED***,
   ***REMOVED***)
 
-  if packer_bootstrap then
-packer.sync()
+  -- Automatically set up your con***REMOVED***guration after cloning packer.nvim  
+  if PACKER_BOOTSTRAP then
+    require("packer").sync()
   end
 end)

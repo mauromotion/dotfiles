@@ -5,12 +5,17 @@
 -- * .dot***REMOVED***les * --
 -- Neovim -- highlights.lua --------------------------------
 
--- COLORSCHEMES
+-- Default Theme --
 
--- Uncomment just ONE of the following colorschemes!
-local ok, _ = pcall(vim.cmd, 'colorscheme onedark')
--- local ok, _ = pcall(vim.cmd, 'colorscheme gruvbox-material')
--- local ok, _ = pcall(vim.cmd, 'colorscheme everforest')
+-- To set a default change the name of the theme here: 
+local colorscheme = "onedark"
+
+local status_ok, _ = pcall(vim.cmd, 'colorscheme ' .. colorscheme)
+
+if not status_ok then
+  vim.notify('colorscheme ' .. ' not found!')
+  return
+end
 
 -- Highlight the region on yank
 vim.api.nvim_create_autocmd("TextYankPost", {

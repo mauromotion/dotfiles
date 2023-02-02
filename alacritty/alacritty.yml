@@ -7,8 +7,8 @@ shell:
 
 window:
   padding:
-    x: 10
-    y: 10
+    x: 2
+    y: 2
     class:
       instance: Alacritty
       general: Alacritty
