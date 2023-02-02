@@ -1,7 +1,13 @@
 local servers = {
 	"sumneko_lua",
+	"cssls",
+	"html",
+	"tsserver",
 	"pyright",
+	"bashls",
 	"jsonls",
+	"yamlls",
+  "emmet_ls",
 ***REMOVED***
 
 local settings = {
@@ -45,4 +51,3 @@ for _, server in pairs(servers) do
 
 	lspcon***REMOVED***g[server].setup(opts)
 end
-
