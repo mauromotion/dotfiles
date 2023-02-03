@@ -160,15 +160,6 @@ packer.startup(function(use)
     end,
   })
 
-  -- Live Server
-  use({
-    'aurum77/live-server.nvim',
-    run = function()
-      require'live_server.util'.install()
-    end,
-    cmd = { 'LiveServer', 'LiveServerStart', 'LiveServerStop' },
-  })
-
   -- Automatically set up your configuration after cloning packer.nvim  
   if PACKER_BOOTSTRAP then
     require("packer").sync()
