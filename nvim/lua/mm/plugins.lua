@@ -106,10 +106,10 @@ packer.startup(function(use)
 
   -- Git
   use{
-  'lewis6991/gitsigns.nvim',
-  config = function()
-    require('mm.plugins.gitsigns')
-  end
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('mm.plugins.gitsigns')
+    end
   }
 
   -- Better editing
@@ -140,6 +140,17 @@ packer.startup(function(use)
     },
     tag = 'nightly' -- optional, updated every week. (see issue #1193)
   }
+  use({
+    "utilyre/barbecue.nvim",
+    tag = "*",
+    requires = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("barbecue").setup()
+    end,
+  })
 
   -- Status line
   use({
