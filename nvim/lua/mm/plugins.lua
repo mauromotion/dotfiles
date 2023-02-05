@@ -11,7 +11,7 @@ if not status then
   return
 end
 
--- Reloads Neovim after whenever you save plugins.lua
+-- Reloads Neovim whenever you save plugins.lua
 vim.cmd([[
 augroup packer_user_config
 autocmd!
@@ -32,26 +32,21 @@ packer.startup(function(use)
     },
   }
 
+  ---------------
   --* PLUGINS *--
+  ---------------
 
-  -- Packer itself
-  use'wbthomason/packer.nvim'
-
-  -- Dashboard 
-  use'glepnir/dashboard-nvim'
-
-  -- Telescope
+  use'wbthomason/packer.nvim' -- Packer itself
+  use'glepnir/dashboard-nvim' -- Dashboard 
   use({
-    'nvim-telescope/telescope.nvim',
+    'nvim-telescope/telescope.nvim', -- Telescope
     tag = '0.1.x',
     requires = { { 'nvim-lua/plenary.nvim' } },
   })
   use('nvim-telescope/telescope-file-browser.nvim')
-
-  -- Treesitter Syntax Highlighting
   use({
     {
-      'nvim-treesitter/nvim-treesitter',
+      'nvim-treesitter/nvim-treesitter', -- Treesitter Syntax Highlighting
       event = 'CursorHold',
       run = ':TSUpdate',
       config = function()
@@ -65,7 +60,9 @@ packer.startup(function(use)
     { 'JoosepAlviste/nvim-ts-context-commentstring', after = 'nvim-treesitter' },
   })
 
-  -- Colorschemes
+  --------------------
+  -- *Colorschemes* --
+  -- -----------------
   use({
     'olimorris/onedarkpro.nvim',
     config = function()
@@ -83,7 +80,9 @@ packer.startup(function(use)
   use'rose-pine/neovim'
   use{'sainnhe/everforest', background = 'hard'}
 
-  -- Autocompletion and Documentation
+  ----------------------------------------
+  -- *Autocompletion and Documentation* --
+  ----------------------------------------
   use'hrsh7th/nvim-cmp' -- The completion plugin
   use'hrsh7th/cmp-buffer' -- Buffer completion
   use'hrsh7th/cmp-path' -- Path completion
@@ -91,12 +90,12 @@ packer.startup(function(use)
   use'saadparwaiz1/cmp_luasnip' -- Snippet completions
   use'hrsh7th/cmp-nvim-lsp'
   use'hrsh7th/cmp-nvim-lua'
-
-  -- Snippets
   use'L3MON4D3/LuaSnip' -- Snippet engine
   use'rafamadriz/friendly-snippets' -- A repo of snippets
 
-  -- LSP
+  --------------------------------
+  -- *Language Server Protocol* --
+  --------------------------------
   use'neovim/nvim-lspconfig' -- Enable LSP
   -- use('williamboman/nvim-lsp-installer')
   use'williamboman/mason.nvim' -- simple to use language server installer 
@@ -104,7 +103,41 @@ packer.startup(function(use)
   -- use "tamago324/nlsp-settings.nvim" -- language server settings defined in json
   use'jose-elias-alvarez/null-ls.nvim' -- LSP diagnostics and code actions
 
-  -- Git
+  ----------------------
+  -- *Better editing* --
+  ----------------------
+  use'tpope/vim-surround' -- Quickly surround anything
+  use'tpope/vim-commentary' -- Comment lines quickly
+  use {'windwp/nvim-autopairs', -- Autoclose parentheses
+    config = function() require('nvim-autopairs').setup {} end}
+  use{'norcalli/nvim-colorizer.lua',
+    config = function() require('colorizer').setup {} end}
+
+  --------------------
+  -- *Better UI/UX* --
+  -------------------- 
+  -- Icons
+  use'nvim-tree/nvim-web-devicons'
+  use'ryanoasis/vim-devicons'
+
+  -- Buffers like tabs
+  use({
+    'akinsho/bufferline.nvim',
+    config = function()
+      require('mm.plugins.bufferline')
+    end,
+  })
+
+  -- File browser
+  use {
+    'nvim-tree/nvim-tree.lua',
+    config = function()
+      require('mm.plugins.nvimtree')
+    end,
+    tag = 'nightly' -- optional, updated every week. (see issue #1193)
+  }
+
+  -- Git status
   use{
     'lewis6991/gitsigns.nvim',
     config = function()
@@ -112,40 +145,12 @@ packer.startup(function(use)
     end
   }
 
-  -- Better editing
-  use'tpope/vim-surround'
-  use'tpope/vim-commentary'
-  use {'windwp/nvim-autopairs',
-    config = function() require('nvim-autopairs').setup {} end}
-  use{'norcalli/nvim-colorizer.lua',
-    config = function() require('colorizer').setup {} end}
-
-  -- Better UI/UX
-  use'ryanoasis/vim-devicons'
-  use({
-    'akinsho/bufferline.nvim',
-    config = function()
-      require('mm.plugins.bufferline')
-    end,
-  })
-  use'nvim-tree/nvim-web-devicons'
-  use {
-    'nvim-tree/nvim-tree.lua',
-    config = function()
-      require('mm.plugins.nvimtree')
-    end,
-
-    requires = {
-      'nvim-tree/nvim-web-devicons', -- optional, for file icons
-    },
-    tag = 'nightly' -- optional, updated every week. (see issue #1193)
-  }
+  -- LSP context bar
   use({
     "utilyre/barbecue.nvim",
     tag = "*",
     requires = {
       "SmiteshP/nvim-navic",
-      "nvim-tree/nvim-web-devicons",
     },
     config = function()
       require("barbecue").setup()
@@ -165,13 +170,13 @@ packer.startup(function(use)
     'Pocco81/true-zen.nvim',
     config = function()
       require('true-zen').setup {
-        -- your config goes here
-        -- or just leave it empty :)
       }
     end,
   })
 
-  -- Automatically set up your configuration after cloning packer.nvim  
+  -------------------------------------------------------------------------
+  -- *Automatically set up your configuration after cloning packer.nvim* --
+  ------------------------------------------------------------------------- 
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end
