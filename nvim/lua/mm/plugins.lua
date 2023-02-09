@@ -146,16 +146,16 @@ packer.startup(function(use)
   }
 
   -- LSP context bar
-  use({
-    "utilyre/barbecue.nvim",
-    tag = "*",
-    requires = {
-      "SmiteshP/nvim-navic",
-    },
-    config = function()
-      require("barbecue").setup()
-    end,
-  })
+  -- use({
+  --   "utilyre/barbecue.nvim",
+  --   tag = "*",
+  --   requires = {
+  --     "SmiteshP/nvim-navic",
+  --   },
+  --   config = function()
+  --     require("barbecue").setup()
+  --   end,
+  -- })
 
   -- Status line
   use({
