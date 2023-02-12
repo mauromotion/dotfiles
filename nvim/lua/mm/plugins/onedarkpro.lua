@@ -18,5 +18,4 @@ require('onedarkpro').setup({
     conditionals = "italic",
     virtual_text = "NONE",
   }
- 
 })
