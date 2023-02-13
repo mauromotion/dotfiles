@@ -21,7 +21,7 @@
   # each instance of Alacritty. If it is not present, alacritty will
   # check the local terminfo database and use `alacritty` if it is
   # available, otherwise `xterm-256color` is used.
-  #TERM: alacritty
+ #TERM: alacritty
 
 window:
   # Window dimensions (changes require restart)
@@ -116,13 +116,13 @@ font:
     style: Medium
   bold: 
     family: OperatorMono Nerd Font
-    style: Semi Bold
+    style: Bold
   italic:
     family: OperatorMono Nerd Font
     style: Book Italic
   bold_italic:
     family: OperatorMono Nerd Font
-    style: Semi Bold Italic
+    style: Bold Italic
   size: 13
 
   # Offset is the extra space around each character. `offset.y` can be thought
