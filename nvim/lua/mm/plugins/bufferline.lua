@@ -55,7 +55,7 @@ bufferline.setup {
     --     return true
     --   end
     -- end,
-    offsets = { { ***REMOVED***letype = "NvimTree", text = "", padding = 1 ***REMOVED*** ***REMOVED***,
+    offsets = { { ***REMOVED***letype = "NvimTree", text = "", padding = 6 ***REMOVED*** ***REMOVED***,
     show_buffer_icons = true,
     show_buffer_close_icons = true,
     show_close_icon = true,
@@ -63,7 +63,7 @@ bufferline.setup {
     persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
     -- can also be a table containing 2 custom separators
     -- [focused and unfocused]. eg: { '|', '|' ***REMOVED***
-    separator_style = "thin", -- | "thick" | "thin" | { 'any', 'any' ***REMOVED***,
+    separator_style = "padded_slant", -- | "thick" | "thin" | { 'any', 'any' ***REMOVED***,
     enforce_regular_tabs = true,
     always_show_bufferline = true,
     -- sort_by = 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' | function(buffer_a, buffer_b)
@@ -155,10 +155,10 @@ bufferline.setup {
       fg = { attribute = "bg", highlight = "Normal" ***REMOVED***,
       bg = { attribute = "bg", highlight = "Normal" ***REMOVED***,
     ***REMOVED***,
-    -- separator_visible = {
-    --   fg = {attribute='bg',highlight='TabLine'***REMOVED***,
-    --   bg = {attribute='bg',highlight='TabLine'***REMOVED***
-    --   ***REMOVED***,
+    separator_visible = {
+      fg = {attribute='bg',highlight='TabLine'***REMOVED***,
+      bg = {attribute='bg',highlight='TabLine'***REMOVED***
+      ***REMOVED***,
     indicator_selected = {
       fg = { attribute = "fg", highlight = "LspDiagnosticsDefaultHint" ***REMOVED***,
       bg = { attribute = "bg", highlight = "Normal" ***REMOVED***,

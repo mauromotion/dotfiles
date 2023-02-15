@@ -85,6 +85,7 @@ packer.startup(function(use)
   use{'catppuccin/nvim', as = 'catppuccin' ***REMOVED***
   use'rose-pine/neovim'
   use{'sainnhe/everforest', background = 'hard'***REMOVED***
+  use 'mhartington/oceanic-next'
 
   ----------------------------------------
   -- *Autocompletion and Documentation* --
@@ -131,7 +132,7 @@ packer.startup(function(use)
     'akinsho/bufferline.nvim',
     con***REMOVED***g = function()
       require('mm.plugins.bufferline')
-    end,
+    end
   ***REMOVED***)
 
   -- File browser
@@ -163,12 +164,20 @@ packer.startup(function(use)
   --   end,
   -- ***REMOVED***)
 
+  -- Aerial
+  use({
+    'stevearc/aerial.nvim',
+    con***REMOVED***g = function()
+      require('mm.plugins.aerial')
+    end
+  ***REMOVED***)
+
   -- Status line
   use({
     'nvim-lualine/lualine.nvim',
     con***REMOVED***g = function()
       require('mm.plugins.lualine')
-    end,
+    end
   ***REMOVED***)
 
   -- Zen modes
@@ -177,7 +186,7 @@ packer.startup(function(use)
     con***REMOVED***g = function()
       require('true-zen').setup {
       ***REMOVED***
-    end,
+    end
   ***REMOVED***)
 
   -------------------------------------------------------------------------
