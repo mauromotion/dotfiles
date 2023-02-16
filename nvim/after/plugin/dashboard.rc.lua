@@ -42,13 +42,13 @@ db.setup({
           desc = ' Health',
           group = 'DiagnosticHint',
           action = 'checkhealth',
-          key = 'a',
+          key = 'h',
         },
         {
-          desc = ' dotfiles',
+          desc = ' Mason',
           group = 'Number',
-          action = 'Telescope dotfiles',
-          key = 'd',
+          action = 'Mason',
+          key = 'm',
         }, 
   },
   packages = { enable = true }, -- show how many plugins neovim loaded
