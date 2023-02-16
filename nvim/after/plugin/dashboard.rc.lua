@@ -42,13 +42,13 @@ db.setup({
           desc = ' Health',
           group = 'DiagnosticHint',
           action = 'checkhealth',
-          key = 'a',
+          key = 'h',
         ***REMOVED***,
         {
-          desc = ' dot***REMOVED***les',
+          desc = ' Mason',
           group = 'Number',
-          action = 'Telescope dot***REMOVED***les',
-          key = 'd',
+          action = 'Mason',
+          key = 'm',
         ***REMOVED***, 
   ***REMOVED***,
   packages = { enable = true ***REMOVED***, -- show how many plugins neovim loaded
