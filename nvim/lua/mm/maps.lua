@@ -33,12 +33,12 @@ map('i', '<A-j>', '<Esc>:m .+1<CR>==gi')
 map('i','<A-k>', '<Esc>:m .-2<CR>==gi')
 
 -- Move current line / block with Alt-j/k ala vscode (Visual mode).
-map('v', '<A-j>', ":m '>+1<CR>gv-gv")
-map('v', '<A-k>', ":m '<-2<CR>gv-gv")
+map('v', '<A-j>', ":m '>+1<CR>gv=gv")
+map('v', '<A-k>', ":m '<-2<CR>gv=gv")
 
 -- Move current line / block with Alt-j/k ala vscode (Visual Block mode).
-map('x', '<A-j>', ":move '>+1<CR>gv-gv")
-map('x', '<A-k>', ":move '<-2<CR>gv-gv")
+map('x', '<A-j>', ":move '>+1<CR>gv=gv")
+map('x', '<A-k>', ":move '<-2<CR>gv=gv")
 
 -- Navigation
 map('i', '<A-Up>', '<C-\\><C-N><C-w>k')
@@ -65,4 +65,16 @@ map('n', '<S-h>', ':bprevious<CR>')
 -- Visual mode -- Stay in indent mode
 map('v', '<', '<gv')
 map('v', '>', '>gv')
+
+-- Keep centered while half page up/Down
+map('n', '<C-d>', '<C-d>zz')
+map('n', '<C-u>', '<C-u>zz')
+
+-- Keep centered while scrolling search
+map('n', 'n', 'nzzzv')
+map('n', 'N', 'Nzzzv')
+
+-- Keep pasting the same with leader + p
+map('x', '<leader>p', "\"_dP")
+
 
