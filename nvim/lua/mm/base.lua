@@ -31,7 +31,7 @@ o.smarttab = true
 o.wrap = true
 
 -- Can copy/paste outside Neovim
-o.clipboard = "unnamedplus" 
+o.clipboard = "unnamedplus"
 
 -- Undo and backup options
 o.backup = false
@@ -58,8 +58,12 @@ g.maplocalleader = " "
 
 -- Decrease update time
 o.timeoutlen = 500
-o.updatetime = 200
+o.updatetime = 50
 
 -- Remember 50 items in commandline history
 o.history = 50
+
+-- Search highlighting
+opt.hlsearch = false
+opt.incsearch = true
 
