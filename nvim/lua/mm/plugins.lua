@@ -63,12 +63,6 @@ packer.startup(function(use)
   --------------------
   -- *Colorschemes* --
   -- -----------------
-  -- use ({
-  --   'navarasu/onedark.nvim',
-  --   con***REMOVED***g = function()
-  --     require('mm.plugins.onedark')
-  --   end
-  -- ***REMOVED***)
   use({
     'olimorris/onedarkpro.nvim',
     con***REMOVED***g = function()

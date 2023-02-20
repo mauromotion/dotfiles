@@ -112,16 +112,16 @@ scrolling:
 
 font:
   normal:
-    family: OperatorMono Nerd Font
+    family: BlexMono Nerd Font
     style: Medium
   bold: 
-    family: OperatorMono Nerd Font
+    family: BlexMono Nerd Font
     style: Bold
   italic:
-    family: OperatorMono Nerd Font
-    style: Book Italic
+    family: BlexMono Nerd Font
+    style: Text Italic
   bold_italic:
-    family: OperatorMono Nerd Font
+    family: BlexMono Nerd Font
     style: Bold Italic
   size: 12
 
