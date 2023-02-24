@@ -77,7 +77,13 @@ packer.startup(function(use)
   use'shaunsingh/nord.nvim'
   use 'folke/tokyonight.nvim'
   use{'catppuccin/nvim', as = 'catppuccin' }
-  use'rose-pine/neovim'
+  use({
+    'rose-pine/neovim',
+    as = 'rose-pine',
+    config = function()
+        require("rose-pine").setup()
+    end
+})
   use{'sainnhe/everforest', background = 'hard'}
   use 'mhartington/oceanic-next'
 
