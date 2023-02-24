@@ -1,6 +1,6 @@
 require('onedarkpro').setup({
   options = {
-    transparency = true,
+    transparency = false,
     cursorline = true,
     highlight_inactive_windows = false
   ***REMOVED***,

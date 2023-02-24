@@ -11,7 +11,7 @@ export PATH=~/.local/bin:$PATH
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which speci***REMOVED***c one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="re***REMOVED***ned"
+ZSH_THEME="re***REMOVED***ned" # set by `omz`
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load

@@ -8,7 +8,7 @@
 -- Default Theme --
 
 -- To set a default change the name of the theme here: 
-local colorscheme = "onedark"
+local colorscheme = "nord"
 
 local status_ok, _ = pcall(vim.cmd, 'colorscheme ' .. colorscheme)
 
