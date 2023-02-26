@@ -2,3 +2,4 @@
 
 - i3/con***REMOVED***g goes into ~/.i3/
 - .Xresources goes into $HOME
+- .dmenurc goes into $HOME
