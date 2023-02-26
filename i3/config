@@ -153,7 +153,7 @@ set $ws3 3: mail
 set $ws4 4: dev
 set $ws5 5: read
 set $ws6 6:󰺷 Play
-set $ws7 7
+set $ws7 7:󰍺 Ext. Monitor
 set $ws8 8
 
 # switch to workspace
