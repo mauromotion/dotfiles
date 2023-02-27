@@ -7,7 +7,7 @@
 |File manager (PCmanFM)    |MOD + Ctrl + Return  
 |Launcher (dmenu)          |MOD + Space          
 |Applications menu         |MOD + z              
-
+|
 |### Windows Management    |
 |--------------------------|---------------------
 |Focused window no border  |MOD + u               
@@ -24,7 +24,7 @@
 |Move focused window up    |MOD + Shift + k (or Up)      
 |Move focused window right |MOD + Shift + l (or Right)   
 |Workspace back & forth    |MOD + b            
-
+|
 |### Utilities             |
 |--------------------------|---------------------
 |Screenshot full screen    |Alt + Shift + 1      
@@ -33,7 +33,7 @@
 |Pulse audio controls      |MOD + Ctrl + m       
 |Brightness up             |MOD + PageUp         
 |Brightness down           |MOD + PageDown       
-
+|
 |### System                |                  
 |--------------------------|---------------------
 |Re-load i3 config         |MOD + Shift + r      
