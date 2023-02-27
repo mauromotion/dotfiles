@@ -138,6 +138,8 @@ bindsym $mod+minus scratchpad show
 #navigate workspaces next / previous
 bindsym $mod+Ctrl+Right workspace next
 bindsym $mod+Ctrl+Left workspace prev
+bindsym $mod+Ctrl+l workspace next
+bindsym $mod+Ctrl+h workspace prev
 
 # Workspace names
 # to display names or symbols instead of plain workspace numbers you can use
@@ -183,10 +185,15 @@ bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
 # Open applications on speci***REMOVED***c workspaces
-# assign [class="Thunderbird"] $ws1
-# assign [class="Pale moon"] $ws2
-# assign [class="Pcmanfm"] $ws3
-# assign [class="Skype"] $ws5
+assign [class="Firefox"] $ws1
+assign [class="Telegram-desktop"] $ws2
+assign [class="Discord"] $ws2
+assign [class="Cinny"] $ws2
+assign [class="Thunderbird"] $ws3
+assign [class="Thunderbird-beta"] $ws3
+assign [class="Firefox-developer-edition"] $ws4
+assign [class="Foliate"] $ws5
+assign [class="Steam"] $ws6
 
 # Open speci***REMOVED***c applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
@@ -205,14 +212,12 @@ for_window [title="MuseScore: Play Panel"] floating enable
 for_window [class="Nitrogen"] floating enable sticky enable border normal
 for_window [class="Oblogout"] fullscreen enable
 for_window [class="octopi"] floating enable
-for_window [title="About Pale Moon"] floating enable
 for_window [class="Pamac-manager"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="qt5ct"] floating enable sticky enable border normal
 for_window [class="Qtcon***REMOVED***g-qt4"] floating enable sticky enable border normal
 for_window [class="Simple-scan"] floating enable border normal
 for_window [class="(?i)System-con***REMOVED***g-printer.py"] floating enable border normal
-for_window [class="Skype"] floating enable border normal
 for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
@@ -254,10 +259,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 5 px or 5 ppt
-        bindsym k resize grow height 5 px or 5 ppt
-        bindsym l resize shrink height 5 px or 5 ppt
-        bindsym semicolon resize grow width 5 px or 5 ppt
+        bindsym h resize shrink width 5 px or 5 ppt
+        bindsym j resize grow height 5 px or 5 ppt
+        bindsym k resize shrink height 5 px or 5 ppt
+        bindsym l resize grow width 5 px or 5 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -283,10 +288,10 @@ exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
 # exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
-exec --no-startup-id start_conky_maia
-# exec --no-startup-id start_conky_green
+# exec --no-startup-id start_conky_maia
+exec --no-startup-id start_conky_green
 exec --no-startup-id xautolock -time 10 -locker blurlock
-exec_always --no-startup-id ff-theme-util
+# exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id ***REMOVED***x_xcursor
 
 # Color palette used for the terminal ( ~/.Xresources ***REMOVED***le )
@@ -324,7 +329,7 @@ set_from_resource $term_color15    color15
 bar {
 	i3bar_command i3bar
 	status_command i3status
-	position top
+	position bottom
 
 ## please set your primary output ***REMOVED***rst. Example: 'xrandr --output eDP1 --primary'
 #	tray_output primary
@@ -345,7 +350,7 @@ bar {
         active_workspace   #81A1C1 #81A1C1 #D8DEE9
         inactive_workspace #2E3440 #2E3440 #E5E9F0
         binding_mode       #88C0D0 #2E3440 #ECEFF4
-        urgent_workspace   #D8DEE9 #D8DEE9 #BF616A
+        urgent_workspace   #D8DEE9 #BF616A #D8DEE9
     ***REMOVED***
 ***REMOVED***
 
