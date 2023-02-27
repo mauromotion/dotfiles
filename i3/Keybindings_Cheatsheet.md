@@ -1,13 +1,14 @@
 # Custom keybindings for i3wm
 
-|### Applications          |                      
+|### Applications          |### Keybindings                      
 |--------------------------|---------------------
 |Terminal (Alacritty)      |MOD + Return         
 |Browser (Firefox)         |MOD + Shift + Return 
 |File manager (PCmanFM)    |MOD + Ctrl + Return  
 |Launcher (dmenu)          |MOD + Space          
 |Applications menu         |MOD + z              
-|### Windows Management    |
+
+|### Windows Management    |### Keybindings
 |--------------------------|---------------------
 |Focused window no border  |MOD + u               
 |Focused window border     |MOD + y               
@@ -23,7 +24,8 @@
 |Move focused window up    |MOD + Shift + k (or Up)      
 |Move focused window right |MOD + Shift + l (or Right)   
 |Workspace back & forth    |MOD + b            
-|### Utilities             |
+
+|### Utilities             |### Keybindings
 |--------------------------|---------------------
 |Screenshot full screen    |Alt + Shift + 1      
 |Screenshot window         |Alt + Shift + 2      
@@ -31,7 +33,8 @@
 |Pulse audio controls      |MOD + Ctrl + m       
 |Brightness up             |MOD + PageUp         
 |Brightness down           |MOD + PageDown       
-|### System                |                  
+
+|### System                |### Keybindings                  
 |--------------------------|---------------------
 |Re-load i3 config         |MOD + Shift + r      
 |Kill X                    |MOD + Shift + x      
