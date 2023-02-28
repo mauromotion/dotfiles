@@ -113,7 +113,16 @@ packer.startup(function(use)
   ----------------------
   -- *Better editing* --
   ----------------------
-  use'tpope/vim-surround' -- Quickly surround anything
+  -- use'tpope/vim-surround' -- Quickly surround anything
+  use({
+    "kylechui/nvim-surround",
+    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+    con***REMOVED***g = function()
+        require("nvim-surround").setup({
+            -- Con***REMOVED***guration here, or leave empty to use defaults
+        ***REMOVED***)
+    end
+  ***REMOVED***)
   use'tpope/vim-commentary' -- Comment lines quickly
   use {'windwp/nvim-autopairs', -- Autoclose parentheses
     con***REMOVED***g = function() require('nvim-autopairs').setup {***REMOVED*** end***REMOVED***
