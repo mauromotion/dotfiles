@@ -109,7 +109,7 @@ source $ZSH/oh-my-zsh.sh
 	echo ' --------- ZSH Shell -----------	'
 
 # Rbenv setup
-eval "$(~/.rbenv/bin/rbenv init - zsh)"
+# eval "$(~/.rbenv/bin/rbenv init - zsh)"
 
 
 # export MANPATH="/usr/local/man:$MANPATH"

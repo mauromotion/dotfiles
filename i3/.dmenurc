@@ -6,13 +6,13 @@
 DMENU_FN="FiraSans-11"
 
 ## background colour for unselected menu-items
-DMENU_NB="#2E3440"
+DMENU_NB="#3B4252"
 
 ## textcolour for unselected menu-items
 DMENU_NF="#D8DEE9"
 
 ## background colour for selected menu-items
-DMENU_SB="#B48EAD"
+DMENU_SB="#A3BE8C"
 
 ## textcolour for selected menu-items
 DMENU_SF="#3B4252"
