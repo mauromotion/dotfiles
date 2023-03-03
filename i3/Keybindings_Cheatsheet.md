@@ -46,6 +46,9 @@
 |Pulse audio controls      |MOD + Ctrl + m       
 |Brightness up             |MOD + PageUp         
 |Brightness down           |MOD + PageDown       
+|Media player play/pause   |MOD + period       
+|Media player previous     |MOD + comma       
+|Media player next         |MOD + slash       
 
 |## System                 |## Keybindings                  
 |--------------------------|---------------------
