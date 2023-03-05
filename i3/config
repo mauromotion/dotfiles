@@ -71,11 +71,14 @@ bindsym $mod+Ctrl+Return exec pcmanfm
 bindsym $mod+t exec --no-startup-id pkill picom
 bindsym $mod+Ctrl+t exec --no-startup-id picom -b --experimental-backends
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
-bindsym Alt+Shift+2 exec --no-startup-id i3-scrot
-bindsym Alt+Shift+2 --release exec --no-startup-id i3-scrot -w
-bindsym Alt+Shift+3 --release exec --no-startup-id i3-scrot -s
+bindsym Print exec --no-startup-id i3-scrot
+bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
+bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
 bindsym $mod+Shift+z exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
+
+# Load ICC profiles
+exec_always --no-startup-id dispwin ~/.color/Gigabyte_Aero_15X.icm
 
 focus_follows_mouse no
 
