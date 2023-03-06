@@ -40,9 +40,9 @@
 
 |## Utilities              |## Keybindings
 |--------------------------|---------------------
-|Screenshot full screen    |Alt + Shift + 1      
-|Screenshot window         |Alt + Shift + 2      
-|Screenshot region         |Alt + Shift + 3      
+|Screenshot full screen    |MOD + Shift + a      
+|Screenshot window         |MOD + Shift + x      
+|Screenshot region         |MOD + Shift + z      
 |Pulse audio controls      |MOD + Ctrl + m       
 |Brightness up             |MOD + PageUp         
 |Brightness down           |MOD + PageDown       
