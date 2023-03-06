@@ -71,10 +71,10 @@ bindsym $mod+Ctrl+Return exec pcmanfm
 bindsym $mod+t exec --no-startup-id pkill picom
 bindsym $mod+Ctrl+t exec --no-startup-id picom -b --experimental-backends
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
-bindsym Print exec --no-startup-id i3-scrot
-bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
-bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
-bindsym $mod+Shift+z exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
+bindsym $mod+Shift+a exec --no-startup-id i3-scrot
+bindsym $mod+Shift+x --release exec --no-startup-id i3-scrot -w
+bindsym $mod+Shift+z --release exec --no-startup-id i3-scrot -s
+# bindsym $mod+Shift+z exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
 # Load ICC profiles
