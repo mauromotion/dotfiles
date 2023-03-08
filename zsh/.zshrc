@@ -148,6 +148,10 @@ alias grep="grep --color=auto"
 alias df="df -H"
 alias manjaro-update="pamac upgrade && pamac upgrade --aur --devel || echo -e '\033[0;91mThere was an error upgrading the system. AUR packages not upgraded.\e[0m'"
 alias manjaro-boot-log="journalctl --boot=-1 --priority=3 --catalog --no-pager"
+alias ll="exa -l --git --icons -h"
+alias lla="exa -l --git --icons -h -a"
+alias ls="exa --icons"
+alias lsa="exa --icons -a"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
