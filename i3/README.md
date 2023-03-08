@@ -1,5 +1,8 @@
 ## i3 con***REMOVED***guration instructions
 
-- i3/con***REMOVED***g goes into ~/.i3/
-- .Xresources goes into $HOME
-- .dmenurc goes into $HOME
+Symlink these ***REMOVED***les into the appropriate directories:
+
+- i3/con***REMOVED***g   => $HOME/.i3
+- .Xresources => $HOME
+- .dmenurc    => $HOME
+- dunstrc     => $HOME/.con***REMOVED***g/dunstr
