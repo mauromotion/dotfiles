@@ -5,7 +5,8 @@
 |Terminal (Alacritty)      |MOD + Return         
 |Browser (Firefox)         |MOD + Shift + Return 
 |File manager (PCmanFM)    |MOD + Ctrl + Return  
-|Launcher (dmenu)          |MOD + Space          
+|Launcher (rofi)           |MOD + Space          
+|Calculator (rofi)         |MOD + c          
 |Applications menu         |MOD + z              
 
 |## Windows Management     |## Keybindings
