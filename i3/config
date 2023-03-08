@@ -35,7 +35,8 @@ bindsym $mod+Shift+q kill
 # Start program launcher
 # bindsym $mod+space exec --no-startup-id dmenu_recency -b
 bindsym $mod+space exec --no-startup-id "ro***REMOVED*** -show combi -modes combi -combi-modes 'drun,run,windows' icon-theme 'Nordic' -show-icons"
-
+# Start ro***REMOVED***-calc
+bindsym $mod+c exec --no-startup-id "ro***REMOVED*** -show calc -modi calc -no-show-match -no-sort > /dev/null"
 
 # Launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
