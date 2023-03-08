@@ -1,5 +1,8 @@
 ## i3 configuration instructions
 
-- i3/config goes into ~/.i3/
-- .Xresources goes into $HOME
-- .dmenurc goes into $HOME
+Symlink these files into the appropriate directories:
+
+- i3/config   => $HOME/.i3
+- .Xresources => $HOME
+- .dmenurc    => $HOME
+- dunstrc     => $HOME/.config/dunstr
