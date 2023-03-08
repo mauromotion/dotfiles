@@ -34,7 +34,7 @@ bindsym $mod+Shift+q kill
 
 # Start program launcher
 # bindsym $mod+space exec --no-startup-id dmenu_recency -b
-bindsym $mod+space exec --no-startup-id "rofi -show combi -modes combi -combi-modes 'window,drun,run'"
+bindsym $mod+space exec --no-startup-id "rofi -show combi -modes combi -combi-modes 'drun,run,windows' icon-theme 'Nordic' -show-icons"
 
 
 # Launch categorized menu
