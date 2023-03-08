@@ -21,7 +21,7 @@ bindsym $mod+n border normal
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {***REMOVED*** block below.
-font xft: Fira Sans Book 11
+font xft: Fira Sans Book 12
 
 # Use Mouse+$mod to drag floating windows
 floating_modi***REMOVED***er $mod
@@ -168,10 +168,10 @@ set $ws1 1: www
 set $ws2 2: mail
 set $ws3 3:󰻞 chat
 set $ws4 4: dev
-set $ws5 5: read
-set $ws6 6:󰺷 Play
-set $ws7 7:󰍺 Ext. Monitor
-set $ws8 8
+set $ws5 5: docs
+set $ws6 6: games
+set $ws7 7: vids
+set $ws8 8:󰍺 ext
 
 # Switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -356,6 +356,10 @@ tray_output primary
 # Laptop
 tray_output eDP-1-1
 
+tray_padding 2
+
+separator_symbol 
+
 	bindsym button4 nop
 	bindsym button5 nop
 #   font xft:URWGothic-Book 11
@@ -364,7 +368,7 @@ tray_output eDP-1-1
     colors {
         background #3B4252
         statusline #D8DEE9
-        separator  #4C566A
+        separator  #D8DEE9
 
 #                      border  backgr. text
         focused_workspace  #4d5568 #4d5568 #E5E9F0
