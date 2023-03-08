@@ -161,8 +161,8 @@ bindsym $mod+Ctrl+h workspace prev
 # something like: set $ws1 1:mail
 #                 set $ws2 2:
 set $ws1 1: www
-set $ws2 2:󰻞 chat
-set $ws3 3: mail
+set $ws2 2: mail
+set $ws3 3:󰻞 chat
 set $ws4 4: dev
 set $ws5 5: read
 set $ws6 6:󰺷 Play
