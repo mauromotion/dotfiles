@@ -63,29 +63,29 @@ packer.startup(function(use)
   --------------------
   -- *Colorschemes* --
   -- -----------------
-  use({
-    'olimorris/onedarkpro.nvim',
-    config = function()
-      require('mm.plugins.onedarkpro')
-    end
-  })
-  use'wittyjudge/gruvbox-material.nvim'
-  use'shatur/neovim-ayu'
-  use'gruvbox-community/gruvbox'
-  use'martinsione/darkplus.nvim'
+  -- use({
+  --   'olimorris/onedarkpro.nvim',
+  --   config = function()
+  --     require('mm.plugins.onedarkpro')
+  --   end
+  -- })
+  -- use'wittyjudge/gruvbox-material.nvim'
+  -- use'shatur/neovim-ayu'
+  -- use'gruvbox-community/gruvbox'
+  -- use'martinsione/darkplus.nvim'
   use'EdenEast/nightfox.nvim'
   use'shaunsingh/nord.nvim'
-  use 'folke/tokyonight.nvim'
-  use{'catppuccin/nvim', as = 'catppuccin' }
-  use({
-    'rose-pine/neovim',
-    as = 'rose-pine',
-    config = function()
-        require("rose-pine").setup()
-    end
-})
-  use{'sainnhe/everforest', background = 'hard'}
-  use 'mhartington/oceanic-next'
+  -- use 'folke/tokyonight.nvim'
+  -- use{'catppuccin/nvim', as = 'catppuccin' }
+  -- use({
+  --   'rose-pine/neovim',
+  --   as = 'rose-pine',
+  --   config = function()
+  --       require("rose-pine").setup()
+  --   end
+-- })
+  -- use{'sainnhe/everforest', background = 'hard'}
+  -- use 'mhartington/oceanic-next'
 
   ----------------------------------------
   -- *Autocompletion and Documentation* --
