@@ -7,5 +7,6 @@ killall -q polybar
 
 # Launch Polybar, using default con***REMOVED***g location ~/.con***REMOVED***g/polybar/con***REMOVED***g.ini
 polybar desktop_primary_Nord 2>&1 | tee -a /tmp/polybar.log & disown
+polybar desktop_ext_Nord 2>&1 | tee -a /tmp/polybar.log & disown
 
 echo "Polybar launched..."
