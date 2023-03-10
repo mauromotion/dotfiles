@@ -301,6 +301,7 @@ bindsym $mod+9 exec --no-startup-id blurlock
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nitrogen --restore; sleep 1; picom -b --experimental-backends
 #exec --no-startup-id manjaro-hello
+exec --no-startup-id $HOME/.con***REMOVED***g/polybar/launch.sh
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
@@ -345,43 +346,44 @@ set_from_resource $term_color14    color14
 set_from_resource $term_color15    color15
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
-bar {
-	i3bar_command i3bar
-	status_command i3status
-	position top
+# bar {
+# 	i3bar_command i3bar
+# 	status_command i3status
+# 	position top
 
-## Please set your primary output ***REMOVED***rst. Example: 'xrandr --output eDP1 --primary'
-# Desktop
-tray_output primary
-# Laptop
-tray_output eDP-1-1
+# ## Please set your primary output ***REMOVED***rst. Example: 'xrandr --output eDP1 --primary'
+# # Desktop
+# tray_output primary
+# # Laptop
+# tray_output eDP-1-1
 
-tray_padding 2
+# tray_padding 2
 
-# separator_symbol 
+# # separator_symbol 
 
-	bindsym button4 nop
-	bindsym button5 nop
-  # font xft:Fira-Code-Nerd-Fonts-Regular 11
-	strip_workspace_numbers yes
-  workspace_min_width 70
+# 	bindsym button4 nop
+# 	bindsym button5 nop
+#   # font xft:Fira-Code-Nerd-Fonts-Regular 11
+# 	strip_workspace_numbers yes
+#   workspace_min_width 70
 
-    colors {
-        background #3B4252
-        statusline #D8DEE9
-        separator  #4d5568 
+#     colors {
+#         background #3B4252
+#         statusline #D8DEE9
+#         separator  #4d5568 
 
-#                      border  backgr. text
-        focused_workspace  #4d5568 #4d5568 #E5E9F0
-        active_workspace   #88C0D0 #88C0D0 #2E3440
-        inactive_workspace #2E3440 #2E3440 #9ea2ad
-        binding_mode       #A3BE8C #A3BE8C #2E3440
-        urgent_workspace   #B48EAD #B48EAD #2E3440
-    ***REMOVED***
-***REMOVED***
+# #                      border  backgr. text
+#         focused_workspace  #4d5568 #4d5568 #E5E9F0
+#         active_workspace   #88C0D0 #88C0D0 #2E3440
+#         inactive_workspace #2E3440 #2E3440 #9ea2ad
+#         binding_mode       #A3BE8C #A3BE8C #2E3440
+#         urgent_workspace   #B48EAD #B48EAD #2E3440
+#     ***REMOVED***
+# ***REMOVED***
 
 # Hide/unhide i3status bar
-bindsym $mod+m bar mode toggle
+# bindsym $mod+m bar mode toggle
+bindsym $mod+m exec --no-startup-id polybar-msg cmd toggle
 
 # Theme colors
 # class                   border  backgr. text    indic.   child_border
