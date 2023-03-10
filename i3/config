@@ -373,7 +373,7 @@ tray_padding 2
 
 #                      border  backgr. text
         focused_workspace  #4d5568 #4d5568 #E5E9F0
-        active_workspace   #88C0D0 #88C0D0 #E5E9F0
+        active_workspace   #88C0D0 #88C0D0 #2E3440
         inactive_workspace #2E3440 #2E3440 #9ea2ad
         binding_mode       #A3BE8C #A3BE8C #2E3440
         urgent_workspace   #B48EAD #B48EAD #2E3440
