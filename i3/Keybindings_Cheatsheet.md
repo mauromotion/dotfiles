@@ -21,7 +21,7 @@
 |Move focused window down  |MOD + Shift + j (or Down)    
 |Move focused window up    |MOD + Shift + k (or Up)      
 |Move focused window right |MOD + Shift + l (or Right)   
-|Workspace back & forth    |MOD + b            
+|Workspace back & forth    |MOD + Tab            
 |Move window on Workspace back & forth    |MOD + Shift + b            
 |Split orientation toggle  |MOD + BackSpace
 |Fullscreen toggle         |MOD + f
