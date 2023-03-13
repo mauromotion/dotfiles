@@ -27,10 +27,10 @@ db.setup({
     " [ TIP: To exit Neovim, just power off your computer. ] ",
     "",
     },
-  shortcut = {
-        { desc = ' Update', 
-          group = '@property', 
-          action = 'PackerUpdate', 
+    shortcut = {
+        { desc = ' Update',
+          group = '@property',
+          action = 'PackerUpdate',
           key = 'u' },
         {
           desc = ' Files',
@@ -49,11 +49,12 @@ db.setup({
           group = 'Number',
           action = 'Mason',
           key = 'm',
-        }, 
-  },
-  packages = { enable = true }, -- show how many plugins neovim loaded
-  project = { limit = 8, action = 'Telescope find_files cwd=' }, -- limit how many projects list, action when you press key or enter it will run this action.
-  mru = { limit = 10 }, -- how many files in list
-  footer = {'', '  2023: The year of Linux on Desktop! (WSL)   ' }, 
-}})
+        },
+      },
+    packages = { enable = true }, -- show how many plugins neovim loaded
+    project = { limit = 8, action = 'Telescope find_files cwd=' }, -- limit how many projects list, action when you press key or enter it will run this action.
+    mru = { limit = 10 }, -- how many files in list
+    footer = {"", "  2023: The year of Linux on Desktop.  " }
+  }
+})
 
