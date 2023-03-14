@@ -72,7 +72,7 @@ bindsym $mod+Ctrl+Return exec pcmanfm
 # bindsym $mod+Shift+F3 exec pcmanfm_pkexec
 # bindsym $mod+F5 exec alacritty -e 'mocp'
 bindsym $mod+t exec --no-startup-id pkill picom
-bindsym $mod+Ctrl+t exec --no-startup-id picom -b --experimental-backends
+bindsym $mod+Ctrl+t exec --no-startup-id picom -b --experimental-backend
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
 bindsym $mod+Shift+a exec --no-startup-id i3-scrot
 bindsym $mod+Shift+x --release exec --no-startup-id i3-scrot -w
