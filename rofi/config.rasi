@@ -1,0 +1,7 @@
+configuration {
+    modi: "window,drun,combi";
+    combi-modi: "window,drun,run";
+    show-icons: true;
+    icon-theme: "Nordic";
+  }
+@theme "/home/mauromotion/.config/rofi/nord-Mauro.rasi"
