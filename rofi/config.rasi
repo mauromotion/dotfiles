@@ -1,0 +1,7 @@
+con***REMOVED***guration {
+    modi: "window,drun,combi";
+    combi-modi: "window,drun,run";
+    show-icons: true;
+    icon-theme: "Nordic";
+  ***REMOVED***
+@theme "/home/mauromotion/.con***REMOVED***g/ro***REMOVED***/nord-Mauro.rasi"
