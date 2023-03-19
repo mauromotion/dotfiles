@@ -2,6 +2,6 @@ configuration {
     modi: "window,drun,combi";
     combi-modi: "window,drun,run";
     show-icons: true;
-    icon-theme: "Nordic";
+    icon-theme: "papirus-Dark-nordic-folders";
   }
 @theme "/home/mauromotion/.config/rofi/nord-Mauro.rasi"
