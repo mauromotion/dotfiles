@@ -74,9 +74,9 @@ bindsym $mod+Ctrl+Return exec pcmanfm
 bindsym $mod+t exec --no-startup-id pkill picom
 bindsym $mod+Ctrl+t exec --no-startup-id picom -b 
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
-bindsym $mod+Shift+a exec --no-startup-id i3-scrot
-bindsym $mod+Shift+x --release exec --no-startup-id i3-scrot -w
-bindsym $mod+Shift+z --release exec --no-startup-id i3-scrot -s
+bindsym $mod+Shift+a exec --no-startup-id scrot
+bindsym $mod+Shift+x --release exec --no-startup-id scrot -w
+bindsym $mod+Shift+z --release exec --no-startup-id flameshot gui 
 # bindsym $mod+Shift+z exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
@@ -301,7 +301,7 @@ bindsym $mod+9 exec --no-startup-id blurlock
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nitrogen --restore; sleep 1; picom --config /home/mauromotion/.config/picom.conf -b
 #exec --no-startup-id manjaro-hello
-exec --no-startup-id $HOME/.config/polybar/launch.sh
+exec --no-startup-id $HOME/.config/polybar/launch-desktop.sh
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
