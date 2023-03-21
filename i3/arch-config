@@ -64,6 +64,14 @@ bindsym $mod+slash exec playerctl next
 bindsym $mod+Prior exec --no-startup-id brightnessctl set +5%
 bindsym $mod+Next exec --no-startup-id brightnessctl set 5%-
 
+# Resize floating windows with mouse wheel
+set $resize_step 20
+
+# Mouse bindings normally only work on window titlebars.
+# The --whole-window flag makes them work if the cursor is anywhere within the window
+bindsym --whole-window $mod+button4 resize grow   width $resize_step; resize grow   height $resize_step
+bindsym --whole-window $mod+button5 resize shrink width $resize_step; resize shrink height $resize_step
+
 # Start Applications
 bindsym $mod+Ctrl+b exec alacritty -e 'bmenu'
 bindsym $mod+Shift+Return exec firefox
@@ -205,11 +213,10 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
 # Open applications on specific workspaces
 assign [class="Firefox"] $ws1
-assign [class="Telegram-desktop"] $ws2
-assign [class="Discord"] $ws2
-assign [class="Cinny"] $ws2
-assign [class="Thunderbird"] $ws3
-assign [class="Thunderbird-beta"] $ws3
+assign [class="Discord"] $ws3
+assign [class="Cinny"] $ws3
+assign [class="Thunderbird"] $ws2
+assign [class="Thunderbird-beta"] $ws2
 assign [class="Firefox-developer-edition"] $ws4
 assign [class="Foliate"] $ws5
 assign [class="Steam"] $ws6
@@ -233,6 +240,7 @@ for_window [class="Oblogout"] fullscreen enable
 for_window [class="octopi"] floating enable
 for_window [class="Pamac-manager"] floating enable
 for_window [class="Pavucontrol"] floating enable
+for_window [class="Viewnior"] floating enable
 for_window [class="qt5ct"] floating enable sticky enable border normal
 for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
 for_window [class="Simple-scan"] floating enable border normal
@@ -299,19 +307,14 @@ bindsym $mod+9 exec --no-startup-id blurlock
 
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id nitrogen --restore; sleep 1; picom --config /home/mauromotion/.config/picom.conf -b
-#exec --no-startup-id manjaro-hello
+exec --no-startup-id "nitrogen --restore; sleep 1; picom --config /home/mauromotion/.config/picom.conf -b"
 exec --no-startup-id $HOME/.config/polybar/launch-desktop.sh
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
-# exec --no-startup-id clipit
 # exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
-# exec --no-startup-id start_conky_maia
-# exec --no-startup-id start_conky_green
 exec --no-startup-id xautolock -time 10 -locker blurlock
-# exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 
 # Color palette used for the terminal ( ~/.Xresources file )

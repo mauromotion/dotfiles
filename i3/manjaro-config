@@ -205,11 +205,11 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
 # Open applications on specific workspaces
 assign [class="Firefox"] $ws1
-assign [class="Telegram-desktop"] $ws2
-assign [class="Discord"] $ws2
-assign [class="Cinny"] $ws2
-assign [class="Thunderbird"] $ws3
-assign [class="Thunderbird-beta"] $ws3
+assign [class="Telegram-desktop"] $ws3
+assign [class="Discord"] $ws3
+assign [class="Cinny"] $ws3
+assign [class="Thunderbird"] $ws2
+assign [class="Thunderbird-beta"] $ws2
 assign [class="Firefox-developer-edition"] $ws4
 assign [class="Foliate"] $ws5
 assign [class="Steam"] $ws6
@@ -233,6 +233,7 @@ for_window [class="Oblogout"] fullscreen enable
 for_window [class="octopi"] floating enable
 for_window [class="Pamac-manager"] floating enable
 for_window [class="Pavucontrol"] floating enable
+for_window [class="Viewnior"] floating enable
 for_window [class="qt5ct"] floating enable sticky enable border normal
 for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
 for_window [class="Simple-scan"] floating enable border normal
@@ -299,7 +300,7 @@ bindsym $mod+9 exec --no-startup-id blurlock
 
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id nitrogen --restore; sleep 1; picom --config /home/mauromotion/.config/picom.conf -b
+exec --no-startup-id "nitrogen --restore; sleep 1; picom --config /home/mauromotion/.config/picom.conf -b"
 #exec --no-startup-id manjaro-hello
 exec --no-startup-id $HOME/.config/polybar/launch-desktop.sh
 exec --no-startup-id nm-applet
