@@ -23,11 +23,11 @@ if info=$(cmus-remote -Q 2> /dev/null); then
 			info_string="$artist - $title $info_string"
 
 			if [ "$status" = "playing" ]; then
-				echo "playing $info_string"
+				echo " | $info_string"
 			elif [ "$status" = "paused" ]; then
-				echo "paused $info_string"
+				echo " | $info_string"
 			elif [ "$status" = "stopped" ]; then
-				echo "stopped $info_string"
+				echo " |$info_string"
 			***REMOVED***
 				echo ""
 			***REMOVED***
