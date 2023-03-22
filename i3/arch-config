@@ -58,12 +58,6 @@ bindsym $mod+period exec playerctl play-pause
 bindsym $mod+comma exec playerctl previous
 bindsym $mod+slash exec playerctl next
 
-# Screen brightness controls
-# bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
-# bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
-bindsym $mod+Prior exec --no-startup-id brightnessctl set +5%
-bindsym $mod+Next exec --no-startup-id brightnessctl set 5%-
-
 # Resize floating windows with mouse wheel
 set $resize_step 20
 
@@ -76,19 +70,16 @@ bindsym --whole-window $mod+button5 resize shrink width $resize_step; resize shr
 bindsym $mod+Ctrl+b exec alacritty -e 'bmenu'
 bindsym $mod+Shift+Return exec ***REMOVED***refox
 bindsym $mod+Ctrl+Return exec pcmanfm
-# bindsym $mod+F3 exec ranger
-# bindsym $mod+Shift+F3 exec pcmanfm_pkexec
-# bindsym $mod+F5 exec alacritty -e 'mocp'
 bindsym $mod+t exec --no-startup-id pkill picom
 bindsym $mod+Ctrl+t exec --no-startup-id picom -b 
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
 bindsym $mod+Shift+a exec --no-startup-id scrot
 bindsym $mod+Shift+x --release exec --no-startup-id scrot -w
 bindsym $mod+Shift+z --release exec --no-startup-id flameshot gui 
-# bindsym $mod+Shift+z exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
 ## Load ICC pro***REMOVED***les ##
+
 # Laptop
 exec_always --no-startup-id dispwin ~/.color/Gigabyte_Aero_15X.icm
 # Desktop
@@ -99,7 +90,7 @@ exec_always --no-startup-id dispwin -d2 ~/.color/icc/Dell_U2713HM.icm.icm
 focus_follows_mouse no
 
 # Set mouse acceleration on desktop (Razer Viper)
-exec_always --no-startup-id xinput set-prop 16 298 -0.7
+exec_always --no-startup-id xinput set-prop 9 293 -0.700000
 
 # Change focus
 bindsym $mod+h focus left
@@ -232,13 +223,9 @@ for_window [class="GParted"] floating enable border normal
 for_window [title="i3_help"] floating enable sticky enable border normal
 for_window [class="Lightdm-settings"] floating enable
 for_window [class="Lxappearance"] floating enable sticky enable border normal
-for_window [class="Manjaro-hello"] floating enable
-for_window [class="Manjaro Settings Manager"] floating enable border normal
-for_window [title="MuseScore: Play Panel"] floating enable
 for_window [class="Nitrogen"] floating enable sticky enable border normal
 for_window [class="Oblogout"] fullscreen enable
 for_window [class="octopi"] floating enable
-for_window [class="Pamac-manager"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Viewnior"] floating enable
 for_window [class="qt5ct"] floating enable sticky enable border normal
@@ -250,7 +237,7 @@ for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 
 # Switch to workspace with urgent window automatically
-for_window [urgent=latest] focus
+# for_window [urgent=latest] focus
 
 # Reload the con***REMOVED***guration ***REMOVED***le
 bindsym $mod+Shift+c reload
