@@ -59,28 +59,31 @@ bindsym $mod+comma exec playerctl previous
 bindsym $mod+slash exec playerctl next
 
 # Screen brightness controls
-# bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
-# bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 bindsym $mod+Prior exec --no-startup-id brightnessctl set +5%
 bindsym $mod+Next exec --no-startup-id brightnessctl set 5%-
+
+# Resize floating windows with mouse wheel
+set $resize_step 20
+
+# Mouse bindings normally only work on window titlebars.
+# The --whole-window flag makes them work if the cursor is anywhere within the window
+bindsym --whole-window $mod+button4 resize grow   width $resize_step; resize grow   height $resize_step
+bindsym --whole-window $mod+button5 resize shrink width $resize_step; resize shrink height $resize_step
 
 # Start Applications
 bindsym $mod+Ctrl+b exec alacritty -e 'bmenu'
 bindsym $mod+Shift+Return exec firefox
 bindsym $mod+Ctrl+Return exec pcmanfm
-# bindsym $mod+F3 exec ranger
-# bindsym $mod+Shift+F3 exec pcmanfm_pkexec
-# bindsym $mod+F5 exec alacritty -e 'mocp'
 bindsym $mod+t exec --no-startup-id pkill picom
 bindsym $mod+Ctrl+t exec --no-startup-id picom -b 
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
 bindsym $mod+Shift+a exec --no-startup-id i3-scrot
 bindsym $mod+Shift+x --release exec --no-startup-id i3-scrot -w
 bindsym $mod+Shift+z --release exec --no-startup-id i3-scrot -s
-# bindsym $mod+Shift+z exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
 ## Load ICC profiles ##
+
 # Laptop
 exec_always --no-startup-id dispwin ~/.color/Gigabyte_Aero_15X.icm
 # Desktop
@@ -89,9 +92,6 @@ exec_always --no-startup-id dispwin -d2 ~/.color/icc/Dell_U2713HM.icm.icm
 
 # Focus following the mouse pointer
 focus_follows_mouse no
-
-# Set mouse acceleration on desktop (Razer Viper)
-exec_always --no-startup-id xinput set-prop 16 298 -0.7
 
 # Change focus
 bindsym $mod+h focus left
@@ -227,7 +227,6 @@ for_window [class="Lightdm-settings"] floating enable
 for_window [class="Lxappearance"] floating enable sticky enable border normal
 for_window [class="Manjaro-hello"] floating enable
 for_window [class="Manjaro Settings Manager"] floating enable border normal
-for_window [title="MuseScore: Play Panel"] floating enable
 for_window [class="Nitrogen"] floating enable sticky enable border normal
 for_window [class="Oblogout"] fullscreen enable
 for_window [class="octopi"] floating enable
@@ -243,7 +242,7 @@ for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 
 # Switch to workspace with urgent window automatically
-for_window [urgent=latest] focus
+# for_window [urgent=latest] focus
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
