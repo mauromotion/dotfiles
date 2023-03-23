@@ -2,7 +2,7 @@
 -- ┌┬┐┌─┐┬ ┬┬─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌┐┌
 -- │││├─┤│ │├┬┘│ │││││ │ │ ││ ││││
 -- ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘
--- * .dot***REMOVED***les * --
+-- * .dotfiles * --
 -- Neovim -- base.lua ---------------------------------
 
 local g = vim.g
@@ -36,8 +36,8 @@ o.clipboard = "unnamedplus"
 -- Undo and backup options
 o.backup = false
 o.writebackup = false
-o.undo***REMOVED***le = true
-o.swap***REMOVED***le = false
+o.undofile = true
+o.swapfile = false
 -- o.backupdir = '/tmp/'
 -- o.directory = '/tmp/'
 -- o.undodir = '/tmp/'

@@ -1,7 +1,7 @@
-con***REMOVED***guration {
+configuration {
     modi: "window,drun,combi";
     combi-modi: "window,drun,run";
     show-icons: true;
     icon-theme: "papirus-Dark-nordic-folders";
-  ***REMOVED***
-@theme "/home/mauromotion/.con***REMOVED***g/ro***REMOVED***/nord-Mauro.rasi"
+  }
+@theme "/home/mauromotion/.config/rofi/nord-Mauro.rasi"

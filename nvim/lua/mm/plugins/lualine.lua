@@ -2,46 +2,46 @@
 -- ┌┬┐┌─┐┬ ┬┬─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌┐┌
 -- │││├─┤│ │├┬┘│ │││││ │ │ ││ ││││
 -- ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘
--- * .dot***REMOVED***les * --
+-- * .dotfiles * --
 -- Neovim -- lualine.lua --------------------------------
 
 require('lualine').setup {
   options = {
     icons_enabled = true,
     theme = 'auto',
-    component_separators = { left = '', right = ''***REMOVED***,
-    section_separators = { left = '', right = ''***REMOVED***,
-    disabled_***REMOVED***letypes = {
-      statusline = {***REMOVED***,
-      winbar = {***REMOVED***,
-    ***REMOVED***,
-    ignore_focus = {***REMOVED***,
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {
+      statusline = {},
+      winbar = {},
+    },
+    ignore_focus = {},
     always_divide_middle = true,
     globalstatus = false,
     refresh = {
       statusline = 1000,
       tabline = 1000,
       winbar = 1000,
-    ***REMOVED***
-  ***REMOVED***,
+    }
+  },
   sections = {
-    lualine_a = {'mode'***REMOVED***,
-    lualine_b = {'branch', 'diff', 'diagnostics'***REMOVED***,
-    lualine_c = {'***REMOVED***lename'***REMOVED***,
-    lualine_x = {'encoding', '***REMOVED***leformat', '***REMOVED***letype'***REMOVED***,
-    lualine_y = {'progress'***REMOVED***,
-    lualine_z = {'location'***REMOVED***
-  ***REMOVED***,
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {'filename'},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
   inactive_sections = {
-    lualine_a = {***REMOVED***,
-    lualine_b = {***REMOVED***,
-    lualine_c = {'***REMOVED***lename'***REMOVED***,
-    lualine_x = {'location'***REMOVED***,
-    lualine_y = {***REMOVED***,
-    lualine_z = {***REMOVED***
-  ***REMOVED***,
-  tabline = {***REMOVED***,
-  winbar = {***REMOVED***,
-  inactive_winbar = {***REMOVED***,
-  extensions = {***REMOVED***
-***REMOVED***
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  winbar = {},
+  inactive_winbar = {},
+  extensions = {}
+}

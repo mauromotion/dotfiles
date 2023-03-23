@@ -2,7 +2,7 @@
 # ~/.dmenurc
 #
 
-## de***REMOVED***ne the font for dmenu to be used
+## define the font for dmenu to be used
 DMENU_FN="FiraSans-11"
 
 ## background colour for unselected menu-items

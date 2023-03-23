@@ -4,7 +4,7 @@ Xft.hinting:   true
 Xft.rgba:      rgb
 Xft.autohint:  false
 Xft.hintstyle: hintslight
-Xft.lcd***REMOVED***lter: lcddefault
+Xft.lcdfilter: lcddefault
 
 XTerm*background:        #3B4252
 XTerm*foreground:        #D8DEE9

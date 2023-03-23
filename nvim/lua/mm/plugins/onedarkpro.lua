@@ -3,7 +3,7 @@ require('onedarkpro').setup({
     transparency = false,
     cursorline = true,
     highlight_inactive_windows = false
-  ***REMOVED***,
+  },
   styles = {
     types = "NONE",
     methods = "NONE",
@@ -18,5 +18,5 @@ require('onedarkpro').setup({
     parameters = "NONE",
     conditionals = "italic",
     virtual_text = "NONE",
-  ***REMOVED***
-***REMOVED***)
+  }
+})

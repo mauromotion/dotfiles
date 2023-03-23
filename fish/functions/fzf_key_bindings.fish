@@ -1,1 +1,1 @@
-/home/mauromotion/.fzf/shell/key-bindings.***REMOVED***sh
+/home/mauromotion/.fzf/shell/key-bindings.fish

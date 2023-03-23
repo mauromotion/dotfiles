@@ -2,17 +2,17 @@
 local awful = require("awful")
 awful.util = require("awful.util")
 
-theme_path = awful.util.getdir("con***REMOVED***g") .. "/themes/clone/"
+theme_path = awful.util.getdir("config") .. "/themes/clone/"
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 -- default variables
 
-theme = {***REMOVED***
+theme = {}
 
-do***REMOVED***le(theme_path .. "elements.lua")
-do***REMOVED***le(theme_path .. "titlebar.lua")
-do***REMOVED***le(theme_path .. "layouts.lua")
--- do***REMOVED***le(theme_path .. "icons.lua")
+dofile(theme_path .. "elements.lua")
+dofile(theme_path .. "titlebar.lua")
+dofile(theme_path .. "layouts.lua")
+-- dofile(theme_path .. "icons.lua")
 
 
 theme.wallpaper          = theme_path .. "background.jpg"

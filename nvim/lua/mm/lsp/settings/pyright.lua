@@ -3,7 +3,7 @@ return {
     python = {
       analysis = {
         typeCheckingMode = "off",
-      ***REMOVED***,
-    ***REMOVED***,
-  ***REMOVED***,
-***REMOVED***
+      },
+    },
+  },
+}

@@ -1,7 +1,7 @@
 -- Standard awesome library
 local awful = require("awful")
 
-local _M = {***REMOVED***
+local _M = {}
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
@@ -23,18 +23,18 @@ function _M.get ()
 
     awful.layout.suit.max,                -- 10:
     awful.layout.suit.max.fullscreen,     -- 11:
-    awful.layout.suit.magni***REMOVED***er,          -- 12:
+    awful.layout.suit.magnifier,          -- 12:
 
     awful.layout.suit.corner.nw           -- 13:
 --  awful.layout.suit.corner.ne,
 --  awful.layout.suit.corner.sw,
 --  awful.layout.suit.corner.se,
-  ***REMOVED***
+  }
 
   return layouts
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-return setmetatable({***REMOVED***, { __call = function(_, ...) return _M.get(...) end ***REMOVED***)
+return setmetatable({}, { __call = function(_, ...) return _M.get(...) end })
 

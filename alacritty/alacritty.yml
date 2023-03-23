@@ -1,4 +1,4 @@
-# Con***REMOVED***guration for Alacritty, the GPU enhanced terminal emulator.
+# Configuration for Alacritty, the GPU enhanced terminal emulator.
 
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
@@ -50,7 +50,7 @@ scrolling:
   # Scrolling distance multiplier.
   multiplier: 3
 
-# Font con***REMOVED***guration
+# Font configuration
 
 font:
   normal:
@@ -152,7 +152,7 @@ cursor:
 
   # Vi mode cursor style
   #
-  # If the vi mode cursor style is `None` or not speci***REMOVED***ed, it will fall back to
+  # If the vi mode cursor style is `None` or not specified, it will fall back to
   # the style of the active value of the normal cursor.
   #
   # See `cursor.style` for available options.
@@ -174,8 +174,8 @@ cursor:
   # from `0.0` to `1.0`.
   #thickness: 0.15
 
-# Live con***REMOVED***g reload (changes require restart)
-live_con***REMOVED***g_reload: true
+# Live config reload (changes require restart)
+live_config_reload: true
 
 # Shell
 shell:
@@ -188,7 +188,7 @@ mouse:
 
 # Hints
 #
-# Terminal hints can be used to ***REMOVED***nd text or hyperlink in the visible part of
+# Terminal hints can be used to find text or hyperlink in the visible part of
 # the terminal and pipe it to other applications.
 #hints:
   # Keys used for the hint labels.
@@ -196,20 +196,20 @@ mouse:
 
   # List with all available hints
   #
-  # Each hint must have any of `regex` or `hyperlinks` ***REMOVED***eld and either an
-  # `action` or a `command` ***REMOVED***eld. The ***REMOVED***elds `mouse`, `binding` and
+  # Each hint must have any of `regex` or `hyperlinks` field and either an
+  # `action` or a `command` field. The fields `mouse`, `binding` and
   # `post_processing` are optional.
   #
   # The `hyperlinks` option will cause OSC 8 escape sequence hyperlinks to be
   # highlighted.
   #
-  # The ***REMOVED***elds `command`, `binding.key`, `binding.mods`, `binding.mode` and
+  # The fields `command`, `binding.key`, `binding.mods`, `binding.mode` and
   # `mouse.mods` accept the same values as they do in the `key_bindings` section.
   #
-  # The `mouse.enabled` ***REMOVED***eld controls if the hint should be underlined while
+  # The `mouse.enabled` field controls if the hint should be underlined while
   # the mouse with all `mouse.mods` keys held or the vi mode cursor is above it.
   #
-  # If the `post_processing` ***REMOVED***eld is set to `true`, heuristics will be used to
+  # If the `post_processing` field is set to `true`, heuristics will be used to
   # shorten the match if there are characters likely not to be part of the hint
   # (e.g. a trailing `.`). This is most useful for URIs and applies only to
   # `regex` matches.
@@ -224,8 +224,8 @@ mouse:
   #   - MoveViModeCursor
   #       Move the vi mode cursor to the beginning of the hint.
   #enabled:
-  # - regex: "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|***REMOVED***le:|git:|ssh:|ftp:)\
-  #           [^\u0000-\u001F\u007F-\u009F<>\"\\s{-***REMOVED***\\^⟨⟩`]+"
+  # - regex: "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)\
+  #           [^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
   #   hyperlinks: true
   #   command: xdg-open
   #   post_processing: true
@@ -238,14 +238,14 @@ mouse:
 
 # Key bindings
 #
-# Key bindings are speci***REMOVED***ed as a list of objects. For example, this is the
+# Key bindings are specified as a list of objects. For example, this is the
 # default paste binding:
 #
-# `- { key: V, mods: Control|Shift, action: Paste ***REMOVED***`
+# `- { key: V, mods: Control|Shift, action: Paste }`
 #
 # Each key binding will specify a:
 #
-# - `key`: Identi***REMOVED***er of the key pressed
+# - `key`: Identifier of the key pressed
 #
 #    - A-Z
 #    - F1-F24
@@ -254,8 +254,8 @@ mouse:
 #    A full list with available key codes can be found here:
 #    https://docs.rs/glutin/*/glutin/event/enum.VirtualKeyCode.html#variants
 #
-#    Instead of using the name of the keys, the `key` ***REMOVED***eld also supports using
-#    the scancode of the desired key. Scancodes have to be speci***REMOVED***ed as a
+#    Instead of using the name of the keys, the `key` field also supports using
+#    the scancode of the desired key. Scancodes have to be specified as a
 #    decimal number. This command will allow you to display the hex scancodes
 #    for certain keys:
 #
@@ -265,14 +265,14 @@ mouse:
 #
 # - `chars`: Send a byte sequence to the running application
 #
-#    The `chars` ***REMOVED***eld writes the speci***REMOVED***ed string to the terminal. This makes
-#    it possible to pass escape sequences. To ***REMOVED***nd escape codes for bindings
+#    The `chars` field writes the specified string to the terminal. This makes
+#    it possible to pass escape sequences. To find escape codes for bindings
 #    like `PageUp` (`"\x1b[5~"`), you can run the command `showkey -a` outside
 #    of tmux. Note that applications use terminfo to map escape sequences back
 #    to keys. It is therefore required to update the terminfo when changing an
 #    escape sequence.
 #
-# - `action`: Execute a prede***REMOVED***ned action
+# - `action`: Execute a predefined action
 #
 #   - ToggleViMode
 #   - SearchForward
@@ -315,7 +315,7 @@ mouse:
 # - Vi mode exclusive actions:
 #
 #   - Open
-#       Perform the action of the ***REMOVED***rst matching hint under the vi mode cursor
+#       Perform the action of the first matching hint under the vi mode cursor
 #       with `mouse.enabled` set to `true`.
 #   - ToggleNormalSelection
 #   - ToggleLineSelection
@@ -336,12 +336,12 @@ mouse:
 #   - Right
 #       One character right.
 #   - First
-#       First column, or beginning of the line when already at the ***REMOVED***rst column.
+#       First column, or beginning of the line when already at the first column.
 #   - Last
 #       Last column, or beginning of the line when already at the last column.
 #   - FirstOccupied
-#       First non-empty cell in this terminal row, or ***REMOVED***rst non-empty cell of
-#       the line when already at the ***REMOVED***rst cell of the row.
+#       First non-empty cell in this terminal row, or first non-empty cell of
+#       the line when already at the first cell of the row.
 #   - High
 #       Top of the screen.
 #   - Middle
@@ -380,7 +380,7 @@ mouse:
 #       Move the focus to the next search match.
 #   - SearchFocusPrevious
 #       Move the focus to the previous search match.
-#   - SearchCon***REMOVED***rm
+#   - SearchConfirm
 #   - SearchCancel
 #   - SearchClear
 #       Reset the search regex.
@@ -402,15 +402,15 @@ mouse:
 #   - PasteSelection
 #       Paste from the selection buffer.
 #
-# - `command`: Fork and execute a speci***REMOVED***ed command plus arguments
+# - `command`: Fork and execute a specified command plus arguments
 #
-#    The `command` ***REMOVED***eld must be a map containing a `program` string and an
+#    The `command` field must be a map containing a `program` string and an
 #    `args` array of command line parameter strings. For example:
-#       `{ program: "alacritty", args: ["-e", "vttest"] ***REMOVED***`
+#       `{ program: "alacritty", args: ["-e", "vttest"] }`
 #
 # And optionally:
 #
-# - `mods`: Key modi***REMOVED***ers to ***REMOVED***lter binding actions
+# - `mods`: Key modifiers to filter binding actions
 #
 #    - Command
 #    - Control
@@ -423,7 +423,7 @@ mouse:
 #       `mods: Control|Shift`.
 #    Whitespace and capitalization are relevant and must match the example.
 #
-# - `mode`: Indicate a binding for only speci***REMOVED***c terminal reported modes
+# - `mode`: Indicate a binding for only specific terminal reported modes
 #
 #    This is mainly used to send applications the correct escape sequences
 #    when in different modes.
@@ -437,130 +437,130 @@ mouse:
 #    A `~` operator can be used before a mode to apply the binding whenever
 #    the mode is *not* active, e.g. `~Alt`.
 #
-# Bindings are always ***REMOVED***lled by default, but will be replaced when a new
-# binding with the same triggers is de***REMOVED***ned. To unset a default binding, it can
+# Bindings are always filled by default, but will be replaced when a new
+# binding with the same triggers is defined. To unset a default binding, it can
 # be mapped to the `ReceiveChar` action. Alternatively, you can use `None` for
 # a no-op if you do not wish to receive input characters for that binding.
 #
 # If the same trigger is assigned to multiple actions, all of them are executed
-# in the order they were de***REMOVED***ned in.
+# in the order they were defined in.
 #key_bindings:
-  #- { key: Paste,                                       action: Paste          ***REMOVED***
-  #- { key: Copy,                                        action: Copy           ***REMOVED***
-  #- { key: L,         mods: Control,                    action: ClearLogNotice ***REMOVED***
-  #- { key: L,         mods: Control, mode: ~Vi|~Search, chars: "\x0c"          ***REMOVED***
-  #- { key: PageUp,    mods: Shift,   mode: ~Alt,        action: ScrollPageUp   ***REMOVED***
-  #- { key: PageDown,  mods: Shift,   mode: ~Alt,        action: ScrollPageDown ***REMOVED***
-  #- { key: Home,      mods: Shift,   mode: ~Alt,        action: ScrollToTop    ***REMOVED***
-  #- { key: End,       mods: Shift,   mode: ~Alt,        action: ScrollToBottom ***REMOVED***
+  #- { key: Paste,                                       action: Paste          }
+  #- { key: Copy,                                        action: Copy           }
+  #- { key: L,         mods: Control,                    action: ClearLogNotice }
+  #- { key: L,         mods: Control, mode: ~Vi|~Search, chars: "\x0c"          }
+  #- { key: PageUp,    mods: Shift,   mode: ~Alt,        action: ScrollPageUp   }
+  #- { key: PageDown,  mods: Shift,   mode: ~Alt,        action: ScrollPageDown }
+  #- { key: Home,      mods: Shift,   mode: ~Alt,        action: ScrollToTop    }
+  #- { key: End,       mods: Shift,   mode: ~Alt,        action: ScrollToBottom }
 
   # Vi Mode
-  #- { key: Space,  mods: Shift|Control, mode: ~Search,    action: ToggleViMode            ***REMOVED***
-  #- { key: Space,  mods: Shift|Control, mode: Vi|~Search, action: ScrollToBottom          ***REMOVED***
-  #- { key: Escape,                      mode: Vi|~Search, action: ClearSelection          ***REMOVED***
-  #- { key: I,                           mode: Vi|~Search, action: ToggleViMode            ***REMOVED***
-  #- { key: I,                           mode: Vi|~Search, action: ScrollToBottom          ***REMOVED***
-  #- { key: C,      mods: Control,       mode: Vi|~Search, action: ToggleViMode            ***REMOVED***
-  #- { key: Y,      mods: Control,       mode: Vi|~Search, action: ScrollLineUp            ***REMOVED***
-  #- { key: E,      mods: Control,       mode: Vi|~Search, action: ScrollLineDown          ***REMOVED***
-  #- { key: G,                           mode: Vi|~Search, action: ScrollToTop             ***REMOVED***
-  #- { key: G,      mods: Shift,         mode: Vi|~Search, action: ScrollToBottom          ***REMOVED***
-  #- { key: B,      mods: Control,       mode: Vi|~Search, action: ScrollPageUp            ***REMOVED***
-  #- { key: F,      mods: Control,       mode: Vi|~Search, action: ScrollPageDown          ***REMOVED***
-  #- { key: U,      mods: Control,       mode: Vi|~Search, action: ScrollHalfPageUp        ***REMOVED***
-  #- { key: D,      mods: Control,       mode: Vi|~Search, action: ScrollHalfPageDown      ***REMOVED***
-  #- { key: Y,                           mode: Vi|~Search, action: Copy                    ***REMOVED***
-  #- { key: Y,                           mode: Vi|~Search, action: ClearSelection          ***REMOVED***
-  #- { key: Copy,                        mode: Vi|~Search, action: ClearSelection          ***REMOVED***
-  #- { key: V,                           mode: Vi|~Search, action: ToggleNormalSelection   ***REMOVED***
-  #- { key: V,      mods: Shift,         mode: Vi|~Search, action: ToggleLineSelection     ***REMOVED***
-  #- { key: V,      mods: Control,       mode: Vi|~Search, action: ToggleBlockSelection    ***REMOVED***
-  #- { key: V,      mods: Alt,           mode: Vi|~Search, action: ToggleSemanticSelection ***REMOVED***
-  #- { key: Return,                      mode: Vi|~Search, action: Open                    ***REMOVED***
-  #- { key: Z,                           mode: Vi|~Search, action: CenterAroundViCursor    ***REMOVED***
-  #- { key: K,                           mode: Vi|~Search, action: Up                      ***REMOVED***
-  #- { key: J,                           mode: Vi|~Search, action: Down                    ***REMOVED***
-  #- { key: H,                           mode: Vi|~Search, action: Left                    ***REMOVED***
-  #- { key: L,                           mode: Vi|~Search, action: Right                   ***REMOVED***
-  #- { key: Up,                          mode: Vi|~Search, action: Up                      ***REMOVED***
-  #- { key: Down,                        mode: Vi|~Search, action: Down                    ***REMOVED***
-  #- { key: Left,                        mode: Vi|~Search, action: Left                    ***REMOVED***
-  #- { key: Right,                       mode: Vi|~Search, action: Right                   ***REMOVED***
-  #- { key: Key0,                        mode: Vi|~Search, action: First                   ***REMOVED***
-  #- { key: Key4,   mods: Shift,         mode: Vi|~Search, action: Last                    ***REMOVED***
-  #- { key: Key6,   mods: Shift,         mode: Vi|~Search, action: FirstOccupied           ***REMOVED***
-  #- { key: H,      mods: Shift,         mode: Vi|~Search, action: High                    ***REMOVED***
-  #- { key: M,      mods: Shift,         mode: Vi|~Search, action: Middle                  ***REMOVED***
-  #- { key: L,      mods: Shift,         mode: Vi|~Search, action: Low                     ***REMOVED***
-  #- { key: B,                           mode: Vi|~Search, action: SemanticLeft            ***REMOVED***
-  #- { key: W,                           mode: Vi|~Search, action: SemanticRight           ***REMOVED***
-  #- { key: E,                           mode: Vi|~Search, action: SemanticRightEnd        ***REMOVED***
-  #- { key: B,      mods: Shift,         mode: Vi|~Search, action: WordLeft                ***REMOVED***
-  #- { key: W,      mods: Shift,         mode: Vi|~Search, action: WordRight               ***REMOVED***
-  #- { key: E,      mods: Shift,         mode: Vi|~Search, action: WordRightEnd            ***REMOVED***
-  #- { key: Key5,   mods: Shift,         mode: Vi|~Search, action: Bracket                 ***REMOVED***
-  #- { key: Slash,                       mode: Vi|~Search, action: SearchForward           ***REMOVED***
-  #- { key: Slash,  mods: Shift,         mode: Vi|~Search, action: SearchBackward          ***REMOVED***
-  #- { key: N,                           mode: Vi|~Search, action: SearchNext              ***REMOVED***
-  #- { key: N,      mods: Shift,         mode: Vi|~Search, action: SearchPrevious          ***REMOVED***
+  #- { key: Space,  mods: Shift|Control, mode: ~Search,    action: ToggleViMode            }
+  #- { key: Space,  mods: Shift|Control, mode: Vi|~Search, action: ScrollToBottom          }
+  #- { key: Escape,                      mode: Vi|~Search, action: ClearSelection          }
+  #- { key: I,                           mode: Vi|~Search, action: ToggleViMode            }
+  #- { key: I,                           mode: Vi|~Search, action: ScrollToBottom          }
+  #- { key: C,      mods: Control,       mode: Vi|~Search, action: ToggleViMode            }
+  #- { key: Y,      mods: Control,       mode: Vi|~Search, action: ScrollLineUp            }
+  #- { key: E,      mods: Control,       mode: Vi|~Search, action: ScrollLineDown          }
+  #- { key: G,                           mode: Vi|~Search, action: ScrollToTop             }
+  #- { key: G,      mods: Shift,         mode: Vi|~Search, action: ScrollToBottom          }
+  #- { key: B,      mods: Control,       mode: Vi|~Search, action: ScrollPageUp            }
+  #- { key: F,      mods: Control,       mode: Vi|~Search, action: ScrollPageDown          }
+  #- { key: U,      mods: Control,       mode: Vi|~Search, action: ScrollHalfPageUp        }
+  #- { key: D,      mods: Control,       mode: Vi|~Search, action: ScrollHalfPageDown      }
+  #- { key: Y,                           mode: Vi|~Search, action: Copy                    }
+  #- { key: Y,                           mode: Vi|~Search, action: ClearSelection          }
+  #- { key: Copy,                        mode: Vi|~Search, action: ClearSelection          }
+  #- { key: V,                           mode: Vi|~Search, action: ToggleNormalSelection   }
+  #- { key: V,      mods: Shift,         mode: Vi|~Search, action: ToggleLineSelection     }
+  #- { key: V,      mods: Control,       mode: Vi|~Search, action: ToggleBlockSelection    }
+  #- { key: V,      mods: Alt,           mode: Vi|~Search, action: ToggleSemanticSelection }
+  #- { key: Return,                      mode: Vi|~Search, action: Open                    }
+  #- { key: Z,                           mode: Vi|~Search, action: CenterAroundViCursor    }
+  #- { key: K,                           mode: Vi|~Search, action: Up                      }
+  #- { key: J,                           mode: Vi|~Search, action: Down                    }
+  #- { key: H,                           mode: Vi|~Search, action: Left                    }
+  #- { key: L,                           mode: Vi|~Search, action: Right                   }
+  #- { key: Up,                          mode: Vi|~Search, action: Up                      }
+  #- { key: Down,                        mode: Vi|~Search, action: Down                    }
+  #- { key: Left,                        mode: Vi|~Search, action: Left                    }
+  #- { key: Right,                       mode: Vi|~Search, action: Right                   }
+  #- { key: Key0,                        mode: Vi|~Search, action: First                   }
+  #- { key: Key4,   mods: Shift,         mode: Vi|~Search, action: Last                    }
+  #- { key: Key6,   mods: Shift,         mode: Vi|~Search, action: FirstOccupied           }
+  #- { key: H,      mods: Shift,         mode: Vi|~Search, action: High                    }
+  #- { key: M,      mods: Shift,         mode: Vi|~Search, action: Middle                  }
+  #- { key: L,      mods: Shift,         mode: Vi|~Search, action: Low                     }
+  #- { key: B,                           mode: Vi|~Search, action: SemanticLeft            }
+  #- { key: W,                           mode: Vi|~Search, action: SemanticRight           }
+  #- { key: E,                           mode: Vi|~Search, action: SemanticRightEnd        }
+  #- { key: B,      mods: Shift,         mode: Vi|~Search, action: WordLeft                }
+  #- { key: W,      mods: Shift,         mode: Vi|~Search, action: WordRight               }
+  #- { key: E,      mods: Shift,         mode: Vi|~Search, action: WordRightEnd            }
+  #- { key: Key5,   mods: Shift,         mode: Vi|~Search, action: Bracket                 }
+  #- { key: Slash,                       mode: Vi|~Search, action: SearchForward           }
+  #- { key: Slash,  mods: Shift,         mode: Vi|~Search, action: SearchBackward          }
+  #- { key: N,                           mode: Vi|~Search, action: SearchNext              }
+  #- { key: N,      mods: Shift,         mode: Vi|~Search, action: SearchPrevious          }
 
   # Search Mode
-  #- { key: Return,                mode: Search|Vi,  action: SearchCon***REMOVED***rm         ***REMOVED***
-  #- { key: Escape,                mode: Search,     action: SearchCancel          ***REMOVED***
-  #- { key: C,      mods: Control, mode: Search,     action: SearchCancel          ***REMOVED***
-  #- { key: U,      mods: Control, mode: Search,     action: SearchClear           ***REMOVED***
-  #- { key: W,      mods: Control, mode: Search,     action: SearchDeleteWord      ***REMOVED***
-  #- { key: P,      mods: Control, mode: Search,     action: SearchHistoryPrevious ***REMOVED***
-  #- { key: N,      mods: Control, mode: Search,     action: SearchHistoryNext     ***REMOVED***
-  #- { key: Up,                    mode: Search,     action: SearchHistoryPrevious ***REMOVED***
-  #- { key: Down,                  mode: Search,     action: SearchHistoryNext     ***REMOVED***
-  #- { key: Return,                mode: Search|~Vi, action: SearchFocusNext       ***REMOVED***
-  #- { key: Return, mods: Shift,   mode: Search|~Vi, action: SearchFocusPrevious   ***REMOVED***
+  #- { key: Return,                mode: Search|Vi,  action: SearchConfirm         }
+  #- { key: Escape,                mode: Search,     action: SearchCancel          }
+  #- { key: C,      mods: Control, mode: Search,     action: SearchCancel          }
+  #- { key: U,      mods: Control, mode: Search,     action: SearchClear           }
+  #- { key: W,      mods: Control, mode: Search,     action: SearchDeleteWord      }
+  #- { key: P,      mods: Control, mode: Search,     action: SearchHistoryPrevious }
+  #- { key: N,      mods: Control, mode: Search,     action: SearchHistoryNext     }
+  #- { key: Up,                    mode: Search,     action: SearchHistoryPrevious }
+  #- { key: Down,                  mode: Search,     action: SearchHistoryNext     }
+  #- { key: Return,                mode: Search|~Vi, action: SearchFocusNext       }
+  #- { key: Return, mods: Shift,   mode: Search|~Vi, action: SearchFocusPrevious   }
 
   # (Windows, Linux, and BSD only)
-  #- { key: V,              mods: Control|Shift, mode: ~Vi,        action: Paste            ***REMOVED***
-  #- { key: C,              mods: Control|Shift,                   action: Copy             ***REMOVED***
-  #- { key: F,              mods: Control|Shift, mode: ~Search,    action: SearchForward    ***REMOVED***
-  #- { key: B,              mods: Control|Shift, mode: ~Search,    action: SearchBackward   ***REMOVED***
-  #- { key: C,              mods: Control|Shift, mode: Vi|~Search, action: ClearSelection   ***REMOVED***
-  #- { key: Insert,         mods: Shift,                           action: PasteSelection   ***REMOVED***
-  #- { key: Key0,           mods: Control,                         action: ResetFontSize    ***REMOVED***
-  #- { key: Equals,         mods: Control,                         action: IncreaseFontSize ***REMOVED***
-  #- { key: Plus,           mods: Control,                         action: IncreaseFontSize ***REMOVED***
-  #- { key: NumpadAdd,      mods: Control,                         action: IncreaseFontSize ***REMOVED***
-  #- { key: Minus,          mods: Control,                         action: DecreaseFontSize ***REMOVED***
-  #- { key: NumpadSubtract, mods: Control,                         action: DecreaseFontSize ***REMOVED***
+  #- { key: V,              mods: Control|Shift, mode: ~Vi,        action: Paste            }
+  #- { key: C,              mods: Control|Shift,                   action: Copy             }
+  #- { key: F,              mods: Control|Shift, mode: ~Search,    action: SearchForward    }
+  #- { key: B,              mods: Control|Shift, mode: ~Search,    action: SearchBackward   }
+  #- { key: C,              mods: Control|Shift, mode: Vi|~Search, action: ClearSelection   }
+  #- { key: Insert,         mods: Shift,                           action: PasteSelection   }
+  #- { key: Key0,           mods: Control,                         action: ResetFontSize    }
+  #- { key: Equals,         mods: Control,                         action: IncreaseFontSize }
+  #- { key: Plus,           mods: Control,                         action: IncreaseFontSize }
+  #- { key: NumpadAdd,      mods: Control,                         action: IncreaseFontSize }
+  #- { key: Minus,          mods: Control,                         action: DecreaseFontSize }
+  #- { key: NumpadSubtract, mods: Control,                         action: DecreaseFontSize }
 
   # (Windows only)
-  #- { key: Return,   mods: Alt,           action: ToggleFullscreen ***REMOVED***
+  #- { key: Return,   mods: Alt,           action: ToggleFullscreen }
 
   # (macOS only)
-  #- { key: K,              mods: Command, mode: ~Vi|~Search, chars: "\x0c"                 ***REMOVED***
-  #- { key: K,              mods: Command, mode: ~Vi|~Search, action: ClearHistory          ***REMOVED***
-  #- { key: Key0,           mods: Command,                    action: ResetFontSize         ***REMOVED***
-  #- { key: Equals,         mods: Command,                    action: IncreaseFontSize      ***REMOVED***
-  #- { key: Plus,           mods: Command,                    action: IncreaseFontSize      ***REMOVED***
-  #- { key: NumpadAdd,      mods: Command,                    action: IncreaseFontSize      ***REMOVED***
-  #- { key: Minus,          mods: Command,                    action: DecreaseFontSize      ***REMOVED***
-  #- { key: NumpadSubtract, mods: Command,                    action: DecreaseFontSize      ***REMOVED***
-  #- { key: V,              mods: Command,                    action: Paste                 ***REMOVED***
-  #- { key: C,              mods: Command,                    action: Copy                  ***REMOVED***
-  #- { key: C,              mods: Command, mode: Vi|~Search,  action: ClearSelection        ***REMOVED***
-  #- { key: H,              mods: Command,                    action: Hide                  ***REMOVED***
-  #- { key: H,              mods: Command|Alt,                action: HideOtherApplications ***REMOVED***
-  #- { key: M,              mods: Command,                    action: Minimize              ***REMOVED***
-  #- { key: Q,              mods: Command,                    action: Quit                  ***REMOVED***
-  #- { key: W,              mods: Command,                    action: Quit                  ***REMOVED***
-  #- { key: N,              mods: Command,                    action: SpawnNewInstance      ***REMOVED***
-  #- { key: F,              mods: Command|Control,            action: ToggleFullscreen      ***REMOVED***
-  #- { key: F,              mods: Command, mode: ~Search,     action: SearchForward         ***REMOVED***
-  #- { key: B,              mods: Command, mode: ~Search,     action: SearchBackward        ***REMOVED***
+  #- { key: K,              mods: Command, mode: ~Vi|~Search, chars: "\x0c"                 }
+  #- { key: K,              mods: Command, mode: ~Vi|~Search, action: ClearHistory          }
+  #- { key: Key0,           mods: Command,                    action: ResetFontSize         }
+  #- { key: Equals,         mods: Command,                    action: IncreaseFontSize      }
+  #- { key: Plus,           mods: Command,                    action: IncreaseFontSize      }
+  #- { key: NumpadAdd,      mods: Command,                    action: IncreaseFontSize      }
+  #- { key: Minus,          mods: Command,                    action: DecreaseFontSize      }
+  #- { key: NumpadSubtract, mods: Command,                    action: DecreaseFontSize      }
+  #- { key: V,              mods: Command,                    action: Paste                 }
+  #- { key: C,              mods: Command,                    action: Copy                  }
+  #- { key: C,              mods: Command, mode: Vi|~Search,  action: ClearSelection        }
+  #- { key: H,              mods: Command,                    action: Hide                  }
+  #- { key: H,              mods: Command|Alt,                action: HideOtherApplications }
+  #- { key: M,              mods: Command,                    action: Minimize              }
+  #- { key: Q,              mods: Command,                    action: Quit                  }
+  #- { key: W,              mods: Command,                    action: Quit                  }
+  #- { key: N,              mods: Command,                    action: SpawnNewInstance      }
+  #- { key: F,              mods: Command|Control,            action: ToggleFullscreen      }
+  #- { key: F,              mods: Command, mode: ~Search,     action: SearchForward         }
+  #- { key: B,              mods: Command, mode: ~Search,     action: SearchBackward        }
 
 #debug:
   # Display the time it takes to redraw each frame.
   #render_timer: false
 
-  # Keep the log ***REMOVED***le after quitting Alacritty.
+  # Keep the log file after quitting Alacritty.
   #persistent_logging: false
 
   # Log level

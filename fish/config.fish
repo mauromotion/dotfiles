@@ -2,8 +2,8 @@
 ## ┌┬┐┌─┐┬ ┬┬─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌┐┌
 ## │││├─┤│ │├┬┘│ │││││ │ │ ││ ││││
 ## ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘
-## * .dot***REMOVED***les * --
-## Fish terminal -- con***REMOVED***g.***REMOVED***sh --------------
+## * .dotfiles * --
+## Fish terminal -- config.fish --------------
 
 ## Aliases
 alias nv="nvim"
@@ -20,17 +20,17 @@ alias df="df -H"
 ## rbenv autostart & PATH
 ## set -x PATH $PATH ~/.rbenv/bin
 ## rbenv init - | source
-status --is-interactive; and ~/.rbenv/bin/rbenv init - ***REMOVED***sh | source
+status --is-interactive; and ~/.rbenv/bin/rbenv init - fish | source
 
 ## NodeJS PATH
 set PATH /home/mauromotion/.nvm/versions/node/v19.5.0/bin $PATH
 
 ## Zoxide
 set PATH /home/mauromotion/.local/bin $PATH
-zoxide init ***REMOVED***sh | source
+zoxide init fish | source
 
 ## Greeting message
-function ***REMOVED***sh_greeting
+function fish_greeting
 	echo --------------------------------
 	echo ┌┬┐┌─┐┬ ┬┬─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌┐┌
 	echo │││├─┤│ │├┬┘│ │││││ │ │ ││ ││││
@@ -41,9 +41,9 @@ function ***REMOVED***sh_greeting
 	echo
 end
 
-# note: this erases the default ***REMOVED***sh_mode_prompt, which adds a vi mode
+# note: this erases the default fish_mode_prompt, which adds a vi mode
 # indicator to the left of your prompt
-function ***REMOVED***sh_mode_prompt; end
+function fish_mode_prompt; end
 
 # turn on vi mode when the shell starts
-#***REMOVED***sh_vi_mode
+#fish_vi_mode

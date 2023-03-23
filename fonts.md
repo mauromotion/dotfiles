@@ -9,5 +9,5 @@ IBM Plex
 *Monospaced text*: Fira Mono Regular 11
 *Legacy windows titles*: Fira Sans Semibold 10
 
-`sudo pacman -S otf-***REMOVED***ra-sans otf-***REMOVED***ramono-nerd ttf-ibmplex-mono-nerd ttf-roboto-slab`
+`sudo pacman -S otf-fira-sans otf-firamono-nerd ttf-ibmplex-mono-nerd ttf-roboto-slab`
 

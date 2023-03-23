@@ -1,17 +1,17 @@
 -- Standard awesome library
 local awful = require("awful")
 
-local _M = {***REMOVED***
+local _M = {}
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 function _M.get ()
-  local tags = {***REMOVED***
+  local tags = {}
 
   awful.screen.connect_for_each_screen(function(s)
     -- Each screen has its own tag table.
     tags[s] = awful.tag(
-      { "1", "2", "3", "4", "5", "6", "7", "8", "9" ***REMOVED***, s, RC.layouts[1]
+      { "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, RC.layouts[1]
     )
   end)
 
@@ -20,5 +20,5 @@ end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-return setmetatable({***REMOVED***, { __call = function(_, ...) return _M.get(...) end ***REMOVED***)
+return setmetatable({}, { __call = function(_, ...) return _M.get(...) end })
 

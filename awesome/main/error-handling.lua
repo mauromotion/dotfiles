@@ -1,16 +1,16 @@
--- Noti***REMOVED***cation library
+-- Notification library
 local naughty = require("naughty")
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 -- Check if awesome encountered an error during startup and fell back to
--- another con***REMOVED***g (This code will only ever execute for the fallback con***REMOVED***g)
+-- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
   naughty.notify({
-    preset = naughty.con***REMOVED***g.presets.critical,
+    preset = naughty.config.presets.critical,
     title = "Oops, there were errors during startup!",
     text = awesome.startup_errors
-  ***REMOVED***)
+  })
 end
 
 -- Handle runtime errors after startup
@@ -22,10 +22,10 @@ do
     in_error = true
 
     naughty.notify({
-      preset = naughty.con***REMOVED***g.presets.critical,
+      preset = naughty.config.presets.critical,
       title = "Oops, an error happened!",
       text = tostring(err)
-    ***REMOVED***)
+    })
     in_error = false
   end)
 end

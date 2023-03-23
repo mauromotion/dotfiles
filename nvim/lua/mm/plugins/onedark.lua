@@ -9,32 +9,32 @@ require('onedark').setup  {
 
     -- toggle theme style ---
     toggle_style_key = nil, -- keybind to toggle theme style. Leave it nil to disable it, or set it to a string, for example "<leader>ts"
-    toggle_style_list = {'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light'***REMOVED***, -- List of styles to toggle between
+    toggle_style_list = {'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light'}, -- List of styles to toggle between
 
     -- Change code style ---
     -- Options are italic, bold, underline, none
-    -- You can con***REMOVED***gure multiple style with comma seperated, For e.g., keywords = 'italic,bold'
+    -- You can configure multiple style with comma seperated, For e.g., keywords = 'italic,bold'
     code_style = {
         comments = 'italic',
         keywords = 'italic',
         functions = 'italic',
         strings = 'none',
         variables = 'none'
-    ***REMOVED***,
+    },
 
     -- Lualine options --
     lualine = {
         transparent = false, -- lualine center bar transparency
-    ***REMOVED***,
+    },
 
     -- Custom Highlights --
-    colors = {***REMOVED***, -- Override default colors
-    highlights = {***REMOVED***, -- Override highlight groups
+    colors = {}, -- Override default colors
+    highlights = {}, -- Override highlight groups
 
-    -- Plugins Con***REMOVED***g --
+    -- Plugins Config --
     diagnostics = {
         darker = true, -- darker colors for diagnostic
         undercurl = true,   -- use undercurl instead of underline for diagnostics
         background = true,    -- use background color for virtual text
-    ***REMOVED***,
-***REMOVED***
+    },
+}

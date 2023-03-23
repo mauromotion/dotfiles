@@ -14,12 +14,12 @@ local wibox = require("wibox")
 client.connect_signal("request::titlebars", function(c)
     -- buttons for the titlebar
     local buttons = gears.table.join(
-        awful.button({ ***REMOVED***, 1, function()
-            c:emit_signal("request::activate", "titlebar", {raise = true***REMOVED***)
+        awful.button({ }, 1, function()
+            c:emit_signal("request::activate", "titlebar", {raise = true})
             awful.mouse.client.move(c)
         end),
-        awful.button({ ***REMOVED***, 3, function()
-            c:emit_signal("request::activate", "titlebar", {raise = true***REMOVED***)
+        awful.button({ }, 3, function()
+            c:emit_signal("request::activate", "titlebar", {raise = true})
             awful.mouse.client.resize(c)
         end)
     )
@@ -28,24 +28,24 @@ client.connect_signal("request::titlebars", function(c)
         { -- Left
             awful.titlebar.widget.iconwidget(c),
             buttons = buttons,
-            layout  = wibox.layout.***REMOVED***xed.horizontal
-        ***REMOVED***,
+            layout  = wibox.layout.fixed.horizontal
+        },
         { -- Middle
             { -- Title
                 align  = "center",
                 widget = awful.titlebar.widget.titlewidget(c)
-            ***REMOVED***,
+            },
             buttons = buttons,
             layout  = wibox.layout.flex.horizontal
-        ***REMOVED***,
+        },
         { -- Right
             awful.titlebar.widget.floatingbutton (c),
             awful.titlebar.widget.maximizedbutton(c),
             awful.titlebar.widget.stickybutton   (c),
             awful.titlebar.widget.ontopbutton    (c),
             awful.titlebar.widget.closebutton    (c),
-            layout = wibox.layout.***REMOVED***xed.horizontal()
-        ***REMOVED***,
+            layout = wibox.layout.fixed.horizontal()
+        },
         layout = wibox.layout.align.horizontal
-    ***REMOVED***
+    }
 end)

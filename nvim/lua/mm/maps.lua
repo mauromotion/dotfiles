@@ -2,22 +2,22 @@
 -- ┌┬┐┌─┐┬ ┬┬─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌┐┌
 -- │││├─┤│ │├┬┘│ │││││ │ │ ││ ││││
 -- ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘
--- * .dot***REMOVED***les * --
+-- * .dotfiles * --
 -- Neovim -- maps.lua --------------------------------
 
 -- KEYBINDINGS
 
 local function map(m, k, v)
-	vim.keymap.set(m, k, v, { noremap = true, silent = true ***REMOVED***)
+	vim.keymap.set(m, k, v, { noremap = true, silent = true })
 end
 
 -- Load recent sessions
 map('n', '<leader>sl', '<CMD>SessionLoad<CR>')
 
 -- Keybindings for telescope
-map('n', '<leader>fr', '<CMD>Telescope old***REMOVED***les<CR>')
-map('n', '<leader>ff', '<CMD>Telescope ***REMOVED***nd_***REMOVED***les<CR>')
-map('n', '<leader>fb', '<CMD>Telescope ***REMOVED***le_browser<CR>')
+map('n', '<leader>fr', '<CMD>Telescope oldfiles<CR>')
+map('n', '<leader>ff', '<CMD>Telescope find_files<CR>')
+map('n', '<leader>fb', '<CMD>Telescope file_browser<CR>')
 map('n', '<leader>fw', '<CMD>Telescope live_grep<CR>')
 map('n', '<leader>ht', '<CMD>Telescope colorscheme<CR>')
 map('n', '<leader>cl', '<CMD>ColorizerToggle<CR>')

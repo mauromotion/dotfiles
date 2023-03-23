@@ -30,12 +30,12 @@ theme.border_marked = gmc.color['orange500'] .. "cc"
 
 -- There are other variable sets
 -- overriding the default one when
--- de***REMOVED***ned, the sets are:
+-- defined, the sets are:
 -- taglist_[bg|fg]_[focus|urgent|occupied|empty]
 -- tasklist_[bg|fg]_[focus|urgent]
 -- titlebar_[bg|fg]_[normal|focus]
 -- tooltip_[font|opacity|fg_color|bg_color|border_width|border_color]
--- mouse_***REMOVED***nder_[color|timeout|animate_timeout|radius|factor]
+-- mouse_finder_[color|timeout|animate_timeout|radius|factor]
 -- Example:
 
 theme.taglist_bg_focus = gmc.color['red500'] .. "cc"

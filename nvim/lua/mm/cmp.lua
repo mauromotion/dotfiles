@@ -42,60 +42,60 @@ local kind_icons = {
   Event = "",
   Operator = "",
   TypeParameter = "",
-***REMOVED***
--- ***REMOVED***nd more here: https://www.nerdfonts.com/cheat-sheet
+}
+-- find more here: https://www.nerdfonts.com/cheat-sheet
 
 cmp.setup {
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body) -- For `luasnip` users.
     end,
-  ***REMOVED***,
+  },
   mapping = {
     ["<C-k>"] = cmp.mapping.select_prev_item(),
 		["<C-j>"] = cmp.mapping.select_next_item(),
-    ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" ***REMOVED***),
-    ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" ***REMOVED***),
-    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" ***REMOVED***),
-    ["<C-y>"] = cmp.con***REMOVED***g.disable, -- Specify `cmp.con***REMOVED***g.disable` if you want to remove the default `<C-y>` mapping.
+    ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
+    ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
+    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+    ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
     ["<C-e>"] = cmp.mapping {
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
-    ***REMOVED***,
-    -- Accept currently selected item. If none selected, `select` ***REMOVED***rst item.
-    -- Set `select` to `false` to only con***REMOVED***rm explicitly selected items.
-    ["<CR>"] = cmp.mapping.con***REMOVED***rm { select = true ***REMOVED***,
+    },
+    -- Accept currently selected item. If none selected, `select` first item.
+    -- Set `select` to `false` to only confirm explicitly selected items.
+    ["<CR>"] = cmp.mapping.confirm { select = true },
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-  ***REMOVED***if luasnip.expandable() then
+      elseif luasnip.expandable() then
         luasnip.expand()
-  ***REMOVED***if luasnip.expand_or_jumpable() then
+      elseif luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
-  ***REMOVED***if check_backspace() then
+      elseif check_backspace() then
         fallback()
-  ***REMOVED***
+      else
         fallback()
       end
     end, {
       "i",
       "s",
-    ***REMOVED***),
+    }),
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-  ***REMOVED***if luasnip.jumpable(-1) then
+      elseif luasnip.jumpable(-1) then
         luasnip.jump(-1)
-  ***REMOVED***
+      else
         fallback()
       end
     end, {
       "i",
       "s",
-    ***REMOVED***),
-  ***REMOVED***,
+    }),
+  },
   formatting = {
-***REMOVED***elds = { "kind", "abbr", "menu" ***REMOVED***,
+    fields = { "kind", "abbr", "menu" },
     format = function(entry, vim_item)
       -- Kind icons
       vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
@@ -106,27 +106,27 @@ cmp.setup {
         luasnip = "[Snippet]",
         buffer = "[Buffer]",
         path = "[Path]",
-      ***REMOVED***)[entry.source.name]
+      })[entry.source.name]
       return vim_item
     end,
-  ***REMOVED***,
+  },
   sources = {
-    { name = "nvim_lsp" ***REMOVED***,
-    { name = "nvim_lua" ***REMOVED***,
-    { name = "luasnip" ***REMOVED***,
-    { name = "buffer" ***REMOVED***,
-    { name = "path" ***REMOVED***,
-  ***REMOVED***,
-  con***REMOVED***rm_opts = {
-    behavior = cmp.Con***REMOVED***rmBehavior.Replace,
+    { name = "nvim_lsp" },
+    { name = "nvim_lua" },
+    { name = "luasnip" },
+    { name = "buffer" },
+    { name = "path" },
+  },
+  confirm_opts = {
+    behavior = cmp.ConfirmBehavior.Replace,
     select = false,
-  ***REMOVED***,
+  },
   window = {
-    documentation = cmp.con***REMOVED***g.window.bordered()
-  ***REMOVED***,
+    documentation = cmp.config.window.bordered()
+  },
   experimental = {
     ghost_text = false,
     native_menu = false,
-  ***REMOVED***,
-***REMOVED***
+  },
+}
 

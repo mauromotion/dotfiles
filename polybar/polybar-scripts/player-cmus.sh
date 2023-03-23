@@ -1,4 +1,4 @@
-***REMOVED***
+#!/bin/sh
 
 if info=$(cmus-remote -Q 2> /dev/null); then
 	status=$(echo "$info" | grep -v "set " | grep -v "tag " | grep "status " | cut -d ' ' -f 2)
@@ -18,7 +18,7 @@ if info=$(cmus-remote -Q 2> /dev/null); then
 				dur_seconds=$(printf "%02d" $((duration % 60)))
 
 				info_string="| $pos_minutes:$pos_seconds / $dur_minutes:$dur_seconds"
-			***REMOVED***
+			fi
 
 			info_string="$artist - $title $info_string"
 
@@ -28,15 +28,15 @@ if info=$(cmus-remote -Q 2> /dev/null); then
 				echo " | $info_string"
 			elif [ "$status" = "stopped" ]; then
 				echo " |$info_string"
-			***REMOVED***
+			else
 				echo ""
-			***REMOVED***
-		***REMOVED***
+			fi
+		else
 			echo ""
-		***REMOVED***
-	***REMOVED***
+		fi
+	else
 		echo ""
-	***REMOVED***
-***REMOVED***
+	fi
+else
 	echo ""
-***REMOVED***
+fi

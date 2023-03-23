@@ -2,32 +2,32 @@
 -- {{{ Required libraries
 local gears = require("gears")
 local awful = require("awful")
--- ***REMOVED******REMOVED******REMOVED***
+-- }}}
 
-local _M = {***REMOVED***
+local _M = {}
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 function _M.get()
   local tasklist_buttons = gears.table.join(
-    awful.button({ ***REMOVED***, 1, function (c)
+    awful.button({ }, 1, function (c)
       if c == client.focus then
         c.minimized = true
-  ***REMOVED***
+      else
         c:emit_signal(
           "request::activate",
           "tasklist",
-          {raise = true***REMOVED***
+          {raise = true}
         )
       end
     end),
-    awful.button({ ***REMOVED***, 3, function()
-      awful.menu.client_list({ theme = { width = 250 ***REMOVED*** ***REMOVED***)
+    awful.button({ }, 3, function()
+      awful.menu.client_list({ theme = { width = 250 } })
     end),
-    awful.button({ ***REMOVED***, 4, function ()
+    awful.button({ }, 4, function ()
       awful.client.focus.byidx(1)
     end),
-    awful.button({ ***REMOVED***, 5, function ()
+    awful.button({ }, 5, function ()
       awful.client.focus.byidx(-1)
     end)
   )
@@ -37,4 +37,4 @@ end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-return setmetatable({***REMOVED***, { __call = function(_, ...) return _M.get(...) end ***REMOVED***)
+return setmetatable({}, { __call = function(_, ...) return _M.get(...) end })

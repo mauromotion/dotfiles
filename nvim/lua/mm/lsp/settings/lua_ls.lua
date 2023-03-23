@@ -3,15 +3,15 @@ return {
 
 		Lua = {
 			diagnostics = {
-				globals = { "vim" ***REMOVED***,
-			***REMOVED***,
+				globals = { "vim" },
+			},
 			workspace = {
 				library = {
 					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-					[vim.fn.stdpath("con***REMOVED***g") .. "/lua"] = true,
-				***REMOVED***,
-			***REMOVED***,
-		***REMOVED***,
-	***REMOVED***,
-***REMOVED***
+					[vim.fn.stdpath("config") .. "/lua"] = true,
+				},
+			},
+		},
+	},
+}
 

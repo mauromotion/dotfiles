@@ -11,11 +11,11 @@ local diagnostics = null_ls.builtins.diagnostics
 null_ls.setup {
   debug = false,
   sources = {
-    formatting.prettier.with { extra_args = { "--single-quote" ***REMOVED*** ***REMOVED***,
-    -- formatting.black.with { extra_args = { "--fast" ***REMOVED*** ***REMOVED***,
+    formatting.prettier.with { extra_args = { "--single-quote" } },
+    -- formatting.black.with { extra_args = { "--fast" } },
     formatting.stylua,
    --  diagnostics.flake8,
     diagnostics.eslint,
-  ***REMOVED***,
-***REMOVED***
+  },
+}
 

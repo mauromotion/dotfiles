@@ -9,9 +9,9 @@ export PATH=~/.local/bin:$PATH
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which speci***REMOVED***c one was loaded, run: echo $RANDOM_THEME
+# to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="re***REMOVED***ned" # set by `omz`
+ZSH_THEME="refined" # set by `omz`
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -48,11 +48,11 @@ ZSH_THEME="re***REMOVED***ned" # set by `omz`
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow***REMOVED***waiting...%f"
+# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 # COMPLETION_WAITING_DOTS="true"
 
-# Uncomment the following line if you want to disable marking untracked ***REMOVED***les
+# Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
@@ -61,7 +61,7 @@ ZSH_THEME="re***REMOVED***ned" # set by `omz`
 # stamp shown in the history command output.
 # You can set one of the optional three formats:
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format speci***REMOVED***cations,
+# or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
@@ -96,10 +96,10 @@ plugins=(
   zsh-syntax-highlighting
 )
 
-fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh***REMOVED***/custom***REMOVED***/plugins/zsh-completions/src
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 source $ZSH/oh-my-zsh.sh
 
-# User con***REMOVED***guration
+# User configuration
 
 ## Greeting message
 	echo ' -------------------------------- '
@@ -120,20 +120,20 @@ source $ZSH/oh-my-zsh.sh
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
-# ***REMOVED***
+# else
 #   export EDITOR='mvim'
-# ***REMOVED***
+# fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to de***REMOVED***ne aliases within the ZSH_CUSTOM folder.
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshcon***REMOVED***g="mate ~/.zshrc"
+# alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 ## Aliases
@@ -146,7 +146,7 @@ alias rm="rm -i"
 alias lg="lazygit"
 alias grep="grep --color=auto"
 alias df="df -H"
-alias polybar-restart="sh ~/.con***REMOVED***g/polybar/launch*"
+alias polybar-restart="sh ~/.config/polybar/launch*"
 alias load-ICC="sh ~/.color/*.sh"
 alias manjaro-update="pamac upgrade && pamac upgrade --aur --devel || echo -e '\033[0;91mThere was an error upgrading the system. AUR packages not upgraded.\e[0m'"
 alias manjaro-boot-log="journalctl --boot=-1 --priority=3 --catalog --no-pager"

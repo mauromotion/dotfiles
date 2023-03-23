@@ -3,7 +3,7 @@
 local gears = require("gears")
 local awful = require("awful")
 
-local _M = {***REMOVED***
+local _M = {}
 local modkey = RC.vars.modkey
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -19,7 +19,7 @@ function _M.get(globalkeys)
 
       --  -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
       -- View tag only.
-      awful.key({ modkey ***REMOVED***, "#" .. i + 9,
+      awful.key({ modkey }, "#" .. i + 9,
         function ()
           local screen = awful.screen.focused()
           local tag = screen.tags[i]
@@ -27,11 +27,11 @@ function _M.get(globalkeys)
             tag:view_only()
           end
         end,
-        {description = "view tag #"..i, group = "tag"***REMOVED***),
+        {description = "view tag #"..i, group = "tag"}),
 
       --  -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
       -- Toggle tag display.
-      awful.key({ modkey, "Control" ***REMOVED***, "#" .. i + 9,
+      awful.key({ modkey, "Control" }, "#" .. i + 9,
         function ()
           local screen = awful.screen.focused()
           local tag = screen.tags[i]
@@ -39,11 +39,11 @@ function _M.get(globalkeys)
             awful.tag.viewtoggle(tag)
           end
         end,
-        {description = "toggle tag #" .. i, group = "tag"***REMOVED***),
+        {description = "toggle tag #" .. i, group = "tag"}),
 
       --  -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
       -- Move client to tag.
-      awful.key({ modkey, "Shift" ***REMOVED***, "#" .. i + 9,
+      awful.key({ modkey, "Shift" }, "#" .. i + 9,
         function ()
           if client.focus then
             local tag = client.focus.screen.tags[i]
@@ -52,11 +52,11 @@ function _M.get(globalkeys)
             end
           end
         end,
-        {description = "move focused client to tag #"..i, group = "tag"***REMOVED***),
+        {description = "move focused client to tag #"..i, group = "tag"}),
 
       --  -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
       -- Toggle tag on focused client.
-      awful.key({ modkey, "Control", "Shift" ***REMOVED***, "#" .. i + 9,
+      awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
         function ()
           if client.focus then
             local tag = client.focus.screen.tags[i]
@@ -65,7 +65,7 @@ function _M.get(globalkeys)
             end
           end
         end,
-        {description = "toggle focused client on tag #" .. i, group = "tag"***REMOVED***)
+        {description = "toggle focused client on tag #" .. i, group = "tag"})
 
       --  -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
     )
@@ -73,8 +73,8 @@ function _M.get(globalkeys)
 
   return globalkeys
 end
--- ***REMOVED******REMOVED******REMOVED***
+-- }}}
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-return setmetatable({***REMOVED***, { __call = function(_, ...) return _M.get(...) end ***REMOVED***)
+return setmetatable({}, { __call = function(_, ...) return _M.get(...) end })

@@ -5,8 +5,8 @@
 |Terminal (Alacritty)      |MOD + Return         
 |Browser (Firefox)         |MOD + Shift + Return 
 |File manager (PCmanFM)    |MOD + Ctrl + Return  
-|Launcher (ro***REMOVED***)           |MOD + Space          
-|Calculator (ro***REMOVED***)         |MOD + c          
+|Launcher (rofi)           |MOD + Space          
+|Calculator (rofi)         |MOD + c          
 |Applications menu         |MOD + z              
 
 |## Windows Management     |## Keybindings
@@ -53,7 +53,7 @@
 
 |## System                 |## Keybindings                  
 |--------------------------|---------------------
-|Re-load i3 con***REMOVED***g         |MOD + Shift + c      
+|Re-load i3 config         |MOD + Shift + c      
 |Re-load i3                |MOD + Shift + r      
 |Log out of i3             |MOD + Shift + e
 |Kill X                    |MOD + Shift + x      

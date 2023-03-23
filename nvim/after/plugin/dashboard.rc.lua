@@ -2,8 +2,8 @@
 -- ┌┬┐┌─┐┬ ┬┬─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌┐┌
 -- │││├─┤│ │├┬┘│ │││││ │ │ ││ ││││
 -- ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘
--- * .dot***REMOVED***les * --
--- Neovim -- Dashboard-nvim -- plugin con***REMOVED***g ---------
+-- * .dotfiles * --
+-- Neovim -- Dashboard-nvim -- plugin config ---------
 
 
 local status, db = pcall(require, "dashboard")
@@ -11,7 +11,7 @@ local home = os.getenv("HOME")
 
 db.setup({
   theme = 'hyper',
-  con***REMOVED***g = {
+  config = {
     header = {
 "",
 "",
@@ -26,35 +26,35 @@ db.setup({
 "",
     " [ TIP: To exit Neovim, just power off your computer. ] ",
     "",
-    ***REMOVED***,
+    },
     shortcut = {
         { desc = ' Update',
           group = '@property',
           action = 'PackerUpdate',
-          key = 'u' ***REMOVED***,
+          key = 'u' },
         {
           desc = ' Files',
           group = 'Label',
-          action = 'Telescope ***REMOVED***nd_***REMOVED***les',
+          action = 'Telescope find_files',
           key = 'f',
-        ***REMOVED***,
+        },
         {
           desc = ' Health',
           group = 'DiagnosticHint',
           action = 'checkhealth',
           key = 'h',
-        ***REMOVED***,
+        },
         {
           desc = ' Mason',
           group = 'Number',
           action = 'Mason',
           key = 'm',
-        ***REMOVED***,
-      ***REMOVED***,
-    packages = { enable = true ***REMOVED***, -- show how many plugins neovim loaded
-    project = { limit = 8, action = 'Telescope ***REMOVED***nd_***REMOVED***les cwd=' ***REMOVED***, -- limit how many projects list, action when you press key or enter it will run this action.
-    mru = { limit = 10 ***REMOVED***, -- how many ***REMOVED***les in list
-    footer = {"", "  2023: The year of Linux on Desktop.  " ***REMOVED***
-  ***REMOVED***
-***REMOVED***)
+        },
+      },
+    packages = { enable = true }, -- show how many plugins neovim loaded
+    project = { limit = 8, action = 'Telescope find_files cwd=' }, -- limit how many projects list, action when you press key or enter it will run this action.
+    mru = { limit = 10 }, -- how many files in list
+    footer = {"", "  2023: The year of Linux on Desktop.  " }
+  }
+})
 

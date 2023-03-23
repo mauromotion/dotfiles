@@ -1,8 +1,8 @@
-## i3 con***REMOVED***guration instructions
+## i3 configuration instructions
 
-Symlink these ***REMOVED***les into the appropriate directories:
+Symlink these files into the appropriate directories:
 
-- i3/con***REMOVED***g   => $HOME/.i3
+- i3/config   => $HOME/.i3
 - .Xresources => $HOME
 - .dmenurc    => $HOME
-- dunstrc     => $HOME/.con***REMOVED***g/dunst
+- dunstrc     => $HOME/.config/dunst

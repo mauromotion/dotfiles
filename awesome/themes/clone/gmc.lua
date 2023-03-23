@@ -1,5 +1,5 @@
 
-local _M = {***REMOVED***
+local _M = {}
 
 -- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 -- google material colors
@@ -141,6 +141,6 @@ _M.color = {
     ['deepOrangeA200'] = '#ff6e40',
     ['deepOrangeA400'] = '#ff3d00',
     ['deepOrangeA700'] = '#dd2c00'
-***REMOVED***
+}
 
 return _M

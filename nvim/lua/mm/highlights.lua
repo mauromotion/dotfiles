@@ -2,7 +2,7 @@
 -- ┌┬┐┌─┐┬ ┬┬─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌┐┌
 -- │││├─┤│ │├┬┘│ │││││ │ │ ││ ││││
 -- ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘
--- * .dot***REMOVED***les * --
+-- * .dotfiles * --
 -- Neovim -- highlights.lua --------------------------------
 
 -- Default Theme --
@@ -18,12 +18,12 @@ if not status_ok then
 end
 
 -- Highlight the region on yank
-local num_au = vim.api.nvim_create_augroup('nonvim', { clear = true ***REMOVED***)
+local num_au = vim.api.nvim_create_augroup('nonvim', { clear = true })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
 	group = num_au,
 	callback = function()
-		vim.highlight.on_yank({ higroup = "Visual", timeout = 120 ***REMOVED***)
+		vim.highlight.on_yank({ higroup = "Visual", timeout = 120 })
 	end,
-***REMOVED***)
+})
 

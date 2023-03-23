@@ -2,7 +2,7 @@
 -- ┌┬┐┌─┐┬ ┬┬─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌┐┌
 -- │││├─┤│ │├┬┘│ │││││ │ │ ││ ││││
 -- ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘
--- * .dot***REMOVED***les * --
+-- * .dotfiles * --
 -- Neovim -- Plugins.lua -----------------------------
 
 local status, packer = pcall(require, 'packer')
@@ -13,9 +13,9 @@ end
 
 -- Reloads Neovim whenever you save plugins.lua
 vim.cmd([[
-augroup packer_user_con***REMOVED***g
+augroup packer_user_config
 autocmd!
-autocmd BufWritePost plugins.lua source <a***REMOVED***le> | PackerSync
+autocmd BufWritePost plugins.lua source <afile> | PackerSync
 augroup END
 ]])
 
@@ -27,10 +27,10 @@ packer.startup(function(use)
   packer.init {
     display = {
       open_fn = function()
-        return require("packer.util").float { border = "rounded" ***REMOVED***
+        return require("packer.util").float { border = "rounded" }
       end,
-    ***REMOVED***,
-  ***REMOVED***
+    },
+  }
 
   ---------------
   --* PLUGINS *--
@@ -41,34 +41,34 @@ packer.startup(function(use)
   use({
     'nvim-telescope/telescope.nvim', -- Telescope
     tag = '0.1.x',
-    requires = { { 'nvim-lua/plenary.nvim' ***REMOVED*** ***REMOVED***,
-  ***REMOVED***)
-  use('nvim-telescope/telescope-***REMOVED***le-browser.nvim')
+    requires = { { 'nvim-lua/plenary.nvim' } },
+  })
+  use('nvim-telescope/telescope-file-browser.nvim')
   use({
     {
       'nvim-treesitter/nvim-treesitter', -- Treesitter Syntax Highlighting
       event = 'CursorHold',
       run = ':TSUpdate',
-      con***REMOVED***g = function()
+      config = function()
         require('mm.plugins.treesitter')
       end,
-    ***REMOVED***,
-    { 'nvim-treesitter/playground', after = 'nvim-treesitter' ***REMOVED***,
-    { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' ***REMOVED***,
-    { 'nvim-treesitter/nvim-treesitter-refactor', after = 'nvim-treesitter' ***REMOVED***,
-    { 'windwp/nvim-ts-autotag', after = 'nvim-treesitter' ***REMOVED***,
-    { 'JoosepAlviste/nvim-ts-context-commentstring', after = 'nvim-treesitter' ***REMOVED***,
-  ***REMOVED***)
+    },
+    { 'nvim-treesitter/playground', after = 'nvim-treesitter' },
+    { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' },
+    { 'nvim-treesitter/nvim-treesitter-refactor', after = 'nvim-treesitter' },
+    { 'windwp/nvim-ts-autotag', after = 'nvim-treesitter' },
+    { 'JoosepAlviste/nvim-ts-context-commentstring', after = 'nvim-treesitter' },
+  })
 
   --------------------
   -- *Colorschemes* --
   -- -----------------
   -- use({
   --   'olimorris/onedarkpro.nvim',
-  --   con***REMOVED***g = function()
+  --   config = function()
   --     require('mm.plugins.onedarkpro')
   --   end
-  -- ***REMOVED***)
+  -- })
   -- use'wittyjudge/gruvbox-material.nvim'
   -- use'shatur/neovim-ayu'
   -- use'gruvbox-community/gruvbox'
@@ -76,15 +76,15 @@ packer.startup(function(use)
   use'EdenEast/nightfox.nvim'
   use'shaunsingh/nord.nvim'
   -- use 'folke/tokyonight.nvim'
-  -- use{'catppuccin/nvim', as = 'catppuccin' ***REMOVED***
+  -- use{'catppuccin/nvim', as = 'catppuccin' }
   -- use({
   --   'rose-pine/neovim',
   --   as = 'rose-pine',
-  --   con***REMOVED***g = function()
+  --   config = function()
   --       require("rose-pine").setup()
   --   end
--- ***REMOVED***)
-  -- use{'sainnhe/everforest', background = 'hard'***REMOVED***
+-- })
+  -- use{'sainnhe/everforest', background = 'hard'}
   -- use 'mhartington/oceanic-next'
 
   ----------------------------------------
@@ -103,11 +103,11 @@ packer.startup(function(use)
   --------------------------------
   -- *Language Server Protocol* --
   --------------------------------
-  use'neovim/nvim-lspcon***REMOVED***g' -- Enable LSP
+  use'neovim/nvim-lspconfig' -- Enable LSP
   -- use('williamboman/nvim-lsp-installer')
   use'williamboman/mason.nvim' -- simple to use language server installer 
-  use'williamboman/mason-lspcon***REMOVED***g' -- simple to use language server installer 
-  -- use "tamago324/nlsp-settings.nvim" -- language server settings de***REMOVED***ned in json
+  use'williamboman/mason-lspconfig' -- simple to use language server installer 
+  -- use "tamago324/nlsp-settings.nvim" -- language server settings defined in json
   use'jose-elias-alvarez/null-ls.nvim' -- LSP diagnostics and code actions
 
   ----------------------
@@ -117,17 +117,17 @@ packer.startup(function(use)
   use({
     "kylechui/nvim-surround",
     tag = "*", -- Use for stability; omit to use `main` branch for the latest features
-    con***REMOVED***g = function()
+    config = function()
         require("nvim-surround").setup({
-            -- Con***REMOVED***guration here, or leave empty to use defaults
-        ***REMOVED***)
+            -- Configuration here, or leave empty to use defaults
+        })
     end
-  ***REMOVED***)
+  })
   use'tpope/vim-commentary' -- Comment lines quickly
   use {'windwp/nvim-autopairs', -- Autoclose parentheses
-    con***REMOVED***g = function() require('nvim-autopairs').setup {***REMOVED*** end***REMOVED***
+    config = function() require('nvim-autopairs').setup {} end}
   use{'norcalli/nvim-colorizer.lua',
-    con***REMOVED***g = function() require('colorizer').setup {***REMOVED*** end***REMOVED***
+    config = function() require('colorizer').setup {} end}
 
   --------------------
   -- *Better UI/UX* --
@@ -139,27 +139,27 @@ packer.startup(function(use)
   -- Buffers like tabs
   use({
     'akinsho/bufferline.nvim',
-    con***REMOVED***g = function()
+    config = function()
       require('mm.plugins.bufferline')
     end
-  ***REMOVED***)
+  })
 
   -- File browser
   use {
     'nvim-tree/nvim-tree.lua',
-    con***REMOVED***g = function()
+    config = function()
       require('mm.plugins.nvimtree')
     end,
     tag = 'nightly' -- optional, updated every week. (see issue #1193)
-  ***REMOVED***
+  }
 
   -- Git status
   use{
     'lewis6991/gitsigns.nvim',
-    con***REMOVED***g = function()
+    config = function()
       require('mm.plugins.gitsigns')
     end
-  ***REMOVED***
+  }
 
   -- LSP context bar
   -- use({
@@ -167,39 +167,39 @@ packer.startup(function(use)
   --   tag = "*",
   --   requires = {
   --     "SmiteshP/nvim-navic",
-  --   ***REMOVED***,
-  --   con***REMOVED***g = function()
+  --   },
+  --   config = function()
   --     require("barbecue").setup()
   --   end,
-  -- ***REMOVED***)
+  -- })
 
   -- Aerial
   use({
     'stevearc/aerial.nvim',
-    con***REMOVED***g = function()
+    config = function()
       require('mm.plugins.aerial')
     end
-  ***REMOVED***)
+  })
 
   -- Status line
   use({
     'nvim-lualine/lualine.nvim',
-    con***REMOVED***g = function()
+    config = function()
       require('mm.plugins.lualine')
     end
-  ***REMOVED***)
+  })
 
   -- Zen modes
   use({
     'Pocco81/true-zen.nvim',
-    con***REMOVED***g = function()
+    config = function()
       require('true-zen').setup {
-      ***REMOVED***
+      }
     end
-  ***REMOVED***)
+  })
 
   -------------------------------------------------------------------------
-  -- *Automatically set up your con***REMOVED***guration after cloning packer.nvim* --
+  -- *Automatically set up your configuration after cloning packer.nvim* --
   ------------------------------------------------------------------------- 
   if PACKER_BOOTSTRAP then
     require("packer").sync()
