@@ -1,5 +1,7 @@
 #!/bin/sh
 
+source ./weather_api.env
+
 get_icon() {
     case $1 in
         # Icons for weather-icons
@@ -52,7 +54,7 @@ get_duration() {
 
 }
 
-KEY="38ca538ee9d21d9ef490071502a8411d"
+KEY="$KEY"
 CITY="London,UK"
 UNITS="metric"
 SYMBOL="°"
