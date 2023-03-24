@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source ./weather_api.env
+source ~/.config/polybar/polybar-scripts/weather_api.env
 
 get_icon() {
     case $1 in
