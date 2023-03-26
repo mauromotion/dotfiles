@@ -96,9 +96,6 @@ focus_follows_mouse no
 # Set mouse acceleration on desktop (Razer Viper)
 exec_always --no-startup-id xinput set-prop 9 293 -0.700000
 
-# Mount volumes
-exec --no-startup-id ~/.scripts/mount.sh
-
 # Change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -300,6 +297,7 @@ mode "resize" {
 bindsym $mod+9 exec --no-startup-id blurlock
 
 # Autostart applications
+exec --no-startup-id udiskie -a -n -t 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id picom -b
