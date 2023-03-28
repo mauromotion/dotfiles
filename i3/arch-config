@@ -47,7 +47,7 @@ bindsym $mod+period exec playerctl play-pause
 bindsym $mod+comma exec playerctl previous
 bindsym $mod+slash exec playerctl next
 
-# Start Applications
+# Launch Applications
 bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+Return exec firefox
 bindsym $mod+Ctrl+Return exec pcmanfm
@@ -261,10 +261,10 @@ mode "resize" {
         bindsym l resize grow width 5 px or 5 ppt
 
         # Same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 5 px or 5 ppt
+        bindsym Down resize grow height 5 px or 5 ppt
+        bindsym Up resize shrink height 5 px or 5 ppt
+        bindsym Right resize grow width 5 px or 5 ppt
 
         # Exit resize mode: Enter or Escape
         bindsym Return mode "default"
@@ -274,7 +274,9 @@ mode "resize" {
 # Lock screen
 bindsym $mod+9 exec --no-startup-id blurlock
 
-# Autostart applications
+##############################
+### Autostart applications ###
+##############################
 exec --no-startup-id pulseaudio
 exec --no-startup-id pa-applet
 exec --no-startup-id udiskie -a -n -t 
@@ -282,7 +284,6 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id picom -b
 exec --no-startup-id openrgb --startminimized
-exec --no-startup-id $HOME/.config/polybar/launch-desktop.sh
 exec --no-startup-id pcmanfm -d
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
@@ -321,7 +322,9 @@ set_from_resource $term_color13    color13
 set_from_resource $term_color14    color14
 set_from_resource $term_color15    color15
 
-# Start i3bar to display a workspace bar (plus the system information i3status if available)
+#############
+### i3bar ###
+#############
 # bar {
 # 	i3bar_command i3bar
 # 	status_command i3status
@@ -356,10 +359,13 @@ set_from_resource $term_color15    color15
 #         urgent_workspace   #B48EAD #B48EAD #2E3440
 #     }
 # }
-
 # Hide/unhide i3status bar
 # bindsym $mod+m bar mode toggle
 
+###############
+### Polybar ###
+###############
+exec --no-startup-id $HOME/.config/polybar/launch-desktop.sh
 # Hide/unhide polybar
 bindsym $mod+m exec --no-startup-id polybar-msg cmd toggle
 
