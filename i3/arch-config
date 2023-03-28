@@ -26,52 +26,29 @@ font pango: FiraCode Nerd Font Regular 11
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
 
-# Start a terminal
-bindsym $mod+Return exec alacritty
+# Resize floating windows with mouse wheel
+set $resize_step 20
+# Mouse bindings normally only work on window titlebars.
+# The --whole-window flag makes them work if the cursor is anywhere within the window
+bindsym --whole-window $mod+button4 resize grow   width $resize_step; resize grow   height $resize_step
+bindsym --whole-window $mod+button5 resize shrink width $resize_step; resize shrink height $resize_step
 
 # Kill focused window
 bindsym $mod+Shift+q kill
 
 # Start program launcher
-# bindsym $mod+space exec --no-startup-id dmenu_recency -b
 bindsym $mod+space exec --no-startup-id rofi -show combi 
 
 # Start rofi-calc
 bindsym $mod+Ctrl+c exec --no-startup-id "rofi -show calc -modi calc -no-show-match -no-sort > /dev/null"
-
-# Start Galculator
-bindsym $mod+c exec galculator
-
-# Launch categorized menu
-bindsym $mod+z exec --no-startup-id morc_menu
-
-################################################################################################
-## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
-################################################################################################
-
-# exec --no-startup-id volumeicon
-# bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
-exec --no-startup-id pulseaudio
-exec --no-startup-id pa-applet
-bindsym $mod+Ctrl+m exec pavucontrol
-
-################################################################################################
 
 # Media player controls
 bindsym $mod+period exec playerctl play-pause 
 bindsym $mod+comma exec playerctl previous
 bindsym $mod+slash exec playerctl next
 
-# Resize floating windows with mouse wheel
-set $resize_step 20
-
-# Mouse bindings normally only work on window titlebars.
-# The --whole-window flag makes them work if the cursor is anywhere within the window
-bindsym --whole-window $mod+button4 resize grow   width $resize_step; resize grow   height $resize_step
-bindsym --whole-window $mod+button5 resize shrink width $resize_step; resize shrink height $resize_step
-
 # Start Applications
-bindsym $mod+Ctrl+b exec alacritty -e 'bmenu'
+bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+Return exec firefox
 bindsym $mod+Ctrl+Return exec pcmanfm
 bindsym $mod+t exec --no-startup-id pkill picom
@@ -81,9 +58,10 @@ bindsym $mod+Shift+a exec --no-startup-id scrot
 bindsym $mod+Shift+x --release exec --no-startup-id scrot -w
 bindsym $mod+Shift+z --release exec --no-startup-id flameshot gui 
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
+bindsym $mod+Ctrl+m exec pavucontrol
+bindsym $mod+c exec galculator
 
 ## Load ICC profiles ##
-
 # Laptop
 exec_always --no-startup-id dispwin ~/.color/Gigabyte_Aero_15X.icm
 # Desktop
@@ -297,6 +275,8 @@ mode "resize" {
 bindsym $mod+9 exec --no-startup-id blurlock
 
 # Autostart applications
+exec --no-startup-id pulseaudio
+exec --no-startup-id pa-applet
 exec --no-startup-id udiskie -a -n -t 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nitrogen --restore
@@ -379,6 +359,8 @@ set_from_resource $term_color15    color15
 
 # Hide/unhide i3status bar
 # bindsym $mod+m bar mode toggle
+
+# Hide/unhide polybar
 bindsym $mod+m exec --no-startup-id polybar-msg cmd toggle
 
 # Theme colors
