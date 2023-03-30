@@ -14,6 +14,10 @@ end
 -- Load recent sessions
 map('n', '<leader>sl', '<CMD>SessionLoad<CR>')
 
+-- Fast saving, fast quitting
+map('n', '<leader>w', '<CMD>:w<CR>')
+map('n', '<leader>q', '<CMD>:q<CR>')
+
 -- Keybindings for telescope
 map('n', '<leader>fr', '<CMD>Telescope oldfiles<CR>')
 map('n', '<leader>ff', '<CMD>Telescope find_files<CR>')
