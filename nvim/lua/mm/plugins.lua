@@ -161,6 +161,12 @@ packer.startup(function(use)
     end
   }
 
+  -- Terminal
+  -- use {"akinsho/toggleterm.nvim", tag = 'v0.8.3',
+  --   config = function()
+  -- require("toggleterm").setup()
+  --   end}
+
   -- LSP context bar
   -- use({
   --   "utilyre/barbecue.nvim",
