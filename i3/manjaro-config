@@ -85,7 +85,7 @@ bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 ## Load ICC profiles ##
 
 # Laptop
-exec_always --no-startup-id dispwin ~/.color/Gigabyte_Aero_15X.icm
+exec_always --no-startup-id dispwin ~/.monitor/color-profiles/icc/Gigabyte_Aero_15X.icm
 # Desktop
 exec_always --no-startup-id dispwin -d1 ~/.color/icc/Dell_S2721DGF.icm
 exec_always --no-startup-id dispwin -d2 ~/.color/icc/Dell_U2713HM.icm.icm
