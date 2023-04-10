@@ -72,7 +72,7 @@ exec_always --no-startup-id dispwin -d2 ~/.color/icc/Dell_U2713HM.icm.icm
 focus_follows_mouse no
 
 # Set mouse acceleration on desktop (Razer Viper)
-exec_always --no-startup-id xinput set-prop 9 295 -0.700000
+exec_always --no-startup-id "xinput set-prop 9 295 -0.700000"
 
 # Change focus
 bindsym $mod+h focus left
@@ -277,7 +277,7 @@ bindsym $mod+9 exec --no-startup-id blurlock
 ##############################
 ### Autostart applications ###
 ##############################
-exec --no-startup-id pulseaudio
+exec --no-startup-id pulseaudio --start
 exec --no-startup-id pa-applet
 exec --no-startup-id udiskie -a -n -t 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1

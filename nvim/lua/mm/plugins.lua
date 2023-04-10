@@ -83,7 +83,7 @@ packer.startup(function(use)
   --   config = function()
   --       require("rose-pine").setup()
   --   end
--- })
+  -- })
   -- use{'sainnhe/everforest', background = 'hard'}
   -- use 'mhartington/oceanic-next'
 
@@ -113,19 +113,30 @@ packer.startup(function(use)
   ----------------------
   -- *Better editing* --
   ----------------------
-  -- use'tpope/vim-surround' -- Quickly surround anything
+
   use({
     "kylechui/nvim-surround",
     tag = "*", -- Use for stability; omit to use `main` branch for the latest features
     config = function()
-        require("nvim-surround").setup({
-            -- Configuration here, or leave empty to use defaults
-        })
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
     end
   })
-  use'tpope/vim-commentary' -- Comment lines quickly
+
+  -- Comment lines quickly
+  use {
+    'numToStr/Comment.nvim',
+    config = function()
+        require('Comment').setup()
+    end
+  }
+
+  -- use'tpope/vim-commentary' -- Comment lines quickly
   use {'windwp/nvim-autopairs', -- Autoclose parentheses
     config = function() require('nvim-autopairs').setup {} end}
+
+  -- Add color behind hash codes
   use{'norcalli/nvim-colorizer.lua',
     config = function() require('colorizer').setup {} end}
 
