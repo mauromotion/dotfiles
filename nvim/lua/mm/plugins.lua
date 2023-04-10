@@ -36,23 +36,33 @@ packer.startup(function(use)
   --* PLUGINS *--
   ---------------
 
-  use'wbthomason/packer.nvim' -- Packer itself
-  use'glepnir/dashboard-nvim' -- Dashboard 
+  -- Packer itself
+  use'wbthomason/packer.nvim'
+
+  -- Dashboard 
+  use'glepnir/dashboard-nvim'
+
+  -- Telescope
   use({
-    'nvim-telescope/telescope.nvim', -- Telescope
-    tag = '0.1.x',
+    'nvim-telescope/telescope.nvim', 
+    tag = '0.1.1',
     requires = { { 'nvim-lua/plenary.nvim' } },
   })
+
+  -- Telescope File Browser
   use('nvim-telescope/telescope-file-browser.nvim')
+
+  -- Treesitter Syntax Highlighting
   use({
     {
-      'nvim-treesitter/nvim-treesitter', -- Treesitter Syntax Highlighting
+      'nvim-treesitter/nvim-treesitter', 
       event = 'CursorHold',
       run = ':TSUpdate',
       config = function()
         require('mm.plugins.treesitter')
       end,
     },
+    -- Treesitter plugins
     { 'nvim-treesitter/playground', after = 'nvim-treesitter' },
     { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' },
     { 'nvim-treesitter/nvim-treesitter-refactor', after = 'nvim-treesitter' },
@@ -65,27 +75,6 @@ packer.startup(function(use)
   -- -----------------
   use'EdenEast/nightfox.nvim'
   use'shaunsingh/nord.nvim'
-  -- use({
-  --   'olimorris/onedarkpro.nvim',
-  --   config = function()
-  --     require('mm.plugins.onedarkpro')
-  --   end
-  -- })
-  -- use'wittyjudge/gruvbox-material.nvim'
-  -- use'shatur/neovim-ayu'
-  -- use'gruvbox-community/gruvbox'
-  -- use'martinsione/darkplus.nvim'
-  -- use 'folke/tokyonight.nvim'
-  -- use{'catppuccin/nvim', as = 'catppuccin' }
-  -- use({
-  --   'rose-pine/neovim',
-  --   as = 'rose-pine',
-  --   config = function()
-  --       require("rose-pine").setup()
-  --   end
-  -- })
-  -- use{'sainnhe/everforest', background = 'hard'}
-  -- use 'mhartington/oceanic-next'
 
   ----------------------------------------
   -- *Autocompletion and Documentation* --
@@ -171,12 +160,6 @@ packer.startup(function(use)
     end
   }
 
-  -- Terminal
-  -- use {"akinsho/toggleterm.nvim", tag = 'v0.8.3',
-  --   config = function()
-  -- require("toggleterm").setup()
-  --   end}
-
   -- LSP context bar
   use({
     "utilyre/barbecue.nvim",
@@ -188,14 +171,6 @@ packer.startup(function(use)
       require("barbecue").setup()
     end,
   })
-
-  -- -- Aerial
-  -- use({
-  --   'stevearc/aerial.nvim',
-  --   config = function()
-  --     require('mm.plugins.aerial')
-  --   end
-  -- })
 
   -- Status line
   use({
