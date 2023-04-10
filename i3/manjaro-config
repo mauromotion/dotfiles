@@ -85,7 +85,7 @@ bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 ## Load ICC profiles ##
 
 # Laptop
-exec_always --no-startup-id dispwin ~/.color/Gigabyte_Aero_15X.icm
+exec_always --no-startup-id dispwin ~/.monitor/color-profiles/icc/Gigabyte_Aero_15X.icm
 # Desktop
 exec_always --no-startup-id dispwin -d1 ~/.color/icc/Dell_S2721DGF.icm
 exec_always --no-startup-id dispwin -d2 ~/.color/icc/Dell_U2713HM.icm.icm
@@ -299,9 +299,10 @@ bindsym $mod+9 exec --no-startup-id blurlock
 
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id "nitrogen --restore; sleep 1; picom --config /home/mauromotion/.config/picom.conf -b"
+exec --no-startup-id "nitrogen --restore
+exec --no-startup-id picom -b
 #exec --no-startup-id manjaro-hello
-exec --no-startup-id $HOME/.config/polybar/launch-desktop.sh
+exec --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray

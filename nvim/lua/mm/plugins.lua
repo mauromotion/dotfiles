@@ -63,6 +63,8 @@ packer.startup(function(use)
   --------------------
   -- *Colorschemes* --
   -- -----------------
+  use'EdenEast/nightfox.nvim'
+  use'shaunsingh/nord.nvim'
   -- use({
   --   'olimorris/onedarkpro.nvim',
   --   config = function()
@@ -73,8 +75,6 @@ packer.startup(function(use)
   -- use'shatur/neovim-ayu'
   -- use'gruvbox-community/gruvbox'
   -- use'martinsione/darkplus.nvim'
-  use'EdenEast/nightfox.nvim'
-  use'shaunsingh/nord.nvim'
   -- use 'folke/tokyonight.nvim'
   -- use{'catppuccin/nvim', as = 'catppuccin' }
   -- use({
@@ -104,16 +104,15 @@ packer.startup(function(use)
   -- *Language Server Protocol* --
   --------------------------------
   use'neovim/nvim-lspconfig' -- Enable LSP
-  -- use('williamboman/nvim-lsp-installer')
   use'williamboman/mason.nvim' -- simple to use language server installer 
   use'williamboman/mason-lspconfig' -- simple to use language server installer 
-  -- use "tamago324/nlsp-settings.nvim" -- language server settings defined in json
   use'jose-elias-alvarez/null-ls.nvim' -- LSP diagnostics and code actions
 
   ----------------------
   -- *Better editing* --
   ----------------------
 
+  -- Quickly surround anything with anything
   use({
     "kylechui/nvim-surround",
     tag = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -124,7 +123,7 @@ packer.startup(function(use)
     end
   })
 
-  -- Comment lines quickly
+  -- Quickly comment/uncomment with "gcc"
   use {
     'numToStr/Comment.nvim',
     config = function()
@@ -132,12 +131,12 @@ packer.startup(function(use)
     end
   }
 
-  -- use'tpope/vim-commentary' -- Comment lines quickly
-  use {'windwp/nvim-autopairs', -- Autoclose parentheses
+  -- Autoclose parentheses
+  use {'windwp/nvim-autopairs',
     config = function() require('nvim-autopairs').setup {} end}
 
-  -- Add color behind hash codes
-  use{'norcalli/nvim-colorizer.lua',
+  -- Shows colours over colours hashes
+  use{'norcalli/nvim-colorizer.lua', -- Shows colors over color-codes
     config = function() require('colorizer').setup {} end}
 
   --------------------
@@ -179,24 +178,24 @@ packer.startup(function(use)
   --   end}
 
   -- LSP context bar
-  -- use({
-  --   "utilyre/barbecue.nvim",
-  --   tag = "*",
-  --   requires = {
-  --     "SmiteshP/nvim-navic",
-  --   },
-  --   config = function()
-  --     require("barbecue").setup()
-  --   end,
-  -- })
-
-  -- Aerial
   use({
-    'stevearc/aerial.nvim',
+    "utilyre/barbecue.nvim",
+    tag = "*",
+    requires = {
+      "SmiteshP/nvim-navic",
+    },
     config = function()
-      require('mm.plugins.aerial')
-    end
+      require("barbecue").setup()
+    end,
   })
+
+  -- -- Aerial
+  -- use({
+  --   'stevearc/aerial.nvim',
+  --   config = function()
+  --     require('mm.plugins.aerial')
+  --   end
+  -- })
 
   -- Status line
   use({
