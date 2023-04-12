@@ -289,7 +289,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 # exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
-exec --no-startup-id xautolock -time 10 -locker "blurlock -n"
+exec_always --no-startup-id xautolock -time 10 -notify -corners -000 -locker "blurlock -n"
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
