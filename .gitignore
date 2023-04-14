@@ -1,3 +1,4 @@
 nvim/session/
 nvim/plugin/
 *.env
+lazy-lock.json
