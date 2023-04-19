@@ -272,7 +272,7 @@ mode "resize" {
 }
 
 # Lock screen
-bindsym $mod+9 exec --no-startup-id "blurlock -n"
+bindsym $mod+9 exec --no-startup-id i3lock -n -i ~/Pictures/Wallpapers/abstract_nord_waves.png
 
 ##############################
 ### Autostart applications ###
@@ -286,10 +286,11 @@ exec --no-startup-id picom -b
 exec --no-startup-id openrgb --startminimized
 exec --no-startup-id pcmanfm -d
 exec --no-startup-id nm-applet
-exec --no-startup-id xfce4-power-manager
+exec --no-startup-id nextcloud --background
+# exec --no-startup-id xfce4-power-manager
 # exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
-exec_always --no-startup-id xautolock -time 10 -notify -corners -000 -locker "blurlock -n"
+exec_always --no-startup-id xautolock -time 10 -locker i3lock -n -i ~/Pictures/Wallpapers/abstract_nord_waves.png
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
