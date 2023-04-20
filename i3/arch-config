@@ -48,7 +48,7 @@ bindsym $mod+comma exec playerctl previous
 bindsym $mod+slash exec playerctl next
 
 # Launch Applications
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec kitty
 bindsym $mod+Shift+Return exec firefox
 bindsym $mod+Ctrl+Return exec pcmanfm
 bindsym $mod+t exec --no-startup-id pkill picom
@@ -292,7 +292,7 @@ exec --no-startup-id nextcloud --background
 # exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
 # exec_always --no-startup-id xautolock -time 10 -locker i3lock -n -i ~/Pictures/Wallpapers/abstract_nord_waves.png
-exec_always --no-startup-id xautolock -time 10 -locker betterlockscreen -u ~/Pictures/Wallpapers -w dim
+exec_always --no-startup-id xautolock -time 10 -locker betterlockscreen -u ~/Pictures/Wallpapers -l dim
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
@@ -374,7 +374,7 @@ bindsym $mod+m exec --no-startup-id polybar-msg cmd toggle
 
 # Theme colors
 # class                   border  backgr. text    indic.   child_border
-  client.focused          #81A1C1 #81A1C1 #D8DEE9 #D8DEE9
+  client.focused          #88C0D0 #88C0D0 #D8DEE9 #D8DEE9
   client.focused_inactive #3B4252 #3B4252 #81A1C1 #4C566A
   client.unfocused        #3B4252 #3B4252 #81A1C1 #4C566A
   client.urgent           #BF616A #D8DEE9 #81A1C1 #88C0D0
