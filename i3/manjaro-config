@@ -84,11 +84,7 @@ bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
 ## Load ICC profiles ##
 
-# Laptop
 exec_always --no-startup-id dispwin ~/.monitor/color-profiles/icc/Gigabyte_Aero_15X.icm
-# Desktop
-exec_always --no-startup-id dispwin -d1 ~/.color/icc/Dell_S2721DGF.icm
-exec_always --no-startup-id dispwin -d2 ~/.color/icc/Dell_U2713HM.icm.icm
 
 # Focus following the mouse pointer
 focus_follows_mouse no
@@ -301,8 +297,7 @@ bindsym $mod+9 exec --no-startup-id blurlock -n
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id picom -b
-#exec --no-startup-id manjaro-hello
-exec --no-startup-id $HOME/.config/polybar/launch-laptop.sh
+exec_always --no-startup-id $HOME/.config/polybar/launch-laptop.sh
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
@@ -311,7 +306,7 @@ exec --no-startup-id pamac-tray
 # exec_always --no-startup-id sbxkb
 # exec --no-startup-id start_conky_maia
 # exec --no-startup-id start_conky_green
-exec_always "--no-startup-id xautolock -time 10 -locker blurlock -n"
+exec_always --no-startup-id xautolock -time 10 -locker blurlock -n
 # exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 
@@ -388,7 +383,7 @@ bindsym $mod+m exec --no-startup-id polybar-msg cmd toggle
 
 # Theme colors
 # class                   border  backgr. text    indic.   child_border
-  client.focused          #81A1C1 #81A1C1 #D8DEE9 #D8DEE9
+  client.focused          #88C0D0 #88C0D0 #D8DEE9 #D8DEE9
   client.focused_inactive #3B4252 #3B4252 #81A1C1 #4C566A
   client.unfocused        #3B4252 #3B4252 #81A1C1 #4C566A
   client.urgent           #BF616A #D8DEE9 #81A1C1 #88C0D0
