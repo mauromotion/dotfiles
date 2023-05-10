@@ -150,8 +150,8 @@ set $ws2 2: mail
 set $ws3 3:󰻞 chat
 set $ws4 4:󰲌 dev
 set $ws5 5: docs
-set $ws6 6: games
-set $ws7 7: media
+set $ws6 6: media
+set $ws7 7: games
 set $ws8 8:󰍺 ext
 
 # Switch to workspace
@@ -192,7 +192,7 @@ assign [class="Thunderbird"] $ws2
 assign [class="Thunderbird-beta"] $ws2
 assign [class="Firefox-developer-edition"] $ws4
 assign [class="Foliate"] $ws5
-assign [class="Steam"] $ws6
+assign [class="Steam"] $ws7
 
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
@@ -219,7 +219,7 @@ for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 
 # Switch to workspace with urgent window automatically
-# for_window [urgent=latest] focus
+for_window [urgent=latest] focus
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
@@ -293,7 +293,7 @@ exec --no-startup-id nextcloud --background
 # exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
 # exec_always --no-startup-id xautolock -time 10 -locker i3lock -n -i ~/Pictures/Wallpapers/abstract_nord_waves.png
-exec_always --no-startup-id xautolock -time 10 -locker "betterlockscreen -l"
+# exec_always --no-startup-id xautolock -time 10 -locker "betterlockscreen -l"
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:

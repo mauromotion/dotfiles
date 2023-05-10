@@ -69,14 +69,14 @@ scrolling:
 
 font:
   normal:
-    family: BlexMono Nerd Font
-    style: Medium
+    family: BlexMonoMedm Nerd Font
+    style: Regular
   bold:
     family: BlexMono Nerd Font
     style: Bold
   italic:
-    family: BlexMono Nerd Font
-    style: Text Italic
+    family: BlexMonoMedm Nerd Font
+    style: Italic
   bold_italic:
     family: BlexMono Nerd Font
     style: Bold Italic
