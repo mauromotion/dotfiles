@@ -160,14 +160,14 @@ bindsym $mod+Ctrl+h workspace prev
 # To display names or symbols instead of plain workspace numbers you can use
 # something like: set $ws1 1:mail
 #                 set $ws2 2:
-set $ws1 1: www
-set $ws2 2: mail
-set $ws3 3:󰻞 chat
-set $ws4 4:󰲌 dev
-set $ws5 5: docs
-set $ws6 6: games
-set $ws7 7: media
-set $ws8 8:󰍺 ext
+set $ws1 1: www
+set $ws2 2: mail
+set $ws3 3: chat
+set $ws4 4: dev
+set $ws5 5: docs
+set $ws6 6: media
+set $ws7 7: games
+set $ws8 8: ext
 
 # Switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -208,7 +208,7 @@ assign [class="Thunderbird"] $ws2
 assign [class="Thunderbird-beta"] $ws2
 assign [class="Firefox-developer-edition"] $ws4
 assign [class="Foliate"] $ws5
-assign [class="Steam"] $ws6
+assign [class="Steam"] $ws7
 
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
@@ -238,7 +238,7 @@ for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 
 # Switch to workspace with urgent window automatically
-# for_window [urgent=latest] focus
+for_window [urgent=latest] focus
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
