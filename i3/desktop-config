@@ -47,10 +47,6 @@ bindsym $mod+period exec playerctl play-pause
 bindsym $mod+comma exec playerctl previous
 bindsym $mod+slash exec playerctl next
 
-# Screen brightness controls
-bindsym $mod+prior exec --no-startup-id brightnessctl set +5%
-bindsym $mod+next exec --no-startup-id brightnessctl set 5%-
-
 # Launch Applications
 bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+Return exec firefox
@@ -60,16 +56,20 @@ bindsym $mod+Ctrl+t exec --no-startup-id picom -b
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
 bindsym $mod+Shift+a exec --no-startup-id scrot
 bindsym $mod+Shift+x --release exec --no-startup-id scrot -w
-bindsym $mod+Shift+z --release exec --no-startup-id scrot -s
+bindsym $mod+Shift+z --release exec --no-startup-id flameshot gui 
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 bindsym $mod+Ctrl+m exec pavucontrol
 bindsym $mod+c exec galculator
 
 ## Load ICC profiles ##
-exec_always --no-startup-id dispwin ~/.monitor/color-profiles/icc/Gigabyte_Aero_15X.icm
+exec_always --no-startup-id dispwin -d1 ~/.color/icc/Dell_S2721DGF.icm
+exec_always --no-startup-id dispwin -d2 ~/.color/icc/Dell_U2713HM.icm.icm
 
 # Focus following the mouse pointer
 focus_follows_mouse no
+
+# Set mouse acceleration on desktop (Razer Viper)
+exec_always --no-startup-id "xinput set-prop 9 295 -0.700000"
 
 # Change focus
 bindsym $mod+h focus left
@@ -183,7 +183,6 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
 # Open applications on specific workspaces
 assign [class="Firefox"] $ws1
-assign [class="Telegram-desktop"] $ws3
 assign [class="Discord"] $ws3
 assign [class="Cinny"] $ws3
 assign [class="Thunderbird"] $ws2
@@ -206,7 +205,6 @@ for_window [class="Lxappearance"] floating enable sticky enable border normal
 for_window [class="Nitrogen"] floating enable sticky enable border normal
 for_window [class="Oblogout"] fullscreen enable
 for_window [class="octopi"] floating enable
-for_window [class="Pamac-manager"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Viewnior"] floating enable
 for_window [class="qt5ct"] floating enable sticky enable border normal
@@ -271,17 +269,24 @@ mode "resize" {
 }
 
 # Lock screen
-bindsym $mod+9 exec --no-startup-id blurlock -n
+# bindsym $mod+9 exec --no-startup-id i3lock -n -i ~/Pictures/Wallpapers/abstract_nord_waves.png
+bindsym $mod+9 exec betterlockscreen -l dim
 
-# Autostart applications
+##############################
+### Autostart applications ###
+##############################
+# exec --no-startup-id pulseaudio --start
 exec --no-startup-id pa-applet
+exec --no-startup-id xset b 100
+exec --no-startup-id udiskie -a -n -t 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id picom -b
-exec --no-startup-id udiskie -a -n -t
-exec_always --no-startup-id $HOME/.config/polybar/launch-laptop.sh
+exec --no-startup-id openrgb --startminimized
+exec --no-startup-id pcmanfm -d
 exec --no-startup-id nm-applet
-exec_always --no-startup-id xautolock -time 10 -locker "blurlock -n"
+exec --no-startup-id nextcloud --background
+# exec_always --no-startup-id xautolock -time 10 -locker "betterlockscreen -l"
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
@@ -314,7 +319,9 @@ set_from_resource $term_color13    color13
 set_from_resource $term_color14    color14
 set_from_resource $term_color15    color15
 
-# Start i3bar to display a workspace bar (plus the system information i3status if available)
+#############
+### i3bar ###
+#############
 # bar {
 # 	i3bar_command i3bar
 # 	status_command i3status
@@ -349,9 +356,14 @@ set_from_resource $term_color15    color15
 #         urgent_workspace   #B48EAD #B48EAD #2E3440
 #     }
 # }
-
 # Hide/unhide i3status bar
 # bindsym $mod+m bar mode toggle
+
+###############
+### Polybar ###
+###############
+exec --no-startup-id $HOME/.config/polybar/launch-desktop.sh
+# Hide/unhide polybar
 bindsym $mod+m exec --no-startup-id polybar-msg cmd toggle
 
 # Theme colors
