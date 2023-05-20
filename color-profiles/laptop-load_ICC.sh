@@ -1,2 +1,2 @@
 #!bin/bash
-dispwin .color/Gigabyte_Aero_15X.icm
+dispwin .color/icc/Gigabyte_Aero_15X.icm
