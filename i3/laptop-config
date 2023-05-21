@@ -26,32 +26,21 @@ font pango: FiraCode Nerd Font Regular 11
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
 
-# Start a terminal
-bindsym $mod+Return exec alacritty
+# Resize floating windows with mouse wheel
+set $resize_step 20
+# Mouse bindings normally only work on window titlebars.
+# The --whole-window flag makes them work if the cursor is anywhere within the window
+bindsym --whole-window $mod+button4 resize grow   width $resize_step; resize grow   height $resize_step
+bindsym --whole-window $mod+button5 resize shrink width $resize_step; resize shrink height $resize_step
 
 # Kill focused window
 bindsym $mod+Shift+q kill
 
 # Start program launcher
-# bindsym $mod+space exec --no-startup-id dmenu_recency -b
 bindsym $mod+space exec --no-startup-id rofi -show combi 
+
 # Start rofi-calc
-bindsym $mod+c exec --no-startup-id "rofi -show calc -modi calc -no-show-match -no-sort > /dev/null"
-
-# Launch categorized menu
-bindsym $mod+z exec --no-startup-id morc_menu
-
-################################################################################################
-## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
-################################################################################################
-
-# exec --no-startup-id volumeicon
-# bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
-# exec --no-startup-id pulseaudio
-exec --no-startup-id pa-applet
-bindsym $mod+Ctrl+m exec pavucontrol
-
-################################################################################################
+bindsym $mod+Ctrl+c exec --no-startup-id "rofi -show calc -modi calc -no-show-match -no-sort > /dev/null"
 
 # Media player controls
 bindsym $mod+period exec playerctl play-pause 
@@ -59,31 +48,24 @@ bindsym $mod+comma exec playerctl previous
 bindsym $mod+slash exec playerctl next
 
 # Screen brightness controls
-bindsym $mod+Prior exec --no-startup-id brightnessctl set +5%
-bindsym $mod+Next exec --no-startup-id brightnessctl set 5%-
+bindsym $mod+prior exec --no-startup-id brightnessctl set +5%
+bindsym $mod+next exec --no-startup-id brightnessctl set 5%-
 
-# Resize floating windows with mouse wheel
-set $resize_step 20
-
-# Mouse bindings normally only work on window titlebars.
-# The --whole-window flag makes them work if the cursor is anywhere within the window
-bindsym --whole-window $mod+button4 resize grow   width $resize_step; resize grow   height $resize_step
-bindsym --whole-window $mod+button5 resize shrink width $resize_step; resize shrink height $resize_step
-
-# Start Applications
-bindsym $mod+Ctrl+b exec alacritty -e 'bmenu'
+# Launch Applications
+bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+Return exec firefox
 bindsym $mod+Ctrl+Return exec pcmanfm
 bindsym $mod+t exec --no-startup-id pkill picom
 bindsym $mod+Ctrl+t exec --no-startup-id picom -b 
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
-bindsym $mod+Shift+a exec --no-startup-id i3-scrot
-bindsym $mod+Shift+x --release exec --no-startup-id i3-scrot -w
-bindsym $mod+Shift+z --release exec --no-startup-id i3-scrot -s
+bindsym $mod+Shift+a exec --no-startup-id scrot
+bindsym $mod+Shift+x --release exec --no-startup-id scrot -w
+bindsym $mod+Shift+z --release exec --no-startup-id scrot -s
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
+bindsym $mod+Ctrl+m exec pavucontrol
+bindsym $mod+c exec galculator
 
 ## Load ICC profiles ##
-
 exec_always --no-startup-id dispwin ~/.monitor/color-profiles/icc/Gigabyte_Aero_15X.icm
 
 # Focus following the mouse pointer
@@ -221,8 +203,6 @@ for_window [class="GParted"] floating enable border normal
 for_window [title="i3_help"] floating enable sticky enable border normal
 for_window [class="Lightdm-settings"] floating enable
 for_window [class="Lxappearance"] floating enable sticky enable border normal
-for_window [class="Manjaro-hello"] floating enable
-for_window [class="Manjaro Settings Manager"] floating enable border normal
 for_window [class="Nitrogen"] floating enable sticky enable border normal
 for_window [class="Oblogout"] fullscreen enable
 for_window [class="octopi"] floating enable
@@ -294,22 +274,14 @@ mode "resize" {
 bindsym $mod+9 exec --no-startup-id blurlock -n
 
 # Autostart applications
+exec --no-startup-id pa-applet
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id picom -b
 exec --no-startup-id udiskie -a -n -t
 exec_always --no-startup-id $HOME/.config/polybar/launch-laptop.sh
 exec --no-startup-id nm-applet
-exec --no-startup-id xfce4-power-manager
-exec --no-startup-id pamac-tray
-# exec --no-startup-id clipit
-# exec --no-startup-id blueman-applet
-# exec_always --no-startup-id sbxkb
-# exec --no-startup-id start_conky_maia
-# exec --no-startup-id start_conky_green
 exec_always --no-startup-id xautolock -time 10 -locker "blurlock -n"
-# exec_always --no-startup-id ff-theme-util
-exec_always --no-startup-id fix_xcursor
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
