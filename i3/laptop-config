@@ -60,7 +60,7 @@ bindsym $mod+Ctrl+t exec --no-startup-id picom -b
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
 bindsym $mod+Shift+a exec --no-startup-id scrot
 bindsym $mod+Shift+x --release exec --no-startup-id scrot -w
-bindsym $mod+Shift+z --release exec --no-startup-id scrot -s
+bindsym $mod+Shift+z --release exec --no-startup-id flameshot gui 
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 bindsym $mod+Ctrl+m exec pavucontrol
 bindsym $mod+c exec galculator
@@ -281,6 +281,8 @@ exec --no-startup-id picom -b
 exec --no-startup-id udiskie -a -n -t
 exec_always --no-startup-id $HOME/.config/polybar/launch-laptop.sh
 exec --no-startup-id nm-applet
+exec --no-startup-id nextcloud --background
+exec --no-startup-id optimus-manager-qt
 exec_always --no-startup-id xautolock -time 10 -locker "blurlock -n"
 
 # Color palette used for the terminal ( ~/.Xresources file )
