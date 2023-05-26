@@ -1,3 +1,10 @@
+#------------------------------------------------------
+#-- ┌┬┐┌─┐┬ ┬┬─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌┐┌
+#-- │││├─┤│ │├┬┘│ │││││ │ │ ││ ││││
+#-- ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘
+#-- * .dotfiles * --
+#-- i3 config -- Arch Linux on desktop PC -------------
+
 # i3 config file (v4)
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
@@ -32,6 +39,12 @@ set $resize_step 20
 # The --whole-window flag makes them work if the cursor is anywhere within the window
 bindsym --whole-window $mod+button4 resize grow   width $resize_step; resize grow   height $resize_step
 bindsym --whole-window $mod+button5 resize shrink width $resize_step; resize shrink height $resize_step
+# Resize width only
+bindsym --whole-window $mod+Shift+button4 resize grow   width $resize_step
+bindsym --whole-window $mod+Shift+button5 resize shrink width $resize_step
+# Resize height only
+bindsym --whole-window $mod+Ctrl+button4 resize grow   height $resize_step
+bindsym --whole-window $mod+Ctrl+button5 resize shrink height $resize_step
 
 # Kill focused window
 bindsym $mod+Shift+q kill
@@ -199,6 +212,9 @@ for_window [title="File Transfer*"] floating enable
 for_window [class="fpakman"] floating enable
 for_window [class="Galculator"] floating enable border pixel 1
 for_window [class="GParted"] floating enable border normal
+for_window [class="Gpick"] floating enable border pixel 2
+for_window [class="mpv"] floating enable border pixel 2
+for_window [class="vlc"] floating enable border pixel 2
 for_window [title="i3_help"] floating enable sticky enable border normal
 for_window [class="Lightdm-settings"] floating enable
 for_window [class="Lxappearance"] floating enable sticky enable border normal
