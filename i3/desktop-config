@@ -285,23 +285,20 @@ mode "resize" {
 }
 
 # Lock screen
-# bindsym $mod+9 exec --no-startup-id i3lock -n -i ~/Pictures/Wallpapers/abstract_nord_waves.png
 bindsym $mod+9 exec betterlockscreen -l dim
 
 ##############################
 ### Autostart applications ###
 ##############################
-# exec --no-startup-id pulseaudio --start
 exec --no-startup-id pa-applet
-exec --no-startup-id xset b 100
 exec --no-startup-id udiskie -a -n -t 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id picom -b
-exec --no-startup-id openrgb --startminimized
-exec --no-startup-id pcmanfm -d
 exec --no-startup-id nm-applet
 exec --no-startup-id nextcloud --background
+exec --no-startup-id openrgb --startminimized
+exec --no-startup-id xset b 100
 # exec_always --no-startup-id xautolock -time 10 -locker "betterlockscreen -l"
 
 # Color palette used for the terminal ( ~/.Xresources file )
@@ -372,13 +369,14 @@ set_from_resource $term_color15    color15
 #         urgent_workspace   #B48EAD #B48EAD #2E3440
 #     }
 # }
+
 # Hide/unhide i3status bar
 # bindsym $mod+m bar mode toggle
 
 ###############
 ### Polybar ###
 ###############
-exec --no-startup-id $HOME/.config/polybar/launch-desktop.sh
+exec always --no-startup-id $HOME/.config/polybar/launch-desktop.sh
 # Hide/unhide polybar
 bindsym $mod+m exec --no-startup-id polybar-msg cmd toggle
 
