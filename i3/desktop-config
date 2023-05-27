@@ -376,7 +376,7 @@ set_from_resource $term_color15    color15
 ###############
 ### Polybar ###
 ###############
-exec always --no-startup-id $HOME/.config/polybar/launch-desktop.sh
+exec_always --no-startup-id $HOME/.config/polybar/launch-desktop.sh
 # Hide/unhide polybar
 bindsym $mod+m exec --no-startup-id polybar-msg cmd toggle
 
