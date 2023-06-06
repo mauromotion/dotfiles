@@ -54,13 +54,13 @@ scrolling:
 
 font:
   normal:
-    family: BlexMonoMedm Nerd Font
-    style: Regular
+    family: BlexMono Nerd Font
+    style: Medium
   bold:
     family: BlexMono Nerd Font
     style: Bold
   italic:
-    family: BlexMonoMedm Nerd Font
+    family: BlexMono Nerd Font
     style: Italic
   bold_italic:
     family: BlexMono Nerd Font
