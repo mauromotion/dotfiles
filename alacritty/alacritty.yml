@@ -97,21 +97,6 @@ font:
 #     style: Bold Italic
 #   size: 11
 
-font:
-  normal:
-    family: BlexMonoMedm Nerd Font
-    style: Regular
-  bold:
-    family: BlexMono Nerd Font
-    style: Bold
-  italic:
-    family: BlexMonoMedm Nerd Font
-    style: Italic
-  bold_italic:
-    family: BlexMono Nerd Font
-    style: Bold Italic
-  size: 11
-
 # Colors - https://github.com/olimorris/onedarkpro.nvim
 # colors:
 #   primary:
