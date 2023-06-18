@@ -3,7 +3,7 @@ return {
     "EdenEast/nightfox.nvim",
     opts = {
       options = {
-        transparent = true,
+        transparent = false,
         styles = {
           comments = "italic",
           keywords = "bold",
