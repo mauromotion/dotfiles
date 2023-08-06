@@ -389,7 +389,7 @@ bindsym $mod+m exec --no-startup-id polybar-msg cmd toggle
 
 # Theme colors
 # class                   border  backgr. text    indic.   child_border
-  client.focused          #88C0D0 #88C0D0 #D8DEE9 #D8DEE9
+  client.focused          #88C0D0 #88C0D0 #3B4252 #D8DEE9
   client.focused_inactive #3B4252 #3B4252 #81A1C1 #4C566A
   client.unfocused        #3B4252 #3B4252 #81A1C1 #4C566A
   client.urgent           #BF616A #D8DEE9 #81A1C1 #88C0D0
