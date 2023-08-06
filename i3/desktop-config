@@ -194,6 +194,12 @@ bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
+# Resize windows
+bindsym $mod+Shift+u resize shrink height 5 px or 5 ppt
+bindsym $mod+Shift+i resize grow height 5 px or 5 ppt
+bindsym $mod+Shift+y resize shrink width 5 px or 5 ppt
+bindsym $mod+Shift+o resize grow width 5 px or 5 ppt
+
 # Open applications on specific workspaces
 assign [class="Firefox"] $ws1
 assign [class="Discord"] $ws3
