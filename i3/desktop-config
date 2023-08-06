@@ -291,6 +291,7 @@ bindsym $mod+9 exec betterlockscreen -l dim
 ##############################
 ### Autostart applications ###
 ##############################
+exec --no-startup-id xrdb ~/.Xresources
 exec --no-startup-id pa-applet
 exec --no-startup-id udiskie -a -n -t 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
