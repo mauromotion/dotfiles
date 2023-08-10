@@ -194,6 +194,12 @@ bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
+# Resize windows
+bindsym $mod+Shift+u resize shrink height 5 px or 5 ppt
+bindsym $mod+Shift+i resize grow height 5 px or 5 ppt
+bindsym $mod+Shift+y resize shrink width 5 px or 5 ppt
+bindsym $mod+Shift+o resize grow width 5 px or 5 ppt
+
 # Open applications on specific workspaces
 assign [class="Firefox"] $ws1
 assign [class="Telegram-desktop"] $ws3
@@ -233,7 +239,7 @@ for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 
 # Switch to workspace with urgent window automatically
-for_window [urgent=latest] focus
+for_window [urgent="latest"] focus
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
@@ -242,7 +248,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # Exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # Set shut down, restart and locking features
 bindsym $mod+0 mode "$mode_system"
@@ -291,6 +297,7 @@ bindsym $mod+9 exec --no-startup-id blurlock -n
 ##############################
 ### Autostart applications ###
 ##############################
+exec --no-startup-id xrdb ~/.Xresources
 exec --no-startup-id pa-applet
 exec --no-startup-id udiskie -a -n -t
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -382,7 +389,7 @@ bindsym $mod+m exec --no-startup-id polybar-msg cmd toggle
 
 # Theme colors
 # class                   border  backgr. text    indic.   child_border
-  client.focused          #88C0D0 #88C0D0 #D8DEE9 #D8DEE9
+  client.focused          #88C0D0 #88C0D0 #3B4252 #D8DEE9
   client.focused_inactive #3B4252 #3B4252 #81A1C1 #4C566A
   client.unfocused        #3B4252 #3B4252 #81A1C1 #4C566A
   client.urgent           #BF616A #D8DEE9 #81A1C1 #88C0D0

@@ -17,6 +17,10 @@
 |Move focus right          |MOD + l (or Right)   
 |Kill focused window       |MOD + Shift + q      
 |Enter Resize mode         |MOD + r              
+|Resize left               |MOD + Shift + y
+|Resize right              |MOD + Shift + o
+|Resize up                 |MOD + Shift + i
+|Resize down               |MOD + Shift + u
 |Move focused window left  |MOD + Shift + h (or Left)    
 |Move focused window down  |MOD + Shift + j (or Down)    
 |Move focused window up    |MOD + Shift + k (or Up)      

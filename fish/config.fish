@@ -7,7 +7,6 @@
 
 ## Aliases
 alias nv="nvim"
-alias vim="nvim"
 alias ..="cd .."
 alias cp="cp -i"
 alias mv="mv -i"
