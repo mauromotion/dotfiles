@@ -157,8 +157,8 @@ bindsym $mod+Ctrl+h workspace prev
 #                 set $ws2 2:
 set $ws1 1: home
 set $ws2 2: mail
-set $ws3 3: chat
-set $ws4 4: dev
+set $ws3 3: dev
+set $ws4 4: chat
 set $ws5 5: docs
 set $ws6 6: media
 set $ws7 7: games
