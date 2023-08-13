@@ -1,6 +1,6 @@
 # Tmux commands keybindings
 
-**leader = <C-a>**
+**leader = <C-Space>**
 
 |## Functions             | ## Keybindings
 |-------------------------|--------------------
