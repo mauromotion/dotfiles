@@ -3,12 +3,14 @@
 -- Add any additional keymaps here
 --
 
+local wk = require("which-key")
+
 -- Harpoon
-local mark = require("harpoon.mark")
+-- local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
 
-vim.keymap.set("n", "<leader>a", mark.add_file)
-vim.keymap.set("n", "<leader>h", ui.toggle_quick_menu)
+-- vim.keymap.set("n", "<leader>a", mark.add_file)
+-- vim.keymap.set("n", "<leader>h", ui.toggle_quick_menu)
 
 vim.keymap.set("n", "<C-y>", function()
   ui.nav_file(1)
@@ -24,4 +26,18 @@ vim.keymap.set("n", "<C-o>", function()
 end)
 
 -- UndoTree
-vim.keymap.set("n", "<leader>ut", vim.cmd.UndotreeToggle)
+-- vim.keymap.set("n", "<leader>ut", vim.cmd.UndotreeToggle)
+
+wk.register({
+  ["<leader>"] = {
+    h = {
+      name = "Harpoon",
+      h = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", "quick Menu" },
+      a = { "<cmd>lua require('harpoon.mark').add_file()<cr>", "add file" },
+      r = { "<cmd>lua require('harpoon.mark').rm_file()<cr>", "remove file" },
+      n = { "<cmd>lua require('harpoon.ui').nav_next()<cr>", "next file" },
+      p = { "<cmd>lua require('harpoon.ui').nav_prev()<cr>", "previous file" },
+    },
+  },
+  ["<leader>ut"] = { "<cmd>UndotreeToggle<cr>", "UndoTree" },
+})
