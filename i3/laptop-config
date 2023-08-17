@@ -157,8 +157,8 @@ bindsym $mod+Ctrl+h workspace prev
 #                 set $ws2 2:
 set $ws1 1: home
 set $ws2 2: mail
-set $ws3 3: chat
-set $ws4 4: dev
+set $ws3 3: dev
+set $ws4 4: chat
 set $ws5 5: docs
 set $ws6 6: media
 set $ws7 7: games
@@ -197,8 +197,8 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 # Resize windows
 bindsym $mod+Shift+u resize shrink height 5 px or 5 ppt
 bindsym $mod+Shift+i resize grow height 5 px or 5 ppt
-bindsym $mod+Shift+y resize shrink width 5 px or 5 ppt
-bindsym $mod+Shift+o resize grow width 5 px or 5 ppt
+bindsym $mod+Shift+o resize shrink width 5 px or 5 ppt
+bindsym $mod+Shift+y resize grow width 5 px or 5 ppt
 
 # Open applications on specific workspaces
 assign [class="Firefox"] $ws1
