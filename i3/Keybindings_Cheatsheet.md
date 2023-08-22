@@ -49,6 +49,7 @@
 |Screenshot window         |MOD + Shift + x      
 |Screenshot region         |MOD + Shift + z      
 |Pulse audio controls      |MOD + Ctrl + m       
+|Mute system audio         |MOD + m       
 |Brightness up             |MOD + PageUp         
 |Brightness down           |MOD + PageDown       
 |Media player play/pause   |MOD + period       
@@ -70,7 +71,7 @@
 
 |## UI                     |## Keybindings                  
 |--------------------------|---------------------
-|Hide/Show i3bar           |MOD + m
+|Hide/Show i3bar           |MOD + b
 |Focused window no border  |MOD + u               
 |Focused window border     |MOD + y               
 |Focused window top bar    |MOD + n               

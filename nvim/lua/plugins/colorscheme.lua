@@ -13,6 +13,8 @@ return {
     },
   },
   { "shaunsingh/nord.nvim" },
+  { "neanias/everforest-nvim" },
+  { "WIttyJudge/gruvbox-material.nvim" },
 
   {
     "LazyVim/LazyVim",

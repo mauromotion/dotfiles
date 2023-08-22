@@ -59,6 +59,7 @@ bindsym $mod+Ctrl+c exec --no-startup-id "rofi -show calc -modi calc -no-show-ma
 bindsym $mod+period exec playerctl play-pause 
 bindsym $mod+comma exec playerctl previous
 bindsym $mod+slash exec playerctl next
+bindsym $mod+m exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # Screen brightness controls
 bindsym $mod+prior exec --no-startup-id brightnessctl set +5%
@@ -378,14 +379,14 @@ set_from_resource $term_color15    color15
 # }
 
 # Hide/unhide i3status bar
-# bindsym $mod+m bar mode toggle
+# bindsym $mod+b bar mode toggle
 
 ###############
 ### Polybar ###
 ###############
 exec_always --no-startup-id $HOME/.config/polybar/launch-laptop.sh
 # Hide/unhide polybar
-bindsym $mod+m exec --no-startup-id polybar-msg cmd toggle
+bindsym $mod+b exec --no-startup-id polybar-msg cmd toggle
 
 # Theme colors
 # class                   border  backgr. text    indic.   child_border
