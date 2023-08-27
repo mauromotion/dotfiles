@@ -40,4 +40,5 @@ wk.register({
     },
   },
   ["<leader>ut"] = { "<cmd>UndotreeToggle<cr>", "UndoTree" },
+  ["<leader>z"] = { "<cmd>ZenMode<cr>", "ZenMode" },
 })
