@@ -138,6 +138,7 @@ fi
 
 ## Aliases
 alias nv="nvim"
+alias v="nvim"
 alias ..="cd .."
 alias cp="cp -i"
 alias mv="mv -i"
@@ -153,6 +154,7 @@ alias ll="exa -l --git --icons -h"
 alias lla="exa -l --git --icons -h -a"
 alias ls="exa --icons"
 alias lsa="exa --icons -a"
+alias yt="ytfzf"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
