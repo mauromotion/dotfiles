@@ -7,11 +7,23 @@ export ZSH="$HOME/.oh-my-zsh"
 # Zoxide
 export PATH=~/.local/bin:$PATH
 
+# FZF set up with fd
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="refined" # set by `omz`
+ZSH_THEME="" # set by `omz`
+
+# Pure theme
+fpath+=($HOME/.zsh/pure)
+autoload -U promptinit; promptinit
+prompt pure
+
+# zsh-vi-mode
+ZVM_VI_HIGHLIGHT_BACKGROUND=#88c0d0
+ZVM_VI_HIGHLIGHT_FOREGROUND=#3b4252
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -74,14 +86,7 @@ ZSH_THEME="refined" # set by `omz`
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git
-  nvm
-  npm
-  node
-  rbenv
-  bundler
-  gem
-  vi-mode
+  zsh-vi-mode
   fzf
   zoxide
   ripgrep
@@ -102,15 +107,11 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 ## Greeting message
-	echo ' -------------------------------- '
-	echo ' ┌┬┐┌─┐┬ ┬┬─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌┐┌  '
-	echo ' │││├─┤│ │├┬┘│ │││││ │ │ ││ ││││  '
-	echo ' ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘  '
-	echo ' --------- ZSH Shell -----------	'
-
-# Rbenv setup
-# eval "$(~/.rbenv/bin/rbenv init - zsh)"
-
+	# echo ' -------------------------------- '
+	# echo ' ┌┬┐┌─┐┬ ┬┬─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌┐┌  '
+	# echo ' │││├─┤│ │├┬┘│ │││││ │ │ ││ ││││  '
+	# echo ' ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘  '
+	# echo ' --------- ZSH Shell -----------	'
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -155,6 +156,12 @@ alias lla="exa -l --git --icons -h -a"
 alias ls="exa --icons"
 alias lsa="exa --icons -a"
 alias yt="ytfzf"
+alias gst="git status"
+alias gp="git push"
+alias gl="git pull"
+alias gcam="git commit --all --message"
+alias ga="git add"
+alias gaa="git add --all"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
