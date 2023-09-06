@@ -21,6 +21,9 @@ fpath+=($HOME/.zsh/pure)
 autoload -U promptinit; promptinit
 prompt pure
 
+zstyle :prompt:pure:git:branch color yellow
+zstyle :prompt:pure:virtualenv color yellow
+
 # zsh-vi-mode
 ZVM_VI_HIGHLIGHT_BACKGROUND=#88c0d0
 ZVM_VI_HIGHLIGHT_FOREGROUND=#3b4252
