@@ -8,13 +8,13 @@ export FZF_PREVIEW_WINDOW='right:35%:nohidden'
 
 # Zoxide setup
 export PATH=~/.local/bin:$PATH
+### --------------------------------------- ###
 
-# ---------------------------------------
 ### ZSH Home
 export ZSH=$HOME/.zsh
 
 
-### ---- History Config ----
+### ---- History Config ---- ###
 export HISTFILE=$ZSH/.zsh_history
 
 # How many commands zsh will load to memory.
@@ -28,9 +28,11 @@ setopt HIST_IGNORE_ALL_DUPS
 
 # History won't show duplicates on search.
 setopt HIST_FIND_NO_DUPS
-# ---------------------------------------
+### --------------------------------------- ###
 
-# ---- Themes ----
+
+### ---- Themes ---- ###
+
 # Pure theme
 fpath+=($HOME/.zsh/themes/pure)
 autoload -U promptinit; promptinit
@@ -39,18 +41,19 @@ prompt pure
 zstyle :prompt:pure:git:branch color yellow
 zstyle :prompt:pure:virtualenv color yellow
 
-## Greeting message
+# zsh-vi-mode
+ZVM_VI_HIGHLIGHT_BACKGROUND=#88c0d0
+ZVM_VI_HIGHLIGHT_FOREGROUND=#3b4252
+
+### ---- Greeting message ---- ###
 	echo ' -------------------------------- '
 	echo ' ┌┬┐┌─┐┬ ┬┬─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌┐┌  '
 	echo ' │││├─┤│ │├┬┘│ │││││ │ │ ││ ││││  '
 	echo ' ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘  '
 	echo ' --------- ZSH Shell -----------	'
 
-# zsh-vi-mode
-ZVM_VI_HIGHLIGHT_BACKGROUND=#88c0d0
-ZVM_VI_HIGHLIGHT_FOREGROUND=#3b4252
 
-# ---- Aliases ----
+### ---- Aliases ---- ###
 alias ~="cd ~/"
 alias nv="nvim"
 alias v="nvim"
@@ -77,13 +80,26 @@ alias gcam="git commit --all --message"
 alias ga="git add"
 alias gaa="git add --all"
 
-# ---- Plugins ----
+
+### ---- Plugins ---- ###
+# Completion
+zstyle ':completion:*' menu select
 fpath=(~/.zsh/plugins/zsh-completions/src/ $fpath)
+autoload -U compinit && compinit
+zmodload -i zsh/complist
+# Vim mode
 source ~/.zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+# Autosuggestions
 source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+# Fuzzy Finder
 source ~/.zsh/plugins/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
+# Colored MAN pages
 source ~/.zsh/plugins/colored-man-pages/colored-man-pages.plugin.zsh
+# Colorize code in terminal
 source ~/.zsh/plugins/colorize/clorize.plugin.zsh
 
+### ---- This lines must always be on EOF!!! ---- ###
+# Zoxide
 eval "$(zoxide init zsh)"
-source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh # This line must always be at the EOF
+# Syntax Highlighting
+source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
