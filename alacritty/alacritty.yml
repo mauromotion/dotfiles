@@ -35,7 +35,7 @@ window:
   #
   # Window opacity as a floating point number from `0.0` to `1.0`.
   # The value `0.0` is completely transparent and `1.0` is opaque.
-  opacity: 1
+  opacity: 0.9
 
   # Window title
   #title: Alacritty
@@ -67,36 +67,7 @@ font:
     style: Bold Italic
   size: 11
 
-# # Colors (Nord)
-# colors:
-#   # Default colors
-#   primary:
-#     background: '0x2E3440'
-#     foreground: '0xD8DEE9'
-#
-#   # Normal colors
-#   normal:
-#     black:   '0x3B4252'
-#     red:     '0xBF616A'
-#     green:   '0xA3BE8C'
-#     yellow:  '0xEBCB8B'
-#     blue:    '0x81A1C1'
-#     magenta: '0xB48EAD'
-#     cyan:    '0x88C0D0'
-#     white:   '0xE5E9F0'
-#
-#   # Bright colors
-#   bright:
-#     black:   '0x4C566A'
-#     red:     '0xBF616A'
-#     green:   '0xA3BE8C'
-#     yellow:  '0xEBCB8B'
-#     blue:    '0x81A1C1'
-#     magenta: '0xB48EAD'
-#     cyan:    '0x8FBCBB'
-#     white:   '0xECEFF4'
 # Colors (Nord)
-
 colors:
   primary:
     background: "#2e3440"
@@ -622,7 +593,7 @@ bell:
   duration: 100
 
   # Visual bell animation color.
-  color: '#88c0d0'
+  color: '#4c566a'
 
   # Bell Command
   #

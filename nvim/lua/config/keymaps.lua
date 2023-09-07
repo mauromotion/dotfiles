@@ -42,3 +42,13 @@ wk.register({
   ["<leader>ut"] = { "<cmd>UndotreeToggle<cr>", "UndoTree" },
   ["<leader>z"] = { "<cmd>ZenMode<cr>", "ZenMode" },
 })
+
+-- Nvim-tmux-navigator
+vim.cmd([[
+  noremap <silent> <c-h> :<C-U>NvimTmuxNavigateLeft<cr>
+  noremap <silent> <c-j> :<C-U>NvimTmuxNavigateDown<cr>
+  noremap <silent> <c-k> :<C-U>NvimTmuxNavigateUp<cr>
+  noremap <silent> <c-l> :<C-U>NvimTmuxNavigateRight<cr>
+  noremap <silent> <c-\\> :<C-U>NvimTmuxNavigateLastActive<cr>
+  noremap <silent> <c-Space> :<C-U>NvimTmuxNavigateNext<cr>
+]])
