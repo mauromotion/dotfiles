@@ -55,6 +55,7 @@ ZVM_VI_HIGHLIGHT_FOREGROUND=#3b4252
 
 ### ---- Aliases ---- ###
 alias ~="cd ~/"
+alias cl="clear"
 alias nv="nvim"
 alias v="nvim"
 alias ..="cd .."
