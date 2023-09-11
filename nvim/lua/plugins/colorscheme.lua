@@ -12,14 +12,23 @@ return {
       },
     },
   },
-  { "shaunsingh/nord.nvim" },
+
   { "neanias/everforest-nvim" },
-  { "WIttyJudge/gruvbox-material.nvim" },
+
+  {
+    "sainnhe/gruvbox-material",
+    config = function()
+      vim.g.gruvbox_material_foreground = "material"
+      vim.g.gruvbox_material_background = "medium"
+      vim.g.gruvbox_material_transparent_background = 1
+      vim.cmd.colorscheme("gruvbox-material")
+    end,
+  },
 
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "nordfox",
+      colorscheme = "gruvbox-material",
     },
   },
 }

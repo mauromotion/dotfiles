@@ -4,4 +4,7 @@ configuration {
     show-icons: true;
     icon-theme: "papirus-Dark-nordic-folders";
   }
-@theme "/home/mauromotion/.config/rofi/nord-Mauro.rasi"
+//@theme "/home/mauromotion/.config/rofi/nord-Mauro.rasi"
+//@theme "/usr/share/rofi/themes/gruvbox-dark.rasi"
+//@theme "/usr/share/rofi/themes/gruvbox-dark-soft.rasi"
+@theme "/usr/share/rofi/themes/gruvbox-dark-soft.rasi"
