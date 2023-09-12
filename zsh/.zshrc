@@ -28,6 +28,39 @@ setopt HIST_IGNORE_ALL_DUPS
 
 # History won't show duplicates on search.
 setopt HIST_FIND_NO_DUPS
+
+# Various tweaks
+setopt auto_cd
+setopt auto_list
+
+#Fuzzy matching of completions
+zstyle ':completion:*' completer _complete _match _approximate
+zstyle ':completion:*:match:*' original only
+zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3>7?7:($#PREFIX+$#SUFFIX)/3))numeric)'
+
+# Pretty completions
+zstyle ':completion:*:matches' group 'yes'
+zstyle ':completion:*:options' description 'yes'
+zstyle ':completion:*:options' auto-description '%d'
+zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
+zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
+zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
+zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
+zstyle ':completion:*' use-cache true
+zstyle ':completion:*' rehash true
+
+# Color completion
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# Do menu-driven completion
+zstyle ':completion:*' menu select
+
 ### --------------------------------------- ###
 
 
@@ -42,8 +75,8 @@ zstyle :prompt:pure:git:branch color cyan
 zstyle :prompt:pure:virtualenv color cyan
 
 # zsh-vi-mode
-ZVM_VI_HIGHLIGHT_BACKGROUND=#88c0d0
-ZVM_VI_HIGHLIGHT_FOREGROUND=#3b4252
+ZVM_VI_HIGHLIGHT_BACKGROUND=#D8A657
+ZVM_VI_HIGHLIGHT_FOREGROUND=#282828
 
 ### ---- Greeting message ---- ###
 	echo ' -------------------------------- '
