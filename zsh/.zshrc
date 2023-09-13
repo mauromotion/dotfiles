@@ -132,7 +132,7 @@ source ~/.zsh/plugins/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
 # Colored MAN pages
 source ~/.zsh/plugins/colored-man-pages/colored-man-pages.plugin.zsh
 # Colorize code in terminal
-source ~/.zsh/plugins/colorize/clorize.plugin.zsh
+source ~/.zsh/plugins/colorize/colorize.plugin.zsh
 # NVM 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
