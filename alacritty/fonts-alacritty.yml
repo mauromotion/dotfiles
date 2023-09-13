@@ -1,0 +1,84 @@
+## Fonts configuration
+
+# IBM Plex
+blexmono: &blexmono
+  normal:
+    family: BlexMono Nerd Font
+    style: Medium
+  bold:
+    family: BlexMono Nerd Font
+    style: Bold
+  italic:
+    family: BlexMono Nerd Font
+    style: Medium Italic
+  bold_italic:
+    family: BlexMono Nerd Font
+    style: Bold Italic
+  size: 11
+
+# JetBrains
+jetbrains: &jetbrains
+  normal:
+    family: JetBrainsMono Nerd Font
+    style: Medium
+  bold:
+    family: JetBrainsMono Nerd Font
+    style: Bold
+  italic:
+    family: JetBrainsMono Nerd Font
+    style: Medium Italic
+  bold_italic:
+    family: JetBrainsMono Nerd Font
+    style: Bold Italic
+  size: 11
+
+# Iosevka
+iosevka: &iosevka
+  normal:
+    family: Iosevka Nerd Font
+    style: Medium
+  bold:
+    family: Iosevka Nerd Font
+    style: Bold
+  italic:
+    family: Iosevka Nerd Font
+    style: Medium Italic
+  bold_italic:
+    family: Iosevka Nerd Font
+    style: Bold Italic
+  size: 12
+
+# Hack
+hack: &hack
+  normal:
+    family: Hack Nerd Font
+    style: Regular
+  bold:
+    family: Hack Nerd Font
+    style: Bold
+  italic:
+    family: Hack Nerd Font
+    style: Italic
+  bold_italic:
+    family: Hack Nerd Font
+    style: Bold Italic
+  size: 11
+
+# Fantasque
+fantasque: &fantasque
+  normal:
+    family: FantasqueSansM Nerd Font
+    style: Regular
+  bold:
+    family: FantasqueSansM Nerd Font
+    style: Bold
+  italic:
+    family: FantasqueSansM Nerd Font
+    style: Italic
+  bold_italic:
+    family: FantasqueSansM Nerd Font
+    style: Bold Italic
+  size: 12
+
+# Apply fonts
+font: *hack
