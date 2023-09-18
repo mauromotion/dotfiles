@@ -61,6 +61,23 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # Do menu-driven completion
 zstyle ':completion:*' menu select
 
+## Multiple Neovim configs selector
+# alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
+alias nvim-mauro="NVIM_APPNAME=nvim_mauro nvim"
+
+function nvims() {
+  items=("default" "Mauro")
+  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
+  if [[ -z $config ]]; then
+    echo "Nothing selected"
+    return 0
+  elif [[ $config == "default" ]]; then
+    config=""
+  fi
+  NVIM_APPNAME=$config nvim $@
+}
+
+bindkey -s ^a "nvims\n"
 ### --------------------------------------- ###
 
 
