@@ -66,7 +66,7 @@ zstyle ':completion:*' menu select
 alias nvim-mauro="NVIM_APPNAME=nvim_mauro nvim"
 
 function nvims() {
-  items=("default" "Mauro")
+  items=("default" "nvim_mauro")
   config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
   if [[ -z $config ]]; then
     echo "Nothing selected"
@@ -77,7 +77,7 @@ function nvims() {
   NVIM_APPNAME=$config nvim $@
 }
 
-bindkey -s ^a "nvims\n"
+bindkey -s ^n "nvims\n"
 ### --------------------------------------- ###
 
 
