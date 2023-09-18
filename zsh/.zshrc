@@ -115,7 +115,7 @@ alias gl="git pull"
 alias gcam="git commit --all --message"
 alias ga="git add"
 alias gaa="git add --all"
-
+alias py="python3"
 
 ### ---- Plugins ---- ###
 # Completion
