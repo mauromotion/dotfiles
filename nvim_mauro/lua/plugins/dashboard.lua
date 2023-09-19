@@ -22,7 +22,7 @@ return {
 				},
 				center = {
 					{
-						icon = " ",
+						icon = "  ",
 						icon_hl = "Title",
 						desc = "Find File           ",
 						desc_hl = "String",
@@ -39,18 +39,18 @@ return {
 						action = "lua print(3)",
 					},
 					{
-						icon = " ",
-						desc = "Find Dotfiles",
-						key = "f",
-						keymap = "SPC f d",
-						action = "lua print(3)",
+						icon = "󰒲  ",
+						desc = "Lazy",
+						key = "l",
+						keymap = "l",
+						action = "Lazy",
 					},
 					{
-						icon = " ",
-						desc = "Find Dotfiles",
-						key = "f",
-						keymap = "SPC f d",
-						action = "lua print(3)",
+						icon = " ",
+						desc = "Quit",
+						key = "q",
+						keymap = "q",
+						action = "qa",
 					},
 				},
 				packages = { enable = true }, -- show how many plugins neovim loaded

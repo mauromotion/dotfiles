@@ -9,6 +9,7 @@ return {
 
 	{
 		"edeneast/nightfox.nvim",
+    lazy = true,
 		opts = {
 			options = {
 				transparent = true,
