@@ -11,8 +11,8 @@ local opt = vim.opt
 local cmd = vim.cmd
 
 -- Disable netrw
-g.loaded_netrw = 1
-g.loaded_netrwPlugin = 1
+-- g.loaded_netrw = 1
+-- g.loaded_netrwPlugin = 1
 
 -- Enable theming
 o.termguicolors = true

@@ -1,0 +1,38 @@
+return {
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		-- event = { "bufreadpost", "bufnewfile" },
+		cmd = { "TSUpdateSync" },
+		dependencies = { "nvim-treesitter-textobjects" },
+		config = function()
+      require("nvim-treesitter.configs").setup({
+        highlight = { enable = true },
+        indent = { enable = true },
+        ensure_installed = {
+          "astro",
+          "bash",
+          "c",
+          "css",
+          "html",
+          "http",
+          "javascript",
+          "jsdoc",
+          "json",
+          "lua",
+          "luadoc",
+          "luap",
+          "markdown",
+          "markdown_inline",
+          "python",
+          "query",
+          "regex",
+          "tsx",
+          "typescript",
+          "vim",
+          "vimdoc",
+          "yaml",
+          "query",
+        },
+      })
+		end,
+	}
