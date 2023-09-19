@@ -152,6 +152,9 @@ bindsym $mod+Ctrl+Left workspace prev
 bindsym $mod+Ctrl+l workspace next
 bindsym $mod+Ctrl+h workspace prev
 
+# Instant layouts
+bindsym $mod+Escape exec "~/.local/bin/i3-instant-layout --list | rofi -dmenu -i | ~/.local/bin/i3-instant-layout -"
+
 # Workspace names #
 # To display names or symbols instead of plain workspace numbers you can use
 # something like: set $ws1 1:mail
@@ -201,43 +204,44 @@ bindsym $mod+Shift+i resize grow height 5 px or 5 ppt
 bindsym $mod+Shift+o resize grow width 5 px or 5 ppt
 bindsym $mod+Shift+y resize shrink width 5 px or 5 ppt
 
+# Open workspaces on specific screens
+workspace "1: home" output DP-2
+workspace "2: mail" output DP-2
+workspace "3: dev" output DP-2
+workspace "4: chat" output DP-0
+workspace "5: docs" output DP-0
+workspace "6: media" output DP-2
+workspace "7: games" output DP-2
+workspace "8: ext" output DP-0
+
 # Open applications on specific workspaces
-assign [class="Firefox"] $ws1
-assign [class="Discord"] $ws3
-assign [class="Cinny"] $ws3
-assign [class="Thunderbird"] $ws2
-assign [class="Thunderbird-beta"] $ws2
-assign [class="Firefox-developer-edition"] $ws4
+assign [class="firefox"] $ws1
+assign [class="thunderbird"] $ws2
+assign [class="Firefox-developer-edition"] $ws3
+assign [class="Discord"] $ws4
+assign [class="Cinny"] $ws4
+assign [class="telegram-desktop"] $ws4
 assign [class="Foliate"] $ws5
-assign [class="Steam"] $ws7
+assign [class="steam"] $ws7
 
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
-for_window [class="calamares"] floating enable border normal
 for_window [title="ClipGrab"] floating enable
-for_window [class="steam"] floating enable
+for_window [title="Cryptomator"] floating enable
 for_window [title="File Transfer*"] floating enable
-for_window [class="fpakman"] floating enable
 for_window [class="Galculator"] floating enable border pixel 1
 for_window [class="GParted"] floating enable border normal
 for_window [class="Gpick"] floating enable border pixel 2
-for_window [class="mpv"] floating enable border pixel 2
-for_window [class="vlc"] floating enable border pixel 2
-for_window [title="i3_help"] floating enable sticky enable border normal
 for_window [class="Lightdm-settings"] floating enable
 for_window [class="Lxappearance"] floating enable sticky enable border normal
+for_window [class="mpv"] floating enable border pixel 2
 for_window [class="Nitrogen"] floating enable sticky enable border normal
-for_window [class="Oblogout"] fullscreen enable
-for_window [class="octopi"] floating enable
 for_window [class="Pavucontrol"] floating enable
-for_window [class="Viewnior"] floating enable
 for_window [class="qt5ct"] floating enable sticky enable border normal
 for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
-for_window [class="Simple-scan"] floating enable border normal
-for_window [class="(?i)System-config-printer.py"] floating enable border normal
-for_window [class="Timeset-gui"] floating enable border normal
-for_window [class="(?i)virtualbox"] floating enable border normal
-for_window [class="Xfburn"] floating enable
+for_window [class="steam*"] floating enable
+for_window [class="Viewnior"] floating enable
+for_window [class="vlc"] floating enable border pixel 2
 
 # Switch to workspace with urgent window automatically
 for_window [urgent="latest"] focus

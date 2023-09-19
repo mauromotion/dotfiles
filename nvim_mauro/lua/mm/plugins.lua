@@ -14,8 +14,8 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
 
--- Install the plugins
 require("lazy").setup({
+	-- Color schemes
 	"sainnhe/gruvbox-material",
 	config = function()
 		vim.g.gruvbox_material_foreground = "material"
@@ -36,6 +36,23 @@ require("lazy").setup({
 			},
 		},
 	},
-
+	-- Treesitter
+	{
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		event = { "BufReadPost", "BufNewFile" },
+		cmd = { "TSUpdateSync" },
+		config = function()
+			require("mm.plugins.treesitter")
+		end,
+	},
+	-- Highlight colors
 	{ "brenoprata10/nvim-highlight-colors" },
+	-- Lualine
+	{
+		"nvim-lualine/lualine.nvim",
+		config = function()
+			require("mm.plugins.lualine")
+		end,
+	},
 })
