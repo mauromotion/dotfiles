@@ -1,11 +1,12 @@
 {
-  "alpha-nvim": { "branch": "main", "commit": "234822140b265ec4ba3203e3e0be0e0bb826dff5" },
+  "dashboard-nvim": { "branch": "master", "commit": "bbe0234168501b8ba46f24b4fb3cb7c5b88c0784" },
   "flash.nvim": { "branch": "main", "commit": "8a8e74922a383c253b7f92e042b749150140c8d1" },
   "gruvbox-material": { "branch": "master", "commit": "b5f8c6a6c1cda630c53b061b765068a0898d47a3" },
   "harpoon": { "branch": "master", "commit": "21f4c47c6803d64ddb934a5b314dcb1b8e7365dc" },
   "lazy.nvim": { "branch": "main", "commit": "2a9354c7d2368d78cbd5575a51a2af5bd8a6ad01" },
   "lualine.nvim": { "branch": "master", "commit": "45e27ca739c7be6c49e5496d14fcf45a303c3a63" },
   "mini.comment": { "branch": "main", "commit": "877acea5b2a32ff55f808fc0ebe9aa898648318c" },
+  "mini.indentscope": { "branch": "main", "commit": "f60e9b51a6214c73a170ffc5445ce91560981031" },
   "mini.pairs": { "branch": "main", "commit": "dfa9f6e2576bb8853be277d96b735af59d9be7c2" },
   "mini.surround": { "branch": "main", "commit": "9d1956b576d7051da3a483b251dfc778121c60db" },
   "nightfox.nvim": { "branch": "main", "commit": "e886e39e592e89f316536a6f070365a9d88901c9" },
