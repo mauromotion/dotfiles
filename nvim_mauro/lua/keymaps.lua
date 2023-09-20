@@ -96,16 +96,16 @@ map("n", "<leader>hr", mark.rm_file)
 map("n", "<leader>hn", ui.nav_next)
 map("n", "<leader>hp", ui.nav_prev)
 
-map("n", "<c-1>", function()
+map("n", "<C-1>", function()
   ui.nav_file(1)
 end)
-map("n", "<c-2>", function()
+map("n", "<C-2>", function()
   ui.nav_file(2)
 end)
-map("n", "<c-3>", function()
+map("n", "<C-3>", function()
   ui.nav_file(3)
 end)
-map("n", "<c-4>", function()
+map("n", "<C-4>", function()
   ui.nav_file(4)
 end)
 
@@ -124,4 +124,3 @@ vim.cmd([[
   noremap <silent> <c-\\> :<C-U>NvimTmuxNavigateLastActive<cr>
   noremap <silent> <c-Space> :<C-U>NvimTmuxNavigateNext<cr>
 ]])
-
