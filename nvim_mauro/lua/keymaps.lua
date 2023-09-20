@@ -21,6 +21,7 @@ map("n", "<leader>q", "<CMD>:q<CR>")
 -- Keybindings for telescope
 map("n", "<leader>fr", "<CMD>Telescope oldfiles<CR>")
 map("n", "<leader>ff", "<CMD>Telescope find_files<CR>")
+map("n", "<leader><space>", "<CMD>Telescope find_files<CR>")
 map("n", "<leader>fb", "<CMD>Telescope file_browser<CR>")
 map("n", "<leader>fw", "<CMD>Telescope live_grep<CR>")
 map("n", "<leader>ht", "<CMD>Telescope colorscheme<CR>")
@@ -81,3 +82,45 @@ map("n", "N", "Nzzzv")
 
 -- Keep pasting the same with leader + p
 map("x", "<leader>p", '"_dP')
+
+-- Oil.Nvim
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
+-- Harpoon
+local ui = require("harpoon.ui")
+local mark = require("harpoon.mark")
+
+map("n", "<leader>hh", ui.toggle_quick_menu)
+map("n", "<leader>ha", mark.add_file)
+map("n", "<leader>hr", mark.rm_file)
+map("n", "<leader>hn", ui.nav_next)
+map("n", "<leader>hp", ui.nav_prev)
+
+map("n", "<C-y>", function()
+  ui.nav_file(1)
+end)
+map("n", "<C-u>", function()
+  ui.nav_file(2)
+end)
+map("n", "<C-i>", function()
+  ui.nav_file(3)
+end)
+map("n", "<C-o>", function()
+  ui.nav_file(4)
+end)
+
+-- UndoTree
+map("n", "<leader>ut", "<cmd>UndotreeToggle<cr>")
+
+-- Zen Mode
+map("n", "<leader>z", "<cmd>ZenMode<cr>")
+
+-- Nvim-tmux-navigation
+vim.cmd([[
+  noremap <silent> <c-h> :<C-U>NvimTmuxNavigateLeft<cr>
+  noremap <silent> <c-j> :<C-U>NvimTmuxNavigateDown<cr>
+  noremap <silent> <c-k> :<C-U>NvimTmuxNavigateUp<cr>
+  noremap <silent> <c-l> :<C-U>NvimTmuxNavigateRight<cr>
+  noremap <silent> <c-\\> :<C-U>NvimTmuxNavigateLastActive<cr>
+  noremap <silent> <c-Space> :<C-U>NvimTmuxNavigateNext<cr>
+]])
