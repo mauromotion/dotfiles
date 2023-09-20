@@ -28,11 +28,11 @@ map("n", "<leader>ht", "<CMD>Telescope colorscheme<CR>")
 map("n", "<leader>co", "<CMD>HighlightColorsToggle<CR>")
 
 -- Keybindings for NvimTree
-map("n", "<C-b>", "<CMD>NvimTreeToggle<CR>")
+-- map("n", "<C-b>", "<CMD>NvimTreeToggle<CR>")
 
--- Copying the vscode behaviour of making tab splits
-map("n", "<C-\\>", "<CMD>vsplit<CR>")
-map("n", "<A-\\>", "<CMD>split<CR>")
+-- Split views
+map("n", "<leader>|", "<CMD>vsplit<CR>")
+map("n", "<leader>-", "<CMD>split<CR>")
 
 -- Move current line / block with Alt-j/k ala vscode (Insert mode).
 map("i", "<A-j>", "<Esc>:m .+1<CR>==gi")
@@ -96,16 +96,16 @@ map("n", "<leader>hr", mark.rm_file)
 map("n", "<leader>hn", ui.nav_next)
 map("n", "<leader>hp", ui.nav_prev)
 
-map("n", "<C-y>", function()
+map("n", "<c-1>", function()
   ui.nav_file(1)
 end)
-map("n", "<C-u>", function()
+map("n", "<c-2>", function()
   ui.nav_file(2)
 end)
-map("n", "<C-i>", function()
+map("n", "<c-3>", function()
   ui.nav_file(3)
 end)
-map("n", "<C-o>", function()
+map("n", "<c-4>", function()
   ui.nav_file(4)
 end)
 
@@ -124,3 +124,4 @@ vim.cmd([[
   noremap <silent> <c-\\> :<C-U>NvimTmuxNavigateLastActive<cr>
   noremap <silent> <c-Space> :<C-U>NvimTmuxNavigateNext<cr>
 ]])
+
