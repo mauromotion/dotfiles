@@ -77,7 +77,7 @@ gruvbox_material_medium_dark: &gruvbox_material_medium_dark
 # Everforest
 everforest: &everforest
   primary:
-    background: "#2d353b"
+    background: "#272E33"
     foreground: "#d3c6aa"
   normal:
     black: "#475258"
@@ -99,4 +99,4 @@ everforest: &everforest
     white: "#d3c6aa"
 
 # Apply the color scheme
-colors: *gruvbox_material_medium_dark
+colors: *everforest

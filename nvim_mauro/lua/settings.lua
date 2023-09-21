@@ -16,7 +16,7 @@ local cmd = vim.cmd
 
 -- Enable theming
 o.termguicolors = true
-cmd("colorscheme gruvbox-material")
+cmd("colorscheme everforest")
 
 -- Better editing experience
 o.number = true
