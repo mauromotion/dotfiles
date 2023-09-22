@@ -86,6 +86,9 @@ map("x", "<leader>p", '"_dP')
 -- Oil.Nvim
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
+-- mini.files
+-- map("n", "-", "<CMD>lua MiniFiles.open()")
+
 -- Harpoon
 local ui = require("harpoon.ui")
 local mark = require("harpoon.mark")
