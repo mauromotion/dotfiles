@@ -8,6 +8,9 @@
 -- Load Plugins
 require("plugins")
 
+-- Load Auto-commands
+require("autocmds")
+
 -- Load General Settings
 require("settings")
 

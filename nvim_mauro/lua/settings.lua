@@ -8,7 +8,6 @@
 local g = vim.g
 local o = vim.o
 local opt = vim.opt
-local cmd = vim.cmd
 
 -- Disable netrw
 -- g.loaded_netrw = 1
@@ -16,7 +15,6 @@ local cmd = vim.cmd
 
 -- Enable theming
 o.termguicolors = true
-cmd("colorscheme everforest")
 
 -- Better editing experience
 o.number = true
