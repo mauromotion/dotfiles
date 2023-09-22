@@ -1,15 +1,15 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	build = ":TSUpdate",
+	build = ":TSUpdate<CR>",
 	event = { "BufReadPost", "BufNewFile" },
 	cmd = { "TSUpdateSync" },
-	-- dependencies = { "nvim-treesitter-textobjects" },
+	dependencies = { "nvim-treesitter-textobjects" },
 	config = function()
-		require("nvim-treesitter.configs").setup({
+		require("nvim-treesitter").setup({
 			highlight = { enable = true },
+			incremental_selection = { enable = true },
 			indent = { enable = true },
 			ensure_installed = {
-				"astro",
 				"bash",
 				"c",
 				"css",
@@ -31,8 +31,8 @@ return {
 				"vim",
 				"vimdoc",
 				"yaml",
-				"query",
 			},
 		})
 	end,
 }
+-- FIXME:
