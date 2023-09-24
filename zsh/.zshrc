@@ -141,8 +141,6 @@ zstyle ':completion:*' menu select
 fpath=(~/.zsh/plugins/zsh-completions/src/ $fpath)
 autoload -U compinit && compinit
 zmodload -i zsh/complist
-# Vim mode
-source ~/.zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 # Autosuggestions
 source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 # Fuzzy Finder
@@ -163,3 +161,5 @@ eval "$(rbenv init - zsh)"
 eval "$(zoxide init zsh)"
 # Syntax Highlighting
 source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Vim mode
+source ~/.zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
