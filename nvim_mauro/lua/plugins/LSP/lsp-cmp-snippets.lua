@@ -107,12 +107,12 @@ return {
 						c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
 					}),
 				}),
-        sources = {
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
-          { name = "buffer" },
-          { name = "path" },
-        },
+				sources = {
+					{ name = "nvim_lsp" },
+					{ name = "luasnip" },
+					{ name = "buffer" },
+					{ name = "path" },
+				},
 			})
 		end,
 	},
