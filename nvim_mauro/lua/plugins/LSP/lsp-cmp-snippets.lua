@@ -12,8 +12,25 @@ return {
 	},
 	{
 		"williamboman/mason.nvim",
+		cmd = "Mason",
 		lazy = false,
 		config = true,
+		opts = {
+			ensure_installed = {
+				"lua_ls",
+				"stylua",
+				"tsserver",
+				"prettierd",
+				"html",
+				"cssls",
+				"pylsp",
+				"pyright",
+				"marksman",
+				"shfmt",
+				"jsonls",
+				"yamlls",
+			},
+		},
 	},
 
 	-- Snippets
@@ -39,11 +56,11 @@ return {
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"saadparwaiz1/cmp_luasnip",
-			"hrsh7th/cmp-emoji",
+			{ "hrsh7th/cmp-nvim-lsp" },
+			{ "hrsh7th/cmp-buffer" },
+			{ "hrsh7th/cmp-path" },
+			{ "saadparwaiz1/cmp_luasnip" },
+			{ "hrsh7th/cmp-emoji" },
 		},
 		config = function()
 			-- Here is where you configure the autocompletion settings.
@@ -62,7 +79,7 @@ return {
 			end
 
 			local luasnip = require("luasnip")
-			local cmp = require("cmp")
+			-- local cmp = require("cmp")
 
 			cmp.setup({
 				formatting = lsp_zero.cmp_format(),
@@ -123,8 +140,8 @@ return {
 		cmd = { "LspInfo", "LspInstall", "LspStart" },
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "williamboman/mason-lspconfig.nvim" },
+			{ "hrsh7th/cmp-nvim-lsp" },
 		},
 		config = function()
 			-- This is where all the LSP shenanigans will live
@@ -138,17 +155,7 @@ return {
 			end)
 
 			require("mason-lspconfig").setup({
-				ensure_installed = {
-					"lua_ls",
-					"stylua",
-					"tsserver",
-					"html",
-					"cssls",
-					"pylsp",
-					"pyright",
-					"marksman",
-					"shfmt",
-				},
+				ensure_installed = {},
 				handlers = {
 					lsp_zero.default_setup,
 					lua_ls = function()
