@@ -35,10 +35,10 @@ return {
 				{ action = "Oil /home/mauromotion/.config/nvim_mauro/", name = "Configuration", section = "System" },
 				{ action = "Oil /home/mauromotion/.dotfiles/", name = "Dotfiles", section = "System" },
 				-- Builtin actions
-				{ action = "enew", name = "New Buffer", section = "Builtin actions" },
-				{ action = "qall!", name = "Quit Neovim", section = "Builtin actions" },
+				require("mini.starter").sections.builtin_actions(),
+				-- { action = "enew", name = "New Buffer", section = "Builtin actions" },
+				-- { action = "qall!", name = "Quit Neovim", section = "Builtin actions" },
 				-- require('mini.starter').sections.telescope(),
-				-- require('mini.starter').sections.builtin_actions(),
 				-- require('mini.starter').sections.recent_files(10, false, false)
 			},
 		})

@@ -109,8 +109,9 @@ function zvm_config() {
 ### ---- Aliases ---- ###
 alias ~="cd ~/"
 alias cl="clear"
-alias nv="nvim"
-alias v="nvim"
+alias nv="nvim-mauro"
+alias v="nvim-mauro"
+alias lazy="nvim"
 alias ..="cd .."
 alias cp="cp -i"
 alias mv="mv -i"
