@@ -19,22 +19,27 @@ return {
 			}, "\n"),
 			query_updaters = [[abcdefghijklmnoqrstuvwxyz0123456789_-,.ABCDEFGHIJKLMNOQRSTUVWXYZ]],
 			items = {
-				{ action = "Oil", name = "-: CWD", section = "Start here" },
-				{ action = "Telescope oldfiles", name = "R: Recent files", section = "Start here" },
-				{ action = "Telescope live_grep", name = "G: Grep CWD", section = "Start here" },
-				{ action = "VimwikiIndex", name = "V: VimWiki", section = "Start here" },
-				{ action = "VimwikiDiaryIndex", name = "J: VimWikiDiary", section = "Start here" },
-				{ action = "VimwikiMakeDiaryNote", name = "N: VimWikiDiary Today", section = "Start here" },
-        { action = "Lazy check", name = "L: Lazy", section = "System" },
-        { action = "Mason", name = "M: Mason", section = "System" },
-        { action = "checkhealth", name = "H: Checkhealth", section = "System" },
-        { action = "Oil /home/mauromotion/.config/nvim_mauro/", name = "C: Configuration", section = "System" },
-        { action = "Oil /home/mauromotion/.dotfiles/", name = "D: Dotfiles", section = "System" },
-				{ action = "enew", name = "E: New Buffer", section = "Builtin actions" },
-				{ action = "qall!", name = "Q: Quit Neovim", section = "Builtin actions" },
-        -- require('mini.starter').sections.telescope(),
-        -- require('mini.starter').sections.builtin_actions(),
-        -- require('mini.starter').sections.recent_files(10, false, false)
+				-- Start here
+				{ action = "Oil", name = "- CWD", section = "Start here" },
+				{ action = "Telescope oldfiles", name = "Recent files", section = "Start here" },
+				{ action = "Telescope live_grep", name = "Grep CWD", section = "Start here" },
+				{ action = "VimwikiIndex", name = "VimWiki", section = "Start here" },
+				{ action = "VimwikiDiaryIndex", name = "Journal VimWikiDiary", section = "Start here" },
+				{ action = "VimwikiMakeDiaryNote", name = "Today VimWikiDiary", section = "Start here" },
+				-- Sessions
+				require("mini.starter").sections.sessions(),
+				-- System
+				{ action = "Lazy check", name = "Lazy", section = "System" },
+				{ action = "Mason", name = "Mason", section = "System" },
+				{ action = "checkhealth", name = "Health", section = "System" },
+				{ action = "Oil /home/mauromotion/.config/nvim_mauro/", name = "Configuration", section = "System" },
+				{ action = "Oil /home/mauromotion/.dotfiles/", name = "Dotfiles", section = "System" },
+				-- Builtin actions
+				{ action = "enew", name = "New Buffer", section = "Builtin actions" },
+				{ action = "qall!", name = "Quit Neovim", section = "Builtin actions" },
+				-- require('mini.starter').sections.telescope(),
+				-- require('mini.starter').sections.builtin_actions(),
+				-- require('mini.starter').sections.recent_files(10, false, false)
 			},
 		})
 	end,
