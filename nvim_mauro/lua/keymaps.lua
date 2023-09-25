@@ -66,11 +66,17 @@ map("x", "<leader>p", '"_dP')
 
 ------* Plugins' keymaps *------
 
+-- Lazy
+map("n", "<leader>l", "<CMD>Lazy<CR>", { desc = "Launch Lazy Plugin Manager" })
+
+-- Mason
+map("n", "<leader>m", "<CMD>Mason<CR>", { desc = "Launch Mason LSP Manager" })
+
 -- Higlight Colors
 map("n", "<leader>co", "<CMD>HighlightColorsToggle<CR>")
 
 -- Oil.Nvim
-vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+map("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 -- mini.files
 -- map("n", "-", "<CMD>lua MiniFiles.open()")

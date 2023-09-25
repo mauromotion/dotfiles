@@ -20,18 +20,24 @@ elif [ ! -d "$HOME/.config/polybar/" ]; then
 	mkdir "$HOME/.config/polybar/"
 elif [ ! -d "$HOME/.config/dunst/" ]; then
 	mkdir "$HOME/.config/dunst/"
+elif [ ! -d "$HOME/.config/rofi/" ]; then
+	mkdir "$HOME/.config/rofi/"
 else
 	## Symlink i3 config
-  rm -f "$HOME/.config/i3/config" 
+	rm -f "$HOME/.config/i3/config"
 	ln -svf "$HOME/.dotfiles/i3/${theme}-desktop-i3-config" "$HOME/.config/i3/config"
 
 	## Symlink polybar config
-  rm -f "$HOME/.config/polybar/config.ini" 
+	rm -f "$HOME/.config/polybar/config.ini"
 	ln -svf "$HOME/.dotfiles/polybar/${theme}-config.ini" "$HOME/.config/polybar/config.ini"
 
 	## Symlink dunst
-  rm -f "$HOME/.config/dunst/dunstrc" 
+	rm -f "$HOME/.config/dunst/dunstrc"
 	ln -svf "$HOME/.dotfiles/dunst/${theme}-dunstrc" "$HOME/.config/dunst/dunstrc"
+
+	## Symlink rofi
+	rm -f "$HOME/.config/rofi/config-Mauro.rasi"
+	ln -svf "$HOME/.dotfiles/rofi/${theme}-Mauro.rasi" "$HOME/.config/rofi/config-Mauro.rasi"
 fi
 
 # Reload polybar
@@ -40,7 +46,6 @@ sh ~/.config/polybar/launch.sh
 # Reload i3
 i3-msg reload
 
-# Switch rofi theme
 # Switch Firefox theme
 # Load Sidebery custom CSS
 # Switch Thunderbird theme
