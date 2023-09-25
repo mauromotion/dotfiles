@@ -3,7 +3,7 @@
 #-- │││├─┤│ │├┬┘│ │││││ │ │ ││ ││││
 #-- ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘
 #-- * .dotfiles * --
-#-- i3 config -- Arch Linux on desktop PC -------------
+#-- i3 config -- Arch Linux on Laptop -----------------
 
 # i3 config file (v4)
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
@@ -61,6 +61,10 @@ bindsym $mod+comma exec playerctl previous
 bindsym $mod+slash exec playerctl next
 bindsym $mod+m exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 
+# Screen brightness controls
+bindsym $mod+prior exec --no-startup-id brightnessctl set +5%
+bindsym $mod+next exec --no-startup-id brightnessctl set 5%-
+
 # Launch Applications
 bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+Return exec firefox
@@ -76,14 +80,10 @@ bindsym $mod+Ctrl+m exec pavucontrol
 bindsym $mod+c exec galculator
 
 ## Load ICC profiles ##
-exec_always --no-startup-id dispwin -d1 ~/.color/icc/Dell_S2721DGF.icm
-exec_always --no-startup-id dispwin -d2 ~/.color/icc/Dell_U2713HM.icm.icm
+exec_always --no-startup-id dispwin ~/.monitor/color-profiles/icc/Gigabyte_Aero_15X.icm
 
 # Focus following the mouse pointer
 focus_follows_mouse no
-
-# Set mouse acceleration on desktop (Razer Viper)
-exec_always --no-startup-id "xinput set-prop 9 295 -0.800000"
 
 # Change focus
 bindsym $mod+h focus left
@@ -151,9 +151,6 @@ bindsym $mod+Ctrl+Right workspace next
 bindsym $mod+Ctrl+Left workspace prev
 bindsym $mod+Ctrl+l workspace next
 bindsym $mod+Ctrl+h workspace prev
-
-# Instant layouts
-bindsym $mod+Escape exec "~/.local/bin/i3-instant-layout --list | rofi -dmenu -i | ~/.local/bin/i3-instant-layout -"
 
 # Workspace names #
 # To display names or symbols instead of plain workspace numbers you can use
@@ -297,7 +294,7 @@ mode "resize" {
 }
 
 # Lock screen
-bindsym $mod+9 exec betterlockscreen -l dim
+bindsym $mod+9 exec --no-startup-id blurlock -n
 
 ##############################
 ### Autostart applications ###
@@ -305,15 +302,14 @@ bindsym $mod+9 exec betterlockscreen -l dim
 exec --no-startup-id xrdb ~/.Xresources
 exec --no-startup-id pcmanfm -d
 exec --no-startup-id pa-applet
-exec --no-startup-id udiskie -a -n -t 
+exec --no-startup-id udiskie -a -n -t
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id picom -b
 exec --no-startup-id nm-applet
 exec --no-startup-id nextcloud --background
-exec --no-startup-id openrgb --startminimized
-exec --no-startup-id xset b 100
-# exec_always --no-startup-id xautolock -time 10 -locker "betterlockscreen -l"
+exec --no-startup-id optimus-manager-qt
+exec_always --no-startup-id xautolock -time 10 -locker "blurlock -n"
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
