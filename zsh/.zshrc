@@ -92,8 +92,11 @@ zstyle :prompt:pure:git:branch color cyan
 zstyle :prompt:pure:virtualenv color cyan
 
 # zsh-vi-mode
-ZVM_VI_HIGHLIGHT_BACKGROUND=#D8A657
-ZVM_VI_HIGHLIGHT_FOREGROUND=#282828
+function zvm_config() {
+  ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+  ZVM_VI_HIGHLIGHT_BACKGROUND=#D8A657
+  ZVM_VI_HIGHLIGHT_FOREGROUND=#282828
+}
 
 ### ---- Greeting message ---- ###
 	echo ' -------------------------------- '

@@ -16,7 +16,7 @@ vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappin
 
 -- Load Plugins
 require("lazy").setup({
-	{ import = "plugins.editing" },
+	{ import = "plugins.coding" },
 	{ import = "plugins.LSP" },
 	{ import = "plugins.navigation" },
 	{ import = "plugins.treesitter" },
