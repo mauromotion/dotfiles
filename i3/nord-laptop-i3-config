@@ -80,7 +80,7 @@ bindsym $mod+Ctrl+m exec pavucontrol
 bindsym $mod+c exec galculator
 
 ## Load ICC profiles ##
-exec_always --no-startup-id dispwin ~/.monitor/color-profiles/icc/Gigabyte_Aero_15X.icm
+exec_always --no-startup-id dispwin ~/.color/color-profiles/icc/Gigabyte_Aero_15X.icm
 
 # Focus following the mouse pointer
 focus_follows_mouse no
