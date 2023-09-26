@@ -12,12 +12,12 @@ local function map(m, k, v, opts)
 end
 
 -- Fast saving, fast quitting
-map("n", "<leader>w", "<CMD>:w<CR>")
-map("n", "<leader>q", "<CMD>:q<CR>")
+map("n", "<leader>w", "<CMD>:w<CR>", { desc = "Fast saving [W]" })
+map("n", "<leader>q", "<CMD>:q<CR>", { desc = "Fast [Q]uitting" })
 
 -- Split views
-map("n", "<leader>|", "<C-W>v")
-map("n", "<leader>-", "<C-W>s")
+map("n", "<leader>|", "<C-W>v", { desc = "Split view vertically | " })
+map("n", "<leader>-", "<C-W>s", { desc = "Split view horizontally - " })
 
 -- Move Lines
 map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move down" })
@@ -67,13 +67,13 @@ map("x", "<leader>p", '"_dP')
 ------* Plugins' keymaps *------
 
 -- Lazy
-map("n", "<leader>l", "<CMD>Lazy<CR>", { desc = "Launch Lazy Plugin Manager" })
+map("n", "<leader>l", "<CMD>Lazy<CR>", { desc = "Launch [L]azy Plugin Manager" })
 
 -- Mason
-map("n", "<leader>m", "<CMD>Mason<CR>", { desc = "Launch Mason LSP Manager" })
+map("n", "<leader>m", "<CMD>Mason<CR>", { desc = "Launch [M]ason LSP Manager" })
 
 -- Higlight Colors
-map("n", "<leader>co", "<CMD>HighlightColorsToggle<CR>")
+map("n", "<leader>ch", "<CMD>HighlightColorsToggle<CR>", { desc = "Toggle [C]olors [H]ighlighter" })
 
 -- Oil.Nvim
 map("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
@@ -82,14 +82,14 @@ map("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 -- map("n", "-", "<CMD>lua MiniFiles.open()")
 
 -- Harpoon
-local ui = require("harpoon.ui")
-local mark = require("harpoon.mark")
-
-map("n", "<leader>hh", ui.toggle_quick_menu)
-map("n", "<leader>ha", mark.add_file)
-map("n", "<leader>hr", mark.rm_file)
-map("n", "<leader>hn", ui.nav_next)
-map("n", "<leader>hp", ui.nav_prev)
+-- local ui = require("harpoon.ui")
+-- local mark = require("harpoon.mark")
+--
+-- map("n", "<leader>hh", ui.toggle_quick_menu)
+-- map("n", "<leader>ha", mark.add_file)
+-- map("n", "<leader>hr", mark.rm_file)
+-- map("n", "<leader>hn", ui.nav_next)
+-- map("n", "<leader>hp", ui.nav_prev)
 
 -- map("n", "h['1']>", function()
 -- 	ui.nav_file(1)
@@ -105,10 +105,10 @@ map("n", "<leader>hp", ui.nav_prev)
 -- end)
 
 -- UndoTree
-map("n", "<leader>ut", "<cmd>UndotreeToggle<cr>")
+map("n", "<leader>ut", "<cmd>UndotreeToggle<cr>", { desc = "Toggle [U]ndo[T]ree" })
 
 -- Zen Mode
-map("n", "<leader>z", "<cmd>ZenMode<cr>")
+map("n", "<leader>z", "<cmd>ZenMode<cr>", { desc = "Toggle [Z]en mode" })
 
 -- Nvim-tmux-navigation
 vim.cmd([[
