@@ -30,7 +30,7 @@ jetbrains: &jetbrains
   bold_italic:
     family: JetBrainsMono Nerd Font
     style: Bold Italic
-  size: 11
+  size: 12
 
 # Iosevka
 iosevka: &iosevka

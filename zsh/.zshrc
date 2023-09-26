@@ -92,8 +92,11 @@ zstyle :prompt:pure:git:branch color cyan
 zstyle :prompt:pure:virtualenv color cyan
 
 # zsh-vi-mode
-ZVM_VI_HIGHLIGHT_BACKGROUND=#D8A657
-ZVM_VI_HIGHLIGHT_FOREGROUND=#282828
+function zvm_config() {
+  ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+  ZVM_VI_HIGHLIGHT_BACKGROUND=#D8A657
+  ZVM_VI_HIGHLIGHT_FOREGROUND=#282828
+}
 
 ### ---- Greeting message ---- ###
 	echo ' -------------------------------- '
@@ -106,8 +109,9 @@ ZVM_VI_HIGHLIGHT_FOREGROUND=#282828
 ### ---- Aliases ---- ###
 alias ~="cd ~/"
 alias cl="clear"
-alias nv="nvim"
-alias v="nvim"
+alias nv="nvim-mauro"
+alias v="nvim-mauro"
+alias lazy="nvim"
 alias ..="cd .."
 alias cp="cp -i"
 alias mv="mv -i"
@@ -133,6 +137,7 @@ alias gcam="git commit --all --message"
 alias ga="git add"
 alias gaa="git add --all"
 alias py="python3"
+alias zsh-update="sh ~/.zsh/zsh_plugins_updater.sh"
 
 ### ---- Plugins ---- ###
 # Completion
@@ -140,8 +145,6 @@ zstyle ':completion:*' menu select
 fpath=(~/.zsh/plugins/zsh-completions/src/ $fpath)
 autoload -U compinit && compinit
 zmodload -i zsh/complist
-# Vim mode
-source ~/.zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 # Autosuggestions
 source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 # Fuzzy Finder
@@ -162,3 +165,5 @@ eval "$(rbenv init - zsh)"
 eval "$(zoxide init zsh)"
 # Syntax Highlighting
 source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Vim mode
+source ~/.zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh

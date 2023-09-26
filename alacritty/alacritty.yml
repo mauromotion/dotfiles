@@ -35,7 +35,7 @@ window:
   decorations: full
 
   # Background opacity
-  opacity: 1
+  opacity: 0.9
 
   # Window title
   #title: Alacritty

@@ -215,7 +215,7 @@ workspace "7: games" output DP-2
 workspace "8: ext" output DP-0
 
 # Open applications on specific workspaces
-assign [class="firefox"] $ws1
+# assign [class="firefox"] $ws1
 assign [class="thunderbird"] $ws2
 assign [class="Firefox-developer-edition"] $ws3
 assign [class="Discord"] $ws4
