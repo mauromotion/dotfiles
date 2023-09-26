@@ -80,7 +80,7 @@ bindsym $mod+Ctrl+m exec pavucontrol
 bindsym $mod+c exec galculator
 
 ## Load ICC profiles ##
-exec_always --no-startup-id dispwin ~/.color/color-profiles/icc/Gigabyte_Aero_15X.icm
+exec_always --no-startup-id sh ~/.color/color-profiles/laptop-load_ICC.sh
 
 # Focus following the mouse pointer
 focus_follows_mouse no
@@ -201,43 +201,44 @@ bindsym $mod+Shift+i resize grow height 5 px or 5 ppt
 bindsym $mod+Shift+o resize shrink width 5 px or 5 ppt
 bindsym $mod+Shift+y resize grow width 5 px or 5 ppt
 
+# Open workspaces on specific screens
+workspace "1: home" output DP-2
+workspace "2: mail" output DP-2
+workspace "3: dev" output DP-2
+workspace "4: chat" output DP-0
+workspace "5: docs" output DP-0
+workspace "6: media" output DP-2
+workspace "7: games" output DP-2
+workspace "8: ext" output DP-0
+
 # Open applications on specific workspaces
-assign [class="Firefox"] $ws1
-assign [class="Telegram-desktop"] $ws3
-assign [class="Discord"] $ws3
-assign [class="Cinny"] $ws3
-assign [class="Thunderbird"] $ws2
-assign [class="Thunderbird-beta"] $ws2
-assign [class="Firefox-developer-edition"] $ws4
+# assign [class="firefox"] $ws1
+assign [class="thunderbird"] $ws2
+assign [title="Firefox-developer-edition"] $ws3
+assign [class="Discord"] $ws4
+assign [class="Cinny"] $ws4
+assign [class="telegram-desktop"] $ws4
 assign [class="Foliate"] $ws5
-assign [class="Steam"] $ws7
+assign [class="steam"] $ws7
 
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
-for_window [class="calamares"] floating enable border normal
-for_window [class="Clipgrab"] floating enable
+for_window [title="ClipGrab"] floating enable
+for_window [title="Cryptomator"] floating enable
 for_window [title="File Transfer*"] floating enable
-for_window [class="fpakman"] floating enable
 for_window [class="Galculator"] floating enable border pixel 1
 for_window [class="GParted"] floating enable border normal
 for_window [class="Gpick"] floating enable border pixel 2
-for_window [class="mpv"] floating enable border pixel 2
-for_window [class="vlc"] floating enable border pixel 2
-for_window [title="i3_help"] floating enable sticky enable border normal
 for_window [class="Lightdm-settings"] floating enable
 for_window [class="Lxappearance"] floating enable sticky enable border normal
+for_window [class="mpv"] floating enable border pixel 2
 for_window [class="Nitrogen"] floating enable sticky enable border normal
-for_window [class="Oblogout"] fullscreen enable
-for_window [class="octopi"] floating enable
 for_window [class="Pavucontrol"] floating enable
-for_window [class="Viewnior"] floating enable
 for_window [class="qt5ct"] floating enable sticky enable border normal
 for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
-for_window [class="Simple-scan"] floating enable border normal
-for_window [class="(?i)System-config-printer.py"] floating enable border normal
-for_window [class="Timeset-gui"] floating enable border normal
-for_window [class="(?i)virtualbox"] floating enable border normal
-for_window [class="Xfburn"] floating enable
+for_window [class="steam*"] floating enable
+for_window [class="Viewnior"] floating enable
+for_window [class="vlc"] floating enable border pixel 2
 
 # Switch to workspace with urgent window automatically
 for_window [urgent="latest"] focus
@@ -249,7 +250,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # Exit i3 (logs you out of your X session)
-# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # Set shut down, restart and locking features
 bindsym $mod+0 mode "$mode_system"
@@ -365,7 +366,6 @@ set_from_resource $term_color15    color15
 # 	strip_workspace_numbers yes
 #   workspace_min_width 70
 
-
 #     colors {
 #         background #32302F
 #         statusline #D4BE98
@@ -378,6 +378,7 @@ set_from_resource $term_color15    color15
 #         binding_mode       #A9B665 #A9B665 #1B1B1B
 #         urgent_workspace   #D3869B #D3869B #1B1B1B
 #     }
+# }
 
 # Hide/unhide i3status bar
 # bindsym $mod+b bar mode toggle

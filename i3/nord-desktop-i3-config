@@ -201,8 +201,8 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 # Resize windows
 bindsym $mod+Shift+u resize shrink height 5 px or 5 ppt
 bindsym $mod+Shift+i resize grow height 5 px or 5 ppt
-bindsym $mod+Shift+o resize grow width 5 px or 5 ppt
-bindsym $mod+Shift+y resize shrink width 5 px or 5 ppt
+bindsym $mod+Shift+o resize shrink width 5 px or 5 ppt
+bindsym $mod+Shift+y resize grow width 5 px or 5 ppt
 
 # Open workspaces on specific screens
 workspace "1: home" output DP-2
@@ -215,9 +215,9 @@ workspace "7: games" output DP-2
 workspace "8: ext" output DP-0
 
 # Open applications on specific workspaces
-assign [class="firefox"] $ws1
+# assign [class="firefox"] $ws1
 assign [class="thunderbird"] $ws2
-assign [class="Firefox-developer-edition"] $ws3
+assign [title="Firefox-developer-edition"] $ws3
 assign [class="Discord"] $ws4
 assign [class="Cinny"] $ws4
 assign [class="telegram-desktop"] $ws4
