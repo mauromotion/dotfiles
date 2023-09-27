@@ -12,11 +12,15 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
+-- Make sure to set `mapleader` before lazy so your mappings are correct
+vim.g.mapleader = " "
 
---VimWiki setup -- Here's the only place where it loads...
-vim.g.vimwiki_list = { { path = "~/Notes/VimWiki", syntax = "markdown", ext = ".md" } } -- Set VimWiki deafult directory
--- Set langauge highlighting
+-- VimWiki setup // Here's the only place where it loads...
+
+-- Set VimWiki deafult directory
+vim.g.vimwiki_list = { { path = "~/Notes/VimWiki", syntax = "markdown", ext = ".md" } }
+
+-- Set VimWiki syntax highlighting for code blocks
 vim.g.vimwiki_syntax_plugins = {
 	codeblock = {
 		["```lua"] = { parser = "lua" },
