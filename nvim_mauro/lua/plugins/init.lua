@@ -14,6 +14,8 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
 
+vim.g.vimwiki_list = { { path = "~/Notes/VimWiki" } } -- Set VimWiki deafult directory
+
 -- Load Plugins
 require("lazy").setup({
 	{ import = "plugins.coding" },
