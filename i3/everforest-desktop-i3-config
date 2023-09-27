@@ -76,8 +76,9 @@ bindsym $mod+Ctrl+m exec pavucontrol
 bindsym $mod+c exec galculator
 
 ## Load ICC profiles ##
-exec_always --no-startup-id dispwin -d1 ~/.color/icc/Dell_S2721DGF.icm
-exec_always --no-startup-id dispwin -d2 ~/.color/icc/Dell_U2713HM.icm.icm
+# exec_always --no-startup-id dispwin -d1 ~/.color/icc/Dell_S2721DGF.icm
+# exec_always --no-startup-id dispwin -d2 ~/.color/icc/Dell_U2713HM.icm.icm
+exec_always --no-startup-id sh ~/.dotfiles/color-profiles/desktop-load_ICC.sh
 
 # Focus following the mouse pointer
 focus_follows_mouse no
