@@ -1,2 +1,2 @@
 #!/bin/bash
-dispwin ./icc/Gigabyte_Aero_15X.icm
+dispwin "$HOME/.dotfiles/color-profiles/icc/Gigabyte_Aero_15X.icm"
