@@ -1,2 +1,2 @@
 #!/bin/bash
-dispwin $HOME/.color/color-profiles/icc/Gigabyte_Aero_15X.icm
+dispwin ./icc/Gigabyte_Aero_15X.icm

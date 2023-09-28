@@ -80,7 +80,7 @@ bindsym $mod+Ctrl+m exec pavucontrol
 bindsym $mod+c exec galculator
 
 ## Load ICC profiles ##
-exec_always --no-startup-id sh ~/.color/color-profiles/laptop-load_ICC.sh
+exec_always --no-startup-id sh ~/.dotfiles/color-profiles/laptop-load_ICC.sh
 
 # Focus following the mouse pointer
 focus_follows_mouse no

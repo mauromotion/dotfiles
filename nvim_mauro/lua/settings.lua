@@ -51,6 +51,7 @@ o.splitkeep = "screen"
 
 -- Enables mouse clicking
 opt.mouse = "a"
+opt.mousemodel = "popup"
 
 -- Map <leader> to space
 g.mapleader = " "

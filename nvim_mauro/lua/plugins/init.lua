@@ -12,9 +12,29 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
+-- Make sure to set `mapleader` before lazy so your mappings are correct
+vim.g.mapleader = " "
 
--- Load Plugins
+-- VimWiki setup // Here's the only place where it loads...
+
+-- Set VimWiki deafult directory
+vim.g.vimwiki_list =
+	{ { path = "~/Notes/VimWiki", syntax = "markdown", ext = ".md", links_space_char = "_", auto_tags = 1 } }
+
+-- Set VimWiki syntax highlighting for code blocks
+vim.g.vimwiki_syntax_plugins = {
+	codeblock = {
+		["```lua"] = { parser = "lua" },
+		["```python"] = { parser = "python" },
+		["```javascript"] = { parser = "javascript" },
+		["```bash"] = { parser = "bash" },
+		["```html"] = { parser = "html" },
+		["```css"] = { parser = "css" },
+		["```c"] = { parser = "c" },
+	},
+}
+
+-- Load Plugins --
 require("lazy").setup({
 	{ import = "plugins.coding" },
 	{ import = "plugins.LSP" },
