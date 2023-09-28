@@ -18,7 +18,7 @@ vim.g.mapleader = " "
 -- VimWiki setup // Here's the only place where it loads...
 
 -- Set VimWiki deafult directory
-vim.g.vimwiki_list = { { path = "~/Notes/VimWiki", syntax = "markdown", ext = ".md" } }
+vim.g.vimwiki_list = { { path = "~/Notes/VimWiki", syntax = "markdown", ext = ".md", links_space_char = "_" } }
 
 -- Set VimWiki syntax highlighting for code blocks
 vim.g.vimwiki_syntax_plugins = {
