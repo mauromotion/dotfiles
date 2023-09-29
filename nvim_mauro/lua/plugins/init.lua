@@ -21,6 +21,12 @@ vim.g.mapleader = " "
 vim.g.vimwiki_list =
 	{ { path = "~/Notes/VimWiki", syntax = "markdown", ext = ".md", links_space_char = "_", auto_tags = 1 } }
 
+-- Remapping "-" so oil.nvim works again in markdown files
+-- vim.keymap.set({ "n", "<leader>-", "<CMD>VimwikiRemoveHeaderLevel<CR>" })
+vim.g.vimwiki_key_mappings = {
+	headers = 0,
+}
+
 -- Set VimWiki syntax highlighting for code blocks
 vim.g.vimwiki_syntax_plugins = {
 	codeblock = {
