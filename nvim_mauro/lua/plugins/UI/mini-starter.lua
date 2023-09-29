@@ -21,19 +21,19 @@ return {
 			items = {
 				-- Start here
 				{ action = "Oil", name = "- CWD", section = "Start here" },
-				{ action = "Telescope oldfiles", name = "Recent files", section = "Start here" },
 				{ action = "Telescope live_grep", name = "Grep CWD", section = "Start here" },
+				{ action = "Telescope oldfiles", name = "Recent files", section = "Start here" },
 				{ action = "VimwikiIndex", name = "VimWiki", section = "Start here" },
-				{ action = "VimwikiDiaryIndex", name = "Journal VimWikiDiary", section = "Start here" },
-				{ action = "VimwikiMakeDiaryNote", name = "Today VimWikiDiary", section = "Start here" },
+				-- { action = "VimwikiDiaryIndex", name = "Journal VimWikiDiary", section = "Start here" },
+				-- { action = "VimwikiMakeDiaryNote", name = "Today VimWikiDiary", section = "Start here" },
 				-- Sessions
 				require("mini.starter").sections.sessions(),
 				-- System
-				{ action = "Lazy check", name = "Lazy", section = "System" },
-				{ action = "Mason", name = "Mason", section = "System" },
-				{ action = "checkhealth", name = "Health", section = "System" },
 				{ action = "Oil /home/mauromotion/.config/nvim_mauro/", name = "Configuration", section = "System" },
 				{ action = "Oil /home/mauromotion/.dotfiles/", name = "Dotfiles", section = "System" },
+				{ action = "checkhealth", name = "Health", section = "System" },
+				{ action = "Lazy check", name = "Lazy", section = "System" },
+				{ action = "Mason", name = "Mason", section = "System" },
 				-- Builtin actions
 				require("mini.starter").sections.builtin_actions(),
 				-- { action = "enew", name = "New Buffer", section = "Builtin actions" },
