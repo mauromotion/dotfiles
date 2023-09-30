@@ -32,7 +32,7 @@ return {
 				"tsserver",
 				"html",
 				"cssls",
-				"emmet_ls",
+				"emmet_language_server",
 				"pyright",
 				"marksman",
 				"jsonls",
