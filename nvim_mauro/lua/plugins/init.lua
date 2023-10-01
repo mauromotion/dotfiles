@@ -15,31 +15,6 @@ vim.opt.rtp:prepend(lazypath)
 -- Make sure to set `mapleader` before lazy so your mappings are correct
 vim.g.mapleader = " "
 
--- VimWiki setup // Here's the only place where it loads...
-
--- Set VimWiki deafult directory
-vim.g.vimwiki_list =
-	{ { path = "~/Notes/VimWiki", syntax = "markdown", ext = ".md", links_space_char = "_", auto_tags = 1 } }
-
--- Remapping "-" so oil.nvim works again in markdown files
--- vim.keymap.set({ "n", "<leader>-", "<CMD>VimwikiRemoveHeaderLevel<CR>" })
-vim.g.vimwiki_key_mappings = {
-	headers = 0,
-}
-
--- Set VimWiki syntax highlighting for code blocks
-vim.g.vimwiki_syntax_plugins = {
-	codeblock = {
-		["```lua"] = { parser = "lua" },
-		["```python"] = { parser = "python" },
-		["```javascript"] = { parser = "javascript" },
-		["```bash"] = { parser = "bash" },
-		["```html"] = { parser = "html" },
-		["```css"] = { parser = "css" },
-		["```c"] = { parser = "c" },
-	},
-}
-
 -- Load Plugins --
 require("lazy").setup({
 	{ import = "plugins.coding" },
