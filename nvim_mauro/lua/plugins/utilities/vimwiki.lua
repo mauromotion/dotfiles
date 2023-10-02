@@ -8,6 +8,7 @@ return {
 				syntax = "markdown",
 				ext = ".md",
 				links_space_char = "_",
+				vimwiki_global_ext = 0,
 				auto_tags = 1,
 				auto_diary_index = 1,
 			},
