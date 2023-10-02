@@ -9,6 +9,7 @@ return {
 				ext = ".md",
 				links_space_char = "_",
 				auto_tags = 1,
+				auto_diary_index = 1,
 			},
 		}
 
