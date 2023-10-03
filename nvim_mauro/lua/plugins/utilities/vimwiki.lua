@@ -32,4 +32,5 @@ return {
 			},
 		}
 	end,
+	-- dependencies = { "tools-life/taskwiki" },
 }

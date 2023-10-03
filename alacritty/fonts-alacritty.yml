@@ -30,7 +30,7 @@ jetbrains: &jetbrains
   bold_italic:
     family: JetBrainsMono Nerd Font
     style: Bold Italic
-  size: 12
+  size: 11
 
 # Iosevka
 iosevka: &iosevka
@@ -97,4 +97,4 @@ pragmata: &pragmata
   size: 11
 
 # Apply fonts
-font: *hack
+font: *jetbrains

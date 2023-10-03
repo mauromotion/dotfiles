@@ -9,10 +9,6 @@ local g = vim.g
 local o = vim.o
 local opt = vim.opt
 
--- Disable netrw
--- g.loaded_netrw = 1
--- g.loaded_netrwPlugin = 1
-
 -- Enable theming
 o.termguicolors = true
 
