@@ -35,16 +35,16 @@ jetbrains: &jetbrains
 # Iosevka
 iosevka: &iosevka
   normal:
-    family: Iosevka Nerd Font
+    family: IosevkaTerm Nerd Font
     style: Medium
   bold:
-    family: Iosevka Nerd Font
+    family: IosevkaTerm Nerd Font
     style: Bold
   italic:
-    family: Iosevka Nerd Font
+    family: IosevkaTerm Nerd Font
     style: Medium Italic
   bold_italic:
-    family: Iosevka Nerd Font
+    family: IosevkaTerm Nerd Font
     style: Bold Italic
   size: 12
 
