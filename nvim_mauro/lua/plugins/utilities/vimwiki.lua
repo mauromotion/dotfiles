@@ -33,5 +33,12 @@ return {
 			},
 		}
 	end,
-	-- dependencies = { "tools-life/taskwiki" },
+	-- dependencies = {
+	-- 	"tools-life/taskwiki",
+	-- 	init = function()
+	-- 		vim.g.task_wiki = {
+	-- 			dont_fold = 1,
+	-- 		}
+	-- 	end,
+	-- },
 }
