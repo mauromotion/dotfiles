@@ -68,7 +68,7 @@ bindsym $mod+next exec --no-startup-id brightnessctl set 5%-
 # Launch Applications
 bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+Return exec firefox
-bindsym $mod+Ctrl+Return exec pcmanfm
+bindsym $mod+Ctrl+Return exec thunar
 bindsym $mod+t exec --no-startup-id pkill picom
 bindsym $mod+Ctrl+t exec --no-startup-id picom -b 
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
@@ -300,7 +300,6 @@ bindsym $mod+9 exec --no-startup-id blurlock -n
 ### Autostart applications ###
 ##############################
 exec --no-startup-id xrdb ~/.Xresources
-exec --no-startup-id pcmanfm -d
 exec --no-startup-id pa-applet
 exec --no-startup-id udiskie -a -n -t
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
