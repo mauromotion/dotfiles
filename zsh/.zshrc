@@ -150,7 +150,7 @@ source ~/.zsh/plugins/zsh-nvm/zsh-nvm.plugin.zsh
 zstyle ':completion:*' menu select
 fpath=(~/.zsh/plugins/zsh-completions/src/ $fpath)
 # autoload -U compinit && compinit
-[ ! "$(find ~/.zcompdump -mtime 1)" ] || compinit
+[ ! "$(find ~/.zcompdump -mtime +1)" ] || compinit
 compinit -C
 zmodload -i zsh/complist
 # Autosuggestions
