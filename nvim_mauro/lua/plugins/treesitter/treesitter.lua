@@ -3,7 +3,7 @@ return {
 	build = ":TSUpdate",
 	event = { "BufReadPost", "BufNewFile" },
 	cmd = { "TSUpdateSync" },
-	dependencies = { "nvim-treesitter-textobjects" },
+	dependencies = { "nvim-treesitter-textobjects", "windwp/nvim-ts-autotag" },
 	opts = {
 		highlight = { enable = true },
 		incremental_selection = { enable = true },
@@ -32,4 +32,7 @@ return {
 			"yaml",
 		},
 	},
+	config = function()
+		require("nvim-ts-autotag").setup()
+	end,
 }
