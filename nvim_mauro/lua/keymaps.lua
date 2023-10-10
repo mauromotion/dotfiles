@@ -11,10 +11,6 @@ local function map(m, k, v, opts)
 	vim.keymap.set(m, k, v, { noremap = true, silent = true })
 end
 
--- Fast saving, fast quitting
-map("n", "<leader>w", "<CMD>:w<CR>", { desc = "Fast saving [W]" })
-map("n", "<leader>q", "<CMD>:q<CR>", { desc = "Fast [Q]uitting" })
-
 -- Split views
 map("n", "<leader>|", "<C-W>v", { desc = "Split view vertically | " })
 map("n", "<leader>-", "<C-W>s", { desc = "Split view horizontally - " })
