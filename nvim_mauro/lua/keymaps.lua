@@ -72,8 +72,10 @@ map("n", "<leader>l", "<CMD>Lazy<CR>", { desc = "Launch [L]azy Plugin Manager" }
 -- Mason
 map("n", "<leader>m", "<CMD>Mason<CR>", { desc = "Launch [M]ason LSP Manager" })
 
--- Higlight Colors
-map("n", "<leader>ch", "<CMD>HighlightColorsToggle<CR>", { desc = "Toggle [C]olors [H]ighlighter" })
+-- Ccc
+map("n", "<leader>ch", "<CMD>CccHighlighterToggle<CR>", { desc = "Toggle [C]olors [H]ighlighter" })
+map("n", "<leader>cp", "<CMD>CccPick<CR>", { desc = "Toggle [C]olor [P]icker" })
+map("n", "<leader>cc", "<CMD>CccConvert<CR>", { desc = "[C]onvert [C]olor format" })
 
 -- Oil.Nvim
 map("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })

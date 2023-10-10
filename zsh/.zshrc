@@ -139,6 +139,7 @@ alias ga="git add"
 alias gaa="git add --all"
 alias py="python3"
 alias zsh-update="sh ~/.zsh/zsh_plugins_updater.sh"
+alias tree="eza -T"
 alias tw="task"
 
 ### ---- Plugins ---- ###
