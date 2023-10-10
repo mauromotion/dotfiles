@@ -12,6 +12,7 @@ return {
 				vimwiki_global_ext = 0,
 				auto_tags = 1,
 				auto_diary_index = 1,
+				-- vimwiki_folding = "custom",
 			},
 		}
 
@@ -33,12 +34,11 @@ return {
 			},
 		}
 	end,
-	-- dependencies = {
-	-- 	"tools-life/taskwiki",
-	-- 	init = function()
-	-- 		vim.g.task_wiki = {
-	-- 			dont_fold = 1,
-	-- 		}
-	-- 	end,
-	-- },
+	dependencies = {
+		"tools-life/taskwiki",
+		init = function()
+			vim.g.taskwiki_dont_preserve_folds = "yes"
+			vim.g.taskwiki_dont_fold = "yes"
+		end,
+	},
 }

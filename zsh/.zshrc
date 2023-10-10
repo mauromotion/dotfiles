@@ -1,3 +1,4 @@
+# zmodload zsh/zprof
 # FZF set up with fd
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 # FZF_BASE
@@ -141,10 +142,16 @@ alias zsh-update="sh ~/.zsh/zsh_plugins_updater.sh"
 alias tw="task"
 
 ### ---- Plugins ---- ###
+#zsh-NVM
+export NVM_LAZY_LOAD=true
+export NVM_COMPLETION=true
+source ~/.zsh/plugins/zsh-nvm/zsh-nvm.plugin.zsh
 # Completion
 zstyle ':completion:*' menu select
 fpath=(~/.zsh/plugins/zsh-completions/src/ $fpath)
-autoload -U compinit && compinit
+# autoload -U compinit && compinit
+[ ! "$(find ~/.zcompdump -mtime 1)" ] || compinit
+compinit -C
 zmodload -i zsh/complist
 # Autosuggestions
 source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -155,9 +162,9 @@ source ~/.zsh/plugins/colored-man-pages/colored-man-pages.plugin.zsh
 # Colorize code in terminal
 source ~/.zsh/plugins/colorize/colorize.plugin.zsh
 # NVM 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 # rbenv
 eval "$(rbenv init - zsh)"
 
@@ -168,3 +175,5 @@ eval "$(zoxide init zsh)"
 source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # Vim mode
 source ~/.zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+###DEBUG###
+# zprof
