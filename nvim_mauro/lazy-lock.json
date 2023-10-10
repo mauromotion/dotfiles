@@ -35,6 +35,7 @@
   "nvim-web-devicons": { "branch": "master", "commit": "a1e6268779411048a87f767a27380089362a0ce2" },
   "oil.nvim": { "branch": "master", "commit": "f72b9b2637eec2b3db8255c196aa4bf11231af81" },
   "plenary.nvim": { "branch": "master", "commit": "9ce85b0f7dcfe5358c0be937ad23e456907d410b" },
+  "taskwiki": { "branch": "master", "commit": "7a74ad8ed3743142830ba29a599c7bd23dd2b158" },
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "6c921ca12321edaa773e324ef64ea301a1d0da62" },
   "telescope-vimwiki.nvim": { "branch": "main", "commit": "13a83b6107da17af9eb8a1d8e0fe49e1004dfeb4" },
   "telescope.nvim": { "branch": "0.1.x", "commit": "54930e1abfc94409e1bb9266e752ef8379008592" },
@@ -43,4 +44,3 @@
   "vimwiki": { "branch": "dev", "commit": "f0fe154ede6b11e3db9b058b930005a056a3d1c6" },
   "which-key.nvim": { "branch": "main", "commit": "7ccf476ebe0445a741b64e36c78a682c1c6118b7" },
   "zen-mode.nvim": { "branch": "main", "commit": "cb73b8bd0ef9d765b942db09dc762c603a89ae44" }
-}

@@ -86,7 +86,7 @@ focus_follows_mouse no
 # Set mouse acceleration on desktop (Razer Viper)
 exec_always --no-startup-id "xinput set-prop 9 295 -0.800000"
 # Set mouse acceleration on desktop (Kensinton Orbit Trackball)
-exec_always --no-startup-id "xinput set-prop 26 295 -0.700000"
+exec_always --no-startup-id "xinput set-prop 15 295 -0.700000"
 
 # Change focus
 bindsym $mod+h focus left
