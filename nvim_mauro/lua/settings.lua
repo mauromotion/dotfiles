@@ -63,3 +63,6 @@ o.history = 50
 -- Search highlighting
 opt.hlsearch = false
 opt.incsearch = true
+
+-- Python virtual env
+g.python3_host_prog = "$HOME/.venvs/nvim_venv/bin/python"

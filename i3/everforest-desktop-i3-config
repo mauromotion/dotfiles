@@ -212,7 +212,7 @@ workspace "1: home" output DP-2
 workspace "2: mail" output DP-2
 workspace "3: dev" output DP-2
 workspace "4: chat" output DP-0
-workspace "5: docs" output DP-0
+# workspace "5: docs" output DP-0
 workspace "6: media" output DP-2
 workspace "7: games" output DP-2
 workspace "8: ext" output DP-0
