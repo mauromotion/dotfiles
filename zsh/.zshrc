@@ -159,10 +159,10 @@ source ~/.zsh/plugins/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
 # FZF set up with fd
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 # FZF_BASE
-export FZF_BASE=~/.zsh/plugins/fzf-zsh-plugin/
+# export FZF_BASE=~/.zsh/plugins/fzf-zsh-plugin/
 # FZF custom
-export FZF_PREVIEW_ADVANCED=true
-export FZF_PREVIEW_WINDOW='right:35%:nohidden'
+# export FZF_PREVIEW_ADVANCED=true
+# export FZF_PREVIEW_WINDOW='right:35%:nohidden'
 
 # Colored MAN pages
 source ~/.zsh/plugins/colored-man-pages/colored-man-pages.plugin.zsh
