@@ -1,21 +1,14 @@
 # zmodload zsh/zprof
-# FZF set up with fd
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-# FZF_BASE
-export FZF_BASE=~/.zsh/plugins/fzf-zsh-plugin/
-# FZF custom
-export FZF_PREVIEW_ADVANCED=true
-export FZF_PREVIEW_WINDOW='right:35%:nohidden'
 
 # Zoxide setup
 export PATH=~/.local/bin:$PATH
-### --------------------------------------- ###
 
-### ZSH Home
+# ZSH Home
 export ZSH=$HOME/.zsh
 
-
-### ---- History Config ---- ###
+## History configuration ##
+#
+# History file location
 export HISTFILE=$ZSH/.zsh_history
 
 # How many commands zsh will load to memory.
@@ -30,7 +23,7 @@ setopt HIST_IGNORE_ALL_DUPS
 # History won't show duplicates on search.
 setopt HIST_FIND_NO_DUPS
 
-# Various tweaks
+## Various tweaks ##
 setopt auto_cd
 setopt auto_list
 
@@ -62,8 +55,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # Do menu-driven completion
 zstyle ':completion:*' menu select
 
-## Multiple Neovim configs selector
-# alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
+### --- Multiple Neovim configs selector --- ###
 alias nvim-mauro="NVIM_APPNAME=nvim_mauro nvim"
 
 function nvims() {
@@ -81,8 +73,7 @@ function nvims() {
 bindkey -s ^n "nvims\n"
 ### --------------------------------------- ###
 
-
-### ---- Themes ---- ###
+### ---- Theming ---- ###
 
 # Pure theme
 fpath+=($HOME/.zsh/themes/pure)
@@ -108,73 +99,90 @@ function zvm_config() {
 
 
 ### ---- Aliases ---- ###
-alias ~="cd ~/"
-alias cl="clear"
-alias nv="nvim-mauro"
-alias v="nvim-mauro"
-alias lazy="nvim"
 alias ..="cd .."
+alias cl="clear"
 alias cp="cp -i"
-alias mv="mv -i"
-alias rm="rm -i"
-alias trash="trash -i"
-alias tr="trash -i"
-alias lg="lazygit"
-alias grep="grep --color=auto"
 alias df="df -H"
-alias rn="ranger"
-alias polybar-restart="sh ~/.config/polybar/launch*"
-alias load-ICC="sh ~/.color/*.sh"
-alias pac-autoremove="sudo pacman -Rcs $(pacman -Qdtq)"
-alias ll="eza -l --git --icons -h"
-alias lla="eza -l --git --icons -h -a"
-alias ls="eza --icons"
-alias lsa="eza --icons -a"
-alias yt="ytfzf"
-alias gst="git status"
-alias gp="git push"
-alias gl="git pull"
-alias gcam="git commit --all --message"
 alias ga="git add"
 alias gaa="git add --all"
+alias gcam="git commit --all --message"
+alias gl="git pull"
+alias gp="git push"
+alias grep="grep --color=auto"
+alias gst="git status"
+alias lazy="nvim"
+alias lg="lazygit"
+alias ll="eza -l --git --icons -h"
+alias lla="eza -l --git --icons -h -a"
+alias load-ICC="sh ~/.color/*.sh"
+alias ls="eza --icons"
+alias lsa="eza --icons -a"
+alias mv="mv -i"
+alias nv="nvim-mauro"
+alias pac-autoremove="sudo pacman -Rcs $(pacman -Qdtq)"
+alias polybar-restart="sh ~/.config/polybar/launch*"
 alias py="python3"
-alias zsh-update="sh ~/.zsh/zsh_plugins_updater.sh"
+alias rm="rm -i"
+alias rn="ranger"
+alias tr="trash -i"
+alias trash="trash -i"
 alias tree="eza -T"
 alias tw="task"
+alias v="nvim-mauro"
+alias yt="ytfzf"
+alias zsh-update="sh ~/.zsh/zsh_plugins_updater.sh"
+alias ~="cd ~/"
 
 ### ---- Plugins ---- ###
 #zsh-NVM
 export NVM_LAZY_LOAD=true
 export NVM_COMPLETION=true
 source ~/.zsh/plugins/zsh-nvm/zsh-nvm.plugin.zsh
+
+# csh.sh completion
+fpath=(~/.zsh/plugins/cht_completion/ $fpath)
+
 # Completion
 zstyle ':completion:*' menu select
 fpath=(~/.zsh/plugins/zsh-completions/src/ $fpath)
+zmodload -i zsh/complist
+
 # autoload -U compinit && compinit
 [ ! "$(find ~/.zcompdump -mtime +1)" ] || compinit
 compinit -C
-zmodload -i zsh/complist
+
 # Autosuggestions
 source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 # Fuzzy Finder
 source ~/.zsh/plugins/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
+# FZF set up with fd
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+# FZF_BASE
+export FZF_BASE=~/.zsh/plugins/fzf-zsh-plugin/
+# FZF custom
+export FZF_PREVIEW_ADVANCED=true
+export FZF_PREVIEW_WINDOW='right:35%:nohidden'
+
 # Colored MAN pages
 source ~/.zsh/plugins/colored-man-pages/colored-man-pages.plugin.zsh
+
 # Colorize code in terminal
 source ~/.zsh/plugins/colorize/colorize.plugin.zsh
-# NVM 
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 # rbenv
 eval "$(rbenv init - zsh)"
 
-### ---- This lines must always be on EOF!!! ---- ###
+### ---- This lines must always be at EOF!!! ---- ###
 # Zoxide
 eval "$(zoxide init zsh)"
+
 # Syntax Highlighting
 source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 # Vim mode
 source ~/.zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+zvm_after_init_commands+=('[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh')
+
 ###DEBUG###
 # zprof
