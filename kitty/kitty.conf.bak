@@ -224,7 +224,8 @@ bold_italic_font auto
 #: }}}
 
 #: Cursor customization {{{
-# cursor none
+
+ cursor none
 
 #: Default cursor color. If set to the special value none the cursor
 #: will be rendered with a "reverse video" effect. It's color will be
@@ -2340,9 +2341,3 @@ background_opacity 0.93
 # include ./nord.conf
 # include ./grvubox-dark.conf
 include ./everforest-theme.conf
-
-
-# BEGIN_KITTY_THEME
-# Everforest Dark Hard
-include current-theme.conf
-# END_KITTY_THEME

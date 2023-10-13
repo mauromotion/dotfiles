@@ -96,5 +96,21 @@ pragmata: &pragmata
     style: Bold Italic
   size: 11
 
+# Maple
+maple: &maple
+  normal:
+    family: Maple Mono NF
+    style: Regular
+  bold:
+    family: Maple Mono NF
+    style: Bold
+  italic:
+    family: Maple Mono NF
+    style: Italic
+  bold_italic:
+    family: Maple Mono NF
+    style: BoldItalic
+  size: 11
+
 # Apply fonts
-font: *jetbrains
+font: *maple
