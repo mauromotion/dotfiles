@@ -66,7 +66,7 @@ bindsym $mod+prior exec --no-startup-id brightnessctl set +5%
 bindsym $mod+next exec --no-startup-id brightnessctl set 5%-
 
 # Launch Applications
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec wezterm
 bindsym $mod+Shift+Return exec firefox
 bindsym $mod+Ctrl+Return exec thunar
 bindsym $mod+t exec --no-startup-id pkill picom
