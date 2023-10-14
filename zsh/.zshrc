@@ -1,5 +1,8 @@
 # zmodload zsh/zprof
 
+# Set default editor
+export EDITOR=nvim
+
 # Zoxide setup
 export PATH=~/.local/bin:$PATH
 
