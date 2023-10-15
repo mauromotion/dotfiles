@@ -1,160 +1,191 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# zmodload zsh/zprof
 
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+# Set default editor
+export EDITOR=nvim
 
-# Zoxide
+# Zoxide setup
 export PATH=~/.local/bin:$PATH
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="refined" # set by `omz`
+# ZSH Home
+export ZSH=$HOME/.zsh
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+## History configuration ##
+#
+# History file location
+export HISTFILE=$ZSH/.zsh_history
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+# How many commands zsh will load to memory.
+export HISTSIZE=10000
 
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+# How many commands history will save on file.
+export SAVEHIST=10000
 
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+# History won't save duplicates.
+setopt HIST_IGNORE_ALL_DUPS
 
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
+# History won't show duplicates on search.
+setopt HIST_FIND_NO_DUPS
 
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
+## Various tweaks ##
+setopt auto_cd
+setopt auto_list
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+#Fuzzy matching of completions
+zstyle ':completion:*' completer _complete _match _approximate
+zstyle ':completion:*:match:*' original only
+zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3>7?7:($#PREFIX+$#SUFFIX)/3))numeric)'
 
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+# Pretty completions
+zstyle ':completion:*:matches' group 'yes'
+zstyle ':completion:*:options' description 'yes'
+zstyle ':completion:*:options' auto-description '%d'
+zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
+zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
+zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
+zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
+zstyle ':completion:*' use-cache true
+zstyle ':completion:*' rehash true
 
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+# Color completion
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
+# Do menu-driven completion
+zstyle ':completion:*' menu select
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+### --- Multiple Neovim configs selector --- ###
+alias nvim-mauro="NVIM_APPNAME=nvim_mauro nvim"
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+function nvims() {
+  items=("default" "nvim_mauro")
+  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
+  if [[ -z $config ]]; then
+    echo "Nothing selected"
+    return 0
+  elif [[ $config == "default" ]]; then
+    config=""
+  fi
+  NVIM_APPNAME=$config nvim $@
+}
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+bindkey -s ^n "nvims\n"
+### --------------------------------------- ###
 
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  git
-  nvm
-  npm
-  node
-  rbenv
-  bundler
-  gem
-  vi-mode
-  fzf
-  zoxide
-  ripgrep
-  colored-man-pages
-  command-not-found
-  cp
-  colorize
-  themes
-  compleat
-  ssh-agent
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-)
+### ---- Theming ---- ###
 
-fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
-source $ZSH/oh-my-zsh.sh
+# Pure theme
+fpath+=($HOME/.zsh/themes/pure)
+autoload -U promptinit; promptinit
+prompt pure
 
-# User configuration
+zstyle :prompt:pure:git:branch color cyan
+zstyle :prompt:pure:virtualenv color cyan
 
-## Greeting message
+# zsh-vi-mode
+function zvm_config() {
+  ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+  ZVM_VI_HIGHLIGHT_BACKGROUND=#D8A657
+  ZVM_VI_HIGHLIGHT_FOREGROUND=#282828
+}
+
+### ---- Greeting message ---- ###
 	echo ' -------------------------------- '
 	echo ' ┌┬┐┌─┐┬ ┬┬─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌┐┌  '
 	echo ' │││├─┤│ │├┬┘│ │││││ │ │ ││ ││││  '
 	echo ' ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘  '
 	echo ' --------- ZSH Shell -----------	'
 
-# Rbenv setup
-# eval "$(~/.rbenv/bin/rbenv init - zsh)"
 
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='nvim'
-fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-## Aliases
-alias nv="nvim"
-alias vim="nvim"
+### ---- Aliases ---- ###
 alias ..="cd .."
+alias cl="clear"
 alias cp="cp -i"
-alias mv="mv -i"
-alias rm="rm -i"
-alias lg="lazygit"
-alias grep="grep --color=auto"
 alias df="df -H"
-alias rn="ranger"
-alias polybar-restart="sh ~/.config/polybar/launch*"
+alias ga="git add"
+alias gaa="git add --all"
+alias gcam="git commit --all --message"
+alias gl="git pull"
+alias gp="git push"
+alias grep="grep --color=auto"
+alias gst="git status"
+alias lazy="nvim"
+alias lg="lazygit"
+alias ll="eza -l --git --icons -h"
+alias lla="eza -l --git --icons -h -a"
 alias load-ICC="sh ~/.color/*.sh"
+alias ls="eza --icons"
+alias lsa="eza --icons -a"
+alias mv="mv -i"
+alias nv="nvim-mauro"
 alias pac-autoremove="sudo pacman -Rcs $(pacman -Qdtq)"
-alias ll="exa -l --git --icons -h"
-alias lla="exa -l --git --icons -h -a"
-alias ls="exa --icons"
-alias lsa="exa --icons -a"
+alias polybar-restart="sh ~/.config/polybar/launch*"
+alias py="python3"
+alias rm="rm -i"
+alias rn="ranger"
+alias tr="trash -i"
+alias trash="trash -i"
+alias tree="eza -T"
+alias tw="task"
+alias v="nvim-mauro"
+alias yt="ytfzf"
+alias zsh-update="sh ~/.zsh/zsh_plugins_updater.sh"
+alias ~="cd ~/"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+### ---- Plugins ---- ###
+#zsh-NVM
+export NVM_LAZY_LOAD=true
+export NVM_COMPLETION=true
+source ~/.zsh/plugins/zsh-nvm/zsh-nvm.plugin.zsh
+
+# csh.sh completion
+fpath=(~/.zsh/plugins/cht_completion/ $fpath)
+
+# Completion
+zstyle ':completion:*' menu select
+fpath=(~/.zsh/plugins/zsh-completions/src/ $fpath)
+zmodload -i zsh/complist
+
+# autoload -U compinit && compinit
+[ ! "$(find ~/.zcompdump -mtime +1)" ] || compinit
+compinit -C
+
+# Autosuggestions
+source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Fuzzy Finder
+source ~/.zsh/plugins/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
+# FZF set up with fd
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+# FZF_BASE
+# export FZF_BASE=~/.zsh/plugins/fzf-zsh-plugin/
+# FZF custom
+# export FZF_PREVIEW_ADVANCED=true
+# export FZF_PREVIEW_WINDOW='right:35%:nohidden'
+
+# Colored MAN pages
+source ~/.zsh/plugins/colored-man-pages/colored-man-pages.plugin.zsh
+
+# Colorize code in terminal
+source ~/.zsh/plugins/colorize/colorize.plugin.zsh
+
+# rbenv
+eval "$(rbenv init - zsh)"
+
+### ---- This lines must always be at EOF!!! ---- ###
+# Zoxide
+eval "$(zoxide init zsh)"
+
+# Syntax Highlighting
+source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Vim mode
+source ~/.zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+zvm_after_init_commands+=('[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh')
+
+###DEBUG###
+# zprof

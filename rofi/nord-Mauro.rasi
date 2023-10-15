@@ -6,7 +6,7 @@
  *******************************************************************************/
 
 * {
-    font:   "Fira Sans 12";
+    font:   "BlexMono Nerd Font 12";
 
     nord0:     #2e3440;
     nord1:     #3b4252;
@@ -30,7 +30,7 @@
 
     background-color:   transparent;
     text-color:         @nord4;
-    accent-color:       @nord9;
+    accent-color:       @nord8;
 
     margin:     0px;
     padding:    0px;
