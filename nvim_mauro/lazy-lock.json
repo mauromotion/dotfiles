@@ -45,4 +45,3 @@
   "vimwiki": { "branch": "dev", "commit": "5d86b625f52e80476cb73c0a14ac62d51e7eb36f" },
   "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" },
   "zen-mode.nvim": { "branch": "main", "commit": "50e2e2a36cc97847d9ab3b1a3555ba2ef6839b50" }
-}
