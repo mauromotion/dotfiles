@@ -1,5 +1,6 @@
 return {
 	"stevearc/aerial.nvim",
+	event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 	opts = {},
 	-- Optional dependencies
 	dependencies = {
