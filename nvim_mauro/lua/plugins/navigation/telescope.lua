@@ -16,13 +16,13 @@ return {
 		-- Keymaps
 		local map = vim.keymap
 
-		map.set("n", "<leader><space>", "<CMD>Telescope find_files<CR>", { desc = "Fuzzy find files in cwd" })
+		map.set("n", "<leader>f", "<CMD>Telescope find_files<CR>", { desc = "Fuzzy find files in cwd" })
 		map.set("n", "<leader>fr", "<CMD>Telescope oldfiles<CR>", { desc = "Fuzzy [f]ind [r]ecent files" })
 		map.set("n", "<leader>fg", "<CMD>Telescope live_grep<CR>", { desc = "[F]ind strin[g] in cwd" })
 		map.set("n", "<leader>fs", "<CMD>Telescope grep_string<CR>", { desc = "[F]ind [s]tring under cursor in cwd" })
 		map.set("n", "<leader>fv", "<CMD>Telescope vimwiki<CR>", { desc = "[F]ind [V]imWiki pages" })
 		map.set("n", "<leader>fw", "<CMD>Telescope vimwiki live_grep<CR>", { desc = "Live Grep inside Vim[W]iki" })
-		map.set("n", "<leader>fb", function()
+		map.set("n", "<leader><space>", function()
 			require("telescope.builtin").buffers({ sort_lastused = true })
 		end, { desc = "[F]ind open [B]uffers" })
 	end,
