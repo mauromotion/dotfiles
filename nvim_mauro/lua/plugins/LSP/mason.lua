@@ -52,6 +52,7 @@ return {
 				"ruff", -- python linter
 				"mypy", -- python type checker
 				"black", -- python type formatter
+				"djlint", -- django templates linter
 			},
 			-- auto-install configured servers (with lspconfig)
 			automatic_installation = true,
