@@ -27,6 +27,7 @@ return {
 				formatting.black, -- python formatter
 				diagnostics.mypy, -- python linter
 				diagnostics.ruff, -- python linter
+				diagnostics.djlint, -- django templates linter
 				-- diagnostics.eslint_d.with({ -- js/ts linter
 				-- condition = function(utils)
 				--   return utils.root_has_file({ ".eslintrc.js", ".eslintrc.cjs" }) -- only enable if root has .eslintrc.js or .eslintrc.cjs

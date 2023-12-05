@@ -13,6 +13,7 @@ return {
 			"c",
 			"css",
 			"html",
+			"htmldjango",
 			"http",
 			"javascript",
 			"jsdoc",
