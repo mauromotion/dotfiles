@@ -99,4 +99,4 @@ everforest: &everforest
     white: "#d3c6aa"
 
 # Apply the color scheme
-colors: *everforest
+colors: *nord
