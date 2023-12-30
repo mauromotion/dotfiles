@@ -1,0 +1,39 @@
+import = [".config/alacritty/fonts-alacritty.toml", ".config/alacritty/themes-alacritty.toml"]
+live_config_reload = true
+
+[bell]
+animation = "EaseOutExpo"
+color = "#5A524C"
+duration = 100
+
+[cursor]
+blink_interval = 750
+blink_timeout = 5
+unfocused_hollow = false
+
+[cursor.style]
+blinking = "On"
+shape = "Beam"
+
+[env]
+TERM = "alacritty"
+
+[mouse]
+hide_when_typing = true
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[shell]
+program = "/bin/zsh"
+
+[window]
+decorations = "full"
+dynamic_padding = true
+dynamic_title = true
+opacity = 0.93
+
+[window.padding]
+x = 5
+y = 5
