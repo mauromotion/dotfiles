@@ -25,14 +25,9 @@ return {
 				formatting.prettierd, -- js/ts formatter
 				formatting.stylua, -- lua formatter
 				formatting.black, -- python formatter
-				diagnostics.mypy, -- python linter
-				diagnostics.ruff, -- python linter
+				formatting.isort.with({ extra_args = { "profile", "black" } }), -- python formatter
+				diagnostics.flake8.with({ extra_args = { "--max-line-length", "88" }, { "extend-ignore", "E203" } }), -- python linter
 				diagnostics.djlint, -- django templates linter
-				-- diagnostics.eslint_d.with({ -- js/ts linter
-				-- condition = function(utils)
-				--   return utils.root_has_file({ ".eslintrc.js", ".eslintrc.cjs" }) -- only enable if root has .eslintrc.js or .eslintrc.cjs
-				-- end,
-				-- }),
 			},
 			-- configure format on save
 			on_attach = function(current_client, bufnr)

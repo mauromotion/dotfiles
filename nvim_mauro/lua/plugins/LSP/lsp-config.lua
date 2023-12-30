@@ -128,7 +128,14 @@ return {
 		})
 
 		-- configure python server
-		lspconfig["pyright"].setup({
+		-- lspconfig["pyright"].setup({
+		-- 	capabilities = capabilities,
+		-- 	on_attach = on_attach,
+		-- 	filetypes = { "python" },
+		-- })
+
+		-- configure python server
+		lspconfig["jedi_language_server"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
 			filetypes = { "python" },
