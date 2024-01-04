@@ -33,7 +33,7 @@ return {
 				"html",
 				"cssls",
 				"emmet_language_server",
-				"pyright",
+				"jedi_language_server",
 				"marksman",
 				"jsonls",
 				"yamlls",
@@ -49,9 +49,9 @@ return {
 				"prettierd", -- ts/js formatter
 				"stylua", -- lua formatter
 				"shfmt", -- shell script formatter
-				"ruff", -- python linter
-				"mypy", -- python type checker
+				"flake8", -- python linter
 				"black", -- python type formatter
+				"isort", -- python type formatter
 				"djlint", -- django templates linter
 			},
 			-- auto-install configured servers (with lspconfig)

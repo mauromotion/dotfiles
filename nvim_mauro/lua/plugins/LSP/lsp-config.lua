@@ -2,7 +2,7 @@ return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
-		"hrsh7th/cmp-nvim-lsp",
+		"hrsh7th/cmp-nvim-lsp", -- snippets from the attached LSP
 	},
 	config = function()
 		-- import lspconfig plugin
@@ -128,7 +128,14 @@ return {
 		})
 
 		-- configure python server
-		lspconfig["pyright"].setup({
+		-- lspconfig["pyright"].setup({
+		-- 	capabilities = capabilities,
+		-- 	on_attach = on_attach,
+		-- 	filetypes = { "python" },
+		-- })
+
+		-- configure python server
+		lspconfig["jedi_language_server"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
 			filetypes = { "python" },
