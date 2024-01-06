@@ -58,7 +58,7 @@ map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
 
 -- Keep pasting the same with leader + p
-map("x", "<leader>p", '"_dP')
+-- map("x", "<leader>p", '"_dP')
 
 ------* Plugins' keymaps *------
 
@@ -115,5 +115,5 @@ vim.cmd([[
   noremap <silent> <c-k> :<C-U>NvimTmuxNavigateUp<cr>
   noremap <silent> <c-l> :<C-U>NvimTmuxNavigateRight<cr>
   noremap <silent> <c-\\> :<C-U>NvimTmuxNavigateLastActive<cr>
-  noremap <silent> <c-Space> :<C-U>NvimTmuxNavigateNext<cr>
+  noremap <silent> <c-n> :<C-U>NvimTmuxNavigateNext<cr>
 ]])
