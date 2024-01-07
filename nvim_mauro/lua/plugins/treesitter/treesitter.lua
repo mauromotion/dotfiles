@@ -1,17 +1,23 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
+	version = false,
 	build = ":TSUpdate",
-	event = { "BufReadPost", "BufNewFile" },
-	cmd = { "TSUpdateSync" },
+	event = { "BufReadPre", "BufNewFile" },
 	dependencies = { "nvim-treesitter-textobjects", "windwp/nvim-ts-autotag" },
+	cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
+	keys = {
+		{ "<C-space>", desc = "Increment selection" },
+		{ "<bs>", desc = "Decrement selection", mode = "x" },
+	},
 	opts = {
 		highlight = { enable = true },
-		incremental_selection = { enable = true },
 		indent = { enable = true },
 		ensure_installed = {
 			"bash",
 			"c",
 			"css",
+			"diff",
+			"gitignore",
 			"html",
 			"htmldjango",
 			"http",
@@ -26,6 +32,7 @@ return {
 			"python",
 			"query",
 			"regex",
+			"toml",
 			"tsx",
 			"typescript",
 			"vim",
@@ -34,6 +41,17 @@ return {
 		},
 	},
 	config = function()
+		require("nvim-treesitter.configs").setup({
+			incremental_selection = {
+				enable = true,
+				keymaps = {
+					init_selection = "<C-space>",
+					node_incremental = "<C-space>",
+					scope_incremental = false,
+					node_decremental = "<bs>",
+				},
+			},
+		})
 		require("nvim-ts-autotag").setup()
 	end,
 }
