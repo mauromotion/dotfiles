@@ -6,7 +6,7 @@ return {
 	dependencies = { "nvim-treesitter-textobjects", "windwp/nvim-ts-autotag" },
 	cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
 	keys = {
-		{ "<C-space>", desc = "Increment selection" },
+		{ "<C-s>", desc = "Increment selection" },
 		{ "<bs>", desc = "Decrement selection", mode = "x" },
 	},
 	opts = {
@@ -46,8 +46,8 @@ return {
 			incremental_selection = {
 				enable = true,
 				keymaps = {
-					init_selection = "<C-space>",
-					node_incremental = "<C-space>",
+					init_selection = "<C-s>",
+					node_incremental = "<C-s>",
 					scope_incremental = false,
 					node_decremental = "<bs>",
 				},

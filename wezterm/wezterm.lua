@@ -8,7 +8,7 @@ end
 
 -- Configuration
 config.color_scheme_dirs = { "~/.config/wezterm/colors" }
-config.color_scheme = "Nord (base16)"
+config.color_scheme = "Gruvbox Material (Gogh)"
 config.font = wezterm.font("JetBrainsMono NF")
 config.font_size = 12
 config.hide_tab_bar_if_only_one_tab = true

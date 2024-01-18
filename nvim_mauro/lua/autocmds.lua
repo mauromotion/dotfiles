@@ -96,4 +96,4 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 vim.cmd([[TSToggle highlight]])
 
 -- Load colorscheme
-vim.cmd("colorscheme nordfox")
+vim.cmd("colorscheme gruvbox-material")

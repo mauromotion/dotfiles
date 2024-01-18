@@ -1,6 +1,6 @@
 return {
 	"edeneast/nightfox.nvim",
-	lazy = false,
+	lazy = true,
 	opts = {
 		options = {
 			transparent = true,
