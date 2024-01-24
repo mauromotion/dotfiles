@@ -58,7 +58,7 @@ map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
 
 -- Tab to alternate buffers
-vim.api.nvim_set_keymap("n", "<TAB>", "<C-^", { noremap = true, silent = true, desc = "Alternate buffers" })
+map("n", "<TAB>", "<C-^>", { desc = "Alternate buffers" })
 
 -- Keep pasting the same with leader + p
 -- map("x", "<leader>p", '"_dP')
