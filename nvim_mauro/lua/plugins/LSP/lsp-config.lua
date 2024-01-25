@@ -127,12 +127,12 @@ return {
 			on_attach = on_attach,
 		})
 
-		-- configure python server
-		-- lspconfig["pyright"].setup({
-		-- 	capabilities = capabilities,
-		-- 	on_attach = on_attach,
-		-- 	filetypes = { "python" },
-		-- })
+		-- configure rust server
+		lspconfig["rust_analyzer"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			filetypes = { "rust" },
+		})
 
 		-- configure python server
 		lspconfig["jedi_language_server"].setup({

@@ -57,6 +57,9 @@ map("n", "<C-u>", "<C-u>zz")
 map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
 
+-- Tab to alternate buffers
+map("n", "<TAB>", "<C-^>", { desc = "Alternate buffers" })
+
 -- Keep pasting the same with leader + p
 -- map("x", "<leader>p", '"_dP')
 
