@@ -65,6 +65,10 @@ map("n", "<TAB>", "<C-^>", { desc = "Alternate buffers" })
 
 ------* Plugins' keymaps *------
 
+-- Gitsigns
+map("n", "<leader>hg", ":Gitsigns preview_hunk<CR>", { desc = "Gitsigns preview hunk" })
+map("n", "<leader>hb", ":Gitsigns toggle_current_line_blame<CR>", { desc = "Gitsigns toggle current line blame" })
+
 -- Lazy
 map("n", "<leader>l", "<CMD>Lazy<CR>", { desc = "Launch [L]azy Plugin Manager" })
 
