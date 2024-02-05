@@ -22,7 +22,7 @@ config.visual_bell = {
 	fade_out_duration_ms = 100,
 }
 config.colors = {
-	visual_bell = "#81a1c1",
+	visual_bell = "#4c566a",
 }
 
 -- For zen-mode plugin integration in Neovim
