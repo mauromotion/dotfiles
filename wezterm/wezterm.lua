@@ -9,11 +9,21 @@ end
 -- Configuration
 config.color_scheme_dirs = { "~/.config/wezterm/colors" }
 config.color_scheme = "Nord (base16)"
-config.font = wezterm.font("JetBrainsMono NF")
+config.font = wezterm.font("JetBrains Mono Nerd Font")
 config.font_size = 12
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = true
 config.window_background_opacity = 0.92
+config.audible_bell = "Disabled"
+config.visual_bell = {
+	fade_in_function = "EaseIn",
+	fade_in_duration_ms = 100,
+	fade_out_function = "EaseOut",
+	fade_out_duration_ms = 100,
+}
+config.colors = {
+	visual_bell = "#81a1c1",
+}
 
 -- For zen-mode plugin integration in Neovim
 wezterm.on("user-var-changed", function(window, pane, name, value)
