@@ -4,7 +4,7 @@ return {
 		lazy = false,
 		opts = {
 			options = {
-				transparent = true,
+				transparent = false,
 				styles = {
 					comments = "italic",
 					keywords = "bold",
