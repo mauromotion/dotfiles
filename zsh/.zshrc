@@ -138,10 +138,6 @@ alias zsh-update="sh ~/.zsh/zsh_plugins_updater.sh"
 alias ~="cd ~/"
 
 ### ---- Plugins ---- ###
-#zsh-NVM
-export NVM_LAZY_LOAD=true
-export NVM_COMPLETION=true
-source ~/.zsh/plugins/zsh-nvm/zsh-nvm.plugin.zsh
 
 # csh.sh completion
 fpath=(~/.zsh/plugins/cht_completion/ $fpath)
@@ -151,10 +147,6 @@ zstyle ':completion:*' menu select
 fpath=(~/.zsh/plugins/zsh-completions/src/ $fpath)
 zmodload -i zsh/complist
 
-# autoload -U compinit && compinit
-[ ! "$(find ~/.zcompdump -mtime +1)" ] || compinit
-compinit -C
-
 # Autosuggestions
 source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
@@ -162,17 +154,14 @@ source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/plugins/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
 # FZF set up with fd
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-# FZF_BASE
-# export FZF_BASE=~/.zsh/plugins/fzf-zsh-plugin/
-# FZF custom
-# export FZF_PREVIEW_ADVANCED=true
-# export FZF_PREVIEW_WINDOW='right:35%:nohidden'
-
-# Colored MAN pages
-source ~/.zsh/plugins/colored-man-pages/colored-man-pages.plugin.zsh
 
 # Colorize code in terminal
 source ~/.zsh/plugins/colorize/colorize.plugin.zsh
+
+# fnm
+export PATH="/home/mauromotion/.local/share/fnm:$PATH"
+eval "`fnm env`"
+eval "$(fnm env --use-on-cd)"
 
 # rbenv
 eval "$(rbenv init - zsh)"
@@ -190,3 +179,4 @@ zvm_after_init_commands+=('[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh')
 
 ###DEBUG###
 # zprof
+
