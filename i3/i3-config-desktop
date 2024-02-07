@@ -77,8 +77,6 @@ bindsym $mod+Ctrl+m exec pavucontrol
 bindsym $mod+c exec galculator
 
 ## Load ICC profiles ##
-# exec_always --no-startup-id dispwin -d1 ~/.color/icc/Dell_S2721DGF.icm
-# exec_always --no-startup-id dispwin -d2 ~/.color/icc/Dell_U2713HM.icm.icm
 exec_always --no-startup-id sh ~/.dotfiles/color-profiles/desktop-load_ICC.sh
 
 # Focus following the mouse pointer
@@ -317,7 +315,6 @@ exec --no-startup-id nm-applet
 exec --no-startup-id nextcloud --background
 exec --no-startup-id openrgb --startminimized
 exec --no-startup-id xset b 100
-# exec_always --no-startup-id xautolock -time 10 -locker "betterlockscreen -l"
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:

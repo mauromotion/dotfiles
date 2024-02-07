@@ -51,6 +51,7 @@ bindsym $mod+Shift+q kill
 
 # Start program launcher
 bindsym $mod+space exec --no-startup-id rofi -show combi 
+bindsym $mod+g exec --no-startup-id rofi -show combi 
 
 # Start rofi-calc
 bindsym $mod+Ctrl+c exec --no-startup-id "rofi -show calc -modi calc -no-show-match -no-sort > /dev/null"
