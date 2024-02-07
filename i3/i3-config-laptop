@@ -28,7 +28,7 @@ bindsym $mod+n border normal
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango: Hack Nerd Font Regular 12
+font pango: FiraCode Nerd Font Regular 11
 
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
@@ -312,7 +312,7 @@ exec_always --no-startup-id xautolock -time 10 -locker "blurlock -n"
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
-# https://i3wm.org/docs/userguide.html#xresources
+# httpas://i3wm.org/docs/userguide.html#xresources
 # Change the variable name at the place you want to match the color
 # of your terminal like this:
 # [example]
@@ -341,63 +341,8 @@ set_from_resource $term_color13    color13
 set_from_resource $term_color14    color14
 set_from_resource $term_color15    color15
 
-#############
-### i3bar ###
-#############
-# bar {
-# 	i3bar_command i3bar
-# 	status_command i3status
-# 	position top
-
-# ## Please set your primary output first. Example: 'xrandr --output eDP1 --primary'
-# # Desktop
-# tray_output primary
-# # Laptop
-# tray_output eDP-1-1
-
-# tray_padding 2
-
-# # separator_symbol 
-
-# 	bindsym button4 nop
-# 	bindsym button5 nop
-#   # font xft:Fira-Code-Nerd-Fonts-Regular 11
-# 	strip_workspace_numbers yes
-#   workspace_min_width 70
-
-#     colors {
-#         background #2D353B
-#         statusline #D3C6AA
-#         separator  #7A8478 
-
-# #                      border  backgr. text
-#         focused_workspace  #7A8478 #7A8478 #D3C6AA
-#         active_workspace   #A7C080 #A7C080 #1B1B1B
-#         inactive_workspace #1B1B1B #1B1B1B #9ea2ad
-#         binding_mode       #DBBC7F #A9B665 #1B1B1B
-#         urgent_workspace   #D699B6 #D699B6 #1B1B1B
-#     }
-# }
-
-# Hide/unhide i3status bar
-# bindsym $mod+b bar mode toggle
-
-###############
-### Polybar ###
-###############
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-# Hide/unhide polybar
-bindsym $mod+b exec --no-startup-id polybar-msg cmd toggle
-
-# Theme colors
-# class                   border  backgr. text    indic.   child_border
-  client.focused          #A7C080 #A7C080 #2D353B #D3C6AA
-  client.focused_inactive #2D353B #2D353B #DBBC7F #7A8478
-  client.unfocused        #2D353B #2D353B #DBBC7F #7A8478
-  client.urgent           #E67E80 #D3C6AA #DBBC7F #A7C080
-  client.placeholder      #000000 #0c0c0c #ffffff #000000 
-
-  client.background       #1B1B1B
+### Colorscheme ###
+include ~/.dotfiles/i3/colorschemes/i3-nord
 
 #############################
 ### settings for i3-gaps: ###

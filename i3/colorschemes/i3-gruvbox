@@ -1,0 +1,58 @@
+#############
+### i3bar ###
+#############
+# bar {
+# 	i3bar_command i3bar
+# 	status_command i3status
+# 	position top
+
+# ## Please set your primary output first. Example: 'xrandr --output eDP1 --primary'
+# # Desktop
+# tray_output primary
+# # Laptop
+# tray_output eDP-1-1
+
+# tray_padding 2
+
+# # separator_symbol 
+
+# 	bindsym button4 nop
+# 	bindsym button5 nop
+#   # font xft:Fira-Code-Nerd-Fonts-Regular 11
+# 	strip_workspace_numbers yes
+#   workspace_min_width 70
+
+#     colors {
+#         background #32302F
+#         statusline #D4BE98
+#         separator  #7C6F64 
+
+# #                      border  backgr. text
+#         focused_workspace  #7C6F64 #7C6F64 #D4BE98
+#         active_workspace   #D8A657 #D8A657 #1B1B1B
+#         inactive_workspace #1B1B1B #1B1B1B #9ea2ad
+#         binding_mode       #A9B665 #A9B665 #1B1B1B
+#         urgent_workspace   #D3869B #D3869B #1B1B1B
+#     }
+# }
+
+# Hide/unhide i3status bar
+# bindsym $mod+b bar mode toggle
+
+###############
+### Polybar ###
+###############
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+# Hide/unhide polybar
+bindsym $mod+b exec --no-startup-id polybar-msg cmd toggle
+
+# Theme colors
+# class                   border  backgr. text    indic.   child_border
+  client.focused          #D8A657 #D8A657 #32302F #D4BE98
+  client.focused_inactive #32302F #32302F #A9B665 #7C6F64
+  client.unfocused        #32302F #32302F #A9B665 #7C6F64
+  client.urgent           #EA6962 #D4BE98 #A9B665 #D8A657
+  client.placeholder      #000000 #0c0c0c #ffffff #000000 
+
+  client.background       #1B1B1B
+
