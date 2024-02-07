@@ -5,9 +5,10 @@ return {
 		opts = {
 			options = {
 				transparent = false,
+				dim_inactive = false,
 				styles = {
 					comments = "italic",
-					keywords = "bold",
+					keywords = "italic,bold",
 					types = "italic,bold",
 				},
 			},
@@ -35,8 +36,4 @@ return {
 			})
 		end,
 	},
-	{ "shaunsingh/nord.nvim", lazy = true, options = {
-		nord_disable_background = true,
-	} },
-	{ "AlexvZyl/nordic.nvim", lazy = true },
 }
