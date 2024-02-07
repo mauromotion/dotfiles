@@ -2,12 +2,12 @@
 
 |## Applications           |## Keybindings                      
 |--------------------------|---------------------
-|Terminal (Alacritty)      |MOD + Return         
-|Browser (Firefox)         |MOD + Shift + Return 
-|File manager (PCmanFM)    |MOD + Ctrl + Return  
+|Terminal                  |MOD + Return         
+|Browser                   |MOD + Shift + Return 
+|File manager              |MOD + Ctrl + Return  
 |Launcher (rofi)           |MOD + Space          
+|Launcher (rofi)           |MOD + g          
 |Calculator (rofi)         |MOD + c          
-|Applications menu         |MOD + z              
 
 |## Windows Management     |## Keybindings
 |--------------------------|---------------------
@@ -71,7 +71,7 @@
 
 |## UI                     |## Keybindings                  
 |--------------------------|---------------------
-|Hide/Show i3bar           |MOD + b
+|Hide/Show bar             |MOD + b
 |Focused window no border  |MOD + u               
 |Focused window border     |MOD + y               
 |Focused window top bar    |MOD + n               
