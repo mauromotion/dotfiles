@@ -182,4 +182,3 @@ zvm_after_init_commands+=('[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh')
 
 ###DEBUG###
 # zprof
-
