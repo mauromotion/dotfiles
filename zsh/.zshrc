@@ -52,6 +52,10 @@ zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
 zstyle ':completion:*' use-cache true
 zstyle ':completion:*' rehash true
 
+# Initialize completion
+autoload -Uz compinit
+compinit
+
 # Color completion
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
