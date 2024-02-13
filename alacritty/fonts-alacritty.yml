@@ -113,4 +113,4 @@ maple: &maple
   size: 11
 
 # Apply fonts
-font: *maple
+font: *hack

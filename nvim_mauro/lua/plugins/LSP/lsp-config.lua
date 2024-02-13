@@ -2,7 +2,7 @@ return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
-		"hrsh7th/cmp-nvim-lsp",
+		"hrsh7th/cmp-nvim-lsp", -- snippets from the attached LSP
 	},
 	config = function()
 		-- import lspconfig plugin
@@ -127,8 +127,15 @@ return {
 			on_attach = on_attach,
 		})
 
+		-- configure rust server
+		lspconfig["rust_analyzer"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			filetypes = { "rust" },
+		})
+
 		-- configure python server
-		lspconfig["pyright"].setup({
+		lspconfig["jedi_language_server"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
 			filetypes = { "python" },

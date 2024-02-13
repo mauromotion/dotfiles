@@ -1,13 +1,24 @@
 return {
-  "folke/zen-mode.nvim",
-  opts = {
-    plugins = {
-      alacritty = {
-        enabled = true,
-      },
-      tmux = {
-        enabled = true,
-      },
-    },
-  },
+	"folke/zen-mode.nvim",
+	opts = {
+		plugins = {
+			options = {
+				laststatus = 0,
+			},
+			alacritty = {
+				enabled = true,
+			},
+			wezterm = {
+				enabled = true,
+				font = "+2",
+			},
+			kitty = {
+				enabled = true,
+				font = "+2",
+			},
+			tmux = {
+				enabled = true,
+			},
+		},
+	},
 }

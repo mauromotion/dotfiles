@@ -57,10 +57,17 @@ map("n", "<C-u>", "<C-u>zz")
 map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
 
+-- Tab to alternate buffers
+map("n", "<TAB>", "<C-^>", { desc = "Alternate buffers" })
+
 -- Keep pasting the same with leader + p
-map("x", "<leader>p", '"_dP')
+-- map("x", "<leader>p", '"_dP')
 
 ------* Plugins' keymaps *------
+
+-- Gitsigns
+map("n", "<leader>gh", ":Gitsigns preview_hunk<CR>", { desc = "Gitsigns preview hunk" })
+map("n", "<leader>gb", ":Gitsigns toggle_current_line_blame<CR>", { desc = "Gitsigns toggle current line blame" })
 
 -- Lazy
 map("n", "<leader>l", "<CMD>Lazy<CR>", { desc = "Launch [L]azy Plugin Manager" })
@@ -115,5 +122,5 @@ vim.cmd([[
   noremap <silent> <c-k> :<C-U>NvimTmuxNavigateUp<cr>
   noremap <silent> <c-l> :<C-U>NvimTmuxNavigateRight<cr>
   noremap <silent> <c-\\> :<C-U>NvimTmuxNavigateLastActive<cr>
-  noremap <silent> <c-Space> :<C-U>NvimTmuxNavigateNext<cr>
+  noremap <silent> <c-n> :<C-U>NvimTmuxNavigateNext<cr>
 ]])
