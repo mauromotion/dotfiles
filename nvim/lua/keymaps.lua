@@ -45,6 +45,9 @@ map("n", "<C-Right>", ":vertical resize +2<CR>")
 map("n", "<S-l>", ":bnext<CR>")
 map("n", "<S-h>", ":bprevious<CR>")
 
+-- Delete (close) a buffer
+map("n", "<leader>bd", ":bdelete<CR>")
+
 -- Visual mode -- Stay in indent mode
 map("v", "<", "<gv")
 map("v", ">", ">gv")
