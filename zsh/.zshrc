@@ -63,21 +63,21 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' menu select
 
 ### --- Multiple Neovim configs selector --- ###
-alias nvim-mauro="NVIM_APPNAME=nvim_mauro nvim"
+#alias nvim-mauro="NVIM_APPNAME=nvim_mauro nvim"
 
-function nvims() {
-  items=("default" "nvim_mauro")
-  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
-  if [[ -z $config ]]; then
-    echo "Nothing selected"
-    return 0
-  elif [[ $config == "default" ]]; then
-    config=""
-  fi
-  NVIM_APPNAME=$config nvim $@
-}
-
-bindkey -s ^n "nvims\n"
+#function nvims() {
+#  items=("default" "nvim_mauro")
+#  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
+#  if [[ -z $config ]]; then
+#    echo "Nothing selected"
+#    return 0
+#  elif [[ $config == "default" ]]; then
+#    config=""
+#  fi
+#  NVIM_APPNAME=$config nvim $@
+#}
+#
+#bindkey -s ^n "nvims\n"
 ### --------------------------------------- ###
 
 ### ---- Theming ---- ###
@@ -118,7 +118,6 @@ alias gp="git push"
 alias grep="grep --color=auto"
 alias gst="git status"
 alias in="tw add +in"
-alias lazy="nvim"
 alias lg="lazygit"
 alias ll="eza -l --git --icons -h"
 alias lla="eza -l --git --icons -h -a"
@@ -126,7 +125,7 @@ alias load-ICC="sh ~/.color/*.sh"
 alias ls="eza --icons"
 alias lsa="eza --icons -a"
 alias mv="mv -i"
-alias nv="nvim-mauro"
+alias nv="nvim"
 alias next="tw +next"
 alias pac-autoremove="sudo pacman -Rcs $(pacman -Qdtq)"
 alias polybar-restart="sh ~/.config/polybar/launch*"
@@ -139,7 +138,7 @@ alias tr="trash -i"
 alias trash="trash -i"
 alias tree="eza -T"
 alias tw="task"
-alias v="nvim-mauro"
+alias v="nvim"
 alias yt="ytfzf"
 alias zsh-update="sh ~/.zsh/zsh_plugins_updater.sh"
 alias ~="cd ~/"

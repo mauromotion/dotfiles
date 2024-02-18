@@ -29,7 +29,7 @@ return {
 				-- Sessions
 				require("mini.starter").sections.sessions(),
 				-- System
-				{ action = "Oil /home/mauromotion/.config/nvim_mauro/", name = "Configuration", section = "System" },
+				{ action = "Oil /home/mauromotion/.config/nvim/", name = "Configuration", section = "System" },
 				{ action = "Oil /home/mauromotion/.dotfiles/", name = "Dotfiles", section = "System" },
 				{ action = "checkhealth", name = "Health", section = "System" },
 				{ action = "Lazy check", name = "Lazy", section = "System" },

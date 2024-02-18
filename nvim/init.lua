@@ -1,2 +1,18 @@
--- bootstrap lazy.nvim, LazyVim and your plugins
-require("config.lazy")
+------------------------------------------------------
+-- ┌┬┐┌─┐┬ ┬┬─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌┐┌
+-- │││├─┤│ │├┬┘│ │││││ │ │ ││ ││││
+-- ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘
+-- * .dotfiles * --
+-- Neovim -- init.lua --------------------------------
+
+-- Load Plugins
+require("plugins")
+
+-- Load Auto-commands
+require("autocmds")
+
+-- Load General Settings
+require("settings")
+
+-- Load Keymaps
+require("keymaps")
