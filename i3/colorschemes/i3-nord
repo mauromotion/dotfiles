@@ -4,29 +4,29 @@
 # bar {
 # 	i3bar_command i3bar
 # 	status_command i3status
-# 	position top
+# 	position bottom
 
-# ## Please set your primary output first. Example: 'xrandr --output eDP1 --primary'
-# # Desktop
-# tray_output primary
-# # Laptop
+## Please set your primary output first. Example: 'xrandr --output eDP1 --primary'
+# Desktop
+  # tray_output DP-0
+# Laptop
 # tray_output eDP-1-1
 
-# tray_padding 2
+  # tray_padding 2
 
-# # separator_symbol 
+# separator_symbol 
 
 # 	bindsym button4 nop
 # 	bindsym button5 nop
-#   # font xft:Fira-Code-Nerd-Fonts-Regular 11
+#   font pango: FiraMono Nerd Font 12
 # 	strip_workspace_numbers yes
 #   workspace_min_width 70
-
+#
 #     colors {
-#         background #3B4252
+#         background #2E3440
 #         statusline #D8DEE9
 #         separator  #4d5568 
-
+#
 # #                      border  backgr. text
 #         focused_workspace  #4d5568 #4d5568 #E5E9F0
 #         active_workspace   #88C0D0 #88C0D0 #2E3440
