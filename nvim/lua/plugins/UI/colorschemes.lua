@@ -16,7 +16,7 @@ return {
 	},
 	{
 		"sainnhe/gruvbox-material",
-		lazy = true,
+		lazy = false,
 		config = function()
 			vim.g.gruvbox_material_foreground = "material"
 			vim.g.gruvbox_material_background = "medium"
@@ -25,11 +25,11 @@ return {
 	},
 	{
 		"neanias/everforest-nvim",
-		lazy = true,
+		lazy = false,
 		config = function()
 			require("everforest").setup({
 				background = "hard",
-				transparent_background_level = 0.9,
+				transparent_background_level = 1,
 				italics = true,
 				disable_italics_comments = false,
 				ui_contrast = "low",
