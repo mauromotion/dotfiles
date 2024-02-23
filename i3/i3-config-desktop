@@ -348,7 +348,7 @@ exec --no-startup-id xset b 100
 # set_from_resource $term_color15    color15
 
 ### Colorscheme ###
-include ~/.dotfiles/i3/colorschemes/i3-everforest
+include ~/.dotfiles/i3/colorschemes/i3-nord
 
 #############################
 ### settings for i3-gaps: ###
