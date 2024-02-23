@@ -1,4 +1,4 @@
-import = [".config/alacritty/fonts-alacritty.toml", ".config/alacritty/themes-alacritty.toml"]
+# import = ["~/.config/alacritty/themes/everforest-alacritty-theme.toml",]
 live_config_reload = true
 
 [bell]
@@ -29,7 +29,7 @@ multiplier = 3
 program = "/bin/zsh"
 
 [window]
-decorations = "full"
+decorations = "Full"
 dynamic_padding = true
 dynamic_title = true
 opacity = 0.93
@@ -37,3 +37,36 @@ opacity = 0.93
 [window.padding]
 x = 5
 y = 5
+
+[font]
+size = 12
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+[font.bold_italic]
+family = "JetBrainsMono Nerd Font"
+style = "Bold Italic"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Medium Italic"
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Medium"
+
+[colors.primary]
+background = "#272E33"
+foreground = "#d3c6aa"
+
+[colors.normal]
+black = "#475258"
+blue = "#7fbbb3"
+cyan = "#83c092"
+green = "#a7c080"
+magenta = "#d699b6"
+red = "#e67e80"
+white = "#d3c6aa"
+yellow = "#dbbc7f"
