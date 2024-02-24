@@ -62,8 +62,6 @@
 |Re-load i3                |MOD + Shift + r      
 |Log out of i3             |MOD + Shift + e
 |Kill X                    |MOD + Shift + x      
-|Manjaro i3 help doc       |MOD + Shift + z      
-|CLI system settings       |MOD + Ctrl + b       
 |Kill picom (compositor)   |MOD + t              
 |Launch picom              |MOD + Ctrl + t       
 |Lock screen               |MOD + 9

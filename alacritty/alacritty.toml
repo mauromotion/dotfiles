@@ -1,4 +1,4 @@
-import = [".config/alacritty/fonts-alacritty.toml", ".config/alacritty/themes-alacritty.toml"]
+import = ["~/.config/alacritty/themes/nord-alacritty-theme.toml",]
 live_config_reload = true
 
 [bell]
@@ -29,11 +29,30 @@ multiplier = 3
 program = "/bin/zsh"
 
 [window]
-decorations = "full"
+decorations = "Full"
 dynamic_padding = true
 dynamic_title = true
-opacity = 0.93
+opacity = 1
 
 [window.padding]
 x = 5
 y = 5
+
+[font]
+size = 12
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+[font.bold_italic]
+family = "JetBrainsMono Nerd Font"
+style = "Bold Italic"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Medium Italic"
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Medium"

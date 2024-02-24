@@ -109,6 +109,12 @@ return {
 			on_attach = on_attach,
 		})
 
+		-- configure bash language server
+		lspconfig["bashls"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+
 		-- configure sql language server
 		lspconfig["sqlls"].setup({
 			capabilities = capabilities,
@@ -136,6 +142,13 @@ return {
 
 		-- configure python server
 		lspconfig["jedi_language_server"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			filetypes = { "python" },
+		})
+
+		-- configure python server
+		lspconfig["ruff_lsp"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
 			filetypes = { "python" },

@@ -63,7 +63,7 @@ bindsym $mod+slash exec playerctl next
 bindsym $mod+m exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # Launch Applications
-bindsym $mod+Return exec wezterm
+bindsym $mod+Return exec kitty
 bindsym $mod+Shift+Return exec firefox
 bindsym $mod+Ctrl+Return exec thunar
 bindsym $mod+t exec --no-startup-id pkill picom
@@ -355,8 +355,8 @@ include ~/.dotfiles/i3/colorschemes/i3-nord
 #############################
 
 # Set inner/outer gaps
-gaps inner 6
-gaps outer 1
+gaps inner 4
+gaps outer 0
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # gaps inner|outer current|all set|plus|minus <px>

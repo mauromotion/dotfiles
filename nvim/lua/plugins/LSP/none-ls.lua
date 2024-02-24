@@ -26,7 +26,7 @@ return {
 				formatting.stylua, -- lua formatter
 				formatting.black, -- python formatter
 				formatting.isort.with({ extra_args = { "--profile", "black", "--filter-files" } }), -- python formatter
-				diagnostics.flake8.with({ extra_args = { "--max-line-length", "88", "--extend-ignore", "E203" } }), -- python linter
+				-- diagnostics.flake8.with({ extra_args = { "--max-line-length", "88", "--extend-ignore", "E203" } }), -- python linter
 				diagnostics.djlint, -- django templates linter
 			},
 			-- configure format on save
