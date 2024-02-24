@@ -107,6 +107,7 @@ function zvm_config() {
 
 ### ---- Aliases ---- ###
 alias ..="cd .."
+alias cat="bat"
 alias cl="clear"
 alias cp="cp -i"
 alias df="df -H"
@@ -173,6 +174,9 @@ eval "$(fnm env --use-on-cd)"
 # rbenv
 eval "$(rbenv init - zsh)"
 
+# Broot
+source /home/mauromotion/.config/broot/launcher/bash/br
+
 ### ---- This lines must always be at EOF!!! ---- ###
 # Zoxide
 eval "$(zoxide init zsh)"
@@ -186,3 +190,5 @@ zvm_after_init_commands+=('[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh')
 
 ###DEBUG###
 # zprof
+
+source /home/mauromotion/.config/broot/launcher/bash/br
