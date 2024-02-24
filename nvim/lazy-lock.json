@@ -29,9 +29,9 @@
   "nightfox.nvim": { "branch": "main", "commit": "a408e6bb101066952b81de9c11be367114bd561f" },
   "none-ls.nvim": { "branch": "main", "commit": "0f7e1094d06c9d0fa31f545db7f00a0c518397ef" },
   "nvim-cmp": { "branch": "main", "commit": "04e0ca376d6abdbfc8b52180f8ea236cbfddf782" },
-  "nvim-lspconfig": { "branch": "master", "commit": "d1bab4cf4b69e49d6058028fd933d8ef5e74e680" },
+  "nvim-lspconfig": { "branch": "master", "commit": "b22610cc7ceb513396adb8e648abb1d1613b2a82" },
   "nvim-tmux-navigation": { "branch": "main", "commit": "4898c98702954439233fdaf764c39636681e2861" },
-  "nvim-treesitter": { "branch": "master", "commit": "8e1df60b13301c9e3a14b79cddd7ccee1088d878" },
+  "nvim-treesitter": { "branch": "master", "commit": "c06292fdc641d71d185d2f1a507ad8232b6cf528" },
   "nvim-treesitter-textobjects": { "branch": "master", "commit": "7f00d94543f1fd37cab2afa2e9a6cd54e1c6b9ef" },
   "nvim-ts-autotag": { "branch": "main", "commit": "531f48334c422222aebc888fd36e7d109cb354cd" },
   "nvim-web-devicons": { "branch": "master", "commit": "14ac5887110b06b89a96881d534230dac3ed134d" },
@@ -49,3 +49,4 @@
   "vimwiki": { "branch": "dev", "commit": "fde35bb87e45abe930eebef5ab99a16289e53789" },
   "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" },
   "zen-mode.nvim": { "branch": "main", "commit": "78557d972b4bfbb7488e17b5703d25164ae64e6a" }
+}
