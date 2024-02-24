@@ -141,6 +141,13 @@ return {
 			filetypes = { "python" },
 		})
 
+		-- configure python server
+		lspconfig["ruff_lsp"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			filetypes = { "python" },
+		})
+
 		-- configure lua server (with special settings)
 		lspconfig["lua_ls"].setup({
 			capabilities = capabilities,

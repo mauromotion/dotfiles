@@ -34,6 +34,7 @@ return {
 				"cssls",
 				"emmet_language_server",
 				"jedi_language_server",
+				"ruff_lsp",
 				"marksman",
 				"jsonls",
 				"yamlls",
@@ -50,7 +51,7 @@ return {
 				"prettierd", -- ts/js formatter
 				"stylua", -- lua formatter
 				"shfmt", -- shell script formatter
-				"flake8", -- python linter
+				-- "flake8", -- python linter
 				"black", -- python type formatter
 				"isort", -- python type formatter
 				"djlint", -- django templates linter
