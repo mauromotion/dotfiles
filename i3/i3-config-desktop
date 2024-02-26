@@ -224,7 +224,6 @@ assign [title="Firefox-developer-edition"] $ws3
 assign [class="Discord"] $ws4
 assign [class="Cinny"] $ws4
 assign [class="telegram-desktop"] $ws4
-assign [class="Foliate"] $ws5
 assign [class="steam"] $ws7
 
 # Open specific applications in floating mode
