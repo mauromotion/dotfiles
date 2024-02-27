@@ -24,3 +24,5 @@ require("lazy").setup({
 	{ import = "plugins.UI" },
 	{ import = "plugins.utilities" },
 })
+-- Keybindings
+vim.keymap.set("n", "<leader>l", "<CMD>Lazy<CR>", { noremap = true, silent = true, desc = "Lazy Plugins Manager" })

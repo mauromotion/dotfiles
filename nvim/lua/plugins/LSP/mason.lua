@@ -60,5 +60,13 @@ return {
 			-- auto-install configured servers (with lspconfig)
 			automatic_installation = true,
 		})
+
+		-- Keybindings
+		vim.keymap.set(
+			"n",
+			"<leader>m",
+			"<CMD>Mason<CR>",
+			{ noremap = true, silent = true, desc = "Mason LSP Manager" }
+		)
 	end,
 }
