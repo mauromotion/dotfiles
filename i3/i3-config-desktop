@@ -167,7 +167,7 @@ set $ws2 2: 
 set $ws3 3: 
 set $ws4 4: 󰻞
 set $ws5 5: 
-set $ws6 6: 
+set $ws6 6: 
 set $ws7 7: 
 set $ws8 8: 󰍺
 
@@ -208,14 +208,14 @@ bindsym $mod+Shift+o resize shrink width 5 px or 5 ppt
 bindsym $mod+Shift+y resize grow width 5 px or 5 ppt
 
 # Open workspaces on specific screens
-workspace "1: 󰜥" output DP-2
-workspace "2: " output DP-2
-workspace "3: " output DP-2
-workspace "4: 󰻞" output DP-0
-# workspace "5: docs" output DP-0
-workspace "6: " output DP-2
-workspace "7: " output DP-2
-workspace "8: 󰍺" output DP-0
+workspace "1: 󰜥 " output DP-2
+workspace "2:  " output DP-2
+workspace "3:  " output DP-2
+workspace "4: 󰻞 " output DP-0
+# workspace "5:  " output DP-0
+workspace "6:  " output DP-2
+workspace "7:  " output DP-2
+workspace "8: 󰍺 " output DP-0
 
 # Open applications on specific workspaces
 # assign [class="firefox"] $ws1
