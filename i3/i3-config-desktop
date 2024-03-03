@@ -162,13 +162,13 @@ bindsym $mod+Escape exec "~/.local/bin/i3-instant-layout --list | rofi -dmenu -i
 # To display names or symbols instead of plain workspace numbers you can use
 # something like: set $ws1 1:mail
 #                 set $ws2 2:
-set $ws1 1: 󰜥
-set $ws2 2: 
-set $ws3 3: 
-set $ws4 4: 󰻞
-set $ws5 5: 
-set $ws6 6: 
-set $ws7 7: 
+set $ws1 1: home
+set $ws2 2: mail
+set $ws3 3: dev
+set $ws4 4: chat
+set $ws5 5: docs
+set $ws6 6: media
+set $ws7 7: games
 set $ws8 8: 󰍺
 
 # Switch to workspace
@@ -208,14 +208,14 @@ bindsym $mod+Shift+o resize shrink width 5 px or 5 ppt
 bindsym $mod+Shift+y resize grow width 5 px or 5 ppt
 
 # Open workspaces on specific screens
-workspace "1: 󰜥 " output DP-2
-workspace "2:  " output DP-2
-workspace "3:  " output DP-2
-workspace "4: 󰻞 " output DP-0
-# workspace "5:  " output DP-0
-workspace "6:  " output DP-2
-workspace "7:  " output DP-2
-workspace "8: 󰍺 " output DP-0
+workspace "1: home" output DP-2
+workspace "2: mail" output DP-2
+workspace "3: dev" output DP-2
+workspace "4: chat" output DP-0
+# workspace "5: docs" output DP-0
+workspace "6: media" output DP-2
+workspace "7: games" output DP-2
+workspace "8: 󰍺" output DP-0
 
 # Open applications on specific workspaces
 # assign [class="firefox"] $ws1
