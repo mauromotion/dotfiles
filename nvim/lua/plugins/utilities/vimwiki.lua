@@ -1,5 +1,6 @@
 return {
 	"vimwiki/vimwiki",
+	cmd = "VimwikiIndex",
 	-- branch = "dev",
 	init = function()
 		-- Default directory, syntax and file type, symbols for spaces, auto re-index tags db

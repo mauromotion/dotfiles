@@ -18,6 +18,7 @@ return {
 				r = { "<CMD>FzfLua oldfiles<CR>", "Fuzzy find recent files" },
 				g = { "<CMD>FzfLua live_grep<CR>", "Find string in cwd" },
 				s = { "<CMD>FzfLua lgrep_curbuf<CR>", "Find string in current buffer" },
+				c = { "<CMD>FzfLua grep_cword<CR>", "Search for word under cursor" },
 			},
 			["<Space>"] = {
 				"<CMD>FzfLua buffers<CR>",
