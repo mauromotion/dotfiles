@@ -5,7 +5,7 @@ return {
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function()
 		-- calling `setup` is optional for customization
-		require("fzf-lua").setup({ "telescope" })
+		require("fzf-lua").setup({})
 
 		-- Keymaps
 		local wk = require("which-key")
