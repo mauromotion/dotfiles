@@ -27,8 +27,8 @@ return {
 			items = {
 				-- Start here
 				{ action = "Oil", name = "- CWD", section = "Start here" },
-				{ action = "Telescope live_grep", name = "Grep CWD", section = "Start here" },
-				{ action = "Telescope oldfiles", name = "Recent files", section = "Start here" },
+				{ action = "FzfLua live_grep", name = "Grep CWD", section = "Start here" },
+				{ action = "FzfLua oldfiles", name = "Recent files", section = "Start here" },
 				{ action = "VimwikiIndex", name = "VimWiki", section = "Start here" },
 				-- { action = "VimwikiDiaryIndex", name = "Journal VimWikiDiary", section = "Start here" },
 				-- { action = "VimwikiMakeDiaryNote", name = "Today VimWikiDiary", section = "Start here" },

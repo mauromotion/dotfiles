@@ -89,9 +89,3 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 		vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
 	end,
 })
-
--- Toggle treesitter highlights on
-vim.cmd([[TSToggle highlight]])
-
--- Load colorscheme
-vim.cmd("colorscheme nordfox")

@@ -13,27 +13,30 @@ return {
 				},
 			},
 		},
-	},
-	{
-		"sainnhe/gruvbox-material",
-		lazy = true,
 		config = function()
-			vim.g.gruvbox_material_foreground = "material"
-			vim.g.gruvbox_material_background = "medium"
-			vim.g.gruvbox_material_transparent_background = 1
+			vim.cmd([[colorscheme nordfox]])
 		end,
 	},
-	{
-		"neanias/everforest-nvim",
-		lazy = true,
-		config = function()
-			require("everforest").setup({
-				background = "hard",
-				transparent_background_level = 1,
-				italics = true,
-				disable_italics_comments = false,
-				ui_contrast = "low",
-			})
-		end,
-	},
+	-- {
+	-- 	"sainnhe/gruvbox-material",
+	-- 	lazy = true,
+	-- 	config = function()
+	-- 		vim.g.gruvbox_material_foreground = "material"
+	-- 		vim.g.gruvbox_material_background = "medium"
+	-- 		vim.g.gruvbox_material_transparent_background = 1
+	-- 	end,
+	-- },
+	-- {
+	-- 	"neanias/everforest-nvim",
+	-- 	lazy = true,
+	-- 	config = function()
+	-- 		require("everforest").setup({
+	-- 			background = "hard",
+	-- 			transparent_background_level = 1,
+	-- 			italics = true,
+	-- 			disable_italics_comments = false,
+	-- 			ui_contrast = "low",
+	-- 		})
+	-- 	end,
+	-- },
 }
