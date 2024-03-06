@@ -14,6 +14,7 @@ return {
 			},
 		},
 		config = function()
+			-- apply colorscheme
 			vim.cmd([[colorscheme nordfox]])
 		end,
 	},
@@ -24,6 +25,8 @@ return {
 	-- 		vim.g.gruvbox_material_foreground = "material"
 	-- 		vim.g.gruvbox_material_background = "medium"
 	-- 		vim.g.gruvbox_material_transparent_background = 1
+	--  -- apply colorscheme
+	-- vim.cmd([[colorscheme gruvbox-material]])
 	-- 	end,
 	-- },
 	-- {
@@ -37,6 +40,8 @@ return {
 	-- 			disable_italics_comments = false,
 	-- 			ui_contrast = "low",
 	-- 		})
+	--  -- apply colorscheme
+	-- vim.cmd([[colorscheme everforest]])
 	-- 	end,
 	-- },
 }
