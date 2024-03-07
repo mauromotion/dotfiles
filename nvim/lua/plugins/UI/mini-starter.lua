@@ -17,12 +17,18 @@ return {
 				[[\_\ \/ \___|\___/ \_/ |_|_| |_| |_|]],
 				[[───────────────────────────────────]],
 			}, "\n"),
+			-- header = table.concat({
+			-- 	[[                       o              ]],
+			-- 	[[  _  _    _   __           _  _  _    ]],
+			-- 	[[ / |/ |  |/  /  \_|  |_|  / |/ |/ |   ]],
+			-- 	[[   |  |_/|__/\__/  \/  |_/  |  |  |_/ ]],
+			-- }, "\n"),
 			query_updaters = [[abcdefghijklmnoqrstuvwxyz0123456789_-,.ABCDEFGHIJKLMNOQRSTUVWXYZ]],
 			items = {
 				-- Start here
 				{ action = "Oil", name = "- CWD", section = "Start here" },
-				{ action = "Telescope live_grep", name = "Grep CWD", section = "Start here" },
-				{ action = "Telescope oldfiles", name = "Recent files", section = "Start here" },
+				{ action = "FzfLua live_grep", name = "Grep CWD", section = "Start here" },
+				{ action = "FzfLua oldfiles", name = "Recent files", section = "Start here" },
 				{ action = "VimwikiIndex", name = "VimWiki", section = "Start here" },
 				-- { action = "VimwikiDiaryIndex", name = "Journal VimWikiDiary", section = "Start here" },
 				-- { action = "VimwikiMakeDiaryNote", name = "Today VimWikiDiary", section = "Start here" },

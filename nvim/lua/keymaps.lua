@@ -7,21 +7,21 @@
 
 -- KEYBINDINGS
 
-local function map(m, k, v, opts)
-	vim.keymap.set(m, k, v, { noremap = true, silent = true })
+local function map(m, k, v, d)
+	vim.keymap.set(m, k, v, { noremap = true, silent = true, desc = d })
 end
 
 -- Split views
-map("n", "<leader>|", "<C-W>v", { desc = "Split view vertically | " })
-map("n", "<leader>-", "<C-W>s", { desc = "Split view horizontally - " })
+map("n", "<leader>|", "<C-W>v", "Split view vertically")
+map("n", "<leader>-", "<C-W>s", "Split view horizontally")
 
 -- Move Lines
-map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move down" })
-map("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move up" })
-map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
-map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
-map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
-map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
+map("n", "<A-j>", "<cmd>m .+1<cr>==", "Move line down")
+map("n", "<A-k>", "<cmd>m .-2<cr>==", "Move line up")
+map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", "Move line down")
+map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", "Move line up")
+map("v", "<A-j>", ":m '>+1<cr>gv=gv", "Move line down")
+map("v", "<A-k>", ":m '<-2<cr>gv=gv", "Move line up")
 
 -- Navigation
 map("i", "<A-Up>", "<C-\\><C-N><C-w>k")
@@ -46,7 +46,7 @@ map("n", "<S-l>", ":bnext<CR>")
 map("n", "<S-h>", ":bprevious<CR>")
 
 -- Delete (close) a buffer
-map("n", "<leader>bd", ":bdelete<CR>")
+map("n", "<leader>b", ":bdelete<CR>", "Delete buffer")
 
 -- Visual mode -- Stay in indent mode
 map("v", "<", "<gv")
@@ -61,62 +61,10 @@ map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
 
 -- Tab to alternate buffers
-map("n", "<TAB>", "<C-^>", { desc = "Alternate buffers" })
+map("n", "<TAB>", "<C-^>")
 
 -- Keep pasting the same with leader + p
 -- map("x", "<leader>p", '"_dP')
-
-------* Plugins' keymaps *------
-
--- Gitsigns
-map("n", "<leader>gh", ":Gitsigns preview_hunk<CR>", { desc = "Gitsigns preview hunk" })
-map("n", "<leader>gb", ":Gitsigns toggle_current_line_blame<CR>", { desc = "Gitsigns toggle current line blame" })
-
--- Lazy
-map("n", "<leader>l", "<CMD>Lazy<CR>", { desc = "Launch [L]azy Plugin Manager" })
-
--- Mason
-map("n", "<leader>m", "<CMD>Mason<CR>", { desc = "Launch [M]ason LSP Manager" })
-
--- Ccc
-map("n", "<leader>ch", "<CMD>CccHighlighterToggle<CR>", { desc = "Toggle [C]olors [H]ighlighter" })
-map("n", "<leader>cp", "<CMD>CccPick<CR>", { desc = "Toggle [C]olor [P]icker" })
-map("n", "<leader>cc", "<CMD>CccConvert<CR>", { desc = "[C]onvert [C]olor format" })
-
--- Oil.Nvim
-map("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-
--- mini.files
--- map("n", "-", "<CMD>lua MiniFiles.open()")
-
--- Harpoon
--- local ui = require("harpoon.ui")
--- local mark = require("harpoon.mark")
---
--- map("n", "<leader>hh", ui.toggle_quick_menu)
--- map("n", "<leader>ha", mark.add_file)
--- map("n", "<leader>hr", mark.rm_file)
--- map("n", "<leader>hn", ui.nav_next)
--- map("n", "<leader>hp", ui.nav_prev)
-
--- map("n", "h['1']>", function()
--- 	ui.nav_file(1)
--- end)
--- map("n", "h['2']>", function()
--- 	ui.nav_file(2)
--- end)
--- map("n", "h['3']>", function()
--- 	ui.nav_file(3)
--- end)
--- map("n", "h['4']>", function()
--- 	ui.nav_file(4)
--- end)
-
--- UndoTree
-map("n", "<leader>ut", "<cmd>UndotreeToggle<cr>", { desc = "Toggle [U]ndo[T]ree" })
-
--- Zen Mode
-map("n", "<leader>z", "<cmd>ZenMode<cr>", { desc = "Toggle [Z]en mode" })
 
 -- Nvim-tmux-navigation
 vim.cmd([[

@@ -52,6 +52,14 @@ zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
 zstyle ':completion:*' use-cache true
 zstyle ':completion:*' rehash true
 
+# Colors autoload for colored man pages
+autoload colors && colors
+for COLOR in RED GREEN YELLOW BLUE MAGENTA CYAN BLACK WHITE; do
+    eval $COLOR='%{$fg_no_bold[${(L)COLOR}]%}'  #wrap colours between %{ %} to avoid weird gaps in autocomplete
+    eval BOLD_$COLOR='%{$fg_bold[${(L)COLOR}]%}'
+done
+eval RESET='%{$reset_color%}'
+
 # Initialize completion
 autoload -Uz compinit
 compinit
@@ -98,11 +106,11 @@ function zvm_config() {
 }
 
 ### ---- Greeting message ---- ###
-	echo ' -------------------------------- '
-	echo ' ┌┬┐┌─┐┬ ┬┬─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌┐┌  '
-	echo ' │││├─┤│ │├┬┘│ │││││ │ │ ││ ││││  '
-	echo ' ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘  '
-	echo ' --------- ZSH Shell -----------	'
+	# echo ' -------------------------------- '
+	# echo ' ┌┬┐┌─┐┬ ┬┬─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌┐┌  '
+	# echo ' │││├─┤│ │├┬┘│ │││││ │ │ ││ ││││  '
+	# echo ' ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘  '
+	# echo ' --------- ZSH Shell -----------	'
 
 
 ### ---- Aliases ---- ###
@@ -118,6 +126,7 @@ alias gl="git pull"
 alias gp="git push"
 alias grep="grep --color=auto"
 alias gst="git status"
+alias icat="kitty +kitten icat"
 alias in="tw add +in"
 alias lg="lazygit"
 alias ll="eza -l --git --icons -h"
@@ -165,6 +174,9 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 
 # Colorize code in terminal
 source ~/.zsh/plugins/colorize/colorize.plugin.zsh
+
+# Colored man pages
+source ~/.zsh/plugins/colored-man-pages/colored-man-pages.plugin.zsh
 
 # fnm
 export PATH="/home/mauromotion/.local/share/fnm:$PATH"

@@ -54,5 +54,8 @@ return {
 			},
 		})
 		require("nvim-ts-autotag").setup()
+
+		-- Launch treesitter highlight at startup
+		vim.cmd([[TSToggle highlight]])
 	end,
 }

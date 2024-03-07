@@ -4,44 +4,18 @@ return {
 		version = false,
 		config = function()
 			require("mini.sessions").setup({})
+
+			-- Keybindings with "which-key" plugin
+			local wk = require("which-key")
+			wk.register({
+				s = {
+					name = "Sessions",
+					w = { ':lua MiniSessions.write(vim.fn.input("Session name: "))<CR>', "Save a new session" },
+					d = { ':lua MiniSessions.select("delete")<CR>', "Delete a session" },
+					s = { ':lua MiniSessions.select("read")<CR>', "Select a session" },
+					l = { ":lua MiniSessions.read(MiniSessions.get_latest())<CR>", "Open last session" },
+				},
+			}, { prefix = "<leader>" })
 		end,
-
-		--* Keybindings *--
-
-		-- Save a new session
-		vim.api.nvim_set_keymap(
-			"n",
-			"<leader>sw",
-			':lua MiniSessions.write(vim.fn.input("Session name: "))<CR>',
-			-- { desc = "New [S]ession [Write]" },
-			{ noremap = true }
-		),
-
-		-- Delete session prompt
-		vim.api.nvim_set_keymap(
-			"n",
-			"<leader>sd",
-			':lua MiniSessions.select("delete")<CR>',
-			-- { desc = "[S]essions [D]elete" },
-			{ noremap = true }
-		),
-
-		-- Select session prompt
-		vim.api.nvim_set_keymap(
-			"n",
-			"<leader>ss",
-			':lua MiniSessions.select("read")<CR>',
-			-- { desc = "[S]elect a [S]ession" },
-			{ noremap = true }
-		),
-
-		-- Open last session
-		vim.api.nvim_set_keymap(
-			"n",
-			"<leader>sl",
-			":lua MiniSessions.read(MiniSessions.get_latest())<CR>",
-			-- { desc = "[S]ession [L]ast open" },
-			{ noremap = true }
-		),
 	},
 }

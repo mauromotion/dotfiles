@@ -63,7 +63,7 @@ bindsym $mod+slash exec playerctl next
 bindsym $mod+m exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # Launch Applications
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec wezterm
 bindsym $mod+Shift+Return exec firefox
 bindsym $mod+Ctrl+Return exec thunar
 bindsym $mod+t exec --no-startup-id pkill picom
@@ -169,7 +169,7 @@ set $ws4 4: chat
 set $ws5 5: docs
 set $ws6 6: media
 set $ws7 7: games
-set $ws8 8: ext
+set $ws8 8: 󰍺
 
 # Switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -215,7 +215,7 @@ workspace "4: chat" output DP-0
 # workspace "5: docs" output DP-0
 workspace "6: media" output DP-2
 workspace "7: games" output DP-2
-workspace "8: ext" output DP-0
+workspace "8: 󰍺" output DP-0
 
 # Open applications on specific workspaces
 # assign [class="firefox"] $ws1
@@ -224,7 +224,6 @@ assign [title="Firefox-developer-edition"] $ws3
 assign [class="Discord"] $ws4
 assign [class="Cinny"] $ws4
 assign [class="telegram-desktop"] $ws4
-assign [class="Foliate"] $ws5
 assign [class="steam"] $ws7
 
 # Open specific applications in floating mode
