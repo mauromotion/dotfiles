@@ -40,6 +40,9 @@ return {
 
 						["ac"] = { query = "@class.outer", desc = "Select outer part of a class" },
 						["ic"] = { query = "@class.inner", desc = "Select inner part of a class" },
+
+						["ao"] = { query = "@comment.outer", desc = "Select outer part of a comment" },
+						["io"] = { query = "@comment.outer", desc = "Select inner part of a comment" },
 					},
 				},
 				swap = {
@@ -62,6 +65,7 @@ return {
 						["]c"] = { query = "@class.outer", desc = "Next class start" },
 						["]i"] = { query = "@conditional.outer", desc = "Next conditional start" },
 						["]l"] = { query = "@loop.outer", desc = "Next loop start" },
+						["]o"] = { query = "@comment.outer", desc = "Next comment start" },
 
 						-- You can pass a query group to use query from `queries/<lang>/<query_group>.scm file in your runtime path.
 						-- Below example nvim-treesitter's `locals.scm` and `folds.scm`. They also provide highlights.scm and indent.scm.
@@ -74,6 +78,7 @@ return {
 						["]C"] = { query = "@class.outer", desc = "Next class end" },
 						["]I"] = { query = "@conditional.outer", desc = "Next conditional end" },
 						["]L"] = { query = "@loop.outer", desc = "Next loop end" },
+						["]O"] = { query = "@comment.outer", desc = "Next comment end" },
 					},
 					goto_previous_start = {
 						["[f"] = { query = "@call.outer", desc = "Prev function call start" },
@@ -81,6 +86,7 @@ return {
 						["[c"] = { query = "@class.outer", desc = "Prev class start" },
 						["[i"] = { query = "@conditional.outer", desc = "Prev conditional start" },
 						["[l"] = { query = "@loop.outer", desc = "Prev loop start" },
+						["[o"] = { query = "@comment.outer", desc = "Prev comment start" },
 					},
 					goto_previous_end = {
 						["[F"] = { query = "@call.outer", desc = "Prev function call end" },
@@ -88,6 +94,7 @@ return {
 						["[C"] = { query = "@class.outer", desc = "Prev class end" },
 						["[I"] = { query = "@conditional.outer", desc = "Prev conditional end" },
 						["[L"] = { query = "@loop.outer", desc = "Prev loop end" },
+						["[O"] = { query = "@comment.outer", desc = "Prev comment end" },
 					},
 				},
 			},
