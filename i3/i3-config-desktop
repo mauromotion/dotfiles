@@ -89,10 +89,10 @@ exec_always --no-startup-id "xinput set-prop 17 295 -0.800000"
 exec_always --no-startup-id "xinput set-prop 9 295 -0.700000"
 
 # Change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
 
 # Alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -101,10 +101,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # Move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
 
 # Alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
