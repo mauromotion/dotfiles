@@ -30,6 +30,55 @@ setopt HIST_FIND_NO_DUPS
 setopt auto_cd
 setopt auto_list
 
+# FZF set up with fd
+eval "$(fzf --zsh)"
+
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+
+# Use fd (https://github.com/sharkdp/fd) for listing path candidates.
+# - The first argument to the function ($1) is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
+_fzf_compgen_path() {
+  fd --hidden --exclude .git . "$1"
+}
+
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd --type=d --hidden --exclude .git . "$1"
+}
+
+export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always --line-range :500 {}'"
+export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
+
+# Advanced customization of fzf options via _fzf_comprun function
+# - The first argument to the function is the name of the command.
+# - You should make sure to pass the rest of the arguments to fzf.
+_fzf_comprun() {
+  local command=$1
+  shift
+
+  case "$command" in
+    cd)           fzf --preview 'eza --tree --color=always {} | head -200' "$@" ;;
+    export|unset) fzf --preview "eval 'echo $'{}"         "$@" ;;
+    ssh)          fzf --preview 'dig {}'                   "$@" ;;
+    *)            fzf --preview "bat -n --color=always --line-range :500 {}" "$@" ;;
+  esac
+}
+
+# Fzf theme
+# Nord theme permalink: https://vitormv.github.io/fzf-themes#eyJib3JkZXJTdHlsZSI6InJvdW5kZWQiLCJib3JkZXJMYWJlbCI6ImZ6ZiIsImJvcmRlckxhYmVsUG9zaXRpb24iOjAsInByZXZpZXdCb3JkZXJTdHlsZSI6InJvdW5kZWQiLCJwYWRkaW5nIjoiMCIsIm1hcmdpbiI6IjAiLCJwcm9tcHQiOiI+ICIsIm1hcmtlciI6Ij4iLCJwb2ludGVyIjoi4peGIiwic2VwYXJhdG9yIjoi4pSAIiwic2Nyb2xsYmFyIjoi4pSCIiwibGF5b3V0IjoiZGVmYXVsdCIsImluZm8iOiJkZWZhdWx0IiwiY29sb3JzIjoiZmc6I2U1ZTlmMCxmZys6I2VjZWZmNCxiZzojMmUzNDQwLGJnKzojM2I0MjUyLGhsOiNiNDhlYWQsaGwrOiM4ZmJjYmIsaW5mbzojZWJjYjhiLG1hcmtlcjojYTNiZThjLHByb21wdDojYjQ4ZWFkLHNwaW5uZXI6I2EzYmU4Yyxwb2ludGVyOiNhM2JlOGMsaGVhZGVyOiM4ZmJjYmIsYm9yZGVyOiM0YzU2NmEsbGFiZWw6IzgxYTFjMSxxdWVyeTojZDhkZWU5In0=
+
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+  --color=fg:#e5e9f0,fg+:#eceff4,bg:#2e3440,bg+:#3b4252
+  --color=hl:#b48ead,hl+:#8fbcbb,info:#ebcb8b,marker:#a3be8c
+  --color=prompt:#b48ead,spinner:#a3be8c,pointer:#a3be8c,header:#8fbcbb
+  --color=border:#4c566a,label:#81a1c1,query:#d8dee9
+  --border="rounded" --border-label="fzf" --border-label-pos="0" --preview-window="border-rounded"
+  --prompt="> " --marker=">" --pointer="◆" --separator="─"
+  --scrollbar="│"'
+
 #Fuzzy matching of completions
 zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*:match:*' original only
@@ -157,6 +206,9 @@ alias ~="cd ~/"
 
 ### ---- Plugins ---- ###
 
+# Bat theme
+export BAT_THEME=Nord
+
 # csh.sh completion
 fpath=(~/.zsh/plugins/cht_completion/ $fpath)
 
@@ -168,10 +220,8 @@ zmodload -i zsh/complist
 # Autosuggestions
 source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# Fuzzy Finder
+# FZF plugin utilities
 source ~/.zsh/plugins/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
-# FZF set up with fd
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 
 # Colorize code in terminal
 source ~/.zsh/plugins/colorize/colorize.plugin.zsh
@@ -187,9 +237,6 @@ eval "$(fnm env --use-on-cd)"
 # rbenv
 eval "$(rbenv init - zsh)"
 
-# Broot
-source /home/mauromotion/.config/broot/launcher/bash/br
-
 ### ---- This lines must always be at EOF!!! ---- ###
 # Zoxide
 eval "$(zoxide init zsh)"
@@ -204,4 +251,3 @@ zvm_after_init_commands+=('[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh')
 ###DEBUG###
 # zprof
 
-source /home/mauromotion/.config/broot/launcher/bash/br
