@@ -3,8 +3,33 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp", -- snippets from the attached LSP
+		"hrsh7th/cmp-cmdline", -- autocomplete commands
 	},
 	config = function()
+		-- `/` cmdline setup.
+		local cmp = require("cmp")
+
+		cmp.setup.cmdline("/", {
+			mapping = cmp.mapping.preset.cmdline(),
+			sources = {
+				{ name = "buffer" },
+			},
+		})
+
+		-- `:` cmdline setup.
+		cmp.setup.cmdline(":", {
+			mapping = cmp.mapping.preset.cmdline(),
+			sources = cmp.config.sources({
+				{ name = "path" },
+			}, {
+				{
+					name = "cmdline",
+					option = {
+						ignore_cmds = { "Man", "!" },
+					},
+				},
+			}),
+		})
 		-- import lspconfig plugin
 		local lspconfig = require("lspconfig")
 
