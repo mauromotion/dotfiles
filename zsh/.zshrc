@@ -26,9 +26,15 @@ setopt HIST_IGNORE_ALL_DUPS
 # History won't show duplicates on search.
 setopt HIST_FIND_NO_DUPS
 
+# History navigation keybindings
+bindkey "^[[A" history-search-backward
+bindkey "^[[B" history-search-forward
+
 ## Various tweaks ##
 setopt auto_cd
 setopt auto_list
+
+
 
 # FZF set up with fd
 eval "$(fzf --zsh)"

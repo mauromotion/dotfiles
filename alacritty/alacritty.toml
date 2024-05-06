@@ -16,7 +16,7 @@ blinking = "On"
 shape = "Beam"
 
 [env]
-TERM = "alacritty"
+TERM = "xterm-256color"
 
 [mouse]
 hide_when_typing = true
@@ -42,17 +42,17 @@ y = 5
 size = 12
 
 [font.bold]
-family = "Hack Nerd Font"
+family = "JetBrainsMono NF"
 style = "Bold"
 
 [font.bold_italic]
-family = "Hack Nerd Font"
+family = "JetBrainsMono NF"
 style = "Bold Italic"
 
 [font.italic]
-family = "Hack Nerd Font"
+family = "JetBrainsMono NF"
 style = "Medium Italic"
 
 [font.normal]
-family = "Hack Nerd Font"
+family = "JetBrainsMono NF"
 style = "Medium"
