@@ -22,7 +22,9 @@ return {
 			sources = {
 				--  to disable file types use
 				--  "formatting.prettier.with({disabled_filetypes: {}})" (see null-ls docs)
-				formatting.prettierd, -- js/ts formatter
+				formatting.prettierd.with({
+					extra_filetypes = { "typescriptreact", "astro", "htmldjango" },
+				}), -- js/ts formatter
 				formatting.stylua, -- lua formatter
 				formatting.black, -- python formatter
 				formatting.isort.with({ extra_args = { "--profile", "black", "--filter-files" } }), -- python formatter

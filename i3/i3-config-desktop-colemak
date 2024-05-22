@@ -83,8 +83,7 @@ exec_always --no-startup-id sh ~/.dotfiles/color-profiles/desktop-load_ICC.sh
 focus_follows_mouse no
 
 # Set mouse acceleration on desktop (Razer Viper)
-exec_always --no-startup-id "xinput set-prop 9 295 -0.800000"
-exec_always --no-startup-id "xinput set-prop 17 295 -0.800000"
+exec_always --no-startup-id "xinput set-prop 8 295 -0.800000"
 # Set mouse acceleration on desktop (Kensinton Orbit Trackball)
 exec_always --no-startup-id "xinput set-prop 9 295 -0.700000"
 

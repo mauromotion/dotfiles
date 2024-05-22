@@ -158,13 +158,6 @@ return {
 			on_attach = on_attach,
 		})
 
-		-- configure rust server
-		lspconfig["rust_analyzer"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-			filetypes = { "rust" },
-		})
-
 		-- configure python server
 		lspconfig["jedi_language_server"].setup({
 			capabilities = capabilities,
@@ -177,6 +170,14 @@ return {
 			capabilities = capabilities,
 			on_attach = on_attach,
 			filetypes = { "python" },
+		})
+
+		-- configure astro server
+		lspconfig["astro"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			filetypes = { "astro" },
+			typescript = {},
 		})
 
 		-- configure lua server (with special settings)

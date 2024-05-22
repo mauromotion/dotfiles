@@ -13,6 +13,7 @@ return {
 		highlight = { enable = true },
 		indent = { enable = true },
 		ensure_installed = {
+			"astro",
 			"bash",
 			"c",
 			"css",
@@ -32,7 +33,6 @@ return {
 			"python",
 			"query",
 			"regex",
-			"rust",
 			"toml",
 			"tsx",
 			"typescript",
