@@ -1,7 +1,7 @@
 return {
 	"echasnovski/mini.surround",
 	version = false,
-	keys = { "ma", "md", "mf", "mF", "mh", "mr", "mn" },
+	keys = { "gsa", "gsd", "gsf", "gsF", "gsh", "gsr", "gsn" },
 	config = function()
 		require("mini.surround").setup({
 			mappings = {
