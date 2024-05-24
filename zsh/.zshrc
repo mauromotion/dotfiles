@@ -12,19 +12,26 @@ export ZSH=$HOME/.zsh
 ## History configuration ##
 #
 # History file location
-export HISTFILE=$ZSH/.zsh_history
+HISTFILE=$ZSH/.zsh_history
 
 # How many commands zsh will load to memory.
-export HISTSIZE=10000
+HISTSIZE=10000
 
 # How many commands history will save on file.
-export SAVEHIST=10000
+SAVEHIST=10000
+
+# Remove duplicates
+HISTDUP=erase
 
 # History won't save duplicates.
-setopt HIST_IGNORE_ALL_DUPS
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
 
-# History won't show duplicates on search.
-setopt HIST_FIND_NO_DUPS
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
 
 # History navigation keybindings
 bindkey "^[[A" history-search-backward
@@ -90,7 +97,10 @@ zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*:match:*' original only
 zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3>7?7:($#PREFIX+$#SUFFIX)/3))numeric)'
 
-# Pretty completions
+## Pretty completions ##
+# Load LS_COLORS if not already set
+eval "$(dircolors -b)"
+
 zstyle ':completion:*:matches' group 'yes'
 zstyle ':completion:*:options' description 'yes'
 zstyle ':completion:*:options' auto-description '%d'
@@ -103,9 +113,21 @@ zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
 zstyle ':completion:*' use-cache true
 zstyle ':completion:*' rehash true
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+# NOTE: don't use escape sequences here, fzf-tab will ignore them
+zstyle ':completion:*:descriptions' format '[%d]'
+# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+zstyle ':completion:*' menu no
+# preview directory's content with eza when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+# switch group using `<` and `>`
+zstyle ':fzf-tab:*' switch-group '<' '>'
 
 # Colors autoload for colored man pages
 autoload colors && colors
@@ -116,12 +138,7 @@ done
 eval RESET='%{$reset_color%}'
 
 # Initialize completion
-# autoload -Uz compinit
-# compinit
-autoload -U comtinit && compinit
-
-# Color completion
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+autoload -U compinit && compinit
 
 # Do menu-driven completion
 zstyle ':completion:*' menu select
@@ -230,6 +247,9 @@ source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # FZF plugin utilities
 source ~/.zsh/plugins/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
+
+# Fzf-tab
+source ~/.zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
 
 # Colorize code in terminal
 source ~/.zsh/plugins/colorize/colorize.plugin.zsh
