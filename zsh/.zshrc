@@ -116,8 +116,9 @@ done
 eval RESET='%{$reset_color%}'
 
 # Initialize completion
-autoload -Uz compinit
-compinit
+# autoload -Uz compinit
+# compinit
+autoload -U comtinit && compinit
 
 # Color completion
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
@@ -203,7 +204,7 @@ alias rnd="tw +rnd"
 alias src="source ~/.zshrc"
 alias tr="trash -i"
 alias trash="trash -i"
-alias tree="eza -T"
+alias etree="eza -T --color=always --icons | less -R"
 alias tw="task"
 alias v="nvim"
 alias wiki="v ~/Notes/VimWiki/index.md"
