@@ -164,7 +164,7 @@ zstyle ':completion:*' menu select
 ### ---- Theming ---- ###
 
 # Pure theme
-fpath+=($HOME/.zsh/themes/pure)
+fpath+=($HOME/.zsh/plugins/pure)
 autoload -U promptinit; promptinit
 prompt pure
 
