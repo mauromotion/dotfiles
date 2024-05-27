@@ -89,3 +89,19 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 		vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
 	end,
 })
+
+local remember_folds_group = augroup("remember_folds")
+
+-- Save folds when leaving a buffer
+vim.api.nvim_create_autocmd("BufWinLeave", {
+	group = remember_folds_group,
+	pattern = "*",
+	command = "silent! mkview",
+})
+
+-- Restore folds when entering a buffer
+vim.api.nvim_create_autocmd("BufWinEnter", {
+	group = remember_folds_group,
+	pattern = "*",
+	command = "silent! loadview",
+})

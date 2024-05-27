@@ -247,7 +247,7 @@ eval "$(rbenv init - zsh)"
 
 ### ---- This lines must always be at EOF!!! ---- ###
 # Zoxide
-eval "$(zoxide init zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 
 # Syntax Highlighting
 source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
