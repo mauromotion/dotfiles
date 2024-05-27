@@ -1,4 +1,5 @@
-# zmodload zsh/zprof
+# ZSH Home dir
+export ZSH=$HOME/.zsh
 
 # Set default editor
 export EDITOR=nvim
@@ -6,24 +7,12 @@ export EDITOR=nvim
 # Zoxide setup
 export PATH=~/.local/bin:$PATH
 
-# ZSH Home
-export ZSH=$HOME/.zsh
-
-## History configuration ##
-#
-# History file location
+## -- History configuration -- ##
 HISTFILE=$ZSH/.zsh_history
-
-# How many commands zsh will load to memory.
 HISTSIZE=10000
-
-# How many commands history will save on file.
 SAVEHIST=10000
-
-# Remove duplicates
 HISTDUP=erase
 
-# History won't save duplicates.
 setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_ignore_dups
@@ -33,19 +22,15 @@ setopt appendhistory
 setopt sharehistory
 setopt hist_ignore_space
 
-# History navigation keybindings
 bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
 
-## Various tweaks ##
+# Miscellaneous general options
 setopt auto_cd
 setopt auto_list
 
-
-
-# FZF set up with fd
+# Fzf set up
 eval "$(fzf --zsh)"
-
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
@@ -80,7 +65,7 @@ _fzf_comprun() {
   esac
 }
 
-# Fzf theme
+## -- Fzf theme -- ##
 # Nord theme permalink: https://vitormv.github.io/fzf-themes#eyJib3JkZXJTdHlsZSI6InJvdW5kZWQiLCJib3JkZXJMYWJlbCI6ImZ6ZiIsImJvcmRlckxhYmVsUG9zaXRpb24iOjAsInByZXZpZXdCb3JkZXJTdHlsZSI6InJvdW5kZWQiLCJwYWRkaW5nIjoiMCIsIm1hcmdpbiI6IjAiLCJwcm9tcHQiOiI+ICIsIm1hcmtlciI6Ij4iLCJwb2ludGVyIjoi4peGIiwic2VwYXJhdG9yIjoi4pSAIiwic2Nyb2xsYmFyIjoi4pSCIiwibGF5b3V0IjoiZGVmYXVsdCIsImluZm8iOiJkZWZhdWx0IiwiY29sb3JzIjoiZmc6I2U1ZTlmMCxmZys6I2VjZWZmNCxiZzojMmUzNDQwLGJnKzojM2I0MjUyLGhsOiNiNDhlYWQsaGwrOiM4ZmJjYmIsaW5mbzojZWJjYjhiLG1hcmtlcjojYTNiZThjLHByb21wdDojYjQ4ZWFkLHNwaW5uZXI6I2EzYmU4Yyxwb2ludGVyOiNhM2JlOGMsaGVhZGVyOiM4ZmJjYmIsYm9yZGVyOiM0YzU2NmEsbGFiZWw6IzgxYTFjMSxxdWVyeTojZDhkZWU5In0=
 
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
@@ -92,12 +77,15 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
   --prompt="> " --marker=">" --pointer="◆" --separator="─"
   --scrollbar="│"'
 
-#Fuzzy matching of completions
+# Bat theme
+export BAT_THEME=Nord
+
+# Fuzzy matching of completions
 zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*:match:*' original only
 zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3>7?7:($#PREFIX+$#SUFFIX)/3))numeric)'
 
-## Pretty completions ##
+## -- Pretty completions -- ##
 # Load LS_COLORS if not already set
 eval "$(dircolors -b)"
 
@@ -143,7 +131,7 @@ autoload -U compinit && compinit
 # Do menu-driven completion
 zstyle ':completion:*' menu select
 
-### --- Multiple Neovim configs selector --- ###
+## -- Multiple Neovim configs selector -- ##
 #alias nvim-mauro="NVIM_APPNAME=nvim_mauro nvim"
 
 #function nvims() {
@@ -159,19 +147,15 @@ zstyle ':completion:*' menu select
 #}
 #
 #bindkey -s ^n "nvims\n"
-### --------------------------------------- ###
 
-### ---- Theming ---- ###
-
-# Pure theme
+## -- Prompt Theming -- ##
 fpath+=($HOME/.zsh/plugins/pure)
 autoload -U promptinit; promptinit
 prompt pure
-
 zstyle :prompt:pure:git:branch color cyan
 zstyle :prompt:pure:virtualenv color cyan
 
-# zsh-vi-mode
+# zsh-vi-mode settings
 function zvm_config() {
   ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
   ZVM_VI_HIGHLIGHT_BACKGROUND=#D8A657
@@ -185,8 +169,7 @@ function zvm_config() {
 	# echo ' ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘  '
 	# echo ' --------- ZSH Shell -----------	'
 
-
-### ---- Aliases ---- ###
+## -- Aliases -- ##
 alias ..="cd .."
 alias cat="bat"
 alias cl="clear"
@@ -229,10 +212,7 @@ alias yt="ytfzf"
 alias zsh-update="sh ~/.zsh/zsh_plugins_updater.sh"
 alias ~="cd ~/"
 
-### ---- Plugins ---- ###
-
-# Bat theme
-export BAT_THEME=Nord
+## -- Plugins -- ##
 
 # csh.sh completion
 fpath=(~/.zsh/plugins/cht_completion/ $fpath)
@@ -275,6 +255,3 @@ source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # Vim mode
 source ~/.zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 zvm_after_init_commands+=('[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh')
-
-###DEBUG###
-# zprof
