@@ -19,6 +19,7 @@ return {
 				g = { "<CMD>FzfLua live_grep<CR>", "Find string in cwd" },
 				s = { "<CMD>FzfLua lgrep_curbuf<CR>", "Find string in current buffer" },
 				c = { "<CMD>FzfLua grep_cword<CR>", "Search for word under cursor" },
+				k = { "<CMD>FzfLua keymaps<CR>", "Search through all the keybindings" },
 			},
 			["<Space>"] = {
 				"<CMD>FzfLua buffers<CR>",

@@ -1,13 +1,13 @@
 # Fonts in use
 
-### Terminal (Alacritty)
-IBM Plex
+### Terminal (Wezterm)
 
-### System (GNOME/i3)
-*Interface text*: Fira Sans book 11
-*Document text*: Roboto Slab Regular 11
-*Monospaced text*: Fira Mono Regular 11
-*Legacy windows titles*: Fira Sans Semibold 10
+JetBrainsMono NF
 
-`sudo pacman -S otf-fira-sans otf-firamono-nerd ttf-ibmplex-mono-nerd ttf-roboto-slab`
+### i3WM
 
+FiraMono Nerd Font Medium 11
+
+### Polybar
+
+JetBrainsMono NF
