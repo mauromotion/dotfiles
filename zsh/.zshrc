@@ -1,4 +1,5 @@
-# zmodload zsh/zprof
+# ZSH Home dir
+export ZSH=$HOME/.zsh
 
 # Set default editor
 export EDITOR=nvim
@@ -6,39 +7,30 @@ export EDITOR=nvim
 # Zoxide setup
 export PATH=~/.local/bin:$PATH
 
-# ZSH Home
-export ZSH=$HOME/.zsh
+## -- History configuration -- ##
+HISTFILE=$ZSH/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+HISTDUP=erase
 
-## History configuration ##
-#
-# History file location
-export HISTFILE=$ZSH/.zsh_history
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
 
-# How many commands zsh will load to memory.
-export HISTSIZE=10000
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
 
-# How many commands history will save on file.
-export SAVEHIST=10000
-
-# History won't save duplicates.
-setopt HIST_IGNORE_ALL_DUPS
-
-# History won't show duplicates on search.
-setopt HIST_FIND_NO_DUPS
-
-# History navigation keybindings
 bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
 
-## Various tweaks ##
+# Miscellaneous general options
 setopt auto_cd
 setopt auto_list
 
-
-
-# FZF set up with fd
+# Fzf set up
 eval "$(fzf --zsh)"
-
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
@@ -73,7 +65,7 @@ _fzf_comprun() {
   esac
 }
 
-# Fzf theme
+## -- Fzf theme -- ##
 # Nord theme permalink: https://vitormv.github.io/fzf-themes#eyJib3JkZXJTdHlsZSI6InJvdW5kZWQiLCJib3JkZXJMYWJlbCI6ImZ6ZiIsImJvcmRlckxhYmVsUG9zaXRpb24iOjAsInByZXZpZXdCb3JkZXJTdHlsZSI6InJvdW5kZWQiLCJwYWRkaW5nIjoiMCIsIm1hcmdpbiI6IjAiLCJwcm9tcHQiOiI+ICIsIm1hcmtlciI6Ij4iLCJwb2ludGVyIjoi4peGIiwic2VwYXJhdG9yIjoi4pSAIiwic2Nyb2xsYmFyIjoi4pSCIiwibGF5b3V0IjoiZGVmYXVsdCIsImluZm8iOiJkZWZhdWx0IiwiY29sb3JzIjoiZmc6I2U1ZTlmMCxmZys6I2VjZWZmNCxiZzojMmUzNDQwLGJnKzojM2I0MjUyLGhsOiNiNDhlYWQsaGwrOiM4ZmJjYmIsaW5mbzojZWJjYjhiLG1hcmtlcjojYTNiZThjLHByb21wdDojYjQ4ZWFkLHNwaW5uZXI6I2EzYmU4Yyxwb2ludGVyOiNhM2JlOGMsaGVhZGVyOiM4ZmJjYmIsYm9yZGVyOiM0YzU2NmEsbGFiZWw6IzgxYTFjMSxxdWVyeTojZDhkZWU5In0=
 
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
@@ -85,12 +77,18 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
   --prompt="> " --marker=">" --pointer="◆" --separator="─"
   --scrollbar="│"'
 
-#Fuzzy matching of completions
+# Bat theme
+export BAT_THEME=Nord
+
+# Fuzzy matching of completions
 zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*:match:*' original only
 zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3>7?7:($#PREFIX+$#SUFFIX)/3))numeric)'
 
-# Pretty completions
+## -- Pretty completions -- ##
+# Load LS_COLORS if not already set
+eval "$(dircolors -b)"
+
 zstyle ':completion:*:matches' group 'yes'
 zstyle ':completion:*:options' description 'yes'
 zstyle ':completion:*:options' auto-description '%d'
@@ -103,9 +101,21 @@ zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
 zstyle ':completion:*' use-cache true
 zstyle ':completion:*' rehash true
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+# NOTE: don't use escape sequences here, fzf-tab will ignore them
+zstyle ':completion:*:descriptions' format '[%d]'
+# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+zstyle ':completion:*' menu no
+# preview directory's content with eza when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+# switch group using `<` and `>`
+zstyle ':fzf-tab:*' switch-group '<' '>'
 
 # Colors autoload for colored man pages
 autoload colors && colors
@@ -116,16 +126,12 @@ done
 eval RESET='%{$reset_color%}'
 
 # Initialize completion
-autoload -Uz compinit
-compinit
-
-# Color completion
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+autoload -U compinit && compinit
 
 # Do menu-driven completion
 zstyle ':completion:*' menu select
 
-### --- Multiple Neovim configs selector --- ###
+## -- Multiple Neovim configs selector -- ##
 #alias nvim-mauro="NVIM_APPNAME=nvim_mauro nvim"
 
 #function nvims() {
@@ -141,19 +147,15 @@ zstyle ':completion:*' menu select
 #}
 #
 #bindkey -s ^n "nvims\n"
-### --------------------------------------- ###
 
-### ---- Theming ---- ###
-
-# Pure theme
-fpath+=($HOME/.zsh/themes/pure)
+## -- Prompt Theming -- ##
+fpath+=($HOME/.zsh/plugins/pure)
 autoload -U promptinit; promptinit
 prompt pure
-
 zstyle :prompt:pure:git:branch color cyan
 zstyle :prompt:pure:virtualenv color cyan
 
-# zsh-vi-mode
+# zsh-vi-mode settings
 function zvm_config() {
   ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
   ZVM_VI_HIGHLIGHT_BACKGROUND=#D8A657
@@ -167,8 +169,7 @@ function zvm_config() {
 	# echo ' ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘  '
 	# echo ' --------- ZSH Shell -----------	'
 
-
-### ---- Aliases ---- ###
+## -- Aliases -- ##
 alias ..="cd .."
 alias cat="bat"
 alias cl="clear"
@@ -203,7 +204,7 @@ alias rnd="tw +rnd"
 alias src="source ~/.zshrc"
 alias tr="trash -i"
 alias trash="trash -i"
-alias tree="eza -T"
+alias etree="eza -T --color=always --icons | less -R"
 alias tw="task"
 alias v="nvim"
 alias wiki="v ~/Notes/VimWiki/index.md"
@@ -211,10 +212,7 @@ alias yt="ytfzf"
 alias zsh-update="sh ~/.zsh/zsh_plugins_updater.sh"
 alias ~="cd ~/"
 
-### ---- Plugins ---- ###
-
-# Bat theme
-export BAT_THEME=Nord
+## -- Plugins -- ##
 
 # csh.sh completion
 fpath=(~/.zsh/plugins/cht_completion/ $fpath)
@@ -229,6 +227,9 @@ source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # FZF plugin utilities
 source ~/.zsh/plugins/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
+
+# Fzf-tab
+source ~/.zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
 
 # Colorize code in terminal
 source ~/.zsh/plugins/colorize/colorize.plugin.zsh
@@ -246,7 +247,7 @@ eval "$(rbenv init - zsh)"
 
 ### ---- This lines must always be at EOF!!! ---- ###
 # Zoxide
-eval "$(zoxide init zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 
 # Syntax Highlighting
 source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -254,7 +255,3 @@ source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # Vim mode
 source ~/.zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 zvm_after_init_commands+=('[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh')
-
-###DEBUG###
-# zprof
-

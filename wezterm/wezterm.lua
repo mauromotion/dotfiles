@@ -14,7 +14,7 @@ config.color_scheme = "nordfox"
 config.window_background_opacity = 1
 
 -- Font
-config.font = wezterm.font("JetBrainsMono NF")
+config.font = wezterm.font("JetBrainsMono NF", {})
 config.font_size = 12
 
 -- Tabs
