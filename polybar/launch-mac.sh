@@ -9,4 +9,7 @@ killall -q polybar
 polybar mac 2>&1 | tee -a /tmp/polybar.log &
 disown
 
+polybar laptop 2>&1 | tee -a /tmp/polybar.log &
+disown
+
 echo "Polybar launched..."
