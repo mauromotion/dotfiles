@@ -24,8 +24,8 @@ return {
 			sections = {
 				lualine_a = { "mode" },
 				lualine_b = { "branch", "diff", "diagnostics" },
-				lualine_c = {},
-				lualine_x = { "aerial", "encoding", "fileformat", "filetype" },
+				lualine_c = { { "aerial", depth = nil, dense = false } },
+				lualine_x = { "encoding", "fileformat", "filetype" },
 				lualine_y = { "progress" },
 				lualine_z = { { "filename", path = 4 } },
 			},
@@ -40,7 +40,7 @@ return {
 			tabline = {},
 			winbar = {},
 			inactive_winbar = {},
-			extensions = {},
+			extensions = { "fzf", "trouble", "aerial", "lazy", "oil", "quickfix", "mason" },
 		})
 	end,
 }

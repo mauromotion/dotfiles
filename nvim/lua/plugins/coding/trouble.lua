@@ -1,8 +1,9 @@
 return {
 	"folke/trouble.nvim",
+	-- branch = "main",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	cmd = { "TroubleToggle", "Trouble" },
-	opts = { use_diagnostic_signs = true },
+	-- opts = { use_diagnostic_signs = true },
 	-- keys = {
 	-- 	{ "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
 	-- 	{ "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
@@ -14,11 +15,20 @@ return {
 		wk.register({
 			x = {
 				name = "Trouble",
-				x = { "<cmd>TroubleToggle document_diagnostics<cr>", "Document Diagnostics" },
-				X = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics" },
-				L = { "<cmd>TroubleToggle loclist<cr>", "Location List" },
-				Q = { "<cmd>TroubleToggle quickfix<cr>", "Quickfix List" },
+				x = { "<cmd>Trouble diagnostics toggle<cr>", "Diagnostics (Trouble)" },
+				X = { "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", "Buffer Diagnostics (Trouble)" },
+				L = { "<cmd>Trouble loclist toggle<cr>", "Location List (Trouble)" },
+				Q = { "<cmd>Trouble qflist toggle<cr>", "Quickfix List (Trouble)" },
+			},
+			c = {
+				name = "Trouble",
+				s = { "<cmd>Trouble symbols toggle focus=false<cr>", "Symbols (Trouble)" },
+				l = {
+					"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+					"LSP Definitions / references / ... (Trouble)",
+				},
 			},
 		}, { prefix = "<leader>" })
 	end,
+	opts = {},
 }
