@@ -6,7 +6,7 @@ return {
 		-- Default directory, syntax and file type, symbols for spaces, auto re-index tags db
 		vim.g.vimwiki_list = {
 			{
-				path = "~/Notes/VimWiki",
+				path = "~/Notes/VimWiki/notes",
 				syntax = "markdown",
 				ext = ".md",
 				links_space_char = "_",
