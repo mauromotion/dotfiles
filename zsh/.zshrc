@@ -172,8 +172,10 @@ function zvm_config() {
 ## -- Aliases -- ##
 alias ..="cd .."
 alias cat="bat"
+alias cd="z"
 alias cl="clear"
 alias cp="cp -i"
+alias diary="nvim +VimwikiIndex +VimwikiDiaryIndex"
 alias df="df -H"
 alias ga="git add"
 alias gaa="git add --all"
@@ -207,7 +209,7 @@ alias trash="trash -i"
 alias etree="eza -T --color=always --icons | less -R"
 alias tw="task"
 alias v="nvim"
-alias wiki="v ~/Notes/VimWiki/index.md"
+alias wiki="nvim -c VimwikiIndex"
 alias yt="ytfzf"
 alias zsh-update="sh ~/.zsh/zsh_plugins_updater.sh"
 alias ~="cd ~/"
@@ -247,7 +249,7 @@ eval "$(rbenv init - zsh)"
 
 ### ---- This lines must always be at EOF!!! ---- ###
 # Zoxide
-eval "$(zoxide init --cmd cd zsh)"
+eval "$(zoxide init zsh)"
 
 # Syntax Highlighting
 source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
