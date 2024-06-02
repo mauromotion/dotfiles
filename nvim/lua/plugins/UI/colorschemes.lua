@@ -5,7 +5,7 @@ return {
 		config = function()
 			require("nightfox").setup({
 				options = {
-					transparent = false,
+					transparent = true,
 					dim_inactive = false,
 					styles = {
 						comments = "italic",
