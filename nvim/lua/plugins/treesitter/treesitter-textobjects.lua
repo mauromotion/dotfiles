@@ -48,8 +48,8 @@ return {
 				swap = {
 					enable = true,
 					swap_next = {
-						["<leader>na"] = "@parameter.inner", -- swap parameters/argument with next
-						["<leader>nm"] = "@function.outer", -- swap function with next
+						["<leader>sa"] = "@parameter.inner", -- swap parameters/argument with next
+						["<leader>sm"] = "@function.outer", -- swap function with next
 					},
 					swap_previous = {
 						["<leader>pa"] = "@parameter.inner", -- swap parameters/argument with prev

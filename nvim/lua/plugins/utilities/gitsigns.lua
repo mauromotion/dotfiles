@@ -16,12 +16,12 @@ return {
 			-- Keybindgs with "which-key" plugin
 			local wk = require("which-key")
 			wk.register({
-				name = "Gitsigns",
+				name = "Neogit/Gitsigns",
 				S = { gs.stage_buffer, "Stage Buffer" },
 				u = { gs.undo_stage_hunk, "Undo Stage Hunk" },
 				R = { gs.reset_buffer, "Reset Buffer" },
 				p = { gs.preview_hunk_inline, "Preview Hunk Inline" },
-				b = {
+				B = {
 					function()
 						gs.blame_line({ full = true })
 					end,
