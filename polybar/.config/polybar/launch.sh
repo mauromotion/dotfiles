@@ -10,8 +10,6 @@ polybar desktop_primary 2>&1 | tee -a /tmp/polybar.log &
 disown
 polybar desktop_ext 2>&1 | tee -a /tmp/polybar.log &
 disown
-polybar laptop 2>&1 | tee -a /tmp/polybar.log &
-disown
 polybar mac 2>&1 | tee -a /tmp/polybar.log &
 disown
 
