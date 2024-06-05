@@ -211,33 +211,33 @@ alias tw="task"
 alias v="nvim"
 alias wiki="nvim -c VimwikiIndex"
 alias yt="ytfzf"
-alias zsh-update="sh ~/.zsh/zsh_plugins_updater.sh"
+alias zsh-update="~/.zsh/zsh_plugins_updater.sh"
 alias ~="cd ~/"
 
 ## -- Plugins -- ##
 
 # csh.sh completion
-fpath=(~/.zsh/plugins/cht_completion/ $fpath)
+fpath=($ZSH/plugins/cht_completion/ $fpath)
 
 # Completion
 zstyle ':completion:*' menu select
-fpath=(~/.zsh/plugins/zsh-completions/src/ $fpath)
+fpath=($ZSH/plugins/zsh-completions/src/ $fpath)
 zmodload -i zsh/complist
 
 # Autosuggestions
-source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $ZSH/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # FZF plugin utilities
-source ~/.zsh/plugins/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
+source $ZSH/plugins/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
 
 # Fzf-tab
-source ~/.zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
+source $ZSH/plugins/fzf-tab/fzf-tab.plugin.zsh
 
 # Colorize code in terminal
-source ~/.zsh/plugins/colorize/colorize.plugin.zsh
+source $ZSH/plugins/colorize/colorize.plugin.zsh
 
 # Colored man pages
-source ~/.zsh/plugins/colored-man-pages/colored-man-pages.plugin.zsh
+source $ZSH/plugins/colored-man-pages/colored-man-pages.plugin.zsh
 
 # fnm
 export PATH="/home/mauromotion/.local/share/fnm:$PATH"
@@ -252,8 +252,8 @@ eval "$(rbenv init - zsh)"
 eval "$(zoxide init zsh)"
 
 # Syntax Highlighting
-source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $ZSH/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Vim mode
-source ~/.zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+source $ZSH/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 zvm_after_init_commands+=('[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh')
