@@ -22,9 +22,9 @@ default_floating_border normal
 hide_edge_borders none
 
 # Change borders
-bindsym $mod+u border none
-bindsym $mod+y border pixel 2
-bindsym $mod+n border normal
+bindsym $mod+Ctrl+u border none
+bindsym $mod+Ctrl+y border pixel 2
+bindsym $mod+Ctrl+n border normal
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -77,13 +77,13 @@ bindsym $mod+Ctrl+m exec pavucontrol
 bindsym $mod+c exec galculator
 
 ## Load ICC profiles ##
-exec_always --no-startup-id sh ~/.dotfiles/color-profiles/desktop-load_ICC.sh
+exec_always --no-startup-id sh ./color-profiles/desktop-load_ICC.sh
 
 # Focus following the mouse pointer
 focus_follows_mouse no
 
 # Set mouse acceleration on desktop (Razer Viper)
-exec_always --no-startup-id "xinput set-prop 9 295 -0.800000"
+exec_always --no-startup-id "xinput set-prop 8 295 -0.800000"
 exec_always --no-startup-id "xinput set-prop 17 295 -0.800000"
 # Set mouse acceleration on desktop (Kensinton Orbit Trackball)
 exec_always --no-startup-id "xinput set-prop 9 295 -0.700000"
@@ -128,7 +128,7 @@ bindsym $mod+f fullscreen toggle
 # Change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+Ctrl+e layout toggle split
 
 # Toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -202,10 +202,10 @@ bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
 # Resize windows
-bindsym $mod+Shift+u resize shrink height 5 px or 5 ppt
-bindsym $mod+Shift+i resize grow height 5 px or 5 ppt
+bindsym $mod+Shift+u resize grow width 5 px or 5 ppt
+bindsym $mod+Shift+i resize shrink height 5 px or 5 ppt
 bindsym $mod+Shift+o resize shrink width 5 px or 5 ppt
-bindsym $mod+Shift+y resize grow width 5 px or 5 ppt
+bindsym $mod+Shift+p resize grow height 5 px or 5 ppt
 
 # Open workspaces on specific screens
 workspace "1: home" output DP-2
@@ -255,7 +255,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # Exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+Ctrl+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # Set shut down, restart and locking features
 bindsym $mod+0 mode "$mode_system"
@@ -282,10 +282,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 5 px or 5 ppt
-        bindsym j resize grow height 5 px or 5 ppt
-        bindsym k resize shrink height 5 px or 5 ppt
-        bindsym l resize grow width 5 px or 5 ppt
+        bindsym j resize shrink width 5 px or 5 ppt
+        bindsym k resize grow height 5 px or 5 ppt
+        bindsym l resize shrink height 5 px or 5 ppt
+        bindsym semicolon resize grow width 5 px or 5 ppt
 
         # Same bindings, but for the arrow keys
         bindsym Left resize shrink width 5 px or 5 ppt
@@ -315,6 +315,13 @@ exec --no-startup-id nextcloud --background
 exec --no-startup-id openrgb --startminimized
 exec --no-startup-id xset b 100
 
+###############
+### Polybar ###
+###############
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+# Hide/unhide polybar
+bindsym $mod+b exec --no-startup-id polybar-msg cmd toggle
+
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
 # https://i3wm.org/docs/userguide.html#xresources
@@ -328,7 +335,7 @@ exec --no-startup-id xset b 100
 # background $term_background
 # Same logic applied to everything else.
 # set_from_resource $term_background background
-# set_from_resource $term_foreground foreground
+# set_from_resource $term_foreground foregroud
 # set_from_resource $term_color0     color0
 # set_from_resource $term_color1     color1
 # set_from_resource $term_color2     color2

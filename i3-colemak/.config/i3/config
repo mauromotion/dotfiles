@@ -77,7 +77,6 @@ bindsym $mod+Ctrl+m exec pavucontrol
 bindsym $mod+c exec galculator
 
 ## Load ICC profiles ##
-# exec_always --no-startup-id sh ~/.dotfiles/i3/color-profiles/desktop-load_ICC.sh
 exec_always --no-startup-id sh ./color-profiles/desktop-load_ICC.sh
 
 # Focus following the mouse pointer
@@ -85,6 +84,7 @@ focus_follows_mouse no
 
 # Set mouse acceleration on desktop (Razer Viper)
 exec_always --no-startup-id "xinput set-prop 8 295 -0.800000"
+exec_always --no-startup-id "xinput set-prop 17 295 -0.800000"
 # Set mouse acceleration on desktop (Kensinton Orbit Trackball)
 exec_always --no-startup-id "xinput set-prop 9 295 -0.700000"
 
@@ -314,6 +314,13 @@ exec --no-startup-id nm-applet
 exec --no-startup-id nextcloud --background
 exec --no-startup-id openrgb --startminimized
 exec --no-startup-id xset b 100
+
+###############
+### Polybar ###
+###############
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+# Hide/unhide polybar
+bindsym $mod+b exec --no-startup-id polybar-msg cmd toggle
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:

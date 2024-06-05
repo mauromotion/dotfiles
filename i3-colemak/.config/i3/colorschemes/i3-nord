@@ -39,13 +39,6 @@
 # Hide/unhide i3status bar
 # bindsym $mod+b bar mode toggle
 
-###############
-### Polybar ###
-###############
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-# Hide/unhide polybar
-bindsym $mod+b exec --no-startup-id polybar-msg cmd toggle
-
 # Theme colors
 # class                   border  backgr. text    indic.   child_border
   client.focused          #88C0D0 #88C0D0 #3B4252 #D8DEE9
