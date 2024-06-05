@@ -1,0 +1,59 @@
+Xft.dpi:       96
+Xft.antialias: true
+Xft.hinting:   true
+Xft.rgba:      rgb
+Xft.autohint:  false
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
+
+XTerm*background:        #3B4252
+XTerm*foreground:        #D8DEE9
+XTerm*pointerColor:      #81A1C1
+XTerm*faceName:          Fixed
+XTerm*faceSize:          11
+XTerm*reverseVideo:      on
+XTerm*selectToClipboard: true
+
+*background:                      #2E3440
+*foreground:                      #D8DEE9
+*fading:                          8
+*fadeColor:                       black
+*cursorColor:                     #81A1C1
+*pointerColorBackground:          #3B4252
+*pointerColorForeground:          #81A1C1
+
+!! black dark/light
+*color0:                          #3B4252
+*color8:                          #4C566A
+
+!! red dark/light
+*color1:                          #BF616A
+*color9:                          #cf876f
+
+!! green dark/light
+*color2:                          #A3BE8C
+*color10:                         #A3BE8C
+
+!! yellow dark/light
+*color3:                          #EBCB8B
+*color11:                         #EBCB8B
+
+!! blue dark/light
+*color4:                          #81A1C1
+*color12:                         #81A1C1
+
+!! magenta dark/light
+*color5:                          #B48EAD
+*color13:                         #B48EAD
+
+!! cyan dark/light
+*color6:                          #88C0D0
+*color14:                         #8FBCBB
+
+!! white dark/light
+*color7:                          #E5E9F0
+*color15:                         #ECEFF4
+
+Xcursor.theme: capitaine-cursors-light
+Xcursor.size:                     16
+
