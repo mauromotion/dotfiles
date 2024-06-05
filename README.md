@@ -17,7 +17,7 @@ This repository contains all the configuration files for the Arch Linux installa
    `sudo pacman -S git stow`
 
 2. Clone this repository into home:
-   `git clone git@github.com:mauromotion/dotfiles.git ~/.dotfiles`
+   `git clone -b arch-desktop git@github.com:mauromotion/dotfiles.git ~/.dotfiles`
 
 3. Move inside the just created directory:
    `cd ~/.dotfiles`
