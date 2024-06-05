@@ -27,6 +27,3 @@ This repository contains all the configuration files for the Arch Linux installa
 
 5. OR run stow and move on with your day:
    `stow .`
-
-   > [!WARNING]
-   > this is currently a work in progress, some symlinks won't work correctly (yet).
