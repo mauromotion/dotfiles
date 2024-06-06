@@ -77,7 +77,7 @@ bindsym $mod+Ctrl+m exec pavucontrol
 bindsym $mod+c exec galculator
 
 ## Load ICC profiles ##
-exec_always --no-startup-id sh ./color-profiles/desktop-load_ICC.sh
+exec_always --no-startup-id sh ~/.dotfiles/i3/.config/i3/color-profiles/desktop-load_ICC.sh
 
 # Focus following the mouse pointer
 focus_follows_mouse no
