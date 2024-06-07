@@ -66,16 +66,15 @@ _fzf_comprun() {
 }
 
 ## -- Fzf theme -- ##
-# Nord theme permalink: https://vitormv.github.io/fzf-themes#eyJib3JkZXJTdHlsZSI6InJvdW5kZWQiLCJib3JkZXJMYWJlbCI6ImZ6ZiIsImJvcmRlckxhYmVsUG9zaXRpb24iOjAsInByZXZpZXdCb3JkZXJTdHlsZSI6InJvdW5kZWQiLCJwYWRkaW5nIjoiMCIsIm1hcmdpbiI6IjAiLCJwcm9tcHQiOiI+ICIsIm1hcmtlciI6Ij4iLCJwb2ludGVyIjoi4peGIiwic2VwYXJhdG9yIjoi4pSAIiwic2Nyb2xsYmFyIjoi4pSCIiwibGF5b3V0IjoiZGVmYXVsdCIsImluZm8iOiJkZWZhdWx0IiwiY29sb3JzIjoiZmc6I2U1ZTlmMCxmZys6I2VjZWZmNCxiZzojMmUzNDQwLGJnKzojM2I0MjUyLGhsOiNiNDhlYWQsaGwrOiM4ZmJjYmIsaW5mbzojZWJjYjhiLG1hcmtlcjojYTNiZThjLHByb21wdDojYjQ4ZWFkLHNwaW5uZXI6I2EzYmU4Yyxwb2ludGVyOiNhM2JlOGMsaGVhZGVyOiM4ZmJjYmIsYm9yZGVyOiM0YzU2NmEsbGFiZWw6IzgxYTFjMSxxdWVyeTojZDhkZWU5In0=
+# Nord theme permalink: https://shorturl.at/WGERJ
 
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
-  --color=fg:#e5e9f0,fg+:#eceff4,bg:#2e3440,bg+:#3b4252
+  --color=fg:#e5e9f0,fg+:#eceff4,bg:-1,bg+:#3b4252
   --color=hl:#b48ead,hl+:#8fbcbb,info:#ebcb8b,marker:#a3be8c
   --color=prompt:#b48ead,spinner:#a3be8c,pointer:#a3be8c,header:#8fbcbb
   --color=border:#4c566a,label:#81a1c1,query:#d8dee9
   --border="rounded" --border-label="fzf" --border-label-pos="0" --preview-window="border-rounded"
-  --prompt="> " --marker=">" --pointer="◆" --separator="─"
-  --scrollbar="│"'
+  --prompt="> " --marker=">" --pointer="◆" --separator="─" --scrollbar="│" --info="right"'
 
 # Bat theme
 export BAT_THEME=Nord
@@ -92,6 +91,17 @@ eval "$(dircolors -b)"
 zstyle ':completion:*:matches' group 'yes'
 zstyle ':completion:*:options' description 'yes'
 zstyle ':completion:*:options' auto-description '%d'
+zstyle ':completion:*:git-checkout:*' sort false
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' menu no
+## fzf-tab specific config
+# set descriptions format to enable group support
+# NOTE: don't use escape sequences here, fzf-tab will ignore them
+# zstyle ':completion:*:descriptions' format '[%d]'
+# preview directory's content with eza when completing cd
+zstyle ':fzf-tab:complete:z:*' fzf-preview 'eza -1 --color=always $realpath'
+# switch group using `<` and `>`
+zstyle ':fzf-tab:*' switch-group '<' '>'
 zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
 zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
 zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
@@ -101,21 +111,9 @@ zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
 zstyle ':completion:*' use-cache true
 zstyle ':completion:*' rehash true
-# disable sort when completing `git checkout`
-zstyle ':completion:*:git-checkout:*' sort false
-# set descriptions format to enable group support
-# NOTE: don't use escape sequences here, fzf-tab will ignore them
-zstyle ':completion:*:descriptions' format '[%d]'
-# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
-zstyle ':completion:*' menu no
-# preview directory's content with eza when completing cd
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-# switch group using `<` and `>`
-zstyle ':fzf-tab:*' switch-group '<' '>'
 
 # Colors autoload for colored man pages
 autoload colors && colors

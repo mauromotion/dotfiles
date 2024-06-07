@@ -19,7 +19,7 @@ bindsym $mod+Shift+y resize grow height 5 px or 5 ppt
 bindsym $mod+Shift+semicolon resize shrink width 5 px or 5 ppt
 
 # Resize window (you can also use the mouse for that)
-bindsym $mod+r mode "resize"
+bindsym $mod+Ctrl+r mode "resize"
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
         # Pressing left will shrink the window’s width.

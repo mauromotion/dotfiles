@@ -16,6 +16,7 @@ config.window_background_opacity = 0.95
 -- Font
 config.font = wezterm.font("JetBrainsMono NF", {})
 config.font_size = 12
+config.freetype_load_flags = "NO_HINTING"
 
 -- Tabs
 config.hide_tab_bar_if_only_one_tab = true
