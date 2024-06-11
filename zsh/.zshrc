@@ -30,7 +30,6 @@ setopt auto_cd
 setopt auto_list
 
 # Fzf set up
-eval "$(fzf --zsh)"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
@@ -215,21 +214,21 @@ alias ~="cd ~/"
 ## -- Plugins -- ##
 
 # csh.sh completion
-fpath=($ZSH/plugins/cht_completion/ $fpath)
+# fpath=($ZSH/plugins/cht_completion/ $fpath)
 
 # Completion
 zstyle ':completion:*' menu select
 fpath=($ZSH/plugins/zsh-completions/src/ $fpath)
 zmodload -i zsh/complist
 
+# Fzf-tab
+source $ZSH/plugins/fzf-tab/fzf-tab.plugin.zsh
+
 # Autosuggestions
 source $ZSH/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # FZF plugin utilities
 source $ZSH/plugins/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
-
-# Fzf-tab
-source $ZSH/plugins/fzf-tab/fzf-tab.plugin.zsh
 
 # Colorize code in terminal
 source $ZSH/plugins/colorize/colorize.plugin.zsh
@@ -246,7 +245,8 @@ eval "$(fnm env --use-on-cd)"
 eval "$(rbenv init - zsh)"
 
 ### ---- This lines must always be at EOF!!! ---- ###
-# Zoxide
+
+eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
 
 # Syntax Highlighting
