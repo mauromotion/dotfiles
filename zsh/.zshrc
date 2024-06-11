@@ -78,12 +78,8 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 # Bat theme
 export BAT_THEME=Nord
 
-# Fuzzy matching of completions
-zstyle ':completion:*' completer _complete _match _approximate
-zstyle ':completion:*:match:*' original only
-zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3>7?7:($#PREFIX+$#SUFFIX)/3))numeric)'
+## -- fzf-tab and completion visual settings -- ##
 
-## -- Pretty completions -- ##
 # Load LS_COLORS if not already set
 eval "$(dircolors -b)"
 
@@ -91,28 +87,12 @@ zstyle ':completion:*:matches' group 'yes'
 zstyle ':completion:*:options' description 'yes'
 zstyle ':completion:*:options' auto-description '%d'
 zstyle ':completion:*:git-checkout:*' sort false
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' menu no
-## fzf-tab specific config
-# set descriptions format to enable group support
-# NOTE: don't use escape sequences here, fzf-tab will ignore them
-# zstyle ':completion:*:descriptions' format '[%d]'
-# preview directory's content with eza when completing cd
-zstyle ':fzf-tab:complete:z:*' fzf-preview 'eza -1 --color=always $realpath'
-# switch group using `<` and `>`
+zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':fzf-tab:*' switch-group '<' '>'
-zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
-zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
-zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
-zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
-zstyle ':completion:*:default' list-prompt '%S%M matches%s'
-zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*' verbose yes
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
-zstyle ':completion:*' use-cache true
-zstyle ':completion:*' rehash true
+zstyle ':fzf-tab:complete:z:*' fzf-preview 'eza -1 --color=always $realpath'
 
 # Colors autoload for colored man pages
 autoload colors && colors
@@ -124,9 +104,6 @@ eval RESET='%{$reset_color%}'
 
 # Initialize completion
 autoload -U compinit && compinit
-
-# Do menu-driven completion
-zstyle ':completion:*' menu select
 
 ## -- Multiple Neovim configs selector -- ##
 #alias nvim-mauro="NVIM_APPNAME=nvim_mauro nvim"
@@ -217,7 +194,6 @@ alias ~="cd ~/"
 # fpath=($ZSH/plugins/cht_completion/ $fpath)
 
 # Completion
-zstyle ':completion:*' menu select
 fpath=($ZSH/plugins/zsh-completions/src/ $fpath)
 zmodload -i zsh/complist
 
@@ -246,6 +222,7 @@ eval "$(rbenv init - zsh)"
 
 ### ---- This lines must always be at EOF!!! ---- ###
 
+# eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/pure.toml)"
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
 
