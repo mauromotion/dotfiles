@@ -74,7 +74,7 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
   --color=prompt:#b48ead,spinner:#a3be8c,pointer:#a3be8c,header:#8fbcbb
   --color=border:#4c566a,label:#81a1c1,query:#d8dee9
   --border="rounded" --border-label="fzf" --border-label-pos="0" --preview-window="border-rounded"
-  --prompt="> " --marker=">" --pointer="◆" --separator="─" --scrollbar="│" --info="right"'
+  --prompt="> " --separator="─" --scrollbar="│" --info="right"'
 
 # Bat theme
 export BAT_THEME=Nord

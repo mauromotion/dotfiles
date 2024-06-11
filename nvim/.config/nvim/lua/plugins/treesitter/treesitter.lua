@@ -3,7 +3,11 @@ return {
 	version = false,
 	build = ":TSUpdate",
 	event = { "BufReadPre", "BufNewFile" },
-	dependencies = { "nvim-treesitter-textobjects", "windwp/nvim-ts-autotag" },
+	dependencies = {
+		"nvim-treesitter-textobjects",
+		"nvim-treesitter/nvim-treesitter-context",
+		"windwp/nvim-ts-autotag",
+	},
 	cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
 	keys = {
 		{ "<C-s>", desc = "Increment selection" },
@@ -53,6 +57,7 @@ return {
 				},
 			},
 		})
+		require("treesitter-context").setup()
 		require("nvim-ts-autotag").setup()
 
 		-- Launch treesitter highlight at startup
