@@ -93,6 +93,8 @@ zstyle ':completion:*' menu no
 zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':fzf-tab:*' switch-group '<' '>'
 zstyle ':fzf-tab:complete:z:*' fzf-preview 'eza -1 --color=always $realpath'
+zstyle ':fzf-tab:complete:codium:*' fzf-preview 'eza --tree --level=2 --color=always $realpath'
+zstyle ':fzf-tab:complete:nvim:*' fzf-preview 'eza --tree --level=2 --color=always $realpath'
 
 # Colors autoload for colored man pages
 autoload colors && colors
