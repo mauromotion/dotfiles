@@ -101,6 +101,12 @@ for COLOR in RED GREEN YELLOW BLUE MAGENTA CYAN BLACK WHITE; do
     eval BOLD_$COLOR='%{$fg_bold[${(L)COLOR}]%}'
 done
 eval RESET='%{$reset_color%}'
+## ---------- ##
+
+# Fuzzy matching of completion
+zstyle ':completion:*' completer _complete _match _approximate
+zstyle ':completion:*:match:*' original only
+zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3>7?7:($#PREFIX+$#SUFFIX)/3))numeric)'
 
 # Initialize completion
 autoload -U compinit && compinit
