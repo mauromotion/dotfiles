@@ -131,11 +131,13 @@ autoload -U compinit && compinit
 #bindkey -s ^n "nvims\n"
 
 ## -- Prompt Theming -- ##
-fpath+=($HOME/.zsh/plugins/pure)
-autoload -U promptinit; promptinit
-prompt pure
-zstyle :prompt:pure:git:branch color cyan
-zstyle :prompt:pure:virtualenv color cyan
+# fpath+=($HOME/.zsh/plugins/pure)
+# autoload -U promptinit; promptinit
+# prompt pure
+# zstyle :prompt:pure:git:branch color cyan
+# zstyle :prompt:pure:virtualenv color cyan
+eval "$(starship init zsh)"
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
 
 # zsh-vi-mode settings
 function zvm_config() {
@@ -210,6 +212,7 @@ source $ZSH/plugins/fzf-tab/fzf-tab.plugin.zsh
 
 # Autosuggestions
 source $ZSH/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # FZF plugin utilities
 source $ZSH/plugins/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
