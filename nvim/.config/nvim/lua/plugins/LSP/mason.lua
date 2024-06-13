@@ -38,6 +38,7 @@ return {
 				"marksman",
 				"jsonls",
 				"yamlls",
+				"taplo",
 				"sqlls",
 				"bashls",
 				"astro",
