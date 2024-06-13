@@ -13,6 +13,6 @@ return {
 			},
 		})
 		-- Keybindings
-		-- vim.keymap.set("n", "-", "<CMD>Oil<CR>", { noremap = true, silent = true, desc = "Open parent directory" })
+		vim.keymap.set("n", "-", "<CMD>Oil<CR>", { noremap = true, silent = true, desc = "Open parent directory" })
 	end,
 }

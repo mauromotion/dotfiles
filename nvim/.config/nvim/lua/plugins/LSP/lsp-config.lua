@@ -134,6 +134,18 @@ return {
 			on_attach = on_attach,
 		})
 
+		-- configure toml server
+		lspconfig["taplo"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+
+		-- configure yaml server
+		lspconfig["yamlls"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+
 		-- configure bash language server
 		lspconfig["bashls"].setup({
 			capabilities = capabilities,
