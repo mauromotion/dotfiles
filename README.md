@@ -9,7 +9,7 @@
 
 # Dotfiles repository
 
-This repository contains all the configuration files for the Arch Linux installation on my main desktop machine.
+This repository contains all the configuration files for the Arch Linux installations on both my desktop and laptop computers.
 
 ## Installation
 
@@ -17,13 +17,12 @@ This repository contains all the configuration files for the Arch Linux installa
    `sudo pacman -S git stow`
 
 2. Clone this repository into home:
-   `git clone -b arch-desktop git@github.com:mauromotion/dotfiles.git ~/.dotfiles`
+   `git clone git@github.com:mauromotion/dotfiles.git ~/.dotfiles`
 
 3. Move inside the just created directory:
    `cd ~/.dotfiles`
 
-4. Stow specific configurations as needed:
-   `stow nvim` `stow wezterm` `stow zsh`
-
-5. OR run stow and move on with your day:
-   `stow .`
+4. Stow specific configurations as needed either for desktop, laptop, or common:
+   `stow -d desktop -t ~ i3 polybar`
+   `stow -d laptop -t ~ i3 polybar`
+   `stow -d common -t ~ nvim wezterm zsh`
