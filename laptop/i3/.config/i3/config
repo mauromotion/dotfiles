@@ -88,7 +88,7 @@ exec_always --no-startup-id  sh ~/.dotfiles/i3/.config/i3/color-profiles/laptop-
 focus_follows_mouse no
 
 ### Keyboard layout specific keybindings
-include ./keyboard_layouts/layout_colemak_dh
+include ./keyboard_layouts/layout_qwerty
 
 # Change focus
 bindsym $mod+Left focus left
