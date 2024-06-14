@@ -1,0 +1,50 @@
+#############
+### i3bar ###
+#############
+# bar {
+# 	i3bar_command i3bar
+# 	status_command i3status
+# 	position bottom
+
+## Please set your primary output first. Example: 'xrandr --output eDP1 --primary'
+# Desktop
+  # tray_output DP-0
+# Laptop
+# tray_output eDP-1-1
+
+  # tray_padding 2
+
+# separator_symbol 
+
+# 	bindsym button4 nop
+# 	bindsym button5 nop
+#   font pango: FiraMono Nerd Font 12
+# 	strip_workspace_numbers yes
+#   workspace_min_width 70
+#
+#     colors {
+#         background #2E3440
+#         statusline #D8DEE9
+#         separator  #4d5568 
+#
+# #                      border  backgr. text
+#         focused_workspace  #4d5568 #4d5568 #E5E9F0
+#         active_workspace   #88C0D0 #88C0D0 #2E3440
+#         inactive_workspace #2E3440 #2E3440 #9ea2ad
+#         binding_mode       #A3BE8C #A3BE8C #2E3440
+#         urgent_workspace   #B48EAD #B48EAD #2E3440
+#     }
+# }
+
+# Hide/unhide i3status bar
+# bindsym $mod+b bar mode toggle
+
+# Theme colors
+# class                   border  backgr. text    indic.   child_border
+  client.focused          #88C0D0 #88C0D0 #3B4252 #D8DEE9
+  client.focused_inactive #3B4252 #3B4252 #81A1C1 #4C566A
+  client.unfocused        #3B4252 #3B4252 #81A1C1 #4C566A
+  client.urgent           #BF616A #D8DEE9 #81A1C1 #88C0D0
+  client.placeholder      #000000 #0c0c0c #ffffff #000000 
+
+  client.background       #2E3440
