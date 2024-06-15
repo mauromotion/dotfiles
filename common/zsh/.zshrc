@@ -1,5 +1,5 @@
 # ZSH Home dir
-export ZSH=$HOME/.zsh
+export ZSH=$HOME
 
 # Set default editor
 export EDITOR=nvim
@@ -28,6 +28,13 @@ bindkey "^[[B" history-search-forward
 # Miscellaneous general options
 setopt auto_cd
 setopt auto_list
+
+## -- Install Zinit plugin manager -- ##
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+
+source "${ZINIT_HOME}/zinit.zsh"
 
 # Fzf set up
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
@@ -102,30 +109,10 @@ zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*:match:*' original only
 zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3>7?7:($#PREFIX+$#SUFFIX)/3))numeric)'
 
-## Install Zinit plugin manager
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
-[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-source "${ZINIT_HOME}/zinit.zsh"
 # Initialize completion
 autoload -U compinit && compinit
 
-## -- Multiple Neovim configs selector -- ##
-#alias nvim-mauro="NVIM_APPNAME=nvim_mauro nvim"
-
-#function nvims() {
-#  items=("default" "nvim_mauro")
-#  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
-#  if [[ -z $config ]]; then
-#    echo "Nothing selected"
-#    return 0
-#  elif [[ $config == "default" ]]; then
-#    config=""
-#  fi
-#  NVIM_APPNAME=$config nvim $@
-#}
-#
-#bindkey -s ^n "nvims\n"
+zinit cdreplay -q
 
 ## -- Prompt Theming -- ##
 eval "$(starship init zsh)"
@@ -152,14 +139,16 @@ alias cat="bat"
 alias cd="z"
 alias cl="clear"
 alias cp="cp -i"
-alias diary="nvim +VimwikiIndex +VimwikiDiaryIndex"
+alias del="trash-put -i"
 alias df="df -H"
+alias diary="nvim +VimwikiIndex +VimwikiDiaryIndex"
+alias etree="eza -T --color=always --icons | less -R"
+alias gP="git push"
 alias ga="git add"
 alias gaa="git add --all"
 alias gcam="git commit --all --message"
-alias gp="git pull"
 alias glog="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --date=short"
-alias gP="git push"
+alias gp="git pull"
 alias grep="grep --color=auto"
 alias gst="git status"
 alias icat="kitty +kitten icat"
@@ -172,8 +161,8 @@ alias ls="eza --icons"
 alias lsa="eza --icons -a"
 alias mirrors-update="sudo reflector -c 'United Kingdom' -a 6 --sort rate --save /etc/pacman.d/mirrorlist"
 alias mv="mv -i"
-alias nv="nvim"
 alias next="tw +next"
+alias nv="nvim"
 alias pac-autoremove="sudo pacman -Rcs $(pacman -Qdtq)"
 alias polybar-restart="sh ~/.config/polybar/launch*"
 alias py="python3"
@@ -181,10 +170,6 @@ alias rm="rm -i"
 alias rn="ranger"
 alias rnd="tw +rnd"
 alias src="source ~/.zshrc"
-# alias tr="trash -i"
-# alias trash="trash -i"
-alias del="trash-put -i"
-alias etree="eza -T --color=always --icons | less -R"
 alias tw="task"
 alias v="nvim"
 alias wiki="nvim -c VimwikiIndex"
@@ -193,6 +178,9 @@ alias zsh-update="~/.zsh/zsh_plugins_updater.sh"
 alias ~="cd ~/"
 
 ## -- Plugins -- ##
+
+# Autosuggestions
+zinit light zsh-users/zsh-autosuggestions
 
 # csh.sh completion
 zinit load thirteen37/chtsh-completions
@@ -203,14 +191,14 @@ zinit light zsh-users/zsh-completions
 # Fzf-tab
 zinit light Aloxaf/fzf-tab
 
-# Autosuggestions
-zinit light zsh-users/zsh-autosuggestions
-
 # FZF plugin utilities
 zinit light unixorn/fzf-zsh-plugin
 
 # Colored man pages
 zinit snippet OMZP::colored-man-pages
+
+# command-not-found
+zinit snippet OMZP::command-not-found
 
 # fnm
 export PATH="/home/mauromotion/.local/share/fnm:$PATH"
@@ -232,3 +220,4 @@ zinit light zsh-users/zsh-syntax-highlighting
 # Vim mode
 zinit light jeffreytse/zsh-vi-mode
 zvm_after_init_commands+=('[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh')
+
