@@ -95,14 +95,6 @@ zstyle ':fzf-tab:*' switch-group '<' '>'
 zstyle ':fzf-tab:complete:z:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':fzf-tab:complete:codium:*' fzf-preview 'eza --tree --level=2 --color=always $realpath'
 zstyle ':fzf-tab:complete:nvim:*' fzf-preview 'eza --tree --level=2 --color=always $realpath'
-
-# Colors autoload for colored man pages
-autoload colors && colors
-for COLOR in RED GREEN YELLOW BLUE MAGENTA CYAN BLACK WHITE; do
-    eval $COLOR='%{$fg_no_bold[${(L)COLOR}]%}'  #wrap colours between %{ %} to avoid weird gaps in autocomplete
-    eval BOLD_$COLOR='%{$fg_bold[${(L)COLOR}]%}'
-done
-eval RESET='%{$reset_color%}'
 ## ---------- ##
 
 # Fuzzy matching of completion
@@ -110,6 +102,11 @@ zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*:match:*' original only
 zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3>7?7:($#PREFIX+$#SUFFIX)/3))numeric)'
 
+## Install Zinit plugin manager
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
 # Initialize completion
 autoload -U compinit && compinit
 
@@ -131,11 +128,6 @@ autoload -U compinit && compinit
 #bindkey -s ^n "nvims\n"
 
 ## -- Prompt Theming -- ##
-# fpath+=($HOME/.zsh/plugins/pure)
-# autoload -U promptinit; promptinit
-# prompt pure
-# zstyle :prompt:pure:git:branch color cyan
-# zstyle :prompt:pure:virtualenv color cyan
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 
@@ -203,27 +195,22 @@ alias ~="cd ~/"
 ## -- Plugins -- ##
 
 # csh.sh completion
-# fpath=($ZSH/plugins/cht_completion/ $fpath)
+zinit load thirteen37/chtsh-completions
 
 # Completion
-fpath=($ZSH/plugins/zsh-completions/src/ $fpath)
-zmodload -i zsh/complist
+zinit light zsh-users/zsh-completions
 
 # Fzf-tab
-source $ZSH/plugins/fzf-tab/fzf-tab.plugin.zsh
+zinit light Aloxaf/fzf-tab
 
 # Autosuggestions
-source $ZSH/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+zinit light zsh-users/zsh-autosuggestions
 
 # FZF plugin utilities
-source $ZSH/plugins/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
-
-# Colorize code in terminal
-source $ZSH/plugins/colorize/colorize.plugin.zsh
+zinit light unixorn/fzf-zsh-plugin
 
 # Colored man pages
-source $ZSH/plugins/colored-man-pages/colored-man-pages.plugin.zsh
+zinit snippet OMZP::colored-man-pages
 
 # fnm
 export PATH="/home/mauromotion/.local/share/fnm:$PATH"
@@ -240,8 +227,8 @@ eval "$(rbenv init - zsh)"
 eval "$(zoxide init zsh)"
 
 # Syntax Highlighting
-source $ZSH/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+zinit light zsh-users/zsh-syntax-highlighting
 
 # Vim mode
-source $ZSH/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+zinit light jeffreytse/zsh-vi-mode
 zvm_after_init_commands+=('[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh')
