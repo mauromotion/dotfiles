@@ -236,7 +236,7 @@ eval "$(rbenv init - zsh)"
 ### ---- This lines must always be at EOF!!! ---- ###
 
 # eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/pure.toml)"
-eval "$(fzf --zsh)"
+# eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
 
 # Syntax Highlighting
