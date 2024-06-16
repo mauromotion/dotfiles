@@ -29,12 +29,61 @@ bindkey "^[[B" history-search-forward
 setopt auto_cd
 setopt auto_list
 
+## -- Prompt Theming -- ##
+eval "$(starship init zsh)"
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
+
 ## -- Install Zinit plugin manager -- ##
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 
 source "${ZINIT_HOME}/zinit.zsh"
+
+# csh.sh completion script -- needs to be before compinit
+fpath=(~/.zsh.d/ $fpath)
+
+# Initialize completion
+autoload -U compinit && compinit
+
+zinit cdreplay -q
+
+## -- Plugins -- ##
+
+# Fzf-tab
+zinit light Aloxaf/fzf-tab
+
+# Autosuggestions
+zinit wait lucid atload'_zsh_autosuggest_start' light-mode for \
+    zsh-users/zsh-autosuggestions
+
+# Syntax Highlighting
+zinit ice wait'1' silent
+zinit light zsh-users/zsh-syntax-highlighting
+
+# Completion
+zinit ice wait"2" silent
+zinit light zsh-users/zsh-completions
+
+# Fzf plugin utilities
+zinit ice wait'3' silent
+zinit light unixorn/fzf-zsh-plugin
+
+# Vim mode
+# zinit snippet OMZP::vi-mode
+zinit light jeffreytse/zsh-vi-mode
+zvm_after_init_commands+=('[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh')
+
+# cp command with rsync functionalities
+zinit snippet OMZP::cp
+
+# Colored man pages
+zinit snippet OMZP::colored-man-pages
+
+# command-not-found
+zinit snippet OMZP::command-not-found
+
+## -- Plugins settings -- ##
 
 # Fzf set up
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
@@ -109,15 +158,6 @@ zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*:match:*' original only
 zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3>7?7:($#PREFIX+$#SUFFIX)/3))numeric)'
 
-# Initialize completion
-autoload -U compinit && compinit
-
-zinit cdreplay -q
-
-## -- Prompt Theming -- ##
-eval "$(starship init zsh)"
-export STARSHIP_CONFIG=~/.config/starship/starship.toml
-
 # zsh-vi-mode settings
 function zvm_config() {
   ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
@@ -174,31 +214,9 @@ alias tw="task"
 alias v="nvim"
 alias wiki="nvim -c VimwikiIndex"
 alias yt="ytfzf"
-alias zsh-update="~/.zsh/zsh_plugins_updater.sh"
 alias ~="cd ~/"
 
-## -- Plugins -- ##
-
-# Autosuggestions
-zinit light zsh-users/zsh-autosuggestions
-
-# csh.sh completion
-zinit load thirteen37/chtsh-completions
-
-# Completion
-zinit light zsh-users/zsh-completions
-
-# Fzf-tab
-zinit light Aloxaf/fzf-tab
-
-# FZF plugin utilities
-zinit light unixorn/fzf-zsh-plugin
-
-# Colored man pages
-zinit snippet OMZP::colored-man-pages
-
-# command-not-found
-zinit snippet OMZP::command-not-found
+### ---- This lines must always be at EOF!!! ---- ###
 
 # fnm
 export PATH="/home/mauromotion/.local/share/fnm:$PATH"
@@ -208,16 +226,7 @@ eval "$(fnm env --use-on-cd)"
 # rbenv
 eval "$(rbenv init - zsh)"
 
-### ---- This lines must always be at EOF!!! ---- ###
 
 # eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/pure.toml)"
 # eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
-
-# Syntax Highlighting
-zinit light zsh-users/zsh-syntax-highlighting
-
-# Vim mode
-zinit light jeffreytse/zsh-vi-mode
-zvm_after_init_commands+=('[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh')
-
