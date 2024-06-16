@@ -54,19 +54,19 @@ zinit cdreplay -q
 zinit light Aloxaf/fzf-tab
 
 # Autosuggestions
-zinit wait lucid atload'_zsh_autosuggest_start' light-mode for \
+zinit wait lucid atload'_zsh_autosuggest_start; unalias zi' light-mode for \
     zsh-users/zsh-autosuggestions
 
 # Syntax Highlighting
-zinit ice wait'1' silent
-zinit light zsh-users/zsh-syntax-highlighting
+zinit ice wait'0' silent
+zinit light zdharma-continuum/fast-syntax-highlighting
 
 # Completion
-zinit ice wait"2" silent
+zinit ice wait"1" silent
 zinit light zsh-users/zsh-completions
 
 # Fzf plugin utilities
-zinit ice wait'3' silent
+zinit ice wait'2' silent
 zinit light unixorn/fzf-zsh-plugin
 
 # Vim mode
@@ -74,13 +74,9 @@ zinit light unixorn/fzf-zsh-plugin
 zinit light jeffreytse/zsh-vi-mode
 zvm_after_init_commands+=('[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh')
 
-# cp command with rsync functionalities
+# Oh-My-zsh plugins
 zinit snippet OMZP::cp
-
-# Colored man pages
 zinit snippet OMZP::colored-man-pages
-
-# command-not-found
 zinit snippet OMZP::command-not-found
 
 ## -- Plugins settings -- ##
