@@ -7,8 +7,10 @@ session=${1:-i3}
 
 case $session in
 dwm)
-	$HOME/dwm/autostart.sh &
-	exec dwm
+	while true; do
+		$HOME/dwm/autostart.sh &
+		dwm 2>~/.dwm.log
+	done
 	;;
 i3)
 	exec i3
