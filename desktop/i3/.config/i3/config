@@ -64,8 +64,8 @@ bindsym $mod+slash exec playerctl next
 bindsym $mod+m exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # Launch Applications
-bindsym $mod+Return exec wezterm
-bindsym $mod+Shift+Return exec firefox
+bindsym $mod+Shift+Return exec wezterm
+bindsym $mod+b exec firefox
 bindsym $mod+Ctrl+Return exec thunar
 bindsym $mod+t exec --no-startup-id pkill picom
 bindsym $mod+Ctrl+t exec --no-startup-id picom -b 
@@ -115,7 +115,7 @@ bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_
 bindsym $mod+BackSpace split toggle
 
 # Toggle fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+Return fullscreen toggle
 
 # Change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -282,7 +282,7 @@ exec --no-startup-id xset b 100
 ###############
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # Hide/unhide polybar
-bindsym $mod+b exec --no-startup-id polybar-msg cmd toggle
+bindsym $mod+Ctrl+b exec --no-startup-id polybar-msg cmd toggle
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
