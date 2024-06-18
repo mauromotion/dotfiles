@@ -147,6 +147,7 @@ zstyle ':fzf-tab:*' switch-group '<' '>'
 zstyle ':fzf-tab:complete:z:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':fzf-tab:complete:codium:*' fzf-preview 'eza --tree --level=2 --color=always $realpath'
 zstyle ':fzf-tab:complete:nvim:*' fzf-preview 'eza --tree --level=2 --color=always $realpath'
+zstyle ':fzf-tab:*' ignore 3
 ## ---------- ##
 
 # Fuzzy matching of completion
