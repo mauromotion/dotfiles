@@ -1,27 +1,27 @@
 #!/bin/sh
 
-# manage sessions
+## Manage sessions ##
 
-# default session
+# Define the default session
 session=${1:-i3}
 
+# Launch requested session
 case $session in
 dwm)
 	while true; do
-		$HOME/dwm/autostart.sh &
+		# Launch script to autostart some services and programs
+		$HOME/src/suckless/dwm/autostart.sh &
+		# Launch dwm, and in case of errors log them in a file
 		dwm 2>~/.dwm.log
 	done
 	;;
 i3)
+	# Launch i3
 	exec i3
 	;;
 	# no known session, try to run it as command
 *)
+	# Launch default session (i3)
 	exec $1
 	;;
 esac
-
-# Autostart applictations
-# if [ $session == "dwm" ]; then
-# 	~/dwm/autostart.sh &
-# fi
