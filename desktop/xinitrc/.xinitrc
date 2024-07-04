@@ -19,6 +19,12 @@ i3)
 	# Launch i3
 	exec i3
 	;;
+xmonad)
+	# Launch script to autostart some services and programs
+	# $HOME/.config/xmonad/autostart.sh
+	# Launch Xmonad
+	exec xmonad
+	;;
 	# no known session, try to run it as command
 *)
 	# Launch default session (i3)

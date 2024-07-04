@@ -9,8 +9,8 @@ return {
 				component_separators = { left = "", right = "" },
 				section_separators = { left = "", right = "" },
 				disabled_filetypes = {
-					statusline = { "dashboard", "alpha", "starter" },
-					winbar = { "dashboard", "alpha", "starter" },
+					statusline = { "dashboard", "alpha", "ministarter" },
+					winbar = { "dashboard", "alpha", "ministarter" },
 				},
 				ignore_focus = {},
 				always_divide_middle = true,
