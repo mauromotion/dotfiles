@@ -211,6 +211,10 @@ screen.connect_signal("request::desktop_decoration", function(s)
 		},
 	})
 
+	-- Customize the systray
+	mysystray = wibox.widget.systray()
+	mysystray.base_size = 18
+
 	-- Create the wibox
 	s.mywibox = awful.wibar({
 		position = "top",
@@ -219,7 +223,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			layout = wibox.layout.align.horizontal,
 			{ -- Left widgets
 				layout = wibox.layout.fixed.horizontal,
-				mylauncher,
+				-- mylauncher,
 				s.mytaglist,
 				s.mypromptbox,
 			},
@@ -227,7 +231,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			{ -- Right widgets
 				layout = wibox.layout.fixed.horizontal,
 				mykeyboardlayout,
-				wibox.widget.systray(),
+				mysystray,
 				mytextclock,
 				s.mylayoutbox,
 			},
@@ -275,9 +279,19 @@ awful.keyboard.append_global_keybindings({
 		awful.screen.focused().mypromptbox:run()
 	end, { description = "run prompt", group = "launcher" }),
 
+	-- awful.key({ modkey }, "p", function()
+	-- 	menubar.show()
+	-- end, { description = "show the menubar", group = "launcher" }),
+
+	awful.key({ modkey }, "g", function()
+		awful.spawn("rofi -show combi")
+	end, { description = "launch rofi", group = "launcher" }),
+
 	awful.key({ modkey }, "p", function()
-		menubar.show()
-	end, { description = "show the menubar", group = "launcher" }),
+		awful.spawn(
+			'rofi -show power-menu -modi "power-menu:rofi-power-menu --choices=suspend/lockscreen/reboot/shutdown"'
+		)
+	end, { description = "launch power menu", group = "launcher" }),
 })
 
 -- Tags related keybindings
@@ -511,6 +525,7 @@ ruled.client.connect_signal("request::rules", function()
 				"Gpick",
 				"Kruler",
 				"lxappearance",
+				"Qalculate-gtk",
 				"steam",
 				"Sxiv",
 				"Tor Browser",
@@ -541,12 +556,12 @@ ruled.client.connect_signal("request::rules", function()
 
 	ruled.client.append_rule({
 		rule = { class = "thunderbird" },
-		properties = { screen = 1, tag = "2" },
+		properties = { screen = 1, tag = "mail" },
 	})
 
 	ruled.client.append_rule({
 		rule = { class = "steam" },
-		properties = { screen = 1, tag = "7" },
+		properties = { screen = 1, tag = "games" },
 	})
 end)
 -- }}}
