@@ -25,9 +25,12 @@ xmonad)
 	# Launch Xmonad
 	exec xmonad
 	;;
+awesome)
+	# Launch awesome
+	exec awesome
+	;;
 	# no known session, try to run it as command
 *)
-	# Launch default session (i3)
 	exec $1
 	;;
 esac
