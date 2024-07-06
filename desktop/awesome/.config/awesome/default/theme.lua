@@ -66,6 +66,14 @@ theme.menu_width = dpi(200)
 -- beautiful.variable in your rc.lua
 --theme.bg_widget = "#cc0000"
 
+-- Hotkeys screen customization
+local beautiful = require("beautiful")
+beautiful.hotkeys_font = "JetBrains Mono 14"
+beautiful.hotkeys_description_font = "JetBrains Mono 12"
+beautiful.menu_font = "JetBrains Mono 14"
+beautiful.menu_height = 24
+beautiful.menu_width = 300
+
 -- Define the image to load
 theme.titlebar_close_button_normal = themes_path .. "default/titlebar/close_normal.png"
 theme.titlebar_close_button_focus = themes_path .. "default/titlebar/close_focus.png"
@@ -94,7 +102,7 @@ theme.titlebar_maximized_button_normal_active = themes_path .. "default/titlebar
 theme.titlebar_maximized_button_focus_active = themes_path .. "default/titlebar/maximized_focus_active.png"
 
 -- theme.wallpaper = themes_path.."default/background.png"
-theme.wallpaper = "/home/mauromotion/Pictures/Wallpapers/art_stalenhag_01.jpg"
+-- theme.wallpaper = "/home/mauromotion/Pictures/Wallpapers/art_stalenhag_01.jpg"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path .. "default/layouts/fairhw.png"

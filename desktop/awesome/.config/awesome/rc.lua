@@ -35,7 +35,6 @@ end)
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
--- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 beautiful.init("/home/mauromotion/.config/awesome/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
@@ -209,11 +208,32 @@ screen.connect_signal("request::desktop_decoration", function(s)
 				awful.client.focus.byidx(1)
 			end),
 		},
+		widget_template = {
+			{
+				{
+					{
+						id = "text_role",
+						widget = wibox.widget.textbox,
+					},
+					layout = wibox.layout.fixed.horizontal,
+				},
+				left = 10,
+				right = 10,
+				widget = wibox.container.margin,
+			},
+			id = "background_role",
+			widget = wibox.container.background,
+			create_callback = function(self, c, index, objects) --luacheck: no unused args
+				self:get_children_by_id("text_role")[1].markup = "<b>" .. c.name .. "</b>"
+			end,
+		},
 	})
 
 	-- Customize the systray
-	mysystray = wibox.widget.systray()
-	mysystray.base_size = 18
+	local mysystray = wibox.widget.systray()
+	mysystray:set_base_size(20)
+	mysystray:set_screen("primary")
+	-- mysystray:systray_icon_spacing(4)
 
 	-- Create the wibox
 	s.mywibox = awful.wibar({
@@ -230,8 +250,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			s.mytasklist, -- Middle widget
 			{ -- Right widgets
 				layout = wibox.layout.fixed.horizontal,
-				mykeyboardlayout,
-				mysystray,
+				-- mykeyboardlayout,
+				wibox.container.margin(mysystray, 5, 5, 8, 5, "#2e3440"),
 				mytextclock,
 				s.mylayoutbox,
 			},

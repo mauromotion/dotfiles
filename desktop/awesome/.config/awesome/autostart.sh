@@ -1,34 +1,24 @@
 #!/bin/bash
 
-# Kill already existing processes to avoid duplication
-processes=(
-	"picom"
-	"udiskie"
-	"polkit-gnome-au"
-	"pa-applet"
-	"nm-applet"
-	"nextcloud"
-	"openrgb"
-)
-
-for proc in "${processes[@]}"; do
-	pids=$(pgrep "$proc")
-
-	if [ -n "$pids" ]; then
-		kill $pids
+# Check for already existing processes to avoid duplication
+run() {
+	if ! pgrep -f "$1"; then
+		"$@" &
 	fi
-done
+}
 
-# Autostart programs
-picom -b &
+# Start every time
 nitrogen --restore &
-udiskie -a -n -t &
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-pa-applet &
-nm-applet &
-nextcloud --background &
-openrgb --startminimized &
-xset b 100 &
+
+# Start only once
+run "picom -b"
+run "udiskie -a -n -t"
+run "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+run "pa-applet"
+run "nm-applet"
+run "nextcloud --background"
+run "openrgb --startminimized"
+run "xset b 100 &"
 
 # Load color profiles either for my desktop monitors or my laptop
 if [ $(hostnamectl --static) == "eva-01" ]; then
