@@ -165,7 +165,10 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	-- Create a taglist widget
 	s.mytaglist = awful.widget.taglist({
 		screen = s,
-		filter = awful.widget.taglist.filter.all,
+		-- filter = awful.widget.taglist.filter.all,
+		filter = function(t)
+			return t.selected or #t:clients() > 0
+		end,
 		buttons = {
 			awful.button({}, 1, function(t)
 				t:view_only()
@@ -280,7 +283,7 @@ awful.keyboard.append_global_keybindings({
 		mymainmenu:show()
 	end, { description = "show main menu", group = "awesome" }),
 	awful.key({ modkey, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
-	awful.key({ modkey, "Shift" }, "e", awesome.quit, { description = "quit awesome", group = "awesome" }),
+	awful.key({ modkey, "Control" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
 
 	awful.key({ modkey }, "x", function()
 		awful.prompt.run({
