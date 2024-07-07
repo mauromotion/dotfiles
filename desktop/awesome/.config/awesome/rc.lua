@@ -169,6 +169,10 @@ screen.connect_signal("request::desktop_decoration", function(s)
 		filter = function(t)
 			return t.selected or #t:clients() > 0
 		end,
+		layout = {
+			spacing = 10,
+			layout = wibox.layout.fixed.horizontal,
+		},
 		buttons = {
 			awful.button({}, 1, function(t)
 				t:view_only()
@@ -544,17 +548,18 @@ ruled.client.connect_signal("request::rules", function()
 			instance = { "copyq", "pinentry" },
 			class = {
 				"Arandr",
-				"Blueman-manager",
 				"Gpick",
-				"Kruler",
-				"lxappearance",
+				"Lxappearance",
 				"Qalculate-gtk",
-				"steam",
-				"Sxiv",
 				"Tor Browser",
-				"Wpa_gui",
-				"veromix",
-				"xtightvncviewer",
+				"steam",
+				"Galculator",
+				"Gimp",
+				"Pavucontrol",
+				"Viewnior",
+				"mpv",
+				"org.cryptomator.launcher.Cryptomator$MainApp",
+				"vlc",
 			},
 			-- Note that the name property shown in xprop might be set slightly after creation of the client
 			-- and the name shown there might not match defined rules here.
