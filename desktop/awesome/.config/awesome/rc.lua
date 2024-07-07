@@ -239,7 +239,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	-- Customize the systray
 	local mysystray = wibox.widget.systray()
 	mysystray:set_base_size(20)
-	mysystray:set_screen("primary")
+	mysystray:set_screen(screen[2])
 	-- mysystray:systray_icon_spacing(4)
 
 	-- Create the wibox
@@ -316,7 +316,7 @@ awful.keyboard.append_global_keybindings({
 
 	awful.key({ modkey }, "p", function()
 		awful.spawn(
-			'rofi -show power-menu -modi "power-menu:rofi-power-menu --choices=suspend/lockscreen/reboot/shutdown"'
+			'rofi -show power-menu -modi "power-menu:rofi-power-menu --choices=suspend/logout/lockscreen/reboot/shutdown"'
 		)
 	end, { description = "launch power menu", group = "launcher" }),
 })
