@@ -136,7 +136,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	-- Each screen has its own tag table.
 	local names = { "home", "mail", "dev", "chat", "docs", "media", "games", "edit", "extra" }
 	local l = awful.layout.suit -- Just to save some typing: use an alias.
-	local layouts = { l.tile, l.max, l.fair, l.tile, l.fair, l.max, l.floating, l.tile, l.floating }
+	local layouts = { l.tile, l.max, l.fair, l.tile, l.fair, l.tile, l.floating, l.tile, l.floating }
 	awful.tag(names, s, layouts)
 
 	-- Create a promptbox for each screen
@@ -537,7 +537,7 @@ ruled.client.connect_signal("request::rules", function()
 			focus = awful.client.focus.filter,
 			raise = true,
 			screen = awful.screen.preferred,
-			placement = awful.placement.no_overlap + awful.placement.no_offscreen,
+			placement = awful.placement.centered + awful.placement.no_overlap + awful.placement.no_offscreen,
 		},
 	})
 
