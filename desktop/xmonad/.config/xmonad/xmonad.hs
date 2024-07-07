@@ -2,6 +2,11 @@
 -- Import modules
 --
 import XMonad
+import Data.Monoid
+import System.Exit
+
+import qualified XMonad.StackSet as W
+import qualified Data.Map        as M
 
 import XMonad.Util.EZConfig
 
@@ -28,6 +33,8 @@ import XMonad.Util.Loggers
 
 myModMask = mod4Mask
 myTerminal = "wezterm"
+myBrowser = "firefox"
+myFileManager = "thunar"
 myBorderWidth = 2
 myNormalBorderColor = "#2e3440"
 myFocusedBorderColor = "#88c0d0"
@@ -78,12 +85,12 @@ myManageHook = composeAll
 ------------------------------------------------------------------------
 -- Startup hook
 --
-myStartupHook :: X 
+myStartupHook :: X ()
 myStartupHook = do
   spawnOnce "picom -b"
   spawnOnce "trayer --edge top --align right --SetDockType true \
-            \--SetPartialStrut true --expand true --width 10 \
-            \--transparent true --tint 0x5f5f5f --height 18"
+            \--SetPartialStrut false --expand true --width 10 \
+            \--transparent false --tint 0xFFFFFFFF --height 18"
   spawnOnce "nitrogen --restore"
   spawnOnce "udiskie -a -n -t"
   spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
@@ -139,16 +146,28 @@ myXmobarPP = def
 ------------------------------------------------------------------------
 -- Key bindings
 --
-myKeys conf@(XConfig {XMonad.modMask = mod}) = Data.Map.fromList $
+myKeys conf@(XConfig {XMonad.modMask = mod}) = M.fromList $
 
     -- launch a terminal
     [ ((mod .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
-    -- launch rofi power menu
-    , ((mod,               xK_p     ), spawn "rofi -show combi")
+    -- launch rofi
+    , ((mod,               xK_g     ), spawn "rofi -show combi")
 
     -- launch rofi power menu
-    , ((mod,               xK_p     ), spawn 'rofi -show power-menu -modi "power-menu:rofi-power-menu --choices=suspend/logout/lockscreen/reboot/shutdown"')
+    , ((mod,               xK_p     ), spawn "rofi -show power-menu -modi \"power-menu:rofi-power-menu --choices=suspend/logout/lockscreen/reboot/shutdown\"")
+
+    -- launch the browser
+    , ((mod,               xK_b     ), spawn myBrowser)
+
+    -- launch the file manager
+    , ((mod,               xK_f     ), spawn myFileManager)
+
+    -- launch the calculator
+    , ((mod,               xK_c     ), spawn "galculator")
+
+    -- Capture screen region
+    , ((mod .|. shiftMask, xK_z     ), spawn "flameshot gui")
 
     -- close focused window
     , ((mod .|. shiftMask, xK_q     ), kill)
@@ -202,7 +221,7 @@ myKeys conf@(XConfig {XMonad.modMask = mod}) = Data.Map.fromList $
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
     -- See also the statusBar function from Hooks.DynamicLog.
     --
-    -- , ((mod              , xK_b     ), sendMessage ToggleStruts)
+    , ((mod .|. shiftMask, xK_b     ), sendMessage ToggleStruts)
 
     -- Quit xmonad
     , ((mod .|. shiftMask .|. controlMask, xK_q     ), io (exitWith ExitSuccess))
