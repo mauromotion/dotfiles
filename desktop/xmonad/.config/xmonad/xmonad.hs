@@ -87,19 +87,19 @@ myManageHook = composeAll
 --
 myStartupHook :: X ()
 myStartupHook = do
-  spawnOnce "picom -b"
+  spawnOnce "picom -b &"
   spawnOnce "trayer --edge top --align right --SetDockType true \
-            \--SetPartialStrut false --expand true --width 10 \
-            \--transparent false --tint 0xFFFFFFFF --height 18"
-  spawnOnce "nitrogen --restore"
-  spawnOnce "udiskie -a -n -t"
-  spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
-  spawnOnce "pa-applet"
-  spawnOnce "nm-applet"
-  spawnOnce "nextcloud --background"
-  spawnOnce "openrgb --startminimized"
-  spawnOnce "xset b 100"
-  spawnOnce "/home/mauromotion/.config/i3/color-profiles/desktop-load_ICC.sh"
+            \--SetPartialStrut true --expand true --width 5 --padding 5 --margin 5 \
+            \--transparent false --tint 0xFFFFFFFF --height 18 &"
+  spawnOnce "nitrogen --restore &"
+  spawnOnce "udiskie -a -n -t &"
+  spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &"
+  spawnOnce "pa-applet &"
+  spawnOnce "nm-applet &"
+  spawnOnce "nextcloud --background &"
+  spawnOnce "openrgb --startminimized &"
+  spawnOnce "xset b 100 &"
+  spawnOnce "/home/mauromotion/.config/i3/color-profiles/desktop-load_ICC.sh &"
 
 ------------------------------------------------------------------------
 -- Layouts

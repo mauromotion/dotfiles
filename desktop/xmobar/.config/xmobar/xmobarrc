@@ -4,7 +4,7 @@ Config { overrideRedirect = False
        , fgColor  = "#d8dee9"
        , position = TopW L 90
        , commands = [ Run Weather "EGKK"
-                        [ "--template", "<weather> <tempC>°C"
+                        [ "--template", " <station>: <weather> <tempC>°C"
                         , "-L", "0"
                         , "-H", "25"
                         , "--low"   , "lightblue"
