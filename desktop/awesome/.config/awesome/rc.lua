@@ -625,12 +625,12 @@ ruled.client.connect_signal("request::rules", function()
 
 	ruled.client.append_rule({
 		rule = { class = "thunderbird" },
-		properties = { screen = 1, tag = "mail" },
+		properties = { screen = 1, tag = " mail " },
 	})
 
 	ruled.client.append_rule({
 		rule = { class = "steam" },
-		properties = { screen = 1, tag = "games" },
+		properties = { screen = 1, tag = " games " },
 	})
 end)
 -- }}}
