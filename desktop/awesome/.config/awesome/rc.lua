@@ -8,6 +8,7 @@ local gears = require("gears") -- Standard awesome library
 local awful = require("awful") -- Standard awesome library
 require("awful.autofocus")
 local wibox = require("wibox") -- Widget and layout library
+local my_widget = require("my_widget") -- My custom script loading widget
 local beautiful = require("beautiful") -- Theme handling library
 local naughty = require("naughty") -- Notification library
 local ruled = require("ruled") -- Declarative object management
@@ -237,10 +238,45 @@ screen.connect_signal("request::desktop_decoration", function(s)
 
 	-- Create a separator
 	local myseparator = wibox.widget.textbox(" ≡ ")
+	local widgets_separator = wibox.widget.textbox(" | ")
 
-	-- Create kernel widget
-	local kernel = awful.spawn.with_shell("~/src/suckless/dwmblocks/scripts/kernel.sh")
-	local mykernel = wibox.widget.textbox(kernel)
+	-- My own custom widgets
+	--
+	--  Cpu widget
+	-- local cpu_script_path = gears.filesystem.get_configuration_dir() .. "/home/mauromotion/src/suckless/dwmblocks/scripts/cpu.sh"
+	local cpu_script_path = "/home/mauromotion/.scripts/cpu.sh"
+	local cpu_update_interval = 2 -- in seconds
+	local cpu_widget = my_widget.create(cpu_script_path, cpu_update_interval)
+
+	-- Memory widget
+	local mem_script_path = "/home/mauromotion/.scripts/memory.sh"
+	local mem_update_interval = 5
+	local mem_widget = my_widget.create(mem_script_path, mem_update_interval)
+
+	-- Updates widget
+	local upds_widget_path = "/home/mauromotion/.scripts/updates.sh"
+	local upds_widget_interval = 400
+	local upds_widget = my_widget.create(upds_widget_path, upds_widget_interval)
+
+	-- Kernel widget
+	local kern_widget_path = "/home/mauromotion/.scripts/kernel.sh"
+	local kern_update_interval = 7200
+	local kern_widget = my_widget.create(kern_widget_path, kern_update_interval)
+
+	-- HD space 1 widget
+	local hd_1_widget_path = "/home/mauromotion/.scripts/hd_space_root.sh"
+	local hd_1_widget_interval = 600
+	local hd_1_widget = my_widget.create(hd_1_widget_path, hd_1_widget_interval)
+
+	-- HD space 2 widget
+	local hd_2_widget_path = "/home/mauromotion/.scripts/hd_space_media.sh"
+	local hd_2_widget_interval = 600
+	local hd_2_widget = my_widget.create(hd_2_widget_path, hd_2_widget_interval)
+
+	-- Volume widget
+	local volume_widget_path = "/home/mauromotion/.scripts/volume.sh"
+	local volume_widget_interval = 0
+	local volume_widget = my_widget.create(volume_widget_path, volume_widget_interval)
 
 	-- Create the wibox
 	s.mywibox = awful.wibar({
@@ -251,7 +287,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			layout = wibox.layout.align.horizontal,
 			{ -- Left widgets
 				layout = wibox.layout.fixed.horizontal,
-				-- mylauncher,
+				mylauncher,
+				myseparator,
 				s.mytaglist,
 				myseparator,
 				s.mypromptbox,
@@ -259,9 +296,23 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			s.mytasklist, -- Middle widget
 			{ -- Right widgets
 				layout = wibox.layout.fixed.horizontal,
-				-- mykeyboardlayout,
 				-- wibox.container.margin(mysystray, 5, 5, 8, 5, "#2e3440"),
+				myseparator,
+				kern_widget,
+				widgets_separator,
+				hd_1_widget,
+				widgets_separator,
+				hd_2_widget,
+				widgets_separator,
+				cpu_widget,
+				widgets_separator,
+				mem_widget,
+				widgets_separator,
+				volume_widget,
+				widgets_separator,
+				upds_widget,
 				mysystray,
+				myseparator,
 				mytextclock,
 				s.mylayoutbox,
 			},
