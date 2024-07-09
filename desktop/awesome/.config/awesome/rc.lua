@@ -32,7 +32,7 @@ end)
 -- Themes define colours, icons, font and wallpapers.
 
 -- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
-beautiful.init("/home/mauromotion/.config/awesome/nord/theme.lua")
+beautiful.init("/home/mauromotion/.config/awesome/themes/nord/theme.lua")
 
 local modkey = "Mod4"
 local terminal = "wezterm"
