@@ -260,7 +260,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			{ -- Right widgets
 				layout = wibox.layout.fixed.horizontal,
 				-- mykeyboardlayout,
-				wibox.container.margin(mysystray, 5, 5, 8, 5, "#2e3440"),
+				-- wibox.container.margin(mysystray, 5, 5, 8, 5, "#2e3440"),
+				mysystray,
 				mytextclock,
 				s.mylayoutbox,
 			},
