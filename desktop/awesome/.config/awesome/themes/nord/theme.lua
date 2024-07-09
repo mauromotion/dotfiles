@@ -12,7 +12,7 @@ local themes_path = gfs.get_themes_dir()
 
 local theme = {}
 
-theme.font = "JetBrainsMono Nerd Font 11.5"
+theme.font = "JetBrainsMono Nerd Font Medium 11.5"
 
 theme.bg_normal = "#2e3440"
 theme.bg_focus = "#88c0d0"
@@ -60,6 +60,7 @@ theme.border_color_marked = "#bf616a"
 theme.menu_submenu_icon = themes_path .. "default/submenu.png"
 theme.menu_height = dpi(30)
 theme.menu_width = dpi(200)
+-- theme.menu_font = "JetBrains Mono 14"
 
 -- You can add as many variables as
 -- you wish and access them by using
@@ -67,12 +68,13 @@ theme.menu_width = dpi(200)
 --theme.bg_widget = "#cc0000"
 
 -- Hotkeys screen customization
-local beautiful = require("beautiful")
-beautiful.hotkeys_font = "JetBrains Mono 14"
-beautiful.hotkeys_description_font = "JetBrains Mono 12"
-beautiful.menu_font = "JetBrains Mono 14"
-beautiful.menu_height = 24
-beautiful.menu_width = 300
+theme.hotkeys_font = "JetBrains Mono 11"
+theme.hotkeys_description_font = "JetBrains Mono 9"
+theme.hotkeys_border_width = 2
+theme.hotkeys_border_color = "#88c0d0"
+theme.hotkeys_group_margin = 20
+theme.hotkeys_margin = 20
+theme.hotkeys_label_margin = 10
 
 -- Define the image to load
 theme.titlebar_close_button_normal = themes_path .. "default/titlebar/close_normal.png"
@@ -133,7 +135,7 @@ theme.icon_theme = "Papirus-Dark-nordic-blue-folders"
 rnotification.connect_signal("request::rules", function()
 	rnotification.append_rule({
 		rule = { urgency = "critical" },
-		properties = { bg = "#ff0000", fg = "#ffffff" },
+		properties = { bg = "#bf616a", fg = "#d8dee9" },
 	})
 end)
 

@@ -42,6 +42,7 @@ local editor_cmd = terminal .. " -e " .. editor
 local browser = "firefox"
 local filebrowser = "thunar"
 -- }}}
+--
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
@@ -130,7 +131,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	local names = { " home ", " mail ", " dev ", " chat ", " docs ", " media ", " games ", " edit ", " xtra " }
 	-- local names = { " 󰣇  ", "   ", "   ", "   ", "   ", "   ", " 󰺷  ", " 󰷝  ", "   " }
 	local l = awful.layout.suit -- Just to save some typing: use an alias.
-	local layouts = { l.tile, l.max, l.fair, l.tile, l.fair, l.tile, l.floating, l.tile, l.floating }
+	local layouts = { l.tile, l.max, l.tile, l.tile, l.tile, l.tile, l.floating, l.tile, l.floating }
 	awful.tag(names, s, layouts)
 
 	-- Create a promptbox for each screen
@@ -236,14 +237,13 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	mysystray:set_screen(screen[2])
 	-- mysystray:systray_icon_spacing(4)
 
-	-- Create a separator
+	-- Create separators
 	local myseparator = wibox.widget.textbox(" ≡ ")
 	local widgets_separator = wibox.widget.textbox(" | ")
 
 	-- My own custom widgets
 	--
 	--  Cpu widget
-	-- local cpu_script_path = gears.filesystem.get_configuration_dir() .. "/home/mauromotion/src/suckless/dwmblocks/scripts/cpu.sh"
 	local cpu_script_path = "/home/mauromotion/.scripts/cpu.sh"
 	local cpu_update_interval = 2 -- in seconds
 	local cpu_widget = my_widget.create(cpu_script_path, cpu_update_interval)
@@ -296,7 +296,6 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			s.mytasklist, -- Middle widget
 			{ -- Right widgets
 				layout = wibox.layout.fixed.horizontal,
-				-- wibox.container.margin(mysystray, 5, 5, 8, 5, "#2e3440"),
 				myseparator,
 				kern_widget,
 				widgets_separator,
