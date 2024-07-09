@@ -239,12 +239,14 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	local myseparator = wibox.widget.textbox(" ≡ ")
 
 	-- Create kernel widget
-	local mykernel = wibox.widget.textbox()
+	local kernel = awful.spawn.with_shell("~/src/suckless/dwmblocks/scripts/kernel.sh")
+	local mykernel = wibox.widget.textbox(kernel)
 
 	-- Create the wibox
 	s.mywibox = awful.wibar({
 		position = "top",
 		screen = s,
+		height = 22,
 		widget = {
 			layout = wibox.layout.align.horizontal,
 			{ -- Left widgets
