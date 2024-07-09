@@ -3,23 +3,18 @@
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
--- Standard awesome library
-local gears = require("gears")
-local awful = require("awful")
+-- {{{ Required libraries
+local gears = require("gears") -- Standard awesome library
+local awful = require("awful") -- Standard awesome library
 require("awful.autofocus")
--- Widget and layout library
-local wibox = require("wibox")
--- Theme handling library
-local beautiful = require("beautiful")
--- Notification library
-local naughty = require("naughty")
--- Declarative object management
-local ruled = require("ruled")
+local wibox = require("wibox") -- Widget and layout library
+local beautiful = require("beautiful") -- Theme handling library
+local naughty = require("naughty") -- Notification library
+local ruled = require("ruled") -- Declarative object management
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
--- Enable hotkeys help widget for VIM and other apps
--- when client with a matching name is opened:
-require("awful.hotkeys_popup.keys")
+require("awful.hotkeys_popup.keys") -- Enable hotkeys help widget for VIM and other apps when client with a matching name is opened
+-- }}}
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -35,19 +30,16 @@ end)
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("/home/mauromotion/.config/awesome/default/theme.lua")
 
--- This is used later as the default terminal and editor to run.
-terminal = "wezterm"
-editor = os.getenv("EDITOR") or "vim"
-editor_cmd = terminal .. " -e " .. editor
+-- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+beautiful.init("/home/mauromotion/.config/awesome/nord/theme.lua")
 
--- Default modkey.
--- Usually, Mod4 is the key with a logo between Control and Alt.
--- If you do not like this or do not have such a key,
--- I suggest you to remap Mod4 to another key using xmodmap or other tools.
--- However, you can use another modifier like Mod1, but it may interact with others.
-modkey = "Mod4"
+local modkey = "Mod4"
+local terminal = "wezterm"
+local editor = os.getenv("EDITOR") or "vim"
+local editor_cmd = terminal .. " -e " .. editor
+local browser = "firefox"
+local filebrowser = "thunar"
 -- }}}
 
 -- {{{ Menu
@@ -134,7 +126,8 @@ mytextclock = wibox.widget.textclock()
 
 screen.connect_signal("request::desktop_decoration", function(s)
 	-- Each screen has its own tag table.
-	local names = { "home", "mail", "dev", "chat", "docs", "media", "games", "edit", "extra" }
+	local names = { " home ", " mail ", " dev ", " chat ", " docs ", " media ", " games ", " edit ", " xtra " }
+	-- local names = { " 󰣇  ", "   ", "   ", "   ", "   ", "   ", " 󰺷  ", " 󰷝  ", "   " }
 	local l = awful.layout.suit -- Just to save some typing: use an alias.
 	local layouts = { l.tile, l.max, l.fair, l.tile, l.fair, l.tile, l.floating, l.tile, l.floating }
 	awful.tag(names, s, layouts)
@@ -242,6 +235,12 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	mysystray:set_screen(screen[2])
 	-- mysystray:systray_icon_spacing(4)
 
+	-- Create a separator
+	local myseparator = wibox.widget.textbox(" ≡ ")
+
+	-- Create kernel widget
+	local mykernel = wibox.widget.textbox()
+
 	-- Create the wibox
 	s.mywibox = awful.wibar({
 		position = "top",
@@ -252,6 +251,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 				layout = wibox.layout.fixed.horizontal,
 				-- mylauncher,
 				s.mytaglist,
+				myseparator,
 				s.mypromptbox,
 			},
 			s.mytasklist, -- Middle widget
@@ -265,7 +265,6 @@ screen.connect_signal("request::desktop_decoration", function(s)
 		},
 	})
 end)
-
 -- }}}
 
 -- {{{ Mouse bindings
@@ -280,15 +279,34 @@ awful.mouse.append_global_mousebindings({
 
 -- {{{ Key bindings
 
+-- Dwm-like focus switching
+local function swap_master()
+	if client.focus == awful.client.getmaster() then
+		awful.client.swap.byidx(1)
+		awful.client.focus.byidx(-1)
+	else
+		awful.client.setmaster(client.focus)
+	end
+end
+
 -- General Awesome keys
 awful.keyboard.append_global_keybindings({
+
+	-- Show keybindings screen
 	awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
+
+	-- Show apps menu
 	awful.key({ modkey }, "w", function()
 		mymainmenu:show()
 	end, { description = "show main menu", group = "awesome" }),
+
+	-- Restart Awesome
 	awful.key({ modkey, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
+
+	-- Quit Awesome
 	awful.key({ modkey, "Control" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
 
+	-- Run Lua code on bar prompt
 	awful.key({ modkey }, "x", function()
 		awful.prompt.run({
 			prompt = "Run Lua code: ",
@@ -298,27 +316,42 @@ awful.keyboard.append_global_keybindings({
 		})
 	end, { description = "lua execute prompt", group = "awesome" }),
 
-	awful.key({ modkey }, "Return", function()
+	-- Launch a terminal
+	awful.key({ modkey, "Shift" }, "Return", function()
 		awful.spawn(terminal)
 	end, { description = "open a terminal", group = "launcher" }),
 
+	-- Run bar prompt
 	awful.key({ modkey }, "r", function()
 		awful.screen.focused().mypromptbox:run()
 	end, { description = "run prompt", group = "launcher" }),
 
+	-- -- Show the menubar
 	-- awful.key({ modkey }, "p", function()
 	-- 	menubar.show()
 	-- end, { description = "show the menubar", group = "launcher" }),
 
+	-- Launch rofi
 	awful.key({ modkey }, "g", function()
 		awful.spawn("rofi -show combi")
 	end, { description = "launch rofi", group = "launcher" }),
 
+	-- Launch rofi power menu
 	awful.key({ modkey }, "p", function()
 		awful.spawn(
 			'rofi -show power-menu -modi "power-menu:rofi-power-menu --choices=suspend/logout/lockscreen/reboot/shutdown"'
 		)
 	end, { description = "launch power menu", group = "launcher" }),
+
+	-- Launch the browser
+	awful.key({ modkey }, "b", function()
+		awful.spawn(browser)
+	end, { description = "launch browser", group = "launcher" }),
+
+	-- Launch the file browser
+	awful.key({ modkey, "Shift" }, "f", function()
+		awful.spawn(filebrowser)
+	end, { description = "launch file browser", group = "launcher" }),
 })
 
 -- Tags related keybindings
@@ -330,6 +363,11 @@ awful.keyboard.append_global_keybindings({
 
 -- Focus related keybindings
 awful.keyboard.append_global_keybindings({
+
+	awful.key({ modkey }, "Return", function()
+		swap_master()
+	end, { description = "swap master", group = "client" }),
+
 	awful.key({ modkey }, "e", function()
 		awful.client.focus.byidx(1)
 	end, { description = "focus next by index", group = "client" }),
