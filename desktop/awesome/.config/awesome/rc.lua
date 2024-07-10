@@ -340,9 +340,8 @@ end
 
 -- Toggle wibar visibility
 local function toggle_wibar()
-	for s in screen do
-		s.mywibox.visible = not s.mywibox.visible
-	end
+	local s = awful.screen.focused()
+	s.mywibox.visible = not s.mywibox.visible
 end
 -- }}}
 
@@ -361,6 +360,7 @@ awful.keyboard.append_global_keybindings({
 
 	-- Toggle the wibar
 	awful.key({ modkey, "Control" }, "b", toggle_wibar, { description = "toggle wibar", group = "awesome" }),
+
 	-- Restart Awesome
 	awful.key({ modkey, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
 
