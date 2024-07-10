@@ -18,8 +18,6 @@ require("awful.hotkeys_popup.keys") -- Enable hotkeys help widget for VIM and ot
 -- }}}
 
 -- {{{ Error handling
--- Check if awesome encountered an error during startup and fell back to
--- another config (This code will only ever execute for the fallback config)
 naughty.connect_signal("request::display_error", function(message, startup)
 	naughty.notification({
 		urgency = "critical",
@@ -30,7 +28,6 @@ end)
 -- }}}
 
 -- {{{ Variable definitions
--- Themes define colours, icons, font and wallpapers.
 
 -- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 beautiful.init("/home/mauromotion/.config/awesome/themes/nord/theme.lua")
@@ -42,7 +39,6 @@ local editor_cmd = terminal .. " -e " .. editor
 local browser = "firefox"
 local filebrowser = "thunar"
 -- }}}
---
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
@@ -330,8 +326,8 @@ awful.mouse.append_global_mousebindings({
 })
 -- }}}
 
--- {{{ Key bindings
-
+-- {{{ Custom functions
+--
 -- Dwm-like focus switching
 local function swap_master()
 	if client.focus == awful.client.getmaster() then
@@ -342,6 +338,16 @@ local function swap_master()
 	end
 end
 
+-- Toggle wibar visibility
+local function toggle_wibar()
+	for s in screen do
+		s.mywibox.visible = not s.mywibox.visible
+	end
+end
+-- }}}
+
+-- {{{ Key bindings
+--
 -- General Awesome keys
 awful.keyboard.append_global_keybindings({
 
@@ -353,6 +359,8 @@ awful.keyboard.append_global_keybindings({
 		mymainmenu:show()
 	end, { description = "show main menu", group = "awesome" }),
 
+	-- Toggle the wibar
+	awful.key({ modkey, "Control" }, "b", toggle_wibar, { description = "toggle wibar", group = "awesome" }),
 	-- Restart Awesome
 	awful.key({ modkey, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
 
@@ -379,10 +387,10 @@ awful.keyboard.append_global_keybindings({
 		awful.screen.focused().mypromptbox:run()
 	end, { description = "run prompt", group = "launcher" }),
 
-	-- -- Show the menubar
-	-- awful.key({ modkey }, "p", function()
-	-- 	menubar.show()
-	-- end, { description = "show the menubar", group = "launcher" }),
+	-- Show the menubar
+	awful.key({ modkey, "Shift" }, "p", function()
+		menubar.show()
+	end, { description = "show the menubar", group = "launcher" }),
 
 	-- Launch rofi
 	awful.key({ modkey }, "g", function()
@@ -595,7 +603,7 @@ client.connect_signal("request::default_keybindings", function()
 		awful.key({ modkey }, "t", function(c)
 			c.ontop = not c.ontop
 		end, { description = "toggle keep on top", group = "client" }),
-		awful.key({ modkey }, "n", function(c)
+		awful.key({ modkey, "Control" }, "n", function(c)
 			-- The client currently has the input focus, so it cannot be
 			-- minimized, since minimized clients can't have the focus.
 			c.minimized = true
@@ -682,46 +690,6 @@ ruled.client.connect_signal("request::rules", function()
 		rule = { class = "steam" },
 		properties = { screen = 1, tag = " games " },
 	})
-end)
--- }}}
-
--- {{{ Titlebars
--- Add a titlebar if titlebars_enabled is set to true in the rules.
-client.connect_signal("request::titlebars", function(c)
-	-- buttons for the titlebar
-	local buttons = {
-		awful.button({}, 1, function()
-			c:activate({ context = "titlebar", action = "mouse_move" })
-		end),
-		awful.button({}, 3, function()
-			c:activate({ context = "titlebar", action = "mouse_resize" })
-		end),
-	}
-
-	awful.titlebar(c).widget = {
-		{ -- Left
-			awful.titlebar.widget.iconwidget(c),
-			buttons = buttons,
-			layout = wibox.layout.fixed.horizontal,
-		},
-		{ -- Middle
-			{ -- Title
-				halign = "center",
-				widget = awful.titlebar.widget.titlewidget(c),
-			},
-			buttons = buttons,
-			layout = wibox.layout.flex.horizontal,
-		},
-		{ -- Right
-			awful.titlebar.widget.floatingbutton(c),
-			awful.titlebar.widget.maximizedbutton(c),
-			awful.titlebar.widget.stickybutton(c),
-			awful.titlebar.widget.ontopbutton(c),
-			awful.titlebar.widget.closebutton(c),
-			layout = wibox.layout.fixed.horizontal(),
-		},
-		layout = wibox.layout.align.horizontal,
-	}
 end)
 -- }}}
 
