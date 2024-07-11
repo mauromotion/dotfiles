@@ -153,7 +153,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	local names = { " home ", " mail ", " dev ", " chat ", " docs ", " media ", " games ", " edit ", " xtra " }
 	-- local names = { " 󰣇  ", "   ", "   ", "   ", "   ", "   ", " 󰺷  ", " 󰷝  ", "   " }
 	local l = awful.layout.suit -- Just to save some typing: use an alias.
-	local layouts = { l.tile, l.max, l.tile, l.tile, l.tile, l.tile, l.floating, l.tile, l.floating }
+	local layouts = { l.tile.left, l.max, l.tile, l.tile, l.tile, l.tile, l.floating, l.tile, l.tile.top }
 	awful.tag(names, s, layouts)
 
 	-- Create a promptbox for each screen
@@ -296,9 +296,9 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	local hd_2_widget = my_widget.create(hd_2_widget_path, hd_2_widget_interval)
 
 	-- Volume widget
-	local volume_widget_path = "/home/mauromotion/.scripts/volume.sh"
-	local volume_widget_interval = 0
-	local volume_widget = my_widget.create(volume_widget_path, volume_widget_interval)
+	-- local volume_widget_path = "/home/mauromotion/.scripts/volume.sh"
+	-- local volume_widget_interval = 0
+	-- local volume_widget = my_widget.create(volume_widget_path, volume_widget_interval)
 
 	-- Create the wibox
 	s.mywibox = awful.wibar({
@@ -329,8 +329,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
 				widgets_separator,
 				mem_widget,
 				widgets_separator,
-				volume_widget,
-				widgets_separator,
+				-- volume_widget,
+				-- widgets_separator,
 				upds_widget,
 				mysystray,
 				myseparator,
