@@ -40,6 +40,32 @@ local browser = "firefox"
 local filebrowser = "thunar"
 -- }}}
 
+-- {{{ Custom functions
+--
+-- Dwm-like focus switching
+local function swap_master()
+	if client.focus == awful.client.getmaster() then
+		awful.client.swap.byidx(1)
+		awful.client.focus.byidx(-1)
+	else
+		awful.client.setmaster(client.focus)
+	end
+end
+
+-- Toggle wibar visibility on a single screen
+-- local function toggle_wibar()
+-- 	local s = awful.screen.focused()
+-- 	s.mywibox.visible = not s.mywibox.visible
+-- end
+
+-- Toggle wibar visibility on a all screens
+local function toggle_wibar()
+	for s in screen do
+		s.mywibox.visible = not s.mywibox.visible
+	end
+end
+-- }}}
+
 -- {{{ Menu
 -- Create a launcher widget and a main menu
 myawesomemenu = {
@@ -324,25 +350,6 @@ awful.mouse.append_global_mousebindings({
 	awful.button({}, 4, awful.tag.viewprev),
 	awful.button({}, 5, awful.tag.viewnext),
 })
--- }}}
-
--- {{{ Custom functions
---
--- Dwm-like focus switching
-local function swap_master()
-	if client.focus == awful.client.getmaster() then
-		awful.client.swap.byidx(1)
-		awful.client.focus.byidx(-1)
-	else
-		awful.client.setmaster(client.focus)
-	end
-end
-
--- Toggle wibar visibility
-local function toggle_wibar()
-	local s = awful.screen.focused()
-	s.mywibox.visible = not s.mywibox.visible
-end
 -- }}}
 
 -- {{{ Key bindings
@@ -719,3 +726,8 @@ end)
 
 -- Autostart at launch
 awful.spawn.with_shell("~/.config/awesome/autostart.sh")
+
+-- Garbage collection to avoid lag
+collectgarbage()
+collectgarbage("setpause", 110)
+collectgarbage("setstepmul", 1000)
