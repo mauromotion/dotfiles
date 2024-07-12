@@ -61,7 +61,7 @@ prompt {
 }
 
 listview {
-    lines:      4;
+    lines:      5;
     columns:    1;
 
     fixed-height:   false;
