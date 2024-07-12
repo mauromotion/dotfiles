@@ -1,0 +1,27 @@
+Config { overrideRedirect = False
+       , font     = "JetBrainsMono Nerd Font 12"
+       , bgColor  = "#2e3440"
+       , fgColor  = "#d8dee9"
+       , position = TopW L 90
+       , commands = [ Run Weather "EGKK"
+                        [ "--template", " <station>: <weather> <tempC>°C"
+                        , "-L", "0"
+                        , "-H", "25"
+                        , "--low"   , "lightblue"
+                        , "--normal", "#d8dee9"
+                        , "--high"  , "red"
+                        ] 36000
+                    , Run Cpu
+                        [ "-L", "3"
+                        , "-H", "50"
+                        , "--high"  , "red"
+                        , "--normal", "green"
+                        ] 10
+                    , Run Memory ["--template", "Mem: <usedratio>%"] 10
+                    , Run Date "%a %Y-%m-%d <fc=#8be9fd>%H:%M</fc>" "date" 10
+                    , Run XMonadLog
+                    ]
+       , sepChar  = "%"
+       , alignSep = "}{"
+       , template = "%XMonadLog% }{ %cpu% | %memory% | %EGKK% | %date% "
+       }

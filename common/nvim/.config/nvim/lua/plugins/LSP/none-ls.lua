@@ -23,7 +23,7 @@ return {
 				--  to disable file types use
 				--  "formatting.prettier.with({disabled_filetypes: {}})" (see null-ls docs)
 				formatting.prettierd.with({
-					extra_filetypes = { "typescriptreact", "astro", "htmldjango" },
+					extra_filetypes = { "typescriptreact", "astro", "htmldjango", "javascriptreact" },
 				}), -- js/ts formatter
 				formatting.stylua, -- lua formatter
 				formatting.shfmt, -- shell formatter

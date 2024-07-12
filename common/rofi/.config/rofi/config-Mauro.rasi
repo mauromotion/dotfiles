@@ -6,7 +6,7 @@
  *******************************************************************************/
 
 * {
-    font:   "JetBrainsMono NF 14";
+    font:   "JetBrains Mono 13";
 
     nord0:     #2e3440;
     nord1:     #3b4252;
@@ -103,3 +103,12 @@ element-icon {
 element-text {
     text-color: inherit;
 }
+
+element.normal.normal {
+    background-color: @nord0;
+}
+
+element.normal.normal.alternate {
+    background-color: @nord1;
+}
+
