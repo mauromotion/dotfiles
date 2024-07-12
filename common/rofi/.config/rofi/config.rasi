@@ -1,6 +1,6 @@
 configuration {
     modi: "window,drun,combi, power-menu:/usr/bin/rofi-power-menu";
-    combi-modi: "window,drun,run";
+    combi-modi: "drun,window,run";
     show-icons: true;
     icon-theme: "papirus-Dark-nordic-folders";
   }

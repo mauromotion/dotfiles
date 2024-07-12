@@ -3,6 +3,8 @@
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
+package.path = package.path .. ";/usr/share/lua/5.3/?.lua"
+
 -- {{{ Required libraries
 local gears = require("gears") -- Standard awesome library
 local awful = require("awful") -- Standard awesome library
@@ -14,6 +16,7 @@ local naughty = require("naughty") -- Notification library
 local ruled = require("ruled") -- Declarative object management
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
+local freedesktop = require("freedesktop") -- Install this with luarocks: `luarocks install lcpz/awesome-freedesktop`
 require("awful.hotkeys_popup.keys") -- Enable hotkeys help widget for VIM and other apps when client with a matching name is opened
 -- }}}
 
@@ -68,6 +71,8 @@ end
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
+freedesktop_menu = freedesktop.menu.build()
+
 myawesomemenu = {
 	{
 		"hotkeys",
@@ -86,12 +91,23 @@ myawesomemenu = {
 	},
 }
 
-mymainmenu = awful.menu({
-	items = {
-		{ "awesome", myawesomemenu, beautiful.awesome_icon },
-		{ "open terminal", terminal },
+mymainmenu = freedesktop.menu.build({
+	before = {
+		{ "Awesome", myawesomemenu, beautiful.awesome_icon },
+		-- other triads can be put here
+	},
+	after = {
+		{ "Open terminal", terminal },
+		-- other triads can be put here
 	},
 })
+
+-- mymainmenu = awful.menu({
+-- 	items = {
+-- 		{ "awesome", myawesomemenu, beautiful.awesome_icon },
+-- 		{ "open terminal", terminal },
+-- 	},
+-- })
 
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = mymainmenu })
 
