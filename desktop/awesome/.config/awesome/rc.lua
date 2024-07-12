@@ -512,7 +512,9 @@ awful.keyboard.append_global_keybindings({
 		on_press = function(index)
 			local screen = awful.screen.focused()
 			local tag = screen.tags[index]
-			if tag then
+			if tag == screen.selected_tag then
+				awful.tag.history.restore()
+			else
 				tag:view_only()
 			end
 		end,
