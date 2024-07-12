@@ -52,7 +52,7 @@ bindsym $mod+Shift+q kill
 # Start program launcher
 bindsym $mod+space exec --no-startup-id rofi -show combi 
 bindsym $mod+g exec --no-startup-id rofi -show drun 
-bindsym $mod+p exec --no-startup-id rofi -show power-menu -modi "power-menu:rofi-power-menu --choices=suspend/lockscreen/reboot/shutdown"
+bindsym $mod+p exec --no-startup-id rofi -show power-menu -modi "power-menu:rofi-power-menu --choices=suspend/lockscreen/logout/reboot/shutdown"
 
 # Start rofi-calc
 bindsym $mod+Ctrl+c exec --no-startup-id "rofi -show calc -modi calc -no-show-match -no-sort > /dev/null"
