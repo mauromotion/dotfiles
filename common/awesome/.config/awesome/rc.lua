@@ -3,6 +3,8 @@
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
+package.path = package.path .. ";/usr/share/lua/5.3/?.lua"
+
 -- {{{ Required libraries
 local gears = require("gears") -- Standard awesome library
 local awful = require("awful") -- Standard awesome library
@@ -14,6 +16,7 @@ local naughty = require("naughty") -- Notification library
 local ruled = require("ruled") -- Declarative object management
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
+local freedesktop = require("freedesktop") -- Install this with luarocks: `luarocks install lcpz/awesome-freedesktop`
 require("awful.hotkeys_popup.keys") -- Enable hotkeys help widget for VIM and other apps when client with a matching name is opened
 -- }}}
 
@@ -68,6 +71,8 @@ end
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
+freedesktop_menu = freedesktop.menu.build()
+
 myawesomemenu = {
 	{
 		"hotkeys",
@@ -86,12 +91,23 @@ myawesomemenu = {
 	},
 }
 
-mymainmenu = awful.menu({
-	items = {
-		{ "awesome", myawesomemenu, beautiful.awesome_icon },
-		{ "open terminal", terminal },
+mymainmenu = freedesktop.menu.build({
+	before = {
+		{ "Awesome", myawesomemenu, beautiful.awesome_icon },
+		-- other triads can be put here
+	},
+	after = {
+		{ "Open terminal", terminal },
+		-- other triads can be put here
 	},
 })
+
+-- mymainmenu = awful.menu({
+-- 	items = {
+-- 		{ "awesome", myawesomemenu, beautiful.awesome_icon },
+-- 		{ "open terminal", terminal },
+-- 	},
+-- })
 
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = mymainmenu })
 
@@ -295,11 +311,43 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	local hd_2_widget_interval = 600
 	local hd_2_widget = my_widget.create(hd_2_widget_path, hd_2_widget_interval)
 
-	-- Volume widget
-	-- local volume_widget_path = "/home/mauromotion/.scripts/volume.sh"
-	-- local volume_widget_interval = 0
-	-- local volume_widget = my_widget.create(volume_widget_path, volume_widget_interval)
+	-- {{{ Volume widget
+	--
+	-- Function to get volume
+	local function get_volume(callback)
+		awful.spawn.easy_async_with_shell("/home/mauromotion/.scripts/volume.sh", function(stdout)
+			callback(stdout)
+		end)
+	end
 
+	-- Create a volume widget
+	local volume_widget = wibox.widget.textbox()
+
+	-- Function to update volume widget
+	local function update_volume_widget()
+		get_volume(function(volume)
+			volume_widget.text = volume
+		end)
+	end
+
+	-- Initial update
+	update_volume_widget()
+
+	-- Function to listen for volume changes
+	local function listen_for_volume_changes()
+		awful.spawn.with_line_callback("pw-mon", {
+			stdout = function(line)
+				if line:match("change") then
+					update_volume_widget()
+				end
+			end,
+		})
+	end
+
+	-- Start listening for volume changes
+	listen_for_volume_changes()
+	-- }}}
+	--
 	-- Create the wibox
 	s.mywibox = awful.wibar({
 		position = "top",
@@ -329,8 +377,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
 				widgets_separator,
 				mem_widget,
 				widgets_separator,
-				-- volume_widget,
-				-- widgets_separator,
+				volume_widget,
+				widgets_separator,
 				upds_widget,
 				mysystray,
 				myseparator,

@@ -14,9 +14,17 @@ local theme = {}
 
 theme.font = "JetBrainsMono Nerd Font Medium 11.5"
 
+local accent_color = function()
+	local colors = { "#88c0d0", "#b48ead", "#a3be8c", "#ebcb8b" }
+	local accent = colors[math.random(1, 4)]
+	return accent
+end
+
+local use_accent_color = accent_color()
+
 theme.bg_normal = "#2e3440"
-theme.bg_focus = "#88c0d0"
-theme.bg_urgent = "#b48ead"
+theme.bg_focus = use_accent_color
+theme.bg_urgent = "#bf616a"
 theme.bg_minimize = "#4c566a"
 theme.bg_systray = theme.bg_normal
 
@@ -28,8 +36,10 @@ theme.fg_minimize = "#eceff4"
 theme.useless_gap = dpi(0)
 theme.border_width = dpi(2)
 theme.border_color_normal = "#2e3440"
-theme.border_color_active = "#88c0d0"
+theme.border_color_active = use_accent_color
 theme.border_color_marked = "#bf616a"
+theme.notification_border_color = use_accent_color
+theme.notification_border_width = dpi(4)
 
 -- There are other variable sets
 -- overriding the default one when
@@ -71,7 +81,7 @@ theme.menu_width = dpi(200)
 theme.hotkeys_font = "JetBrains Mono 11"
 theme.hotkeys_description_font = "JetBrains Mono 9"
 theme.hotkeys_border_width = 2
-theme.hotkeys_border_color = "#88c0d0"
+theme.hotkeys_border_color = use_accent_color
 theme.hotkeys_group_margin = 20
 theme.hotkeys_margin = 20
 theme.hotkeys_label_margin = 10
