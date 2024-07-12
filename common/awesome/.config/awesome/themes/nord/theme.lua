@@ -12,7 +12,8 @@ local themes_path = gfs.get_themes_dir()
 
 local theme = {}
 
-theme.font = "JetBrainsMono Nerd Font Medium 11.5"
+-- theme.font = "JetBrainsMono Nerd Font Medium 11.5"
+theme.font = "FiraMono Nerd Font Medium 11.5"
 
 local accent_color = function()
 	local colors = { "#88c0d0", "#b48ead", "#a3be8c", "#ebcb8b" }
