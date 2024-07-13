@@ -41,6 +41,27 @@ local editor = os.getenv("EDITOR") or "vim"
 local editor_cmd = terminal .. " -e " .. editor
 local browser = "firefox"
 local filebrowser = "thunar"
+hostname = nil
+
+-- Function to retrieve the hostname asynchronously
+local function get_hostname(callback)
+	awful.spawn.easy_async_with_shell("hostnamectl --static", function(stdout, stderr, reason, exit_code)
+		hostname = stdout:match("^%s*(.-)%s*$") -- Trim any leading/trailing whitespace
+		if callback then
+			callback(hostname)
+		end
+	end)
+end
+
+get_hostname(function(hostname)
+	print("hostname:", hostname)
+	naughty.notify({
+		title = "Hostname",
+		text = "Current hostname is: " .. hostname,
+		timeout = 10, -- Timeout in seconds
+		position = "top_right",
+	})
+end)
 -- }}}
 
 -- {{{ Custom functions
@@ -268,12 +289,17 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			end,
 		},
 	})
-
 	-- Customize the systray
 	local mysystray = wibox.widget.systray()
 	mysystray:set_base_size(20)
-	mysystray:set_screen(screen[2])
-	-- mysystray:systray_icon_spacing(4)
+
+	get_hostname(function(hostname)
+		if hostname == "eva-01" then
+			mysystray:set_screen(screen[2])
+		else
+			mysystray:set_screen("primary")
+		end
+	end)
 
 	-- Create separators
 	local myseparator = wibox.widget.textbox(" ≡ ")
@@ -349,44 +375,89 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	-- }}}
 	--
 	-- Create the wibox
-	s.mywibox = awful.wibar({
-		position = "top",
-		screen = s,
-		height = 22,
-		widget = {
-			layout = wibox.layout.align.horizontal,
-			{ -- Left widgets
-				layout = wibox.layout.fixed.horizontal,
-				mylauncher,
-				myseparator,
-				s.mytaglist,
-				myseparator,
-				s.mypromptbox,
-			},
-			s.mytasklist, -- Middle widget
-			{ -- Right widgets
-				layout = wibox.layout.fixed.horizontal,
-				myseparator,
-				kern_widget,
-				widgets_separator,
-				hd_1_widget,
-				widgets_separator,
-				hd_2_widget,
-				widgets_separator,
-				cpu_widget,
-				widgets_separator,
-				mem_widget,
-				widgets_separator,
-				volume_widget,
-				widgets_separator,
-				upds_widget,
-				mysystray,
-				myseparator,
-				mytextclock,
-				s.mylayoutbox,
-			},
-		},
-	})
+	get_hostname(function(hostname)
+		if hostname == "eva-01" then
+			-- Wibox for desktop
+			s.mywibox = awful.wibar({
+				position = "top",
+				screen = s,
+				height = 22,
+				widget = {
+					layout = wibox.layout.align.horizontal,
+					{ -- Left widgets
+						layout = wibox.layout.fixed.horizontal,
+						mylauncher,
+						myseparator,
+						s.mytaglist,
+						myseparator,
+						s.mypromptbox,
+					},
+					s.mytasklist, -- Middle widget
+					{ -- Right widgets
+						layout = wibox.layout.fixed.horizontal,
+						myseparator,
+						kern_widget,
+						widgets_separator,
+						hd_1_widget,
+						widgets_separator,
+						hd_2_widget,
+						widgets_separator,
+						cpu_widget,
+						widgets_separator,
+						mem_widget,
+						widgets_separator,
+						volume_widget,
+						widgets_separator,
+						upds_widget,
+						mysystray,
+						myseparator,
+						mytextclock,
+						s.mylayoutbox,
+					},
+				},
+			})
+		else
+			if hostname == "eva-02" then
+				-- Wibox for laptop
+				s.mywibox = awful.wibar({
+					position = "top",
+					screen = s,
+					height = 22,
+					widget = {
+						layout = wibox.layout.align.horizontal,
+						{ -- Left widgets
+							layout = wibox.layout.fixed.horizontal,
+							mylauncher,
+							myseparator,
+							s.mytaglist,
+							myseparator,
+							s.mypromptbox,
+						},
+						s.mytasklist, -- Middle widget
+						{ -- Right widgets
+							layout = wibox.layout.fixed.horizontal,
+							myseparator,
+							kern_widget,
+							widgets_separator,
+							hd_1_widget,
+							widgets_separator,
+							cpu_widget,
+							widgets_separator,
+							mem_widget,
+							widgets_separator,
+							volume_widget,
+							widgets_separator,
+							upds_widget,
+							mysystray,
+							myseparator,
+							mytextclock,
+							s.mylayoutbox,
+						},
+					},
+				})
+			end
+		end
+	end)
 end)
 -- }}}
 

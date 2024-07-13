@@ -15,6 +15,7 @@ config.window_background_opacity = 1
 
 -- Font
 config.font = wezterm.font("JetBrainsMono NF", {})
+-- config.font = wezterm.font("FiraCode Nerd Font", {})
 config.font_size = 12
 config.freetype_load_flags = "NO_HINTING"
 
