@@ -312,6 +312,11 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	local cpu_update_interval = 2 -- in seconds
 	local cpu_widget = my_widget.create(cpu_script_path, cpu_update_interval)
 
+	-- Battery widget
+	local batt_script_path = "/home/mauromotion/.scripts/battery.sh"
+	local batt_update_interval = 15
+	local batt_widget = my_widget.create(batt_script_path, batt_update_interval)
+
 	-- Memory widget
 	local mem_script_path = "/home/mauromotion/.scripts/memory.sh"
 	local mem_update_interval = 5
@@ -446,6 +451,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
 							mem_widget,
 							widgets_separator,
 							volume_widget,
+							widgets_separator,
+							batt_widget,
 							widgets_separator,
 							upds_widget,
 							mysystray,
