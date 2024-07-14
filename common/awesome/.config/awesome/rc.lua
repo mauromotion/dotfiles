@@ -10,7 +10,7 @@ local gears = require("gears") -- Standard awesome library
 local awful = require("awful") -- Standard awesome library
 require("awful.autofocus")
 local wibox = require("wibox") -- Widget and layout library
-local my_widget = require("my_widget") -- My custom script loading widget
+local my_widget = require("widgets.my_widget") -- My custom script loading widget
 local beautiful = require("beautiful") -- Theme handling library
 local naughty = require("naughty") -- Notification library
 local ruled = require("ruled") -- Declarative object management
