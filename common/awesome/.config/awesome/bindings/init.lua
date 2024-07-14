@@ -1,19 +1,12 @@
-local keybindings = {}
-
-local function load_keybindings(layout)
-	if layout == "colemak-dh" then
-		keybindings.global = require("bindings.global_colemak_dh.lua")
-		keybindings.client = require("bindings.client_colemak_dh.lua")
-	else -- default to QWERTY
-		keybindings.global = require("bindings.global_qwerty.lua")
-		keybindings.client = require("bindings.client_qwerty.lua")
-	end
-
-	keybindings.global_mouse = require("bindings.global_mouse")
-	keybindings.client_mouse = require("bindings.client_mouse")
-end
-
 return {
-	keybindings = keybindings,
-	load_keybindings = load_keybindings,
+	client = {
+		colemak = require("bindings.client.client_colemak_dh"),
+		qwerty = require("bindings.client.client_qwerty"),
+		mouse = require("bindings.client.client_mouse"),
+	},
+	global = {
+		colemak = require("bindings.global.global_colemak_dh"),
+		qwerty = require("bindings.global.global_qwerty"),
+		mouse = require("bindings.global.global_mouse"),
+	},
 }

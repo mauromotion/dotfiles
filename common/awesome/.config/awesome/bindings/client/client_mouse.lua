@@ -2,7 +2,7 @@ local awful = require("awful")
 local vars = require("options.vars")
 local modkey = vars.modkey
 
-client.connect_signal("request::default_mousebindings", function()
+return {
 	awful.mouse.append_client_mousebindings({
 		awful.button({}, 1, function(c)
 			c:activate({ context = "mouse_click" })
@@ -13,5 +13,5 @@ client.connect_signal("request::default_mousebindings", function()
 		awful.button({ modkey }, 3, function(c)
 			c:activate({ context = "mouse_click", action = "mouse_resize" })
 		end),
-	})
-end)
+	}),
+}

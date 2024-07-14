@@ -1,0 +1,20 @@
+local keybindings = {}
+
+local function load_keybindings(layout)
+	if layout == "colemak-dh" then
+		keybindings = {
+			require("bindings.colemak_dh"),
+			require("bindings.mouse"),
+		}
+	else -- default to QWERTY
+		keybindings = {
+			require("bindings.qwerty"),
+			require("bindings.mouse"),
+		}
+	end
+end
+
+return {
+	keybindings = keybindings,
+	load_keybindings = load_keybindings,
+}

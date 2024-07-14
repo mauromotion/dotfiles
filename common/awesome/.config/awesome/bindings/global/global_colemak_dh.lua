@@ -3,7 +3,6 @@ local menubar = require("menubar")
 local vars = require("options.vars")
 local modkey = vars.modkey
 local hotkeys_popup = require("awful.hotkeys_popup")
-
 require("awful.hotkeys_popup.keys")
 
 -- {{{ Custom functions
@@ -28,8 +27,8 @@ end
 
 -- {{{ Key bindings
 --
--- General Awesome keys
-awful.keyboard.append_global_keybindings({
+return {
+	-- General Awesome keys
 
 	-- Show keybindings screen
 	awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
@@ -94,17 +93,13 @@ awful.keyboard.append_global_keybindings({
 	awful.key({ modkey, "Shift" }, "f", function()
 		awful.spawn(vars.filebrowser)
 	end, { description = "launch file browser", group = "launcher" }),
-})
 
--- Tags related keybindings
-awful.keyboard.append_global_keybindings({
+	-- Tags related keybindings
 	awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
 	awful.key({ modkey }, "Right", awful.tag.viewnext, { description = "view next", group = "tag" }),
 	awful.key({ modkey }, "Tab", awful.tag.history.restore, { description = "go back", group = "tag" }),
-})
 
--- Focus related keybindings
-awful.keyboard.append_global_keybindings({
+	-- Focus related keybindings
 
 	awful.key({ modkey }, "Return", function()
 		swap_master()
@@ -140,10 +135,8 @@ awful.keyboard.append_global_keybindings({
 			c:activate({ raise = true, context = "key.unminimize" })
 		end
 	end, { description = "restore minimized", group = "client" }),
-})
 
--- Layout related keybindings
-awful.keyboard.append_global_keybindings({
+	-- Layout related keybindings
 	awful.key({ modkey, "Shift" }, "e", function()
 		awful.client.swap.byidx(1)
 	end, { description = "swap with next client by index", group = "client" }),
@@ -175,9 +168,7 @@ awful.keyboard.append_global_keybindings({
 	awful.key({ modkey, "Shift" }, "space", function()
 		awful.layout.inc(-1)
 	end, { description = "select previous", group = "layout" }),
-})
 
-awful.keyboard.append_global_keybindings({
 	awful.key({
 		modifiers = { modkey },
 		keygroup = "numrow",
@@ -193,6 +184,7 @@ awful.keyboard.append_global_keybindings({
 			end
 		end,
 	}),
+
 	awful.key({
 		modifiers = { modkey, "Control" },
 		keygroup = "numrow",
@@ -246,5 +238,5 @@ awful.keyboard.append_global_keybindings({
 			end
 		end,
 	}),
-})
+}
 -- }}}
