@@ -7,7 +7,7 @@ percentage=$(pamixer --get-volume-human)
 icon=""
 
 # Show a different icon for each volume level
-if [[ "$percentage" == *"muted"* ]]; then
+if [ "$percentage" == muted ]; then
 	icon="" # Mute
 	percentage="muted"
 else
