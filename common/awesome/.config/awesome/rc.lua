@@ -52,16 +52,6 @@ local function get_hostname(callback)
 		end
 	end)
 end
-
-get_hostname(function(hostname)
-	print("hostname:", hostname)
-	naughty.notify({
-		title = "Hostname",
-		text = "Current hostname is: " .. hostname,
-		timeout = 10, -- Timeout in seconds
-		position = "top_right",
-	})
-end)
 -- }}}
 
 -- {{{ Custom functions
