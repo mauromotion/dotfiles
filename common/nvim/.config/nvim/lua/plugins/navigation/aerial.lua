@@ -3,7 +3,7 @@ return {
 	event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter",
-		"nvim-tree/nvim-web-devicons",
+		"echasnovski/mini.icons",
 	},
 	config = function()
 		require("aerial").setup({

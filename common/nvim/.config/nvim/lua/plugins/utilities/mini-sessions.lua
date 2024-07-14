@@ -7,15 +7,17 @@ return {
 
 			-- Keybindings with "which-key" plugin
 			local wk = require("which-key")
-			wk.register({
-				s = {
-					name = "Sessions",
-					w = { ':lua MiniSessions.write(vim.fn.input("Session name: "))<CR>', "Save a new session" },
-					d = { ':lua MiniSessions.select("delete")<CR>', "Delete a session" },
-					s = { ':lua MiniSessions.select("read")<CR>', "Select a session" },
-					l = { ":lua MiniSessions.read(MiniSessions.get_latest())<CR>", "Open last session" },
+			wk.add({
+				{ "<leader>s", group = "Sessions" },
+				{ "<leader>sd", ':lua MiniSessions.select("delete")<CR>', desc = "Delete a session" },
+				{ "<leader>sl", ":lua MiniSessions.read(MiniSessions.get_latest())<CR>", desc = "Open last session" },
+				{ "<leader>ss", ':lua MiniSessions.select("read")<CR>', desc = "Select a session" },
+				{
+					"<leader>sw",
+					':lua MiniSessions.write(vim.fn.input("Session name: "))<CR>',
+					desc = "Save a new session",
 				},
-			}, { prefix = "<leader>" })
+			})
 		end,
 	},
 }

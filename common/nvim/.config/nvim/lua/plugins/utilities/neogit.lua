@@ -12,15 +12,13 @@ return {
 	config = true,
 	keys = function()
 		local wk = require("which-key")
-		wk.register({
-			g = {
-				name = "Neogit/Gitsigns",
-				o = { "<cmd>Neogit<cr>", "Open Neogit (Neogit)" },
-				c = { "<cmd>Neogit commit<cr>", "Git commit (Neogit)" },
-				p = { "<cmd>Neogit pull<cr>", "Git pull (Neogit)" },
-				P = { "<cmd>Neogit push<cr>", "Git push (Neogit)" },
-				b = { "<cmd>FzfLua git_branches<cr>", "Git switch branch (FzfLua)" },
-			},
-		}, { prefix = "<leader>" })
+		wk.add({
+			{ "<leader>g", group = "Neogit/Gitsigns" },
+			{ "<leader>gP", "<cmd>Neogit push<cr>", desc = "Git push (Neogit)" },
+			{ "<leader>gb", "<cmd>FzfLua git_branches<cr>", desc = "Git switch branch (FzfLua)" },
+			{ "<leader>gc", "<cmd>Neogit commit<cr>", desc = "Git commit (Neogit)" },
+			{ "<leader>go", "<cmd>Neogit<cr>", desc = "Open Neogit (Neogit)" },
+			{ "<leader>gp", "<cmd>Neogit pull<cr>", desc = "Git pull (Neogit)" },
+		})
 	end,
 }
