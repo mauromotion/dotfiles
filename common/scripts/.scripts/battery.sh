@@ -6,9 +6,9 @@ state=$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep state | aw
 
 icon=""
 
-if [[ "$state" == *"charging"* ]]; then
+if [ "$state" == charging ]; then
 	icon="󰂄"
-else
+elif [ "$state" == discharging ]; then
 	if [ "$batt_int" -eq 100 ]; then
 		icon="󰁹"
 	elif [ "$batt_int" -gt 90 ] && [ "$batt_int" -lt 100 ]; then
