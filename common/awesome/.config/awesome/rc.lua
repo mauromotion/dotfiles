@@ -10,12 +10,12 @@ local gears = require("gears") -- Standard awesome library
 local awful = require("awful") -- Standard awesome library
 require("awful.autofocus")
 local wibox = require("wibox") -- Widget and layout library
--- local my_widget = require("common.awesome.config.awesome.widgets.my_widget") -- My custom script loading widget
 local my_widget = require("widgets.my_widget") -- My custom script loading widget
 local beautiful = require("beautiful") -- Theme handling library
 local naughty = require("naughty") -- Notification library
 local ruled = require("ruled") -- Declarative object management
 local menubar = require("menubar")
+require("bindings") -- Keybindings
 local freedesktop = require("freedesktop") -- Install this with luarocks: `luarocks install lcpz/awesome-freedesktop`
 local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys") -- Enable hotkeys help widget for VIM and other apps when client with a matching name is opened
@@ -108,12 +108,12 @@ tag.connect_signal("request::default_layouts", function()
 		awful.layout.suit.tile.top,
 		awful.layout.suit.fair,
 		awful.layout.suit.fair.horizontal,
-		awful.layout.suit.spiral,
-		awful.layout.suit.spiral.dwindle,
-		awful.layout.suit.max,
-		awful.layout.suit.max.fullscreen,
+		-- awful.layout.suit.spiral,
+		-- awful.layout.suit.spiral.dwindle,
+		-- awful.layout.suit.max,
+		-- awful.layout.suit.max.fullscreen,
 		awful.layout.suit.magnifier,
-		awful.layout.suit.corner.nw,
+		-- awful.layout.suit.corner.nw,
 	})
 end)
 -- }}}
@@ -383,81 +383,46 @@ screen.connect_signal("request::desktop_decoration", function(s)
 				},
 			})
 		else
-			if hostname == "eva-02" then
-				-- Wibox for laptop
-				s.mywibox = awful.wibar({
-					position = "top",
-					screen = s,
-					height = 22,
-					widget = {
-						layout = wibox.layout.align.horizontal,
-						{ -- Left widgets
-							layout = wibox.layout.fixed.horizontal,
-							mylauncher,
-							myseparator,
-							s.mytaglist,
-							myseparator,
-							s.mypromptbox,
-						},
-						s.mytasklist, -- Middle widget
-						{ -- Right widgets
-							layout = wibox.layout.fixed.horizontal,
-							myseparator,
-							kern_widget,
-							widgets_separator,
-							hd_1_widget,
-							widgets_separator,
-							cpu_widget,
-							widgets_separator,
-							mem_widget,
-							widgets_separator,
-							volume_widget,
-							widgets_separator,
-							batt_widget,
-							widgets_separator,
-							upds_widget,
-							mysystray,
-							myseparator,
-							mytextclock,
-							s.mylayoutbox,
-						},
+			-- Wibox for laptop
+			s.mywibox = awful.wibar({
+				position = "top",
+				screen = s,
+				height = 22,
+				widget = {
+					layout = wibox.layout.align.horizontal,
+					{ -- Left widgets
+						layout = wibox.layout.fixed.horizontal,
+						mylauncher,
+						myseparator,
+						s.mytaglist,
+						myseparator,
+						s.mypromptbox,
 					},
-				})
-			end
+					s.mytasklist, -- Middle widget
+					{ -- Right widgets
+						layout = wibox.layout.fixed.horizontal,
+						myseparator,
+						kern_widget,
+						widgets_separator,
+						hd_1_widget,
+						widgets_separator,
+						cpu_widget,
+						widgets_separator,
+						mem_widget,
+						widgets_separator,
+						volume_widget,
+						widgets_separator,
+						batt_widget,
+						widgets_separator,
+						upds_widget,
+						mysystray,
+						myseparator,
+						mytextclock,
+						s.mylayoutbox,
+					},
+				},
+			})
 		end
-	end)
-end)
--- }}}
-
--- {{{ Key bindings
-local bindings_module = require("bindings")
-
-get_hostname(function(hostname)
-	local global_keybindings, client_keybindings
-
-	if hostname == "eva-01" then
-		-- set_keybindings("colemak-dh")
-		global_keybindings = bindings_module.global.colemak
-		client_keybindings = bindings_module.client.colemak
-	else
-		-- set_keybindings("qwerty")
-		global_keybindings = bindings_module.global.qwerty
-		client_keybindings = bindings_module.client.qwerty
-	end
-	-- Set global keybindings
-	awful.keyboard.append_global_keybindings(global_keybindings)
-
-	-- Set global mouse bindings
-	awful.mouse.append_global_mousebindings(bindings_module.global.mouse)
-
-	-- Connect client keybindings
-	client.connect_signal("request::default_keybindings", function()
-		awful.keyboard.append_client_keybindings(client_keybindings)
-	end)
-
-	-- Connect client mouse bindings
-	client.connect_signal("request::default_mousebindings", function()
-		awful.mouse.append_client_mousebindings(bindings_module.client.mouse)
 	end)
 end)
 -- }}}

@@ -27,8 +27,8 @@ end
 
 -- {{{ Key bindings
 --
-return {
-	-- General Awesome keys
+-- General Awesome keys
+awful.keyboard.append_global_keybindings({
 
 	-- Show keybindings screen
 	awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
@@ -93,13 +93,16 @@ return {
 	awful.key({ modkey, "Shift" }, "f", function()
 		awful.spawn(vars.filebrowser)
 	end, { description = "launch file browser", group = "launcher" }),
+})
 
-	-- Tags related keybindings
+-- Tags related keybindings
+awful.keyboard.append_global_keybindings({
 	awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
 	awful.key({ modkey }, "Right", awful.tag.viewnext, { description = "view next", group = "tag" }),
 	awful.key({ modkey }, "Tab", awful.tag.history.restore, { description = "go back", group = "tag" }),
-
-	-- Focus related keybindings
+})
+-- Focus related keybindings
+awful.keyboard.append_global_keybindings({
 
 	awful.key({ modkey }, "Return", function()
 		swap_master()
@@ -135,8 +138,12 @@ return {
 			c:activate({ raise = true, context = "key.unminimize" })
 		end
 	end, { description = "restore minimized", group = "client" }),
+})
 
-	-- Layout related keybindings
+-- Layout related keybindings
+
+awful.keyboard.append_global_keybindings({
+
 	awful.key({ modkey, "Shift" }, "e", function()
 		awful.client.swap.byidx(1)
 	end, { description = "swap with next client by index", group = "client" }),
@@ -168,7 +175,9 @@ return {
 	awful.key({ modkey, "Shift" }, "space", function()
 		awful.layout.inc(-1)
 	end, { description = "select previous", group = "layout" }),
+})
 
+awful.keyboard.append_global_keybindings({
 	awful.key({
 		modifiers = { modkey },
 		keygroup = "numrow",
@@ -238,5 +247,5 @@ return {
 			end
 		end,
 	}),
-}
+})
 -- }}}
