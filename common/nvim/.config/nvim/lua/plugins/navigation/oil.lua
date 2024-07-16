@@ -1,6 +1,7 @@
 return {
 	"stevearc/oil.nvim",
 	event = "VimEnter",
+	dependencies = { "echasnovski/mini.icons" },
 	config = function()
 		require("oil").setup({
 			default_file_explorer = true,

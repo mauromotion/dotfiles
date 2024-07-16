@@ -15,26 +15,28 @@ return {
 
 			-- Keybindgs with "which-key" plugin
 			local wk = require("which-key")
-			wk.register({
-				name = "Neogit/Gitsigns",
-				S = { gs.stage_buffer, "Stage Buffer (Gitsigns)" },
-				u = { gs.undo_stage_hunk, "Undo Stage Hunk (Gitsigns)" },
-				R = { gs.reset_buffer, "Reset Buffer (Gitsigns)" },
-				p = { gs.preview_hunk_inline, "Preview Hunk Inline (Gitsigns)" },
+			wk.add({
+				{ "<leader>g", group = "Neogit/Gitsigns" },
+				S = { "<leader>gS", gs.stage_buffer, desc = "Stage Buffer (Gitsigns)" },
+				u = { "<leader>gu", gs.undo_stage_hunk, desc = "Undo Stage Hunk (Gitsigns)" },
+				R = { "<leader>gR", gs.reset_buffer, desc = "Reset Buffer (Gitsigns)" },
+				p = { "<leader>gp", gs.preview_hunk_inline, desc = "Preview Hunk Inline (Gitsigns)" },
 				B = {
+					"<leader>gB",
 					function()
 						gs.blame_line({ full = true })
 					end,
-					"Blame Line",
+					desc = "Blame Line",
 				},
-				d = { gs.diffthis, "Diff This (Gitsigns)" },
+				d = { "<leader>d", gs.diffthis, desc = "Diff This (Gitsigns)" },
 				D = {
+					"<leader>D",
 					function()
 						gs.diffthis("~")
 					end,
-					"Diff This ~ (Gitsigns)",
+					desc = "Diff This ~ (Gitsigns)",
 				},
-			}, { prefix = "<leader>g" })
+			})
 
 			-- Vanilla keybindings
 			local function map(mode, l, r, desc)

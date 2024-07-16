@@ -10,13 +10,11 @@ return {
 		})
 		-- Keybindings with "which-key" plugin
 		local wk = require("which-key")
-		wk.register({
-			c = {
-				name = "Ccc",
-				h = { "<CMD>CccHighlighterToggle<CR>", "Toggle Colors Highlighter" },
-				p = { "<CMD>CccPick<CR>", "Toggle Color Picker" },
-				c = { "<CMD>CccConvert<CR>", "Convert Color format" },
-			},
-		}, { prefix = "<leader>" })
+		wk.add({
+			{ "<leader>c", group = "Ccc" },
+			{ "<leader>ch", "<CMD>CccHighlighterToggle<CR>", desc = "Toggle Colors Highlighter" },
+			{ "<leader>cp", "<CMD>CccPick<CR>", desc = "Toggle Color Picker" },
+			{ "<leader>cc", "<CMD>CccConvert<CR>", desc = "Convert Color format" },
+		})
 	end,
 }
