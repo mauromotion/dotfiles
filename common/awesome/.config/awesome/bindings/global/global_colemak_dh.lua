@@ -93,6 +93,11 @@ awful.keyboard.append_global_keybindings({
 	awful.key({ modkey, "Shift" }, "f", function()
 		awful.spawn(vars.filebrowser)
 	end, { description = "launch file browser", group = "launcher" }),
+
+	-- Take a screenshot
+	awful.key({ modkey, "Shift" }, "z", function()
+		awful.spawn("flameshot gui")
+	end, { description = "take a screenshot", group = "launcher" }),
 })
 
 -- Tags related keybindings
