@@ -21,7 +21,7 @@ done
 
 # Autostart programs
 # picom -b &
-fastcompmgr -o 0.4 -r 12 -c -C
+fastcompmgr -o 0.4 -r 12 -c -C &
 nitrogen --restore &
 udiskie -a -n -t &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &

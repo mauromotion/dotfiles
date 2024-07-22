@@ -254,13 +254,21 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	local mysystray = wibox.widget.systray()
 	mysystray:set_base_size(20)
 
-	get_hostname(function(hostname)
-		if hostname == "eva-01" then
-			mysystray:set_screen(screen[2])
-		else
-			mysystray:set_screen("primary")
-		end
-	end)
+	-- Move the systray on secondary monitor for desktop PC, and keep it on primary for laptop
+	-- get_hostname(function(hostname)
+	-- 	if hostname == "eva-01" then
+	-- 		mysystray:set_screen(screen[2])
+	-- 	else
+	-- 		mysystray:set_screen("primary")
+	-- 	end
+	-- end)
+
+	-- Move the systray on the secondary monitor, if secondary monitor is present
+	if screen[2] then
+		mysystray:set_screen(screen[2])
+	else
+		mysystray:set_screen("primary")
+	end
 
 	-- Create separators
 	local myseparator = wibox.widget.textbox(" ≡ ")
