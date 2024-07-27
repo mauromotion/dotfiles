@@ -2,7 +2,8 @@
 
 # Kill already existing processes to avoid duplication
 processes=(
-	"fastcompmgr"
+	# "fastcompmgr"
+	"picom"
 	"udiskie"
 	"polkit-gnome-au"
 	"pa-applet"
@@ -20,8 +21,8 @@ for proc in "${processes[@]}"; do
 done
 
 # Autostart programs
-# picom -b &
-fastcompmgr -o 0.4 -r 12 -c -C &
+picom -b &
+# fastcompmgr -o 0.4 -r 12 -c -C &
 nitrogen --restore &
 udiskie -a -n -t &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
