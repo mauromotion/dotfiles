@@ -11,7 +11,7 @@ end
 -- Colorscheme
 config.color_scheme_dirs = { "~/.config/wezterm/colors" }
 config.color_scheme = "nordfox"
-config.window_background_opacity = 1
+config.window_background_opacity = 0.95
 
 -- Font
 config.font = wezterm.font("JetBrainsMono NF", {})
@@ -227,6 +227,12 @@ config.keys = {
 		key = "Home",
 		mods = "CTRL|SHIFT",
 		action = wezterm.action.ClearScrollback("ScrollbackOnly"),
+	},
+	-- Command palette
+	{
+		key = "p",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.ActivateCommandPalette,
 	},
 }
 
