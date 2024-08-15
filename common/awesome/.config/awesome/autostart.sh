@@ -3,6 +3,7 @@
 # Kill already existing processes to avoid duplication
 processes=(
 	"fastcompmgr"
+	# "picom"
 	"udiskie"
 	"polkit-gnome-au"
 	"pa-applet"

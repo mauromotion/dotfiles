@@ -98,6 +98,11 @@ awful.keyboard.append_global_keybindings({
 	awful.key({ modkey, "Shift" }, "z", function()
 		awful.spawn("flameshot gui")
 	end, { description = "take a screenshot", group = "launcher" }),
+
+	-- Launch the calculator
+	awful.key({ modkey, "Shift" }, "c", function()
+		awful.spawn("galculator")
+	end, { description = "launch calculator", group = "launcher" }),
 })
 
 -- Tags related keybindings

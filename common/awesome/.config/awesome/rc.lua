@@ -148,8 +148,8 @@ mytextclock = wibox.widget.textclock()
 
 screen.connect_signal("request::desktop_decoration", function(s)
 	-- Each screen has its own tag table.
-	local names = { " home ", " mail ", " dev ", " chat ", " docs ", " media ", " games ", " edit ", " xtra " }
-	-- local names = { " 󰣇  ", "   ", "   ", "   ", "   ", "   ", " 󰺷  ", " 󰷝  ", "   " }
+	-- local names = { " home ", " mail ", " dev ", " chat ", " docs ", " media ", " games ", " edit ", " xtra " }
+	local names = { " 󰣇  ", "   ", "   ", "   ", "   ", "   ", " 󰺷  ", " 󰷝  ", "   " }
 	local l = awful.layout.suit -- Just to save some typing: use an alias.
 	local layouts = { l.tile.left, l.max, l.tile, l.tile, l.tile, l.tile, l.floating, l.tile, l.tile.top }
 	awful.tag(names, s, layouts)
@@ -272,7 +272,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 
 	-- Create separators
 	local myseparator = wibox.widget.textbox(" ≡ ")
-	local widgets_separator = wibox.widget.textbox(" | ")
+	local widgets_separator = wibox.widget.textbox(" │ ")
 
 	-- My own custom widgets
 	--
@@ -493,12 +493,12 @@ ruled.client.connect_signal("request::rules", function()
 
 	ruled.client.append_rule({
 		rule = { class = "thunderbird" },
-		properties = { screen = 1, tag = " mail " },
+		properties = { screen = 1, tag = "     " },
 	})
 
 	ruled.client.append_rule({
 		rule = { class = "steam" },
-		properties = { screen = 1, tag = " games " },
+		properties = { screen = 1, tag = "  󰺷   " },
 	})
 end)
 -- }}}
@@ -531,6 +531,12 @@ end)
 awful.spawn.with_shell("~/.config/awesome/autostart.sh")
 
 -- Garbage collection to avoid lag
-collectgarbage()
-collectgarbage("setpause", 110)
-collectgarbage("setstepmul", 1000)
+collectgarbage("incremental", 150, 600, 0)
+
+gears.timer.start_new(60, function()
+	-- just let it do a full collection
+	collectgarbage()
+	-- or else set a step size
+	-- collectgarbage("step", 30000)
+	return true
+end)
