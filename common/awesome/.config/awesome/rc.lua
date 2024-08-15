@@ -414,8 +414,6 @@ screen.connect_signal("request::desktop_decoration", function(s)
 						widgets_separator,
 						hd_1_widget,
 						widgets_separator,
-						cpu_widget,
-						widgets_separator,
 						mem_widget,
 						widgets_separator,
 						volume_widget,
