@@ -149,10 +149,93 @@ mytextclock = wibox.widget.textclock()
 screen.connect_signal("request::desktop_decoration", function(s)
 	-- Each screen has its own tag table.
 	-- local names = { " home ", " mail ", " dev ", " chat ", " docs ", " media ", " games ", " edit ", " xtra " }
-	local names = { " 󰣇  ", "   ", "   ", "   ", "   ", "   ", " 󰺷  ", " 󰷝  ", "   " }
+	-- local names = { " 󰣇  ", "   ", "   ", "   ", "   ", "   ", " 󰺷  ", " 󰷝  ", "   " }
 	local l = awful.layout.suit -- Just to save some typing: use an alias.
-	local layouts = { l.tile.left, l.max, l.tile, l.tile, l.tile, l.tile, l.floating, l.tile, l.tile.top }
-	awful.tag(names, s, layouts)
+	-- local layouts = { l.tile.left, l.max, l.tile, l.tile, l.tile, l.tile, l.floating, l.tile, l.tile.top }
+	-- awful.tag(names, s, layouts)
+
+	awful.tag.add(" home ", {
+		icon = "",
+		icon_only = false,
+		layout = l.tile.left,
+		master_fill_policy = "expand",
+		-- gap_single_client = false,
+		-- gap = 4,
+		screen = s,
+		selected = true,
+	})
+
+	awful.tag.add(" mail ", {
+		icon = "",
+		layout = l.max,
+		master_fill_policy = "expand",
+		-- gap_single_client = false,
+		-- gap = 0,
+		screen = s,
+	})
+
+	awful.tag.add(" dev ", {
+		icon = "",
+		layout = l.tile,
+		master_fill_policy = "expand",
+		-- gap_single_client = false,
+		-- gap = 0,
+		screen = s,
+	})
+
+	awful.tag.add(" chat ", {
+		icon = "",
+		layout = l.tile,
+		master_fill_policy = "expand",
+		-- gap_single_client = false,
+		-- gap = 0,
+		screen = s,
+	})
+
+	awful.tag.add(" docs ", {
+		icon = "",
+		layout = l.tile.bottom,
+		-- master_fill_policy = "master_width_factor",
+		-- gap_single_client = false,
+		-- gap = 0,
+		screen = s,
+	})
+
+	awful.tag.add(" media ", {
+		icon = "",
+		layout = l.tile,
+		master_fill_policy = "expand",
+		-- gap_single_client = false,
+		-- gap = 0,
+		screen = s,
+	})
+
+	awful.tag.add(" games ", {
+		icon = "",
+		layout = l.floating,
+		-- master_fill_policy = "master_width_factor",
+		-- gap_single_client = false,
+		-- gap = 0,
+		screen = s,
+	})
+
+	awful.tag.add(" edit ", {
+		icon = "",
+		layout = l.tile,
+		master_fill_policy = "expand",
+		-- gap_single_client = false,
+		-- gap = 0,
+		screen = s,
+	})
+
+	awful.tag.add(" xtra ", {
+		icon = "",
+		layout = l.tile.top,
+		-- master_fill_policy = "master_width_factor",
+		-- gap_single_client = false,
+		-- gap = 0,
+		screen = s,
+	})
 
 	-- Create a promptbox for each screen
 	s.mypromptbox = awful.widget.prompt()
@@ -491,12 +574,12 @@ ruled.client.connect_signal("request::rules", function()
 
 	ruled.client.append_rule({
 		rule = { class = "thunderbird" },
-		properties = { screen = 1, tag = "     " },
+		properties = { screen = 1, tag = " mail " },
 	})
 
 	ruled.client.append_rule({
 		rule = { class = "steam" },
-		properties = { screen = 1, tag = "  󰺷   " },
+		properties = { screen = 1, tag = " games " },
 	})
 end)
 -- }}}

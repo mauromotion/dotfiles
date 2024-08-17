@@ -6,7 +6,10 @@ configuration {
   }
 //@theme "/home/mauromotion/.config/rofi/nord-Mauro.rasi"
 //@theme "/home/mauromotion/.config/rofi/gruvbox-Mauro.rasi"
-@theme "/home/mauromotion/.config/rofi/config-Mauro.rasi"
+//@theme "/home/mauromotion/.config/rofi/config-Mauro.rasi"
 //@theme "/usr/share/rofi/themes/gruvbox-dark.rasi"
 //@theme "/usr/share/rofi/themes/gruvbox-dark-soft.rasi"
 //@theme "/usr/share/rofi/themes/gruvbox-dark-soft.rasi"
+//@theme "/home/mauromotion/.local/share/rofi/themes/rounded-nord-dark.rasi"
+//@theme "/home/mauromotion/.local/share/rofi/themes/squared-nord.rasi"
+@theme "/home/mauromotion/.local/share/rofi/themes/rounded-nord-dark.rasi"
