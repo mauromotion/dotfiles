@@ -567,8 +567,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
 					{ -- Right widgets
 						layout = wibox.layout.fixed.horizontal,
 						myseparator,
-						kern_widget,
-						widgets_separator,
+						-- kern_widget,
+						-- widgets_separator,
 						hd_1_widget,
 						widgets_separator,
 						mem_widget,
