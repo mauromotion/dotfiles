@@ -25,7 +25,9 @@ elif [ "$state" == discharging ]; then
 		icon="󰁽"
 	elif [ "$batt_int" -gt 30 ] && [ "$batt_int" -lt 40 ]; then
 		icon="󰁼"
-	elif [ "$batt_int" -gt 20 ] && [ "$batt_int" -lt 10 ]; then
+	elif [ "$batt_int" -gt 20 ] && [ "$batt_int" -lt 30 ]; then
+		icon="󰁻"
+	elif [ "$batt_int" -gt 10 ] && [ "$batt_int" -lt 20 ]; then
 		icon="󰁻"
 	elif [ "$batt_int" -gt 10 ] && [ "$batt_int" -lt 0 ]; then
 		icon="󰁺"
