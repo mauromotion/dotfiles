@@ -4,26 +4,26 @@ draw-frame
 
 #-Backgrounds-----
 
-43, 49, 60		player background (top panel)
-43, 49, 60	  	playlist panel
-43, 49, 60		side panel
-43, 49, 60		bottom panel
-43, 49, 60 		gallery background
-43, 49, 60              queue panel
+46, 52, 64		player background (top panel)
+46, 52, 64	  playlist panel
+46, 52, 64		side panel
+46, 52, 64		bottom panel
+46, 52, 64 		gallery background
+46, 52, 64    queue panel
 
 #-Playlist-------
 
 129,161,193		track line
-163,190,140		track time
-163,190,140   	        track index
-129,161,193   	        track artist
+136,192,208		track time
+136,192,208   track index
+216, 222, 233 track artist
 129,161,193		album line
 
-163,190,140		track playing
-163,190,140		index playing
-163,190,140		artist playing
-163,190,140		album playing
-163,190,140		time playing
+235,203,139   track playing
+163,190,140   index playing
+180,142,173		artist playing
+180,142,173		album playing
+163,190,140   time playing
 
 85,85,85		track missing
 
@@ -31,9 +31,9 @@ draw-frame
 129,161,193		folder line
 129,161,193		folder title
 
-73,71,82,0		playing highlight
-255,255,255,11		select highlight
-163,190,140		gallery highlight
+76,86,106,100		playing highlight
+76,86,106,50		select highlight
+76,86,106,50		gallery highlight
 
 #-Menu-------------
 46, 52, 64              menu background
@@ -44,31 +44,31 @@ draw-frame
 #-Bottom panel------
 
 76, 86, 106		buttons off
-163,190,140		buttons over
-163,190,140		buttons active
+136,192,208		buttons active
+180,142,173		buttons over
 
-163,190,140		playing time
+136,192,208		playing time 
 
-163,190,140		seek bar 
-163,190,140		volume bar
-46, 52, 64		seek bg
-46, 52, 64		volume bg
-46, 52, 64		scroll bar
+136,192,208		volume bar 
+136,192,208		seek bar 
+46,52,64		  seek bg
+46,52,64		  volume bg
+46,52,64		  scroll bar
 
 76, 86, 106		mode off
-180,142,173		mode over
-191, 97, 106		mode on
+136,192,208		mode over
+180,142,173 	mode on
 
-163,190,140		bottom title
+235,203,139		bottom title
 
 #-Top panel---------
 
 129,161,193		tab active line
-163,190,140		tab line
+180,142,173		tab line
 59, 66, 82		tab background
 46, 52, 64		tab over
 59, 66, 82		tab active background
-163,190,140		music vis
+180,142,173		music vis
 
 #-Side panel--------
 
@@ -78,5 +78,5 @@ draw-frame
 
 #-Mini Mode---------
 
-43, 49, 60              mini bg
+46, 52, 64              mini bg
 129,161,193             mini border

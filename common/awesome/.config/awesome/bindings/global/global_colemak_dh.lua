@@ -103,6 +103,21 @@ awful.keyboard.append_global_keybindings({
 	awful.key({ modkey, "Shift" }, "c", function()
 		awful.spawn("galculator")
 	end, { description = "launch calculator", group = "launcher" }),
+
+	-- Play/pause media
+	awful.key({ modkey }, ".", function()
+		awful.spawn("playerctl play-pause")
+	end, { description = "play/pause media", group = "media" }),
+
+	-- Play next
+	awful.key({ modkey }, "'", function()
+		awful.spawn("playerctl next")
+	end, { description = "play next track", group = "media" }),
+
+	-- Play previous
+	awful.key({ modkey }, ",", function()
+		awful.spawn("playerctl previous")
+	end, { description = "play next track", group = "media" }),
 })
 
 -- Tags related keybindings
