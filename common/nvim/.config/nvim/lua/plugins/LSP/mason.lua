@@ -32,6 +32,7 @@ return {
 				"tsserver",
 				"html",
 				"cssls",
+				"tailwindcss",
 				"emmet_language_server",
 				"jedi_language_server",
 				"ruff_lsp",
