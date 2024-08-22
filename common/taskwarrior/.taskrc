@@ -1,0 +1,57 @@
+# [Created by task 2.6.2 10/3/2023 00:29:38]
+# Taskwarrior program configuration file.
+# For more documentation, see https://taskwarrior.org or try 'man task', 'man task-color',
+# 'man task-sync' or 'man taskrc'
+
+# Here is an example of entries that use the default, override and blank values
+#   variable=foo   -- By specifying a value, this overrides the default
+#   variable=      -- By specifying no value, this means no default
+#   #variable=foo  -- By commenting out the line, or deleting it, this uses the default
+
+# You can also refence environment variables:
+#   variable=$HOME/task
+#   variable=$VALUE
+
+# Use the command 'task show' to see all defaults and overrides
+
+# Files
+# data.location=/home/mauromotion/.taskwarrior/
+data.location=/home/mauromotion/Nextcloud/03_Resources/PC/Taskwarrior/
+
+# To use the default location of the XDG directories,
+# move this configuration file from ~/.taskrc to ~/.config/task/taskrc and uncomment below
+
+#data.location=~/.local/share/task
+#hooks.location=~/.config/task/hooks
+
+# Set default editor
+editor = nvim
+
+# Color theme (uncomment one to use)
+#include light-16.theme
+#include light-256.theme
+#include dark-16.theme
+#include dark-256.theme
+#include dark-red-256.theme
+#include dark-green-256.theme
+#include dark-blue-256.theme
+#include dark-violets-256.theme
+# include dark-yellow-green.theme
+#include dark-gray-256.theme
+#include dark-gray-blue-256.theme
+#include solarized-dark-256.theme
+#include solarized-light-256.theme
+#include no-color.theme
+include ~/Nextcloud/03_Resources/PC/Taskwarrior/themes/nord.theme
+# include ~/.taskwarrior/themes/everforest.theme
+
+# taskd.server=app.wingtask.com:53589
+# taskd.key=\/home\/mauromotion\/.wingtask_certs\/mmmotion@mailbox.org.key.pem
+# taskd.ca=\/home\/mauromotion\/.wingtask_certs\/letsencrypt_root_cert.pem
+# taskd.certificate=\/home\/mauromotion\/.wingtask_certs\/mmmotion@mailbox.org.cert.pem
+# taskd.credentials=WingTask\/mmmotion@mailbox.org\/5cfee322-46ab-4979-af00-0a753aa13ec8
+context.someday.read=+someday
+context.someday.write=+someday
+context.gtd.read=-someday
+context=gtd
+news.version=3.1.0
