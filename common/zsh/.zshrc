@@ -168,7 +168,8 @@ function zvm_config() {
 	# echo ' │││├─┤│ │├┬┘│ │││││ │ │ ││ ││││  '
 	# echo ' ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘  '
 	# echo ' --------- ZSH Shell -----------	'
-eval "pfetch"
+
+# eval "pfetch"
 
 ## -- Aliases -- ##
 alias ..="cd .."
@@ -198,6 +199,7 @@ alias ls="eza --icons"
 alias lsa="eza --icons -a"
 alias mirrors-update="sudo reflector -c 'United Kingdom' -a 6 --sort rate --save /etc/pacman.d/mirrorlist"
 alias mv="mv -i"
+alias ncdu="ncdu --color dark"
 alias next="tw +next"
 alias nv="nvim"
 alias pac-autoremove="sudo pacman -Rcs $(pacman -Qdtq)"
