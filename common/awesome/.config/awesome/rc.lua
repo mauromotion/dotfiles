@@ -246,8 +246,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	awful.tag.add("docs", {
 		icon = "",
 		icon_only = true,
-		layout = l.tile.bottom,
-		-- master_fill_policy = "master_width_factor",
+		layout = l.tile,
+		master_fill_policy = "expand",
 		-- gap_single_client = false,
 		-- gap = 0,
 		screen = s,
