@@ -7,7 +7,7 @@
 ------------------------------------------------------
 ```
 
-# Dotfiles repository
+# Dotfiles
 
 This repository contains all the configuration files for the Arch Linux installations on both my desktop and laptop computers.
 
