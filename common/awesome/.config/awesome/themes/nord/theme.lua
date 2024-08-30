@@ -14,6 +14,7 @@ local theme = {}
 
 -- theme.font = "JetBrainsMono Nerd Font Medium 11.5"
 theme.font = "FiraMono Nerd Font Medium 12"
+-- theme.font = "GeistMono Nerd Font Medium 12"
 -- theme.font = "Maple Mono NF Medium 12"
 
 local accent_color = function()
