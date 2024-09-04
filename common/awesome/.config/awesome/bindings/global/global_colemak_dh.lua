@@ -63,7 +63,7 @@ awful.keyboard.append_global_keybindings({
 	end, { description = "open a terminal", group = "launcher" }),
 
 	-- Run bar prompt
-	awful.key({ modkey }, "r", function()
+	awful.key({ modkey, "Shift" }, "r", function()
 		awful.screen.focused().mypromptbox:run()
 	end, { description = "run prompt", group = "launcher" }),
 

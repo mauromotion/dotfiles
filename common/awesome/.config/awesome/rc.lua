@@ -58,21 +58,21 @@ local function get_hostname(callback)
 end
 
 -- Remove border when only one window
-local function set_border(c)
-	local s = awful.screen.focused()
-	if
-		c.maximized
-		or (#s.tiled_clients == 1 and not c.floating)
-		or (s.selected_tag and s.selected_tag.layout.name == "max")
-	then
-		c.border_width = 0
-	else
-		c.border_width = beautiful.border_width
-	end
-end
+-- local function set_border(c)
+-- 	local s = awful.screen.focused()
+-- 	if
+-- 		c.maximized
+-- 		or (#s.tiled_clients == 1 and not c.floating)
+-- 		or (s.selected_tag and s.selected_tag.layout.name == "max")
+-- 	then
+-- 		c.border_width = 0
+-- 	else
+-- 		c.border_width = beautiful.border_width
+-- 	end
+-- end
 
-client.connect_signal("request::border", set_border)
-client.connect_signal("property::maximized", set_border)
+-- client.connect_signal("request::border", set_border)
+-- client.connect_signal("property::maximized", set_border)
 -- }}}
 
 -- {{{ Menu
@@ -243,7 +243,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	awful.tag.add("dev", {
 		icon = "",
 		icon_only = true,
-		layout = l.tile,
+		layout = l.tile.left,
 		master_fill_policy = "expand",
 		-- gap_single_client = false,
 		-- gap = 0,
@@ -253,7 +253,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	awful.tag.add("chat", {
 		icon = "",
 		icon_only = true,
-		layout = l.fair.horizontal,
+		layout = l.fair,
 		-- master_fill_policy = "expand",
 		-- gap_single_client = false,
 		-- gap = 0,
@@ -273,7 +273,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	awful.tag.add("media", {
 		icon = "",
 		icon_only = true,
-		layout = l.tile,
+		layout = l.tile.left,
 		master_fill_policy = "expand",
 		-- gap_single_client = false,
 		-- gap = 0,
@@ -293,7 +293,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	awful.tag.add("edit", {
 		icon = "",
 		icon_only = true,
-		layout = l.tile,
+		layout = l.tile.left,
 		master_fill_policy = "expand",
 		-- gap_single_client = false,
 		-- gap = 0,
