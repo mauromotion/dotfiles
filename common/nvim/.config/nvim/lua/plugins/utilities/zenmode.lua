@@ -14,7 +14,7 @@ return {
 			},
 			kitty = {
 				enabled = true,
-				font = "+4",
+				font = "+2",
 			},
 			tmux = {
 				enabled = true,
