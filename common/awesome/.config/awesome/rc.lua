@@ -639,6 +639,7 @@ ruled.client.connect_signal("request::rules", function()
 				"Pavucontrol",
 				"Viewnior",
 				"mpv",
+				"Nitrogen",
 				"org.cryptomator.launcher.Cryptomator$MainApp",
 				"vlc",
 			},

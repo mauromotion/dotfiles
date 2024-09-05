@@ -6,53 +6,91 @@ Xft.autohint:  false
 Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
 
-XTerm*background:        #3B4252
-XTerm*foreground:        #D8DEE9
-XTerm*pointerColor:      #81A1C1
-XTerm*faceName:          Fixed
-XTerm*faceSize:          11
-XTerm*reverseVideo:      on
-XTerm*selectToClipboard: true
+/* !! Nord */
+/* XTerm*background:        #3B4252 */
+/* XTerm*foreground:        #D8DEE9 */
+/* XTerm*pointerColor:      #81A1C1 */
+/* XTerm*faceName:          Fixed */
+/* XTerm*faceSize:          11 */
+/* XTerm*reverseVideo:      on */
+/* XTerm*selectToClipboard: true */
 
-*background:                      #2E3440
-*foreground:                      #D8DEE9
-*fading:                          8
-*fadeColor:                       black
-*cursorColor:                     #81A1C1
-*pointerColorBackground:          #3B4252
-*pointerColorForeground:          #81A1C1
+/* *background:                      #2E3440 */
+/* *foreground:                      #D8DEE9 */
+/* *fading:                          8 */
+/* *fadeColor:                       black */
+/* *cursorColor:                     #81A1C1 */
+/* *pointerColorBackground:          #3B4252 */
+/* *pointerColorForeground:          #81A1C1 */
 
-!! black dark/light
-*color0:                          #3B4252
-*color8:                          #4C566A
+/* !! black dark/light */
+/* *color0:                          #3B4252 */
+/* *color8:                          #4C566A */
 
-!! red dark/light
-*color1:                          #BF616A
-*color9:                          #cf876f
+/* !! red dark/light */
+/* *color1:                          #BF616A */
+/* *color9:                          #cf876f */
 
-!! green dark/light
-*color2:                          #A3BE8C
-*color10:                         #A3BE8C
+/* !! green dark/light */
+/* *color2:                          #A3BE8C */
+/* *color10:                         #A3BE8C */
 
-!! yellow dark/light
-*color3:                          #EBCB8B
-*color11:                         #EBCB8B
+/* !! yellow dark/light */
+/* *color3:                          #EBCB8B */
+/* *color11:                         #EBCB8B */
 
-!! blue dark/light
-*color4:                          #81A1C1
-*color12:                         #81A1C1
+/* !! blue dark/light */
+/* *color4:                          #81A1C1 */
+/* *color12:                         #81A1C1 */
 
-!! magenta dark/light
-*color5:                          #B48EAD
-*color13:                         #B48EAD
+/* !! magenta dark/light */
+/* *color5:                          #B48EAD */
+/* *color13:                         #B48EAD */
 
-!! cyan dark/light
-*color6:                          #88C0D0
-*color14:                         #8FBCBB
+/* !! cyan dark/light */
+/* *color6:                          #88C0D0 */
+/* *color14:                         #8FBCBB */
 
-!! white dark/light
-*color7:                          #E5E9F0
-*color15:                         #ECEFF4
+/* !! white dark/light */
+/* *color7:                          #E5E9F0 */
+/* *color15:                         #ECEFF4 */
+
+!! Catppuccin macchiato
+*background: #24273a
+*foreground: #cad3f5
+*cursorColor: #f4dbd6
+
+! black
+*color0: #494d64
+*color8: #5b6078
+
+! red
+*color1: #ed8796
+*color9: #ed8796
+
+! green
+*color2: #a6da95
+*color10: #a6da95
+
+! yellow
+*color3: #eed49f
+*color11: #eed49f
+
+! blue
+*color4: #8aadf4
+*color12: #8aadf4
+
+! magenta
+*color5: #f5bde6
+*color13: #f5bde6
+
+! cyan
+*color6: #8bd5ca
+*color14: #8bd5ca
+
+! white
+*color7: #b8c0e0
+*color15: #a5adcb
 
 Xcursor.theme: capitaine-cursors-light
 Xcursor.size:                     16

@@ -1,21 +1,33 @@
 return {
+	-- {
+	-- 	"edeneast/nightfox.nvim",
+	-- 	lazy = false,
+	-- 	config = function()
+	-- 		require("nightfox").setup({
+	-- 			options = {
+	-- 				transparent = true,
+	-- 				dim_inactive = false,
+	-- 				styles = {
+	-- 					comments = "italic",
+	-- 					keywords = "italic,bold",
+	-- 					types = "italic,bold",
+	-- 				},
+	-- 			},
+	-- 		})
+	-- 		-- apply colorscheme
+	-- 		vim.cmd([[colorscheme nordfox]])
+	-- 	end,
+	-- },
 	{
-		"edeneast/nightfox.nvim",
+		"catppuccin/nvim",
 		lazy = false,
 		config = function()
-			require("nightfox").setup({
-				options = {
-					transparent = true,
-					dim_inactive = false,
-					styles = {
-						comments = "italic",
-						keywords = "italic,bold",
-						types = "italic,bold",
-					},
-				},
+			require("catppuccin").setup({
+				flavour = "macchiato",
+				transparent_background = false,
 			})
 			-- apply colorscheme
-			vim.cmd([[colorscheme nordfox]])
+			vim.cmd([[colorscheme catppuccin]])
 		end,
 	},
 	-- {
