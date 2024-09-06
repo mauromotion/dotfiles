@@ -173,48 +173,48 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	local tags = {
 		{
 			name = "home",
-			icon_unfocused = "/home/mauromotion/.config/awesome/themes/nord/taglist/unfocused_home.svg",
-			icon_focused = "/home/mauromotion/.config/awesome/themes/nord/taglist/focused_home.svg",
+			icon_unfocused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/unfocused_home.svg",
+			icon_focused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/focused_home.svg",
 		},
 		{
 			name = "mail",
-			icon_unfocused = "/home/mauromotion/.config/awesome/themes/nord/taglist/unfocused_mail.svg",
-			icon_focused = "/home/mauromotion/.config/awesome/themes/nord/taglist/focused_mail.svg",
+			icon_unfocused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/unfocused_mail.svg",
+			icon_focused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/focused_mail.svg",
 		},
 		{
 			name = "dev",
-			icon_unfocused = "/home/mauromotion/.config/awesome/themes/nord/taglist/unfocused_dev.svg",
-			icon_focused = "/home/mauromotion/.config/awesome/themes/nord/taglist/focused_dev.svg",
+			icon_unfocused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/unfocused_dev.svg",
+			icon_focused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/focused_dev.svg",
 		},
 		{
 			name = "chat",
-			icon_unfocused = "/home/mauromotion/.config/awesome/themes/nord/taglist/unfocused_chat.svg",
-			icon_focused = "/home/mauromotion/.config/awesome/themes/nord/taglist/focused_chat.svg",
+			icon_unfocused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/unfocused_chat.svg",
+			icon_focused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/focused_chat.svg",
 		},
 		{
 			name = "docs",
-			icon_unfocused = "/home/mauromotion/.config/awesome/themes/nord/taglist/unfocused_docs.svg",
-			icon_focused = "/home/mauromotion/.config/awesome/themes/nord/taglist/focused_docs.svg",
+			icon_unfocused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/unfocused_docs.svg",
+			icon_focused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/focused_docs.svg",
 		},
 		{
 			name = "media",
-			icon_unfocused = "/home/mauromotion/.config/awesome/themes/nord/taglist/unfocused_media.svg",
-			icon_focused = "/home/mauromotion/.config/awesome/themes/nord/taglist/focused_media.svg",
+			icon_unfocused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/unfocused_media.svg",
+			icon_focused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/focused_media.svg",
 		},
 		{
 			name = "games",
-			icon_unfocused = "/home/mauromotion/.config/awesome/themes/nord/taglist/unfocused_games.svg",
-			icon_focused = "/home/mauromotion/.config/awesome/themes/nord/taglist/focused_games.svg",
+			icon_unfocused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/unfocused_games.svg",
+			icon_focused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/focused_games.svg",
 		},
 		{
 			name = "edit",
-			icon_unfocused = "/home/mauromotion/.config/awesome/themes/nord/taglist/unfocused_edit.svg",
-			icon_focused = "/home/mauromotion/.config/awesome/themes/nord/taglist/focused_edit.svg",
+			icon_unfocused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/unfocused_edit.svg",
+			icon_focused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/focused_edit.svg",
 		},
 		{
 			name = "extra",
-			icon_unfocused = "/home/mauromotion/.config/awesome/themes/nord/taglist/unfocused_extra.svg",
-			icon_focused = "/home/mauromotion/.config/awesome/themes/nord/taglist/focused_extra.svg",
+			icon_unfocused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/unfocused_extra.svg",
+			icon_focused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/focused_extra.svg",
 		},
 	}
 
