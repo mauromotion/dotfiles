@@ -128,7 +128,7 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
   --prompt="> " --separator="─" --scrollbar="│" --info="right"'
 
 # Bat theme
-export BAT_THEME=Nord
+export BAT_THEME="Catppuccin Macchiato"
 
 ## -- fzf-tab and completion visual settings -- ##
 
