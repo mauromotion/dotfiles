@@ -117,16 +117,23 @@ _fzf_comprun() {
 }
 
 ## -- Fzf theme -- ##
-# Nord theme permalink: https://shorturl.at/WGERJ
 
-export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
-  --color=fg:#e5e9f0,fg+:#eceff4,bg:-1,bg+:#3b4252
-  --color=hl:#b48ead,hl+:#8fbcbb,info:#ebcb8b,marker:#a3be8c
-  --color=prompt:#b48ead,spinner:#a3be8c,pointer:#a3be8c,header:#8fbcbb
-  --color=border:#4c566a,label:#81a1c1,query:#d8dee9
-  --border="rounded" --border-label="fzf" --border-label-pos="0" --preview-window="border-rounded"
-  --prompt="> " --separator="─" --scrollbar="│" --info="right"'
+# # Nord theme permalink: https://shorturl.at/WGERJ
+# export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+#   --color=fg:#e5e9f0,fg+:#eceff4,bg:-1,bg+:#3b4252
+#   --color=hl:#b48ead,hl+:#8fbcbb,info:#ebcb8b,marker:#a3be8c
+#   --color=prompt:#b48ead,spinner:#a3be8c,pointer:#a3be8c,header:#8fbcbb
+#   --color=border:#4c566a,label:#81a1c1,query:#d8dee9
+#   --border="rounded" --border-label="fzf" --border-label-pos="0" --preview-window="border-rounded"
+#   --prompt="> " --separator="─" --scrollbar="│" --info="right"'
 
+# Catppuccin Macchiato
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
+--color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
+--color=marker:#b7bdf8,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796 \
+--color=selected-bg:#494d64 \
+--multi"
 # Bat theme
 export BAT_THEME="Catppuccin Macchiato"
 
