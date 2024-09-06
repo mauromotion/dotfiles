@@ -50,7 +50,7 @@ local accent_color = function()
 	local colors =
 		{ "#8AADF4", "#8BD5CA", "#7DC4E4", "#B4BEFE", "#C6A0F6", "#F5BDE6", "#F0C6C6", "#F5A97F", "#A6DA95", "#EED49F" }
 
-	local accent = colors[math.random(1, 4)]
+	local accent = colors[math.random(1, #colors)]
 	return accent
 end
 
