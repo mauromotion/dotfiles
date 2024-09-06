@@ -10,7 +10,7 @@ end
 
 -- Colorscheme
 config.color_scheme_dirs = { "~/.config/wezterm/colors" }
-config.color_scheme = "nordfox"
+config.color_scheme = "Catppuccin Macchiato"
 config.window_background_opacity = 0.95
 
 -- Font

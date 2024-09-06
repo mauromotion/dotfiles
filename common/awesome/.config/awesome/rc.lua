@@ -222,10 +222,10 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	awful.tag.add("home", {
 		icon = "",
 		icon_only = true,
-		layout = l.tile.left,
+		layout = l.tile,
 		master_fill_policy = "expand",
-		-- gap_single_client = false,
-		-- gap = 4,
+		gap_single_client = false,
+		gap = 4,
 		screen = s,
 		selected = true,
 	})
@@ -235,15 +235,15 @@ screen.connect_signal("request::desktop_decoration", function(s)
 		icon_only = true,
 		layout = l.max,
 		master_fill_policy = "expand",
-		-- gap_single_client = false,
-		-- gap = 0,
+		gap_single_client = true,
+		gap = 15,
 		screen = s,
 	})
 
 	awful.tag.add("dev", {
 		icon = "",
 		icon_only = true,
-		layout = l.tile.left,
+		layout = l.tile,
 		master_fill_policy = "expand",
 		-- gap_single_client = false,
 		-- gap = 0,
@@ -256,7 +256,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 		layout = l.fair,
 		-- master_fill_policy = "expand",
 		-- gap_single_client = false,
-		-- gap = 0,
+		gap = 4,
 		screen = s,
 	})
 
@@ -265,8 +265,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
 		icon_only = true,
 		layout = l.tile,
 		master_fill_policy = "expand",
-		-- gap_single_client = false,
-		-- gap = 0,
+		gap_single_client = false,
+		gap = 6,
 		screen = s,
 	})
 
@@ -275,8 +275,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
 		icon_only = true,
 		layout = l.tile.left,
 		master_fill_policy = "expand",
-		-- gap_single_client = false,
-		-- gap = 0,
+		gap_single_client = false,
+		gap = 10,
 		screen = s,
 	})
 
@@ -293,7 +293,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	awful.tag.add("edit", {
 		icon = "",
 		icon_only = true,
-		layout = l.tile.left,
+		layout = l.tile,
 		master_fill_policy = "expand",
 		-- gap_single_client = false,
 		-- gap = 0,
@@ -639,6 +639,7 @@ ruled.client.connect_signal("request::rules", function()
 				"Pavucontrol",
 				"Viewnior",
 				"mpv",
+				"Nitrogen",
 				"org.cryptomator.launcher.Cryptomator$MainApp",
 				"vlc",
 			},
