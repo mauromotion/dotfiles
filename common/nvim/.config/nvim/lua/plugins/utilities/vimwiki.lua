@@ -35,11 +35,11 @@ return {
 			},
 		}
 	end,
-	dependencies = {
-		"tools-life/taskwiki",
-		init = function()
-			vim.g.taskwiki_dont_preserve_folds = "yes"
-			vim.g.taskwiki_dont_fold = "yes"
-		end,
-	},
+	-- dependencies = {
+	-- 	"tools-life/taskwiki",
+	-- 	init = function()
+	-- 		vim.g.taskwiki_dont_preserve_folds = "yes"
+	-- 		vim.g.taskwiki_dont_fold = "yes"
+	-- 	end,
+	-- },
 }

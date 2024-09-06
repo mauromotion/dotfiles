@@ -44,7 +44,7 @@
   "nvim-ts-context-commentstring": { "branch": "main", "commit": "375c2d86cee6674afd75b4f727ce3a80065552f7" },
   "oil.nvim": { "branch": "master", "commit": "1fe476daf0b3c108cb8ee1fc1226cc282fa2c9c1" },
   "plenary.nvim": { "branch": "master", "commit": "ec289423a1693aeae6cd0d503bac2856af74edaa" },
-  "taskwiki": { "branch": "master", "commit": "0ee63dd1f5d80be3296f14070211f4ade96d0e36" },
+  "render-markdown.nvim": { "branch": "main", "commit": "2f9d4f0be8784ed4fef5960eb7b80bf60c5fdf56" },
   "todo-comments.nvim": { "branch": "main", "commit": "319c01b99b7a8c9ac2066bf0efd4d6ec68fef444" },
   "trouble.nvim": { "branch": "main", "commit": "6efc446226679fda0547c0fd6a7892fd5f5b15d8" },
   "undotree": { "branch": "main", "commit": "eab459ab87dd249617b5f7187bb69e614a083047" },
