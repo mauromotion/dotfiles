@@ -7,4 +7,5 @@ return {
 			file_types = { "markdown", "vimwiki" },
 		})
 	end,
+	ft = { "markdown", "norg", "rmd", "org" },
 }
