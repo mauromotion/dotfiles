@@ -53,7 +53,7 @@ theme.font = "FiraMono Nerd Font Medium 12"
 -- 	return accent
 -- end
 
-local use_accent_color = "#B4BEFE" -- accent_color()
+local use_accent_color = "#8AADF4" -- accent_color()
 
 theme.bg_normal = "#24273A"
 theme.bg_focus = use_accent_color
