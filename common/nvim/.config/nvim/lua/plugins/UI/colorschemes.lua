@@ -24,7 +24,12 @@ return {
 		config = function()
 			require("catppuccin").setup({
 				flavour = "macchiato",
-				transparent_background = false,
+				transparent_background = true,
+				styles = {
+					comments = { "italic" },
+					keywords = { "italic, bold" },
+					types = { "italic, bold" },
+				},
 			})
 			-- apply colorscheme
 			vim.cmd([[colorscheme catppuccin]])

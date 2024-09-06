@@ -222,7 +222,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	awful.tag.add("home", {
 		icon = "",
 		icon_only = true,
-		layout = l.tile.left,
+		layout = l.tile,
 		master_fill_policy = "expand",
 		gap_single_client = false,
 		gap = 4,
@@ -243,7 +243,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	awful.tag.add("dev", {
 		icon = "",
 		icon_only = true,
-		layout = l.tile.left,
+		layout = l.tile,
 		master_fill_policy = "expand",
 		-- gap_single_client = false,
 		-- gap = 0,
@@ -293,7 +293,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	awful.tag.add("edit", {
 		icon = "",
 		icon_only = true,
-		layout = l.tile.left,
+		layout = l.tile,
 		master_fill_policy = "expand",
 		-- gap_single_client = false,
 		-- gap = 0,

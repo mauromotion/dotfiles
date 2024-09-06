@@ -11,7 +11,7 @@ end
 -- Colorscheme
 config.color_scheme_dirs = { "~/.config/wezterm/colors" }
 config.color_scheme = "Catppuccin Macchiato"
-config.window_background_opacity = 1
+config.window_background_opacity = 0.95
 
 -- Font
 config.font = wezterm.font("JetBrainsMono NF", {})
