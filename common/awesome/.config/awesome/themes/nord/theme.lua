@@ -46,14 +46,15 @@ theme.font = "FiraMono Nerd Font Medium 12"
 -- theme.notification_border_width = dpi(4)
 
 -- Catppuccin macchiato
+local accent_color = function()
+	local colors =
+		{ "#8AADF4", "#8BD5CA", "#7DC4E4", "#B4BEFE", "#C6A0F6", "#F5BDE6", "#F0C6C6", "#F5A97F", "#A6DA95", "#EED49F" }
 
--- local accent_color = function()
--- 	local colors = { "#8AADF4", "#F5BDE6", "#A6DA95", "#EED49F" }
--- 	local accent = colors[math.random(1, 4)]
--- 	return accent
--- end
+	local accent = colors[math.random(1, 4)]
+	return accent
+end
 
-local use_accent_color = "#8AADF4" -- accent_color()
+local use_accent_color = accent_color()
 
 theme.bg_normal = "#24273A"
 theme.bg_focus = use_accent_color
