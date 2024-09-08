@@ -29,7 +29,7 @@ return {
 			-- list of servers for mason to install
 			ensure_installed = {
 				"lua_ls",
-				"tsserver",
+				"ts_ls",
 				"html",
 				"cssls",
 				"tailwindcss",
@@ -46,8 +46,6 @@ return {
 			},
 			-- auto-install configured servers (with lspconfig)
 			automatic_installation = true, -- not the same as ensure_installed
-
-			server_name = server_name == "tsserver" and "ts_ls" or server_name,
 		})
 
 		mason_null_ls.setup({
