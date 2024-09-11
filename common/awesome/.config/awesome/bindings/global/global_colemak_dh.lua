@@ -45,7 +45,7 @@ awful.keyboard.append_global_keybindings({
 	awful.key({ modkey, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
 
 	-- Quit Awesome
-	awful.key({ modkey, "Control" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
+	awful.key({ modkey, "Control", "Shift" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
 
 	-- Run Lua code on bar prompt
 	awful.key({ modkey }, "x", function()
