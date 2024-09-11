@@ -305,8 +305,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
 		icon_only = true,
 		layout = l.tile.top,
 		-- master_fill_policy = "master_width_factor",
-		-- gap_single_client = false,
-		-- gap = 0,
+		gap_single_client = false,
+		gap = 6,
 		screen = s,
 	})
 
