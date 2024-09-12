@@ -64,10 +64,19 @@ o.history = 50
 opt.hlsearch = false
 opt.incsearch = true
 
+-- Folding
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_tsreesitter#foldexpr()"
+o.foldcolumn = "1"
+o.foldlevel = 99
+o.foldlevelstart = 99
+o.foldenable = true
+
 -- Python virtual env
 g.python3_host_prog = "$HOME/.venvs/nvim_venv/bin/python"
 
 -- Disable perl provider
 g.loaded_perl_provider = 0
 
+-- For render-markdown plugin
 vim.treesitter.language.register("markdown", "vimwiki")
