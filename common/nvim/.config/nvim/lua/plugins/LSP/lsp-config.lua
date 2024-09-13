@@ -115,6 +115,14 @@ return {
 		lspconfig["tailwindcss"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
+			root_dir = function(fname)
+				local root_pattern = require("lspconfig").util.root_pattern(
+					"tailwind.config.cjs",
+					"tailwind.config.js",
+					"postcss.config.js"
+				)
+				return root_pattern(fname)
+			end,
 		})
 
 		-- configure emmet language server
