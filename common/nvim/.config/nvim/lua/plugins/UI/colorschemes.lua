@@ -1,4 +1,5 @@
 return {
+	---- ** Nord ** ----
 	-- {
 	-- 	"edeneast/nightfox.nvim",
 	-- 	lazy = false,
@@ -18,9 +19,11 @@ return {
 	-- 		vim.cmd([[colorscheme nordfox]])
 	-- 	end,
 	-- },
+	---- ** Catppuccin ** ----
 	{
 		"catppuccin/nvim",
 		lazy = false,
+		name = "catppuccin",
 		config = function()
 			require("catppuccin").setup({
 				flavour = "macchiato",
@@ -35,6 +38,7 @@ return {
 			vim.cmd([[colorscheme catppuccin]])
 		end,
 	},
+	---- ** Gruvbox ** ----
 	-- {
 	-- 	"sainnhe/gruvbox-material",
 	-- 	lazy = true,
@@ -46,6 +50,7 @@ return {
 	-- vim.cmd([[colorscheme gruvbox-material]])
 	-- 	end,
 	-- },
+	---- ** Everforest ** ----
 	-- {
 	-- 	"neanias/everforest-nvim",
 	-- 	lazy = true,
