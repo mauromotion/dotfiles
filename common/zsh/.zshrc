@@ -29,6 +29,9 @@ bindkey "^[[B" history-search-forward
 setopt auto_cd
 setopt auto_list
 
+## Start ssh-agent
+eval "$(ssh-agent -s)"
+
 ## -- Prompt Theming -- ##
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
