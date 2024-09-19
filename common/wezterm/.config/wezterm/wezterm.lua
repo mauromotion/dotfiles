@@ -14,7 +14,7 @@ config.color_scheme = "Catppuccin Macchiato"
 config.window_background_opacity = 0.95
 
 -- Font
-config.font = wezterm.font("JetBrainsMono NF", {})
+config.font = wezterm.font("JetBrainsMono NF", { weight = "DemiBold" })
 -- config.font = wezterm.font("FiraCode Nerd Font", {})
 config.font_size = 12
 config.freetype_load_flags = "NO_HINTING"
@@ -149,7 +149,14 @@ config.keys = {
 	{
 		key = "t",
 		mods = "CTRL|SHIFT|ALT",
-		action = wezterm.action.CloseCurrentTab({ confirm = true }),
+		action = wezterm.action.PromptInputLine({
+			description = "Enter a new title for the current tab",
+			action = wezterm.action_callback(function(window, _, line)
+				if line then
+					window:active_tab():set_title(line)
+				end
+			end),
+		}),
 	},
 	{
 		key = "Tab",
@@ -204,7 +211,7 @@ config.keys = {
 	{
 		key = "9",
 		mods = "CTRL|SHIFT",
-		action = wezterm.action.ActivateTab(7),
+		action = wezterm.action.ActivateTab(8),
 	},
 	-- Search
 	{
