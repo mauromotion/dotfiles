@@ -33,7 +33,8 @@ config.visual_bell = {
 	fade_out_duration_ms = 100,
 }
 config.colors = {
-	visual_bell = "#4c566a",
+	visual_bell = "#363A4F",
+	split = "#B4BEFE",
 }
 
 --------* Keybindings *--------
@@ -100,6 +101,11 @@ config.keys = {
 		key = "z",
 		mods = "CTRL|SHIFT",
 		action = wezterm.action.TogglePaneZoomState,
+	},
+	{
+		key = "{",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.PaneSelect({ mode = "SwapWithActiveKeepFocus" }),
 	},
 	-- Quick Select
 	{
