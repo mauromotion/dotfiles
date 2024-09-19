@@ -200,6 +200,9 @@ awful.keyboard.append_global_keybindings({
 	awful.key({ modkey, "Shift" }, "space", function()
 		awful.layout.inc(-1)
 	end, { description = "select previous", group = "layout" }),
+	awful.key({ modkey }, "-", function()
+		awful.spawn.with_shell("tdrop -ma -w 100% -h 40% -y 0 kitty")
+	end, { description = "toggle drop-down kitty terminal", group = "custom" }),
 })
 
 awful.keyboard.append_global_keybindings({
