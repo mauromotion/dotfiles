@@ -42,8 +42,8 @@ config.disable_default_key_bindings = true
 config.keys = {
 	-- Panes
 	{
-		key = "|",
-		mods = "CTRL|SHIFT",
+		key = "Enter",
+		mods = "CTRL|SHIFT|ALT",
 		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 	},
 	{
