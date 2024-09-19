@@ -198,6 +198,13 @@ return {
 			filetypes = { "python" },
 		})
 
+		-- configure django server
+		lspconfig["jinja_lsp"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			filetypes = { "htmldjango" },
+		})
+
 		-- configure astro server
 		lspconfig["astro"].setup({
 			capabilities = capabilities,
