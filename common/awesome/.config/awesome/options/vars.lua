@@ -1,6 +1,6 @@
 local _M = {
 	modkey = "Mod4",
-	terminal = os.getenv("TERMINAL") or "kitty",
+	terminal = os.getenv("TERMINAL") or "wezterm",
 	editor = os.getenv("EDITOR") or "vim",
 	browser = "firefox",
 	filebrowser = "thunar",

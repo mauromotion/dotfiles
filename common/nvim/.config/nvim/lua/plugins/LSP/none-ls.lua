@@ -23,7 +23,7 @@ return {
 				--  to disable file types use
 				--  "formatting.prettier.with({disabled_filetypes: {}})" (see null-ls docs)
 				formatting.prettierd.with({
-					extra_filetypes = { "typescriptreact", "astro", "htmldjango", "javascriptreact" },
+					extra_filetypes = { "typescriptreact", "astro", "javascriptreact" },
 				}), -- js/ts formatter
 				formatting.stylua, -- lua formatter
 				formatting.shfmt, -- shell formatter
@@ -31,6 +31,7 @@ return {
 				formatting.isort.with({ extra_args = { "--profile", "black", "--filter-files" } }), -- python formatter
 				-- diagnostics.flake8.with({ extra_args = { "--max-line-length", "88", "--extend-ignore", "E203" } }), -- python linter
 				diagnostics.djlint, -- django templates linter
+				formatting.djlint,
 			},
 			-- configure format on save
 			on_attach = function(current_client, bufnr)

@@ -6,6 +6,14 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
+-- Sessions set up
+config.unix_domains = {
+	{ name = "unix" },
+}
+
+-- Focus follows mouse
+config.pane_focus_follows_mouse = true
+
 --------* UI *--------
 
 -- Colorscheme
@@ -14,7 +22,7 @@ config.color_scheme = "Catppuccin Macchiato"
 config.window_background_opacity = 0.95
 
 -- Font
-config.font = wezterm.font("JetBrainsMono NF", {})
+config.font = wezterm.font("JetBrainsMono NF", { weight = "DemiBold" })
 -- config.font = wezterm.font("FiraCode Nerd Font", {})
 config.font_size = 12
 config.freetype_load_flags = "NO_HINTING"
@@ -22,7 +30,26 @@ config.freetype_load_flags = "NO_HINTING"
 -- Tabs
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = true
-config.use_fancy_tab_bar = false
+config.show_tab_index_in_tab_bar = true
+config.tab_max_width = 50
+
+-- Config fancy tab bar
+config.use_fancy_tab_bar = true
+config.show_new_tab_button_in_tab_bar = false
+config.window_frame = {
+	font = wezterm.font({ family = "JetBrainsMono NF", weight = "Bold" }),
+	font_size = 10.5,
+	active_titlebar_bg = "rgb(36, 39, 58, 0)",
+	inactive_titlebar_bg = "rgb(36, 39, 58, 0)",
+}
+
+-- Padding
+config.window_padding = {
+	left = 6,
+	right = 0,
+	top = 0,
+	bottom = 0,
+}
 
 -- Alert bell
 config.audible_bell = "Disabled"
@@ -33,17 +60,62 @@ config.visual_bell = {
 	fade_out_duration_ms = 100,
 }
 config.colors = {
-	visual_bell = "#4c566a",
+	visual_bell = "#363A4F",
+	split = "#B4BEFE",
+	-- Fancy tab bar colors
+	tab_bar = {
+		active_tab = {
+			fg_color = "#24273A",
+			bg_color = "#C6A0F6",
+		},
+		inactive_tab = {
+			bg_color = "rgb(0 0 0 0)",
+			fg_color = "#CAD3F5",
+		},
+		inactive_tab_hover = {
+			bg_color = "#363A4F",
+			fg_color = "#B4BEFE",
+		},
+	},
 }
 
 --------* Keybindings *--------
 config.disable_default_key_bindings = true
 
 config.keys = {
+	-- Sessions
+	{
+		key = "a",
+		mods = "CTRL|SHIFT|ALT",
+		action = wezterm.action.AttachDomain("unix"),
+	},
+	{
+		key = "d",
+		mods = "CTRL|SHIFT|ALT",
+		action = wezterm.action.DetachDomain({ DomainName = "unix" }),
+	},
+	{
+		key = "$",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.PromptInputLine({
+			description = "Enter a new name for the current session",
+			action = wezterm.action_callback(function(window, _, line)
+				if line then
+					wezterm.mux.rename_workspace(window:mux_window():get_workspace(), line)
+				end
+			end),
+		}),
+	},
+	-- Show list of workspaces
+	{
+		key = "s",
+		mods = "CTRL|SHIFT|ALT",
+		action = wezterm.action.ShowLauncherArgs({ flags = "WORKSPACES" }),
+	},
 	-- Panes
 	{
-		key = "|",
-		mods = "CTRL|SHIFT",
+		key = "Enter",
+		mods = "CTRL|SHIFT|ALT",
 		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 	},
 	{
@@ -101,6 +173,11 @@ config.keys = {
 		mods = "CTRL|SHIFT",
 		action = wezterm.action.TogglePaneZoomState,
 	},
+	{
+		key = "{",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.PaneSelect({ mode = "SwapWithActiveKeepFocus" }),
+	},
 	-- Quick Select
 	{
 		key = "Space",
@@ -149,7 +226,14 @@ config.keys = {
 	{
 		key = "t",
 		mods = "CTRL|SHIFT|ALT",
-		action = wezterm.action.CloseCurrentTab({ confirm = true }),
+		action = wezterm.action.PromptInputLine({
+			description = "Enter a new title for the current tab",
+			action = wezterm.action_callback(function(window, _, line)
+				if line then
+					window:active_tab():set_title(line)
+				end
+			end),
+		}),
 	},
 	{
 		key = "Tab",
@@ -204,7 +288,7 @@ config.keys = {
 	{
 		key = "9",
 		mods = "CTRL|SHIFT",
-		action = wezterm.action.ActivateTab(7),
+		action = wezterm.action.ActivateTab(8),
 	},
 	-- Search
 	{
