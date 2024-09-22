@@ -3,7 +3,7 @@
 ## Manage sessions ##
 
 # Define the default session
-session=${1:-i3}
+session=${1:-awesome}
 
 # Launch requested session
 case $session in

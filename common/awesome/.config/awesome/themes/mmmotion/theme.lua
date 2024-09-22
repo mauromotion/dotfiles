@@ -17,35 +17,7 @@ local theme = {}
 theme.font = "GeistMono Nerd Font Medium 12"
 -- theme.font = "Maple Mono NF Medium 12"
 
--- local accent_color = function()
--- 	local colors = { "#88c0d0", "#b48ead", "#a3be8c", "#ebcb8b" }
--- 	local accent = colors[math.random(1, 4)]
--- 	return accent
--- end
-
--- ** Nord ** --
--- local use_accent_color = "#88c0d0" -- accent_color()
-
--- theme.bg_normal = "#2e3440"
--- theme.bg_focus = use_accent_color
--- theme.bg_urgent = "#bf616a"
--- theme.bg_minimize = "#4c566a"
--- theme.bg_systray = theme.bg_normal
-
--- theme.fg_normal = "#d8dee9"
--- theme.fg_focus = "#2e3440"
--- theme.fg_urgent = "#eceff4"
--- theme.fg_minimize = "#eceff4"
-
--- theme.useless_gap = dpi(0)
--- theme.border_width = dpi(2)
--- theme.border_color_normal = "#2e3440"
--- theme.border_color_active = use_accent_color
--- theme.border_color_marked = "#bf616a"
--- theme.notification_border_color = use_accent_color
--- theme.notification_border_width = dpi(4)
-
--- ** Catppuccin macchiato ** --
+-- ** Catppuccin Macchiato ** --
 -- local accent_color = function()
 -- 	local colors =
 -- 		{ "#8AADF4", "#8BD5CA", "#7DC4E4", "#B4BEFE", "#C6A0F6", "#F5BDE6", "#F0C6C6", "#F5A97F", "#A6DA95", "#EED49F" }
