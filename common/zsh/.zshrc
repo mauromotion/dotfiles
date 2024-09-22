@@ -224,7 +224,7 @@ alias ~="cd ~/"
 ### ---- This lines must always be at EOF!!! ---- ###
 
 # Haskell
-[ -f "/home/mauromotion/.ghcup/env" ] && . "/home/mauromotion/.ghcup/env" # ghcup-env
+# [ -f "/home/mauromotion/.ghcup/env" ] && . "/home/mauromotion/.ghcup/env" # ghcup-env
 
 # fnm
 export PATH="/home/mauromotion/.local/share/fnm:$PATH"
@@ -238,4 +238,3 @@ eval "$(rbenv init - zsh)"
 # eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/pure.toml)"
 # eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
-
