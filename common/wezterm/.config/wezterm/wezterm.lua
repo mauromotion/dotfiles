@@ -44,12 +44,12 @@ config.window_frame = {
 }
 
 -- Padding
-config.window_padding = {
-	left = 6,
-	right = 0,
-	top = 0,
-	bottom = 0,
-}
+-- config.window_padding = {
+-- 	left = 3,
+-- 	right = 3,
+-- 	top = 5,
+-- 	bottom = 5,
+-- }
 
 -- Alert bell
 config.audible_bell = "Disabled"
