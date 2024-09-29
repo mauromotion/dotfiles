@@ -117,28 +117,20 @@ _fzf_comprun() {
 }
 
 ## -- Fzf theme -- ##
-
-# # Nord theme permalink: https://shorturl.at/WGERJ
-# export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
-#   --color=fg:#e5e9f0,fg+:#eceff4,bg:-1,bg+:#3b4252
-#   --color=hl:#b48ead,hl+:#8fbcbb,info:#ebcb8b,marker:#a3be8c
-#   --color=prompt:#b48ead,spinner:#a3be8c,pointer:#a3be8c,header:#8fbcbb
-#   --color=border:#4c566a,label:#81a1c1,query:#d8dee9
-#   --border="rounded" --border-label="fzf" --border-label-pos="0" --preview-window="border-rounded"
-#   --prompt="> " --separator="─" --scrollbar="│" --info="right"'
-
 # Catppuccin Macchiato
 export FZF_DEFAULT_OPTS=" \
---color=bg+:#363a4f,bg:-1,spinner:#f4dbd6,hl:#ed8796 \
+--color=bg+:#363a4f,spinner:#f4dbd6,hl:#ed8796 \
 --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
 --color=marker:#b7bdf8,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796 \
+--color=border:#5b6078,label:#c6a0f6,query:#b8c0e0 \
+--border="rounded" --border-label="fzf" --border-label-pos="0" --preview-window="border-rounded" \
 --color=selected-bg:#494d64 \
 --multi"
+
 # Bat theme
 export BAT_THEME="Catppuccin Macchiato"
 
 ## -- fzf-tab and completion visual settings -- ##
-
 # Load LS_COLORS if not already set
 eval "$(dircolors -b)"
 
@@ -154,7 +146,19 @@ zstyle ':fzf-tab:*' switch-group '<' '>'
 zstyle ':fzf-tab:complete:z:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':fzf-tab:complete:codium:*' fzf-preview 'eza --tree --level=2 --color=always $realpath'
 zstyle ':fzf-tab:complete:nvim:*' fzf-preview 'eza --tree --level=2 --color=always $realpath'
-zstyle ':fzf-tab:*' ignore 3
+# zstyle ':fzf-tab:*' ignore 3
+zstyle ':fzf-tab:*' query-string ''
+# Customize fzf-tab flags to enforce height, border, and key bindings
+zstyle ':fzf-tab:complete:*' fzf-flags \
+    --height=40% \
+    --preview-window=right:60%:wrap:cycle:border-rounded \
+    --color=bg+:#363a4f,spinner:#f4dbd6,hl:#ed8796 \
+    --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
+    --color=marker:#b7bdf8,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796 \
+    --color=border:#5b6078,label:#c6a0f6,query:#b8c0e0 \
+    --bind="tab:toggle-down" \
+    --bind="ctrl-p:change-preview-window(down,90%,wrap,cycle,border-rounded|hidden|right,50%,wrap,cycle,border-rounded)" \
+    --bind="ctrl-v:execute(bat --paging=always --color=always {+})"
 ## ---------- ##
 
 # Fuzzy matching of completion
@@ -222,9 +226,6 @@ alias yt="ytfzf"
 alias ~="cd ~/"
 
 ### ---- This lines must always be at EOF!!! ---- ###
-
-# Haskell
-# [ -f "/home/mauromotion/.ghcup/env" ] && . "/home/mauromotion/.ghcup/env" # ghcup-env
 
 # fnm
 export PATH="/home/mauromotion/.local/share/fnm:$PATH"
