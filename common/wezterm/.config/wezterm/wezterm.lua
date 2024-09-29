@@ -22,7 +22,8 @@ config.color_scheme = "Catppuccin Macchiato"
 config.window_background_opacity = 0.95
 
 -- Font
-config.font = wezterm.font("JetBrainsMono NF", { weight = "DemiBold" })
+-- config.font = wezterm.font("JetBrainsMono NF", { weight = "DemiBold" })
+config.font = wezterm.font("Maple Mono NF", { weight = "DemiBold" })
 -- config.font = wezterm.font("FiraCode Nerd Font", {})
 config.font_size = 12
 config.freetype_load_flags = "DEFAULT"
@@ -37,19 +38,12 @@ config.tab_max_width = 50
 config.use_fancy_tab_bar = true
 config.show_new_tab_button_in_tab_bar = false
 config.window_frame = {
-	font = wezterm.font({ family = "JetBrainsMono NF", weight = "Bold" }),
+	-- font = wezterm.font({ family = "JetBrainsMono NF", weight = "Bold" }),
+	font = wezterm.font({ family = "Maple Mono NF", weight = "Bold" }),
 	font_size = 10.5,
 	active_titlebar_bg = "rgb(36, 39, 58, 0)",
 	inactive_titlebar_bg = "rgb(36, 39, 58, 0)",
 }
-
--- Padding
--- config.window_padding = {
--- 	left = 3,
--- 	right = 3,
--- 	top = 5,
--- 	bottom = 5,
--- }
 
 -- Alert bell
 config.audible_bell = "Disabled"

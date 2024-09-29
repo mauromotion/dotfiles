@@ -13,7 +13,7 @@ return {
 	keys = function()
 		local wk = require("which-key")
 		wk.add({
-			{ "<leader>g", group = "Neogit/Gitsigns" },
+			{ "<leader>g", group = "Gitsigns / Neogit" },
 			{ "<leader>gP", "<cmd>Neogit push<cr>", desc = "Git push (Neogit)" },
 			{ "<leader>gb", "<cmd>FzfLua git_branches<cr>", desc = "Git switch branch (FzfLua)" },
 			{ "<leader>gc", "<cmd>Neogit commit<cr>", desc = "Git commit (Neogit)" },

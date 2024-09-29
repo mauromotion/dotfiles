@@ -8,11 +8,11 @@ return {
 			-- Keybindgs with "which-key" plugin
 			local wk = require("which-key")
 			wk.add({
-				{ "<leader>g", group = "Gitsigns" },
+				{ "<leader>g", group = "Gitsigns / Neogit" },
 				{ "<leader>gS", gs.stage_buffer, desc = "Stage Buffer (Gitsigns)" },
 				{ "<leader>gu", gs.undo_stage_hunk, desc = "Undo Stage Hunk (Gitsigns)" },
 				{ "<leader>gR", gs.reset_buffer, desc = "Reset Buffer (Gitsigns)" },
-				{ "<leader>gp", gs.preview_hunk_inline, desc = "Preview Hunk Inline (Gitsigns)" },
+				{ "<leader>gg", gs.preview_hunk_inline, desc = "Preview Hunk Inline (Gitsigns)" },
 				{
 					"<leader>gB",
 					function()
