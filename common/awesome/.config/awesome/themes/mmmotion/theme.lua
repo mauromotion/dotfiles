@@ -13,8 +13,8 @@ local themes_path = gfs.get_themes_dir()
 local theme = {}
 
 -- theme.font = "JetBrainsMono Nerd Font Medium 11.5"
--- theme.font = "FiraMono Nerd Font Medium 12"
-theme.font = "GeistMono Nerd Font Medium 12"
+theme.font = "FiraMono Nerd Font Medium 12"
+-- theme.font = "GeistMono Nerd Font Medium 12"
 -- theme.font = "Maple Mono NF Medium 12"
 
 -- ** Catppuccin Macchiato ** --
