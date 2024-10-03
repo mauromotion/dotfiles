@@ -168,10 +168,24 @@ config.keys = {
 		action = wezterm.action.TogglePaneZoomState,
 	},
 	{
-		key = "{",
+		key = "r",
 		mods = "CTRL|SHIFT",
 		action = wezterm.action.PaneSelect({ mode = "SwapWithActiveKeepFocus" }),
 	},
+	-- Cycle to the next pane
+	{
+		key = "}",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action({ ActivatePaneDirection = "Next" }),
+	},
+
+	-- Cycle to the previous pane
+	{
+		key = "{",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action({ ActivatePaneDirection = "Prev" }),
+	},
+
 	-- Quick Select
 	{
 		key = "Space",
