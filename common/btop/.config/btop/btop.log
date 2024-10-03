@@ -403,3 +403,7 @@
 
 2024/10/01 (09:52:13) | ===> btop++ v.1.4.0
 2024/10/01 (09:52:13) | ERROR: Stall in Runner thread, restarting!
+
+2024/10/02 (22:48:17) | ===> btop++ v.1.4.0
+2024/10/02 (22:48:17) | WARNING: NVML: Failed to get maximum GPU power draw, defaulting to 225W: Not Supported
+2024/10/02 (22:48:17) | WARNING: Intel GPU: Failed to initialize PMU
