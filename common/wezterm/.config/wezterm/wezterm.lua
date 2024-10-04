@@ -18,7 +18,7 @@ config.pane_focus_follows_mouse = true
 
 -- Colorscheme
 config.color_scheme_dirs = { "~/.config/wezterm/colors" }
-config.color_scheme = "Catppuccin Macchiato"
+config.color_scheme = "Catppuccin Mocha"
 config.window_background_opacity = 1
 
 -- Font

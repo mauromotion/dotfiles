@@ -14,7 +14,5 @@ configuration{
     sidebar-mode: true;
 }
 
-//@theme "/home/mauromotion/.local/share/rofi/themes/catpuccin-macchiato.rasi"
-@theme "/home/mauromotion/.dotfiles/common/rofi/.config/rofi/catpuccin-macchiato.rasi"
-//@theme "catppuccin-macchiato"
+@theme "/home/mauromotion/.dotfiles/common/rofi/.config/rofi/catpuccin-mocha.rasi"
 

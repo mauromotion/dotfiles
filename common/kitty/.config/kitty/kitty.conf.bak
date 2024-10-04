@@ -664,17 +664,17 @@ cursor_beam_thickness 1.5
 
 #: Terminal bell {{{
 
-# enable_audio_bell yes
+enable_audio_bell no
 
 #: The audio bell. Useful to disable it in environments that require
 #: silence.
 
-# visual_bell_duration 0.0
+visual_bell_duration 0.25
 
 #: The visual bell duration (in seconds). Flash the screen when a bell
 #: occurs for the specified number of seconds. Set to zero to disable.
 
-# visual_bell_color none
+visual_bell_color #363A4F
 
 #: The color used by visual bell. Set to none will fall back to
 #: selection background color. If you feel that the visual bell is too
@@ -778,7 +778,7 @@ cursor_beam_thickness 1.5
 #: set the vertical and horizontal sides. Three values set top,
 #: horizontal and bottom. Four values set top, right, bottom and left.
 
-window_padding_width 5
+# window_padding_width 5
 
 #: The window padding (in pts) (blank area between the text and the
 #: window border). A single value sets all four sides. Two values set
@@ -907,7 +907,7 @@ window_padding_width 5
 #: The second number is the margin between the tab bar and the
 #: contents of the current tab.
 
-# tab_bar_style fade
+tab_bar_style fade
 
 #: The tab bar style, can be one of:
 
@@ -960,12 +960,12 @@ window_padding_width 5
 #: can change the number of cells used by adding/removing entries to
 #: this list.
 
-# tab_separator " ┇"
+# tab_separator " ┊"
 
 #: The separator between tabs in the tab bar when using separator as
 #: the tab_bar_style.
 
-# tab_powerline_style angled
+tab_powerline_style round
 
 #: The powerline separator style between tabs in the tab bar when
 #: using powerline as the tab_bar_style, can be one of: angled,
@@ -1704,6 +1704,15 @@ listen_on unix:/tmp/kitty
 
 map ctrl+shift+enter new_window_with_cwd
 map ctrl+shift+z toggle_layout stack
+map ctrl+1 goto_tab 1
+map ctrl+2 goto_tab 2
+map ctrl+3 goto_tab 3
+map ctrl+4 goto_tab 4
+map ctrl+5 goto_tab 5
+map ctrl+6 goto_tab 6
+map ctrl+7 goto_tab 7
+map ctrl+8 goto_tab 8
+map ctrl+9 goto_tab 9
 # map ctrl+shift+x last_used_layout
 
 #: Clipboard {{{
