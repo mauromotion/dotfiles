@@ -117,18 +117,16 @@ _fzf_comprun() {
 }
 
 ## -- Fzf theme -- ##
-# Catppuccin Macchiato
+# Catppuccin Mocha
 export FZF_DEFAULT_OPTS=" \
---color=bg+:#363a4f,spinner:#f4dbd6,hl:#ed8796 \
---color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
---color=marker:#b7bdf8,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796 \
---color=border:#5b6078,label:#c6a0f6,query:#b8c0e0 \
---border="rounded" --border-label="fzf" --border-label-pos="0" --preview-window="border-rounded" \
---color=selected-bg:#494d64 \
+--color=bg+:#313244,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
+--color=selected-bg:#45475a \
 --multi"
 
 # Bat theme
-export BAT_THEME="Catppuccin Macchiato"
+export BAT_THEME="Catppuccin Mocha"
 
 ## -- fzf-tab and completion visual settings -- ##
 # Load LS_COLORS if not already set

@@ -1,4 +1,5 @@
 local wezterm = require("wezterm")
+local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
 
 local config = {}
 
@@ -6,20 +7,22 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
--- Sessions set up
-config.unix_domains = {
-	{ name = "unix" },
-}
-
 -- Focus follows mouse
 config.pane_focus_follows_mouse = true
 
+-- Resurrect encryption
+resurrect.set_encryption({
+	enable = true,
+	method = "age", -- "age" is the default encryption method, but you can also specify "rage" or "gpg"
+	private_key = "~/Documents/key.txt", -- if using "gpg", you can omit this
+	public_key = "age18cyfnpm3ngtqexddlzhw4a3smml9rnv4ycw5qsrhcxs5uq0gl9qs4rlq49",
+})
 --------* UI *--------
 
 -- Colorscheme
 config.color_scheme_dirs = { "~/.config/wezterm/colors" }
-config.color_scheme = "Catppuccin Macchiato"
-config.window_background_opacity = 1
+config.color_scheme = "Catppuccin Mocha"
+config.window_background_opacity = 0.93
 
 -- Font
 -- config.font = wezterm.font("JetBrainsMono NF", { weight = "DemiBold" })
@@ -77,34 +80,57 @@ config.colors = {
 config.disable_default_key_bindings = true
 
 config.keys = {
-	-- Sessions
+	-- Resurrect
 	{
-		key = "a",
-		mods = "CTRL|SHIFT|ALT",
-		action = wezterm.action.AttachDomain("unix"),
+		key = "w",
+		mods = "CTRL|ALT",
+		action = wezterm.action_callback(function(win, pane)
+			resurrect.save_state(resurrect.workspace_state.get_workspace_state())
+		end),
 	},
 	{
-		key = "d",
-		mods = "CTRL|SHIFT|ALT",
-		action = wezterm.action.DetachDomain({ DomainName = "unix" }),
+		key = "W",
+		mods = "CTRL|ALT",
+		action = resurrect.window_state.save_window_action(),
 	},
 	{
-		key = "$",
-		mods = "CTRL|SHIFT",
-		action = wezterm.action.PromptInputLine({
-			description = "Enter a new name for the current session",
-			action = wezterm.action_callback(function(window, _, line)
-				if line then
-					wezterm.mux.rename_workspace(window:mux_window():get_workspace(), line)
-				end
-			end),
-		}),
+		key = "T",
+		mods = "CTRL|ALT",
+		action = resurrect.tab_state.save_tab_action(),
 	},
-	-- Show list of workspaces
 	{
 		key = "s",
-		mods = "CTRL|SHIFT|ALT",
-		action = wezterm.action.ShowLauncherArgs({ flags = "WORKSPACES" }),
+		mods = "CTRL|ALT",
+		action = wezterm.action_callback(function(win, pane)
+			resurrect.save_state(resurrect.workspace_state.get_workspace_state())
+			resurrect.window_state.save_window_action()
+		end),
+	},
+	{
+		key = "r",
+		mods = "CTRL|ALT",
+		action = wezterm.action_callback(function(win, pane)
+			resurrect.fuzzy_load(win, pane, function(id, label)
+				local type = string.match(id, "^([^/]+)") -- match before '/'
+				id = string.match(id, "([^/]+)$") -- match after '/'
+				id = string.match(id, "(.+)%..+$") -- remove file extention
+				local opts = {
+					relative = true,
+					restore_text = true,
+					on_pane_restore = resurrect.tab_state.default_on_pane_restore,
+				}
+				if type == "workspace" then
+					local state = resurrect.load_state(id, "workspace")
+					resurrect.workspace_state.restore_workspace(state, opts)
+				elseif type == "window" then
+					local state = resurrect.load_state(id, "window")
+					resurrect.window_state.restore_window(pane:window(), state, opts)
+				elseif type == "tab" then
+					local state = resurrect.load_state(id, "tab")
+					resurrect.tab_state.restore_tab(pane:tab(), state, opts)
+				end
+			end)
+		end),
 	},
 	-- Panes
 	{
@@ -255,47 +281,47 @@ config.keys = {
 	},
 	{
 		key = "1",
-		mods = "CTRL|SHIFT",
+		mods = "CTRL",
 		action = wezterm.action.ActivateTab(0),
 	},
 	{
 		key = "2",
-		mods = "CTRL|SHIFT",
+		mods = "CTRL",
 		action = wezterm.action.ActivateTab(1),
 	},
 	{
 		key = "3",
-		mods = "CTRL|SHIFT",
+		mods = "CTRL",
 		action = wezterm.action.ActivateTab(2),
 	},
 	{
 		key = "4",
-		mods = "CTRL|SHIFT",
+		mods = "CTRL",
 		action = wezterm.action.ActivateTab(3),
 	},
 	{
 		key = "5",
-		mods = "CTRL|SHIFT",
+		mods = "CTRL",
 		action = wezterm.action.ActivateTab(4),
 	},
 	{
 		key = "6",
-		mods = "CTRL|SHIFT",
+		mods = "CTRL",
 		action = wezterm.action.ActivateTab(5),
 	},
 	{
 		key = "7",
-		mods = "CTRL|SHIFT",
+		mods = "CTRL",
 		action = wezterm.action.ActivateTab(6),
 	},
 	{
 		key = "8",
-		mods = "CTRL|SHIFT",
+		mods = "CTRL",
 		action = wezterm.action.ActivateTab(7),
 	},
 	{
 		key = "9",
-		mods = "CTRL|SHIFT",
+		mods = "CTRL",
 		action = wezterm.action.ActivateTab(8),
 	},
 	-- Search

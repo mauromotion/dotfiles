@@ -17,33 +17,33 @@ theme.font = "FiraMono Nerd Font Medium 12"
 -- theme.font = "GeistMono Nerd Font Medium 12"
 -- theme.font = "Maple Mono NF Medium 12"
 
--- ** Catppuccin Macchiato ** --
+-- ** Catppuccin Mocha ** --
 -- local accent_color = function()
 -- 	local colors =
--- 		{ "#8AADF4", "#8BD5CA", "#7DC4E4", "#B4BEFE", "#C6A0F6", "#F5BDE6", "#F0C6C6", "#F5A97F", "#A6DA95", "#EED49F" }
+-- 		{ "#89b4fa", "#94e2d5", "#74c7ec", "#b4befe", "#cba6f7", "#f5c2e7", "#f2cdcd", "#fab387", "#a6e3a1", "#f9e2af" }
 
 -- 	local accent = colors[math.random(1, #colors)]
 -- 	return accent
 -- end
 
-local use_accent_color = "#7DC4E4"
+local use_accent_color = "#74c7ec"
 
-theme.bg_normal = "#24273A"
+theme.bg_normal = "#1e1e2e"
 theme.bg_focus = use_accent_color
-theme.bg_urgent = "#ED8796"
-theme.bg_minimize = "#363A4F"
+theme.bg_urgent = "#f38ba8"
+theme.bg_minimize = "#313244"
 theme.bg_systray = theme.bg_normal
 
-theme.fg_normal = "#CAD3F5"
+theme.fg_normal = "#cdd6f4"
 theme.fg_focus = "#24273A"
-theme.fg_urgent = "#CAD3F5"
-theme.fg_minimize = "#CAD3F5"
+theme.fg_urgent = "#cdd6f4"
+theme.fg_minimize = "#cdd6f4"
 
 theme.useless_gap = dpi(0)
 theme.border_width = dpi(2)
-theme.border_color_normal = "#2e3440"
+theme.border_color_normal = "#1e1e2e"
 theme.border_color_active = use_accent_color
-theme.border_color_marked = "#ED8796"
+theme.border_color_marked = "#f38ba8"
 theme.notification_border_color = use_accent_color
 theme.notification_border_width = dpi(4)
 
