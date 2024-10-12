@@ -1,5 +1,4 @@
 local wezterm = require("wezterm")
-local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
 
 local config = {}
 
@@ -11,6 +10,8 @@ end
 config.pane_focus_follows_mouse = true
 
 -- Resurrect encryption
+local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
+
 resurrect.set_encryption({
 	enable = true,
 	method = "age", -- "age" is the default encryption method, but you can also specify "rage" or "gpg"
@@ -22,7 +23,7 @@ resurrect.set_encryption({
 -- Colorscheme
 config.color_scheme_dirs = { "~/.config/wezterm/colors" }
 config.color_scheme = "Catppuccin Mocha"
-config.window_background_opacity = 0.93
+config.window_background_opacity = 0.92
 
 -- Font
 -- config.font = wezterm.font("JetBrainsMono NF", { weight = "DemiBold" })
