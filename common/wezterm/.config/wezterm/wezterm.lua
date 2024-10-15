@@ -18,6 +18,7 @@ resurrect.set_encryption({
 	private_key = "~/Documents/key.txt", -- if using "gpg", you can omit this
 	public_key = "age18cyfnpm3ngtqexddlzhw4a3smml9rnv4ycw5qsrhcxs5uq0gl9qs4rlq49",
 })
+
 --------* UI *--------
 
 -- Colorscheme
