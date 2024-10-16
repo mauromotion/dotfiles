@@ -18,13 +18,13 @@ theme.font = "FiraMono Nerd Font Medium 12"
 -- theme.font = "Maple Mono NF Medium 12"
 
 -- ** Catppuccin Mocha ** --
--- local accent_color = function()
--- 	local colors =
--- 		{ "#89b4fa", "#94e2d5", "#74c7ec", "#b4befe", "#cba6f7", "#f5c2e7", "#f2cdcd", "#fab387", "#a6e3a1", "#f9e2af" }
+local accent_color = function()
+	local colors =
+		{ "#89b4fa", "#94e2d5", "#74c7ec", "#b4befe", "#cba6f7", "#f5c2e7", "#f2cdcd", "#fab387", "#a6e3a1", "#f9e2af" }
 
--- 	local accent = colors[math.random(1, #colors)]
--- 	return accent
--- end
+	local accent = colors[math.random(1, #colors)]
+	return accent
+end
 
 local use_accent_color = "#74c7ec"
 
