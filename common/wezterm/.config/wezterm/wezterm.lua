@@ -29,7 +29,8 @@ config.window_background_opacity = 0.92
 -- Font
 -- config.font = wezterm.font("JetBrainsMono NF", { weight = "DemiBold" })
 config.font = wezterm.font("Maple Mono NF", { weight = "DemiBold" })
--- config.font = wezterm.font("FiraCode Nerd Font", {})
+-- config.font = wezterm.font("IosevkaTerm Nerd Font", { weight = "DemiBold" })
+-- config.font = wezterm.font("FiraCode Nerd Font", { weight = "DemiBold" })
 config.font_size = 12
 config.freetype_load_flags = "DEFAULT"
 
