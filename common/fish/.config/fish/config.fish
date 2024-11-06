@@ -6,37 +6,46 @@
 ## Fish terminal -- config.fish --------------
 
 ## Aliases
-alias nv="nvim"
-alias ..="cd .."
-alias cp="cp -i"
-alias mv="mv -i"
-alias rm="rm -i"
-alias gst="git status"
-alias lg="lazygit"
-alias grep="grep --color=auto"
-alias df="df -H"
-alias rn="ranger"
-alias polybar-restart="sh ~/.config/polybar/launch*"
-alias load-ICC="sh ~/.color/*.sh"
-alias pac-autoremove="sudo pacman -Rcs $(pacman -Qdtq)"
-alias manjaro-update="pamac upgrade && pamac upgrade --aur --devel || echo -e '\033[0;91mThere was an error upgrading the system. AUR packages not upgraded.\e[0m'"
-alias manjaro-boot-log="journalctl --boot=-1 --priority=3 --catalog --no-pager"
-alias ll="exa -l --git --icons -h"
-alias lla="exa -l --git --icons -h -a"
-alias ls="exa --icons"
-alias lsa="exa --icons -a"
-
-## rbenv autostart & PATH
-## set -x PATH $PATH ~/.rbenv/bin
-## rbenv init - | source
-# status --is-interactive; and ~/.rbenv/bin/rbenv init - fish | source
-
-## NodeJS PATH
-set PATH /home/mauromotion/.nvm/versions/node/v19.5.0/bin $PATH
-
-## Zoxide
-set PATH /home/mauromotion/.local/bin $PATH
-zoxide init fish | source
+alias .. "cd .."
+alias cat "bat"
+alias cd "z"
+alias cl "clear"
+alias cp "cp -i"
+alias del "trash-put -i"
+alias df "df -H"
+alias diary "nvim +VimwikiIndex +VimwikiDiaryIndex"
+alias etree "eza -T --color=always --icons | less -R"
+alias gP "git push"
+alias ga "git add"
+alias gaa "git add --all"
+alias gcam "git commit --all --message"
+alias glog "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --date=short"
+alias gp "git pull"
+alias grep "grep --color=auto"
+alias gst "git status"
+alias icat "kitty +kitten icat"
+alias in "tw add +in"
+alias lg "lazygit"
+alias ll "eza -l --git --icons -h"
+alias lla "eza -l --git --icons -h -a"
+alias load-ICC "sh ~/.color/*.sh"
+alias ls "eza --icons"
+alias lsa "eza --icons -a"
+alias mirrors-update "sudo reflector -c 'United Kingdom' -a 6 --sort rate --save /etc/pacman.d/mirrorlist"
+alias mv "mv -i"
+alias ncdu "ncdu --color dark"
+alias next "tw +next"
+alias nv "nvim"
+alias pac-autoremove "sudo pacman -Rcs $(pacman -Qdtq)"
+alias polybar-restart "sh ~/.config/polybar/launch*"
+alias py "python3"
+alias rm "rm -i"
+alias rnd "tw +rnd"
+alias src "source ~/.zshrc"
+alias tw "task"
+alias v "nvim"
+alias wiki "nvim -c VimwikiIndex"
+alias yt "ytfzf"
 
 ## Greeting message
 # function fish_greeting
@@ -83,8 +92,8 @@ fish_vi_key_bindings
 # set -g fish_color_error $red
 # set -g fish_color_param $purple
 # set -g fish_color_comment $comment
-# set -g fish_color_selection --background=$selection
-# set -g fish_color_search_match --background=$selection
+# set -g fish_color_selection --background$selection
+# set -g fish_color_search_match --background$selection
 # set -g fish_color_operator $green
 # set -g fish_color_escape $pink
 # set -g fish_color_autosuggestion $comment
@@ -94,3 +103,6 @@ fish_vi_key_bindings
 # set -g fish_pager_color_prefix $cyan
 # set -g fish_pager_color_completion $foreground
 # set -g fish_pager_color_description $comment
+
+## Zoxide
+zoxide init fish | source

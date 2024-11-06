@@ -221,7 +221,6 @@ alias tw="task"
 alias v="nvim"
 alias wiki="nvim -c VimwikiIndex"
 alias yt="ytfzf"
-alias ~="cd ~/"
 
 ### ---- This lines must always be at EOF!!! ---- ###
 
