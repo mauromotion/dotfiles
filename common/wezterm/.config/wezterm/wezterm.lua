@@ -24,7 +24,7 @@ resurrect.set_encryption({
 -- Colorscheme
 config.color_scheme_dirs = { "~/.config/wezterm/colors" }
 config.color_scheme = "Catppuccin Mocha"
-config.window_background_opacity = 0.92
+config.window_background_opacity = 0.94
 
 -- Font
 -- config.font = wezterm.font("JetBrainsMono NF", { weight = "DemiBold" })

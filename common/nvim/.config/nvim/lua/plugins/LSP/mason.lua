@@ -35,7 +35,7 @@ return {
 				"tailwindcss",
 				"emmet_language_server",
 				"jedi_language_server",
-				"ruff_lsp",
+				"ruff",
 				"marksman",
 				"jsonls",
 				"yamlls",
