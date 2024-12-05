@@ -36,7 +36,7 @@ end)
 beautiful.init("/home/mauromotion/.config/awesome/themes/nord/theme.lua")
 
 local modkey = "Mod4"
-local terminal = "kitty"
+local terminal = "wezterm"
 local editor = os.getenv("EDITOR") or "vim"
 local editor_cmd = terminal .. " -e " .. editor
 local browser = "firefox"

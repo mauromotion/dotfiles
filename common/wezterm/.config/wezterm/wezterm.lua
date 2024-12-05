@@ -9,16 +9,6 @@ end
 -- Focus follows mouse
 config.pane_focus_follows_mouse = true
 
--- Resurrect encryption
-local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
-
-resurrect.set_encryption({
-	enable = true,
-	method = "age", -- "age" is the default encryption method, but you can also specify "rage" or "gpg"
-	private_key = "~/Documents/key.txt", -- if using "gpg", you can omit this
-	public_key = "age18cyfnpm3ngtqexddlzhw4a3smml9rnv4ycw5qsrhcxs5uq0gl9qs4rlq49",
-})
-
 --------* UI *--------
 
 -- Colorscheme
@@ -50,6 +40,9 @@ config.window_frame = {
 	active_titlebar_bg = "rgb(36, 39, 58, 0)",
 	inactive_titlebar_bg = "rgb(36, 39, 58, 0)",
 }
+
+-- Set max fps
+config.max_fps = 144
 
 -- Alert bell
 config.audible_bell = "Disabled"
@@ -83,58 +76,6 @@ config.colors = {
 config.disable_default_key_bindings = true
 
 config.keys = {
-	-- Resurrect
-	{
-		key = "w",
-		mods = "CTRL|ALT",
-		action = wezterm.action_callback(function(win, pane)
-			resurrect.save_state(resurrect.workspace_state.get_workspace_state())
-		end),
-	},
-	{
-		key = "W",
-		mods = "CTRL|ALT",
-		action = resurrect.window_state.save_window_action(),
-	},
-	{
-		key = "T",
-		mods = "CTRL|ALT",
-		action = resurrect.tab_state.save_tab_action(),
-	},
-	{
-		key = "s",
-		mods = "CTRL|ALT",
-		action = wezterm.action_callback(function(win, pane)
-			resurrect.save_state(resurrect.workspace_state.get_workspace_state())
-			resurrect.window_state.save_window_action()
-		end),
-	},
-	{
-		key = "r",
-		mods = "CTRL|ALT",
-		action = wezterm.action_callback(function(win, pane)
-			resurrect.fuzzy_load(win, pane, function(id, label)
-				local type = string.match(id, "^([^/]+)") -- match before '/'
-				id = string.match(id, "([^/]+)$") -- match after '/'
-				id = string.match(id, "(.+)%..+$") -- remove file extention
-				local opts = {
-					relative = true,
-					restore_text = true,
-					on_pane_restore = resurrect.tab_state.default_on_pane_restore,
-				}
-				if type == "workspace" then
-					local state = resurrect.load_state(id, "workspace")
-					resurrect.workspace_state.restore_workspace(state, opts)
-				elseif type == "window" then
-					local state = resurrect.load_state(id, "window")
-					resurrect.window_state.restore_window(pane:window(), state, opts)
-				elseif type == "tab" then
-					local state = resurrect.load_state(id, "tab")
-					resurrect.tab_state.restore_tab(pane:tab(), state, opts)
-				end
-			end)
-		end),
-	},
 	-- Panes
 	{
 		key = "Enter",
