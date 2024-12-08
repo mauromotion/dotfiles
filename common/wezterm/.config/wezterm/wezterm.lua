@@ -156,6 +156,14 @@ config.keys = {
 		action = wezterm.action({ ActivatePaneDirection = "Prev" }),
 	},
 
+	-- Rotate panes
+	{
+		key = "b",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.RotatePanes("CounterClockwise"),
+	},
+	{ key = "n", mods = "CTRL|SHIFT", action = wezterm.action.RotatePanes("Clockwise") },
+
 	-- Quick Select
 	{
 		key = "Space",
