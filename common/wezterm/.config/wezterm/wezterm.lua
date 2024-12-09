@@ -14,11 +14,11 @@ config.pane_focus_follows_mouse = true
 -- Colorscheme
 config.color_scheme_dirs = { "~/.config/wezterm/colors" }
 config.color_scheme = "Catppuccin Mocha"
-config.window_background_opacity = 0.94
+config.window_background_opacity = 1
 
 -- Font
--- config.font = wezterm.font("JetBrainsMono NF", { weight = "DemiBold" })
-config.font = wezterm.font("Maple Mono NF", { weight = "DemiBold" })
+config.font = wezterm.font("JetBrainsMono NF", { weight = "Medium" })
+-- config.font = wezterm.font("Maple Mono NF", { weight = "DemiBold" })
 -- config.font = wezterm.font("IosevkaTerm Nerd Font", { weight = "DemiBold" })
 -- config.font = wezterm.font("FiraCode Nerd Font", { weight = "DemiBold" })
 config.font_size = 12
