@@ -12,6 +12,9 @@ $character"""
 
 [directory]
 style = "blue"
+truncation_length = 3  # Display only the last 3 directories
+truncate_to_repo = true  # Stop truncating at the repository root
+# format = "[$path]($style) "  # Customize the format if desired
 
 [character]
 success_symbol = "[❯](purple)"
