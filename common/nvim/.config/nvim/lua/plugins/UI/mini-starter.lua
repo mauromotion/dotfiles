@@ -33,7 +33,7 @@ return {
 				-- { action = "VimwikiDiaryIndex", name = "Journal VimWikiDiary", section = "Start here" },
 				-- { action = "VimwikiMakeDiaryNote", name = "Today VimWikiDiary", section = "Start here" },
 				-- Sessions
-				require("mini.starter").sections.sessions(),
+				require("mini.starter").sections.sessions(15, true),
 				-- System
 				{ action = "Oil /home/mauromotion/.config/nvim/", name = "Configuration", section = "System" },
 				{ action = "Oil /home/mauromotion/.dotfiles/", name = "Dotfiles", section = "System" },
