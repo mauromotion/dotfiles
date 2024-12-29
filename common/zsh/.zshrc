@@ -182,7 +182,7 @@ function zvm_config() {
 
 ## -- Aliases -- ##
 alias ..="cd .."
-alias cat="bat"
+# alias cat="bat"
 alias cd="z"
 alias cl="clear"
 alias cp="cp -i"
