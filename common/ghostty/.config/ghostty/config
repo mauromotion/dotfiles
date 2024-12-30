@@ -9,10 +9,10 @@ font-size = 12
 keybind = ctrl+shift+enter=new_split:down
 keybind = ctrl+shift+alt+enter=new_split:right
 
-keybind = ctrl+shift+up=resize_split:up,10
-keybind = ctrl+shift+down=resize_split:down,10
-keybind = ctrl+shift+left=resize_split:left,10
-keybind = ctrl+shift+right=resize_split:right,10
+keybind = ctrl+shift+up=resize_split:up,20
+keybind = ctrl+shift+down=resize_split:down,20
+keybind = ctrl+shift+left=resize_split:left,20
+keybind = ctrl+shift+right=resize_split:right,20
 
 keybind = ctrl+shift+left_bracket=goto_split:previous
 keybind = ctrl+shift+right_bracket=goto_split:next
