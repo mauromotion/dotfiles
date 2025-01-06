@@ -272,6 +272,10 @@ cursor_beam_thickness 1.5
 #: Stop blinking cursor after the specified number of seconds of
 #: keyboard inactivity. Set to zero to never stop blinking.
 
+# cursor_trail 1
+# cursor_trail_decay 0.1 0.4
+# cursor_trail_start_threshold 2
+
 #: }}}
 
 #: Scrollback {{{
@@ -456,7 +460,7 @@ cursor_beam_thickness 1.5
 #: clicks (in seconds). Negative numbers will use the system default
 #: instead, if available, or fallback to 0.5.
 
-# focus_follows_mouse no
+focus_follows_mouse yes
 
 #: Set the active window to the window under the mouse when moving the
 #: mouse around.
@@ -673,8 +677,7 @@ visual_bell_duration 0.25
 
 #: The visual bell duration (in seconds). Flash the screen when a bell
 #: occurs for the specified number of seconds. Set to zero to disable.
-
-visual_bell_color #363A4F
+# visual_bell_color #363A4F
 
 #: The color used by visual bell. Set to none will fall back to
 #: selection background color. If you feel that the visual bell is too
@@ -778,7 +781,7 @@ visual_bell_color #363A4F
 #: set the vertical and horizontal sides. Three values set top,
 #: horizontal and bottom. Four values set top, right, bottom and left.
 
-# window_padding_width 5
+window_padding_width 5
 
 #: The window padding (in pts) (blank area between the text and the
 #: window border). A single value sets all four sides. Two values set
@@ -907,7 +910,7 @@ visual_bell_color #363A4F
 #: The second number is the margin between the tab bar and the
 #: contents of the current tab.
 
-tab_bar_style fade
+tab_bar_style powerline
 
 #: The tab bar style, can be one of:
 
@@ -1060,7 +1063,7 @@ tab_powerline_style round
 
 #: The foreground and background colors.
 
-background_opacity .95
+background_opacity 1
 
 #: The opacity of the background. A number between zero and one, where
 #: one is opaque and zero is fully transparent. This will only work if
@@ -2352,6 +2355,6 @@ map ctrl+9 goto_tab 9
 # ~/.config/kitty/kitty.conf
 
 # BEGIN_KITTY_THEME
-# Catppuccin-Macchiato
+# Doom One
 include current-theme.conf
 # END_KITTY_THEME

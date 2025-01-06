@@ -32,3 +32,4 @@ nextcloud --background &
 openrgb --startminimized &
 xset b 100 &
 ~/.icc_color_profiles/load_icc_color_profiles.sh &
+xinput set-prop 16 297 -0.800000
