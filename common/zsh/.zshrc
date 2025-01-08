@@ -221,6 +221,7 @@ alias src="source ~/.zshrc"
 alias tw="task"
 alias v="nvim"
 alias wiki="nvim -c VimwikiIndex"
+alias y="yazi"
 alias yt="ytfzf"
 
 ### ---- This lines must always be at EOF!!! ---- ###
