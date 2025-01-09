@@ -59,6 +59,7 @@ return {
 				"black", -- python type formatter
 				"isort", -- python type formatter
 				"djlint", -- django templates linter
+				"markdownlint-cli2", -- markdown linter
 			},
 			-- auto-install configured servers (with lspconfig)
 			automatic_installation = true,

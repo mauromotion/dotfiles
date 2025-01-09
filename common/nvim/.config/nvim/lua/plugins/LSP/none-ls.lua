@@ -32,6 +32,7 @@ return {
 				-- diagnostics.flake8.with({ extra_args = { "--max-line-length", "88", "--extend-ignore", "E203" } }), -- python linter
 				diagnostics.djlint, -- django templates linter
 				formatting.djlint,
+				diagnostics.markdownlint_cli2,
 			},
 			-- configure format on save
 			on_attach = function(current_client, bufnr)
