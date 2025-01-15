@@ -105,3 +105,12 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 	pattern = "*",
 	command = "silent! loadview",
 })
+
+-- Treat vimwiki filetype as markdown
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	pattern = "vimwiki",
+-- 	callback = function()
+-- 		vim.b.filetype = "markdown" -- Temporarily treat as markdown for LSP
+-- 		vim.cmd("setlocal syntax=markdown")
+-- 	end,
+-- })
