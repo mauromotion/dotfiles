@@ -26,7 +26,7 @@ local accent_color = function()
 	return accent
 end
 
-local use_accent_color = "#74c7ec"
+local use_accent_color = "#b4befe"
 
 theme.bg_normal = "#1e1e2e"
 theme.bg_focus = use_accent_color

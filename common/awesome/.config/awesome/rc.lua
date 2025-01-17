@@ -34,7 +34,7 @@ end)
 -- {{{ Load theme
 --
 -- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
-beautiful.init("/home/mauromotion/.config/awesome/themes/mmmotion/theme.lua")
+beautiful.init("/home/mauromotion/.config/awesome/themes/mmmotion/theme-tokyonight.lua")
 -- }}}
 
 -- {{{ Variable definitions

@@ -117,16 +117,28 @@ _fzf_comprun() {
 }
 
 ## -- Fzf theme -- ##
-# Catppuccin Mocha
-export FZF_DEFAULT_OPTS=" \
---color=bg+:#313244,spinner:#f5e0dc,hl:#f38ba8 \
---color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
---color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
---color=selected-bg:#45475a \
---multi"
+# # Catppuccin Mocha
+# export FZF_DEFAULT_OPTS=" \
+# --color=bg+:#313244,spinner:#f5e0dc,hl:#f38ba8 \
+# --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+# --color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
+# --color=selected-bg:#45475a \
+# --multi"
+
+# Tokyonight Night
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+  --color=fg:#d0d0d0,fg+:#C0CAF5,bg:-1,bg+:#292E42
+  --color=hl:#7AA2F7,hl+:#73DACA,info:#BB9AF7,marker:#9ECE6A
+  --color=prompt:#F7768E,spinner:#E0AF68,pointer:#BB9AF7,header:#73DACA
+  --color=border:#414868,label:#E0AF68,query:#BB9AF7
+  --border="rounded" --border-label="fzf" --border-label-pos="0" --preview-window="border-rounded"
+  --prompt="> " --marker=">" --pointer="◆" --separator="─"
+  --scrollbar="│"'
+# Link: 
+# https://vitormv.github.io/fzf-themes#eyJib3JkZXJTdHlsZSI6InJvdW5kZWQiLCJib3JkZXJMYWJlbCI6ImZ6ZiIsImJvcmRlckxhYmVsUG9zaXRpb24iOjAsInByZXZpZXdCb3JkZXJTdHlsZSI6InJvdW5kZWQiLCJwYWRkaW5nIjoiMCIsIm1hcmdpbiI6IjAiLCJwcm9tcHQiOiI+ICIsIm1hcmtlciI6Ij4iLCJwb2ludGVyIjoi4peGIiwic2VwYXJhdG9yIjoi4pSAIiwic2Nyb2xsYmFyIjoi4pSCIiwibGF5b3V0IjoiZGVmYXVsdCIsImluZm8iOiJkZWZhdWx0IiwiY29sb3JzIjoiZmc6I2QwZDBkMCxmZys6I0MwQ0FGNSxiZys6IzI5MkU0MixobDojN0FBMkY3LGhsKzojNzNEQUNBLGluZm86I0JCOUFGNyxtYXJrZXI6IzlFQ0U2QSxwcm9tcHQ6I0Y3NzY4RSxzcGlubmVyOiNFMEFGNjgscG9pbnRlcjojQkI5QUY3LGhlYWRlcjojNzNEQUNBLGJvcmRlcjojNDE0ODY4LGxhYmVsOiNFMEFGNjgscXVlcnk6I0JCOUFGNyJ9
 
 # Bat theme
-export BAT_THEME="Catppuccin Mocha"
+export BAT_THEME="tokyonight_night"
 
 ## -- fzf-tab and completion visual settings -- ##
 # Load LS_COLORS if not already set

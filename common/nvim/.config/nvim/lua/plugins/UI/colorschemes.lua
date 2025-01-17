@@ -20,22 +20,35 @@ return {
 	-- 	end,
 	-- },
 	---- ** Catppuccin ** ----
+	-- {
+	-- 	"catppuccin/nvim",
+	-- 	lazy = false,
+	-- 	name = "catppuccin",
+	-- 	config = function()
+	-- 		require("catppuccin").setup({
+	-- 			flavour = "mocha",
+	-- 			transparent_background = false,
+	-- 			styles = {
+	-- 				comments = { "italic" },
+	-- 				keywords = { "italic, bold" },
+	-- 				types = { "italic, bold" },
+	-- 			},
+	-- 		})
+	-- 		-- apply colorscheme
+	-- 		vim.cmd([[colorscheme catppuccin]])
+	-- 	end,
+	-- },
+	---- ** Tokyo Night ** ----
 	{
-		"catppuccin/nvim",
+		"folke/tokyonight.nvim",
 		lazy = false,
-		name = "catppuccin",
+		priority = 1000,
 		config = function()
-			require("catppuccin").setup({
-				flavour = "mocha",
-				transparent_background = false,
-				styles = {
-					comments = { "italic" },
-					keywords = { "italic, bold" },
-					types = { "italic, bold" },
-				},
+			require("tokyonight").setup({
+				style = "night",
+				transparent = true,
 			})
-			-- apply colorscheme
-			vim.cmd([[colorscheme catppuccin]])
+			vim.cmd([[colorscheme tokyonight]])
 		end,
 	},
 	---- ** Gruvbox ** ----

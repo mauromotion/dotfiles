@@ -23,8 +23,8 @@ local workspace_switcher = wezterm.plugin.require("https://github.com/MLFlexer/s
 
 -- Colorscheme
 config.color_scheme_dirs = { "~/.config/wezterm/colors" }
-config.color_scheme = "Catppuccin Mocha"
-config.window_background_opacity = 1
+config.color_scheme = "Tokyo Night"
+config.window_background_opacity = 0.96
 
 -- Font
 -- config.font = wezterm.font("Hack Nerd Font Mono", { weight = "Medium" })
@@ -65,21 +65,21 @@ config.visual_bell = {
 	fade_out_duration_ms = 100,
 }
 config.colors = {
-	visual_bell = "#363A4F",
-	split = "#B4BEFE",
+	visual_bell = "#414868",
+	split = "#7AA2F7",
 	-- Fancy tab bar colors
 	tab_bar = {
 		active_tab = {
-			fg_color = "#24273A",
-			bg_color = "#C6A0F6",
+			fg_color = "#1A1B26",
+			bg_color = "#7AA2F7",
 		},
 		inactive_tab = {
 			bg_color = "rgb(0 0 0 0)",
-			fg_color = "#CAD3F5",
+			fg_color = "#C0CAF5",
 		},
 		inactive_tab_hover = {
-			bg_color = "#363A4F",
-			fg_color = "#B4BEFE",
+			bg_color = "#414868",
+			fg_color = "#C0CAF5",
 		},
 	},
 }

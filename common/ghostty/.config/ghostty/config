@@ -1,4 +1,4 @@
-theme = catppuccin-mocha
+theme = tokyonight
 background-opacity = 1
 window-decoration = false
 window-padding-x = 2
