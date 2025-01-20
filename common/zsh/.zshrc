@@ -134,8 +134,16 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
   --border="rounded" --border-label="fzf" --border-label-pos="0" --preview-window="border-rounded"
   --prompt="> " --marker=">" --pointer="◆" --separator="─"
   --scrollbar="│"'
-# Link: 
-# https://vitormv.github.io/fzf-themes#eyJib3JkZXJTdHlsZSI6InJvdW5kZWQiLCJib3JkZXJMYWJlbCI6ImZ6ZiIsImJvcmRlckxhYmVsUG9zaXRpb24iOjAsInByZXZpZXdCb3JkZXJTdHlsZSI6InJvdW5kZWQiLCJwYWRkaW5nIjoiMCIsIm1hcmdpbiI6IjAiLCJwcm9tcHQiOiI+ICIsIm1hcmtlciI6Ij4iLCJwb2ludGVyIjoi4peGIiwic2VwYXJhdG9yIjoi4pSAIiwic2Nyb2xsYmFyIjoi4pSCIiwibGF5b3V0IjoiZGVmYXVsdCIsImluZm8iOiJkZWZhdWx0IiwiY29sb3JzIjoiZmc6I2QwZDBkMCxmZys6I0MwQ0FGNSxiZys6IzI5MkU0MixobDojN0FBMkY3LGhsKzojNzNEQUNBLGluZm86I0JCOUFGNyxtYXJrZXI6IzlFQ0U2QSxwcm9tcHQ6I0Y3NzY4RSxzcGlubmVyOiNFMEFGNjgscG9pbnRlcjojQkI5QUY3LGhlYWRlcjojNzNEQUNBLGJvcmRlcjojNDE0ODY4LGxhYmVsOiNFMEFGNjgscXVlcnk6I0JCOUFGNyJ9
+
+# Poimandres 
+# export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+#   --color=fg:#E4F0FB,fg+:#FFFFFF,bg:-1,bg+:#303340
+#   --color=hl:#D0679D,hl+:#89DDFF,info:#ebcb8b,marker:#5DE4C7
+#   --color=prompt:#FCC5E9,spinner:#5DE4C7,pointer:#5DE4C7,header:#8fbcbb
+#   --color=border:#303340,label:#81a1c1,query:#d8dee9
+#   --border="rounded" --border-label="fzf" --border-label-pos="0" --preview-window="border-rounded"
+#   --prompt="> " --marker=">" --pointer="◆" --separator="─"
+#   --scrollbar="│"'
 
 # Bat theme
 export BAT_THEME="tokyonight_night"
