@@ -33,7 +33,7 @@ end)
 -- {{{ Variable definitions
 
 -- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
-beautiful.init("/home/mauromotion/.config/awesome/themes/nord/theme.lua")
+beautiful.init("/home/mauromotion/.config/awesome/themes/mmmotion/theme-tokyonight.lua")
 
 local modkey = "Mod4"
 local terminal = "wezterm"
@@ -147,24 +147,24 @@ tag.connect_signal("request::default_layouts", function()
 end)
 -- }}}
 
--- {{{ Wallpaper
-screen.connect_signal("request::wallpaper", function(s)
-	awful.wallpaper({
-		screen = s,
-		widget = {
-			{
-				image = beautiful.wallpaper,
-				upscale = true,
-				downscale = true,
-				widget = wibox.widget.imagebox,
-			},
-			valign = "center",
-			halign = "center",
-			tiled = false,
-			widget = wibox.container.tile,
-		},
-	})
-end)
+-- -- {{{ Wallpaper
+-- screen.connect_signal("request::wallpaper", function(s)
+-- 	awful.wallpaper({
+-- 		screen = s,
+-- 		widget = {
+-- 			{
+-- 				image = beautiful.wallpaper,
+-- 				upscale = true,
+-- 				downscale = true,
+-- 				widget = wibox.widget.imagebox,
+-- 			},
+-- 			valign = "center",
+-- 			halign = "center",
+-- 			tiled = false,
+-- 			widget = wibox.container.tile,
+-- 		},
+-- 	})
+-- end)
 -- }}}
 
 -- {{{ Wibar
