@@ -24,7 +24,7 @@ local workspace_switcher = wezterm.plugin.require("https://github.com/MLFlexer/s
 -- Colorscheme
 config.color_scheme_dirs = { "~/.config/wezterm/colors" }
 config.color_scheme = "Tokyo Night"
-config.window_background_opacity = 0.96
+config.window_background_opacity = 1
 
 -- Font
 -- config.font = wezterm.font("Hack Nerd Font Mono", { weight = "Medium" })

@@ -8,6 +8,8 @@ icon=""
 
 if [ "$state" == charging ]; then
 	icon="󰂄"
+elif [ "$batt_int" -eq 100 ]; then
+	icon="󰁹"
 elif [ "$state" == discharging ]; then
 	if [ "$batt_int" -eq 100 ]; then
 		icon="󰁹"
