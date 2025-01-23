@@ -17,6 +17,7 @@ setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
+setopt NO_BANG_HIST
 
 setopt appendhistory
 setopt sharehistory
@@ -40,7 +41,7 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
 source "${ZINIT_HOME}/zinit.zsh"
 
-# csh.sh completion script -- needs to be before compinit
+# Extra completions scripts -- needs to be before compinit
 fpath=(~/.zsh.d/ $fpath)
 
 # Initialize completion
