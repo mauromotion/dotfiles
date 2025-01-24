@@ -18,7 +18,7 @@ return {
 				"lazyterm",
 				"vimwiki",
 				"Vimwiki",
-				"markdown",
+				-- "markdown",
 			},
 		},
 	},
