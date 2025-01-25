@@ -639,7 +639,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 						mem_widget,
 						widgets_separator,
 						styled_volume_widget,
-						widgets_separator,
+						-- widgets_separator,
 						upds_widget,
 						wibox.widget({
 							mysystray,
@@ -681,7 +681,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 						styled_volume_widget,
 						widgets_separator,
 						batt_widget,
-						widgets_separator,
+						-- widgets_separator,
 						upds_widget,
 						wibox.widget({
 							mysystray,
