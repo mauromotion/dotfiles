@@ -37,6 +37,14 @@ theme.border_color_marked = "#D0679D"
 theme.notification_border_color = "#5DE4C7"
 theme.notification_border_width = dpi(4)
 
+-- Colors for the wibar
+theme.yellow = "#FFFAC2"
+theme.blue = "#89DDFF"
+theme.cyan = "#ADD7FF"
+theme.pink = "#FCC5E9"
+theme.red = "#D0679D"
+theme.green = "#5DE4C7"
+
 -- There are other variable sets
 -- overriding the default one when
 -- defined, the sets are:

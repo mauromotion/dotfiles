@@ -162,7 +162,18 @@ end)
 -- mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+local mytextclock = wibox.widget.textclock()
+
+local styled_textclock = wibox.widget({
+	{
+		mytextclock,
+		widget = wibox.container.background,
+		fg = beautiful.green,
+		bg = beautiful.bg_normal,
+	},
+	margins = 4,
+	widget = wibox.container.margin,
+})
 
 screen.connect_signal("request::desktop_decoration", function(s)
 	-- Each screen has its own tag table.
@@ -501,7 +512,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
 
 	-- Create separators
 	local myseparator = wibox.widget.textbox(" ≡ ")
-	local widgets_separator = wibox.widget.textbox(" │ ")
+	-- local widgets_separator = wibox.widget.textbox(" │ ")
+	local widgets_separator = wibox.widget.textbox("  ")
 
 	-- My own custom widgets
 	--
@@ -518,27 +530,32 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	-- Memory widget
 	local mem_script_path = "/home/mauromotion/.scripts/memory.sh"
 	local mem_update_interval = 5
-	local mem_widget = my_widget.create(mem_script_path, mem_update_interval)
+	local mem_fg = beautiful.cyan
+	local mem_widget = my_widget.create(mem_script_path, mem_update_interval, mem_fg)
 
 	-- Updates widget
 	local upds_widget_path = "/home/mauromotion/.scripts/updates.sh"
 	local upds_widget_interval = 400
-	local upds_widget = my_widget.create(upds_widget_path, upds_widget_interval)
+	local upds_fg = beautiful.red
+	local upds_widget = my_widget.create(upds_widget_path, upds_widget_interval, upds_fg)
 
 	-- Kernel widget
 	local kern_widget_path = "/home/mauromotion/.scripts/kernel.sh"
 	local kern_update_interval = 7200
-	local kern_widget = my_widget.create(kern_widget_path, kern_update_interval)
+	local kern_fg = beautiful.yellow
+	local kern_widget = my_widget.create(kern_widget_path, kern_update_interval, kern_fg)
 
 	-- HD space 1 widget
 	local hd_1_widget_path = "/home/mauromotion/.scripts/hd_space_root.sh"
 	local hd_1_widget_interval = 600
-	local hd_1_widget = my_widget.create(hd_1_widget_path, hd_1_widget_interval)
+	local hd_1_widget_fg = beautiful.blue
+	local hd_1_widget = my_widget.create(hd_1_widget_path, hd_1_widget_interval, hd_1_widget_fg)
 
 	-- HD space 2 widget
 	local hd_2_widget_path = "/home/mauromotion/.scripts/hd_space_media.sh"
 	local hd_2_widget_interval = 600
-	local hd_2_widget = my_widget.create(hd_2_widget_path, hd_2_widget_interval)
+	local hd_2_widget_fg = beautiful.blue
+	local hd_2_widget = my_widget.create(hd_2_widget_path, hd_2_widget_interval, hd_2_widget_fg)
 
 	-- {{{ Volume widget
 	--
@@ -575,6 +592,18 @@ screen.connect_signal("request::desktop_decoration", function(s)
 
 	-- Start listening for volume changes
 	listen_for_volume_changes()
+
+	-- Styling the volume widget
+	local styled_volume_widget = wibox.widget({
+		{
+			volume_widget,
+			widget = wibox.container.background,
+			fg = beautiful.pink,
+			bg = beautiful.bg_normal,
+		},
+		margins = 4, -- Optional padding
+		widget = wibox.container.margin,
+	})
 	-- }}}
 	--
 	-- Create the wibox
@@ -584,7 +613,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			s.mywibox = awful.wibar({
 				position = "top",
 				screen = s,
-				height = 22,
+				height = 30,
 				widget = {
 					layout = wibox.layout.align.horizontal,
 					{ -- Left widgets
@@ -609,12 +638,16 @@ screen.connect_signal("request::desktop_decoration", function(s)
 						-- widgets_separator,
 						mem_widget,
 						widgets_separator,
-						volume_widget,
+						styled_volume_widget,
 						widgets_separator,
 						upds_widget,
-						mysystray,
+						wibox.widget({
+							mysystray,
+							widget = wibox.container.place, -- Center the systray vertically
+							valign = "center",
+						}),
 						myseparator,
-						mytextclock,
+						styled_textclock,
 						s.mylayoutbox,
 					},
 				},
@@ -645,14 +678,18 @@ screen.connect_signal("request::desktop_decoration", function(s)
 						widgets_separator,
 						mem_widget,
 						widgets_separator,
-						volume_widget,
+						styled_volume_widget,
 						widgets_separator,
 						batt_widget,
 						widgets_separator,
 						upds_widget,
-						mysystray,
+						wibox.widget({
+							mysystray,
+							widget = wibox.container.place, -- Center the systray vertically
+							valign = "center",
+						}),
 						myseparator,
-						mytextclock,
+						styled_textclock,
 						s.mylayoutbox,
 					},
 				},
