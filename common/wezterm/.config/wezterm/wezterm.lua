@@ -23,7 +23,7 @@ local workspace_switcher = wezterm.plugin.require("https://github.com/MLFlexer/s
 
 -- Colorscheme
 config.color_scheme_dirs = { "~/.config/wezterm/colors" }
-config.color_scheme = "Tokyo Night"
+config.color_scheme = "Poimandres"
 config.window_background_opacity = 1
 
 -- Font

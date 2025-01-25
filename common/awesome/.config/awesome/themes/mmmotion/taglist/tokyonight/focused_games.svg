@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 25.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 1200 1000"
+   xml:space="preserve"
+   width="1200"
+   height="700"
+   sodipodi:docname="focused_games.svg"
+   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs3" /><sodipodi:namedview
+   id="namedview3"
+   pagecolor="#505050"
+   bordercolor="#eeeeee"
+   borderopacity="1"
+   inkscape:showpageshadow="0"
+   inkscape:pageopacity="0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#505050"
+   inkscape:zoom="1.1117597"
+   inkscape:cx="512.25098"
+   inkscape:cy="373.2821"
+   inkscape:window-width="2560"
+   inkscape:window-height="1418"
+   inkscape:window-x="0"
+   inkscape:window-y="582"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Layer_1" />
+
+
+
+<g
+   id="g3"
+   transform="matrix(1.3950893,0,0,1.3950893,242.85714,142.85714)"
+   style="fill:#7AA2F7;fill-opacity:1"><path
+     d="M 473.759,107.286 C 454.639,75.419 420.647,54.174 382.406,54.174 H 127.469 c -38.241,0 -72.232,21.245 -91.353,53.112 C 12.747,149.776 0,196.515 0,245.378 c 0,116.846 46.739,212.448 106.224,212.448 31.867,0 57.361,-29.743 76.481,-91.353 2.124,-8.498 10.622,-14.871 21.245,-14.871 h 104.1 c 8.498,0 16.996,6.373 21.245,14.871 19.12,61.61 44.614,91.353 76.481,91.353 59.485,0 106.224,-95.602 106.224,-212.448 -2.124,-48.863 -14.871,-95.602 -38.241,-138.092 z m -70.108,308.05 c -6.373,0 -21.245,-16.996 -36.116,-61.61 -8.498,-27.618 -33.992,-44.614 -61.61,-44.614 H 203.95 c -27.618,0 -53.112,19.12 -61.61,44.614 -14.871,44.614 -29.743,61.61 -36.116,61.61 -21.245,0 -63.734,-65.859 -63.734,-169.958 0,-40.365 10.622,-80.73 29.743,-116.846 12.747,-19.12 33.992,-31.867 55.237,-31.867 h 254.938 c 21.245,0 42.49,12.747 55.237,31.867 19.12,36.116 29.743,76.481 29.743,116.846 -0.002,104.099 -42.492,169.958 -63.737,169.958 z"
+     id="path1"
+     style="fill:#7AA2F7;fill-opacity:1" /><path
+     d="m 192,192 h -21.333 v -21.333 c 0,-12.8 -8.533,-21.333 -21.333,-21.333 -12.8,0 -21.333,8.533 -21.333,21.333 V 192 h -21.333 c -12.8,0 -21.333,8.533 -21.333,21.333 0,12.8 8.533,21.333 21.333,21.333 H 128 V 256 c 0,12.8 8.533,21.333 21.333,21.333 12.8,0 21.333,-8.533 21.333,-21.333 V 234.667 H 192 c 12.8,0 21.333,-8.533 21.333,-21.333 C 213.333,200.533 204.8,192 192,192 Z"
+     id="path2"
+     style="fill:#7AA2F7;fill-opacity:1" /><circle
+     cx="394.66699"
+     cy="181.33299"
+     r="32"
+     id="circle2"
+     style="fill:#7AA2F7;fill-opacity:1" /><circle
+     cx="330.66699"
+     cy="245.33299"
+     r="32"
+     id="circle3"
+     style="fill:#7AA2F7;fill-opacity:1" /></g>
+</svg>

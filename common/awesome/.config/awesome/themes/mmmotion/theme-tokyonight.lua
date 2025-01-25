@@ -18,25 +18,23 @@ theme.font = "Noto SansM Nerd Font Medium 12"
 -- theme.font = "GeistMono Nerd Font Medium 12"
 -- theme.font = "Maple Mono NF Medium 12"
 
-local use_accent_color = "#7AA2F7"
-
 theme.bg_normal = "#1A1B26"
-theme.bg_focus = use_accent_color
+theme.bg_focus = "#292E42"
 theme.bg_urgent = "#F7768E"
-theme.bg_minimize = "#414868"
+theme.bg_minimize = "#292E42"
 theme.bg_systray = theme.bg_normal
 
-theme.fg_normal = "#C0CAF5"
-theme.fg_focus = "#24273A"
+theme.fg_normal = "#909BC9"
+theme.fg_minimize = "#909BC9"
+theme.fg_focus = "#C0CAF5"
 theme.fg_urgent = "#C0CAF5"
-theme.fg_minimize = "#C0CAF5"
 
 theme.useless_gap = dpi(0)
 theme.border_width = dpi(2)
 theme.border_color_normal = "#1A1B26"
-theme.border_color_active = use_accent_color
+theme.border_color_active = "#292E42"
 theme.border_color_marked = "#F7768E"
-theme.notification_border_color = use_accent_color
+theme.notification_border_color = "#7AA2F7"
 theme.notification_border_width = dpi(4)
 
 -- There are other variable sets
@@ -79,7 +77,7 @@ theme.menu_width = dpi(200)
 theme.hotkeys_font = "JetBrains Mono 11"
 theme.hotkeys_description_font = "JetBrains Mono 9"
 theme.hotkeys_border_width = 2
-theme.hotkeys_border_color = use_accent_color
+theme.hotkeys_border_color = "#292E42"
 theme.hotkeys_group_margin = 20
 theme.hotkeys_margin = 20
 theme.hotkeys_label_margin = 10

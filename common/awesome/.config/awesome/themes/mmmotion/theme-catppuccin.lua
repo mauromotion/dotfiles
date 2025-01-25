@@ -26,25 +26,25 @@ local accent_color = function()
 	return accent
 end
 
-local use_accent_color = "#b4befe"
+local accent = "#74c7ec"
 
 theme.bg_normal = "#1e1e2e"
-theme.bg_focus = use_accent_color
+theme.bg_focus = "#313244"
 theme.bg_urgent = "#f38ba8"
-theme.bg_minimize = "#313244"
+theme.bg_minimize = "#45475a"
 theme.bg_systray = theme.bg_normal
 
 theme.fg_normal = "#cdd6f4"
-theme.fg_focus = "#24273A"
-theme.fg_urgent = "#cdd6f4"
 theme.fg_minimize = "#cdd6f4"
+theme.fg_focus = accent
+theme.fg_urgent = "#cdd6f4"
 
 theme.useless_gap = dpi(0)
 theme.border_width = dpi(2)
 theme.border_color_normal = "#1e1e2e"
-theme.border_color_active = use_accent_color
+theme.border_color_active = "#313244"
 theme.border_color_marked = "#f38ba8"
-theme.notification_border_color = use_accent_color
+theme.notification_border_color = accent
 theme.notification_border_width = dpi(4)
 
 -- There are other variable sets
@@ -87,7 +87,7 @@ theme.menu_width = dpi(200)
 theme.hotkeys_font = "JetBrains Mono 11"
 theme.hotkeys_description_font = "JetBrains Mono 9"
 theme.hotkeys_border_width = 2
-theme.hotkeys_border_color = use_accent_color
+theme.hotkeys_border_color = "#74c7ec"
 theme.hotkeys_group_margin = 20
 theme.hotkeys_margin = 20
 theme.hotkeys_label_margin = 10

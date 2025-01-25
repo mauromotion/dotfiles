@@ -13,29 +13,28 @@ local themes_path = gfs.get_themes_dir()
 local theme = {}
 
 -- theme.font = "JetBrainsMono Nerd Font Medium 11.5"
-theme.font = "FiraMono Nerd Font Medium 12"
+theme.font = "Noto SansM Nerd Font Medium 12"
+-- theme.font = "FiraMono Nerd Font Medium 12"
 -- theme.font = "GeistMono Nerd Font Medium 12"
 -- theme.font = "Maple Mono NF Medium 12"
 
-local use_accent_color = "#5FB3A1"
-
 theme.bg_normal = "#1B1E28"
-theme.bg_focus = use_accent_color
+theme.bg_focus = "#303340"
 theme.bg_urgent = "#D0679D"
-theme.bg_minimize = "#303340"
+theme.bg_minimize = "#506477"
 theme.bg_systray = theme.bg_normal
 
-theme.fg_normal = "#E4F0FB"
-theme.fg_focus = "#1B1E28"
+theme.fg_normal = "#A6ACCD"
+theme.fg_minimize = "#A6ACCD"
+theme.fg_focus = "#E4F0FB"
 theme.fg_urgent = "#E4F0FB"
-theme.fg_minimize = "#E4F0FB"
 
 theme.useless_gap = dpi(0)
 theme.border_width = dpi(2)
 theme.border_color_normal = "#1A1B26"
-theme.border_color_active = use_accent_color
+theme.border_color_active = "#303340"
 theme.border_color_marked = "#D0679D"
-theme.notification_border_color = use_accent_color
+theme.notification_border_color = "#5DE4C7"
 theme.notification_border_width = dpi(4)
 
 -- There are other variable sets
@@ -78,7 +77,7 @@ theme.menu_width = dpi(200)
 theme.hotkeys_font = "JetBrains Mono 11"
 theme.hotkeys_description_font = "JetBrains Mono 9"
 theme.hotkeys_border_width = 2
-theme.hotkeys_border_color = use_accent_color
+theme.hotkeys_border_color = "#303340"
 theme.hotkeys_group_margin = 20
 theme.hotkeys_margin = 20
 theme.hotkeys_label_margin = 10
