@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="Outline"
+   viewBox="0 0 56.25 46.875"
+   width="1200"
+   height="700"
+   version="1.1"
+   sodipodi:docname="unfocused_mail.svg"
+   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:zoom="0.78613281"
+     inkscape:cx="518.36025"
+     inkscape:cy="400.69565"
+     inkscape:window-width="2560"
+     inkscape:window-height="1418"
+     inkscape:window-x="0"
+     inkscape:window-y="582"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Outline" />
+  <path
+     d="m 37.890624,8.091518 h -19.53125 a 6.983817,6.983817 0 0 0 -6.975446,6.975446 v 16.741072 a 6.983817,6.983817 0 0 0 6.975446,6.975446 h 19.53125 a 6.983817,6.983817 0 0 0 6.975447,-6.975446 V 15.066964 A 6.983817,6.983817 0 0 0 37.890624,8.091518 Z m -19.53125,2.790179 h 19.53125 a 4.1852679,4.1852679 0 0 1 3.878349,2.632533 L 31.085379,24.199219 a 4.1950335,4.1950335 0 0 1 -5.920759,0 L 14.481026,13.51423 a 4.1852679,4.1852679 0 0 1 3.878348,-2.632533 z m 19.53125,25.111607 H 18.359374 A 4.1852679,4.1852679 0 0 1 14.174107,31.808036 V 17.159598 l 9.017857,9.012277 a 6.9852121,6.9852121 0 0 0 9.866071,0 l 9.017857,-9.012277 v 14.648438 a 4.1852679,4.1852679 0 0 1 -4.185268,4.185268 z"
+     id="path1"
+     style="fill:#C0CAF5;fill-opacity:1;stroke-width:1.39509" />
+</svg>

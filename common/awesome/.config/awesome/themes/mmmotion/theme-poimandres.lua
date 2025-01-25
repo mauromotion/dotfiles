@@ -13,47 +13,37 @@ local themes_path = gfs.get_themes_dir()
 local theme = {}
 
 -- theme.font = "JetBrainsMono Nerd Font Medium 11.5"
-theme.font = "FiraMono Nerd Font Medium 12"
+theme.font = "Noto SansM Nerd Font Medium 12"
+-- theme.font = "FiraMono Nerd Font Medium 12"
 -- theme.font = "GeistMono Nerd Font Medium 12"
 -- theme.font = "Maple Mono NF Medium 12"
 
--- ** Catppuccin Mocha ** --
-local accent_color = function()
-	local colors =
-		{ "#89b4fa", "#94e2d5", "#74c7ec", "#b4befe", "#cba6f7", "#f5c2e7", "#f2cdcd", "#fab387", "#a6e3a1", "#f9e2af" }
-
-	local accent = colors[math.random(1, #colors)]
-	return accent
-end
-
-local accent = "#74c7ec"
-
-theme.bg_normal = "#1e1e2e"
-theme.bg_focus = "#313244"
-theme.bg_urgent = "#f38ba8"
-theme.bg_minimize = "#45475a"
+theme.bg_normal = "#1B1E28"
+theme.bg_focus = "#303340"
+theme.bg_urgent = "#D0679D"
+theme.bg_minimize = "#506477"
 theme.bg_systray = theme.bg_normal
 
-theme.fg_normal = "#cdd6f4"
-theme.fg_minimize = "#cdd6f4"
-theme.fg_focus = accent
-theme.fg_urgent = "#cdd6f4"
+theme.fg_normal = "#A6ACCD"
+theme.fg_minimize = "#A6ACCD"
+theme.fg_focus = "#E4F0FB"
+theme.fg_urgent = "#E4F0FB"
 
 theme.useless_gap = dpi(0)
 theme.border_width = dpi(2)
-theme.border_color_normal = "#1e1e2e"
-theme.border_color_active = "#313244"
-theme.border_color_marked = "#f38ba8"
-theme.notification_border_color = accent
+theme.border_color_normal = "#1A1B26"
+theme.border_color_active = "#303340"
+theme.border_color_marked = "#D0679D"
+theme.notification_border_color = "#5DE4C7"
 theme.notification_border_width = dpi(4)
 
 -- Colors for the wibar
-theme.yellow = "#f9e2af"
-theme.blue = "#89b4fa"
-theme.cyan = "#74c7ec"
-theme.pink = "#cba6f7"
-theme.red = "#f38ba8"
-theme.green = "#a6e3a1"
+theme.yellow = "#FFFAC2"
+theme.blue = "#89DDFF"
+theme.cyan = "#ADD7FF"
+theme.pink = "#FCC5E9"
+theme.red = "#D0679D"
+theme.green = "#5DE4C7"
 
 -- There are other variable sets
 -- overriding the default one when
@@ -95,7 +85,7 @@ theme.menu_width = dpi(200)
 theme.hotkeys_font = "JetBrains Mono 11"
 theme.hotkeys_description_font = "JetBrains Mono 9"
 theme.hotkeys_border_width = 2
-theme.hotkeys_border_color = "#74c7ec"
+theme.hotkeys_border_color = "#303340"
 theme.hotkeys_group_margin = 20
 theme.hotkeys_margin = 20
 theme.hotkeys_label_margin = 10

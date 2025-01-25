@@ -32,9 +32,10 @@ end)
 -- }}}
 
 -- {{{ Load theme
---
--- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
-beautiful.init("/home/mauromotion/.config/awesome/themes/mmmotion/theme-tokyonight.lua")
+-- Available themes are: catppuccin, tokyonight, poimandres
+local theme = "poimandres"
+
+beautiful.init(string.format("/home/mauromotion/.config/awesome/themes/mmmotion/theme-%s.lua", theme))
 -- }}}
 
 -- {{{ Variable definitions
@@ -161,7 +162,18 @@ end)
 -- mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+local mytextclock = wibox.widget.textclock()
+
+local styled_textclock = wibox.widget({
+	{
+		mytextclock,
+		widget = wibox.container.background,
+		fg = beautiful.green,
+		bg = beautiful.bg_normal,
+	},
+	margins = 4,
+	widget = wibox.container.margin,
+})
 
 screen.connect_signal("request::desktop_decoration", function(s)
 	-- Each screen has its own tag table.
@@ -173,48 +185,102 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	local tags = {
 		{
 			name = "home",
-			icon_unfocused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/unfocused_home.svg",
-			icon_focused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/focused_home.svg",
+			icon_unfocused = string.format(
+				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/unfocused_home.svg",
+				theme
+			),
+			icon_focused = string.format(
+				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/focused_home.svg",
+				theme
+			),
 		},
 		{
 			name = "mail",
-			icon_unfocused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/unfocused_mail.svg",
-			icon_focused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/focused_mail.svg",
+			icon_unfocused = string.format(
+				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/unfocused_mail.svg",
+				theme
+			),
+			icon_focused = string.format(
+				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/focused_mail.svg",
+				theme
+			),
 		},
 		{
 			name = "dev",
-			icon_unfocused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/unfocused_dev.svg",
-			icon_focused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/focused_dev.svg",
+			icon_unfocused = string.format(
+				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/unfocused_dev.svg",
+				theme
+			),
+			icon_focused = string.format(
+				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/focused_dev.svg",
+				theme
+			),
 		},
 		{
 			name = "chat",
-			icon_unfocused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/unfocused_chat.svg",
-			icon_focused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/focused_chat.svg",
+			icon_unfocused = string.format(
+				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/unfocused_chat.svg",
+				theme
+			),
+			icon_focused = string.format(
+				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/focused_chat.svg",
+				theme
+			),
 		},
 		{
 			name = "docs",
-			icon_unfocused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/unfocused_docs.svg",
-			icon_focused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/focused_docs.svg",
+			icon_unfocused = string.format(
+				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/unfocused_docs.svg",
+				theme
+			),
+			icon_focused = string.format(
+				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/focused_docs.svg",
+				theme
+			),
 		},
 		{
 			name = "media",
-			icon_unfocused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/unfocused_media.svg",
-			icon_focused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/focused_media.svg",
+			icon_unfocused = string.format(
+				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/unfocused_media.svg",
+				theme
+			),
+			icon_focused = string.format(
+				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/focused_media.svg",
+				theme
+			),
 		},
 		{
 			name = "games",
-			icon_unfocused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/unfocused_games.svg",
-			icon_focused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/focused_games.svg",
+			icon_unfocused = string.format(
+				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/unfocused_games.svg",
+				theme
+			),
+			icon_focused = string.format(
+				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/focused_games.svg",
+				theme
+			),
 		},
 		{
 			name = "edit",
-			icon_unfocused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/unfocused_edit.svg",
-			icon_focused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/focused_edit.svg",
+			icon_unfocused = string.format(
+				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/unfocused_edit.svg",
+				theme
+			),
+			icon_focused = string.format(
+				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/focused_edit.svg",
+				theme
+			),
 		},
 		{
 			name = "extra",
-			icon_unfocused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/unfocused_extra.svg",
-			icon_focused = "/home/mauromotion/.config/awesome/themes/mmmotion/taglist/focused_extra.svg",
+			icon_unfocused = string.format(
+				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/unfocused_extra.svg",
+				theme
+			),
+			icon_focused = string.format(
+				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/focused_extra.svg",
+				theme
+			),
 		},
 	}
 
@@ -445,8 +511,9 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	end
 
 	-- Create separators
-	local myseparator = wibox.widget.textbox(" ≡ ")
-	local widgets_separator = wibox.widget.textbox(" │ ")
+	local myseparator = wibox.widget.textbox(" ▪ ")
+	-- local widgets_separator = wibox.widget.textbox(" │ ")
+	local widgets_separator = wibox.widget.textbox("  ")
 
 	-- My own custom widgets
 	--
@@ -463,27 +530,32 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	-- Memory widget
 	local mem_script_path = "/home/mauromotion/.scripts/memory.sh"
 	local mem_update_interval = 5
-	local mem_widget = my_widget.create(mem_script_path, mem_update_interval)
+	local mem_fg = beautiful.cyan
+	local mem_widget = my_widget.create(mem_script_path, mem_update_interval, mem_fg)
 
 	-- Updates widget
 	local upds_widget_path = "/home/mauromotion/.scripts/updates.sh"
 	local upds_widget_interval = 400
-	local upds_widget = my_widget.create(upds_widget_path, upds_widget_interval)
+	local upds_fg = beautiful.red
+	local upds_widget = my_widget.create(upds_widget_path, upds_widget_interval, upds_fg)
 
 	-- Kernel widget
 	local kern_widget_path = "/home/mauromotion/.scripts/kernel.sh"
 	local kern_update_interval = 7200
-	local kern_widget = my_widget.create(kern_widget_path, kern_update_interval)
+	local kern_fg = beautiful.yellow
+	local kern_widget = my_widget.create(kern_widget_path, kern_update_interval, kern_fg)
 
 	-- HD space 1 widget
 	local hd_1_widget_path = "/home/mauromotion/.scripts/hd_space_root.sh"
 	local hd_1_widget_interval = 600
-	local hd_1_widget = my_widget.create(hd_1_widget_path, hd_1_widget_interval)
+	local hd_1_widget_fg = beautiful.blue
+	local hd_1_widget = my_widget.create(hd_1_widget_path, hd_1_widget_interval, hd_1_widget_fg)
 
 	-- HD space 2 widget
 	local hd_2_widget_path = "/home/mauromotion/.scripts/hd_space_media.sh"
 	local hd_2_widget_interval = 600
-	local hd_2_widget = my_widget.create(hd_2_widget_path, hd_2_widget_interval)
+	local hd_2_widget_fg = beautiful.blue
+	local hd_2_widget = my_widget.create(hd_2_widget_path, hd_2_widget_interval, hd_2_widget_fg)
 
 	-- {{{ Volume widget
 	--
@@ -520,6 +592,18 @@ screen.connect_signal("request::desktop_decoration", function(s)
 
 	-- Start listening for volume changes
 	listen_for_volume_changes()
+
+	-- Styling the volume widget
+	local styled_volume_widget = wibox.widget({
+		{
+			volume_widget,
+			widget = wibox.container.background,
+			fg = beautiful.pink,
+			bg = beautiful.bg_normal,
+		},
+		margins = 4, -- Optional padding
+		widget = wibox.container.margin,
+	})
 	-- }}}
 	--
 	-- Create the wibox
@@ -529,7 +613,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			s.mywibox = awful.wibar({
 				position = "top",
 				screen = s,
-				height = 22,
+				height = 30,
 				widget = {
 					layout = wibox.layout.align.horizontal,
 					{ -- Left widgets
@@ -554,12 +638,16 @@ screen.connect_signal("request::desktop_decoration", function(s)
 						-- widgets_separator,
 						mem_widget,
 						widgets_separator,
-						volume_widget,
-						widgets_separator,
+						styled_volume_widget,
+						-- widgets_separator,
 						upds_widget,
-						mysystray,
+						wibox.widget({
+							mysystray,
+							widget = wibox.container.place, -- Center the systray vertically
+							valign = "center",
+						}),
 						myseparator,
-						mytextclock,
+						styled_textclock,
 						s.mylayoutbox,
 					},
 				},
@@ -590,14 +678,18 @@ screen.connect_signal("request::desktop_decoration", function(s)
 						widgets_separator,
 						mem_widget,
 						widgets_separator,
-						volume_widget,
+						styled_volume_widget,
 						widgets_separator,
 						batt_widget,
-						widgets_separator,
+						-- widgets_separator,
 						upds_widget,
-						mysystray,
+						wibox.widget({
+							mysystray,
+							widget = wibox.container.place, -- Center the systray vertically
+							valign = "center",
+						}),
 						myseparator,
-						mytextclock,
+						styled_textclock,
 						s.mylayoutbox,
 					},
 				},
