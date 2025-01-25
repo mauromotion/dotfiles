@@ -525,7 +525,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	-- Battery widget
 	local batt_script_path = "/home/mauromotion/.scripts/battery.sh"
 	local batt_update_interval = 15
-	local batt_widget = my_widget.create(batt_script_path, batt_update_interval)
+	local batt_fg = beautiful.yellow
+	local batt_widget = my_widget.create(batt_script_path, batt_update_interval, batt_fg)
 
 	-- Memory widget
 	local mem_script_path = "/home/mauromotion/.scripts/memory.sh"
@@ -657,7 +658,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			s.mywibox = awful.wibar({
 				position = "top",
 				screen = s,
-				height = 22,
+				height = 26,
 				widget = {
 					layout = wibox.layout.align.horizontal,
 					{ -- Left widgets
