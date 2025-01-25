@@ -65,21 +65,21 @@ config.visual_bell = {
 	fade_out_duration_ms = 100,
 }
 config.colors = {
-	visual_bell = "#414868",
-	split = "#7AA2F7",
+	visual_bell = "#767C9D",
+	split = "#5FB3A1",
 	-- Fancy tab bar colors
 	tab_bar = {
 		active_tab = {
 			fg_color = "#1A1B26",
-			bg_color = "#7AA2F7",
+			bg_color = "#5DE4C7",
 		},
 		inactive_tab = {
 			bg_color = "rgb(0 0 0 0)",
-			fg_color = "#C0CAF5",
+			fg_color = "#E4F0FB",
 		},
 		inactive_tab_hover = {
-			bg_color = "#414868",
-			fg_color = "#C0CAF5",
+			bg_color = "#303340",
+			fg_color = "#E4F0FB",
 		},
 	},
 }
