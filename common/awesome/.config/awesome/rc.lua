@@ -511,7 +511,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	end
 
 	-- Create separators
-	local myseparator = wibox.widget.textbox(" ▪ ")
+	local myseparator = wibox.widget.textbox("  ")
 	-- local widgets_separator = wibox.widget.textbox(" │ ")
 	local widgets_separator = wibox.widget.textbox("  ")
 
