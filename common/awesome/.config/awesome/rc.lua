@@ -614,7 +614,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			s.mywibox = awful.wibar({
 				position = "top",
 				screen = s,
-				height = 30,
+				height = 26,
 				widget = {
 					layout = wibox.layout.align.horizontal,
 					{ -- Left widgets
@@ -803,6 +803,6 @@ gears.timer.start_new(60, function()
 	-- just let it do a full collection
 	collectgarbage()
 	-- or else set a step size
-	-- collectgarbage("step", 30000)
+	-- collectgarbage("step",
 	return true
 end)

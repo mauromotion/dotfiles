@@ -20,14 +20,14 @@ theme.font = "Noto SansM Nerd Font Medium 12"
 
 theme.bg_normal = "#1B1E28"
 theme.bg_focus = "#303340"
-theme.bg_urgent = "#D0679D"
+theme.bg_urgent = "#5DE4C7"
 theme.bg_minimize = "#506477"
 theme.bg_systray = theme.bg_normal
 
 theme.fg_normal = "#A6ACCD"
 theme.fg_minimize = "#A6ACCD"
 theme.fg_focus = "#E4F0FB"
-theme.fg_urgent = "#E4F0FB"
+theme.fg_urgent = "#1B1E28"
 
 theme.useless_gap = dpi(0)
 theme.border_width = dpi(2)
