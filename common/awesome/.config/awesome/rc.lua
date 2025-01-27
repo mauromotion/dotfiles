@@ -11,6 +11,7 @@ local awful = require("awful") -- Standard awesome library
 require("awful.autofocus")
 local wibox = require("wibox") -- Widget and layout library
 local my_widget = require("widgets.my_widget") -- My custom script loading widget
+local utils = require("utils.utils")
 local beautiful = require("beautiful") -- Theme handling library
 local naughty = require("naughty") -- Notification library
 local ruled = require("ruled") -- Declarative object management
@@ -31,56 +32,21 @@ naughty.connect_signal("request::display_error", function(message, startup)
 end)
 -- }}}
 
--- {{{ Load theme
--- Available themes are: catppuccin, tokyonight, poimandres
-local theme = "poimandres"
-
-beautiful.init(string.format("/home/mauromotion/.config/awesome/themes/mmmotion/theme-%s.lua", theme))
--- }}}
-
 -- {{{ Variable definitions
 local vars = require("options.vars")
 
 local modkey = vars.modkey
 -- }}}
 
--- {{{ Custom functions
---
--- Function to retrieve the hostname asynchronously
-hostname = nil
-
-local function get_hostname(callback)
-	awful.spawn.easy_async_with_shell("hostnamectl --static", function(stdout, stderr, reason, exit_code)
-		hostname = stdout:match("^%s*(.-)%s*$") -- Trim any leading/trailing whitespace
-		if callback then
-			callback(hostname)
-		end
-	end)
-end
-
--- Remove border when only one window
--- local function set_border(c)
--- 	local s = awful.screen.focused()
--- 	if
--- 		c.maximized
--- 		or (#s.tiled_clients == 1 and not c.floating)
--- 		or (s.selected_tag and s.selected_tag.layout.name == "max")
--- 	then
--- 		c.border_width = 0
--- 	else
--- 		c.border_width = beautiful.border_width
--- 	end
--- end
-
--- client.connect_signal("request::border", set_border)
--- client.connect_signal("property::maximized", set_border)
+-- {{{ Load theme
+beautiful.init(string.format("/home/mauromotion/.config/awesome/themes/mmmotion/theme-%s.lua", vars.theme))
 -- }}}
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
-freedesktop_menu = freedesktop.menu.build()
+local freedesktop_menu = freedesktop.menu.build()
 
-myawesomemenu = {
+local myawesomemenu = {
 	{
 		"hotkeys",
 		function()
@@ -98,7 +64,7 @@ myawesomemenu = {
 	},
 }
 
-mymainmenu = freedesktop.menu.build({
+local mymainmenu = freedesktop.menu.build({
 	before = {
 		{ "Awesome", myawesomemenu, beautiful.awesome_icon },
 		-- other triads can be put here
@@ -109,7 +75,7 @@ mymainmenu = freedesktop.menu.build({
 	},
 })
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = mymainmenu })
+local mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = mymainmenu })
 
 -- Menubar configuration
 menubar.utils.terminal = vars.terminal -- Set the terminal for applications that require it
@@ -157,129 +123,111 @@ end)
 -- }}}
 
 -- {{{ Wibar
-
--- Keyboard map indicator and switcher
--- mykeyboardlayout = awful.widget.keyboardlayout()
-
--- Create a textclock widget
-local mytextclock = wibox.widget.textclock()
-
-local styled_textclock = wibox.widget({
-	{
-		mytextclock,
-		widget = wibox.container.background,
-		fg = beautiful.green,
-		bg = beautiful.bg_normal,
-	},
-	margins = 4,
-	widget = wibox.container.margin,
-})
-
 screen.connect_signal("request::desktop_decoration", function(s)
 	-- Each screen has its own tag table.
 	-- local names = { " home ", " mail ", " dev ", " chat ", " docs ", " media ", " games ", " edit ", " xtra " }
 	local l = awful.layout.suit -- Just to save some typing: use an alias.
 	-- local layouts = { l.tile.left, l.max, l.tile, l.tile, l.tile, l.tile, l.floating, l.tile, l.tile.top }
 	-- awful.tag(names, s, layouts)
-	--
+	-- TODO: make the links to the icons generic so they are reusable
 	local tags = {
 		{
 			name = "home",
 			icon_unfocused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/unfocused_home.svg",
-				theme
+				vars.theme
 			),
 			icon_focused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/focused_home.svg",
-				theme
+				vars.theme
 			),
 		},
 		{
 			name = "mail",
 			icon_unfocused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/unfocused_mail.svg",
-				theme
+				vars.theme
 			),
 			icon_focused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/focused_mail.svg",
-				theme
+				vars.theme
 			),
 		},
 		{
 			name = "dev",
 			icon_unfocused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/unfocused_dev.svg",
-				theme
+				vars.theme
 			),
 			icon_focused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/focused_dev.svg",
-				theme
+				vars.theme
 			),
 		},
 		{
 			name = "chat",
 			icon_unfocused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/unfocused_chat.svg",
-				theme
+				vars.theme
 			),
 			icon_focused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/focused_chat.svg",
-				theme
+				vars.theme
 			),
 		},
 		{
 			name = "docs",
 			icon_unfocused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/unfocused_docs.svg",
-				theme
+				vars.theme
 			),
 			icon_focused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/focused_docs.svg",
-				theme
+				vars.theme
 			),
 		},
 		{
 			name = "media",
 			icon_unfocused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/unfocused_media.svg",
-				theme
+				vars.theme
 			),
 			icon_focused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/focused_media.svg",
-				theme
+				vars.theme
 			),
 		},
 		{
 			name = "games",
 			icon_unfocused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/unfocused_games.svg",
-				theme
+				vars.theme
 			),
 			icon_focused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/focused_games.svg",
-				theme
+				vars.theme
 			),
 		},
 		{
 			name = "edit",
 			icon_unfocused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/unfocused_edit.svg",
-				theme
+				vars.theme
 			),
 			icon_focused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/focused_edit.svg",
-				theme
+				vars.theme
 			),
 		},
 		{
 			name = "extra",
 			icon_unfocused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/unfocused_extra.svg",
-				theme
+				vars.theme
 			),
 			icon_focused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/focused_extra.svg",
-				theme
+				vars.theme
 			),
 		},
 	}
@@ -515,51 +463,66 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	-- local widgets_separator = wibox.widget.textbox(" │ ")
 	local widgets_separator = wibox.widget.textbox("  ")
 
-	-- My own custom widgets
-	--
-	--  Cpu widget
+	-- {{{ Widgets
+	-- Keyboard map indicator and switcher --
+	-- mykeyboardlayout = awful.widget.keyboardlayout()
+
+	-- Textclock widget --
+	local mytextclock = wibox.widget.textclock()
+
+	local styled_textclock = wibox.widget({
+		{
+			mytextclock,
+			widget = wibox.container.background,
+			fg = beautiful.green,
+			bg = beautiful.bg_normal,
+		},
+		margins = 4,
+		widget = wibox.container.margin,
+	})
+
+	--  Cpu widget --
 	local cpu_script_path = "/home/mauromotion/.scripts/cpu.sh"
 	local cpu_update_interval = 2 -- in seconds
 	local cpu_widget = my_widget.create(cpu_script_path, cpu_update_interval)
 
-	-- Battery widget
+	-- Battery widget --
 	local batt_script_path = "/home/mauromotion/.scripts/battery.sh"
 	local batt_update_interval = 15
 	local batt_fg = beautiful.yellow
 	local batt_widget = my_widget.create(batt_script_path, batt_update_interval, batt_fg)
 
-	-- Memory widget
+	-- Memory widget --
 	local mem_script_path = "/home/mauromotion/.scripts/memory.sh"
 	local mem_update_interval = 5
 	local mem_fg = beautiful.cyan
 	local mem_widget = my_widget.create(mem_script_path, mem_update_interval, mem_fg)
 
-	-- Updates widget
+	-- Updates widget --
 	local upds_widget_path = "/home/mauromotion/.scripts/updates.sh"
 	local upds_widget_interval = 400
 	local upds_fg = beautiful.red
 	local upds_widget = my_widget.create(upds_widget_path, upds_widget_interval, upds_fg)
 
-	-- Kernel widget
+	-- Kernel widget --
 	local kern_widget_path = "/home/mauromotion/.scripts/kernel.sh"
 	local kern_update_interval = 7200
 	local kern_fg = beautiful.yellow
 	local kern_widget = my_widget.create(kern_widget_path, kern_update_interval, kern_fg)
 
-	-- HD space 1 widget
+	-- HD space 1 widget --
 	local hd_1_widget_path = "/home/mauromotion/.scripts/hd_space_root.sh"
 	local hd_1_widget_interval = 600
 	local hd_1_widget_fg = beautiful.blue
 	local hd_1_widget = my_widget.create(hd_1_widget_path, hd_1_widget_interval, hd_1_widget_fg)
 
-	-- HD space 2 widget
+	-- HD space 2 widget --
 	local hd_2_widget_path = "/home/mauromotion/.scripts/hd_space_media.sh"
 	local hd_2_widget_interval = 600
 	local hd_2_widget_fg = beautiful.blue
 	local hd_2_widget = my_widget.create(hd_2_widget_path, hd_2_widget_interval, hd_2_widget_fg)
 
-	-- {{{ Volume widget
-	--
+	-- Volume widget --
 	-- Function to get volume
 	local function get_volume(callback)
 		awful.spawn.easy_async_with_shell("/home/mauromotion/.scripts/volume.sh", function(stdout)
@@ -608,7 +571,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	-- }}}
 	--
 	-- Create the wibox
-	get_hostname(function(hostname)
+	utils.get_hostname(function(hostname)
 		if hostname == "eva-01" then
 			-- Wibox for desktop
 			s.mywibox = awful.wibar({
@@ -770,7 +733,6 @@ end)
 -- }}}
 
 -- {{{ Notifications
-
 ruled.notification.connect_signal("request::rules", function()
 	-- All notifications will match this rule.
 	ruled.notification.append_rule({
@@ -785,7 +747,6 @@ end)
 naughty.connect_signal("request::display", function(n)
 	naughty.layout.box({ notification = n })
 end)
-
 -- }}}
 
 -- Enable sloppy focus, so that focus follows mouse.
