@@ -66,7 +66,7 @@ config.visual_bell = {
 }
 config.colors = {
 	visual_bell = "#767C9D",
-	split = "#5FB3A1",
+	split = "#506477",
 	-- Fancy tab bar colors
 	tab_bar = {
 		active_tab = {
