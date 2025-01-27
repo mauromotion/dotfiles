@@ -34,12 +34,12 @@ end)
 
 -- {{{ Variable definitions
 local vars = require("options.vars")
-
 local modkey = vars.modkey
+local theme = vars.theme
 -- }}}
 
 -- {{{ Load theme
-beautiful.init(string.format("/home/mauromotion/.config/awesome/themes/mmmotion/theme-%s.lua", vars.theme))
+beautiful.init(string.format("/home/mauromotion/.config/awesome/themes/mmmotion/theme-%s.lua", theme))
 -- }}}
 
 -- {{{ Menu
@@ -102,26 +102,6 @@ tag.connect_signal("request::default_layouts", function()
 end)
 -- }}}
 
--- {{{ Wallpaper
--- screen.connect_signal("request::wallpaper", function(s)
--- 	awful.wallpaper({
--- 		screen = s,
--- 		widget = {
--- 			{
--- 				image = beautiful.wallpaper,
--- 				upscale = true,
--- 				downscale = true,
--- 				widget = wibox.widget.imagebox,
--- 			},
--- 			valign = "center",
--- 			halign = "center",
--- 			tiled = false,
--- 			widget = wibox.container.tile,
--- 		},
--- 	})
--- end)
--- }}}
-
 -- {{{ Wibar
 screen.connect_signal("request::desktop_decoration", function(s)
 	-- Each screen has its own tag table.
@@ -135,99 +115,99 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			name = "home",
 			icon_unfocused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/unfocused_home.svg",
-				vars.theme
+				theme
 			),
 			icon_focused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/focused_home.svg",
-				vars.theme
+				theme
 			),
 		},
 		{
 			name = "mail",
 			icon_unfocused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/unfocused_mail.svg",
-				vars.theme
+				theme
 			),
 			icon_focused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/focused_mail.svg",
-				vars.theme
+				theme
 			),
 		},
 		{
 			name = "dev",
 			icon_unfocused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/unfocused_dev.svg",
-				vars.theme
+				theme
 			),
 			icon_focused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/focused_dev.svg",
-				vars.theme
+				theme
 			),
 		},
 		{
 			name = "chat",
 			icon_unfocused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/unfocused_chat.svg",
-				vars.theme
+				theme
 			),
 			icon_focused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/focused_chat.svg",
-				vars.theme
+				theme
 			),
 		},
 		{
 			name = "docs",
 			icon_unfocused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/unfocused_docs.svg",
-				vars.theme
+				theme
 			),
 			icon_focused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/focused_docs.svg",
-				vars.theme
+				theme
 			),
 		},
 		{
 			name = "media",
 			icon_unfocused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/unfocused_media.svg",
-				vars.theme
+				theme
 			),
 			icon_focused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/focused_media.svg",
-				vars.theme
+				theme
 			),
 		},
 		{
 			name = "games",
 			icon_unfocused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/unfocused_games.svg",
-				vars.theme
+				theme
 			),
 			icon_focused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/focused_games.svg",
-				vars.theme
+				theme
 			),
 		},
 		{
 			name = "edit",
 			icon_unfocused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/unfocused_edit.svg",
-				vars.theme
+				theme
 			),
 			icon_focused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/focused_edit.svg",
-				vars.theme
+				theme
 			),
 		},
 		{
 			name = "extra",
 			icon_unfocused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/unfocused_extra.svg",
-				vars.theme
+				theme
 			),
 			icon_focused = string.format(
 				"/home/mauromotion/.config/awesome/themes/mmmotion/taglist/%s/focused_extra.svg",
-				vars.theme
+				theme
 			),
 		},
 	}
@@ -464,6 +444,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	local widgets_separator = wibox.widget.textbox("  ")
 
 	-- {{{ Widgets
+	-- TODO: move the widgets to a different module
 	-- Keyboard map indicator and switcher --
 	-- mykeyboardlayout = awful.widget.keyboardlayout()
 
