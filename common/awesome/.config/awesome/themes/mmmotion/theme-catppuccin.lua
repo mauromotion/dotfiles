@@ -1,23 +1,27 @@
----------------------------
--- Default awesome theme --
----------------------------
+-----------------------------------
+-- ┌┬┐┌─┐┬ ┬┬─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌┐┌
+-- │││├─┤│ │├┬┘│ │││││ │ │ ││ ││││
+-- ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘
+-- * AwesomeWM * --
+-- --------------------------------
+-- Catppuccin Mocha theme --
+-----------------------------------
 
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
 local rnotification = require("ruled.notification")
 local dpi = xresources.apply_dpi
 
-local gfs = require("gears.filesystem")
-local themes_path = gfs.get_themes_dir()
+local home = os.getenv("HOME")
+local assets_path = home .. "/.config/awesome/themes/mmmotion"
 
 local theme = {}
 
--- theme.font = "JetBrainsMono Nerd Font Medium 11.5"
 theme.font = "FiraMono Nerd Font Medium 12"
+-- theme.font = "JetBrainsMono Nerd Font Medium 11.5"
 -- theme.font = "GeistMono Nerd Font Medium 12"
 -- theme.font = "Maple Mono NF Medium 12"
 
--- ** Catppuccin Mocha ** --
 local accent_color = function()
 	local colors =
 		{ "#89b4fa", "#94e2d5", "#74c7ec", "#b4befe", "#cba6f7", "#f5c2e7", "#f2cdcd", "#fab387", "#a6e3a1", "#f9e2af" }
@@ -81,15 +85,10 @@ theme.green = "#a6e3a1"
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
-theme.menu_submenu_icon = themes_path .. "default/submenu.png"
+theme.menu_submenu_icon = assets_path .. "submenu.png"
 theme.menu_height = dpi(30)
 theme.menu_width = dpi(200)
 -- theme.menu_font = "JetBrains Mono 14"
-
--- You can add as many variables as
--- you wish and access them by using
--- beautiful.variable in your rc.lua
---theme.bg_widget = "#cc0000"
 
 -- Hotkeys screen customization
 theme.hotkeys_font = "JetBrains Mono 11"
@@ -100,69 +99,84 @@ theme.hotkeys_group_margin = 20
 theme.hotkeys_margin = 20
 theme.hotkeys_label_margin = 10
 
--- Define the image to load
-theme.titlebar_close_button_normal = themes_path .. "default/titlebar/close_normal.png"
-theme.titlebar_close_button_focus = themes_path .. "default/titlebar/close_focus.png"
+-- Titlebar icons
+theme.titlebar_close_button_normal = assets_path .. "/titlebar/close_normal.png"
+theme.titlebar_close_button_focus = assets_path .. "/titlebar/close_focus.png"
 
-theme.titlebar_minimize_button_normal = themes_path .. "default/titlebar/minimize_normal.png"
-theme.titlebar_minimize_button_focus = themes_path .. "default/titlebar/minimize_focus.png"
+theme.titlebar_minimize_button_normal = assets_path .. "/titlebar/minimize_normal.png"
+theme.titlebar_minimize_button_focus = assets_path .. "/titlebar/minimize_focus.png"
 
-theme.titlebar_ontop_button_normal_inactive = themes_path .. "default/titlebar/ontop_normal_inactive.png"
-theme.titlebar_ontop_button_focus_inactive = themes_path .. "default/titlebar/ontop_focus_inactive.png"
-theme.titlebar_ontop_button_normal_active = themes_path .. "default/titlebar/ontop_normal_active.png"
-theme.titlebar_ontop_button_focus_active = themes_path .. "default/titlebar/ontop_focus_active.png"
+theme.titlebar_ontop_button_normal_inactive = assets_path .. "/titlebar/ontop_normal_inactive.png"
+theme.titlebar_ontop_button_focus_inactive = assets_path .. "/titlebar/ontop_focus_inactive.png"
+theme.titlebar_ontop_button_normal_active = assets_path .. "/titlebar/ontop_normal_active.png"
+theme.titlebar_ontop_button_focus_active = assets_path .. "/titlebar/ontop_focus_active.png"
 
-theme.titlebar_sticky_button_normal_inactive = themes_path .. "default/titlebar/sticky_normal_inactive.png"
-theme.titlebar_sticky_button_focus_inactive = themes_path .. "default/titlebar/sticky_focus_inactive.png"
-theme.titlebar_sticky_button_normal_active = themes_path .. "default/titlebar/sticky_normal_active.png"
-theme.titlebar_sticky_button_focus_active = themes_path .. "default/titlebar/sticky_focus_active.png"
+theme.titlebar_sticky_button_normal_inactive = assets_path .. "/titlebar/sticky_normal_inactive.png"
+theme.titlebar_sticky_button_focus_inactive = assets_path .. "/titlebar/sticky_focus_inactive.png"
+theme.titlebar_sticky_button_normal_active = assets_path .. "/titlebar/sticky_normal_active.png"
+theme.titlebar_sticky_button_focus_active = assets_path .. "/titlebar/sticky_focus_active.png"
 
-theme.titlebar_floating_button_normal_inactive = themes_path .. "default/titlebar/floating_normal_inactive.png"
-theme.titlebar_floating_button_focus_inactive = themes_path .. "default/titlebar/floating_focus_inactive.png"
-theme.titlebar_floating_button_normal_active = themes_path .. "default/titlebar/floating_normal_active.png"
-theme.titlebar_floating_button_focus_active = themes_path .. "default/titlebar/floating_focus_active.png"
+theme.titlebar_floating_button_normal_inactive = assets_path .. "/titlebar/floating_normal_inactive.png"
+theme.titlebar_floating_button_focus_inactive = assets_path .. "/titlebar/floating_focus_inactive.png"
+theme.titlebar_floating_button_normal_active = assets_path .. "/titlebar/floating_normal_active.png"
+theme.titlebar_floating_button_focus_active = assets_path .. "/titlebar/floating_focus_active.png"
 
-theme.titlebar_maximized_button_normal_inactive = themes_path .. "default/titlebar/maximized_normal_inactive.png"
-theme.titlebar_maximized_button_focus_inactive = themes_path .. "default/titlebar/maximized_focus_inactive.png"
-theme.titlebar_maximized_button_normal_active = themes_path .. "default/titlebar/maximized_normal_active.png"
-theme.titlebar_maximized_button_focus_active = themes_path .. "default/titlebar/maximized_focus_active.png"
+theme.titlebar_maximized_button_normal_inactive = assets_path .. "/titlebar/maximized_normal_inactive.png"
+theme.titlebar_maximized_button_focus_inactive = assets_path .. "/titlebar/maximized_focus_inactive.png"
+theme.titlebar_maximized_button_normal_active = assets_path .. "/titlebar/maximized_normal_active.png"
+theme.titlebar_maximized_button_focus_active = assets_path .. "/titlebar/maximized_focus_active.png"
 
--- theme.wallpaper = themes_path.."default/background.png"
--- theme.wallpaper = "/home/mauromotion/Pictures/Wallpapers/art_stalenhag_01.jpg"
+-- Layout icons
+theme.layout_fairh = assets_path .. "/layouts/fairhw.png"
+theme.layout_fairv = assets_path .. "/layouts/fairvw.png"
+theme.layout_floating = assets_path .. "/layouts/floatingw.png"
+theme.layout_magnifier = assets_path .. "/layouts/magnifierw.png"
+theme.layout_max = assets_path .. "/layouts/maxw.png"
+theme.layout_fullscreen = assets_path .. "/layouts/fullscreenw.png"
+theme.layout_tilebottom = assets_path .. "/layouts/tilebottomw.png"
+theme.layout_tileleft = assets_path .. "/layouts/tileleftw.png"
+theme.layout_tile = assets_path .. "/layouts/tilew.png"
+theme.layout_tiletop = assets_path .. "/layouts/tiletopw.png"
+theme.layout_spiral = assets_path .. "/layouts/spiralw.png"
+theme.layout_dwindle = assets_path .. "/layouts/dwindlew.png"
+theme.layout_cornernw = assets_path .. "/layouts/cornernww.png"
+theme.layout_cornerne = assets_path .. "/layouts/cornernew.png"
+theme.layout_cornersw = assets_path .. "/layouts/cornersww.png"
+theme.layout_cornerse = assets_path .. "/layouts/cornersew.png"
 
--- You can use your own layout icons like this:
-theme.layout_fairh = themes_path .. "default/layouts/fairhw.png"
-theme.layout_fairv = themes_path .. "default/layouts/fairvw.png"
-theme.layout_floating = themes_path .. "default/layouts/floatingw.png"
-theme.layout_magnifier = themes_path .. "default/layouts/magnifierw.png"
-theme.layout_max = themes_path .. "default/layouts/maxw.png"
-theme.layout_fullscreen = themes_path .. "default/layouts/fullscreenw.png"
-theme.layout_tilebottom = themes_path .. "default/layouts/tilebottomw.png"
-theme.layout_tileleft = themes_path .. "default/layouts/tileleftw.png"
-theme.layout_tile = themes_path .. "default/layouts/tilew.png"
-theme.layout_tiletop = themes_path .. "default/layouts/tiletopw.png"
-theme.layout_spiral = themes_path .. "default/layouts/spiralw.png"
-theme.layout_dwindle = themes_path .. "default/layouts/dwindlew.png"
-theme.layout_cornernw = themes_path .. "default/layouts/cornernww.png"
-theme.layout_cornerne = themes_path .. "default/layouts/cornernew.png"
-theme.layout_cornersw = themes_path .. "default/layouts/cornersww.png"
-theme.layout_cornerse = themes_path .. "default/layouts/cornersew.png"
+-- Tags icons
+theme.tag_icon_home_focused = assets_path .. "/taglist/catppuccin/focused_home.svg"
+theme.tag_icon_home_unfocused = assets_path .. "/taglist/catppuccin/unfocused_home.svg"
+theme.tag_icon_mail_focused = assets_path .. "/taglist/catppuccin/focused_mail.svg"
+theme.tag_icon_mail_unfocused = assets_path .. "/taglist/catppuccin/unfocused_mail.svg"
+theme.tag_icon_dev_focused = assets_path .. "/taglist/catppuccin/focused_dev.svg"
+theme.tag_icon_dev_unfocused = assets_path .. "/taglist/catppuccin/unfocused_dev.svg"
+theme.tag_icon_chat_focused = assets_path .. "/taglist/catppuccin/focused_chat.svg"
+theme.tag_icon_chat_unfocused = assets_path .. "/taglist/catppuccin/unfocused_chat.svg"
+theme.tag_icon_docs_focused = assets_path .. "/taglist/catppuccin/focused_docs.svg"
+theme.tag_icon_docs_unfocused = assets_path .. "/taglist/catppuccin/unfocused_docs.svg"
+theme.tag_icon_media_focused = assets_path .. "/taglist/catppuccin/focused_media.svg"
+theme.tag_icon_media_unfocused = assets_path .. "/taglist/catppuccin/unfocused_media.svg"
+theme.tag_icon_games_focused = assets_path .. "/taglist/catppuccin/focused_games.svg"
+theme.tag_icon_games_unfocused = assets_path .. "/taglist/catppuccin/unfocused_games.svg"
+theme.tag_icon_edit_focused = assets_path .. "/taglist/catppuccin/focused_edit.svg"
+theme.tag_icon_edit_unfocused = assets_path .. "/taglist/catppuccin/unfocused_edit.svg"
+theme.tag_icon_extra_focused = assets_path .. "/taglist/catppuccin/focused_extra.svg"
+theme.tag_icon_extra_unfocused = assets_path .. "/taglist/catppuccin/unfocused_extra.svg"
 
 -- Generate Awesome icon:
 theme.awesome_icon = theme_assets.awesome_icon(theme.menu_height, theme.bg_focus, theme.fg_focus)
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
-theme.icon_theme = "Papirus-Dark-nordic-blue-folders"
+theme.icon_theme = "Fluent-teal-dark"
 
 -- Set different colors for urgent notifications.
 rnotification.connect_signal("request::rules", function()
 	rnotification.append_rule({
 		rule = { urgency = "critical" },
-		properties = { bg = "#bf616a", fg = "#d8dee9" },
+		properties = { bg = "#f38ba8", fg = "#d8dee9" },
 	})
 end)
 
 return theme
-
--- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

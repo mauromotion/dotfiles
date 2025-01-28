@@ -659,3 +659,6 @@
 
 2025/01/26 (14:29:21) | ===> btop++ v.1.4.0
 2025/01/26 (14:29:21) | WARNING: Intel GPU: Failed to initialize PMU
+
+2025/01/27 (02:35:03) | ===> btop++ v.1.4.0
+2025/01/27 (02:35:03) | ERROR: Stall in Runner thread, restarting!
