@@ -20,14 +20,16 @@ local naughty = require("naughty") -- Notification library
 local vars = require("options.vars")
 
 -- Load theme and assets
-beautiful.init(string.format("/home/mauromotion/.config/awesome/themes/mmmotion/theme-%s.lua", vars.theme))
+local home = os.getenv("HOME")
+local config_path = home .. "/.config/awesome"
+beautiful.init(string.format(config_path .. "/themes/mmmotion/theme-%s.lua", vars.theme))
 
 -- Load modules
-require("awful.autofocus")
-require("awful.hotkeys_popup.keys") -- Enable hotkeys help widget for VIM and other apps when client with a matching name is opened
+require("wibar.wibar") -- Wibar
 require("bindings") -- Keybindings
 require("rules.rules") -- Clients' rules
-require("wibar.wibar")
+require("awful.hotkeys_popup.keys") -- Enable hotkeys help widget for VIM and other apps when client with a matching name is opened
+require("awful.autofocus")
 
 -- Error handling
 naughty.connect_signal("request::display_error", function(message, startup)
@@ -44,7 +46,7 @@ client.connect_signal("mouse::enter", function(c)
 end)
 
 -- Autostart at launch
-awful.spawn.with_shell("~/.config/awesome/autostart.sh")
+awful.spawn.with_shell(home .. "/.config/awesome/autostart.sh")
 
 -- Garbage collection to avoid lag
 collectgarbage("incremental", 150, 600, 0)
