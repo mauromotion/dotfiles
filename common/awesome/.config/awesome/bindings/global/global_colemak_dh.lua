@@ -3,6 +3,7 @@ local menubar = require("menubar")
 local vars = require("options.vars")
 local modkey = vars.modkey
 local hotkeys_popup = require("awful.hotkeys_popup")
+local widgets = require("widgets.widgets") -- Custom widgets
 require("awful.hotkeys_popup.keys")
 
 -- {{{ Custom functions
@@ -35,7 +36,7 @@ awful.keyboard.append_global_keybindings({
 
 	-- Show apps menu
 	awful.key({ modkey }, "w", function()
-		mymainmenu:show()
+		widgets.mainmenu:show()
 	end, { description = "show main menu", group = "awesome" }),
 
 	-- Toggle the wibar

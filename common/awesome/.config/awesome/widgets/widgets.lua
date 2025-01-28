@@ -141,7 +141,7 @@ local awesomemenu = {
 	},
 }
 
-local mainmenu = freedesktop.menu.build({
+widgets.mainmenu = freedesktop.menu.build({
 	before = {
 		{ "Awesome", awesomemenu, beautiful.awesome_icon },
 		-- other triads can be put here
@@ -152,7 +152,7 @@ local mainmenu = freedesktop.menu.build({
 	},
 })
 
-widgets.launcher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = mainmenu })
+widgets.launcher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = widgets.mainmenu })
 
 -- Menubar configuration
 menubar.utils.terminal = vars.terminal -- Set the terminal for applications that require it
