@@ -2,16 +2,23 @@
 local awful = require("awful") -- Standard awesome library
 local beautiful = require("beautiful") -- Theme handling library
 local wibox = require("wibox") -- Widget and layout library
-local vars = require("options.vars")
-local utils = require("utils.utils")
+local vars = require("config.vars")
+local custom_funcs = require("utils.custom_functions")
 
-----* Wibar *-----
+----* Toolbar *-----
+print("Toolbar is being set up!")
 screen.connect_signal("request::desktop_decoration", function(s)
+	print("Desktop decoration request received!")
 	-- Each screen has its own tag table.
 	-- local names = { " home ", " mail ", " dev ", " chat ", " docs ", " media ", " games ", " edit ", " xtra " }
 	local l = awful.layout.suit -- Just to save some typing: use an alias.
 	-- local layouts = { l.tile.left, l.max, l.tile, l.tile, l.tile, l.tile, l.floating, l.tile, l.tile.top }
 	-- awful.tag(names, s, layouts)
+	--
+	tag.connect_signal("request::default_layouts", function()
+		awful.layout.append_default_layouts(vars.layouts)
+	end)
+
 	local tags = {
 		{
 			name = "home",
@@ -287,10 +294,10 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	end
 
 	-- Create the wibox
-	utils.get_hostname(function(hostname)
+	custom_funcs.get_hostname(function(hostname)
 		if hostname == "eva-01" then
 			-- Wibox for desktop
-			local widgets = require("widgets.widgets") -- Custom widgets
+			local widgets = require("modules.widgets") -- Custom widgets
 
 			s.mywibox = awful.wibar({
 				position = "top",
@@ -336,7 +343,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			})
 		else
 			-- Wibox for laptop
-			local widgets = require("widgets.widgets") -- Custom widgets
+			local widgets = require("modules.widgets") -- Custom widgets
 
 			s.mywibox = awful.wibar({
 				position = "top",
@@ -378,4 +385,3 @@ screen.connect_signal("request::desktop_decoration", function(s)
 		end
 	end)
 end)
--- }}}

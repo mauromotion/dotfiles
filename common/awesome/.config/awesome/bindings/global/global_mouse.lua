@@ -1,5 +1,6 @@
 local awful = require("awful")
-local widgets = require("widgets.widgets") -- Custom widgets
+local widgets = require("modules.widgets") -- Custom widgets
+require("awful.autofocus")
 
 awful.mouse.append_global_mousebindings({
 	awful.button({}, 3, function()

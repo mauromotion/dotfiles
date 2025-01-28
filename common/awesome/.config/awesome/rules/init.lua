@@ -1,7 +1,6 @@
 ----* Imports *----
 local ruled = require("ruled") -- Declarative object management
 local awful = require("awful") -- Standard awesome library
-local naughty = require("naughty") -- Notification library
 
 ----* Rules *----
 local rules = {
@@ -82,10 +81,6 @@ local rules = {
 				},
 			})
 		end)
-	end),
-
-	naughty.connect_signal("request::display", function(n)
-		naughty.layout.box({ notification = n })
 	end),
 }
 

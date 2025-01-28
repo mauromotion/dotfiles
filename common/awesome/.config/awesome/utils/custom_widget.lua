@@ -2,9 +2,9 @@ local awful = require("awful")
 local wibox = require("wibox")
 local gears = require("gears")
 
-local my_widget = {}
+local _M = {}
 
-function my_widget.create(bash_script, update_interval, fg, bg)
+function _M.create(bash_script, update_interval, fg, bg)
 	-- Create the textbox widget
 	local textbox = wibox.widget({
 		widget = wibox.widget.textbox,
@@ -40,4 +40,4 @@ function my_widget.create(bash_script, update_interval, fg, bg)
 	return widget
 end
 
-return my_widget
+return _M
