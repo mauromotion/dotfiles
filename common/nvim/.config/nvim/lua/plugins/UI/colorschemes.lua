@@ -46,7 +46,7 @@ return {
 	-- 	config = function()
 	-- 		require("tokyonight").setup({
 	-- 			style = "night",
-	-- 			transparent = true,
+	-- 			transparent = false,
 	-- 		})
 	-- 		vim.cmd([[colorscheme tokyonight]])
 	-- 	end,
@@ -57,14 +57,14 @@ return {
 		lazy = false,
 		priority = 1000,
 		config = function()
-			local p = require("poimandres.palette")
+			-- local p = require("poimandres.palette")
 			require("poimandres").setup({
-				highlight_groups = {
-					LspReferenceText = { bg = p.background1 },
-					LspReferenceRead = { bg = p.background1 },
-					LspReferenceWrite = { bg = p.background1 },
-					-- FloatBorder = { bg = p.background1, fg = p.text },
-				},
+				-- highlight_groups = {
+				-- 	LspReferenceText = { bg = p.background1 },
+				-- 	LspReferenceRead = { bg = p.background1 },
+				-- 	LspReferenceWrite = { bg = p.background1 },
+				-- FloatBorder = { bg = p.background1, fg = p.text },
+				-- },
 			})
 		end,
 

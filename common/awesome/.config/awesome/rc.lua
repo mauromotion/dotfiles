@@ -17,7 +17,7 @@ local gears = require("gears") -- Standard awesome library
 local awful = require("awful") -- Standard awesome library
 local beautiful = require("beautiful") -- Theme handling library
 local naughty = require("naughty") -- Notification library
-local vars = require("options.vars")
+local vars = require("options.vars") -- Variables and settings
 
 -- Load theme and assets
 local home = os.getenv("HOME")
