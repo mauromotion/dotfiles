@@ -1,5 +1,5 @@
 local awful = require("awful")
-local vars = require("options.vars")
+local vars = require("config.vars")
 local modkey = vars.modkey
 
 client.connect_signal("request::default_keybindings", function()

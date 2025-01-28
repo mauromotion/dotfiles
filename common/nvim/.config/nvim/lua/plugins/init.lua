@@ -1,3 +1,7 @@
+-- Temporary workaround to being able to use Inspect until they fix a bug
+vim.hl = vim.highlight
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#42675A" })
+
 --* Initialize lazy.nvim package manager *--
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then

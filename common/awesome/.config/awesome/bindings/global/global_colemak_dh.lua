@@ -1,8 +1,10 @@
 local awful = require("awful")
 local menubar = require("menubar")
-local vars = require("options.vars")
+local vars = require("config.vars")
+local apps = require("config.apps")
 local modkey = vars.modkey
 local hotkeys_popup = require("awful.hotkeys_popup")
+local widgets = require("modules.widgets") -- Custom widgets
 require("awful.hotkeys_popup.keys")
 
 -- {{{ Custom functions
@@ -35,7 +37,7 @@ awful.keyboard.append_global_keybindings({
 
 	-- Show apps menu
 	awful.key({ modkey }, "w", function()
-		mymainmenu:show()
+		widgets.mainmenu:show()
 	end, { description = "show main menu", group = "awesome" }),
 
 	-- Toggle the wibar
@@ -59,7 +61,7 @@ awful.keyboard.append_global_keybindings({
 
 	-- Launch a terminal
 	awful.key({ modkey, "Shift" }, "Return", function()
-		awful.spawn(vars.terminal)
+		awful.spawn(apps.terminal)
 	end, { description = "open a terminal", group = "launcher" }),
 
 	-- Run bar prompt
@@ -86,12 +88,12 @@ awful.keyboard.append_global_keybindings({
 
 	-- Launch the browser
 	awful.key({ modkey }, "b", function()
-		awful.spawn(vars.browser)
+		awful.spawn(apps.browser)
 	end, { description = "launch browser", group = "launcher" }),
 
 	-- Launch the file browser
 	awful.key({ modkey, "Shift" }, "f", function()
-		awful.spawn(vars.filebrowser)
+		awful.spawn(apps.filebrowser)
 	end, { description = "launch file browser", group = "launcher" }),
 
 	-- Take a screenshot

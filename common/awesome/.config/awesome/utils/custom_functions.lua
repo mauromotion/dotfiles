@@ -1,7 +1,7 @@
 -- Imports --
 local awful = require("awful") -- Standard awesome library
 
-local utils = {}
+local _M = {}
 
 -- Function to retrieve the hostname asynchronously
 local hostname = nil
@@ -15,6 +15,6 @@ local function get_hostname(callback)
 	end)
 end
 
-utils.get_hostname = get_hostname
+_M.get_hostname = get_hostname
 
-return utils
+return _M
