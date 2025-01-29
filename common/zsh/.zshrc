@@ -127,24 +127,24 @@ _fzf_comprun() {
 # --multi"
 
 # Tokyonight Night
-export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
-  --color=fg:#d0d0d0,fg+:#C0CAF5,bg:-1,bg+:#292E42
-  --color=hl:#7AA2F7,hl+:#73DACA,info:#BB9AF7,marker:#9ECE6A
-  --color=prompt:#F7768E,spinner:#E0AF68,pointer:#BB9AF7,header:#73DACA
-  --color=border:#414868,label:#E0AF68,query:#BB9AF7
-  --border="rounded" --border-label="fzf" --border-label-pos="0" --preview-window="border-rounded"
-  --prompt="> " --marker=">" --pointer="◆" --separator="─"
-  --scrollbar="│"'
-
-# Poimandres 
 # export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
-#   --color=fg:#E4F0FB,fg+:#FFFFFF,bg:-1,bg+:#303340
-#   --color=hl:#D0679D,hl+:#89DDFF,info:#ebcb8b,marker:#5DE4C7
-#   --color=prompt:#FCC5E9,spinner:#5DE4C7,pointer:#5DE4C7,header:#8fbcbb
-#   --color=border:#303340,label:#81a1c1,query:#d8dee9
+#   --color=fg:#d0d0d0,fg+:#C0CAF5,bg:-1,bg+:#292E42
+#   --color=hl:#7AA2F7,hl+:#73DACA,info:#BB9AF7,marker:#9ECE6A
+#   --color=prompt:#F7768E,spinner:#E0AF68,pointer:#BB9AF7,header:#73DACA
+#   --color=border:#414868,label:#E0AF68,query:#BB9AF7
 #   --border="rounded" --border-label="fzf" --border-label-pos="0" --preview-window="border-rounded"
 #   --prompt="> " --marker=">" --pointer="◆" --separator="─"
 #   --scrollbar="│"'
+
+# Poimandres 
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+  --color=fg:#E4F0FB,fg+:#FFFFFF,bg:-1,bg+:#303340
+  --color=hl:#D0679D,hl+:#89DDFF,info:#ebcb8b,marker:#5DE4C7
+  --color=prompt:#FCC5E9,spinner:#5DE4C7,pointer:#5DE4C7,header:#8fbcbb
+  --color=border:#303340,label:#81a1c1,query:#d8dee9
+  --border="rounded" --border-label="fzf" --border-label-pos="0" --preview-window="border-rounded"
+  --prompt="> " --marker=">" --pointer="◆" --separator="─"
+  --scrollbar="│"'
 
 # Bat theme
 export BAT_THEME="tokyonight_night"
@@ -206,6 +206,7 @@ alias ..="cd .."
 # alias cat="bat"
 alias cd="z"
 alias cl="clear"
+alias colemak="setxkbmap gb -variant colemak_dh"
 alias cp="cp -i"
 alias del="trash-put -i"
 alias df="df -H"
@@ -236,6 +237,7 @@ alias nv="nvim"
 alias pac-autoremove="sudo pacman -Rcs $(pacman -Qdtq)"
 alias polybar-restart="sh ~/.config/polybar/launch*"
 alias py="python3"
+alias qwerty="setxkbmap gb"
 alias rm="rm -i"
 alias rnd="tw +rnd"
 alias src="source ~/.zshrc"

@@ -40,6 +40,8 @@ theme.border_color_normal = "#1A1B26"
 theme.border_color_active = "#303340"
 theme.border_color_marked = "#D0679D"
 theme.notification_border_color = "#5DE4C7"
+theme.notification_bg = "#1B1E28"
+theme.notification_fg = "#E4F0FB"
 theme.notification_border_width = dpi(4)
 
 -- Colors for the wibar

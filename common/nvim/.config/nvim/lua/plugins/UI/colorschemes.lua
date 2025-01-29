@@ -59,6 +59,7 @@ return {
 		config = function()
 			-- local p = require("poimandres.palette")
 			require("poimandres").setup({
+				disable_italics = false,
 				-- highlight_groups = {
 				-- 	LspReferenceText = { bg = p.background1 },
 				-- 	LspReferenceRead = { bg = p.background1 },
