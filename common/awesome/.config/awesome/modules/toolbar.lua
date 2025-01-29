@@ -178,6 +178,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 						widgets.volume,
 						widgets.widgets_separator,
 						widgets.battery,
+						widgets.keyboardlayout,
 						widgets.updates,
 						wibox.widget({
 							mysystray,
