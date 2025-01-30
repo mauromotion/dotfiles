@@ -24,7 +24,7 @@ theme.font = "Noto SansM Nerd Font Medium 12"
 -- theme.font = "Maple Mono NF Medium 12"
 
 -- Main colors
-theme.fg_normal = "#88c0d"
+theme.fg_normal = "#616e88"
 theme.bg_normal = "#2e3440"
 
 theme.fg_focus = "#d8dee9"
