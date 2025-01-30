@@ -23,28 +23,37 @@ theme.font = "Noto SansM Nerd Font Medium 12"
 -- theme.font = "GeistMono Nerd Font Medium 12"
 -- theme.font = "Maple Mono NF Medium 12"
 
+-- Main colors
+theme.fg_normal = "#A6ACCD"
 theme.bg_normal = "#1B1E28"
+
+theme.fg_focus = "#E4F0FB"
 theme.bg_focus = "#303340"
+
+theme.fg_urgent = "#1B1E28"
 theme.bg_urgent = "#5DE4C7"
+
+theme.fg_minimize = "#A6ACCD"
 theme.bg_minimize = "#506477"
+
 theme.bg_systray = theme.bg_normal
 
-theme.fg_normal = "#A6ACCD"
-theme.fg_minimize = "#A6ACCD"
-theme.fg_focus = "#E4F0FB"
-theme.fg_urgent = "#1B1E28"
-
+-- Gaps
 theme.useless_gap = dpi(0)
-theme.border_width = dpi(2)
-theme.border_color_normal = "#1A1B26"
+
+-- Windows' border
+theme.border_color_normal = "#1B1E28"
 theme.border_color_active = "#303340"
 theme.border_color_marked = "#D0679D"
-theme.notification_border_color = "#5DE4C7"
-theme.notification_bg = "#1B1E28"
+theme.border_width = dpi(2)
+
+-- Notification
 theme.notification_fg = "#E4F0FB"
+theme.notification_bg = "#1B1E28"
+theme.notification_border_color = "#5DE4C7"
 theme.notification_border_width = dpi(4)
 
--- Colors for the wibar
+-- Colors for the toolbar
 theme.yellow = "#FFFAC2"
 theme.blue = "#89DDFF"
 theme.cyan = "#ADD7FF"

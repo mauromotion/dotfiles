@@ -4,7 +4,7 @@
 -- ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘
 -- * AwesomeWM * --
 -- --------------------------------
--- Tokyonight theme --
+-- Nord theme --
 -----------------------------------
 
 local theme_assets = require("beautiful.theme_assets")
@@ -24,17 +24,17 @@ theme.font = "Noto SansM Nerd Font Medium 12"
 -- theme.font = "Maple Mono NF Medium 12"
 
 -- Main colors
-theme.fg_normal = "#909BC9"
-theme.bg_normal = "#1A1B26"
+theme.fg_normal = "#616e88"
+theme.bg_normal = "#2e3440"
 
-theme.fg_focus = "#C0CAF5"
-theme.bg_focus = "#292E42"
+theme.fg_focus = "#d8dee9"
+theme.bg_focus = "#3b4252"
 
-theme.fg_urgent = "#C0CAF5"
-theme.bg_urgent = "#F7768E"
+theme.fg_urgent = "#2e3440"
+theme.bg_urgent = "#88c0d0"
 
-theme.fg_minimize = "#909BC9"
-theme.bg_minimize = "#292E42"
+theme.fg_minimize = "#d8dee9"
+theme.bg_minimize = "#4c566a"
 
 theme.bg_systray = theme.bg_normal
 
@@ -42,22 +42,24 @@ theme.bg_systray = theme.bg_normal
 theme.useless_gap = dpi(0)
 
 -- Windows' border
-theme.border_color_normal = "#1A1B26"
-theme.border_color_active = "#292E42"
-theme.border_color_marked = "#F7768E"
+theme.border_color_normal = "#2e3440"
+theme.border_color_active = "#3b4252"
+theme.border_color_marked = "#b48ead"
 theme.border_width = dpi(2)
 
 -- Notification
-theme.notification_border_color = "#7AA2F7"
+theme.notification_fg = "#eceff4"
+theme.notification_bg = "#2e3440"
+theme.notification_border_color = "#88c0d0"
 theme.notification_border_width = dpi(4)
 
 -- Colors for the toolbar
-theme.yellow = "#E0AF68"
-theme.blue = "#29B6D0"
-theme.cyan = "#73DACA"
-theme.pink = "#BB9AF7"
-theme.red = "#F7768E"
-theme.green = "#9ECE6A"
+theme.yellow = "#ebcb8b"
+theme.blue = "#81a1c1"
+theme.cyan = "#88c0d0"
+theme.pink = "#b48ead"
+theme.red = "#bf616a"
+theme.green = "#a3be8c"
 
 -- There are other variable sets
 -- overriding the default one when
@@ -94,7 +96,7 @@ theme.menu_width = dpi(200)
 theme.hotkeys_font = "JetBrains Mono 11"
 theme.hotkeys_description_font = "JetBrains Mono 9"
 theme.hotkeys_border_width = 2
-theme.hotkeys_border_color = "#292E42"
+theme.hotkeys_border_color = "#303340"
 theme.hotkeys_group_margin = 20
 theme.hotkeys_margin = 20
 theme.hotkeys_label_margin = 10
@@ -145,24 +147,24 @@ theme.layout_cornersw = assets_path .. "/layouts/cornersww.png"
 theme.layout_cornerse = assets_path .. "/layouts/cornersew.png"
 
 -- Tags icons
-theme.tag_icon_home_focused = assets_path .. "/taglist/tokyonight/focused_home.svg"
-theme.tag_icon_home_unfocused = assets_path .. "/taglist/tokyonight/unfocused_home.svg"
-theme.tag_icon_mail_focused = assets_path .. "/taglist/tokyonight/focused_mail.svg"
-theme.tag_icon_mail_unfocused = assets_path .. "/taglist/tokyonight/unfocused_mail.svg"
-theme.tag_icon_dev_focused = assets_path .. "/taglist/tokyonight/focused_dev.svg"
-theme.tag_icon_dev_unfocused = assets_path .. "/taglist/tokyonight/unfocused_dev.svg"
-theme.tag_icon_chat_focused = assets_path .. "/taglist/tokyonight/focused_chat.svg"
-theme.tag_icon_chat_unfocused = assets_path .. "/taglist/tokyonight/unfocused_chat.svg"
-theme.tag_icon_docs_focused = assets_path .. "/taglist/tokyonight/focused_docs.svg"
-theme.tag_icon_docs_unfocused = assets_path .. "/taglist/tokyonight/unfocused_docs.svg"
-theme.tag_icon_media_focused = assets_path .. "/taglist/tokyonight/focused_media.svg"
-theme.tag_icon_media_unfocused = assets_path .. "/taglist/tokyonight/unfocused_media.svg"
-theme.tag_icon_games_focused = assets_path .. "/taglist/tokyonight/focused_games.svg"
-theme.tag_icon_games_unfocused = assets_path .. "/taglist/tokyonight/unfocused_games.svg"
-theme.tag_icon_edit_focused = assets_path .. "/taglist/tokyonight/focused_edit.svg"
-theme.tag_icon_edit_unfocused = assets_path .. "/taglist/tokyonight/unfocused_edit.svg"
-theme.tag_icon_extra_focused = assets_path .. "/taglist/tokyonight/focused_extra.svg"
-theme.tag_icon_extra_unfocused = assets_path .. "/taglist/tokyonight/unfocused_extra.svg"
+theme.tag_icon_home_focused = assets_path .. "/taglist/nord/focused_home.svg"
+theme.tag_icon_home_unfocused = assets_path .. "/taglist/nord/unfocused_home.svg"
+theme.tag_icon_mail_focused = assets_path .. "/taglist/nord/focused_mail.svg"
+theme.tag_icon_mail_unfocused = assets_path .. "/taglist/nord/unfocused_mail.svg"
+theme.tag_icon_dev_focused = assets_path .. "/taglist/nord/focused_dev.svg"
+theme.tag_icon_dev_unfocused = assets_path .. "/taglist/nord/unfocused_dev.svg"
+theme.tag_icon_chat_focused = assets_path .. "/taglist/nord/focused_chat.svg"
+theme.tag_icon_chat_unfocused = assets_path .. "/taglist/nord/unfocused_chat.svg"
+theme.tag_icon_docs_focused = assets_path .. "/taglist/nord/focused_docs.svg"
+theme.tag_icon_docs_unfocused = assets_path .. "/taglist/nord/unfocused_docs.svg"
+theme.tag_icon_media_focused = assets_path .. "/taglist/nord/focused_media.svg"
+theme.tag_icon_media_unfocused = assets_path .. "/taglist/nord/unfocused_media.svg"
+theme.tag_icon_games_focused = assets_path .. "/taglist/nord/focused_games.svg"
+theme.tag_icon_games_unfocused = assets_path .. "/taglist/nord/unfocused_games.svg"
+theme.tag_icon_edit_focused = assets_path .. "/taglist/nord/focused_edit.svg"
+theme.tag_icon_edit_unfocused = assets_path .. "/taglist/nord/unfocused_edit.svg"
+theme.tag_icon_extra_focused = assets_path .. "/taglist/nord/focused_extra.svg"
+theme.tag_icon_extra_unfocused = assets_path .. "/taglist/nord/unfocused_extra.svg"
 
 -- Generate Awesome icon:
 theme.awesome_icon = theme_assets.awesome_icon(theme.menu_height, theme.bg_focus, theme.fg_focus)
@@ -175,7 +177,7 @@ theme.icon_theme = "Fluent-teal-dark"
 rnotification.connect_signal("request::rules", function()
 	rnotification.append_rule({
 		rule = { urgency = "critical" },
-		properties = { bg = "#F7768E", fg = "#C0CAF5" },
+		properties = { bg = "#bf616a", fg = "#eceff4" },
 	})
 end)
 
