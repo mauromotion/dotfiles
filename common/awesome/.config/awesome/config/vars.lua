@@ -1,7 +1,7 @@
 local awful = require("awful")
 local _M = {
 	modkey = "Mod4",
-	-- Available themes are: catppuccin, tokyonight, poimandres
+	-- Available themes are: catppuccin, nord, poimandres, tokyonight,
 	theme = "poimandres",
 
 	-- Table of layouts to cover with awful.layout.inc, order matters.

@@ -30,28 +30,37 @@ local accent_color = function()
 	return accent
 end
 
+-- Main colors
 local accent = "#74c7ec"
 
+theme.fg_normal = "#cdd6f4"
 theme.bg_normal = "#1e1e2e"
+
+theme.fg_focus = accent
 theme.bg_focus = "#313244"
+
+theme.fg_urgent = "#cdd6f4"
 theme.bg_urgent = "#f38ba8"
+
+theme.fg_minimize = "#cdd6f4"
 theme.bg_minimize = "#45475a"
+
 theme.bg_systray = theme.bg_normal
 
-theme.fg_normal = "#cdd6f4"
-theme.fg_minimize = "#cdd6f4"
-theme.fg_focus = accent
-theme.fg_urgent = "#cdd6f4"
-
+-- Gaps
 theme.useless_gap = dpi(0)
-theme.border_width = dpi(2)
+
+-- Windows' border
 theme.border_color_normal = "#1e1e2e"
 theme.border_color_active = "#313244"
 theme.border_color_marked = "#f38ba8"
+theme.border_width = dpi(2)
+
+-- Notification
 theme.notification_border_color = accent
 theme.notification_border_width = dpi(4)
 
--- Colors for the wibar
+-- Colors for the toolbar
 theme.yellow = "#f9e2af"
 theme.blue = "#89b4fa"
 theme.cyan = "#74c7ec"
