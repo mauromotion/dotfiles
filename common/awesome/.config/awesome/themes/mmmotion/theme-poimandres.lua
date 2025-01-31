@@ -11,6 +11,7 @@ local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
 local rnotification = require("ruled.notification")
 local dpi = xresources.apply_dpi
+local naughty = require("naughty")
 
 local home = os.getenv("HOME")
 local assets_path = home .. "/.config/awesome/themes/mmmotion"
@@ -52,6 +53,14 @@ theme.notification_fg = "#E4F0FB"
 theme.notification_bg = "#1B1E28"
 theme.notification_border_color = "#5DE4C7"
 theme.notification_border_width = dpi(4)
+naughty.config.defaults.ontop = true
+naughty.config.defaults.icon_size = dpi(32)
+naughty.config.defaults.timeout = 10
+naughty.config.defaults.hover_timeout = 300
+naughty.config.defaults.title = "System Notification Title"
+naughty.config.defaults.margin = dpi(16)
+naughty.config.defaults.border_width = 2
+naughty.config.defaults.position = "top_right"
 
 -- Colors for the toolbar
 theme.yellow = "#FFFAC2"
@@ -129,22 +138,24 @@ theme.titlebar_maximized_button_normal_active = assets_path .. "/titlebar/maximi
 theme.titlebar_maximized_button_focus_active = assets_path .. "/titlebar/maximized_focus_active.png"
 
 -- Layout icons
-theme.layout_fairh = assets_path .. "/layouts/fairhw.png"
-theme.layout_fairv = assets_path .. "/layouts/fairvw.png"
-theme.layout_floating = assets_path .. "/layouts/floatingw.png"
-theme.layout_magnifier = assets_path .. "/layouts/magnifierw.png"
-theme.layout_max = assets_path .. "/layouts/maxw.png"
-theme.layout_fullscreen = assets_path .. "/layouts/fullscreenw.png"
-theme.layout_tilebottom = assets_path .. "/layouts/tilebottomw.png"
-theme.layout_tileleft = assets_path .. "/layouts/tileleftw.png"
-theme.layout_tile = assets_path .. "/layouts/tilew.png"
-theme.layout_tiletop = assets_path .. "/layouts/tiletopw.png"
-theme.layout_spiral = assets_path .. "/layouts/spiralw.png"
-theme.layout_dwindle = assets_path .. "/layouts/dwindlew.png"
-theme.layout_cornernw = assets_path .. "/layouts/cornernww.png"
-theme.layout_cornerne = assets_path .. "/layouts/cornernew.png"
-theme.layout_cornersw = assets_path .. "/layouts/cornersww.png"
-theme.layout_cornerse = assets_path .. "/layouts/cornersew.png"
+local gcolor = require("gears.color")
+
+theme.layout_fairh = gcolor.recolor_image(assets_path .. "/layouts/fairhw.png", theme.fg_normal)
+theme.layout_fairv = gcolor.recolor_image(assets_path .. "/layouts/fairvw.png", theme.fg_normal)
+theme.layout_floating = gcolor.recolor_image(assets_path .. "/layouts/floatingw.png", theme.fg_normal)
+theme.layout_magnifier = gcolor.recolor_image(assets_path .. "/layouts/magnifierw.png", theme.fg_normal)
+theme.layout_max = gcolor.recolor_image(assets_path .. "/layouts/maxw.png", theme.fg_normal)
+theme.layout_fullscreen = gcolor.recolor_image(assets_path .. "/layouts/fullscreenw.png", theme.fg_normal)
+theme.layout_tilebottom = gcolor.recolor_image(assets_path .. "/layouts/tilebottomw.png", theme.fg_normal)
+theme.layout_tileleft = gcolor.recolor_image(assets_path .. "/layouts/tileleftw.png", theme.fg_normal)
+theme.layout_tile = gcolor.recolor_image(assets_path .. "/layouts/tilew.png", theme.fg_normal)
+theme.layout_tiletop = gcolor.recolor_image(assets_path .. "/layouts/tiletopw.png", theme.fg_normal)
+theme.layout_spiral = gcolor.recolor_image(assets_path .. "/layouts/spiralw.png", theme.fg_normal)
+theme.layout_dwindle = gcolor.recolor_image(assets_path .. "/layouts/dwindlew.png", theme.fg_normal)
+theme.layout_cornernw = gcolor.recolor_image(assets_path .. "/layouts/cornernww.png", theme.fg_normal)
+theme.layout_cornerne = gcolor.recolor_image(assets_path .. "/layouts/cornernew.png", theme.fg_normal)
+theme.layout_cornersw = gcolor.recolor_image(assets_path .. "/layouts/cornersww.png", theme.fg_normal)
+theme.layout_cornerse = gcolor.recolor_image(assets_path .. "/layouts/cornersew.png", theme.fg_normal)
 
 -- Tags icons
 theme.tag_icon_home_focused = assets_path .. "/taglist/poimandres/focused_home.svg"

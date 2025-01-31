@@ -12,14 +12,11 @@ local menubar = require("menubar")
 ----* Widgets *----
 local _M = {}
 
--- Keyboard map indicator and switcher --
-_M.keyboardlayout = awful.widget.keyboardlayout()
-
 -- Separators
 _M.sections_separator = wibox.widget.textbox("  ")
 _M.widgets_separator = wibox.widget.textbox("  ")
 
--- Textclock widget --
+-- {{{ Textclock widget
 local textclock = wibox.widget.textclock()
 
 _M.datetime = wibox.widget({
@@ -32,6 +29,10 @@ _M.datetime = wibox.widget({
 	margins = 4,
 	widget = wibox.container.margin,
 })
+-- }}}
+
+-- Keyboard map indicator and switcher --
+_M.keyboardlayout = awful.widget.keyboardlayout()
 
 --  Cpu widget --
 local cpu_script_path = "/home/mauromotion/.scripts/cpu.sh"
@@ -74,7 +75,7 @@ local hd_2_widget_interval = 600
 local hd_2_widget_fg = beautiful.blue
 _M.hd2 = custom_widget.create(hd_2_widget_path, hd_2_widget_interval, hd_2_widget_fg)
 
--- Volume widget --
+-- {{{ Volume widget
 -- Function to get volume
 local function get_volume(callback)
 	awful.spawn.easy_async_with_shell("/home/mauromotion/.scripts/volume.sh", function(stdout)
@@ -120,6 +121,7 @@ _M.volume = wibox.widget({
 	margins = 4, -- Optional padding
 	widget = wibox.container.margin,
 })
+-- }}}
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
