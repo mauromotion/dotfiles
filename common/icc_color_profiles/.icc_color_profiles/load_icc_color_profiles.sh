@@ -11,4 +11,7 @@ elif [ $(hostnamectl --static) == "eva-02" ]; then
 
 	dispwin "$HOME/.icc_color_profiles/Gigabyte_Aero_15X.icm"
 
+elif [ $(hostnamectl --static) == "eva-03" ]; then
+
+	dispwin "$HOME/.icc_color_profiles/Thinkpad_x1_carbon_gen_9.icm"
 fi
