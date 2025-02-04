@@ -33,6 +33,7 @@ require("rules") -- Clients' rules
 
 -- Autostart at launch
 awful.spawn.with_shell(home .. "/.config/awesome/autostart.sh")
+-- require("config.autostart")
 
 -- Garbage collection to avoid lag
 collectgarbage("incremental", 150, 600, 0)
