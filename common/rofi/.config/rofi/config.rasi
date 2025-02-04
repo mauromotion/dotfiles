@@ -14,5 +14,5 @@ configuration{
     sidebar-mode: true;
 }
 
-@theme "/home/mauromotion/.dotfiles/common/rofi/.config/rofi/poimandres.rasi"
+@theme "/home/mauromotion/.config/rofi/poimandres.rasi"
 

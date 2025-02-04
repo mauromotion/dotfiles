@@ -9,7 +9,7 @@
     grey: #565F89;
 
     width: 600;
-    font: "FiraMono Nerd Font medium 14";
+    font: "Noto SansM Nerd Font Medium 12";
 }
 
 element-text, element-icon , mode-switcher {
