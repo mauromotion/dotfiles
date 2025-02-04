@@ -678,8 +678,30 @@
 2025/01/29 (18:45:56) | WARNING: Intel GPU: Failed to initialize PMU
 2025/01/30 (15:58:06) | ERROR: Stall in Runner thread, restarting!
 
-2025/01/30 (15:59:59) | ===> btop++ v.1.4.0
-2025/01/30 (15:59:59) | WARNING: NVML: Failed to get maximum GPU power draw, defaulting to 225W: Not Supported
-2025/01/30 (15:59:59) | WARNING: Intel GPU: Failed to initialize PMU
-2025/01/30 (17:46:16) | ERROR: Stall in Runner thread, restarting!
-2025/01/31 (12:12:37) | ERROR: Stall in Runner thread, restarting!
+2025/01/30 (09:38:24) | ===> btop++ v.1.4.0
+2025/01/30 (09:38:24) | ERROR: Stall in Runner thread, restarting!
+2025/01/30 (12:26:06) | ERROR: Stall in Runner thread, restarting!
+
+2025/01/30 (18:37:32) | ===> btop++ v.1.4.0
+2025/01/30 (18:37:32) | ERROR: Stall in Runner thread, restarting!
+
+2025/01/31 (13:17:39) | ===> btop++ v.1.4.0
+2025/01/31 (13:17:39) | ERROR: Stall in Runner thread, restarting!
+
+2025/01/31 (23:02:41) | ===> btop++ v.1.4.0
+2025/01/31 (23:02:41) | ERROR: Stall in Runner thread, restarting!
+
+2025/02/01 (02:41:31) | ===> btop++ v.1.4.0
+2025/02/01 (02:41:31) | ERROR: Stall in Runner thread, restarting!
+
+2025/02/01 (16:24:19) | ===> btop++ v.1.4.0
+2025/02/01 (16:24:19) | ERROR: Stall in Runner thread, restarting!
+
+2025/02/02 (16:51:38) | ===> btop++ v.1.4.0
+2025/02/02 (16:51:38) | ERROR: Stall in Runner thread, restarting!
+
+2025/02/03 (08:48:53) | ===> btop++ v.1.4.0
+2025/02/03 (08:48:53) | ERROR: Stall in Runner thread, restarting!
+
+2025/02/04 (11:25:32) | ===> btop++ v.1.4.0
+2025/02/04 (11:25:32) | ERROR: Stall in Runner thread, restarting!
