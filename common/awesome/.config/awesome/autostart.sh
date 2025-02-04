@@ -8,6 +8,7 @@ processes=(
 	"polkit-gnome-au"
 	"nextcloud"
 	"openrgb"
+	"xbindkeys"
 )
 
 for proc in "${processes[@]}"; do
@@ -27,4 +28,5 @@ udiskie -a -n -t &
 nextcloud --background &
 openrgb --startminimized &
 xset b 100 &
+xbindkeys &
 ~/.icc_color_profiles/load_icc_color_profiles.sh &

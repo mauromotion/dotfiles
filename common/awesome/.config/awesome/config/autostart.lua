@@ -1,5 +1,4 @@
 local awful = require("awful")
-local gears = require("gears") -- Required for adding delays
 
 -- Function to start applications at startup
 local function start_apps()
@@ -15,25 +14,19 @@ local function start_apps()
 	-- Kill already existing processes to avoid duplication
 	-- This loop checks if each process is running and kills it if found
 	for _, proc in ipairs(processes) do
-		awful.spawn.easy_async_with_shell("pgrep -x " .. proc .. " && killall " .. proc)
+		-- Kill existing processes
+		awful.spawn.easy_async_with_shell("pgrep -f " .. proc .. " && killall -9 " .. proc)
 	end
 
-	-- Adding a slight delay to allow processes to properly stop before restarting them
-	gears.timer({
-		timeout = 2, -- 2 seconds delay before relaunching
-		autostart = true,
-		callback = function()
-			-- Now launch the autostart applications after ensuring no duplicates are running
-			awful.spawn("picom -b") -- Background compositor for transparency and effects
-			awful.spawn("nitrogen --restore") -- Restore wallpaper from previous session
-			awful.spawn("udiskie -a -n -t") -- Autostart udiskie for mounting drives
-			awful.spawn("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1") -- PolicyKit authentication agent
-			awful.spawn("nextcloud --background") -- Nextcloud client in background
-			awful.spawn("openrgb --startminimized") -- OpenRGB for controlling RGB lighting
-			awful.spawn("xset b 100") -- Set beep volume to 100
-			awful.spawn("~/.icc_color_profiles/load_icc_color_profiles.sh") -- Load color profiles script
-		end,
-	})
+	-- Start each application asynchronously in the background
+	awful.spawn.easy_async_with_shell("picom -b &")
+	awful.spawn.easy_async_with_shell("nitrogen --restore &")
+	awful.spawn.easy_async_with_shell("udiskie -a -n -t &")
+	awful.spawn.easy_async_with_shell("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &")
+	awful.spawn.easy_async_with_shell("nextcloud --background &")
+	awful.spawn.easy_async_with_shell("openrgb --startminimized &")
+	awful.spawn.easy_async_with_shell("xset b 100 &")
+	awful.spawn.easy_async_with_shell("~/.icc_color_profiles/load_icc_color_profiles.sh &")
 end
 
 -- Call the function to start applications at startup
