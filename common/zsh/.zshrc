@@ -73,7 +73,7 @@ zinit light unixorn/fzf-zsh-plugin
 # Vim mode
 # zinit snippet OMZP::vi-mode
 zinit light jeffreytse/zsh-vi-mode
-zvm_after_init_commands+=('[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh')
+# zvm_after_init_commands+=('[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh')
 
 # Oh-My-zsh plugins
 zinit snippet OMZP::cp
@@ -83,7 +83,7 @@ zinit snippet OMZP::command-not-found
 ## -- Plugins settings -- ##
 
 # Fzf set up
-export FZF_DIR="$HOME/.fzf"
+# export FZF_DIR="$HOME/.fzf"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
@@ -144,8 +144,14 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
   --color=hl:#D0679D,hl+:#89DDFF,info:#ebcb8b,marker:#5DE4C7
   --color=prompt:#FCC5E9,spinner:#5DE4C7,pointer:#5DE4C7,header:#8fbcbb
   --color=border:#303340,label:#81a1c1,query:#d8dee9
-  --border="rounded" --border-label="fzf" --border-label-pos="0" --preview-window="border-rounded"
-  --prompt="> " --marker=">" --pointer="◆" --separator="─"
+  --border="rounded"
+  --border-label="fzf"
+  --border-label-pos="0"
+  --preview-window="border-rounded"
+  --prompt="> "
+  --marker=">"
+  --pointer="◆"
+  --separator="─"
   --scrollbar="│"'
 
 # Bat theme
@@ -259,7 +265,9 @@ eval "$(fnm env --use-on-cd)"
 # rbenv
 # eval "$(rbenv init - zsh)"
 
-
 # eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/pure.toml)"
 # eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
+
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
