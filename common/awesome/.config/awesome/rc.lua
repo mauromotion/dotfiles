@@ -32,7 +32,8 @@ require("notifications") -- Error messages and notifications
 require("rules") -- Clients' rules
 
 -- Autostart at launch
-awful.spawn.with_shell(home .. "/.config/awesome/autostart.sh")
+-- awful.spawn.with_shell(home .. "/.config/awesome/autostart.sh")
+awful.spawn.easy_async_with_shell(home .. "/.config/awesome/autostart.sh")
 -- require("config.autostart")
 
 -- Garbage collection to avoid lag
