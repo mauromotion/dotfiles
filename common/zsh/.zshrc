@@ -179,10 +179,10 @@ zstyle ':fzf-tab:*' query-string ''
 zstyle ':fzf-tab:complete:*' fzf-flags \
     --height=40% \
     --preview-window=right:60%:wrap:cycle:border-rounded \
-    --color=bg+:#363a4f,spinner:#f4dbd6,hl:#ed8796 \
-    --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
-    --color=marker:#b7bdf8,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796 \
-    --color=border:#5b6078,label:#c6a0f6,query:#b8c0e0 \
+    --color=bg+:#363a4f,spinner:#5DE4C7,hl:#89DDFF \
+    --color=fg:#E4F0FB,header:#8fbcbb,info:#ebcb8b,pointer:#5DE4C7 \
+    --color=marker:#5DE4C7,fg+:#FFFFFF,prompt:#FCC5E9,hl+:#89DDFF \
+    --color=border:#303340,label:#81a1c1,query:#d8dee9 \
     --bind="tab:toggle-down" \
     --bind="ctrl-p:change-preview-window(down,90%,wrap,cycle,border-rounded|hidden|right,50%,wrap,cycle,border-rounded)" \
     --bind="ctrl-v:execute(bat --paging=always --color=always {+})"
