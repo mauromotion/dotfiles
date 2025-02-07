@@ -65,6 +65,11 @@ awful.keyboard.append_global_keybindings({
 	-- Switch keyboard layout
 	-- awful.key({ modkey, "Control" }, "k", switch_kb_layout, { description = "switch keyboard layout", group = "misc" }),
 
+	-- Switch keyboard layout with xbd-switch
+	awful.key({ "Mod1" }, "Shift_L", function()
+		awful.spawn.with_shell("xkb-switch -n")
+	end, { description = "switch keyboard layout", group = "hotkeys" }),
+
 	-- Restart Awesome
 	awful.key({ modkey, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
 
