@@ -5,6 +5,7 @@ processes=(
 	# "fastcompmgr"
 	"picom"
 	"udiskie"
+	"nm-applet"
 	"polkit-gnome-au"
 	"nextcloud"
 	"openrgb"
@@ -25,6 +26,7 @@ picom -b &
 nitrogen --restore &
 udiskie -a -n -t &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+nm-applet &
 nextcloud --background &
 openrgb --startminimized &
 xset b 100 &
