@@ -198,6 +198,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 						widgets.volume,
 						widgets.widgets_separator,
 						widgets.battery,
+						widgets.widgets_separator,
 						widgets.keyboardlayout,
 						widgets.updates,
 						wibox.widget({
