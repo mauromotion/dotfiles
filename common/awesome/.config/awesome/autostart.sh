@@ -6,6 +6,7 @@ processes=(
 	"picom"
 	"udiskie"
 	"nm-applet"
+	"blueman-applet"
 	"polkit-gnome-au"
 	"nextcloud"
 	"openrgb"
@@ -27,6 +28,7 @@ nitrogen --restore &
 udiskie -a -n -t &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 nm-applet &
+blueman-applet &
 nextcloud --background &
 openrgb --startminimized &
 xset b 100 &
