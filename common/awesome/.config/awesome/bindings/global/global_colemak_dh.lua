@@ -65,7 +65,7 @@ awful.keyboard.append_global_keybindings({
 	-- Switch keyboard layout
 	awful.key(
 		{ modkey, "Shift" },
-		"k",
+		"0",
 		switch_kb_layout,
 		{ description = "switch keyboard layout", group = "hotkeys" }
 	),
