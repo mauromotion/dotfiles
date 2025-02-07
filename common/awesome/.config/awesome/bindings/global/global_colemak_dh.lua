@@ -28,22 +28,22 @@ end
 -- }}}
 --
 -- -- {{{ Siwtch keyboard layout
--- local function get_current_kb_layout(callback)
--- 	awful.spawn.easy_async_with_shell("setxkbmap -query | awk 'END {print $2}'", function(stdout)
--- 		local layout = stdout:gsub("\n", "") -- Remove trailing newline
--- 		callback(layout)
--- 	end)
--- end
+local function get_current_kb_layout(callback)
+	awful.spawn.easy_async_with_shell("setxkbmap -query | awk '/^variant/{print $2}'", function(stdout)
+		local layout = stdout:gsub("\n", "") -- Remove trailing newline
+		callback(layout)
+	end)
+end
 
--- local function switch_kb_layout()
--- 	get_current_kb_layout(function(current_layout)
--- 		if current_layout == "gb" then
--- 			awful.spawn.with_shell("setxkbmap gb -variant colemak_dh")
--- 		else
--- 			awful.spawn.with_shell("setxkbmap gb")
--- 		end
--- 	end)
--- end
+local function switch_kb_layout()
+	get_current_kb_layout(function(current_layout)
+		if current_layout == "colemak_dh" then
+			awful.spawn.with_shell("setxkbmap gb -option caps:swapescape")
+		else
+			awful.spawn.with_shell("setxkbmap gb -variant colemak_dh -option caps:swapsescape")
+		end
+	end)
+end
 -- -- }}}
 
 -- {{{ Key bindings
@@ -63,12 +63,12 @@ awful.keyboard.append_global_keybindings({
 	awful.key({ modkey, "Control" }, "b", toggle_wibar, { description = "toggle wibar", group = "awesome" }),
 
 	-- Switch keyboard layout
-	-- awful.key({ modkey, "Control" }, "k", switch_kb_layout, { description = "switch keyboard layout", group = "misc" }),
-
-	-- Switch keyboard layout with xbd-switch
-	awful.key({ "Mod1" }, "Shift_L", function()
-		awful.spawn.with_shell("xkb-switch -n")
-	end, { description = "switch keyboard layout", group = "hotkeys" }),
+	awful.key(
+		{ modkey, "Shift" },
+		"k",
+		switch_kb_layout,
+		{ description = "switch keyboard layout", group = "hotkeys" }
+	),
 
 	-- Restart Awesome
 	awful.key({ modkey, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
