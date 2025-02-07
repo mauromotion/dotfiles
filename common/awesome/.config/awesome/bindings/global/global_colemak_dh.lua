@@ -172,11 +172,11 @@ awful.keyboard.append_global_keybindings({
 		end
 	end, { description = "go back", group = "client" }),
 
-	awful.key({ modkey, "Control" }, "e", function()
+	awful.key({ modkey, "Mod1" }, "e", function()
 		awful.screen.focus_relative(1)
 	end, { description = "focus the next screen", group = "screen" }),
 
-	awful.key({ modkey, "Control" }, "i", function()
+	awful.key({ modkey, "Mod1" }, "i", function()
 		awful.screen.focus_relative(-1)
 	end, { description = "focus the previous screen", group = "screen" }),
 
@@ -193,12 +193,18 @@ awful.keyboard.append_global_keybindings({
 
 awful.keyboard.append_global_keybindings({
 
-	awful.key({ modkey, "Shift" }, "e", function()
+	awful.key({ modkey, "Ctrl" }, "e", function()
 		awful.client.swap.byidx(1)
 	end, { description = "swap with next client by index", group = "client" }),
-	awful.key({ modkey, "Shift" }, "i", function()
+	awful.key({ modkey, "Ctrl" }, "i", function()
 		awful.client.swap.byidx(-1)
 	end, { description = "swap with previous client by index", group = "client" }),
+	awful.key({ modkey, "Shift" }, "e", function()
+		awful.client.incwfact(0.05, c)
+	end, { description = "increase client height", group = "client" }),
+	awful.key({ modkey, "Shift" }, "i", function()
+		awful.client.incwfact(-0.05, c)
+	end, { description = "decrease client height", group = "client" }),
 	awful.key({ modkey }, "u", awful.client.urgent.jumpto, { description = "jump to urgent client", group = "client" }),
 	awful.key({ modkey }, "n", function()
 		awful.tag.incmwfact(0.05)
@@ -206,18 +212,18 @@ awful.keyboard.append_global_keybindings({
 	awful.key({ modkey }, "o", function()
 		awful.tag.incmwfact(-0.05)
 	end, { description = "decrease master width factor", group = "layout" }),
-	awful.key({ modkey, "Shift" }, "h", function()
-		awful.tag.incnmaster(1, nil, true)
-	end, { description = "increase the number of master clients", group = "layout" }),
-	awful.key({ modkey, "Shift" }, "d", function()
-		awful.tag.incnmaster(-1, nil, true)
-	end, { description = "decrease the number of master clients", group = "layout" }),
-	awful.key({ modkey, "Control" }, "c", function()
-		awful.tag.incncol(1, nil, true)
-	end, { description = "increase the number of columns", group = "layout" }),
-	awful.key({ modkey, "Control" }, "comma", function()
-		awful.tag.incncol(-1, nil, true)
-	end, { description = "decrease the number of columns", group = "layout" }),
+	-- awful.key({ modkey, "Shift" }, "h", function()
+	-- 	awful.tag.incnmaster(1, nil, true)
+	-- end, { description = "increase the number of master clients", group = "layout" }),
+	-- awful.key({ modkey, "Shift" }, "d", function()
+	-- 	awful.tag.incnmaster(-1, nil, true)
+	-- end, { description = "decrease the number of master clients", group = "layout" }),
+	-- awful.key({ modkey, "Control" }, "c", function()
+	-- 	awful.tag.incncol(1, nil, true)
+	-- end, { description = "increase the number of columns", group = "layout" }),
+	-- awful.key({ modkey, "Control" }, "comma", function()
+	-- 	awful.tag.incncol(-1, nil, true)
+	-- end, { description = "decrease the number of columns", group = "layout" }),
 	awful.key({ modkey }, "space", function()
 		awful.layout.inc(1)
 	end, { description = "select next", group = "layout" }),

@@ -16,7 +16,7 @@ bindsym $mod+Shift+o move right
 bindsym $mod+Shift+l resize grow width 5 px or 5 ppt
 bindsym $mod+Shift+u resize shrink height 5 px or 5 ppt
 bindsym $mod+Shift+y resize grow height 5 px or 5 ppt
-bindsym $mod+Shift+semicolon resize shrink width 5 px or 5 ppt
+bindsym $mod+Shift+apostrophe resize shrink width 5 px or 5 ppt
 
 # Resize window (you can also use the mouse for that)
 bindsym $mod+Ctrl+r mode "resize"
