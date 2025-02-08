@@ -34,5 +34,5 @@ nextcloud --background &
 openrgb --startminimized &
 xset b 100 &
 xbindkeys &
-xautolock -time 10 -locker "betterlockscreen -l dim" -detectsleep &
+xautolock -time 10 -locker "betterlockscreen -l dimblur" -detectsleep &
 ~/.icc_color_profiles/load_icc_color_profiles.sh &
