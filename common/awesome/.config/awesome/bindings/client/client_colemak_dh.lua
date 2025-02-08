@@ -20,7 +20,7 @@ client.connect_signal("request::default_keybindings", function()
 		awful.key({ modkey, "Control" }, "Return", function(c)
 			c:swap(awful.client.getmaster())
 		end, { description = "move to master", group = "client" }),
-		awful.key({ modkey, "Control" }, "o", function(c)
+		awful.key({ modkey, "Mod1" }, "o", function(c)
 			c:move_to_screen()
 		end, { description = "move to screen", group = "client" }),
 		awful.key({ modkey }, "t", function(c)

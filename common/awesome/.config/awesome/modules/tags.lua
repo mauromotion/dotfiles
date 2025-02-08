@@ -61,7 +61,7 @@ local function setup_tags(s)
 		layout = l.tile.left,
 		master_fill_policy = "expand",
 		gap_single_client = false,
-		gap = 4,
+		-- gap = 4,
 		screen = s,
 		selected = true,
 	})

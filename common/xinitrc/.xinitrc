@@ -27,7 +27,7 @@ xmonad)
 	;;
 awesome)
 	# Launch awesome
-	exec awesome
+	exec awesome --no-argb
 	;;
 	# no known session, try to run it as command
 *)
