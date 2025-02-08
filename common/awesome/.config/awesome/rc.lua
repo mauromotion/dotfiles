@@ -36,6 +36,9 @@ require("rules") -- Clients' rules
 awful.spawn.easy_async_with_shell(home .. "/.config/awesome/autostart.sh")
 -- require("config.autostart")
 
+-- For betterlockscreen conflict with dunst
+-- package.loaded["naughty.dbus"] = {}
+
 -- Garbage collection to avoid lag
 collectgarbage("incremental", 150, 600, 0)
 
