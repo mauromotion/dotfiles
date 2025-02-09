@@ -12,6 +12,7 @@ processes=(
 	"openrgb"
 	"xbindkeys"
 	"xautolock"
+	"xidlehook"
 )
 
 for proc in "${processes[@]}"; do
@@ -34,5 +35,6 @@ nextcloud --background &
 openrgb --startminimized &
 xset b 100 &
 xbindkeys &
-xautolock -time 10 -locker "betterlockscreen -l dimblur" -detectsleep &
+# xautolock -time 10 -locker "betterlockscreen -l dimblur" -detectsleep &
+xidlehook --not-when-fullscreen --not-when-audio --timer 600 "betterlockscreen -l dimblur" "" &
 ~/.icc_color_profiles/load_icc_color_profiles.sh &
