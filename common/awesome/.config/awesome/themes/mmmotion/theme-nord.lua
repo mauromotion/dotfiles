@@ -96,7 +96,7 @@ theme.green = "#a3be8c"
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
-theme.menu_submenu_icon = assets_path .. "submenu.png"
+theme.menu_submenu_icon = assets_path .. "/submenu.png"
 theme.menu_height = dpi(30)
 theme.menu_width = dpi(200)
 -- theme.menu_font = "JetBrains Mono 14"
