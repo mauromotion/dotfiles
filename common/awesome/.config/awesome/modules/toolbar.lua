@@ -135,8 +135,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
 					layout = wibox.layout.align.horizontal,
 					{ -- Left widgets
 						layout = wibox.layout.fixed.horizontal,
-						-- widgets.launcher,
-						-- widgets.sections_separator,
+						widgets.launcher,
+						widgets.sections_separator,
 						s.mytaglist,
 						widgets.sections_separator,
 						s.mypromptbox,
@@ -181,8 +181,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
 					layout = wibox.layout.align.horizontal,
 					{ -- Left widgets
 						layout = wibox.layout.fixed.horizontal,
-						-- widgets.launcher,
-						-- widgets.sections_separator,
+						widgets.launcher,
+						widgets.sections_separator,
 						s.mytaglist,
 						widgets.sections_separator,
 						s.mypromptbox,
