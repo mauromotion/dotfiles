@@ -11,7 +11,6 @@ processes=(
 	"nextcloud"
 	"openrgb"
 	"xbindkeys"
-	"xautolock"
 	"xidlehook"
 )
 
@@ -35,6 +34,5 @@ nextcloud --background &
 openrgb --startminimized &
 xset b 100 &
 xbindkeys &
-# xautolock -time 10 -locker "betterlockscreen -l dimblur" -detectsleep &
-xidlehook --not-when-fullscreen --not-when-audio --timer 600 "betterlockscreen -l dimblur" "" &
+xidlehook --not-when-fullscreen --not-when-audio --timer 600 "betterlockscreen -l dimblur" "" --timer 3600 "systemctl suspend" "" &
 ~/.icc_color_profiles/load_icc_color_profiles.sh &
