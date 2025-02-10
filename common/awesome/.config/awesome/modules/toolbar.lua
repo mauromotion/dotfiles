@@ -3,6 +3,7 @@ local awful = require("awful") -- Standard awesome library
 local gears = require("gears") -- Standard awesome library
 local wibox = require("wibox") -- Widget and layout library
 local vars = require("config.vars")
+local widgets = require("modules.widgets") -- Custom widgets
 local custom_funcs = require("utils.custom_functions")
 local setup_tags = require("modules.tags")
 
@@ -125,8 +126,6 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	custom_funcs.get_hostname(function(hostname)
 		if hostname == "eva-01" then
 			-- Wibox for desktop
-			local widgets = require("modules.widgets") -- Custom widgets
-
 			s.mywibox = awful.wibar({
 				position = "top",
 				screen = s,
@@ -171,8 +170,6 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			})
 		else
 			-- Wibox for laptop
-			local widgets = require("modules.widgets") -- Custom widgets
-
 			s.mywibox = awful.wibar({
 				position = "top",
 				screen = s,

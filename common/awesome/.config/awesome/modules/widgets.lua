@@ -31,6 +31,21 @@ _M.datetime = wibox.widget({
 })
 -- }}}
 
+-- {{{ Calendar
+-- Define the widget
+-- local datetime = widgets.datetime
+
+local calendar = awful.widget.calendar_popup.month({
+	screen = awful.screen.focused(),
+	start_sunday = false,
+	week_numbers = false,
+	font = "monospace",
+	spacing = 2,
+})
+-- Connect the widget to another widget
+calendar:attach(_M.datetime, "tr")
+--}}}
+
 -- Keyboard map indicator and switcher --
 _M.keyboardlayout = awful.widget.keyboardlayout()
 

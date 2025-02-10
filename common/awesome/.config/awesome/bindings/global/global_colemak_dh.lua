@@ -27,7 +27,7 @@ local function toggle_wibar()
 end
 -- }}}
 --
--- -- {{{ Siwtch keyboard layout
+-- {{{ Siwtch keyboard layout
 local function get_current_kb_layout(callback)
 	awful.spawn.easy_async_with_shell("setxkbmap -query | awk '/^variant/{print $2}'", function(stdout)
 		local layout = stdout:gsub("\n", "") -- Remove trailing newline
@@ -44,7 +44,7 @@ local function switch_kb_layout()
 		end
 	end)
 end
--- -- }}}
+-- }}}
 
 -- {{{ Key bindings
 --
