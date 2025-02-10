@@ -69,7 +69,7 @@ _M.memory = custom_widget.create(mem_script_path, mem_update_interval, mem_fg)
 -- Updates widget --
 local upds_widget_path = "/home/mauromotion/.scripts/updates.sh"
 local upds_widget_interval = 400
-local upds_fg = beautiful.green
+local upds_fg = beautiful.pink
 _M.updates = custom_widget.create(upds_widget_path, upds_widget_interval, upds_fg)
 
 -- Kernel widget --
