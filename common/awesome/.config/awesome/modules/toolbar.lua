@@ -188,6 +188,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
 					{ -- Right widgets
 						layout = wibox.layout.fixed.horizontal,
 						widgets.sections_separator,
+						widgets.keyboardlayout,
+						widgets.widgets_separator,
 						widgets.hd1,
 						widgets.widgets_separator,
 						widgets.memory,
@@ -195,8 +197,6 @@ screen.connect_signal("request::desktop_decoration", function(s)
 						widgets.volume,
 						widgets.widgets_separator,
 						widgets.battery,
-						widgets.widgets_separator,
-						widgets.keyboardlayout,
 						widgets.updates,
 						wibox.widget({
 							mysystray,
