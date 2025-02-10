@@ -2,7 +2,7 @@
   process-unmapped-keys yes)
 
 (defsrc
-  a s d f ; l k j
+  a s d f ; l k j spc
 )
 
 (defvar
@@ -19,8 +19,26 @@
   l-mod (tap-hold $tap-time $hold-time l ralt)
   k-mod (tap-hold $tap-time $hold-time k rctl)
   j-mod (tap-hold $tap-time $hold-time j rsft)
+  spc-mod (tap-hold $tap-time $hold-time spc (layer-toggle arrows))
 )
 
+(defalias
+  a-arrow home
+  s-arrow pgup
+  d-arrow pgdn
+  f-arrow end
+  ;-arrow right
+  l-arrow down
+  k-arrow up
+  j-arrow left
+  spc-arrow _
+)
+
+
 (deflayer base
-  @a-mod @s-mod @d-mod @f-mod @;-mod @l-mod @k-mod @j-mod
+  @a-mod @s-mod @d-mod @f-mod @;-mod @l-mod @k-mod @j-mod @spc-mod
+)
+
+(deflayer arrows
+  @a-arrow @s-arrow @d-arrow @f-arrow @;-arrow @l-arrow @k-arrow @j-arrow @spc-arrow
 )
