@@ -9,16 +9,6 @@ end
 -- Focus follows mouse
 config.pane_focus_follows_mouse = true
 
--- Sessions --
--- print the workspace name at the upper right
-wezterm.on("update-right-status", function(window, pane)
-	window:set_right_status(window:active_workspace())
-end)
--- load plugin
-local workspace_switcher = wezterm.plugin.require("https://github.com/MLFlexer/smart_workspace_switcher.wezterm")
--- set path to zoxide
--- workspace_switcher.zoxide_path = "/usr/bin/zoxide"
---
 --------* UI *--------
 
 -- Colorscheme
@@ -317,19 +307,6 @@ config.keys = {
 		mods = "CTRL|SHIFT",
 		action = wezterm.action.ActivateCommandPalette,
 	},
-	-- Sessions
-	{
-		key = "s",
-		mods = "CTRL|SHIFT|ALT",
-		action = workspace_switcher.switch_workspace(),
-	},
-	{
-		key = "s",
-		mods = "CTRL|SHIFT",
-		action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }),
-	},
-	{ key = "[", mods = "CTRL|SHIFT", action = wezterm.action.SwitchWorkspaceRelative(1) },
-	{ key = "]", mods = "CTRL|SHIFT", action = wezterm.action.SwitchWorkspaceRelative(-1) },
 }
 
 -- Zen-mode plugin integration in Neovim --

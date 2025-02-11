@@ -54,11 +54,11 @@ local rules = {
 		})
 
 		-- Add titlebars to normal clients and dialogs
-		ruled.client.append_rule({
-			id = "titlebars",
-			rule_any = { type = { "normal", "dialog" } },
-			properties = { titlebars_enabled = false },
-		})
+		-- ruled.client.append_rule({
+		-- 	id = "titlebars",
+		-- 	rule_any = { type = { "normal", "dialog" } },
+		-- 	properties = { titlebars_enabled = false },
+		-- })
 
 		ruled.client.append_rule({
 			rule = { class = "thunderbird" },

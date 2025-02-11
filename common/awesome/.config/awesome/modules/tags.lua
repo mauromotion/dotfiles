@@ -56,7 +56,7 @@ local function setup_tags(s)
 
 	-- Define tags
 	awful.tag.add("home", {
-		icon = "",
+		icon = beautiful.tag_icon_home_focused,
 		icon_only = true,
 		layout = l.tile.left,
 		master_fill_policy = "expand",
@@ -67,7 +67,7 @@ local function setup_tags(s)
 	})
 
 	awful.tag.add("mail", {
-		icon = "",
+		icon = beautiful.tag_icon_mail_unfocused,
 		icon_only = true,
 		layout = l.tile.left,
 		master_fill_policy = "expand",
@@ -77,7 +77,7 @@ local function setup_tags(s)
 	})
 
 	awful.tag.add("dev", {
-		icon = "",
+		icon = beautiful.tag_icon_dev_unfocused,
 		icon_only = true,
 		layout = l.tile.left,
 		master_fill_policy = "expand",
@@ -87,7 +87,7 @@ local function setup_tags(s)
 	})
 
 	awful.tag.add("chat", {
-		icon = "",
+		icon = beautiful.tag_icon_chat_unfocused,
 		icon_only = true,
 		layout = l.fair,
 		-- master_fill_policy = "expand",
@@ -97,7 +97,7 @@ local function setup_tags(s)
 	})
 
 	awful.tag.add("docs", {
-		icon = "",
+		icon = beautiful.tag_icon_docs_unfocused,
 		icon_only = true,
 		layout = l.tile,
 		master_fill_policy = "expand",
@@ -107,7 +107,7 @@ local function setup_tags(s)
 	})
 
 	awful.tag.add("media", {
-		icon = "",
+		icon = beautiful.tag_icon_media_unfocused,
 		icon_only = true,
 		layout = l.tile.left,
 		master_fill_policy = "expand",
@@ -117,7 +117,7 @@ local function setup_tags(s)
 	})
 
 	awful.tag.add("games", {
-		icon = "",
+		icon = beautiful.tag_icon_games_unfocused,
 		icon_only = true,
 		layout = l.floating,
 		-- master_fill_policy = "master_width_factor",
@@ -127,7 +127,7 @@ local function setup_tags(s)
 	})
 
 	awful.tag.add("edit", {
-		icon = "",
+		icon = beautiful.tag_icon_edit_unfocused,
 		icon_only = true,
 		layout = l.tile.left,
 		master_fill_policy = "expand",
@@ -137,7 +137,7 @@ local function setup_tags(s)
 	})
 
 	awful.tag.add("extra", {
-		icon = "",
+		icon = beautiful.tag_icon_extra_unfocused,
 		icon_only = true,
 		layout = l.tile.top,
 		-- master_fill_policy = "master_width_factor",
@@ -148,7 +148,7 @@ local function setup_tags(s)
 
 	-- Loop through screens and tags
 	for sc = 1, screen.count() do
-		for i, tag in ipairs(awful.tag.gettags(sc)) do
+		for i, tag in ipairs(s.tags) do
 			local tag_info = tags[i]
 
 			-- Connect to the selected signal for each tag

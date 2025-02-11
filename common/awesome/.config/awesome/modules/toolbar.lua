@@ -111,15 +111,16 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			end,
 		},
 	})
+
 	-- Customize the systray
 	local mysystray = wibox.widget.systray()
 	mysystray:set_base_size(20)
 
 	-- Move the systray on the secondary monitor, if secondary monitor is present
-	if screen[2] then
+	if screen.count() >= 2 then
 		mysystray:set_screen(screen[2])
 	else
-		mysystray:set_screen("primary")
+		mysystray:set_screen(screen[1])
 	end
 
 	-- Create the wibox
