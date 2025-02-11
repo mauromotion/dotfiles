@@ -45,7 +45,7 @@ config.window_frame = {
 }
 
 -- Set max fps
-config.max_fps = 144
+config.max_fps = 165
 
 -- Alert bell
 config.audible_bell = "Disabled"
