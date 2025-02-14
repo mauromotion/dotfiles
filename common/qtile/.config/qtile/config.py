@@ -119,7 +119,12 @@ keys = [
     ),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    Key(
+        [mod, "shift"],
+        "r",
+        lazy.spawncmd(),
+        desc="Spawn a command using a prompt widget",
+    ),
 ]
 
 # Add key bindings to switch VTs in Wayland.
@@ -169,7 +174,7 @@ layouts = [
         border_focus_stack=["#89DDFF", "#ADD7FF"],
         border_width=1,
         # margin=6,
-        margin_on_single=25,
+        # margin_on_single=25,
     ),
     layout.Max(),
     layout.Matrix(),
@@ -189,7 +194,7 @@ layouts = [
         inactive_bg="#303340",
         bg_color="#1B1E28",
     ),
-    layout.Floating(border_focus="", border_normal="#303340"),
+    layout.Floating(border_focus="#5DE4C7", border_normal="#1B1E28"),
     # layout.Bsp(),
     # layout.Stack(num_stacks=2),
     # layout.Tile(),
@@ -198,24 +203,36 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font="Noto SansM Nerd Font",
-    fontsize=12,
-    padding=3,
+    font="Noto SansM Nerd Font Medium",
+    fontsize=14,
+    padding=8,
 )
 extension_defaults = widget_defaults.copy()
+
+# Custom widgets
+kernel_widget = widget.GenPollText(
+    func=lambda: subprocess.getoutput("~/.scripts/kernel.sh"),
+    update_interval=1200,
+    fmt="{}",
+    foreground="#5DE4C7",
+)
 
 screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.CurrentLayout(),
                 widget.GroupBox(
-                    highlight_method="block",
+                    highlight_method="line",
+                    active="#5DE4C7",
                     this_current_screen_border="#5DE4C7",
                     rounded=False,
                     foreground="#303340",
                 ),
-                widget.Prompt(),
+                widget.CurrentLayout(foreground="#5DE4C7"),
+                widget.Prompt(
+                    foreground="#FFFAC2",
+                ),
+                widget.Spacer(length=50),
                 widget.WindowName(),
                 widget.Chord(
                     chords_colors={
@@ -223,13 +240,28 @@ screens = [
                     },
                     name_transform=lambda name: name.upper(),
                 ),
-                widget.TextBox("default config", name="default"),
-                widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#5DE4C7"),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
+                widget.CheckUpdates(
+                    distro="Arch_yay",
+                    update_interval=600,
+                    display_format=" {updates}",
+                    no_update_string="",
+                    foreground="#FFFAC2",
+                ),
+                kernel_widget,
+                widget.DF(partition="/", visible_on_warn=False, foreground="#A6ACCD"),
+                widget.DF(
+                    partition="/media", visible_on_warn=False, foreground="#A6ACCD"
+                ),
+                widget.Memory(
+                    format="RAM {MemUsed: .0f}{mm}/{MemTotal: .0f}{mm}",
+                    measure_mem="G",
+                    foreground="#ADD7FF",
+                ),
+                widget.PulseVolume(unmute_format="VOL {volume}%", foreground="#FAE4FC"),
                 widget.Systray(),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-                widget.QuickExit(),
+                widget.Clock(format="%b %d (%a) %H:%M", foreground="#5DE4C7"),
             ],
             24,
             background="#1B1E28",
@@ -273,7 +305,7 @@ floating_layout = layout.Floating(
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
-        Match(title="Gpick"),
+        Match(wm_class="gpick"),
         Match(wm_class="Lxappearance"),
         Match(wm_class="Qalculate-gtk"),
         Match(wm_class="Tor Browser"),
@@ -286,7 +318,10 @@ floating_layout = layout.Floating(
         Match(wm_class="Nitrogen"),
         Match(wm_class="org.cryptomator.launcher.Cryptomator$MainApp"),
         Match(wm_class="vlc"),
-    ]
+    ],
+    border_focus="#5DE4C7",
+    border_normal="#1B1E28",
+    border_width=1,
 )
 auto_fullscreen = True
 focus_on_window_activation = "smart"
