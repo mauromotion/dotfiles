@@ -38,9 +38,9 @@ end
 local function switch_kb_layout()
 	get_current_kb_layout(function(current_layout)
 		if current_layout == "colemak_dh" then
-			awful.spawn.with_shell("setxkbmap gb -option caps:swapescape")
+			awful.spawn.with_shell("setxkbmap gb")
 		else
-			awful.spawn.with_shell("setxkbmap gb -variant colemak_dh -option caps:swapsescape")
+			awful.spawn.with_shell("setxkbmap gb -variant colemak_dh")
 		end
 	end)
 end
