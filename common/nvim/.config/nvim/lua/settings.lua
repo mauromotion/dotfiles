@@ -77,6 +77,7 @@ g.python3_host_prog = "$HOME/.venvs/nvim_venv/bin/python"
 
 -- Disable perl provider
 g.loaded_perl_provider = 0
+g.loaded_ruby_provider = 0
 
 -- For render-markdown plugin
 vim.treesitter.language.register("markdown", "vimwiki")
