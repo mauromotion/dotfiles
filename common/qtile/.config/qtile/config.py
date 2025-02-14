@@ -145,7 +145,7 @@ for i in groups:
             Key(
                 [mod],
                 i.name,
-                lazy.group[i.name].toscreen(),
+                lazy.group[i.name].toscreen(toggle=True),
                 desc=f"Switch to group {i.name}",
             ),
             # mod + shift + group number = switch to & move focused window to group
