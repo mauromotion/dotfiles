@@ -252,7 +252,10 @@ screens = [
                 kernel_widget,
                 widget.DF(partition="/", visible_on_warn=False, foreground="#A6ACCD"),
                 widget.DF(
-                    partition="/media", visible_on_warn=False, foreground="#A6ACCD"
+                    partition="/media/Linux_Data",
+                    visible_on_warn=False,
+                    foreground="#A6ACCD",
+                    warn_color="#D0679D",
                 ),
                 widget.Memory(
                     format="RAM {MemUsed: .0f}{mm}/{MemTotal: .0f}{mm}",
