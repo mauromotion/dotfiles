@@ -182,13 +182,19 @@ layouts = [
     ),
     layout.MonadWide(),
     layout.RatioTile(),
-    layout.TreeTab(),
-    layout.Zoomy(),
-    layout.Floating(border_focus="#5DE4C7", border_normal="#303340"),
+    layout.TreeTab(
+        place_right=True,
+        active_bg="#5DE4C7",
+        active_fg="#1B1E28",
+        inactive_bg="#303340",
+        bg_color="#1B1E28",
+    ),
+    layout.Floating(border_focus="", border_normal="#303340"),
     # layout.Bsp(),
     # layout.Stack(num_stacks=2),
     # layout.Tile(),
     # layout.VerticalTile(),
+    # layout.Zoomy(),
 ]
 
 widget_defaults = dict(
