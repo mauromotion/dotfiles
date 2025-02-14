@@ -4,3 +4,5 @@ nvim/plugin/
 nvim/lazy-lock.json
 nvim/lazy-lock.json
 nvim/lazy-lock.json
+
+__pycache__/

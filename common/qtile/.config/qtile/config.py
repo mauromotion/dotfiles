@@ -79,11 +79,6 @@ keys = [
     Key([mod], "0", lazy.layout.normalize(), desc="Reset all window sizes"),
     Key([mod, "shift", "control"], "n", lazy.layout.swap_column_left()),
     Key([mod, "shift", "control"], "o", lazy.layout.swap_column_right()),
-    Key(
-        [mod, "control"],
-        "c",
-        lazy.function(lambda qtile: qtile.current_layout.add_column()),
-    ),
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
@@ -187,12 +182,12 @@ layouts = [
     ),
     layout.MonadWide(),
     layout.RatioTile(),
-    layout.Tile(),
     layout.TreeTab(),
     layout.Zoomy(),
     layout.Floating(border_focus="#5DE4C7", border_normal="#303340"),
     # layout.Bsp(),
     # layout.Stack(num_stacks=2),
+    # layout.Tile(),
     # layout.VerticalTile(),
 ]
 
