@@ -24,6 +24,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 import os
+import socket
 import subprocess
 
 from libqtile import bar, hook, layout, qtile, widget
@@ -38,6 +39,9 @@ from libqtile.lazy import lazy
 def autostart():
     subprocess.call([os.path.expanduser("~/.config/qtile/autostart.sh")])
 
+
+# Get hostname
+hostname = socket.gethostname().lower()
 
 mod = "mod4"
 terminal = "wezterm"  # guess_terminal()
@@ -224,9 +228,66 @@ kernel_widget = widget.GenPollText(
     foreground="#5DE4C7",
 )
 
-screens = [
-    Screen(
-        top=bar.Bar(
+# Bar for different machines
+if "eva-01" in hostname:
+    default_bar = (
+        bar.Bar(
+            [
+                widget.GroupBox(
+                    highlight_method="line",
+                    active="#5DE4C7",
+                    this_current_screen_border="#5DE4C7",
+                    rounded=False,
+                    foreground="#303340",
+                ),
+                widget.CurrentLayout(foreground="#5DE4C7"),
+                widget.Prompt(
+                    foreground="#FFFAC2",
+                ),
+                widget.Spacer(length=50),
+                widget.WindowName(),
+                widget.Chord(
+                    chords_colors={
+                        "launch": ("#5DE4C7", "#E4F0FB"),
+                    },
+                    name_transform=lambda name: name.upper(),
+                ),
+                kernel_widget,
+                widget.DF(partition="/", visible_on_warn=False, foreground="#A6ACCD"),
+                widget.DF(
+                    partition="/media/Linux_Data",
+                    visible_on_warn=False,
+                    foreground="#A6ACCD",
+                    warn_color="#D0679D",
+                ),
+                widget.Memory(
+                    format="RAM {MemUsed: .0f}{mm}/{MemTotal: .0f}{mm}",
+                    measure_mem="G",
+                    foreground="#ADD7FF",
+                ),
+                widget.PulseVolume(unmute_format="VOL {volume}%", foreground="#FAE4FC"),
+                widget.KeyboardLayout(configured_keyboards=["gb", "gb colemak_dh"]),
+                widget.CheckUpdates(
+                    distro="Arch_yay",
+                    update_interval=600,
+                    display_format=" {updates}",
+                    no_update_string="",
+                    colour_have_updates="#FFFAC2",
+                ),
+                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
+                # widget.StatusNotifier(),
+                widget.Systray(),
+                widget.Clock(format="%b %d (%a) %H:%M", foreground="#5DE4C7"),
+            ],
+            24,
+            background="#1B1E28",
+            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
+            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
+        ),
+    )
+elif "eva-03" in hostname:
+    default_bar = (
+        bar.Bar(
             [
                 widget.GroupBox(
                     highlight_method="line",
@@ -262,6 +323,7 @@ screens = [
                     foreground="#ADD7FF",
                 ),
                 widget.PulseVolume(unmute_format="VOL {volume}%", foreground="#FAE4FC"),
+                widget.Battery(),
                 widget.CheckUpdates(
                     distro="Arch_yay",
                     update_interval=600,
@@ -279,11 +341,10 @@ screens = [
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
-        # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
-        # By default we handle these events delayed to already improve performance, however your system might still be struggling
-        # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
-        # x11_drag_polling_rate = 60,
-    ),
+    )
+
+screens = [
+    Screen(top=default_bar),
 ]
 
 # Drag floating layouts.
