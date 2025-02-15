@@ -309,7 +309,7 @@ elif hostname == "eva-03":
                 foreground="#ADD7FF",
             ),
             widget.PulseVolume(unmute_format="VOL {volume}%", foreground="#FAE4FC"),
-            widget.Battery(),
+            widget.Battery(foreground="#FFFAC2", charge_char="󰂄", discharge_char="󰁿"),
             widget.CheckUpdates(
                 distro="Arch_yay",
                 update_interval=600,
