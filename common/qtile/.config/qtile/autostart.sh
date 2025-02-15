@@ -56,7 +56,6 @@ elif [[ "$HOSTNAME" == "eva-03" ]]; then
 	nm-applet &
 	blueman-applet &
 	nextcloud --background &
-	openrgb --startminimized &
 	xbindkeys &
 	kanata -c ~/.config/kanata/kanata.kbd &
 	xidlehook --not-when-fullscreen --not-when-audio --timer 600 "betterlockscreen -l dimblur" "" --timer 3600 "systemctl suspend" "" &
