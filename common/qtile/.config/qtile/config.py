@@ -271,7 +271,7 @@ if hostname == "eva-01":
             ),
             widget.KeyboardLayout(
                 configured_keyboards=["gb", "gb colemak_dh"],
-                display_map={"gb colemak_dh": "  gb_clmk-dh", "gb": "  gb"},
+                display_map={"gb colemak_dh": "󰌌 gb_clmk-dh", "gb": "󰌌 gb"},
                 foreground="#E4F0FB",
             ),
             widget.CheckUpdates(
@@ -346,7 +346,7 @@ elif hostname == "eva-03":
             ),
             widget.KeyboardLayout(
                 configured_keyboards=["gb colemak_dh", "gb"],
-                display_map={"gb colemak_dh": "  gb_clmk-dh", "gb": "  gb"},
+                display_map={"gb colemak_dh": "󰌌 gb_clmk-dh", "gb": "󰌌 gb"},
                 foreground="#E4F0FB",
             ),
             # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
