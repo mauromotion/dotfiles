@@ -125,6 +125,7 @@ keys = [
         lazy.spawncmd(),
         desc="Spawn a command using a prompt widget",
     ),
+    Key([mod, "control"], "b", lazy.hide_show_bar(), desc="Hides the bar"),
 ]
 
 # Add key bindings to switch VTs in Wayland.
@@ -240,15 +241,6 @@ screens = [
                     },
                     name_transform=lambda name: name.upper(),
                 ),
-                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-                # widget.StatusNotifier(),
-                widget.CheckUpdates(
-                    distro="Arch_yay",
-                    update_interval=600,
-                    display_format=" {updates}",
-                    no_update_string="",
-                    foreground="#FFFAC2",
-                ),
                 kernel_widget,
                 widget.DF(partition="/", visible_on_warn=False, foreground="#A6ACCD"),
                 widget.DF(
@@ -263,6 +255,15 @@ screens = [
                     foreground="#ADD7FF",
                 ),
                 widget.PulseVolume(unmute_format="VOL {volume}%", foreground="#FAE4FC"),
+                widget.CheckUpdates(
+                    distro="Arch_yay",
+                    update_interval=600,
+                    display_format=" {updates}",
+                    no_update_string="",
+                    colour_have_updates="#FFFAC2",
+                ),
+                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
+                # widget.StatusNotifier(),
                 widget.Systray(),
                 widget.Clock(format="%b %d (%a) %H:%M", foreground="#5DE4C7"),
             ],
