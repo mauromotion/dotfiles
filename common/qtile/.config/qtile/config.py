@@ -269,7 +269,11 @@ if hostname == "eva-01":
                 foreground="#ADD7FF",
                 mute_format="  muted",
             ),
-            widget.KeyboardLayout(configured_keyboards=["gb", "gb colemak_dh"]),
+            widget.KeyboardLayout(
+                configured_keyboards=["gb", "gb colemak_dh"],
+                display_map={"gb colemak_dh": "  gb_clmk-dh", "gb": "  gb"},
+                foreground="#E4F0FB",
+            ),
             widget.CheckUpdates(
                 distro="Arch_yay",
                 update_interval=600,
@@ -340,7 +344,11 @@ elif hostname == "eva-03":
                 no_update_string="",
                 colour_have_updates="#FFFAC2",
             ),
-            widget.KeyboardLayout(configured_keyboards=["gb colemak_dh", "gb"]),
+            widget.KeyboardLayout(
+                configured_keyboards=["gb colemak_dh", "gb"],
+                display_map={"gb colemak_dh": "  gb_clmk-dh", "gb": "  gb"},
+                foreground="#E4F0FB",
+            ),
             # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
             # widget.StatusNotifier(),
             widget.Systray(),
