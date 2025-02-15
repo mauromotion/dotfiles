@@ -41,7 +41,7 @@ def autostart():
 
 
 # Get hostname
-hostname = socket.gethostname().lower()
+hostname = socket.gethostname()
 
 mod = "mod4"
 terminal = "wezterm"  # guess_terminal()
@@ -229,7 +229,7 @@ kernel_widget = widget.GenPollText(
 )
 
 # Bar for different machines
-if "eva-01" in hostname:
+if hostname == "eva-01":
     default_bar = (
         bar.Bar(
             [
@@ -285,7 +285,7 @@ if "eva-01" in hostname:
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
     )
-elif "eva-03" in hostname:
+elif hostname == "eva-03":
     default_bar = (
         bar.Bar(
             [
