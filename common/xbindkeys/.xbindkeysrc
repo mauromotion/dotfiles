@@ -17,3 +17,11 @@
 # Play/pause media
 "playerctl play-pause"
    XF86AudioPlay
+
+# Increase brightness
+"xbacklight + 5"
+  XF86MonBrightnessUp
+
+# Decrease brightness
+"xbacklight - 5"
+  XF86MonBrightnessDown

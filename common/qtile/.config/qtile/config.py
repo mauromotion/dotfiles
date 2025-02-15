@@ -254,11 +254,15 @@ if hostname == "eva-01":
                 warn_color="#D0679D",
             ),
             widget.Memory(
-                format="RAM {MemUsed: .0f}{mm}/{MemTotal: .0f}{mm}",
+                format=" {MemUsed: .0f}{mm}/{MemTotal: .0f}{mm}",
                 measure_mem="G",
                 foreground="#ADD7FF",
             ),
-            widget.PulseVolume(unmute_format="VOL {volume}%", foreground="#FAE4FC"),
+            widget.PulseVolume(
+                unmute_format=" {volume}%",
+                foreground="#FAE4FC",
+                mute_format="  muted",
+            ),
             widget.KeyboardLayout(configured_keyboards=["gb", "gb colemak_dh"]),
             widget.CheckUpdates(
                 distro="Arch_yay",
@@ -295,7 +299,6 @@ elif hostname == "eva-03":
             widget.Spacer(length=50),
             widget.WindowName(),
             kernel_widget,
-            widget.KeyboardLayout(configured_keyboards=["gb", "gb colemak_dh"]),
             widget.DF(partition="/", visible_on_warn=False, foreground="#A6ACCD"),
             widget.DF(
                 partition="/media/Linux_Data",
@@ -304,12 +307,27 @@ elif hostname == "eva-03":
                 warn_color="#D0679D",
             ),
             widget.Memory(
-                format="RAM {MemUsed: .0f}{mm}/{MemTotal: .0f}{mm}",
+                format=" {MemUsed: .0f}{mm}/{MemTotal: .0f}{mm}",
                 measure_mem="G",
-                foreground="#ADD7FF",
+                foreground="#7390AA",
             ),
-            widget.PulseVolume(unmute_format="VOL {volume}%", foreground="#FAE4FC"),
-            widget.Battery(foreground="#FFFAC2", charge_char="󰂄", discharge_char="󰁿"),
+            widget.PulseVolume(
+                unmute_format=" {volume}%",
+                foreground="#ADD7FF",
+                mute_format="  muted",
+            ),
+            widget.Backlight(
+                backlight_name="intel_backlight",
+                format="󰃠 {percent:2.0%}",
+                foreground="#E4F0FB",
+            ),
+            widget.Battery(
+                foreground="#FFFAC2",
+                format="{char} {percent:2.0%}",
+                charge_char="󰢝",
+                discharge_char="󰁿",
+                full_char="󰁹",
+            ),
             widget.CheckUpdates(
                 distro="Arch_yay",
                 update_interval=600,
@@ -317,6 +335,7 @@ elif hostname == "eva-03":
                 no_update_string="",
                 colour_have_updates="#FFFAC2",
             ),
+            widget.KeyboardLayout(configured_keyboards=["gb colemak_dh", "gb"]),
             # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
             # widget.StatusNotifier(),
             widget.Systray(),
