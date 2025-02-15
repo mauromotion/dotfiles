@@ -246,8 +246,14 @@ if hostname == "eva-01":
             widget.Spacer(length=50),
             widget.WindowName(),
             kernel_widget,
-            widget.DF(partition="/", visible_on_warn=False, foreground="#A6ACCD"),
             widget.DF(
+                format="󱛟 {p} ({uf}{m}|{r:.0f}%)",
+                partition="/",
+                visible_on_warn=False,
+                foreground="#A6ACCD",
+            ),
+            widget.DF(
+                format="󱛟 {p} ({uf}{m}|{r:.0f}%)",
                 partition="/media/Linux_Data",
                 visible_on_warn=False,
                 foreground="#A6ACCD",
@@ -256,11 +262,11 @@ if hostname == "eva-01":
             widget.Memory(
                 format=" {MemUsed: .0f}{mm}/{MemTotal: .0f}{mm}",
                 measure_mem="G",
-                foreground="#ADD7FF",
+                foreground="#7390AA",
             ),
             widget.PulseVolume(
                 unmute_format=" {volume}%",
-                foreground="#FAE4FC",
+                foreground="#ADD7FF",
                 mute_format="  muted",
             ),
             widget.KeyboardLayout(configured_keyboards=["gb", "gb colemak_dh"]),
@@ -299,12 +305,11 @@ elif hostname == "eva-03":
             widget.Spacer(length=50),
             widget.WindowName(),
             kernel_widget,
-            widget.DF(partition="/", visible_on_warn=False, foreground="#A6ACCD"),
             widget.DF(
-                partition="/media/Linux_Data",
+                format="󱛟 {p} ({uf}{m}|{r:.0f}%)",
+                partition="/",
                 visible_on_warn=False,
                 foreground="#A6ACCD",
-                warn_color="#D0679D",
             ),
             widget.Memory(
                 format=" {MemUsed: .0f}{mm}/{MemTotal: .0f}{mm}",
