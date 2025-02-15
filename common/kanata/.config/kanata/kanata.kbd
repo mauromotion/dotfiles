@@ -32,8 +32,8 @@
   d-arrow pgdn
   f-arrow end
   ;-arrow right
-  l-arrow down
-  k-arrow up
+  l-arrow up
+  k-arrow down
   j-arrow left
   spc-arrow _
   p-arrow _
