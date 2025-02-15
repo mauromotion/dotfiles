@@ -36,7 +36,7 @@ from libqtile.lazy import lazy
 # Autostart
 @hook.subscribe.startup_once
 def autostart():
-    subprocess.call([os.path.expanduser("~/.config/awesome/autostart.sh")])
+    subprocess.call([os.path.expanduser("~/.config/qtile/autostart.sh")])
 
 
 mod = "mod4"
@@ -126,6 +126,12 @@ keys = [
         desc="Spawn a command using a prompt widget",
     ),
     Key([mod, "control"], "b", lazy.hide_show_bar(), desc="Hides the bar"),
+    Key(
+        [mod, "control"],
+        "0",
+        lazy.widget["keyboardlayout"].next_keyboard(),
+        desc="Switch keyboard layout",
+    ),
 ]
 
 # Add key bindings to switch VTs in Wayland.
@@ -242,6 +248,7 @@ screens = [
                     name_transform=lambda name: name.upper(),
                 ),
                 kernel_widget,
+                widget.KeyboardLayout(configured_keyboards=["gb", "gb colemak_dh"]),
                 widget.DF(partition="/", visible_on_warn=False, foreground="#A6ACCD"),
                 widget.DF(
                     partition="/media/Linux_Data",
