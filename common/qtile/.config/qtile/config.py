@@ -40,14 +40,14 @@ def autostart():
     subprocess.call([os.path.expanduser("~/.config/qtile/autostart.sh")])
 
 
-# Get hostname
+# Variables
 hostname = socket.gethostname()
-
 mod = "mod4"
 terminal = "wezterm"  # guess_terminal()
 browser = "firefox"
 file_explorer = "thunar"
 
+# Keybindings
 keys = [
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
@@ -151,7 +151,7 @@ for vt in range(1, 8):
         )
     )
 
-
+# Groups (workspaces)
 groups = [Group(i) for i in "123456789"]
 
 for i in groups:
@@ -178,6 +178,7 @@ for i in groups:
         ]
     )
 
+# Layouts
 layouts = [
     layout.Columns(
         border_normal="#303340",
@@ -213,6 +214,7 @@ layouts = [
     # layout.Zoomy(),
 ]
 
+# Widgets for the bar
 widget_defaults = dict(
     font="Noto SansM Nerd Font Medium",
     fontsize=14,
@@ -220,7 +222,7 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
-# Custom widgets
+# Custom "display kernel" widget
 kernel_widget = widget.GenPollText(
     func=lambda: subprocess.getoutput("~/.scripts/kernel.sh"),
     update_interval=1200,
@@ -228,7 +230,7 @@ kernel_widget = widget.GenPollText(
     foreground="#5DE4C7",
 )
 
-# Bar for different machines
+# Bar for desktop PC
 if hostname == "eva-01":
     default_bar = bar.Bar(
         [
@@ -292,6 +294,7 @@ if hostname == "eva-01":
         # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
     )
 
+# Bar for Thinkpad laptop
 elif hostname == "eva-03":
     default_bar = bar.Bar(
         [
