@@ -262,7 +262,7 @@ if hostname == "eva-01":
                 foreground="#FFFAC2",
             ),
             widget.Spacer(length=50),
-            widget.WindowName(foreground="#E4F0FB"),
+            widget.WindowName(foreground="#A6ACCD"),
             widget.Spacer(length=50),
             widget.CheckUpdates(
                 distro="Arch_yay",
@@ -278,13 +278,13 @@ if hostname == "eva-01":
                 format="󱛟 /root {uf}{m}|{r:.0f}%",
                 partition="/",
                 visible_on_warn=False,
-                foreground="#A6ACCD",
+                foreground="#767C9D",
             ),
             widget.DF(
                 format="󱛟 /data {uf}{m}|{r:.0f}%",
                 partition="/media/Linux_Data",
                 visible_on_warn=False,
-                foreground="#A6ACCD",
+                foreground="#767C9D",
                 warn_color="#D0679D",
             ),
             widget.Sep(foreground="#303340"),
@@ -348,7 +348,7 @@ elif hostname == "eva-03":
                 foreground="#FFFAC2",
             ),
             widget.Spacer(length=50),
-            widget.WindowName(),
+            widget.WindowName(foreground="#A6ACCD"),
             widget.Spacer(length=50),
             widget.CheckUpdates(
                 distro="Arch_yay",
@@ -364,7 +364,7 @@ elif hostname == "eva-03":
                 format="󱛟 {p} ({uf}{m}|{r:.0f}%)",
                 partition="/",
                 visible_on_warn=False,
-                foreground="#A6ACCD",
+                foreground="#767C9D",
             ),
             widget.Sep(foreground="#303340"),
             widget.Memory(
@@ -491,4 +491,4 @@ wl_xcursor_size = 24
 #
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
-wmname = "LG3D"
+wmname = "Qtile"
