@@ -61,19 +61,26 @@ keys = [
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
     Key(
-        [mod, "control"],
+        [mod, "control", "shift"],
         "n",
         lazy.layout.shuffle_left(),
         desc="Move window to the left",
     ),
     Key(
-        [mod, "control"],
+        [mod, "control", "shift"],
         "o",
         lazy.layout.shuffle_right(),
         desc="Move window to the right",
     ),
-    Key([mod, "control"], "e", lazy.layout.shuffle_down(), desc="Move window down"),
-    Key([mod, "control"], "i", lazy.layout.shuffle_up(), desc="Move window up"),
+    Key(
+        [mod, "control", "shift"],
+        "e",
+        lazy.layout.shuffle_down(),
+        desc="Move window down",
+    ),
+    Key(
+        [mod, "control", "shift"], "i", lazy.layout.shuffle_up(), desc="Move window up"
+    ),
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
     Key([mod, "shift"], "n", lazy.layout.grow_left(), desc="Grow window to the left"),
@@ -81,8 +88,8 @@ keys = [
     Key([mod, "shift"], "e", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "shift"], "i", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "0", lazy.layout.normalize(), desc="Reset all window sizes"),
-    Key([mod, "shift", "control"], "n", lazy.layout.swap_column_left()),
-    Key([mod, "shift", "control"], "o", lazy.layout.swap_column_right()),
+    Key([mod, "control"], "n", lazy.layout.swap_column_left()),
+    Key([mod, "control"], "o", lazy.layout.swap_column_right()),
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
@@ -298,7 +305,7 @@ if hostname == "eva-01":
             widget.Sep(foreground="#303340"),
             widget.OpenWeather(
                 location="Bromley,UK",
-                format="{main_temp:.1f}°{units_temperature} | {main_feels_like:.1f}°{units_temperature} {icon}",
+                format="{icon} {main_temp:.1f}°{units_temperature} | {main_feels_like:.0f}°{units_temperature}",
                 update_interval=600,
                 foreground="#5FB3A1",
             ),
