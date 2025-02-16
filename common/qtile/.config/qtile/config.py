@@ -298,7 +298,7 @@ if hostname == "eva-01":
             widget.Sep(foreground="#303340"),
             widget.OpenWeather(
                 location="Bromley,UK",
-                format="{location_city}: {main_temp:.1f}°{units_temperature} {icon}",
+                format="{main_temp:.1f}°{units_temperature} | {main_feels_like:.1f}°{units_temperature} {icon}",
                 update_interval=600,
                 foreground="#5FB3A1",
             ),
