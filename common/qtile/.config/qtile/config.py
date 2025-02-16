@@ -230,7 +230,7 @@ layouts = [
 
 # Widgets for the bar
 widget_defaults = dict(
-    font="Noto SansM Nerd Font Medium",
+    font="NotoSansM Nerd Font Medium",
     fontsize=14,
     padding=8,
 )
