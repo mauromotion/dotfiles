@@ -249,6 +249,7 @@ if hostname == "eva-01":
             ),
             widget.Spacer(length=50),
             widget.WindowName(foreground="#E4F0FB"),
+            widget.Spacer(length=50),
             widget.CheckUpdates(
                 distro="Arch_yay",
                 update_interval=600,
@@ -334,6 +335,7 @@ elif hostname == "eva-03":
             ),
             widget.Spacer(length=50),
             widget.WindowName(),
+            widget.Spacer(length=50),
             widget.CheckUpdates(
                 distro="Arch_yay",
                 update_interval=600,
