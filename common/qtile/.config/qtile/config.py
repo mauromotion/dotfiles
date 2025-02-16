@@ -235,47 +235,20 @@ if hostname == "eva-01":
     default_bar = bar.Bar(
         [
             widget.GroupBox(
-                highlight_method="line",
+                highlight_method="block",
                 active="#5DE4C7",
                 this_current_screen_border="#5DE4C7",
                 rounded=False,
+                block_highlight_text_color="#1B1E28",
                 foreground="#303340",
             ),
+            widget.Sep(foreground="#5DE4C7", linewidth=1),
             widget.CurrentLayout(foreground="#5DE4C7"),
             widget.Prompt(
                 foreground="#FFFAC2",
             ),
             widget.Spacer(length=50),
-            widget.WindowName(),
-            kernel_widget,
-            widget.DF(
-                format="󱛟 {p} ({uf}{m}|{r:.0f}%)",
-                partition="/",
-                visible_on_warn=False,
-                foreground="#A6ACCD",
-            ),
-            widget.DF(
-                format="󱛟 {p} ({uf}{m}|{r:.0f}%)",
-                partition="/media/Linux_Data",
-                visible_on_warn=False,
-                foreground="#A6ACCD",
-                warn_color="#D0679D",
-            ),
-            widget.Memory(
-                format=" {MemUsed: .0f}{mm}/{MemTotal: .0f}{mm}",
-                measure_mem="G",
-                foreground="#7390AA",
-            ),
-            widget.PulseVolume(
-                unmute_format=" {volume}%",
-                foreground="#ADD7FF",
-                mute_format="  muted",
-            ),
-            widget.KeyboardLayout(
-                configured_keyboards=["gb", "gb colemak_dh"],
-                display_map={"gb colemak_dh": "󰌌 gb_clmk-dh", "gb": "󰌌 gb"},
-                foreground="#E4F0FB",
-            ),
+            widget.WindowName(foreground="#E4F0FB"),
             widget.CheckUpdates(
                 distro="Arch_yay",
                 update_interval=600,
@@ -283,10 +256,59 @@ if hostname == "eva-01":
                 no_update_string="",
                 colour_have_updates="#FFFAC2",
             ),
-            # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-            # widget.StatusNotifier(),
+            widget.Sep(foreground="#303340"),
+            kernel_widget,
+            widget.Sep(foreground="#303340"),
+            widget.DF(
+                format="󱛟 /root {uf}{m}|{r:.0f}%",
+                partition="/",
+                visible_on_warn=False,
+                foreground="#A6ACCD",
+            ),
+            widget.DF(
+                format="󱛟 /data {uf}{m}|{r:.0f}%",
+                partition="/media/Linux_Data",
+                visible_on_warn=False,
+                foreground="#A6ACCD",
+                warn_color="#D0679D",
+            ),
+            widget.Sep(foreground="#303340"),
+            # widget.CPU(
+            #     format=" {freq_current}GHz {load_percent}%", foreground="#5FB3A1"
+            # ),
+            widget.Memory(
+                format=" {MemUsed: .0f}{mm}/{MemTotal: .0f}{mm}",
+                measure_mem="G",
+                foreground="#7390AA",
+            ),
+            widget.Sep(foreground="#303340"),
+            widget.PulseVolume(
+                unmute_format="  {volume}%",
+                foreground="#ADD7FF",
+                mute_format="  muted",
+            ),
+            widget.Sep(foreground="#303340"),
+            widget.OpenWeather(
+                location="Bromley,UK",
+                format="{location_city}: {main_temp:.1f}°{units_temperature} {icon}",
+                update_interval=600,
+                foreground="#5FB3A1",
+            ),
+            widget.Sep(foreground="#303340"),
+            widget.KeyboardLayout(
+                configured_keyboards=["gb", "gb colemak_dh"],
+                display_map={"gb colemak_dh": "󰌌 gb_clmk-dh", "gb": "󰌌 gb"},
+                foreground="#A6ACCD",
+            ),
+            widget.Sep(foreground="#303340"),
             widget.Systray(),
-            widget.Clock(format="%b %d (%a) %H:%M", foreground="#5DE4C7"),
+            widget.Sep(foreground="#303340"),
+            widget.Clock(
+                format="%b %d (%a) %H:%M",
+                background="#5DE4C7",
+                foreground="#1B1E28",
+                # font="sans bold",
+            ),
         ],
         24,
         background="#1B1E28",
@@ -324,7 +346,7 @@ elif hostname == "eva-03":
                 foreground="#7390AA",
             ),
             widget.PulseVolume(
-                unmute_format=" {volume}%",
+                unmute_format="  {volume}%",
                 foreground="#ADD7FF",
                 mute_format="  muted",
             ),
@@ -398,6 +420,8 @@ floating_layout = layout.Floating(
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
+        Match(title="Grim Dawn"),  # Match by window title
+        Match(wm_class="steam_app_219990"),  # Match by Steam App ID (Grim Dawn)
         Match(wm_class="gpick"),
         Match(wm_class="Lxappearance"),
         Match(wm_class="Qalculate-gtk"),
