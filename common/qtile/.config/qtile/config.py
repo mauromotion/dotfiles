@@ -107,6 +107,12 @@ keys = [
     Key([mod, "shift"], "f", lazy.spawn(file_explorer), desc="Launch file explorer"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+    Key(
+        [mod, "shift"],
+        "Tab",
+        lazy.prev_layout(),
+        desc="Toggle between layouts backwards",
+    ),
     Key([mod, "shift"], "q", lazy.window.kill(), desc="Kill focused window"),
     Key(
         [mod],
@@ -136,6 +142,7 @@ keys = [
         lazy.widget["keyboardlayout"].next_keyboard(),
         desc="Switch keyboard layout",
     ),
+    Key([mod, "shift"], "z", lazy.spawn("flameshot gui"), desc="Take a screenshot"),
 ]
 
 # Add key bindings to switch VTs in Wayland.
