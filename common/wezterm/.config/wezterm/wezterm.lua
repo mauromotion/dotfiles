@@ -17,11 +17,11 @@ config.color_scheme = "Poimandres"
 config.window_background_opacity = 1
 
 -- Font
--- config.font = wezterm.font("Hack Nerd Font Mono", { weight = "Medium" })
-config.font = wezterm.font("JetBrainsMono NF", { weight = "Medium" })
+config.font = wezterm.font("JetBrainsMono NF", { weight = "Regular" })
+-- config.font = wezterm.font("Hack Nerd Font Mono", { weight = "Regular" })
 -- config.font = wezterm.font("BlexMono Nerd Font", { weight = "Medium" })
--- config.font = wezterm.font("GeistMono Nerd Font", { weight = "Medium" })
--- config.font = wezterm.font("Maple Mono NF", { weight = "Medium" })
+-- config.font = wezterm.font("GeistMono Nerd Font", { weight = "Regular" })
+-- config.font = wezterm.font("Maple Mono NF", { weight = "Regular" })
 -- config.font = wezterm.font("IosevkaTerm Nerd Font", { weight = "DemiBold" })
 -- config.font = wezterm.font("FiraCode Nerd Font", { weight = "Regular" })
 config.font_size = 12

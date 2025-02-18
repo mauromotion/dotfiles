@@ -2,7 +2,8 @@ return {
 	"williamboman/mason.nvim",
 	dependencies = {
 		"williamboman/mason-lspconfig.nvim",
-		"jayp0521/mason-null-ls.nvim",
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		-- "jayp0521/mason-null-ls.nvim",
 	},
 	config = function()
 		-- load mason
@@ -11,8 +12,10 @@ return {
 		-- load mason-lspconfig
 		local mason_lspconfig = require("mason-lspconfig")
 
+		local mason_tool_installer = require("mason-tool-installer")
+
 		-- load mason-null-ls
-		local mason_null_ls = require("mason-null-ls")
+		-- local mason_null_ls = require("mason-null-ls")
 
 		-- enable mason and configure icons
 		mason.setup({
@@ -28,41 +31,37 @@ return {
 		mason_lspconfig.setup({
 			-- list of servers for mason to install
 			ensure_installed = {
-				"lua_ls",
-				"ts_ls",
-				"html",
-				"cssls",
-				"tailwindcss",
-				"emmet_language_server",
-				"jedi_language_server",
-				"ruff",
-				"marksman",
-				"jsonls",
-				"yamlls",
-				"taplo",
-				"sqlls",
-				"bashls",
 				"astro",
+				"bashls",
+				"cssls",
+				"emmet_language_server",
+				"html",
+				"jedi_language_server",
 				"jinja_lsp",
+				"jsonls",
+				"lua_ls",
+				"marksman",
+				"ruff",
+				"sqlls",
+				"tailwindcss",
+				"taplo",
+				"ts_ls",
+				"yamlls",
 			},
 			-- auto-install configured servers (with lspconfig)
 			automatic_installation = true, -- not the same as ensure_installed
 		})
 
-		mason_null_ls.setup({
-			-- list of formatters & linters for mason to install
+		mason_tool_installer.setup({
 			ensure_installed = {
-				"prettierd", -- ts/js formatter
-				"stylua", -- lua formatter
-				"shfmt", -- shell script formatter
-				-- "flake8", -- python linter
-				"black", -- python type formatter
-				"isort", -- python type formatter
-				"djlint", -- django templates linter
-				"markdownlint-cli2", -- markdown linter
+				"djlint", -- Django linter and formatter
+				"eslint_d", -- JavaScript linter
+				"markdownlint-cli2", -- Markdown linter
+				"prettierd", -- Prettier formatter
+				"ruff", -- Python linter and formatter
+				"shfmt", -- Shell formatter
+				"stylua", -- Lua formatter
 			},
-			-- auto-install configured servers (with lspconfig)
-			automatic_installation = true,
 		})
 
 		-- Keybindings
