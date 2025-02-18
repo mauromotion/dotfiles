@@ -27,9 +27,8 @@ return {
 				}), -- js/ts formatter
 				formatting.stylua, -- lua formatter
 				formatting.shfmt, -- shell formatter
-				formatting.black, -- python formatter
-				formatting.isort.with({ extra_args = { "--profile", "black", "--filter-files" } }), -- python formatter
-				-- diagnostics.flake8.with({ extra_args = { "--max-line-length", "88", "--extend-ignore", "E203" } }), -- python linter
+				-- formatting.black, -- python formatter
+				-- formatting.isort.with({ extra_args = { "--profile", "black", "--filter-files" } }), -- python formatter
 				diagnostics.djlint, -- django templates linter
 				formatting.djlint,
 				diagnostics.markdownlint_cli2,
@@ -43,6 +42,7 @@ return {
 						buffer = bufnr,
 						callback = function()
 							vim.lsp.buf.format({
+                async = false,
 								filter = function(client)
 									--  only use null-ls for formatting instead of lsp server
 									return client.name == "null-ls"

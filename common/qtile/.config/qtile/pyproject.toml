@@ -1,0 +1,7 @@
+[tool.ruff]
+# Disable the F401 (unused import) rule
+ignore = ["F401"]
+# Enable import sorting
+select = ["I001"]
+# Enable automatic fixing
+fix = true

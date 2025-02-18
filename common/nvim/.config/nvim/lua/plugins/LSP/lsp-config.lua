@@ -192,12 +192,33 @@ return {
 			filetypes = { "python" },
 		})
 
-		-- configure python server
-		lspconfig["ruff"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-			filetypes = { "python" },
-		})
+		-- -- configure python linter and formatter
+		-- lspconfig["ruff"].setup({
+		-- 	cmd = { "ruff", "server" },
+		-- 	filetypes = { "python" },
+		-- 	init_options = {
+		-- 		settings = {
+		-- 			fixAll = true, -- Enable "fix all" (auto-fix) capability
+		-- 			organizeImports = true,
+		-- 			lint = { args = { "--config=pyproject.toml" } },
+		-- 			logLevel = "debug", -- Optional: to help debug issues
+		-- 		},
+		-- 	},
+		-- 	capabilities = capabilities,
+		-- 	on_attach = function(client, bufnr)
+		-- 		vim.api.nvim_create_autocmd("BufWritePre", {
+		-- 			buffer = bufnr,
+		-- 			callback = function()
+		-- 				vim.lsp.buf.format({
+		-- 					async = false,
+		-- 					filter = function(c)
+		-- 						return c.name == "ruff"
+		-- 					end,
+		-- 				})
+		-- 			end,
+		-- 		})
+		-- 	end,
+		-- })
 
 		-- configure django server
 		lspconfig["jinja_lsp"].setup({
@@ -222,7 +243,7 @@ return {
 				Lua = {
 					-- make the language server recognize "vim" global
 					diagnostics = {
-						globals = { "vim", "love" },
+						globals = { "vim", "love", "awesome", "screen" },
 					},
 					workspace = {
 						-- make language server aware of runtime files
@@ -238,4 +259,18 @@ return {
 			},
 		})
 	end,
+
+	-- 	-- Create a user command for organize imports
+	-- 	vim.api.nvim_create_user_command("RuffOrganizeImports", function()
+	-- 		vim.lsp.buf.code_action({
+	-- 			context = { only = { "source.organizeImports.ruff" } },
+	-- 			apply = true,
+	-- 		})
+	-- 	end, { desc = "Organize imports with Ruff" }),
+
+	-- 	-- Optionally, bind the command to a key mapping (e.g., <leader>oi)
+	-- 	vim.keymap.set("n", "<leader>oi", "<cmd>RuffOrganizeImports<CR>", {
+	-- 		buffer = bufnr,
+	-- 		desc = "Organize imports with Ruff",
+	-- 	}),
 }

@@ -2,7 +2,7 @@
 # -- ┌┬┐┌─┐┬ ┬┬─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌┐┌
 # -- │││├─┤│ │├┬┘│ │││││ │ │ ││ ││││
 # -- ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘
-# -------- * Qtile Widgets * --------
+# -------- * Qtile Screens * --------
 # -----------------------------------
 
 import socket
@@ -11,6 +11,7 @@ import subprocess
 from libqtile import bar, widget
 from libqtile.config import Screen
 
+# Get the machine hostname
 hostname = socket.gethostname()
 
 
