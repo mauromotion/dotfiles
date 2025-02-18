@@ -9,27 +9,24 @@ return {
 				astro = { "prettierd" },
 				css = { "prettierd" },
 				html = { "prettierd" },
-				htmldjango = {
-					{
-						exe = "djlint",
-						args = { "--reformat" },
-						stdin = true,
-					},
-				},
+				htmldjango = { "djlint" },
 				javascript = { "prettierd" },
 				javascriptreact = { "prettierd" },
 				json = { "prettierd" },
 				lua = { "stylua" },
 				markdown = { "prettierd" },
 				sh = { "shfmt" },
-				python = {
-					"ruff_fix",
-					"ruff_format",
-					"ruff_organize_imports",
-				},
+				python = { "ruff_organize_imports", "ruff_fix", "ruff_format" },
 				typescript = { "prettierd" },
 				typescriptreact = { "prettierd" },
 				yaml = { "prettierd" },
+			},
+			formatters = {
+				djlint = {
+					command = "djlint",
+					args = { "--reformat", "--quiet", "-" },
+					stdin = true,
+				},
 			},
 			format_on_save = {
 				lsp_fallback = true,
