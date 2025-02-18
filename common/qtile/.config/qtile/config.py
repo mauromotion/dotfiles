@@ -9,13 +9,12 @@ import os
 import subprocess
 
 from libqtile import bar, hook, widget
-from libqtile.config import Screen
 
 from settings.groups import groups
 from settings.keys import keys
 from settings.layouts import floating_layout, layouts
 from settings.mouse import mouse
-from settings.widgets import screens
+from settings.screens import screens
 
 
 # Autostart
