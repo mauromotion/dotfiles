@@ -59,7 +59,7 @@ if hostname == "eva-01":
                 colour_have_updates="#FFFAC2",
                 mouse_callbacks={
                     "Button1": lazy.spawn(
-                        "wezterm start -- sh -c 'yay -Syu --devel; read -n1'"
+                        "wezterm start -- sh -c 'yay -Syu --devel; sleep 5'"
                     )
                 },
             ),
@@ -150,7 +150,7 @@ elif hostname == "eva-03":
                 colour_have_updates="#FFFAC2",
                 mouse_callbacks={
                     "Button1": lazy.spawn(
-                        "wezterm start -- sh -c 'yay -Syu --devel; read -n1'"
+                        "wezterm start -- sh -c 'yay -Syu --devel; sleep 5'"
                     )
                 },
             ),
