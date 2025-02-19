@@ -82,6 +82,8 @@ keys = [
         lazy.window.toggle_floating(),
         desc="Toggle floating on the focused window",
     ),
+    # Center floating window
+    Key([mod], "c", lazy.window.center(), desc="Center floating window"),
     # ------ Launching Applications ------
     # Prompt
     Key(

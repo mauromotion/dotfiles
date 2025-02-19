@@ -15,7 +15,6 @@ from libqtile.config import Screen
 hostname = socket.gethostname()
 
 
-# Widgets for the bar
 widget_defaults = dict(
     font="NotoSansM Nerd Font Medium",
     fontsize=14,

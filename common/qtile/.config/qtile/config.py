@@ -8,13 +8,13 @@
 import os
 import subprocess
 
-from libqtile import bar, hook, widget
+from libqtile import hook
 
-from settings.groups import groups
 from settings.keys import keys
+from settings.groups import groups
 from settings.layouts import floating_layout, layouts
+from settings.screens import screens, widget_defaults
 from settings.mouse import mouse
-from settings.screens import screens
 
 
 # Autostart
@@ -35,7 +35,7 @@ reconfigure_screens = True
 
 # If things like steam games want to auto-minimize themselves when losing
 # focus, should we respect this or not?
-auto_minimize = True
+auto_minimize = False
 
 # When using the Wayland backend, this can be used to configure input devices.
 wl_input_rules = None
