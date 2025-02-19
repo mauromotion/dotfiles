@@ -5,6 +5,7 @@
 # ------- * Qtile Groups * ----------
 # -----------------------------------
 
+import re
 from libqtile.config import Group, Key, Match
 from libqtile.lazy import lazy
 
@@ -17,10 +18,13 @@ groups = [
     Group("2", matches=[Match(wm_class="thunderbird")]),
     Group("3", matches=[Match(wm_class="firefox-developer-edition")]),
     Group(
-        "4", matches=[Match(wm_class=["telegram-desktop", "signal-desktop", "discord"])]
+        "4",
+        matches=[
+            Match(wm_class=re.compile(r"^(telegram\-desktop|signal\-desktop|discord)$"))
+        ],
     ),
     Group("5", matches=[Match(wm_class="logseq")]),
-    Group("6", matches=[Match(wm_class=["freetube", "jellyfinmediaplayer"])]),
+    Group("6", Match(wm_class=re.compile(r"^(freetube|jellyfinmediaplayer)$"))),
     Group("7", matches=[Match(wm_class="steam")], layout="floating"),
     Group("8"),
     Group("9"),

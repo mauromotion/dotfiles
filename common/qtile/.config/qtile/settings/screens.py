@@ -57,7 +57,11 @@ if hostname == "eva-01":
                 display_format=" {updates}",
                 no_update_string="",
                 colour_have_updates="#FFFAC2",
-                mouse_callbacks={lazy.spawn("wezterm start -- yay --devel")},
+                mouse_callbacks={
+                    "Button1": lazy.spawn(
+                        "wezterm start -- sh -c 'yay -Syu --devel; read -n1'"
+                    )
+                },
             ),
             widget.Sep(foreground="#303340"),
             kernel_widget,
@@ -144,7 +148,11 @@ elif hostname == "eva-03":
                 display_format=" {updates}",
                 no_update_string="",
                 colour_have_updates="#FFFAC2",
-                mouse_callbacks={lazy.spawn("wezterm start -- yay --devel")},
+                mouse_callbacks={
+                    "Button1": lazy.spawn(
+                        "wezterm start -- sh -c 'yay -Syu --devel; read -n1'"
+                    )
+                },
             ),
             widget.Sep(foreground="#303340"),
             kernel_widget,
