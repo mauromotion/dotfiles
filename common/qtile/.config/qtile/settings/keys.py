@@ -13,6 +13,17 @@ terminal = "wezterm"  # guess_terminal()
 browser = "firefox"
 file_explorer = "thunar"
 
+
+# Toggle Max and Columns layouts to maximize a window correctly
+@lazy.function
+def maximize_by_switching_layout(qtile):
+    current_layout_name = qtile.current_group.layout.name
+    if current_layout_name == "columns":
+        qtile.current_group.layout = "max"
+    elif current_layout_name == "max":
+        qtile.current_group.layout = "columns"
+
+
 keys = [
     # ------ Windows Management ------
     # Switch between windows
@@ -74,7 +85,7 @@ keys = [
         desc="Toggle fullscreen on the focused window",
     ),
     # Toggle Maximize
-    Key([mod], "m", lazy.window.toggle_maximize(), desc="Toggle maximize"),
+    Key([mod], "m", maximize_by_switching_layout(), desc="Toggle maximize"),
     # Toggle floating
     Key(
         [mod],
