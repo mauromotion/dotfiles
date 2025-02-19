@@ -10,6 +10,7 @@ import subprocess
 
 from libqtile import bar, widget
 from libqtile.config import Screen
+from libqtile.lazy import lazy
 
 # Get the machine hostname
 hostname = socket.gethostname()
@@ -51,11 +52,12 @@ if hostname == "eva-01":
             widget.WindowName(foreground="#A6ACCD"),
             widget.Spacer(length=50),
             widget.CheckUpdates(
-                distro="Arch_yay",
-                update_interval=600,
+                distro="Arch_checkupdates",
+                update_interval=400,
                 display_format=" {updates}",
                 no_update_string="",
                 colour_have_updates="#FFFAC2",
+                mouse_callbacks={lazy.spawn("wezterm start -- yay --devel")},
             ),
             widget.Sep(foreground="#303340"),
             kernel_widget,
@@ -138,10 +140,11 @@ elif hostname == "eva-03":
             widget.Spacer(length=50),
             widget.CheckUpdates(
                 distro="Arch_yay",
-                update_interval=600,
+                update_interval=400,
                 display_format=" {updates}",
                 no_update_string="",
                 colour_have_updates="#FFFAC2",
+                mouse_callbacks={lazy.spawn("wezterm start -- yay --devel")},
             ),
             widget.Sep(foreground="#303340"),
             kernel_widget,

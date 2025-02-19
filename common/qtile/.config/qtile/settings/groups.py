@@ -5,13 +5,26 @@
 # ------- * Qtile Groups * ----------
 # -----------------------------------
 
-from libqtile.config import Group, Key
+from libqtile.config import Group, Key, Match
 from libqtile.lazy import lazy
 
 from .keys import keys, mod
 
 # Groups (workspaces)
-groups = [Group(i) for i in "123456789"]
+# groups = [Group(i) for i in "123456789"]
+groups = [
+    Group("1"),
+    Group("2", matches=[Match(wm_class="thunderbird")]),
+    Group("3", matches=[Match(wm_class="firefox-developer-edition")]),
+    Group(
+        "4", matches=[Match(wm_class=["telegram-desktop", "signal-desktop", "discord"])]
+    ),
+    Group("5", matches=[Match(wm_class="logseq")]),
+    Group("6", matches=[Match(wm_class=["freetube", "jellyfinmediaplayer"])]),
+    Group("7", matches=[Match(wm_class="steam")], layout="floating"),
+    Group("8"),
+    Group("9"),
+]
 
 for i in groups:
     keys.extend(
