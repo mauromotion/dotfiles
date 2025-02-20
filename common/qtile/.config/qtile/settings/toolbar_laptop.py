@@ -1,3 +1,5 @@
+import subprocess
+
 from libqtile import bar, widget
 from libqtile.lazy import lazy
 
