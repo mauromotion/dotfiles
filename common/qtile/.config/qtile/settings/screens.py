@@ -19,8 +19,8 @@ hostname = socket.gethostname()
 
 widget_defaults = dict(
     font="NotoSansM Nerd Font Medium",
-    fontsize=14,
-    padding=8,
+    fontsize=15,
+    padding=6,
 )
 extension_defaults = widget_defaults.copy()
 

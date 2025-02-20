@@ -5,6 +5,7 @@
 # ----- * Qtile Keybindings * -------
 # -----------------------------------
 
+from libqtile import extension as ext
 from libqtile.config import Key
 from libqtile.lazy import lazy
 
@@ -113,6 +114,21 @@ keys = [
             'rofi -show power-menu -modi "power-menu:rofi-power-menu --choices=suspend/logout/lockscreen/reboot/shutdown"'
         ),
         desc="Rofi power menu",
+    ),
+    # Dmenu
+    Key(
+        [mod],
+        "d",
+        lazy.run_extension(
+            ext.DmenuRun(
+                dmenu_prompt=">",
+                dmenu_font="Noto Sans Mono",
+                background="#1B1E28",
+                foreground="#A6ACCD",
+                selected_background="#5DE4C7",
+                selected_foreground="#1B1E28",
+            )
+        ),
     ),
     # Terminal
     Key([mod, "shift"], "Return", lazy.spawn(terminal), desc="Launch terminal"),
