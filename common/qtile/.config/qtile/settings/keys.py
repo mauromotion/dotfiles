@@ -5,13 +5,25 @@
 # ----- * Qtile Keybindings * -------
 # -----------------------------------
 
+from libqtile import extension as ext
 from libqtile.config import Key
 from libqtile.lazy import lazy
 
 mod = "mod4"
-terminal = "wezterm"  # guess_terminal()
+terminal = "wezterm start --always-new-process"
 browser = "firefox"
 file_explorer = "thunar"
+
+
+# Toggle Max and Columns layouts to maximize a window correctly
+@lazy.function
+def maximize_by_switching_layout(qtile):
+    current_layout_name = qtile.current_group.layout.name
+    if current_layout_name == "columns":
+        qtile.current_group.layout = "max"
+    elif current_layout_name == "max":
+        qtile.current_group.layout = "columns"
+
 
 keys = [
     # ------ Windows Management ------
@@ -74,7 +86,7 @@ keys = [
         desc="Toggle fullscreen on the focused window",
     ),
     # Toggle Maximize
-    Key([mod], "m", lazy.window.toggle_maximize(), desc="Toggle maximize"),
+    Key([mod], "m", maximize_by_switching_layout(), desc="Toggle maximize"),
     # Toggle floating
     Key(
         [mod],
@@ -82,6 +94,8 @@ keys = [
         lazy.window.toggle_floating(),
         desc="Toggle floating on the focused window",
     ),
+    # Center floating window
+    Key([mod], "c", lazy.window.center(), desc="Center floating window"),
     # ------ Launching Applications ------
     # Prompt
     Key(
@@ -101,6 +115,21 @@ keys = [
         ),
         desc="Rofi power menu",
     ),
+    # Dmenu
+    Key(
+        [mod],
+        "d",
+        lazy.run_extension(
+            ext.DmenuRun(
+                dmenu_prompt=">",
+                dmenu_font="Noto Sans Mono",
+                background="#1B1E28",
+                foreground="#A6ACCD",
+                selected_background="#5DE4C7",
+                selected_foreground="#1B1E28",
+            )
+        ),
+    ),
     # Terminal
     Key([mod, "shift"], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     # Browser
@@ -115,6 +144,8 @@ keys = [
         lazy.prev_layout(),
         desc="Toggle between layouts backwards",
     ),
+    # ScratchPad dropdown
+    Key([mod], "minus", lazy.group["scratchpad"].dropdown_toggle("term")),
     # ------ System ------
     # Reload Qtile configuration
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
@@ -132,6 +163,7 @@ keys = [
     # Take a Screenshot
     Key([mod, "shift"], "z", lazy.spawn("flameshot gui"), desc="Take a screenshot"),
 ]
+
 # ------ Wayland ------
 
 # # Add key bindings to switch VTs in Wayland.

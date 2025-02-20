@@ -14,18 +14,14 @@ config.pane_focus_follows_mouse = true
 -- Colorscheme
 config.color_scheme_dirs = { "~/.config/wezterm/colors" }
 config.color_scheme = "Poimandres"
-config.window_background_opacity = 1
+config.window_background_opacity = 0.95
 
 -- Font
 config.font = wezterm.font("JetBrainsMono NF", { weight = "Regular" })
--- config.font = wezterm.font("Hack Nerd Font Mono", { weight = "Regular" })
--- config.font = wezterm.font("BlexMono Nerd Font", { weight = "Medium" })
--- config.font = wezterm.font("GeistMono Nerd Font", { weight = "Regular" })
--- config.font = wezterm.font("Maple Mono NF", { weight = "Regular" })
--- config.font = wezterm.font("IosevkaTerm Nerd Font", { weight = "DemiBold" })
--- config.font = wezterm.font("FiraCode Nerd Font", { weight = "Regular" })
 config.font_size = 12
+-- config.line_height = 1.2
 config.freetype_load_flags = "DEFAULT"
+config.freetype_load_target = "Light"
 
 -- Tabs
 config.hide_tab_bar_if_only_one_tab = true
@@ -38,7 +34,6 @@ config.use_fancy_tab_bar = false
 config.show_new_tab_button_in_tab_bar = false
 config.window_frame = {
 	-- font = wezterm.font({ family = "JetBrainsMono NF", weight = "Bold" }),
-	font = wezterm.font({ family = "Maple Mono NF", weight = "Bold" }),
 	font_size = 10.5,
 	active_titlebar_bg = "rgb(36, 39, 58, 0)",
 	inactive_titlebar_bg = "rgb(36, 39, 58, 0)",

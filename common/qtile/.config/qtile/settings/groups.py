@@ -5,13 +5,30 @@
 # ------- * Qtile Groups * ----------
 # -----------------------------------
 
-from libqtile.config import Group, Key
+import re
+from libqtile.config import Group, Match, ScratchPad, DropDown, Key
 from libqtile.lazy import lazy
 
-from .keys import keys, mod
+from .keys import keys, mod, terminal
 
 # Groups (workspaces)
-groups = [Group(i) for i in "123456789"]
+# groups = [Group(i) for i in "123456789"]
+groups = [
+    Group("1"),
+    Group("2", matches=[Match(wm_class="thunderbird")]),
+    Group("3", matches=[Match(wm_class="firefox-developer-edition")]),
+    Group(
+        "4",
+        matches=[
+            Match(wm_class=re.compile(r"^(telegram\-desktop|signal\-desktop|discord)$"))
+        ],
+    ),
+    Group("5", matches=[Match(wm_class="logseq")]),
+    Group("6", Match(wm_class=re.compile(r"^(freetube|jellyfinmediaplayer)$"))),
+    Group("7", matches=[Match(wm_class="steam")], layout="floating"),
+    Group("8"),
+    Group("9"),
+]
 
 for i in groups:
     keys.extend(
@@ -36,3 +53,20 @@ for i in groups:
             #     desc="move focused window to group {}".format(i.name)),
         ]
     )
+
+# Add a scratchpad terminal
+groups.append(
+    ScratchPad(
+        "scratchpad",
+        [
+            DropDown(
+                "term",
+                # "wezterm start --always-new-process",
+                terminal,
+                opacity=0.9,
+                width=0.8,
+                height=0.6,
+            ),
+        ],
+    ),
+)

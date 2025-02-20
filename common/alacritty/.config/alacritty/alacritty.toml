@@ -1,5 +1,5 @@
-import = ["~/.config/alacritty/themes/nord-alacritty-theme.toml",]
-live_config_reload = true
+general.import = ["~/.config/alacritty/themes/poimandres-alacritty-theme.toml"]
+general.live_config_reload = true
 
 [bell]
 animation = "EaseOutExpo"
@@ -25,14 +25,14 @@ hide_when_typing = true
 history = 10000
 multiplier = 3
 
-[shell]
+[terminal.shell]
 program = "/bin/zsh"
 
 [window]
 decorations = "Full"
 dynamic_padding = true
 dynamic_title = true
-opacity = 1
+opacity = 0.95
 
 [window.padding]
 x = 5
@@ -42,17 +42,19 @@ y = 5
 size = 12
 
 [font.bold]
-family = "JetBrainsMono NF"
+family = "JetBrainsMonoNL NF"
 style = "Bold"
 
 [font.bold_italic]
-family = "JetBrainsMono NF"
+family = "JetBrainsMonoNL NF"
 style = "Bold Italic"
 
 [font.italic]
-family = "JetBrainsMono NF"
+family = "JetBrainsMonoNL NF"
 style = "Medium Italic"
 
 [font.normal]
-family = "JetBrainsMono NF"
+family = "JetBrainsMonoNL NF"
 style = "Medium"
+
+[terminal]
