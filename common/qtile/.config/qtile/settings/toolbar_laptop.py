@@ -31,7 +31,7 @@ def laptop_toolbar():
             widget.WindowName(foreground="#A6ACCD"),
             widget.Spacer(length=50),
             widget.CheckUpdates(
-                distro="Arch_yay",
+                distro="Arch_checkupdates",
                 update_interval=400,
                 display_format=" {updates}",
                 no_update_string="",
