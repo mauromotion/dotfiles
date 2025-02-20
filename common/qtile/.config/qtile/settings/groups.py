@@ -61,7 +61,8 @@ groups.append(
         [
             DropDown(
                 "term",
-                "wezterm start --always-new-process",
+                # "wezterm start --always-new-process",
+                terminal,
                 opacity=0.9,
                 width=0.8,
                 height=0.6,

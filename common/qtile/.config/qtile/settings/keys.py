@@ -9,7 +9,7 @@ from libqtile.config import Key
 from libqtile.lazy import lazy
 
 mod = "mod4"
-terminal = "wezterm"  # guess_terminal()
+terminal = "wezterm start --always-new-process"
 browser = "firefox"
 file_explorer = "thunar"
 
