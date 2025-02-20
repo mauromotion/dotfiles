@@ -147,6 +147,7 @@ keys = [
     # Take a Screenshot
     Key([mod, "shift"], "z", lazy.spawn("flameshot gui"), desc="Take a screenshot"),
 ]
+
 # ------ Wayland ------
 
 # # Add key bindings to switch VTs in Wayland.
