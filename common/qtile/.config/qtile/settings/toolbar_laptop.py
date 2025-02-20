@@ -24,6 +24,7 @@ def laptop_toolbar():
             ),
             widget.Sep(foreground="#5DE4C7", linewidth=1),
             widget.CurrentLayout(foreground="#5DE4C7"),
+            widget.Sep(foreground="#5DE4C7", linewidth=1),
             widget.Prompt(
                 foreground="#FFFAC2",
             ),

@@ -21,10 +21,12 @@ def desktop_toolbar():
                 this_current_screen_border="#5DE4C7",
                 rounded=False,
                 block_highlight_text_color="#1B1E28",
-                foreground="#303340",
+                foreground="#767C9D",
+                inactive="#767C9D",
             ),
             widget.Sep(foreground="#5DE4C7", linewidth=1),
             widget.CurrentLayout(foreground="#5DE4C7"),
+            widget.Sep(foreground="#5DE4C7", linewidth=1),
             widget.Prompt(
                 foreground="#FFFAC2",
             ),
