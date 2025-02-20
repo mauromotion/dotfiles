@@ -128,6 +128,8 @@ keys = [
         lazy.prev_layout(),
         desc="Toggle between layouts backwards",
     ),
+    # ScratchPad dropdown
+    Key([mod], "minus", lazy.group["scratchpad"].dropdown_toggle("term")),
     # ------ System ------
     # Reload Qtile configuration
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),

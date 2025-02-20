@@ -6,10 +6,10 @@
 # -----------------------------------
 
 import re
-from libqtile.config import Group, Key, Match
+from libqtile.config import Group, Match, ScratchPad, DropDown, Key
 from libqtile.lazy import lazy
 
-from .keys import keys, mod
+from .keys import keys, mod, terminal
 
 # Groups (workspaces)
 # groups = [Group(i) for i in "123456789"]
@@ -53,3 +53,19 @@ for i in groups:
             #     desc="move focused window to group {}".format(i.name)),
         ]
     )
+
+# Add a scratchpad terminal
+groups.append(
+    ScratchPad(
+        "scratchpad",
+        [
+            DropDown(
+                "term",
+                "wezterm start --always-new-process",
+                opacity=0.9,
+                width=0.8,
+                height=0.6,
+            ),
+        ],
+    ),
+)
