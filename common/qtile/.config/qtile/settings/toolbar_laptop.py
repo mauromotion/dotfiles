@@ -42,8 +42,8 @@ def laptop_toolbar():
                 },
             ),
             widget.Sep(foreground="#303340"),
-            kernel_widget,
-            widget.Sep(foreground="#303340"),
+            # kernel_widget,
+            # widget.Sep(foreground="#303340"),
             widget.DF(
                 format="󱛟 {p} ({uf}{m}|{r:.0f}%)",
                 partition="/",
@@ -79,7 +79,7 @@ def laptop_toolbar():
             widget.Sep(foreground="#303340"),
             widget.OpenWeather(
                 location="Bromley,UK",
-                format="{icon} {main_temp:.1f}°{units_temperature} ({main_feels_like:.0f}°{units_temperature})",
+                format="{icon} {main_temp:.1f}°{units_temperature}",
                 update_interval=600,
                 foreground="#5FB3A1",
                 mouse_callbacks={
