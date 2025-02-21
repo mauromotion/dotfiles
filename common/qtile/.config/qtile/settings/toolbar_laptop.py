@@ -38,9 +38,7 @@ def laptop_toolbar():
                 no_update_string="",
                 colour_have_updates="#FFFAC2",
                 mouse_callbacks={
-                    "Button1": lazy.spawn(
-                        "wezterm start -- sh -c 'yay -Syu --devel; sleep 5'"
-                    )
+                    "Button1": lazy.group["scratchpad"].dropdown_toggle("updates")
                 },
             ),
             widget.Sep(foreground="#303340"),
@@ -79,6 +77,16 @@ def laptop_toolbar():
                 full_char="󰁹",
             ),
             widget.Sep(foreground="#303340"),
+            widget.OpenWeather(
+                location="Bromley,UK",
+                format="{icon} {main_temp:.1f}°{units_temperature} ({main_feels_like:.0f}°{units_temperature})",
+                update_interval=600,
+                foreground="#5FB3A1",
+                mouse_callbacks={
+                    "Button1": lazy.group["scratchpad"].dropdown_toggle("weather")
+                },
+            ),
+            widget.Sep(foreground="#303340"),
             widget.KeyboardLayout(
                 configured_keyboards=["gb colemak_dh", "gb"],
                 display_map={"gb colemak_dh": "󰌌 gb_clmk-dh", "gb": "󰌌 gb"},
@@ -91,6 +99,9 @@ def laptop_toolbar():
                 format="%b %d (%a) %H:%M",
                 background="#5DE4C7",
                 foreground="#1B1E28",
+                mouse_callbacks={
+                    "Button1": lazy.group["scratchpad"].dropdown_toggle("calendar")
+                },
             ),
         ],
         24,
