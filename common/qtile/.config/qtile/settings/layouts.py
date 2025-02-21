@@ -15,6 +15,7 @@ layouts = [
         border_focus="#5DE4C7",
         border_focus_stack=["#89DDFF", "#ADD7FF"],
         border_width=1,
+        initial_ratio=1.3,
         # margin=6,
         # margin_on_single=25,
     ),
