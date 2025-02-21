@@ -146,6 +146,8 @@ keys = [
     ),
     # ScratchPad dropdown
     Key([mod], "minus", lazy.group["scratchpad"].dropdown_toggle("term")),
+    Key([mod, "shift"], "w", lazy.group["scratchpad"].dropdown_toggle("weather")),
+    Key([mod, "shift"], "c", lazy.group["scratchpad"].dropdown_toggle("calendar")),
     # ------ System ------
     # Reload Qtile configuration
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
