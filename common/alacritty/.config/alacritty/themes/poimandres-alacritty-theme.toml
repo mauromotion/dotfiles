@@ -1,6 +1,6 @@
 [colors.primary]
 background = "0x1b1e28"
-foreground = "0xa6accd"
+foreground = "#E4F0FB"
 
 [colors.cursor]
 text = "CellBackground"
@@ -30,7 +30,7 @@ yellow = "0xfffac2"
 blue = "0x89ddff"
 magenta = "0xfcc5e9"
 cyan = "0xadd7ff"
-white = "0xffffff"
+white = "#E4F0FB"
 
 [colors.bright]
 black = "0xa6accd"
