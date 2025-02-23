@@ -75,6 +75,7 @@ groups.append(
                 opacity=0.9,
                 width=0.8,
                 height=0.6,
+                on_focus_lost_hide=False,
             ),
             DropDown(
                 "weather",

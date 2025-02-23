@@ -41,7 +41,9 @@ if [[ "$HOSTNAME" == "eva-01" ]]; then
   nm-applet &
   nextcloud --background &
   openrgb --startminimized &
-  xset b 100 &
+  xset b 100 & # system bell volume
+  xset -dpms & # Disable DPMS
+  xset s off & # Disable screen blanking
   xbindkeys &
   xidlehook --not-when-fullscreen --not-when-audio --timer 600 "betterlockscreen -l dimblur" "" --timer 3600 "systemctl suspend" "" &
   ~/.icc_color_profiles/load_icc_color_profiles.sh &
