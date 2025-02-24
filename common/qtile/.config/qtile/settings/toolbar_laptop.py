@@ -18,16 +18,18 @@ def laptop_toolbar():
     return bar.Bar(
         [
             widget.GroupBox(
-                highlight_method="line",
+                highlight_method="block",
                 active=colors["accent1"][0],
                 this_current_screen_border=colors["accent1"][0],
                 rounded=False,
-                foreground=colors["background"][1],
+                block_highlight_text_color=colors["background"][0],
+                foreground=colors["black"][1],
+                inactive=colors["black"][1],
             ),
+            widget.Sep(foreground=colors["accent1"][0], linewidth=1),
             # widget.TextBox(
             #     "ς", foreground=colors["accent1"][0], font="NotoSansM Nerd Font 16"
             # ),
-            widget.Sep(foreground=colors["accent1"][0], linewidth=1),
             widget.CurrentLayout(foreground=colors["accent1"][0]),
             widget.Sep(foreground=colors["accent1"][0], linewidth=1),
             widget.Prompt(
