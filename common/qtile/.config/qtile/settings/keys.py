@@ -9,6 +9,8 @@ from libqtile import extension as ext
 from libqtile.config import Key
 from libqtile.lazy import lazy
 
+from .theme import colors
+
 mod = "mod4"
 terminal = "wezterm start --always-new-process"
 browser = "firefox"
@@ -123,10 +125,10 @@ keys = [
             ext.DmenuRun(
                 dmenu_prompt=">",
                 dmenu_font="Noto Sans Mono",
-                background="#1B1E28",
-                foreground="#A6ACCD",
-                selected_background="#5DE4C7",
-                selected_foreground="#1B1E28",
+                background=colors["background"][0],
+                foreground=colors["foreground"][0],
+                selected_background=colors["accent1"][0],
+                selected_foreground=colors["background"][0],
             )
         ),
     ),

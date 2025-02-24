@@ -1,0 +1,14 @@
+{
+  "foreground": ["#A6ACCD", "#E4F0FB"],
+  "background": ["#1B1E28", "#303340"],
+  "accent1": ["#5DE4C7", "#5DE4C7"],
+  "accent2": ["#FFFAC2", "#FFFAC2"],
+  "red": ["#D0679D", "#F087BD"],
+  "green": ["#5FB3A1", "#5DE4C7"],
+  "yellow": ["#FFFAC2", "#FFFAC2"],
+  "blue": ["#ADD7FF", "#ADD7FF"],
+  "magenta": ["#FCC5E9", "#FAE4FC"],
+  "cyan": ["#89DDFF", "#89DDFF"],
+  "black": ["#1B1E28", "#767C9D"],
+  "white": ["#E4F0FB", "#FFFFFF"]
+}

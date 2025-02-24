@@ -756,3 +756,7 @@
 2025/02/15 (10:53:11) | ===> btop++ v.1.4.0
 2025/02/15 (10:53:11) | ERROR: Stall in Runner thread, restarting!
 2025/02/15 (15:28:11) | ERROR: Stall in Runner thread, restarting!
+
+2025/02/24 (08:30:37) | ===> btop++ v.1.4.0
+2025/02/24 (08:30:37) | ERROR: Stall in Runner thread, restarting!
+2025/02/24 (17:01:32) | WARNING: Failed to join _runner thread on exit!

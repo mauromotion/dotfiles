@@ -7,13 +7,14 @@
 
 from libqtile import layout
 from libqtile.config import Match
+from .theme import colors
 
 # Layouts configs
 layouts = [
     layout.Columns(
-        border_normal="#303340",
-        border_focus="#5DE4C7",
-        border_focus_stack=["#89DDFF", "#ADD7FF"],
+        border_normal=colors["background"][1],
+        border_focus=colors["accent1"][0],
+        border_focus_stack=[colors["cyan"][0], colors["blue"][0]],
         border_width=1,
         # initial_ratio=1.3,
         # margin=6,
@@ -22,18 +23,20 @@ layouts = [
     layout.Max(),
     layout.TreeTab(
         place_right=True,
-        active_bg="#5DE4C7",
-        active_fg="#1B1E28",
-        inactive_bg="#303340",
-        bg_color="#1B1E28",
+        active_bg=colors["accent1"][0],
+        active_fg=colors["background"][0],
+        inactive_bg=colors["background"][1],
+        bg_color=colors["background"][0],
     ),
-    layout.Floating(border_focus="#5DE4C7", border_normal="#1B1E28"),
+    layout.Floating(
+        border_focus=colors["accent1"][0], border_normal=colors["background"][0]
+    ),
     # layout.Bsp(),
     # layout.Matrix(),
     # layout.MonadTall(
-    #     border_normal="#303340",
-    #     border_focus="#5DE4C7",
-    #     border_focus_stack=["#89DDFF", "#ADD7FF"],
+    #     border_normal=colors["background"][1],
+    #     border_focus=colors["accent1"][0],
+    #     border_focus_stack=[colors["cyan"][0], colors["blue"][0]],
     #     border_width=1,
     #     # margin=6,
     # ),
@@ -72,7 +75,7 @@ floating_layout = layout.Floating(
         Match(wm_class="org.cryptomator.launcher.Cryptomator$MainApp"),
         Match(wm_class="vlc"),
     ],
-    border_focus="#5DE4C7",
-    border_normal="#1B1E28",
+    border_focus=colors["accent1"][0],
+    border_normal=colors["background"][0],
     border_width=1,
 )
