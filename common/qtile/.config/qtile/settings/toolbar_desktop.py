@@ -27,6 +27,11 @@ def desktop_toolbar():
                 inactive=colors["black"][1],
             ),
             widget.Sep(foreground=colors["accent1"][0], linewidth=1),
+            # widget.TextBox(
+            #     "layout:",
+            #     foreground=colors["accent1"][0],
+            #     font="NotoSansM Nerd Font 16",
+            # ),
             widget.CurrentLayout(foreground=colors["accent1"][0]),
             widget.Sep(foreground=colors["accent1"][0], linewidth=1),
             widget.Prompt(

@@ -24,6 +24,9 @@ def laptop_toolbar():
                 rounded=False,
                 foreground=colors["background"][1],
             ),
+            # widget.TextBox(
+            #     "ς", foreground=colors["accent1"][0], font="NotoSansM Nerd Font 16"
+            # ),
             widget.Sep(foreground=colors["accent1"][0], linewidth=1),
             widget.CurrentLayout(foreground=colors["accent1"][0]),
             widget.Sep(foreground=colors["accent1"][0], linewidth=1),
