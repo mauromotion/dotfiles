@@ -53,25 +53,32 @@ def desktop_toolbar():
             widget.Sep(foreground=colors["background"][1]),
             kernel_widget,
             widget.Sep(foreground=colors["background"][1]),
-            widget.DF(
-                format="󱛟 /root {uf}{m}|{r:.0f}%",
-                partition="/",
-                visible_on_warn=False,
+            widget.WidgetBox(
                 foreground=colors["foreground"][0],
-            ),
-            widget.DF(
-                format="󱛟 /data {uf}{m}|{r:.0f}%",
-                partition="/media/Linux_Data",
-                visible_on_warn=False,
-                foreground=colors["foreground"][0],
-                warn_color=colors["red"][0],
+                text_closed="  ",
+                text_open=" ",
+                widgets=[
+                    widget.DF(
+                        format="󱛟 root/ {uf}{m}|{r:.0f}%",
+                        partition="/",
+                        visible_on_warn=False,
+                        foreground=colors["foreground"][0],
+                    ),
+                    widget.DF(
+                        format="󱛟 data/ {uf}{m}|{r:.0f}%",
+                        partition="/media/Linux_Data",
+                        visible_on_warn=False,
+                        foreground=colors["foreground"][0],
+                        warn_color=colors["red"][0],
+                    ),
+                ],
             ),
             widget.Sep(foreground=colors["background"][1]),
             # widget.CPU(
             #     format=" {freq_current}GHz {load_percent}%", foreground=colors["green"][0]
             # ),
             widget.Memory(
-                format=" {MemUsed: .0f}{mm}/{MemTotal: .0f}{mm}",
+                format=" {MemUsed: .0f}{mm}/{MemTotal:.0f}{mm}",
                 measure_mem="G",
                 foreground=colors["foreground"][0],
             ),

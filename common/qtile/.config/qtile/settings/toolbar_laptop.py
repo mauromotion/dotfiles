@@ -59,7 +59,7 @@ def laptop_toolbar():
             ),
             widget.Sep(foreground=colors["background"][1]),
             widget.Memory(
-                format=" {MemUsed: .0f}{mm}/{MemTotal: .0f}{mm}",
+                format=" {MemUsed: .0f}{mm}/{MemTotal:.0f}{mm}",
                 measure_mem="G",
                 foreground=colors["foreground"][0],
             ),
