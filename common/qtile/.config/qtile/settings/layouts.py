@@ -16,7 +16,7 @@ layouts = [
         border_focus=colors["accent1"][0],
         border_focus_stack=[colors["cyan"][0], colors["blue"][0]],
         border_width=1,
-        # initial_ratio=1.3,
+        # initial_ratio=1.50,
         # margin=6,
         # margin_on_single=25,
     ),

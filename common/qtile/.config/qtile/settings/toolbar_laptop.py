@@ -18,13 +18,13 @@ def laptop_toolbar():
     return bar.Bar(
         [
             widget.GroupBox(
-                highlight_method="block",
+                highlight_method="text",
                 active=colors["accent1"][0],
-                this_current_screen_border=colors["accent1"][0],
+                inactive=colors["black"][1],
+                this_current_screen_border=colors["accent2"][0],
                 rounded=False,
                 block_highlight_text_color=colors["background"][0],
                 foreground=colors["black"][1],
-                inactive=colors["black"][1],
             ),
             widget.Sep(foreground=colors["accent1"][0], linewidth=1),
             # widget.TextBox(
