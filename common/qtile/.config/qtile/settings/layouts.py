@@ -16,7 +16,7 @@ layouts = [
         border_focus=colors["accent1"][0],
         border_focus_stack=[colors["cyan"][0], colors["blue"][0]],
         border_width=1,
-        # initial_ratio=1.50,
+        initial_ratio=1.618,
         # margin=6,
         # margin_on_single=25,
     ),
@@ -31,7 +31,6 @@ layouts = [
     layout.Floating(
         border_focus=colors["accent1"][0], border_normal=colors["background"][0]
     ),
-    # layout.Bsp(),
     # layout.Matrix(),
     # layout.MonadTall(
     #     border_normal=colors["background"][1],
@@ -43,7 +42,6 @@ layouts = [
     # layout.MonadWide(),
     # layout.RatioTile(),
     # layout.Stack(num_stacks=2),
-    # layout.Tile(),
     # layout.VerticalTile(),
     # layout.Zoomy(),
 ]

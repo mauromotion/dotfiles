@@ -1,5 +1,5 @@
-theme = tokyonight
-background-opacity = 1
+theme = poimandres
+background-opacity = 0.95
 window-decoration = false
 window-padding-x = 2
 window-padding-balance = true
