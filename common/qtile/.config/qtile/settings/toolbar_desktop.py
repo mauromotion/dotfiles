@@ -37,9 +37,8 @@ def desktop_toolbar():
             widget.Prompt(
                 foreground=colors["accent2"][0],
             ),
-            widget.Spacer(length=50),
             widget.WindowName(foreground=colors["foreground"][0]),
-            widget.Spacer(length=50),
+            widget.Spacer(length=10),
             widget.CheckUpdates(
                 distro="Arch_checkupdates",
                 update_interval=400,
