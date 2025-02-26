@@ -12,7 +12,7 @@ from .theme import colors
 # Layouts configs
 layouts = [
     layout.Columns(
-        border_normal=colors["background"][1],
+        border_normal=colors["background"][0],
         border_focus=colors["accent1"][0],
         border_focus_stack=[colors["cyan"][0], colors["blue"][0]],
         border_width=1,
