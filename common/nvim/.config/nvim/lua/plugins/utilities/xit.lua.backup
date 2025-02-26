@@ -1,0 +1,8 @@
+return {
+	"synaptiko/xit.nvim",
+	ft = "xit", -- lazy-load only for .xit files
+	config = function()
+		require("xit").setup()
+		vim.cmd("TSInstall! xit") -- ensure the tree-sitter grammar for xit is installed
+	end,
+}
