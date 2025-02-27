@@ -10,27 +10,38 @@ from libqtile.config import Group, Match, ScratchPad, DropDown, Key
 from libqtile.lazy import lazy
 
 from .keys import keys, mod, terminal
+from .icons import dots, font_awesome, mixed_geo, moons, numbers, text
+
+# Choose the icons set to use
+icons = mixed_geo
 
 # Groups (workspaces)
-# groups = [Group(i) for i in "123456789"]
+label_style = ["font_awesome", "numbers", "circles", "mixed_geo", "moons"]
+
 groups = [
-    Group("1", label=""),
-    Group("2", label="", matches=[Match(wm_class="thunderbird")]),
-    Group("3", label="", matches=[Match(wm_class="firefox-developer-edition")]),
+    Group("1", label=icons[0]),
+    Group("2", label=icons[1], matches=[Match(wm_class="thunderbird")]),
+    Group(
+        "3",
+        label=icons[2],
+        matches=[Match(wm_class="firefox-developer-edition")],
+    ),
     Group(
         "4",
-        label="",
+        label=icons[3],
         matches=[
             Match(wm_class=re.compile(r"^(telegram\-desktop|signal\-desktop|discord)$"))
         ],
     ),
-    Group("5", label="", matches=[Match(wm_class="logseq")]),
+    Group("5", label=icons[4], matches=[Match(wm_class="logseq")]),
     Group(
-        "6", Match(wm_class=re.compile(r"^(freetube|jellyfinmediaplayer)$")), label=""
+        "6",
+        Match(wm_class=re.compile(r"^(freetube|jellyfinmediaplayer)$")),
+        label=icons[5],
     ),
-    Group("7", label="", matches=[Match(wm_class="steam")], layout="floating"),
-    Group("8", label=""),
-    Group("9", label=""),
+    Group("7", label=icons[6], matches=[Match(wm_class="steam")], layout="floating"),
+    Group("8", label=icons[7]),
+    Group("9", label=icons[8]),
 ]
 
 for i in groups:

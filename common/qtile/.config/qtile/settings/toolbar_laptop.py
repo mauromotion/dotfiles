@@ -18,6 +18,8 @@ def laptop_toolbar():
     return bar.Bar(
         [
             widget.GroupBox(
+                font="Font Awesome 6 Free",
+                fontsize=18,
                 highlight_method="text",
                 active=colors["accent1"][0],
                 inactive=colors["black"][1],
