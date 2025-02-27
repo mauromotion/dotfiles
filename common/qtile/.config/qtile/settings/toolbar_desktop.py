@@ -105,7 +105,7 @@ def desktop_toolbar():
             ),
             widget.Sep(foreground=colors["background"][1]),
             widget.Systray(),
-            widget.Sep(foreground=colors["background"][1]),
+            widget.Spacer(length=10),
             widget.Clock(
                 format="%b %d (%a) %H:%M",
                 background=colors["accent1"][0],

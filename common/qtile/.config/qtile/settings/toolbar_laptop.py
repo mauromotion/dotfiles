@@ -27,9 +27,6 @@ def laptop_toolbar():
                 foreground=colors["black"][1],
             ),
             widget.Sep(foreground=colors["accent1"][0], linewidth=1),
-            # widget.TextBox(
-            #     "ς", foreground=colors["accent1"][0], font="NotoSansM Nerd Font 16"
-            # ),
             widget.CurrentLayout(foreground=colors["accent1"][0]),
             widget.Sep(foreground=colors["accent1"][0], linewidth=1),
             widget.Prompt(
@@ -100,7 +97,7 @@ def laptop_toolbar():
             ),
             widget.Sep(foreground=colors["background"][1]),
             widget.Systray(),
-            widget.Sep(foreground=colors["background"][1]),
+            widget.Spacer(length=10),
             widget.Clock(
                 format="%b %d (%a) %H:%M",
                 background=colors["accent1"][0],
