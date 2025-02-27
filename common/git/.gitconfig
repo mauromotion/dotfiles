@@ -26,6 +26,8 @@
 
 [diff]
   colorMoved = default
+	; tool = delta
+  external = difft
 
 [color]
 	ui = auto

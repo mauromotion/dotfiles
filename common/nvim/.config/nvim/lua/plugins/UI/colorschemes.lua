@@ -59,6 +59,7 @@ return {
 		config = function()
 			-- local p = require("poimandres.palette")
 			require("poimandres").setup({
+				-- bold_vert_split = true,
 				disable_italics = false,
 				disable_background = true,
 				-- highlight_groups = {
