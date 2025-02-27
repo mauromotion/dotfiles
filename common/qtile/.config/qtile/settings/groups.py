@@ -14,23 +14,23 @@ from .keys import keys, mod, terminal
 # Groups (workspaces)
 # groups = [Group(i) for i in "123456789"]
 groups = [
-    Group("1", label="󰄯"),
-    Group("2", label="󰄯", matches=[Match(wm_class="thunderbird")]),
-    Group("3", label="󰄯", matches=[Match(wm_class="firefox-developer-edition")]),
+    Group("1", label=""),
+    Group("2", label="", matches=[Match(wm_class="thunderbird")]),
+    Group("3", label="", matches=[Match(wm_class="firefox-developer-edition")]),
     Group(
         "4",
-        label="󰄯",
+        label="",
         matches=[
             Match(wm_class=re.compile(r"^(telegram\-desktop|signal\-desktop|discord)$"))
         ],
     ),
-    Group("5", label="󰄯", matches=[Match(wm_class="logseq")]),
+    Group("5", label="", matches=[Match(wm_class="logseq")]),
     Group(
-        "6", Match(wm_class=re.compile(r"^(freetube|jellyfinmediaplayer)$")), label="󰄯"
+        "6", Match(wm_class=re.compile(r"^(freetube|jellyfinmediaplayer)$")), label=""
     ),
-    Group("7", label="󰄯", matches=[Match(wm_class="steam")], layout="floating"),
-    Group("8", label="󰄯"),
-    Group("9", label="󰄯"),
+    Group("7", label="", matches=[Match(wm_class="steam")], layout="floating"),
+    Group("8", label=""),
+    Group("9", label=""),
 ]
 
 for i in groups:
