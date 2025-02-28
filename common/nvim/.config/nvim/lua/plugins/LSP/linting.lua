@@ -7,28 +7,28 @@ return {
 	config = function()
 		local lint = require("lint")
 
-		lint.linters.ruff = {
-			init_options = {
-				settings = {
-					logLevel = "debug",
-				},
-			},
-			cmd = "ruff",
-			args = { "check", "--format", "default", "--config=pyproject.toml", "-" },
-			stdin = true, -- send file contents via stdin
-			append_fname = false, -- filename is already handled by the '-' argument
-			stream = "stdout",
-			ignore_exitcode = true, -- so non-zero exit codes (due to lint errors) don't break linting
-			parser = require("lint.parser").from_pattern(
-				"^(%S+):(%d+):(%d+):%s+(%w+):%s+(.*)$", -- pattern capturing: file, line, col, severity, message
-				{ "file", "lnum", "col", "code", "message" },
-				{
-					E = vim.diagnostic.severity.ERROR,
-					W = vim.diagnostic.severity.WARN,
-					I = vim.diagnostic.severity.INFO,
-				}
-			),
-		}
+		-- lint.linters.ruff = {
+		-- 	init_options = {
+		-- 		settings = {
+		-- 			logLevel = "debug",
+		-- 		},
+		-- 	},
+		-- 	cmd = "ruff",
+		-- 	args = { "check", "--format", "default", "--config=pyproject.toml", "-" },
+		-- 	stdin = true, -- send file contents via stdin
+		-- 	append_fname = false, -- filename is already handled by the '-' argument
+		-- 	stream = "stdout",
+		-- 	ignore_exitcode = true, -- so non-zero exit codes (due to lint errors) don't break linting
+		-- 	parser = require("lint.parser").from_pattern(
+		-- 		"^(%S+):(%d+):(%d+):%s+(%w+):%s+(.*)$", -- pattern capturing: file, line, col, severity, message
+		-- 		{ "file", "lnum", "col", "code", "message" },
+		-- 		{
+		-- 			E = vim.diagnostic.severity.ERROR,
+		-- 			W = vim.diagnostic.severity.WARN,
+		-- 			I = vim.diagnostic.severity.INFO,
+		-- 		}
+		-- 	),
+		-- }
 
 		lint.linters_by_ft = {
 			javascript = { "eslint_d" },
