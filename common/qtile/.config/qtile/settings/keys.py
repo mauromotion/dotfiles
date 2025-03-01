@@ -13,7 +13,7 @@ from .theme import colors
 
 mod = "mod4"
 terminal = "kitty"  # "wezterm start --always-new-process"
-browser = "firefox"
+browser = "vivaldi"
 file_explorer = "thunar"
 
 
@@ -171,6 +171,10 @@ keys = [
     ),
     # Take a Screenshot
     Key([mod, "shift"], "z", lazy.spawn("flameshot gui"), desc="Take a screenshot"),
+    # Multimedia
+    Key([mod], "period", lazy.spawn("playerctl play-pause"), desc="Play/pause"),
+    Key([mod], "slash", lazy.spawn("playerctl next"), desc="Play next track"),
+    Key([mod], "comma", lazy.spawn("playerctl previous"), desc="Play previous track"),
 ]
 
 # ------ Wayland ------
