@@ -30,8 +30,8 @@ def maximize_by_switching_layout(qtile):
 keys = [
     # ------ Windows Management ------
     # Switch between groups with meta-arrows
-    Key([mod], "left", lazy.screen.prev_group(), desc="Switch to previous group"),
-    Key([mod], "right", lazy.screen.next_group(), desc="Switch to next group"),
+    # Key([mod], "left", lazy.screen.prev_group(), desc="Switch to previous group"),
+    # Key([mod], "right", lazy.screen.next_group(), desc="Switch to next group"),
     # Switch between windows
     Key([mod], "n", lazy.layout.left(), desc="Move focus to left"),
     Key([mod], "o", lazy.layout.right(), desc="Move focus to right"),
