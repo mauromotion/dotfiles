@@ -29,6 +29,9 @@ def maximize_by_switching_layout(qtile):
 
 keys = [
     # ------ Windows Management ------
+    # Switch between groups with meta-arrows
+    Key([mod], "left", lazy.screen.prev_group(), desc="Switch to previous group"),
+    Key([mod], "right", lazy.screen.next_group(), desc="Switch to next group"),
     # Switch between windows
     Key([mod], "n", lazy.layout.left(), desc="Move focus to left"),
     Key([mod], "o", lazy.layout.right(), desc="Move focus to right"),
@@ -152,9 +155,24 @@ keys = [
         desc="Toggle between layouts backwards",
     ),
     # ScratchPad dropdown
-    Key([mod], "minus", lazy.group["scratchpad"].dropdown_toggle("term")),
-    Key([mod, "shift"], "w", lazy.group["scratchpad"].dropdown_toggle("weather")),
-    Key([mod, "shift"], "c", lazy.group["scratchpad"].dropdown_toggle("calendar")),
+    Key(
+        [mod],
+        "minus",
+        lazy.group["scratchpad"].dropdown_toggle("term"),
+        desc="Launch terminal scratchpad",
+    ),
+    Key(
+        [mod, "shift"],
+        "w",
+        lazy.group["scratchpad"].dropdown_toggle("weather"),
+        desc="Launch weather scratchpad",
+    ),
+    Key(
+        [mod, "shift"],
+        "c",
+        lazy.group["scratchpad"].dropdown_toggle("calendar"),
+        desc="Launch calendar scratchpad",
+    ),
     # ------ System ------
     # Reload Qtile configuration
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
