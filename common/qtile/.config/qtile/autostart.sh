@@ -14,6 +14,8 @@ processes=(
   "nm-applet"
   "blueman-applet"
   "polkit-gnome-au"
+  "clipit"
+  "caffeine-ng"
   "nextcloud"
   "openrgb"
   "xbindkeys"
@@ -39,6 +41,8 @@ if [[ "$HOSTNAME" == "eva-01" ]]; then
   udiskie -a -n -t &
   /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
   nm-applet &
+  caffeine &
+  clipit &
   nextcloud --background &
   openrgb --startminimized &
   xset b 100 & # system bell volume
@@ -56,6 +60,8 @@ elif [[ "$HOSTNAME" == "eva-03" ]]; then
   udiskie -a -n -t &
   /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
   nm-applet &
+  caffeine &
+  clipit &
   blueman-applet &
   nextcloud --background &
   xbindkeys &

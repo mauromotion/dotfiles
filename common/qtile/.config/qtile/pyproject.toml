@@ -1,5 +1,7 @@
 [tool.ruff]
 # Disable the F401 (unused import) rule
-ignore = ["I001", "F401"] # the first rule is "ignore unsorted imports", the second is "ignore unused imports"
+ignore = [
+  "I001",
+] # the first rule is "ignore unsorted imports", the second is "ignore unused imports"
 # Enable automatic fixing
 unfixable = ["I001", "F401"]
