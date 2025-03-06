@@ -31,7 +31,7 @@
   "mini.sessions": { "branch": "main", "commit": "f38354b72c11d5bbb2153183fa6ba0cf238147d5" },
   "mini.starter": { "branch": "main", "commit": "736c5177bd90cc852c05d903f662f0fc395a4b4b" },
   "neo-tree.nvim": { "branch": "v3.x", "commit": "16854ed5559b940f69a6f7138906ebb22c15c553" },
-  "nui.nvim": { "branch": "main", "commit": "53e907ffe5eedebdca1cd503b00aa8692068ca46" },
+  "nui.nvim": { "branch": "main", "commit": "8d3bce9764e627b62b07424e0df77f680d47ffdb" },
   "nvim-cmp": { "branch": "main", "commit": "c27370703e798666486e3064b64d59eaf4bdc6d5" },
   "nvim-highlight-colors": { "branch": "main", "commit": "a770df5fbd98abbb0fc1a95d9a3f2bb1e51e3e2c" },
   "nvim-lint": { "branch": "master", "commit": "6e9dd545a1af204c4022a8fcd99727ea41ffdcc8" },

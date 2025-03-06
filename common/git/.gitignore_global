@@ -49,7 +49,3 @@ db.sqlite3-journal
 ## Flask stuff:
 instance/
 .webassets-cache
-
-## Directories for FZF
-.wine/
-Games/
