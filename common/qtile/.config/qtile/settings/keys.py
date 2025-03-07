@@ -13,7 +13,7 @@ from .theme import colors
 
 mod = "mod4"
 terminal = "kitty"  # "wezterm start --always-new-process"
-browser = "firefox"
+browser = "waterfox"
 file_explorer = "thunar"
 
 
