@@ -115,7 +115,7 @@ keys = [
         desc="Spawn a command using a prompt widget",
     ),
     # Launcher
-    Key([mod], "g", lazy.spawn("rofi -show combi"), desc="Rofi launcher"),
+    Key([mod], "g", lazy.spawn("rofi -show drun"), desc="Rofi launcher"),
     # Power Menu
     Key(
         [mod],

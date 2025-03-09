@@ -1,5 +1,5 @@
 configuration{
-    modi: "drun,run,window";
+    modi: "window,run,drun";
     icon-theme: "Oranchelo";
     show-icons: true;
     terminal: "wezterm";
