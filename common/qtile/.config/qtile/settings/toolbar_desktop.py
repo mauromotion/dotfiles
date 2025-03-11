@@ -51,7 +51,7 @@ def desktop_toolbar():
             widget.Sep(foreground=colors["background"][1]),
             widget.WidgetBox(
                 foreground=colors["foreground"][0],
-                text_closed=" ",
+                text_closed=" ",
                 text_open=" ",
                 widgets=[
                     widget.DF(
