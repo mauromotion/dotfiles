@@ -33,6 +33,7 @@ def laptop_toolbar():
             widget.Sep(foreground=colors["accent1"][0], linewidth=1),
             widget.Prompt(
                 foreground=colors["accent2"][0],
+                prompt="$: ",
             ),
             widget.WindowName(foreground=colors["foreground"][0]),
             widget.Spacer(length=10),

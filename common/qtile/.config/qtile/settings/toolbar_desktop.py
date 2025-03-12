@@ -33,6 +33,7 @@ def desktop_toolbar():
             widget.Sep(foreground=colors["accent1"][0], linewidth=1),
             widget.Prompt(
                 foreground=colors["accent2"][0],
+                prompt="$: ",
             ),
             widget.WindowName(foreground=colors["foreground"][0]),
             widget.Spacer(length=10),
@@ -51,7 +52,7 @@ def desktop_toolbar():
             widget.Sep(foreground=colors["background"][1]),
             widget.WidgetBox(
                 foreground=colors["foreground"][0],
-                text_closed=" ",
+                text_closed=" ",
                 text_open=" ",
                 widgets=[
                     widget.DF(
