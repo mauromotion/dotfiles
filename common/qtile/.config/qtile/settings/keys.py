@@ -14,7 +14,7 @@ from .theme import colors
 mod = "mod4"
 terminal = "kitty"  # "wezterm start --always-new-process"
 browser = "waterfox"
-file_explorer = "thunar"
+file_explorer = "nemo"
 
 
 # Toggle Max and Columns layouts to maximize a window correctly
