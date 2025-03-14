@@ -11,3 +11,5 @@ return {
 		global_keymaps = true,
 	},
 }
+
+-- Install the LSP with "npm install -g @mistweaverco/kulala-ls"
