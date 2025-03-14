@@ -167,6 +167,13 @@ return {
 			on_attach = on_attach,
 		})
 
+		-- configure http language server
+		lspconfig["kulala_ls"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			filetypes = { "http", "rest" },
+		})
+
 		-- configure sql language server
 		lspconfig["sqlls"].setup({
 			capabilities = capabilities,

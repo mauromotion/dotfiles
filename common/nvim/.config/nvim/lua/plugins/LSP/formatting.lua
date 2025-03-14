@@ -10,6 +10,7 @@ return {
 				css = { "prettierd" },
 				html = { "prettierd" },
 				htmldjango = { "djlint" },
+				http = { "kulala" },
 				javascript = { "prettierd" },
 				javascriptreact = { "prettierd" },
 				json = { "prettierd" },
@@ -26,6 +27,11 @@ return {
 					command = "djlint",
 					args = { "--reformat", "--quiet", "-" },
 					stdin = true,
+				},
+				kulala = {
+					command = "kulala-fmt",
+					args = { "format", "$FILENAME" },
+					stdin = false,
 				},
 			},
 			format_on_save = {

@@ -56,6 +56,7 @@ return {
 			ensure_installed = {
 				"djlint", -- Django linter and formatter
 				"eslint_d", -- JavaScript linter
+				"kulala-fmt", -- http linter and formatter
 				"markdownlint-cli2", -- Markdown linter
 				"prettierd", -- Prettier formatter
 				"ruff", -- Python linter and formatter

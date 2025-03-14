@@ -106,6 +106,22 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 	command = "silent! loadview",
 })
 
+-- Add http filetype
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	pattern = "*.http",
+	callback = function()
+		vim.bo.filetype = "http"
+	end,
+})
+
+-- Add rest filetype
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	pattern = "*.rest",
+	callback = function()
+		vim.bo.filetype = "rest"
+	end,
+})
+
 -- Treat vimwiki filetype as markdown
 -- vim.api.nvim_create_autocmd("FileType", {
 -- 	pattern = "vimwiki",
