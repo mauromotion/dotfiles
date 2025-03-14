@@ -20,11 +20,10 @@ label_style = ["font_awesome", "numbers", "circles", "mixed_geo", "moons"]
 
 groups = [
     Group("1", label=icons[0]),
-    Group("2", label=icons[1], matches=[Match(wm_class="thunderbird")]),
+    Group("2", label=icons[1], matches=[Match(wm_class="org.gnome.Evolution")]),
     Group(
         "3",
         label=icons[2],
-        matches=[Match(wm_class="firefox-developer-edition")],
     ),
     Group(
         "4",
