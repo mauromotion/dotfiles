@@ -37,12 +37,11 @@ keys = [
     Key([mod], "o", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "e", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "i", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "space", lazy.layout.next(), desc="Move window focus to next window"),
     Key(
-        [mod, "shift"],
-        "space",
-        lazy.layout.previous(),
-        desc="Move window focuse to previous window",
+        [mod],
+        "Tab",
+        lazy.group.toscreen(toggle=True),
+        desc="Toggle between last two selected groups",
     ),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
@@ -147,10 +146,10 @@ keys = [
     # File Explorer
     Key([mod, "shift"], "f", lazy.spawn(file_explorer), desc="Launch file explorer"),
     # Toggle between different layouts
-    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+    Key([mod], "space", lazy.next_layout(), desc="Toggle between layouts"),
     Key(
         [mod, "shift"],
-        "Tab",
+        "space",
         lazy.prev_layout(),
         desc="Toggle between layouts backwards",
     ),
