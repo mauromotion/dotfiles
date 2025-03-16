@@ -1,0 +1,11 @@
+set selection-clipboard clipboard
+map <F2> set first-page-column 2:1
+map <F4> set first-page-column 1:2
+map j feedkeys "<C-Down>"
+map k feedkeys "<C-Up>"
+map s toggle_statusbar
+
+# Poimandres colorscheme
+set default-bg "#1B1E28"
+set default-fg "#E4F0FB"
+set statusbar-bg "#1B1E28"
