@@ -12,7 +12,7 @@ from libqtile.lazy import lazy
 from .theme import colors
 
 mod = "mod4"
-terminal = "kitty"  # "wezterm start --always-new-process"
+terminal = "alacritty"  # "wezterm start --always-new-process"
 browser = "waterfox"
 file_explorer = "nemo"
 
