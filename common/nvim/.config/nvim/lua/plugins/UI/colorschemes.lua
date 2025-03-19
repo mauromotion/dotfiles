@@ -39,42 +39,42 @@ return {
 	-- 	end,
 	-- },
 	---- ** Tokyo Night ** ----
-	{
-		"folke/tokyonight.nvim",
-		lazy = false,
-		priority = 1000,
-		config = function()
-			require("tokyonight").setup({
-				style = "night",
-				transparent = true,
-			})
-			vim.cmd([[colorscheme tokyonight]])
-		end,
-	},
-	---- ** Poimandres ** ----
 	-- {
-	-- 	"olivercederborg/poimandres.nvim",
+	-- 	"folke/tokyonight.nvim",
 	-- 	lazy = false,
 	-- 	priority = 1000,
 	-- 	config = function()
-	-- 		local p = require("poimandres.palette")
-	-- 		require("poimandres").setup({
-	-- 			-- bold_vert_split = true,
-	-- 			disable_italics = false,
-	-- 			disable_background = true,
-	-- 			highlight_groups = {
-	-- 				LspReferenceText = { bg = p.background1, fg = p.text },
-	-- 				LspReferenceRead = { bg = p.background1, fg = p.text },
-	-- 				LspReferenceWrite = { bg = p.background1, fg = p.text },
-	-- 			},
+	-- 		require("tokyonight").setup({
+	-- 			style = "night",
+	-- 			transparent = true,
 	-- 		})
-	-- 	end,
-
-	-- 	-- Set the colorscheme
-	-- 	init = function()
-	-- 		vim.cmd("colorscheme poimandres")
+	-- 		vim.cmd([[colorscheme tokyonight]])
 	-- 	end,
 	-- },
+	---- ** Poimandres ** ----
+	{
+		"olivercederborg/poimandres.nvim",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			local p = require("poimandres.palette")
+			require("poimandres").setup({
+				-- bold_vert_split = true,
+				disable_italics = false,
+				disable_background = true,
+				highlight_groups = {
+					LspReferenceText = { bg = p.background1, fg = p.text },
+					LspReferenceRead = { bg = p.background1, fg = p.text },
+					LspReferenceWrite = { bg = p.background1, fg = p.text },
+				},
+			})
+		end,
+
+		-- Set the colorscheme
+		init = function()
+			vim.cmd("colorscheme poimandres")
+		end,
+	},
 
 	---- ** Gruvbox ** ----
 	-- {

@@ -1,4 +1,4 @@
-general.import = ["~/.config/alacritty/themes/tokyonight_night-alacritty.toml"]
+general.import = ["~/.config/alacritty/themes/poimandres-alacritty-theme.toml"]
 general.live_config_reload = true
 
 [bell]
@@ -32,7 +32,7 @@ program = "/bin/zsh"
 decorations = "Full"
 dynamic_padding = true
 dynamic_title = true
-opacity = 0.93
+opacity = 0.95
 
 [window.padding]
 x = 5

@@ -3,7 +3,7 @@ import os
 
 
 def load_theme():
-    theme = "tokyonight"  # WARN: Available themes: catppuccin, gruvbox, nord, poimandres, tokyonight
+    theme = "poimandres"  # WARN: Available themes: catppuccin, gruvbox, nord, poimandres, tokyonight
 
     theme_file_path = os.path.expanduser(f"~/.config/qtile/themes/{theme}.json")
 
