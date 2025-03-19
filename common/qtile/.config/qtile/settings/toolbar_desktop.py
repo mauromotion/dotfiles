@@ -90,7 +90,7 @@ def desktop_toolbar():
                 location="Bromley,UK",
                 format="{icon} {main_temp:.1f}°{units_temperature} ({main_feels_like:.0f}°{units_temperature})",
                 update_interval=600,
-                foreground=colors["green"][0],
+                foreground=colors["magenta"][0],
                 mouse_callbacks={
                     "Button1": lazy.group["scratchpad"].dropdown_toggle("weather")
                 },

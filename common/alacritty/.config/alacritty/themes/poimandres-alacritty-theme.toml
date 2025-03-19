@@ -4,7 +4,7 @@ foreground = "#E4F0FB"
 
 [colors.cursor]
 text = "CellBackground"
-cursor = "CellForeground"
+cursor = "0xa6accd"
 
 [colors.search.matches]
 foreground = "0x1b1e28"
