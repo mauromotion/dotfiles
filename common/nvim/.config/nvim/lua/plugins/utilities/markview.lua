@@ -8,7 +8,9 @@ return {
 	},
 	config = function()
 		require("markview").setup({
-			filetypes = { "markdown", "vimwiki" },
+			preview = {
+				filetypes = { "markdown", "vimwiki" },
+			},
 		})
 	end,
 }

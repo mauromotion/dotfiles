@@ -80,7 +80,7 @@ groups.append(
             ),
             DropDown(
                 "updates",
-                "alacritty sh -c 'yay -Syu --devel; sleep 5'",
+                "alacritty -e sh -c 'yay -Syu --devel; sleep 5'",
                 opacity=0.9,
                 width=0.8,
                 height=0.6,
