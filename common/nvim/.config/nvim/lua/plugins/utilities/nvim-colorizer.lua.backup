@@ -1,0 +1,16 @@
+return {
+	"norcalli/nvim-colorizer.lua",
+	event = { "BufReadPost", "BufNewFile", "BufEnter" },
+	config = function()
+		require("colorizer").setup({
+			"css",
+			"javascript",
+			"json",
+			"toml",
+			"yaml",
+			html = {
+				mode = "foreground",
+			},
+		})
+	end,
+}
