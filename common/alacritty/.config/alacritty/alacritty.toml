@@ -32,7 +32,7 @@ program = "/bin/zsh"
 decorations = "Full"
 dynamic_padding = true
 dynamic_title = true
-opacity = 0.95
+opacity = 0.94
 
 [window.padding]
 x = 5
