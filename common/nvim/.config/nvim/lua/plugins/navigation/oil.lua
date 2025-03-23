@@ -12,6 +12,9 @@ return {
 				-- "size",
 				"icon",
 			},
+			win_options = {
+				signcolumn = "yes:2",
+			},
 		})
 		-- Keybindings
 		vim.keymap.set("n", "-", "<CMD>Oil<CR>", { noremap = true, silent = true, desc = "Open parent directory" })
