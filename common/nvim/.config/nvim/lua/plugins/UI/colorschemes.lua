@@ -59,8 +59,6 @@ return {
 		config = function()
 			local p = require("poimandres.palette")
 			require("poimandres").setup({
-				-- bold_vert_split = true,
-				disable_italics = false,
 				disable_background = true,
 				highlight_groups = {
 					LspReferenceText = { bg = p.background1, fg = p.text },
@@ -73,6 +71,7 @@ return {
 		-- Set the colorscheme
 		init = function()
 			vim.cmd("colorscheme poimandres")
+			vim.cmd("highlight Comment cterm=italic gui=italic")
 		end,
 	},
 

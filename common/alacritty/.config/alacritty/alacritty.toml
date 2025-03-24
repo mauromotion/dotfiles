@@ -42,19 +42,19 @@ y = 5
 size = 12
 
 [font.bold]
-family = "JetBrainsMonoNL NF"
+family = "MonoLisa Nerd Font"
 style = "Bold"
 
 [font.bold_italic]
-family = "JetBrainsMonoNL NF"
+family = "MonoLisa Nerd Font"
 style = "Bold Italic"
 
 [font.italic]
-family = "JetBrainsMonoNL NF"
+family = "MonoLisa Nerd Font"
 style = "Medium Italic"
 
 [font.normal]
-family = "JetBrainsMonoNL NF"
-style = "Medium"
+family = "MonoLisa Nerd Font"
+style = "Regular"
 
 [terminal]

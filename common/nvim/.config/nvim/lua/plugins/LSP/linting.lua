@@ -38,7 +38,7 @@ return {
 			astro = { "eslint_d" },
 			python = { "ruff" },
 			htmlpython = { "djlint" },
-			markdown = { "markdownlint-cli2" },
+			-- markdown = { "markdownlint-cli2" },
 		}
 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
