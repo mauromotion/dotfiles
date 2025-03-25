@@ -3,7 +3,7 @@ general.live_config_reload = true
 
 [bell]
 animation = "EaseOutExpo"
-color = "#5A524C"
+color = "#767C9D"
 duration = 100
 
 [cursor]
@@ -29,32 +29,27 @@ multiplier = 3
 program = "/bin/zsh"
 
 [window]
-decorations = "Full"
+decorations = "None"
+padding = { x = 3, y = 3 }
 dynamic_padding = true
 dynamic_title = true
 opacity = 0.94
-
-[window.padding]
-x = 5
-y = 5
 
 [font]
 size = 12
 
 [font.bold]
-family = "MonoLisa Nerd Font"
+family = "JetBrainsMono NF"
 style = "Bold"
 
 [font.bold_italic]
-family = "MonoLisa Nerd Font"
+family = "JetBrainsMono NF"
 style = "Bold Italic"
 
 [font.italic]
-family = "MonoLisa Nerd Font"
+family = "JetBrainsMono NF"
 style = "Medium Italic"
 
 [font.normal]
-family = "MonoLisa Nerd Font"
-style = "Regular"
-
-[terminal]
+family = "JetBrainsMono NF"
+style = "Medium"
