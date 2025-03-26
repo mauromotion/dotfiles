@@ -29,27 +29,28 @@ multiplier = 3
 program = "/bin/zsh"
 
 [window]
-decorations = "None"
+decorations = "Full"
 padding = { x = 3, y = 3 }
 dynamic_padding = true
 dynamic_title = true
-opacity = 0.94
+opacity = 1
 
 [font]
 size = 12
+offset = { x = 0, y = 3 }
 
 [font.bold]
-family = "JetBrainsMono NF"
+family = "Monolisa"
 style = "Bold"
 
 [font.bold_italic]
-family = "JetBrainsMono NF"
+family = "Monolisa"
 style = "Bold Italic"
 
 [font.italic]
-family = "JetBrainsMono NF"
+family = "Monolisa"
 style = "Medium Italic"
 
 [font.normal]
-family = "JetBrainsMono NF"
+family = "Monolisa"
 style = "Medium"

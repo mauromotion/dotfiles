@@ -81,3 +81,5 @@ g.loaded_ruby_provider = 0
 
 -- For render-markdown plugin
 vim.treesitter.language.register("markdown", "vimwiki")
+
+opt.viewoptions:remove("curdir")
