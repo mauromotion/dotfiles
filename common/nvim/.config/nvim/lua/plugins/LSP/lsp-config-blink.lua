@@ -2,39 +2,11 @@ return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
-		"hrsh7th/cmp-nvim-lsp", -- snippets from the attached LSP
-		"hrsh7th/cmp-cmdline", -- autocomplete commands
+		"saghen/blink.cmp",
 	},
 	config = function()
-		-- `/` cmdline setup.
-		local cmp = require("cmp")
-
-		cmp.setup.cmdline("/", {
-			mapping = cmp.mapping.preset.cmdline(),
-			sources = {
-				{ name = "buffer" },
-			},
-		})
-
-		-- `:` cmdline setup.
-		cmp.setup.cmdline(":", {
-			mapping = cmp.mapping.preset.cmdline(),
-			sources = cmp.config.sources({
-				{ name = "path" },
-			}, {
-				{
-					name = "cmdline",
-					option = {
-						ignore_cmds = { "Man", "!" },
-					},
-				},
-			}),
-		})
 		-- import lspconfig plugin
 		local lspconfig = require("lspconfig")
-
-		-- import cmp-nvim-lsp plugin
-		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 		local keymap = vim.keymap -- for conciseness
 
@@ -70,10 +42,14 @@ return {
 			keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
 
 			opts.desc = "Go to previous diagnostic"
-			keymap.set("n", "dp", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
+			keymap.set("n", "dp", function()
+				vim.diagnostic.jump({ count = 1, float = true })
+			end, opts) -- jump to previous diagnostic in buffer
 
 			opts.desc = "Go to next diagnostic"
-			keymap.set("n", "dn", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
+			keymap.set("n", "dn", function()
+				vim.diagnostic.jump({ count = -1, float = true })
+			end, opts) -- jump to next diagnostic in buffer
 
 			opts.desc = "Show documentation for what is under cursor"
 			keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
@@ -83,7 +59,7 @@ return {
 		end
 
 		-- used to enable autocompletion (assign to every lsp server config)
-		local capabilities = cmp_nvim_lsp.default_capabilities()
+		local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 		-- Change the Diagnostic symbols in the sign column (gutter)
 		-- (not in youtube nvim video)
@@ -199,34 +175,6 @@ return {
 			filetypes = { "python" },
 		})
 
-		-- -- configure python linter and formatter
-		-- lspconfig["ruff"].setup({
-		-- 	cmd = { "ruff", "server" },
-		-- 	filetypes = { "python" },
-		-- 	init_options = {
-		-- 		settings = {
-		-- 			fixAll = true, -- Enable "fix all" (auto-fix) capability
-		-- 			organizeImports = true,
-		-- 			lint = { args = { "--config=pyproject.toml" } },
-		-- 			logLevel = "debug", -- Optional: to help debug issues
-		-- 		},
-		-- 	},
-		-- 	capabilities = capabilities,
-		-- 	on_attach = function(client, bufnr)
-		-- 		vim.api.nvim_create_autocmd("BufWritePre", {
-		-- 			buffer = bufnr,
-		-- 			callback = function()
-		-- 				vim.lsp.buf.format({
-		-- 					async = false,
-		-- 					filter = function(c)
-		-- 						return c.name == "ruff"
-		-- 					end,
-		-- 				})
-		-- 			end,
-		-- 		})
-		-- 	end,
-		-- })
-
 		-- configure django server
 		lspconfig["jinja_lsp"].setup({
 			capabilities = capabilities,
@@ -266,18 +214,4 @@ return {
 			},
 		})
 	end,
-
-	-- 	-- Create a user command for organize imports
-	-- 	vim.api.nvim_create_user_command("RuffOrganizeImports", function()
-	-- 		vim.lsp.buf.code_action({
-	-- 			context = { only = { "source.organizeImports.ruff" } },
-	-- 			apply = true,
-	-- 		})
-	-- 	end, { desc = "Organize imports with Ruff" }),
-
-	-- 	-- Optionally, bind the command to a key mapping (e.g., <leader>oi)
-	-- 	vim.keymap.set("n", "<leader>oi", "<cmd>RuffOrganizeImports<CR>", {
-	-- 		buffer = bufnr,
-	-- 		desc = "Organize imports with Ruff",
-	-- 	}),
 }

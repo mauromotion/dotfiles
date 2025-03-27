@@ -75,6 +75,20 @@ return {
 		end,
 	},
 
+	---- ** Edge ** ----
+	-- {
+	-- 	"sainnhe/edge",
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		vim.g.edge_style = "aura"
+	-- 		vim.g.edge_better_performance = 1
+	-- 		vim.g.edge_enable_italic = true
+	-- 		vim.g.edge_disable_italic_comment = false
+	-- 		vim.cmd.colorscheme("edge")
+	-- 	end,
+	-- },
+
 	---- ** Gruvbox ** ----
 	-- {
 	-- 	"sainnhe/gruvbox-material",
