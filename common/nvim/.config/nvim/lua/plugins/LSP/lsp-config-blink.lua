@@ -62,12 +62,13 @@ return {
 		local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 		-- Change the Diagnostic symbols in the sign column (gutter)
-		-- (not in youtube nvim video)
-		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-		for type, icon in pairs(signs) do
-			local hl = "DiagnosticSign" .. type
-			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-		end
+		local x = vim.diagnostic.severity
+
+		vim.diagnostic.config({
+			virtual_text = { prefix = " 󰝤" },
+			signs = { text = { [x.ERROR] = " ", [x.WARN] = " ", [x.INFO] = " ", [x.HINT] = "󰠠 " } },
+			underline = true,
+		})
 
 		-- configure html server
 		lspconfig["html"].setup({
