@@ -13,7 +13,7 @@ from .keys import keys, mod, terminal
 from .icons import dots, font_awesome, mixed_geo, moons, numbers, text
 
 # Choose the icons set to use
-icons = moons
+icons = font_awesome
 
 # Groups (workspaces)
 label_style = ["font_awesome", "numbers", "circles", "mixed_geo", "moons"]
