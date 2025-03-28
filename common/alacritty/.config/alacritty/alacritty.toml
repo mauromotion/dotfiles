@@ -37,20 +37,20 @@ opacity = 1
 
 [font]
 size = 12
-offset = { x = 0, y = 3 }
+# offset = { x = 0, y = 3 }
 
 [font.bold]
-family = "Monolisa"
+family = "JetBrainsMono NF"
 style = "Bold"
 
 [font.bold_italic]
-family = "Monolisa"
+family = "JetBrainsMono NF"
 style = "Bold Italic"
 
 [font.italic]
-family = "Monolisa"
+family = "JetBrainsMono NF"
 style = "Medium Italic"
 
 [font.normal]
-family = "Monolisa"
+family = "JetBrainsMono NF"
 style = "Medium"
