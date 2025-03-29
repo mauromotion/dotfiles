@@ -72,6 +72,7 @@ return {
 		init = function()
 			vim.cmd("colorscheme poimandres")
 			vim.cmd("highlight Comment cterm=italic gui=italic")
+			vim.cmd("highlight FloatBorder guifg=#E4F0FB guibg=#1B1E28")
 		end,
 	},
 
