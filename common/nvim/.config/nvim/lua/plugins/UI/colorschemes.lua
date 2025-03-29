@@ -1,5 +1,5 @@
 return {
-	---- ** Nord ** ----
+	---- ** NordFox ** ----
 	-- {
 	-- 	"edeneast/nightfox.nvim",
 	-- 	lazy = false,
@@ -59,7 +59,7 @@ return {
 		config = function()
 			local p = require("poimandres.palette")
 			require("poimandres").setup({
-				disable_background = true,
+				disable_background = false,
 				highlight_groups = {
 					LspReferenceText = { bg = p.background1, fg = p.text },
 					LspReferenceRead = { bg = p.background1, fg = p.text },

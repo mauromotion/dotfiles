@@ -40,17 +40,17 @@ size = 12
 # offset = { x = 0, y = 3 }
 
 [font.bold]
-family = "JetBrainsMono NF"
+family = "JetBrainsMonoNL Nerd Font"
 style = "Bold"
 
 [font.bold_italic]
-family = "JetBrainsMono NF"
+family = "JetBrainsMonoNL Nerd Font"
 style = "Bold Italic"
 
 [font.italic]
-family = "JetBrainsMono NF"
+family = "JetBrainsMonoNL Nerd Font"
 style = "Medium Italic"
 
 [font.normal]
-family = "JetBrainsMono NF"
+family = "JetBrainsMonoNL Nerd Font"
 style = "Medium"
