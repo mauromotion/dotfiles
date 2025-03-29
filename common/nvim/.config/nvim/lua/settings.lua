@@ -86,3 +86,5 @@ g.loaded_ruby_provider = 0
 vim.treesitter.language.register("markdown", "vimwiki")
 
 opt.viewoptions:remove("curdir")
+
+o.winborder = "rounded"
