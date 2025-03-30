@@ -65,12 +65,15 @@ opt.hlsearch = false
 opt.incsearch = true
 
 -- Folding
-opt.foldmethod = "expr"
-opt.foldexpr = "nvim_tsreesitter#foldexpr()"
-o.foldcolumn = "1"
+o.foldmethod = "expr"
+-- opt.foldexpr = "nvim_tsreesitter#foldexpr()"
+o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+o.foldtext = ""
+opt.foldcolumn = "0"
 o.foldlevel = 99
 o.foldlevelstart = 99
 o.foldenable = true
+opt.fillchars:append({ fold = " " })
 
 -- Python virtual env
 g.python3_host_prog = "$HOME/.venvs/nvim_venv/bin/python"
@@ -83,3 +86,5 @@ g.loaded_ruby_provider = 0
 vim.treesitter.language.register("markdown", "vimwiki")
 
 opt.viewoptions:remove("curdir")
+
+o.winborder = "rounded"

@@ -12,7 +12,7 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 vim.api.nvim_create_autocmd("TextYankPost", {
 	group = augroup("highlight_yank"),
 	callback = function()
-		vim.highlight.on_yank()
+		vim.hl.on_yank()
 	end,
 })
 
@@ -85,14 +85,14 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 		if event.match:match("^%w%w+://") then
 			return
 		end
-		local file = vim.loop.fs_realpath(event.match) or event.match
+		local file = vim.uv.fs_realpath(event.match) or event.match
 		vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
 	end,
 })
 
+-- Save folds when leaving a buffer
 local remember_folds_group = augroup("remember_folds")
 
--- Save folds when leaving a buffer
 vim.api.nvim_create_autocmd("BufWinLeave", {
 	group = remember_folds_group,
 	pattern = "*",
@@ -121,12 +121,3 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 		vim.bo.filetype = "rest"
 	end,
 })
-
--- Treat vimwiki filetype as markdown
--- vim.api.nvim_create_autocmd("FileType", {
--- 	pattern = "vimwiki",
--- 	callback = function()
--- 		vim.b.filetype = "markdown" -- Temporarily treat as markdown for LSP
--- 		vim.cmd("setlocal syntax=markdown")
--- 	end,
--- })

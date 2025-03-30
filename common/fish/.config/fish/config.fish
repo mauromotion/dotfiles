@@ -7,14 +7,15 @@
 
 ## Aliases
 alias .. "cd .."
-alias cat "bat"
 alias cd "z"
 alias cl "clear"
+alias colemak "setxkbmap gb -variant colemak_dh"
 alias cp "cp -i"
 alias del "trash-put -i"
 alias df "df -H"
 alias diary "nvim +VimwikiIndex +VimwikiDiaryIndex"
 alias etree "eza -T --color=always --icons | less -R"
+alias fastfetch "fastfetch -c examples/10.jsonc"
 alias gP "git push"
 alias ga "git add"
 alias gaa "git add --all"
@@ -28,7 +29,7 @@ alias in "tw add +in"
 alias lg "lazygit"
 alias ll "eza -l --git --icons -h"
 alias lla "eza -l --git --icons -h -a"
-alias load-ICC "sh ~/.color/*.sh"
+alias load-ICC "sh ~/.icc_color_profiles/*.sh"
 alias ls "eza --icons"
 alias lsa "eza --icons -a"
 alias mirrors-update "sudo reflector -c 'United Kingdom' -a 6 --sort rate --save /etc/pacman.d/mirrorlist"
@@ -39,25 +40,30 @@ alias nv "nvim"
 alias pac-autoremove "sudo pacman -Rcs $(pacman -Qdtq)"
 alias polybar-restart "sh ~/.config/polybar/launch*"
 alias py "python3"
+alias qwerty "setxkbmap gb"
 alias rm "rm -i"
 alias rnd "tw +rnd"
-alias src "source ~/.zshrc"
+alias src "source ~/.config/fish/config.fish"
 alias tw "task"
 alias v "nvim"
+alias vst "mullvad status"
+alias vup "mullvad connect"
+alias vdw "mullvad disconnect"
 alias wiki "nvim -c VimwikiIndex"
+alias y "yazi"
 alias yt "ytfzf"
 
 ## Greeting message
-# function fish_greeting
-#     echo --------------------------------
-#     echo ┌┬┐┌─┐┬ ┬┬─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌┐┌
-#     echo │││├─┤│ │├┬┘│ │││││ │ │ ││ ││││
-#     echo ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘
-#     echo --------- Fish Shell -----------
-#     echo
-#     echo The time is (set_color yellow; date +%T; set_color normal) and this machine is called $hostname
-#     echo
-# end
+function fish_greeting
+    echo --------------------------------
+    echo ┌┬┐┌─┐┬ ┬┬─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌┐┌
+    echo │││├─┤│ │├┬┘│ │││││ │ │ ││ ││││
+    echo ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘
+    echo --------- Fish Shell -----------
+    echo
+    echo The time is (set_color yellow; date +%T; set_color normal) and this machine is called $hostname
+    echo
+end
 
 # note: this erases the default fish_mode_prompt, which adds a vi mode
 # indicator to the left of your prompt
@@ -67,6 +73,23 @@ end
 # turn on vi mode when the shell starts
 # fish_vi_mode
 fish_vi_key_bindings
+
+
+# Poimandres FZF theme
+set -gx FZF_DEFAULT_OPTS '
+  --color=fg:#E4F0FB,fg+:#FFFFFF,bg:-1,bg+:#303340
+  --color=hl:#D0679D,hl+:#89DDFF,info:#ebcb8b,marker:#5DE4C7
+  --color=prompt:#FCC5E9,spinner:#5DE4C7,pointer:#5DE4C7,header:#8fbcbb
+  --color=border:#303340,label:#81a1c1,query:#d8dee9
+  --border="rounded"
+  --border-label="fzf"
+  --border-label-pos="0"
+  --preview-window="border-rounded"
+  --prompt="> "
+  --marker=">"
+  --pointer="◆"
+  --separator="─"
+  --scrollbar="│"'
 
 # Nightfox Color Palette
 # Style: nordfox
