@@ -74,6 +74,23 @@ end
 # fish_vi_mode
 fish_vi_key_bindings
 
+
+# Poimandres FZF theme
+set -gx FZF_DEFAULT_OPTS '
+  --color=fg:#E4F0FB,fg+:#FFFFFF,bg:-1,bg+:#303340
+  --color=hl:#D0679D,hl+:#89DDFF,info:#ebcb8b,marker:#5DE4C7
+  --color=prompt:#FCC5E9,spinner:#5DE4C7,pointer:#5DE4C7,header:#8fbcbb
+  --color=border:#303340,label:#81a1c1,query:#d8dee9
+  --border="rounded"
+  --border-label="fzf"
+  --border-label-pos="0"
+  --preview-window="border-rounded"
+  --prompt="> "
+  --marker=">"
+  --pointer="◆"
+  --separator="─"
+  --scrollbar="│"'
+
 # Nightfox Color Palette
 # Style: nordfox
 # Upstream: https://github.com/edeneast/nightfox.nvim/raw/main/extra/nordfox/nightfox_fish.fish

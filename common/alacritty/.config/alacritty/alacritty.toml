@@ -30,7 +30,7 @@ history = 10000
 multiplier = 3
 
 [terminal.shell]
-program = "/bin/zsh"
+program = "/bin/fish"
 
 [window]
 decorations = "Full"
