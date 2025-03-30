@@ -53,5 +53,5 @@ include ~/Nextcloud/03_Resources/PC/Taskwarrior/themes/nord.theme
 context.someday.read=+someday
 context.someday.write=+someday
 context.gtd.read=-someday
-news.version=3.3.0
+news.version=3.4.0
 context=gtd

@@ -30,6 +30,10 @@ bindkey "^[[B" history-search-forward
 setopt auto_cd
 setopt auto_list
 
+## -- SSH -- ##
+# Initialize keychain and load SSH keys
+eval "$(keychain --quiet --eval --agents ssh id_rsa id_disroot id_ed25519)"
+
 ## -- Prompt Theming -- ##
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
@@ -235,7 +239,7 @@ alias in="tw add +in"
 alias lg="lazygit"
 alias ll="eza -l --git --icons -h"
 alias lla="eza -l --git --icons -h -a"
-alias load-ICC="sh ~/.color/*.sh"
+alias load-ICC="sh ~/.icc_color_profiles/*.sh"
 alias ls="eza --icons"
 alias lsa="eza --icons -a"
 alias mirrors-update="sudo reflector -c 'United Kingdom' -a 6 --sort rate --save /etc/pacman.d/mirrorlist"
@@ -260,17 +264,11 @@ alias y="yazi"
 alias yt="ytfzf"
 
 ### ---- This lines must always be at EOF!!! ---- ###
-
 # fnm
 export PATH="$HOME/.local/share/fnm:$PATH"
 eval "`fnm env`"
 eval "$(fnm env --use-on-cd)"
 
-# rbenv
-# eval "$(rbenv init - zsh)"
-
-# eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/pure.toml)"
-# eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
 
 # Set up fzf key bindings and fuzzy completion
