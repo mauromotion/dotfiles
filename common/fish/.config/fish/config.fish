@@ -22,6 +22,7 @@ abbr --add gcam git commit --all --message
 abbr --add gP git push
 abbr --add gp git pull
 abbr --add gst git status
+abbr --add gsw git switch
 alias glog "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --date=short"
 alias grep "grep --color=auto"
 alias icat "kitty +kitten icat"
@@ -43,7 +44,7 @@ alias py "python3"
 alias qwerty "setxkbmap gb"
 alias rm "rm -i"
 alias rnd "tw +rnd"
-alias src "source ~/.config/fish/config.fish"
+abbr --add src source ~/.config/fish/config.fish
 alias tw "task"
 alias v "nvim"
 alias vst "mullvad status"
@@ -74,37 +75,6 @@ end
 # fish_vi_mode
 fish_vi_key_bindings
 
-
-# Poimandres FZF theme
-set -gx FZF_DEFAULT_OPTS '
-  --color=fg:#E4F0FB,fg+:#FFFFFF,bg:-1,bg+:#303340
-  --color=hl:#D0679D,hl+:#89DDFF,info:#ebcb8b,marker:#5DE4C7
-  --color=prompt:#FCC5E9,spinner:#5DE4C7,pointer:#5DE4C7,header:#8fbcbb
-  --color=border:#303340,label:#81a1c1,query:#d8dee9
-  --border="rounded"
-  --border-label="fzf"
-  --border-label-pos="0"
-  --preview-window="border-rounded"
-  --prompt="> "
-  --marker=">"
-  --pointer="◆"
-  --separator="─"
-  --scrollbar="│"'
-
-# Nightfox Color Palette
-# Style: nordfox
-# Upstream: https://github.com/edeneast/nightfox.nvim/raw/main/extra/nordfox/nightfox_fish.fish
-# set -l foreground cdcecf
-# set -l selection 3e4a5b
-# set -l comment 60728a
-# set -l red bf616a
-# set -l orange c9826b
-# set -l yellow ebcb8b
-# set -l green a3be8c
-# set -l purple b48ead
-# set -l cyan 88c0d0
-# set -l pink bf88bc
-
 ## Poimandres Color Palette 
 set -l foreground e4f0fb
 set -l selection 506477
@@ -116,7 +86,7 @@ set -l green 5DE4C7
 set -l cyan 89DDFF
 set -l pink FCC5E9
 
-# # Syntax Highlighting Colors
+## Syntax Highlighting Colors
 set -g fish_color_normal $foreground
 set -g fish_color_command $cyan
 set -g fish_color_keyword $pink
@@ -133,13 +103,36 @@ set -g fish_color_operator $green
 set -g fish_color_escape $pink
 set -g fish_color_autosuggestion $comment
 
-# # Completion Pager Colors
+## Completion Pager Colors
 set -g fish_pager_color_progress $comment
 set -g fish_pager_color_prefix $cyan
 set -g fish_pager_color_completion $foreground
 set -g fish_pager_color_description $comment
 
+# Hydro prompt styling
+set hydro_color_pwd $cyan
+set hydro_color_git $pink
+set hydro_color_start $yellow
+set hydro_color_prompt $green
+set hydro_color_error $red
+set hydro_color_duration $yellow
+set hydro_multiline true
 
+# Poimandres FZF theme
+set -gx FZF_DEFAULT_OPTS '
+  --color=fg:#E4F0FB,fg+:#FFFFFF,bg:-1,bg+:#303340
+  --color=hl:#D0679D,hl+:#89DDFF,info:#ebcb8b,marker:#5DE4C7
+  --color=prompt:#FCC5E9,spinner:#5DE4C7,pointer:#5DE4C7,header:#8fbcbb
+  --color=border:#303340,label:#81a1c1,query:#d8dee9
+  --border="rounded"
+  --border-label="fzf"
+  --border-label-pos="0"
+  --preview-window="border-rounded"
+  --prompt="> "
+  --marker=">"
+  --pointer="◆"
+  --separator="─"
+  --scrollbar="│"'
 
 ## Zoxide
 zoxide init fish | source
