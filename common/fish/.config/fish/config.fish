@@ -118,6 +118,12 @@ set hydro_color_error $red
 set hydro_color_duration $yellow
 set hydro_multiline true
 
+# Colored man pages
+set -g man_blink -o $red
+set -g man_bold -o $green
+set -g man_underline -u $yellow
+set -g man_standout -b $comment
+
 # Poimandres FZF theme
 set -gx FZF_DEFAULT_OPTS '
   --color=fg:#E4F0FB,fg+:#FFFFFF,bg:-1,bg+:#303340
