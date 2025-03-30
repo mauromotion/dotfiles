@@ -16,6 +16,12 @@ alias df "df -H"
 alias diary "nvim +VimwikiIndex +VimwikiDiaryIndex"
 alias etree "eza -T --color=always --icons | less -R"
 alias fastfetch "fastfetch -c examples/10.jsonc"
+abbr --add ga git add
+abbr --add gaa git add --all
+abbr --add gcam git commit --all --message
+abbr --add gP git push
+abbr --add gp git pull
+abbr --add gst git status
 alias glog "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --date=short"
 alias grep "grep --color=auto"
 alias icat "kitty +kitten icat"
