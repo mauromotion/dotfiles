@@ -1,5 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
+SETUVAR FZF_DEFAULT_OPTS:\x2d\x2dheight\x2040\x25
 SETUVAR --export SSH_AGENT_PID:997778
 SETUVAR --export SSH_AUTH_SOCK:/tmp/ssh\x2dXXXXXXYyELZj/agent\x2e997777
 SETUVAR SSH_KEYS_TO_AUTOLOAD:/home/mauromotion/\x2essh/id_disroot\x1e/home/mauromotion/\x2essh/id_ed25519\x1e/home/mauromotion/\x2essh/id_rsa
