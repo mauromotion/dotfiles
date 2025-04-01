@@ -89,7 +89,7 @@ groups.append(
             DropDown(
                 "weather",
                 "mousam",
-                opacity=0.9,
+                opacity=1,
                 width=0.5,
                 height=0.6,
                 x=0.5,
@@ -99,7 +99,7 @@ groups.append(
                 # "wezterm start --class CalcurseTerminal -- sh -c 'calcurse'",
                 "gnome-calendar",
                 # match=Match(wm_class=["CalcurseTerminal"]),
-                opacity=0.9,
+                opacity=1,
                 width=0.5,
                 height=0.6,
                 x=0.5,

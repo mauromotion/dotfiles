@@ -1,8 +1,8 @@
 {
   "foreground": ["#654735", "#4f3829"],
   "background": ["#fbf1c7", "#f2e5bc"],
-  "accent1": ["#D4BE98", "#D4BE98"],
-  "accent2": ["#E78A4E", "#E78A4E"],
+  "accent1": ["#E78A4E", "#E78A4E"],
+  "accent2": ["#945e80", "#945e80"],
   "red": ["#c14a4a", "#ae5858"],
   "green": ["#6c782e", "#6f8352"],
   "yellow": ["#b47109", "#a96b2c"],
