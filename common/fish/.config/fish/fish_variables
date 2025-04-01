@@ -3,7 +3,7 @@
 SETUVAR FZF_DEFAULT_OPTS:\x2d\x2dheight\x2040\x25
 SETUVAR --export SSH_AGENT_PID:997778
 SETUVAR --export SSH_AUTH_SOCK:/tmp/ssh\x2dXXXXXXYyELZj/agent\x2e997777
-SETUVAR SSH_KEYS_TO_AUTOLOAD:/home/mauromotion/\x2essh/id_disroot\x1e/home/mauromotion/\x2essh/id_ed25519\x1e/home/mauromotion/\x2essh/id_rsa
+SETUVAR SSH_KEYS_TO_AUTOLOAD:/home/mauromotion/\x2essh/id_disroot\x1e/home/mauromotion/\x2essh/id_ed25519\x1e/home/mauromotion/\x2essh/id_rsa\x1e/home/mauromotion/\x2essh/id_disroot\x1e/home/mauromotion/\x2essh/id_ed25519\x1e/home/mauromotion/\x2essh/id_rsa
 SETUVAR __fish_initialized:3800
 SETUVAR _fisher_decors_2F_fish_2D_colored_2D_man_files:\x7e/\x2econfig/fish/functions/man\x2efish
 SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fisher\x2efish\x1e\x7e/\x2econfig/fish/completions/fisher\x2efish
@@ -21,8 +21,17 @@ SETUVAR _hydro_git_1121980:main\u2022\x20
 SETUVAR _hydro_git_1122278:main\u2022\x20
 SETUVAR _hydro_git_1123373:main\u2022\x20
 SETUVAR _hydro_git_1123480:main\x20
+SETUVAR _hydro_git_11844:main\u2022\x20
+SETUVAR _hydro_git_12107:main\u2022\x20
+SETUVAR _hydro_git_12234:main\u2022\x20
 SETUVAR _hydro_git_1227771:main\x20
-SETUVAR _hydro_git_1378674:main\u2022\x20
+SETUVAR _hydro_git_12697:main\u2022\x20
+SETUVAR _hydro_git_12814:main\u2022\x20
+SETUVAR _hydro_git_1399807:main\u2022\x20
+SETUVAR _hydro_git_1472185:main\u2022\x20
+SETUVAR _hydro_git_1472362:main\u2022\x20
+SETUVAR _hydro_git_20373:main\u2022\x20
+SETUVAR _hydro_git_20882:main\u2022\x20
 SETUVAR chain_links:chain\x2elinks\x2eroot\x1echain\x2elinks\x2ejobs\x1echain\x2elinks\x2epwd\x1echain\x2elinks\x2evcs_branch\x1echain\x2elinks\x2evcs_dirty\x1echain\x2elinks\x2evcs_stashed
 SETUVAR fish_color_autosuggestion:6c7086
 SETUVAR fish_color_cancel:f38ba8

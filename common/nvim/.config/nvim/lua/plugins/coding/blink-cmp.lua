@@ -15,7 +15,7 @@ return {
 			keymap = { preset = "inherit" },
 			completion = {
 				menu = {
-					auto_show = false,
+					auto_show = true,
 				},
 			},
 		},

@@ -5,7 +5,7 @@
 #: kitty has very powerful font management. You can configure
 #: individual font faces and even specify special fonts for particular
 #: characters.
-font_family      CommitMono Nerd Font
+font_family      JetBrainsMono NF 
 bold_font        auto
 italic_font      auto
 bold_italic_font auto
@@ -272,9 +272,9 @@ cursor_beam_thickness 1.5
 #: Stop blinking cursor after the specified number of seconds of
 #: keyboard inactivity. Set to zero to never stop blinking.
 
-# cursor_trail 1
-# cursor_trail_decay 0.1 0.4
-# cursor_trail_start_threshold 2
+cursor_trail 1
+cursor_trail_decay 0.1 0.4
+cursor_trail_start_threshold 2
 
 #: }}}
 
@@ -1717,6 +1717,18 @@ map ctrl+7 goto_tab 7
 map ctrl+8 goto_tab 8
 map ctrl+9 goto_tab 9
 # map ctrl+shift+x last_used_layout
+map ctrl+shift+left resize_window narrower
+map ctrl+shift+right resize_window wider
+map ctrl+shift+up resize_window taller
+map ctrl+shift+down resize_window shorter
+# reset all windows in the tab to default sizes
+map ctrl+shift+home resize_window reset
+map ctrl+shift+s swap_with_window
+
+map ctrl+shift+h neighboring_window left
+map ctrl+shift+j neighboring_window down
+map ctrl+shift+k neighboring_window up
+map ctrl+shift+l neighboring_window right
 
 #: Clipboard {{{
 
@@ -2352,9 +2364,7 @@ map ctrl+9 goto_tab 9
 
 #: }}}
 
-# ~/.config/kitty/kitty.conf
-
 # BEGIN_KITTY_THEME
-# Catppuccin-Mocha
+# Adwaita light
 include current-theme.conf
 # END_KITTY_THEME

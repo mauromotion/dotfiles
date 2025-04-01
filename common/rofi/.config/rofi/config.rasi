@@ -15,3 +15,13 @@ configuration{
 }
 
 @theme "/home/mauromotion/.config/rofi/poimandres.rasi"
+
+//@theme "/usr/share/rofi/themes/gruvbox-light-soft.rasi"
+
+//@theme "/usr/share/rofi/themes/Arc.rasi"
+
+//@theme "/usr/share/rofi/themes/material.rasi"
+
+// @theme "/usr/share/rofi/themes/Arc.rasi"
+
+// @theme "/usr/share/rofi/themes/Arc.rasi"

@@ -5,14 +5,16 @@ import os
     catppuccin, 
     gruvbox-material-dark, 
     gruvbox-material-light, 
+    material-lighter,
     nord, 
     poimandres, 
+    qogir-light,
     tokyonight
 """
 
 
 def load_theme():
-    theme = "gruvbox-material-light"
+    theme = "poimandres"
 
     theme_file_path = os.path.expanduser(f"~/.config/qtile/themes/{theme}.json")
 

@@ -1,0 +1,15 @@
+themes {
+    material-lighter {
+        bg "#FAFAFA"
+        fg "#546E7C"
+        red "#FF5370"
+        green "#97B859"
+        blue "#6182B8"
+        yellow "#F6A434"
+        magenta "#7C4DFF"
+        orange "#F6A434"
+        cyan "#39ADB5"
+        black "#FAFAFA"
+        white "#546E7C"
+    }
+}
