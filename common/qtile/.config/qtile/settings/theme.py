@@ -1,9 +1,18 @@
 import json
 import os
 
+""" _Available themes_: 
+    catppuccin, 
+    gruvbox-material-dark, 
+    gruvbox-material-light, 
+    nord, 
+    poimandres, 
+    tokyonight
+"""
+
 
 def load_theme():
-    theme = "gruvbox"  # WARN: Available themes: catppuccin, gruvbox, nord, poimandres, tokyonight
+    theme = "gruvbox-material-light"
 
     theme_file_path = os.path.expanduser(f"~/.config/qtile/themes/{theme}.json")
 
