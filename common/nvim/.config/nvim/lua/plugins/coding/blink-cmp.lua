@@ -9,7 +9,24 @@ return {
 			nerd_font_variant = "normal",
 			use_nvim_cmp_as_default = true,
 		},
+
+		cmdline = {
+			enabled = true,
+			keymap = { preset = "inherit" },
+			completion = {
+				menu = {
+					auto_show = false,
+				},
+			},
+		},
+
 		completion = {
+			list = {
+				selection = {
+					preselect = false,
+					auto_insert = false,
+				},
+			},
 			menu = {
 				border = "rounded",
 				draw = {
@@ -37,6 +54,7 @@ return {
 			},
 			documentation = { window = { border = "rounded" }, auto_show = true },
 		},
+
 		signature = { window = { border = "rounded" } },
 
 		sources = {

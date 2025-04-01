@@ -52,29 +52,32 @@ return {
 	-- 	end,
 	-- },
 	---- ** Poimandres ** ----
-	{
-		"olivercederborg/poimandres.nvim",
-		lazy = false,
-		priority = 1000,
-		config = function()
-			local p = require("poimandres.palette")
-			require("poimandres").setup({
-				disable_background = false,
-				highlight_groups = {
-					LspReferenceText = { bg = p.background1, fg = p.text },
-					LspReferenceRead = { bg = p.background1, fg = p.text },
-					LspReferenceWrite = { bg = p.background1, fg = p.text },
-				},
-			})
-		end,
+	-- {
+	-- 	"olivercederborg/poimandres.nvim",
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		local p = require("poimandres.palette")
+	-- 		require("poimandres").setup({
+	-- 			disable_background = false,
+	-- 			highlight_groups = {
+	-- 				-- LspReferenceText = { bg = p.background1, fg = p.text },
+	-- 				-- LspReferenceRead = { bg = p.background1, fg = p.text },
+	-- 				-- LspReferenceWrite = { bg = p.background1, fg = p.text },
+	-- 				LspReferenceText = { link = "Visual" },
+	-- 				LspReferenceRead = { link = "Visual" },
+	-- 				LspReferenceWrite = { link = "Visual" },
+	-- 			},
+	-- 		})
+	-- 	end,
 
-		-- Set the colorscheme
-		init = function()
-			vim.cmd("colorscheme poimandres")
-			vim.cmd("highlight Comment cterm=italic gui=italic")
-			vim.cmd("highlight FloatBorder guifg=#E4F0FB guibg=#1B1E28")
-		end,
-	},
+	-- 	-- Set the colorscheme
+	-- 	init = function()
+	-- 		vim.cmd("colorscheme poimandres")
+	-- 		vim.cmd("highlight Comment cterm=italic gui=italic")
+	-- 		vim.cmd("highlight FloatBorder guifg=#E4F0FB guibg=#1B1E28")
+	-- 	end,
+	-- },
 
 	---- ** Edge ** ----
 	-- {
@@ -91,17 +94,19 @@ return {
 	-- },
 
 	---- ** Gruvbox ** ----
-	-- {
-	-- 	"sainnhe/gruvbox-material",
-	-- 	lazy = true,
-	-- 	config = function()
-	-- 		vim.g.gruvbox_material_foreground = "material"
-	-- 		vim.g.gruvbox_material_background = "medium"
-	-- 		vim.g.gruvbox_material_transparent_background = 1
-	--  -- apply colorscheme
-	-- vim.cmd([[colorscheme gruvbox-material]])
-	-- 	end,
-	-- },
+	{
+		"sainnhe/gruvbox-material",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			vim.g.gruvbox_material_foreground = "material"
+			vim.g.gruvbox_material_background = "medium"
+			vim.g.gruvbox_material_transparent_background = 0
+			-- apply colorscheme
+			vim.cmd([[colorscheme gruvbox-material]])
+			vim.cmd([[set background=light]])
+		end,
+	},
 	---- ** Everforest ** ----
 	-- {
 	-- 	"neanias/everforest-nvim",

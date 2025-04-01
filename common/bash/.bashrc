@@ -119,12 +119,7 @@ fi
 export EDITOR='nvim'
 export VISUAL='nvim'
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-# for ruby rbenv autostart
-# set rbenv to PATH
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 ## -- SSH -- ##
 # Initialize keychain and load SSH keys
