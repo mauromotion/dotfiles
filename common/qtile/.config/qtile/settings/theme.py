@@ -6,6 +6,7 @@ import os
     gruvbox-material-dark, 
     gruvbox-material-light, 
     material-lighter,
+    neutral,
     nord, 
     poimandres, 
     qogir-light,
@@ -14,7 +15,7 @@ import os
 
 
 def load_theme():
-    theme = "poimandres"
+    theme = "neutral"
 
     theme_file_path = os.path.expanduser(f"~/.config/qtile/themes/{theme}.json")
 
