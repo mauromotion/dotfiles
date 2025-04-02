@@ -1,13 +1,13 @@
-# Gruvbox Material Dark Color Palette
-set -l foreground d4be98
-set -l selection 7c6f64
-set -l comment d4be98
-set -l red ea6962
-set -l orange e78a4e
-set -l yellow d8a657
-set -l green a9b665
-set -l cyan 89b482
-set -l pink d3849b
+# Zenwritten Dark Color Palette
+set -l foreground bbbbbb
+set -l selection 3d3839
+set -l comment d67c67
+set -l red de6e7c
+set -l orange d68c67
+set -l yellow b77e64
+set -l green 819b69
+set -l cyan 66a5ad
+set -l pink b279a7
 
 # Syntax Highlighting Colors
 set -g fish_color_normal $foreground
@@ -71,10 +71,10 @@ end
 
 # FZF theme
 set -gx FZF_DEFAULT_OPTS '
-  --color=fg:#d4be98,fg+:#ddc7a1,bg:-1,bg+:#1b1b1b
-  --color=hl:#d3869b,hl+:#89b482,info:#d8a657,marker:#e78a4e
-  --color=prompt:#a9b665,spinner:#e78a4e,pointer:#e78a4e,header:#7daea3
-  --color=border:#7c6f64,label:#89b482,query:#4c3423
+  --color=fg:#bbbbbb,fg+:#c9c9c9,bg:-1,bg+:#3D3839
+  --color=hl:#DE6E7C,hl+:#819B69,info:#803D1C,marker:#66A5AD
+  --color=prompt:#8BAE68,spinner:#66A5AD,pointer:#66A5AD,header:#B279A7
+  --color=border:#8E8E8E,label:#8E8E8E,query:#B77E64
   --border="rounded"
   --border-label="fzf"
   --border-label-pos="0"

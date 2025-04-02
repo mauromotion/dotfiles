@@ -2365,6 +2365,6 @@ map ctrl+shift+l neighboring_window right
 #: }}}
 
 # BEGIN_KITTY_THEME
-# Adwaita light
-include current-theme.conf
+# Poimandres
+include poimandres-theme.conf
 # END_KITTY_THEME

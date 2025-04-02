@@ -12,7 +12,7 @@ return {
 
 		cmdline = {
 			enabled = true,
-			keymap = { preset = "inherit" },
+			keymap = { preset = "cmdline" },
 			completion = {
 				menu = {
 					auto_show = true,
@@ -23,7 +23,7 @@ return {
 		completion = {
 			list = {
 				selection = {
-					preselect = false,
+					preselect = true,
 					auto_insert = false,
 				},
 			},

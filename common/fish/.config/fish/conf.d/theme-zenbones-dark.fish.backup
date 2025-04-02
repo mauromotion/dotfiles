@@ -1,13 +1,13 @@
-# Poimandres Color Palette
-set -l foreground e4f0fb
-set -l selection 506477
-set -l comment 767C9d
-set -l red D0679D
-set -l orange F6B486
-set -l yellow FFFAC2
-set -l green 5DE4C7
-set -l cyan 89DDFF
-set -l pink FCC5E9
+# Zenbones Dark Color Palette
+set -l foreground b4bdc3
+set -l selection 403833
+set -l comment d68c67
+set -l red de6e7c
+set -l orange d68c67
+set -l yellow b77e64
+set -l green 819b69
+set -l cyan 66a5ad
+set -l pink b279a7
 
 # Syntax Highlighting Colors
 set -g fish_color_normal $foreground
@@ -20,8 +20,8 @@ set -g fish_color_end $orange
 set -g fish_color_error $red
 set -g fish_color_param $pink
 set -g fish_color_comment $comment
-set -g fish_color_selection --background$selection
-set -g fish_color_search_match --background$selection
+set -g fish_color_selection --background=$selection
+set -g fish_color_search_match --background=$selection
 set -g fish_color_operator $green
 set -g fish_color_escape $pink
 set -g fish_color_autosuggestion $comment
@@ -71,10 +71,10 @@ end
 
 # FZF theme
 set -gx FZF_DEFAULT_OPTS '
-  --color=fg:#E4F0FB,fg+:#FFFFFF,bg:-1,bg+:#303340
-  --color=hl:#D0679D,hl+:#89DDFF,info:#ebcb8b,marker:#5DE4C7
-  --color=prompt:#FCC5E9,spinner:#5DE4C7,pointer:#5DE4C7,header:#8fbcbb
-  --color=border:#303340,label:#81a1c1,query:#d8dee9
+  --color=fg:#B4BDC3,fg+:#C4CACF,bg:-1,bg+:#403833
+  --color=hl:#DE6E7C,hl+:#819B69,info:#D68C67,marker:#66A5AD
+  --color=prompt:#8BAE68,spinner:#66A5AD,pointer:#66A5AD,header:#B279A7
+  --color=border:#888F94,label:#888F94,query:#B77E64
   --border="rounded"
   --border-label="fzf"
   --border-label-pos="0"

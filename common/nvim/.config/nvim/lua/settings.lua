@@ -78,13 +78,15 @@ opt.fillchars:append({ fold = " " })
 -- Python virtual env
 g.python3_host_prog = "$HOME/.venvs/nvim_venv/bin/python"
 
--- Disable perl provider
+-- Disable unused providers
 g.loaded_perl_provider = 0
 g.loaded_ruby_provider = 0
 
 -- For render-markdown plugin
 vim.treesitter.language.register("markdown", "vimwiki")
 
+-- Avoid saving unwanted settings per-file
 opt.viewoptions:remove("curdir")
 
+-- Style of the windows border
 o.winborder = "rounded"

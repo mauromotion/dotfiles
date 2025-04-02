@@ -121,3 +121,40 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 		vim.bo.filetype = "rest"
 	end,
 })
+
+-- Wrap markdown text at a specific number of characters
+vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
+	pattern = { "markdown", "vimwiki", "text" },
+	callback = function()
+		vim.opt_local.wrap = true
+		vim.opt_local.linebreak = true
+		vim.opt_local.textwidth = 80
+		vim.opt_local.formatoptions:append("t")
+	end,
+})
+
+-- vim.api.nvim_create_autocmd({ "FileType", "BufEnter", "BufWinEnter" }, {
+-- 	pattern = { "vimwiki", "markdown", "text" },
+-- 	callback = function()
+-- 		vim.opt_local.wrap = true
+-- 		vim.opt_local.linebreak = true
+-- 		vim.opt_local.textwidth = 50
+-- 		vim.opt_local.formatoptions:append("t") -- Auto-wrap text as you type
+-- 	end,
+-- })
+--
+-- vim.api.nvim_create_autocmd({ "BufWinEnter", "FileType" }, {
+-- 	pattern = { "markdown", "vimwiki" },
+-- 	callback = function()
+-- 		vim.opt.colorcolumn = "81"
+-- 		vim.opt.textwidth = 80
+-- 	end,
+-- })
+
+-- vim.api.nvim_create_autocmd({ "BufWinEnter", "FileType" }, {
+-- 	pattern = { "markdown", "vimwiki" },
+-- 	callback = function()
+-- 		vim.opt.colorcolumn = "121"
+-- 		vim.opt.textwidth = 120
+-- 	end,
+-- })

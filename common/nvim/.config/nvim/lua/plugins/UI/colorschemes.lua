@@ -52,30 +52,43 @@ return {
 	-- 	end,
 	-- },
 	---- ** Poimandres ** ----
+	-- {
+	-- 	"olivercederborg/poimandres.nvim",
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		local p = require("poimandres.palette")
+	-- 		require("poimandres").setup({
+	-- 			disable_background = false,
+	-- 			highlight_groups = {
+	-- 				-- LspReferenceText = { bg = p.background1, fg = p.text },
+	-- 				-- LspReferenceRead = { bg = p.background1, fg = p.text },
+	-- 				-- LspReferenceWrite = { bg = p.background1, fg = p.text },
+	-- 				LspReferenceText = { link = "Visual" },
+	-- 				LspReferenceRead = { link = "Visual" },
+	-- 				LspReferenceWrite = { link = "Visual" },
+	-- 			},
+	-- 		})
+	-- 	end,
+
+	-- 	-- Set the colorscheme
+	-- 	init = function()
+	-- 		vim.cmd("colorscheme poimandres")
+	-- 		vim.cmd("highlight Comment cterm=italic gui=italic")
+	-- 		vim.cmd("highlight FloatBorder guifg=#E4F0FB guibg=#1B1E28")
+	-- 	end,
+	-- },
+
+	---- ** Zenbones ** ----
 	{
-		"olivercederborg/poimandres.nvim",
+		"zenbones-theme/zenbones.nvim",
+		dependencies = "rktjmp/lush.nvim",
 		lazy = false,
 		priority = 1000,
 		config = function()
-			local p = require("poimandres.palette")
-			require("poimandres").setup({
-				disable_background = false,
-				highlight_groups = {
-					-- LspReferenceText = { bg = p.background1, fg = p.text },
-					-- LspReferenceRead = { bg = p.background1, fg = p.text },
-					-- LspReferenceWrite = { bg = p.background1, fg = p.text },
-					LspReferenceText = { link = "Visual" },
-					LspReferenceRead = { link = "Visual" },
-					LspReferenceWrite = { link = "Visual" },
-				},
-			})
-		end,
-
-		-- Set the colorscheme
-		init = function()
-			vim.cmd("colorscheme poimandres")
-			vim.cmd("highlight Comment cterm=italic gui=italic")
-			vim.cmd("highlight FloatBorder guifg=#E4F0FB guibg=#1B1E28")
+			-- vim.g.zenwritten_darken_comments = 45
+			-- vim.g.zenwritten_darkness = "stark"
+			vim.cmd.colorscheme("zenbones")
 		end,
 	},
 
