@@ -23,6 +23,7 @@ magenta = "#88507D"
 red = "#A8334C"
 white = "#2C363C"
 yellow = "#944927"
+
 [colors.primary]
 background = "#F0EDEC"
 foreground = "#2C363C"

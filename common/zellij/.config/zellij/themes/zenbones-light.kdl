@@ -1,0 +1,15 @@
+themes {
+    zenbones-light {
+        bg "#CFC1BA"
+        fg "#2C363C"
+        red "#A8334C"
+        green "#4F6C31"
+        blue "#286486"
+        yellow "#944927"
+        magenta "#88507D"
+        orange "#803D1C"
+        cyan "#3B8992"
+        black "#F0EDEC"
+        white "#2C363C"
+    }
+}
