@@ -1,7 +1,7 @@
 # Zenwritten Dark Color Palette
 set -l foreground bbbbbb
 set -l selection 3d3839
-set -l comment d67c67
+set -l comment 8e8e8e
 set -l red de6e7c
 set -l orange d68c67
 set -l yellow b77e64
@@ -33,10 +33,10 @@ set -g fish_pager_color_completion $foreground
 set -g fish_pager_color_description $comment
 
 # Hydro prompt styling
-set hydro_color_pwd $cyan
-set hydro_color_git $pink
+set hydro_color_pwd $foreground
+set hydro_color_git $selection
 set hydro_color_start $yellow
-set hydro_color_prompt $green
+set hydro_color_prompt $foreground
 set hydro_color_error $red
 set hydro_color_duration $yellow
 set hydro_multiline true
