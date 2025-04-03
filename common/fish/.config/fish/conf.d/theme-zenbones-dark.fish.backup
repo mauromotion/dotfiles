@@ -38,7 +38,7 @@ set hydro_color_git $selection
 set hydro_color_start $yellow
 set hydro_color_prompt $foreground
 set hydro_color_error $red
-set hydro_color_duration $yellow
+set hydro_color_duration $comment
 set hydro_multiline true
 
 # Colored man pages
