@@ -20,7 +20,7 @@ blinking = "Always"
 shape = "Beam"
 
 [env]
-TERM = "xterm-256color"
+TERM = "alacritty"
 
 [mouse]
 hide_when_typing = true
@@ -33,8 +33,8 @@ multiplier = 3
 program = "/bin/fish"
 
 [window]
-decorations = "Full"
-padding = { x = 5, y = 3 }
+decorations = "none"
+# padding = { x = 5, y = 3 }
 dynamic_padding = true
 dynamic_title = true
 opacity = 1
