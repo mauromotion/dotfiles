@@ -105,10 +105,11 @@ def desktop_toolbar():
             widget.Sep(foreground=colors["background"][1]),
             widget.Systray(),
             widget.Spacer(length=10),
+            widget.Sep(foreground=colors["background"][1]),
             widget.Clock(
                 format="%b %d (%a) %H:%M",
-                background=colors["accent1"][0],
-                foreground=colors["background"][0],
+                foreground=colors["accent1"][0],
+                background=colors["background"][0],
                 mouse_callbacks={
                     "Button1": lazy.group["scratchpad"].dropdown_toggle("calendar")
                 },

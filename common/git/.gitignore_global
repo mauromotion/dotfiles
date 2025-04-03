@@ -4,7 +4,6 @@
 .directory
 .Trash-*
 .nfs*
-fish_variables
 
 # Node
 node_modules/
