@@ -6,3 +6,5 @@ nvim/lazy-lock.json
 nvim/lazy-lock.json
 
 __pycache__/
+
+fish_variables
