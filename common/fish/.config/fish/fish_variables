@@ -25,11 +25,8 @@ SETUVAR _hydro_git_1227771:main\x20
 SETUVAR _hydro_git_1399807:main\u2022\x20
 SETUVAR _hydro_git_1472185:main\u2022\x20
 SETUVAR _hydro_git_1472362:main\u2022\x20
-SETUVAR _hydro_git_522493:main\x20
-SETUVAR _hydro_git_554707:main\u2022\x20
 SETUVAR _hydro_git_564131:main\u2022\x20\u21916\x20\u21931\x20
 SETUVAR _hydro_git_567859:main\u2022\x20\u219111\x20\u21932\x20
-SETUVAR _hydro_git_630274:main\u2022\x20
 SETUVAR _hydro_git_632256:main\x20
 SETUVAR _hydro_git_632458:main\x20
 SETUVAR _hydro_git_632888:main\u2022\x20
@@ -37,6 +34,7 @@ SETUVAR _hydro_git_633073:main\u2022\x20
 SETUVAR _hydro_git_633111:main\u2022\x20
 SETUVAR _hydro_git_633718:main\u2022\x20
 SETUVAR _hydro_git_633758:main\u2022\x20
+SETUVAR _hydro_git_655067:main\u2022\x20
 SETUVAR chain_links:chain\x2elinks\x2eroot\x1echain\x2elinks\x2ejobs\x1echain\x2elinks\x2epwd\x1echain\x2elinks\x2evcs_branch\x1echain\x2elinks\x2evcs_dirty\x1echain\x2elinks\x2evcs_stashed
 SETUVAR fish_color_autosuggestion:6c7086
 SETUVAR fish_color_cancel:f38ba8
