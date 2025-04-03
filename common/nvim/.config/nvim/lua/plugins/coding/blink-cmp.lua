@@ -12,10 +12,10 @@ return {
 
 		cmdline = {
 			enabled = true,
-			keymap = { preset = "cmdline" },
+			keymap = { preset = "enter" },
 			completion = {
 				menu = {
-					auto_show = true,
+					auto_show = false,
 				},
 			},
 		},
@@ -23,7 +23,7 @@ return {
 		completion = {
 			list = {
 				selection = {
-					preselect = true,
+					preselect = false,
 					auto_insert = false,
 				},
 			},

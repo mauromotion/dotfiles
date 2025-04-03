@@ -33,12 +33,12 @@ set -g fish_pager_color_completion $foreground
 set -g fish_pager_color_description $comment
 
 # Hydro prompt styling
-set hydro_color_pwd $cyan
-set hydro_color_git $pink
+set hydro_color_pwd $foreground
+set hydro_color_git $selection
 set hydro_color_start $yellow
-set hydro_color_prompt $green
+set hydro_color_prompt $foreground
 set hydro_color_error $red
-set hydro_color_duration $yellow
+set hydro_color_duration $comment
 set hydro_multiline true
 
 # Colored man pages
@@ -71,10 +71,10 @@ end
 
 # FZF theme
 set -gx FZF_DEFAULT_OPTS '
-  --color=fg:#353535,fg+:#5C5C5C,bg:-1,bg+:#EEEEEE
-  --color=hl:#A8334C,hl+:#4F6C31,info:#803D1C,marker:#2B747C
-  --color=prompt:#a9b665,spinner:#2B747C,pointer:#2B747C,header:#88507D
-  --color=border:#C6C3C3,label:#353535,query:#4c3423
+  --color=fg:#353535,fg+:#5C5C5C,bg:-1,bg+:#C6C3C3
+  --color=hl:#A8334C,hl+:#4F6C31,info:#88507D,marker:#2B747C
+  --color=prompt:#353535,spinner:#353535,pointer:#2B747C,header:#88507D
+  --color=border:#5C5C5C,label:#353535,query:#2B747C
   --border="rounded"
   --border-label="fzf"
   --border-label-pos="0"
