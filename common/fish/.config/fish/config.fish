@@ -25,6 +25,7 @@ set fish_greeting
 #     echo
 # end
 
+
 ## Aliases & abbreviations
 abbr --add bash env -i HOME=$HOME PATH=\"/usr/bin:$(echo $PATH)\" TERM=$TERM /usr/bin/bash --noprofile --norc
 abbr --add ga git add
@@ -80,3 +81,7 @@ alias yt "ytfzf"
 
 ## Source Zoxide
 zoxide init fish | source
+
+## Starship prompt
+# set -x STARSHIP_CONFIG ~/.config/staship/starship.toml
+# starship init fish | source
