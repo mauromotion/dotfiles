@@ -1,4 +1,4 @@
-theme = poimandres
+theme = zenwritten_light
 background-opacity = 0.95
 window-decoration = false
 gtk-titlebar = false

@@ -35,6 +35,8 @@ abbr --add gP git push
 abbr --add gp git pull
 abbr --add gst git status
 abbr --add gsw git switch
+abbr --add pym python3 manage.py
+abbr --add pymr python3 manage.py runserver
 abbr --add refl sudo reflector -c \'United Kingdom\' -a 6 --sort rate --save /etc/pacman.d/mirrorlist
 abbr --add src source ~/.config/fish/config.fish
 abbr --add vst mullvad status
@@ -49,7 +51,7 @@ alias del "trash-put -i"
 alias df "df -H"
 alias diary "nvim +VimwikiIndex +VimwikiDiaryIndex"
 alias etree "eza -T --color=always --icons | less -R"
-alias fastfetch "fastfetch -c examples/10.jsonc"
+# alias fastfetch "fastfetch -c examples/10.jsonc"
 alias glog "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --date=short"
 alias grep "grep --color=auto"
 alias icat "kitty +kitten icat"
