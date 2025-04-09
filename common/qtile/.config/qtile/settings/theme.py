@@ -16,7 +16,7 @@ import os
 
 
 def load_theme():
-    theme = "zenwritten-dark"
+    theme = "poimandres"
 
     theme_file_path = os.path.expanduser(f"~/.config/qtile/themes/{theme}.json")
 

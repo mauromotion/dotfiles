@@ -28,6 +28,7 @@ set fish_greeting
 
 ## Aliases & abbreviations
 abbr --add bash env -i HOME=$HOME PATH=\"/usr/bin:$(echo $PATH)\" TERM=$TERM /usr/bin/bash --noprofile --norc
+abbr --add ff fastfetch -c examples/10.jsonc
 abbr --add ga git add
 abbr --add gaa git add --all
 abbr --add gcam git commit --all --message
@@ -51,7 +52,6 @@ alias del "trash-put -i"
 alias df "df -H"
 alias diary "nvim +VimwikiIndex +VimwikiDiaryIndex"
 alias etree "eza -T --color=always --icons | less -R"
-# alias fastfetch "fastfetch -c examples/10.jsonc"
 alias glog "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --date=short"
 alias grep "grep --color=auto"
 alias icat "kitty +kitten icat"

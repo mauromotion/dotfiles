@@ -2,7 +2,7 @@ file:///home/mauromotion/Documents Documents
 file:///home/mauromotion/Downloads Downloads
 file:///home/mauromotion/Pictures Pictures
 file:///home/mauromotion/Videos Videos
-file:///home/mauromotion/Music
+file:///home/mauromotion/Music Music
 file:///home/mauromotion/Pictures/Screenshots Screenshots
 file:///home/mauromotion/Sync Sync
 file:///home/mauromotion/Notes Notes
@@ -12,3 +12,4 @@ file:///home/mauromotion/Nextcloud/01_Projects 01_Projects
 file:///home/mauromotion/Nextcloud/02_Areas 02_Areas
 file:///home/mauromotion/Nextcloud/03_Resources 03_Resources
 file:///home/mauromotion/Nextcloud/04_Archive 04_Archive
+sftp://raspberrypi.local/home/mauromotion mauromotion
