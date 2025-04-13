@@ -126,3 +126,6 @@ zenwritten
 serializer
 DjangoRestFramework
 DRF
+IDM
+emacs
+Nextcloud
