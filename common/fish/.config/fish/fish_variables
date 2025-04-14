@@ -68,7 +68,7 @@ SETUVAR _hydro_git_53413:main\u2022\x20
 SETUVAR _hydro_git_534246:main\u2022\x20
 SETUVAR _hydro_git_54140:main\u2022\x20
 SETUVAR _hydro_git_57069:main\x20
-SETUVAR _hydro_git_57071:main\x20
+SETUVAR _hydro_git_57071:main\u2022\x20
 SETUVAR _hydro_git_57249:main\x20
 SETUVAR _hydro_git_57559:main\x20
 SETUVAR _hydro_git_632256:main\x20
@@ -78,13 +78,14 @@ SETUVAR _hydro_git_797274:main\x20
 SETUVAR _hydro_git_797466:main\x20
 SETUVAR _hydro_git_797590:main\u2022\x20
 SETUVAR _hydro_git_797961:main\u2022\x20
-SETUVAR _hydro_git_804670:main\u2022\x20
+SETUVAR _hydro_git_798262:main\u2022\x20
 SETUVAR _hydro_git_821091:main\u2022\x20
-SETUVAR _hydro_git_827685:main\u2022\x20
+SETUVAR _hydro_git_857049:main\x20
 SETUVAR _hydro_git_88999:main\x20
 SETUVAR _hydro_git_89044:main\x20
 SETUVAR _hydro_git_89179:main\x20
 SETUVAR _hydro_git_89229:main\x20
+SETUVAR _hydro_git_957827:main\u2022\x20
 SETUVAR _hydro_git_980325:main\u2022\x20
 SETUVAR chain_links:chain\x2elinks\x2eroot\x1echain\x2elinks\x2ejobs\x1echain\x2elinks\x2epwd\x1echain\x2elinks\x2evcs_branch\x1echain\x2elinks\x2evcs_dirty\x1echain\x2elinks\x2evcs_stashed
 SETUVAR fish_color_autosuggestion:6c7086
@@ -126,7 +127,7 @@ SETUVAR fish_pager_color_selected_background:\x1d
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
-SETUVAR fish_user_paths:/home/mauromotion/\x2efzf/bin
+SETUVAR fish_user_paths:/home/mauromotion/\x2econfig/emacs/bin\x1e/home/mauromotion/\x2efzf/bin
 SETUVAR pisces_pairs:\x28\x2c\x29\x1e\x5b\x2c\x5d\x1e\x7b\x2c\x7d\x1e\x22\x2c\x22\x1e\x27\x2c\x27
 SETUVAR pure_begin_prompt_with_current_directory:true
 SETUVAR pure_check_for_new_release:false
