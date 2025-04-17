@@ -10,12 +10,13 @@ import os
     nord, 
     poimandres, 
     qogir-light,
-    tokyonight
+    tokyonight,
+    zenwritten-dark
 """
 
 
 def load_theme():
-    theme = "neutral"
+    theme = "poimandres"
 
     theme_file_path = os.path.expanduser(f"~/.config/qtile/themes/{theme}.json")
 

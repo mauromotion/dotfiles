@@ -88,7 +88,7 @@ return {
 		config = function()
 			-- vim.g.zenwritten_darken_comments = 45
 			-- vim.g.zenwritten_darkness = "stark"
-			vim.cmd.colorscheme("zenbones")
+			vim.cmd.colorscheme("poimbones")
 		end,
 	},
 

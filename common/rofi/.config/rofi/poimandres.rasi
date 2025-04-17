@@ -19,10 +19,10 @@ element-text, element-icon , mode-switcher {
 
 window {
     height: 360px;
-    border: 1px;
+    border: 2px;
     border-color: @border-col;
     background-color: @bg-col;
-    border-radius: 0;
+    border-radius: 8;
 }
 
 mainbox {
