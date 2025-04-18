@@ -97,3 +97,10 @@
               )
 (after! org
   (add-to-list 'org-src-lang-modes '("jsx" . js-jsx)))
+
+(use-package! rainbow-mode
+  :commands rainbow-mode
+  :hook
+  (prog-mode . rainbow-mode)   ; every programming buffer
+  (css-mode  . rainbow-mode)
+  (html-mode . rainbow-mode))
