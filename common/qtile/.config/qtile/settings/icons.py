@@ -18,4 +18,6 @@ mixed_geo = ["", "", "󱨊", "", "", "󱨊", "", "", "󱨊"]
 
 moons = ["", "", "", "", "", "", "", "", ""]
 
-text = ["home", "mail", "dev", "chat", "docs", "media", "games", "edit", "extra"]
+text = ["home", "mail", "dev", "chat", "notes", "media", "games", "edit", "extra"]
+
+abbrev = ["hom", "mal", "dev", "cht", "doc", "med", "gam", "edt", "ext"]

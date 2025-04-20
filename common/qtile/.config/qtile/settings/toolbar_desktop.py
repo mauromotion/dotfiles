@@ -18,7 +18,8 @@ def desktop_toolbar():
     return bar.Bar(
         [
             widget.GroupBox(
-                font="Font Awesome 6 Free Medium",
+                # font="Font Awesome 6 Free Medium",
+                font="NotoSansM Nerd Font Medium",
                 # fontsize=14,
                 highlight_method="line",
                 borderwidth=2,

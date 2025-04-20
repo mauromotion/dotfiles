@@ -32,7 +32,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-city-lights)
 (setq doom-font "Maple Mono")
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -97,6 +97,16 @@
               )
 (after! org
   (add-to-list 'org-src-lang-modes '("jsx" . js-jsx)))
+
+(after! org-roam-dailies
+  (setq org-roam-dailies-capture-templates
+        '(("d" "daily entry" entry
+           ;; Prefix each entry with a heading whose time is formatted as HH:MM (24h)
+           "* %<%H:%M>\n%?"
+           :if-new
+           ;; Create the daily file with a date title metadata
+           (file+head "%<%Y-%m-%d>.org"
+                      "#+title: %<%Y-%m-%d>\n")))))
 
 (use-package! rainbow-mode
   :commands rainbow-mode
