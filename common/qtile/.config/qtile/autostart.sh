@@ -15,6 +15,7 @@ processes=(
   "blueman-applet"
   "polkit-gnome-au"
   "clipit"
+  "emacs"
   "caffeine-ng"
   "nextcloud"
   "openrgb"
@@ -44,6 +45,7 @@ if [[ "$HOSTNAME" == "eva-01" ]]; then
   caffeine &
   clipit &
   nextcloud --background &
+  emacs --daemon &
   openrgb --startminimized &
   xset b 100 & # system bell volume
   xset -dpms & # Disable DPMS
@@ -64,6 +66,7 @@ elif [[ "$HOSTNAME" == "eva-03" ]]; then
   clipit &
   blueman-applet &
   nextcloud --background &
+  emacs --daemon &
   xbindkeys &
   kanata -c ~/.config/kanata/kanata.kbd &
   xidlehook --not-when-fullscreen --not-when-audio --timer 600 "betterlockscreen -l dimblur" "" --timer 3600 "systemctl suspend" "" &
