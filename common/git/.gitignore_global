@@ -74,3 +74,31 @@ huey.db-wal
 instance/
 .webassets-cache
 
+## Emacs
+# Backup and autosave files
+*~               # Vim/Emacs backup
+\#*\#            # Emacs autosave
+.\#*             # Emacs lock files
+
+# Compiled Lisp
+*.elc
+
+# Desktop/session files
+/.emacs.desktop
+/.emacs.desktop.lock
+
+# Auto‑save list and tramp metadata
+auto-save-list/
+tramp
+
+# ELPA and package manager dirs
+/elpa/
+/.cask/
+dist/
+
+# Project files and caches
+.projectile
+*.rel            # reftex
+/auto/           # AUCTeX auto
+flycheck_*.el
+/server/         # server auth

@@ -114,3 +114,11 @@
   (prog-mode . rainbow-mode)   ; every programming buffer
   (css-mode  . rainbow-mode)
   (html-mode . rainbow-mode))
+
+;; ispell and dictionaries
+(setq ispell-dictionary "en_GB")
+(with-eval-after-load "ispell"
+  (setq ispell-program-name "hunspell")
+  (setq ispell-dictionary "en_GB,en_US,it_IT")   ; comma‑separated list
+  (ispell-set-spellchecker-params)
+  (ispell-hunspell-add-multi-dic "en_GB,en_US,it_IT"))
