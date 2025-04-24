@@ -32,7 +32,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-city-lights)
+(setq doom-theme 'doom-opera)
 (setq doom-font "Maple Mono")
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -114,3 +114,11 @@
   (prog-mode . rainbow-mode)   ; every programming buffer
   (css-mode  . rainbow-mode)
   (html-mode . rainbow-mode))
+
+;; ispell and dictionaries
+(setq ispell-dictionary "en_GB")
+(with-eval-after-load "ispell"
+  (setq ispell-program-name "hunspell")
+  (setq ispell-dictionary "en_GB,en_US,it_IT")   ; comma‑separated list
+  (ispell-set-spellchecker-params)
+  (ispell-hunspell-add-multi-dic "en_GB,en_US,it_IT"))
