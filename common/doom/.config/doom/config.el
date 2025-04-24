@@ -32,8 +32,8 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-opera)
-(setq doom-font "Maple Mono")
+(setq doom-theme 'modus-operandi-tinted)
+(setq doom-font "Adwaita Mono")
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
@@ -122,3 +122,11 @@
   (setq ispell-dictionary "en_GB,en_US,it_IT")   ; comma‑separated list
   (ispell-set-spellchecker-params)
   (ispell-hunspell-add-multi-dic "en_GB,en_US,it_IT"))
+
+(defun efs/org-mode-visual-fill ()
+  (setq visual-fill-column-width 100
+        visual-fill-column-center-text t)
+  (visual-fill-column-mode 1))
+
+(use-package visual-fill-column
+  :hook (org-mode . efs/org-mode-visual-fill))
