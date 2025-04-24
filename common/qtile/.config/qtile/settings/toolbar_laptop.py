@@ -103,8 +103,8 @@ def laptop_toolbar():
             widget.Spacer(length=10),
             widget.Clock(
                 format="%b %d (%a) %H:%M",
-                background=colors["accent1"][0],
-                foreground=colors["background"][0],
+                foreground=colors["accent1"][0],
+                background=colors["background"][0],
                 mouse_callbacks={
                     "Button1": lazy.group["scratchpad"].dropdown_toggle("calendar")
                 },
