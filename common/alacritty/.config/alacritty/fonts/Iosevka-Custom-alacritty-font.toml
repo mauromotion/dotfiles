@@ -1,19 +1,19 @@
 [font]
-size = 11
+size = 12
 # offset = { x = 0, y = 3 }
 
 [font.bold]
-family = "AdwaitaMono Nerd Font"
+family = "Iosevka Custom"
 style = "Bold"
 
 [font.bold_italic]
-family = "AdwaitaMono Nerd Font"
+family = "Iosevka Custom"
 style = "Bold Italic"
 
 [font.italic]
-family = "AdwaitaMono Nerd Font"
+family = "Iosevka Custom"
 style = "Italic"
 
 [font.normal]
-family = "AdwaitaMono Nerd Font"
+family = "Iosevka Custom"
 style = "Regular"
