@@ -33,7 +33,7 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-zenburn)
-(setq doom-font "Iosevka Custom Extended")
+(setq doom-font "AdwaitaMono Nerd Font")
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
@@ -123,10 +123,12 @@
   (ispell-set-spellchecker-params)
   (ispell-hunspell-add-multi-dic "en_GB,en_US,it_IT"))
 
-(defun efs/org-mode-visual-fill ()
-  (setq visual-fill-column-width 100
-        visual-fill-column-center-text t)
-  (visual-fill-column-mode 1))
+(use-package! olivetti
+  :hook ((text-mode     . olivetti-mode)   ; plain-text buffers
+         (org-mode      . olivetti-mode)   ; Org files
+         (markdown-mode . olivetti-mode))  ; Markdown
+  :config
+  (setq olivetti-body-width 90 olivetti-style 'fancy))           ; width in columns
 
-(use-package visual-fill-column
-  :hook (org-mode . efs/org-mode-visual-fill))
+(add-hook 'org-mode-hook
+          (lambda () (display-line-numbers-mode 0)))
