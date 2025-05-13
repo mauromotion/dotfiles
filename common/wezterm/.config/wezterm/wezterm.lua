@@ -13,8 +13,8 @@ config.pane_focus_follows_mouse = true
 
 -- Colorscheme
 config.color_scheme_dirs = { "~/.config/wezterm/colors" }
-config.color_scheme = "Poimandres"
-config.window_background_opacity = 0.95
+config.color_scheme = "Ef-Day"
+config.window_background_opacity = 1
 
 -- Font
 config.font = wezterm.font("JetBrainsMono NF", { weight = "Regular" })

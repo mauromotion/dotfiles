@@ -50,3 +50,4 @@
 
 (package! org-superstar)
 (package! org-fancy-priorities)
+(package! olivetti)

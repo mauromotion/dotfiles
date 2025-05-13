@@ -46,7 +46,7 @@ map("n", "<S-l>", ":bnext<CR>")
 map("n", "<S-h>", ":bprevious<CR>")
 
 -- Delete (close) a buffer
-map("n", "<leader>b", ":bdelete<CR>", "Delete buffer")
+map("n", "<leader>bd", ":bdelete<CR>", "Delete buffer")
 
 -- Visual mode -- Stay in indent mode
 map("v", "<", "<gv")
@@ -62,6 +62,17 @@ map("n", "N", "Nzzzv")
 
 -- Tab to alternate buffers
 map("n", "<TAB>", "<C-^>")
+
+-- Toggle light/dark mode
+local function toggle_bg()
+	vim.o.background = (vim.o.background == "dark") and "light" or "dark"
+end
+
+vim.keymap.set("n", "<leader>bg", toggle_bg, {
+	noremap = true,
+	silent = true,
+	desc = "Toggle light/dark background",
+})
 
 -- Keep pasting the same with leader + p
 -- map("x", "<leader>p", '"_dP')
