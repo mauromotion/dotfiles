@@ -51,3 +51,5 @@
 (package! org-superstar)
 (package! org-fancy-priorities)
 (package! olivetti)
+(package! websocket)
+(package! org-roam-ui)
