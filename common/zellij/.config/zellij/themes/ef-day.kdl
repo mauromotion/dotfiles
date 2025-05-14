@@ -1,0 +1,15 @@
+themes {
+    ef-day {
+        bg "#fff5ea"
+        fg "#584141"
+        red "#ba2d2f"
+        green "#007a0a"
+        blue "#375cc6"
+        yellow "#a45a22"
+        magenta "#8448aa"
+        orange "#aa4f30"
+        cyan "#0f7b8f"
+        black "#f2e9db"
+        white "#a45a22"
+    }
+}

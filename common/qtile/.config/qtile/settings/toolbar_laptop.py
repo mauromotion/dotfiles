@@ -18,14 +18,15 @@ def laptop_toolbar():
     return bar.Bar(
         [
             widget.GroupBox(
-                font="Font Awesome 6 Free Medium",
+                # font="Font Awesome 6 Free Medium",
                 # fontsize=18,
-                highlight_method="text",
-                active=colors["accent1"][0],
+                highlight_method="line",
+                borderwidth=2,
+                active=colors["accent2"][0],
                 inactive=colors["black"][1],
                 this_current_screen_border=colors["accent2"][0],
                 rounded=False,
-                block_highlight_text_color=colors["background"][0],
+                block_highlight_text_color=colors["accent1"][0],
                 foreground=colors["black"][1],
             ),
             widget.Sep(foreground=colors["accent1"][0], linewidth=1),
@@ -101,6 +102,7 @@ def laptop_toolbar():
             widget.Sep(foreground=colors["background"][1]),
             widget.Systray(),
             widget.Spacer(length=10),
+            widget.Sep(foreground=colors["background"][1]),
             widget.Clock(
                 format="%b %d (%a) %H:%M",
                 foreground=colors["accent1"][0],
