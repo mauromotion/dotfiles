@@ -77,8 +77,8 @@
 
 * General flow
 This literal configuration will work like this:
-- In =early-init.el= package.el is disabled for elpaca (the package manager), and some basic initial UI settings are configured.
-- Then in =init.el= in order, there's the start up performance function, the whole elpaca installation and setup, and a check that loads =config.el= if present on disk, or, if not present, it will tangle this =config.org= file so that =config.el= gets generated. And then =init.el= loads the whole configuration from =config.el=.
+- In =early-init.el= some basic initial UI settings are configured.
+- Then in =init.el= in order, there's the start up performance function, the whole use-package installation and setup, and a check that loads =config.el= if present on disk, or, if not present, it will tangle this =config.org= file so that =config.el= gets generated. And then =init.el= loads the whole configuration from =config.el=.
 - Here there's also a bootstrap function that auto-tangle this file when saved, so that =config.el= gets recreated with the new settings.
   
 * Startup Performance
@@ -105,22 +105,24 @@ This goes statically in =init.el=.
 #+begin_src emacs-lisp
 
 (defvar mmotion/config-org
-  (locate-user-emacs-file "config.org")
-  "Absolute path to my literate Emacs config.")
+  (file-truename (expand-file-name "config.org" user-emacs-directory))
+  "Resolved path to config.org.")
+
+(defvar mmotion/tangled-el
+  (expand-file-name "config.el" user-emacs-directory)
+  "Always tangle to Emacs runtime dir.")
 
 (defun mmotion/auto-tangle-and-load-config ()
-  "When `config.org` is saved, tangle it (and reload the result)."
+  "Tangle config.el to Emacs runtime dir."
   (when (and buffer-file-name
              (string= (file-truename buffer-file-name)
-                      (file-truename mmotion/config-org)))
-    (message "[literate] Tangling %s…" mmotion/config-org)
+                      mmotion/config-org))
     (let ((org-confirm-babel-evaluate nil))
-      (org-babel-tangle-file mmotion/config-org))
-    (let ((generated-el (concat (file-name-sans-extension mmotion/config-org) ".el")))
-      (when (file-exists-p generated-el)
-        (message "[literate] Loading %s…" generated-el)
-        (load-file generated-el)))
-    (message "[literate] Done.")))
+      (message "[literate] Tangling %s → %s…" mmotion/config-org mmotion/tangled-el)
+      (org-babel-tangle-file mmotion/config-org mmotion/tangled-el)
+      (when (file-exists-p mmotion/tangled-el)
+        (load-file mmotion/tangled-el))
+      (message "[literate] Done."))))
 
 (add-hook 'after-save-hook #'mmotion/auto-tangle-and-load-config)
 
@@ -313,7 +315,6 @@ Use ace-window to manipulate windows and navigate between them more efficiently.
   (load-theme 'ef-kassio t)  ; for a light theme
   ;; (load-theme 'ef-owl t)   ; for a dark theme
   )
-
 ;;;; doom-themes
 (use-package doom-themes
   :defer t)

@@ -102,3 +102,6 @@ dist/
 /auto/           # AUCTeX auto
 flycheck_*.el
 /server/         # server auth
+
+# Generated files
+config.el
