@@ -1,5 +1,6 @@
 #+TITLE: Mauro's GNU Emacs Config
 #+AUTHOR: Mauro Di Ianni (mmotion)
+#+EMAIL: hello@mauromotion.com
 #+DESCRIPTION: Mauro's personal Emacs configuration
 #+STARTUP: content
 #+OPTIONS: toc:2
@@ -18,7 +19,7 @@
   - [[#bookmarks][Bookmarks]]
   - [[#navigation][Navigation]]
 - [[#fonts][Fonts]]
-- [[#look--feel][Look & Feel]]
+- [[#appearance][Appearance]]
   - [[#themes][Themes]]
   - [[#icons][Icons]]
   - [[#modeline][Modeline]]
@@ -37,8 +38,8 @@
   - [[#toggle-line-number-states-function][Toggle line-number-states function]]
   - [[#hydras][Hydras]]
   - [[#define-sub-menus][Define Sub-menus]]
-  - [[#evil-mode-integration][Evil-mode integration]]
   - [[#configure-which-key-descriptions][Configure which-key descriptions]]
+  - [[#evil-mode-integration][Evil-mode integration]]
 - [[#completion--selection-framework][Completion & Selection Framework]]
   - [[#consult][Consult]]
   - [[#vertico][Vertico]]
@@ -59,11 +60,13 @@
   - [[#evil-org][Evil-org]]
   - [[#toc-org][TOC-org]]
   - [[#org-babel][Org Babel]]
+  - [[#org-download][Org download]]
+  - [[#save-and-show-remote-images][Save and show remote images]]
   - [[#structure-templates][Structure Templates]]
 - [[#org-styling][Org Styling]]
-  - [[#better-looking-bullet-points][Better looking Bullet Points]]
-  - [[#olivetti][Olivetti]]
+  - [[#org-superstar-bullet-points][Org-superstar (bullet points)]]
   - [[#fancy-priorities-look][Fancy Priorities Look]]
+  - [[#olivetti][Olivetti]]
 - [[#org-roam][Org-roam]]
   - [[#org-roam-ui][Org-roam UI]]
   - [[#consult-org-roam][Consult-org-roam]]
@@ -302,7 +305,7 @@ Use ace-window to manipulate windows and navigate between them more efficiently.
 
   #+end_src
 
-* Look & Feel
+* Appearance
 ** Themes
    #+begin_src emacs-lisp
 
@@ -312,8 +315,8 @@ Use ace-window to manipulate windows and navigate between them more efficiently.
   :defer nil
   :config
   ;; Optional: Set a default theme to load when Emacs starts
-  (load-theme 'ef-kassio t)  ; for a light theme
-  ;; (load-theme 'ef-owl t)   ; for a dark theme
+  ;; (load-theme 'ef-kassio t)  ; for a light theme
+  (load-theme 'ef-owl t)   ; for a dark theme
   )
 ;;;; doom-themes
 (use-package doom-themes
@@ -583,7 +586,8 @@ Use ace-window to manipulate windows and navigate between them more efficiently.
    #+end_src
 
 ** Define Sub-menus 
-   #+begin_src emacs-lisp
+*** [B]uffer keybindings
+    #+begin_src emacs-lisp
 
 ;;;;; Define submenu keymaps
 (defvar-keymap mmotion/buffer-map 
@@ -593,6 +597,10 @@ Use ace-window to manipulate windows and navigate between them more efficiently.
   "o" #'next-buffer
   "e" #'eval-buffer)
 
+    #+end_src
+*** [F]ind keybindings
+    #+begin_src emacs-lisp
+
 (defvar-keymap mmotion/find-map
   :doc "Find operations submenu."
   "a" #'consult-org-agenda
@@ -600,6 +608,10 @@ Use ace-window to manipulate windows and navigate between them more efficiently.
   "g" #'consult-ripgrep
   "l" #'consult-line
   "o" #'consult-outline)
+    #+end_src
+
+*** [H]elp keybindings
+    #+begin_src emacs-lisp
 
 (defvar-keymap mmotion/help-map
   :doc "Help operations submenu."
@@ -607,6 +619,10 @@ Use ace-window to manipulate windows and navigate between them more efficiently.
   "f" #'describe-function
   "k" #'describe-key
   "v" #'describe-variable)
+    #+end_src
+
+*** [N]otes keybindings
+    #+begin_src emacs-lisp
 
 (defvar-keymap mmotion/notes-map
   :doc "Notes operations submenu."
@@ -620,14 +636,25 @@ Use ace-window to manipulate windows and navigate between them more efficiently.
   "s" #'consult-org-roam-search
   "t" #'org-roam-tag-add
   "u" #'org-roam-ui-open)
+    #+end_src
+
+*** [O]rg keybindings
+    #+begin_src emacs-lisp
 
 (defvar-keymap mmotion/org-map
   :doc "Org-mode operations."
   "a" #'org-agenda
   "c" #'org-capture
+  "d" #'org-deadline
+  "i" #'mmotion/org-insert-image-from-url
   "l" #'org-store-link
   "r" #'org-refile
-  "p" #'org-refile-copy)
+  "p" #'org-refile-copy
+  "s" #'org-schedule)
+    #+end_src
+
+*** [T]oggle and [T]abs keybindings
+    #+begin_src emacs-lisp
 
 (defvar-keymap mmotion/toggle-map
   :doc "Toggle settings."
@@ -637,16 +664,23 @@ Use ace-window to manipulate windows and navigate between them more efficiently.
   "o" #'hydra-olivetti-margins/body
   "t" #'consult-theme
   "r" #'tab-rename
-  "s" #'hydra-text-scale/body
-  "w" #'hydra-resize-windows/body)
+  "s" #'hydra-text-scale/body)
+    #+end_src
+
+*** [W]indows keybindings
+    #+begin_src emacs-lisp
 
 (defvar-keymap mmotion/window-map
   :doc "Window operations."
+  "b" #'balance-windows
   "m" #'maximize-window
-  "r" #'balance-windows
+  "r" #'hydra-resize-windows/body
   "s" #'ace-swap-window
-  "w" #'ace-window
-  )
+  "w" #'ace-window)
+    #+end_src
+
+*** Leader keybindings
+    #+begin_src emacs-lisp
 
 ;;;; Define leader keymap
 (defvar-keymap mmotion/leader-map
@@ -666,36 +700,7 @@ Use ace-window to manipulate windows and navigate between them more efficiently.
 (keymap-set mmotion/leader-map "o" mmotion/org-map)
 (keymap-set mmotion/leader-map "t" mmotion/toggle-map)
 (keymap-set mmotion/leader-map "w" mmotion/window-map)
-
-   #+end_src
-
-** Evil-mode integration
-   #+begin_src emacs-lisp
-
-;;;; Set up Evil integration
-(when (featurep 'evil)
-  ;; Clear existing bindings first
-  (define-key evil-normal-state-map (kbd "SPC") nil)
-  (define-key evil-motion-state-map (kbd "SPC") nil)
-  (define-key evil-visual-state-map (kbd "SPC") nil)
-  
-  ;; Set our leader map
-  (define-key evil-normal-state-map (kbd "SPC") mmotion/leader-map)
-  (define-key evil-motion-state-map (kbd "SPC") mmotion/leader-map)
-  (define-key evil-visual-state-map (kbd "SPC") mmotion/leader-map))
-
-;;;;; Make sure Evil properly integrates with our keybindings after it loads
-(with-eval-after-load 'evil
-  (add-hook 'evil-mode-hook
-            (lambda ()
-              (define-key evil-normal-state-map (kbd "SPC") mmotion/leader-map)
-              (define-key evil-motion-state-map (kbd "SPC") mmotion/leader-map)
-              (define-key evil-visual-state-map (kbd "SPC") mmotion/leader-map))))
-
-;;;; Global fallback binding for all modes
-(global-set-key (kbd "C-SPC") mmotion/leader-map)
-
-   #+end_src
+    #+end_src
 
 ** Configure which-key descriptions
    #+begin_src emacs-lisp
@@ -749,9 +754,12 @@ Use ace-window to manipulate windows and navigate between them more efficiently.
   (which-key-add-keymap-based-replacements mmotion/org-map
     "a" "Org Agenda"
     "c" "Org Capture"
+    "d" "Add a Deadline"
+    "i" "Insert image from URL"
     "l" "Org Store Link"
     "r" "Org Refile"
-    "p" "Org Refile Copy")
+    "p" "Org Refile Copy"
+    "s" "Add a Schedule")
   
   (which-key-add-keymap-based-replacements mmotion/toggle-map
     "c" "Close current tab"
@@ -760,16 +768,45 @@ Use ace-window to manipulate windows and navigate between them more efficiently.
     "o" "Resize Olivetti margins"
     "r" "Rename current tab"
     "s" "Scale Text"
-    "t" "Choose Theme"
-    "w" "Resize Windows")
+    "t" "Choose Theme")
 
   (which-key-add-keymap-based-replacements mmotion/window-map
     "m" "Maximize window"
-    "r" "Reset windows"
+    "b" "Reset windows"
     "w" "Switch window"
+    "r" "Resize windows"
     "s" "Swap windows"))
 
    #+end_src
+
+** Evil-mode integration
+   #+begin_src emacs-lisp
+
+;;;; Set up Evil integration
+(when (featurep 'evil)
+  ;; Clear existing bindings first
+  (define-key evil-normal-state-map (kbd "SPC") nil)
+  (define-key evil-motion-state-map (kbd "SPC") nil)
+  (define-key evil-visual-state-map (kbd "SPC") nil)
+  
+  ;; Set our leader map
+  (define-key evil-normal-state-map (kbd "SPC") mmotion/leader-map)
+  (define-key evil-motion-state-map (kbd "SPC") mmotion/leader-map)
+  (define-key evil-visual-state-map (kbd "SPC") mmotion/leader-map))
+
+;;;;; Make sure Evil properly integrates with our keybindings after it loads
+(with-eval-after-load 'evil
+  (add-hook 'evil-mode-hook
+            (lambda ()
+              (define-key evil-normal-state-map (kbd "SPC") mmotion/leader-map)
+              (define-key evil-motion-state-map (kbd "SPC") mmotion/leader-map)
+              (define-key evil-visual-state-map (kbd "SPC") mmotion/leader-map))))
+
+;;;; Global fallback binding for all modes
+(global-set-key (kbd "C-SPC") mmotion/leader-map)
+
+   #+end_src
+
 
 * Completion & Selection Framework
 ** Consult
@@ -1063,6 +1100,7 @@ Completion at point.
   (org-indent-mode 1)
   (variable-pitch-mode 1)
   (visual-line-mode 1)
+  (org-display-inline-images)
   (setq org-adapt-indentation 'headline-data)
   (setq evil-auto-indent 1)
   (setq org-src-preserve-indentation t)
@@ -1261,6 +1299,47 @@ Completion at point.
 
 #+end_src
 
+** Org download
+#+begin_src emacs-lisp
+
+(eval-when-compile
+  (declare-function url-handler-file-remote-p "url-handlers"))
+
+(use-package org-download
+  :init
+  ;; Force the method to 'directory
+  (setq org-download-method 'directory)
+  ;; Set a global default image directory
+  (setq-default org-download-image-dir (expand-file-name "~/Notes/orgfiles/images"))
+  ;; Create the directory if it doesn't exist
+  (unless (file-directory-p org-download-image-dir)
+    (make-directory org-download-image-dir t))
+  :config
+  ;; Keybinding to paste clipboard images
+  (define-key org-mode-map (kbd "C-c C-p") #'org-download-clipboard))
+
+#+end_src
+** Save and show remote images
+#+begin_src emacs-lisp
+
+(defvar mmotion/org-image-cache-dir (expand-file-name "~/Notes/orgfiles/images/"))
+
+(unless (file-directory-p mmotion/org-image-cache-dir)
+  (make-directory mmotion/org-image-cache-dir t))
+
+(defun mmotion/org-insert-image-from-url (url)
+  "Download image from URL, save to cache, insert link, and display inline."
+  (interactive "sImage URL: ")
+  (let* ((filename (file-name-nondirectory (url-filename (url-generic-parse-url url))))
+         (local-path (expand-file-name filename mmotion/org-image-cache-dir)))
+    (url-copy-file url local-path t)
+    (insert (format "[[file:%s]]" local-path))
+    (org-display-inline-images)))
+
+(with-eval-after-load 'org
+  (define-key org-mode-map (kbd "C-c C-i") #'mmotion/org-insert-image-from-url))
+
+#+end_src
 ** Structure Templates
 #+begin_src emacs-lisp
 
@@ -1276,7 +1355,9 @@ Completion at point.
 #+end_src
 
 * Org Styling
-** Better looking Bullet Points
+
+** Org-superstar (bullet points)
+
 #+begin_src emacs-lisp
 
 ;;; Org styling ------------------------------------------------
@@ -1300,6 +1381,17 @@ Completion at point.
 
 #+end_src
 
+** Fancy Priorities Look
+#+begin_src emacs-lisp
+
+;;;; Fancy priorities look
+(use-package org-fancy-priorities
+  :hook (org-mode . org-fancy-priorities-mode)
+  :config
+  (setq org-fancy-priorities-list '("󰬈" "󰬉" "󰬊")))
+
+#+end_src
+
 ** Olivetti
 Typewriter-like look of the page (centring).
 #+begin_src emacs-lisp
@@ -1315,17 +1407,6 @@ Typewriter-like look of the page (centring).
   (olivetti-body-width 100)           ; set body width
   (olivetti-style 'gancy)          ; use fringes for margins
   )  
-
-#+end_src
-
-** Fancy Priorities Look
-#+begin_src emacs-lisp
-
-;;;; Fancy priorities look
-(use-package org-fancy-priorities
-  :hook (org-mode . org-fancy-priorities-mode)
-  :config
-  (setq org-fancy-priorities-list '("󰬈" "󰬉" "󰬊")))
 
 #+end_src
 
