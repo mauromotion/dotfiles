@@ -1,0 +1,1571 @@
+#+TITLE: Mauro's GNU Emacs Config
+#+AUTHOR: Mauro Di Ianni (mmotion)
+#+DESCRIPTION: Mauro's personal Emacs configuration
+#+STARTUP: content
+#+OPTIONS: toc:2
+#+PROPERTY: header-args :tangle config.el
+
+* Table of Contents :toc:
+- [[#general-flow][General flow]]
+- [[#startup-performance][Startup Performance]]
+- [[#bootstrap][Bootstrap]]
+  - [[#auto-tangle-on-save][Auto-tangle on save]]
+- [[#package-manager][Package Manager]]
+  - [[#set-up-packageel-and-the-package-archives][Set up package.el and the Package Archives]]
+  - [[#auto-update-packages][Auto-Update Packages]]
+- [[#keep-directories-clean][Keep directories clean]]
+- [[#essentials][Essentials]]
+  - [[#bookmarks][Bookmarks]]
+  - [[#navigation][Navigation]]
+- [[#fonts][Fonts]]
+- [[#look--feel][Look & Feel]]
+  - [[#themes][Themes]]
+  - [[#icons][Icons]]
+  - [[#modeline][Modeline]]
+  - [[#emacs-dashboard][Emacs-dashboard]]
+  - [[#indent-line-guides][Indent Line Guides]]
+  - [[#rainbow-delimiters][Rainbow delimiters]]
+  - [[#helpful][Helpful]]
+- [[#evil-mode][Evil-mode]]
+  - [[#evil-collection][Evil-collection]]
+  - [[#evil-goggles][Evil-goggles]]
+  - [[#evil-nerd-commenter][Evil-nerd-commenter]]
+  - [[#undo-tree][Undo-tree]]
+- [[#keybindings][Keybindings]]
+  - [[#general-keybindings][General keybindings]]
+  - [[#which-key][Which-key]]
+  - [[#toggle-line-number-states-function][Toggle line-number-states function]]
+  - [[#hydras][Hydras]]
+  - [[#define-sub-menus][Define Sub-menus]]
+  - [[#evil-mode-integration][Evil-mode integration]]
+  - [[#configure-which-key-descriptions][Configure which-key descriptions]]
+- [[#completion--selection-framework][Completion & Selection Framework]]
+  - [[#consult][Consult]]
+  - [[#vertico][Vertico]]
+  - [[#orderless][Orderless]]
+  - [[#marginalia][Marginalia]]
+  - [[#embark][Embark]]
+  - [[#corfu][Corfu]]
+  - [[#cape][Cape]]
+- [[#spellchecking][Spellchecking]]
+- [[#projectile][Projectile]]
+- [[#magit][Magit]]
+- [[#org-mode][Org-mode]]
+  - [[#org-mode-base-settings][Org-mode base settings]]
+  - [[#custom-functions][Custom functions]]
+  - [[#org-mode-config][Org-mode config]]
+  - [[#org-todo-keywords][Org Todo Keywords]]
+  - [[#org-capture-templates][Org Capture Templates]]
+  - [[#evil-org][Evil-org]]
+  - [[#toc-org][TOC-org]]
+  - [[#org-babel][Org Babel]]
+  - [[#structure-templates][Structure Templates]]
+- [[#org-styling][Org Styling]]
+  - [[#better-looking-bullet-points][Better looking Bullet Points]]
+  - [[#olivetti][Olivetti]]
+  - [[#fancy-priorities-look][Fancy Priorities Look]]
+- [[#org-roam][Org-roam]]
+  - [[#org-roam-ui][Org-roam UI]]
+  - [[#consult-org-roam][Consult-org-roam]]
+- [[#lsp-mode][LSP mode]]
+- [[#tree-sitter][Tree-sitter]]
+- [[#terminal-emulators][Terminal Emulators]]
+  - [[#term][Term]]
+  - [[#vterm][Vterm]]
+- [[#dired][Dired]]
+- [[#reset-gc-threshold][Reset GC Threshold]]
+
+* General flow
+This literal configuration will work like this:
+- In =early-init.el= package.el is disabled for elpaca (the package manager), and some basic initial UI settings are configured.
+- Then in =init.el= in order, there's the start up performance function, the whole elpaca installation and setup, and a check that loads =config.el= if present on disk, or, if not present, it will tangle this =config.org= file so that =config.el= gets generated. And then =init.el= loads the whole configuration from =config.el=.
+- Here there's also a bootstrap function that auto-tangle this file when saved, so that =config.el= gets recreated with the new settings.
+  
+* Startup Performance
+This goes statically in =init.el=.
+
+#+begin_src emacs-lisp :tangle no
+;; -*- lexical-binding: t; -*-
+
+;;; Startup Performance -----------------------------------
+(setq gc-cons-threshold (* 50 1000 1000))
+
+(defun mmotion/display-startup-time ()
+  (message "Emacs loaded in %s with %d garbage collections."
+           (format "%.2f seconds"
+                    (float-time
+                        (time-subtract after-init-time before-init-time)))
+            gcs-done))
+(add-hook 'emacs-startup-hook #'mmotion/display-startup-time)
+
+#+end_src
+
+* Bootstrap
+** Auto-tangle on save
+#+begin_src emacs-lisp
+
+(defvar mmotion/config-org
+  (locate-user-emacs-file "config.org")
+  "Absolute path to my literate Emacs config.")
+
+(defun mmotion/auto-tangle-and-load-config ()
+  "When `config.org` is saved, tangle it (and reload the result)."
+  (when (and buffer-file-name
+             (string= (file-truename buffer-file-name)
+                      (file-truename mmotion/config-org)))
+    (message "[literate] Tangling %s…" mmotion/config-org)
+    (let ((org-confirm-babel-evaluate nil))
+      (org-babel-tangle-file mmotion/config-org))
+    (let ((generated-el (concat (file-name-sans-extension mmotion/config-org) ".el")))
+      (when (file-exists-p generated-el)
+        (message "[literate] Loading %s…" generated-el)
+        (load-file generated-el)))
+    (message "[literate] Done.")))
+
+(add-hook 'after-save-hook #'mmotion/auto-tangle-and-load-config)
+
+#+end_src
+
+* Package Manager
+** Set up package.el and the Package Archives
+This is going statically into =init.el=, will set to not tangle.
+#+begin_src emacs-lisp :tangle no
+  
+;;; Initialize package sources ---------------------------
+(require 'package)
+
+(setq package-archives
+      '(("melpa"  . "https://melpa.org/packages/")
+        ("gnu"    . "https://elpa.gnu.org/packages/")
+        ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
+
+(package-initialize)
+
+;; Only refresh and install `use-package` if it's missing:
+(unless (package-installed-p 'use-package)
+  (message "Bootstrapping use-package…")
+  (package-refresh-contents)
+  (package-install    'use-package))
+
+;; Make sure `use-package` is loaded for the rest of the init:
+(eval-when-compile
+  (require 'use-package))
+
+;; Optional: auto-ensure all packages declared below
+(setq use-package-always-ensure t
+      use-package-verbose t)
+
+#+end_src
+
+** Auto-Update Packages
+#+begin_src emacs-lisp
+
+;;;; Auto-update packages
+(use-package auto-package-update
+  :custom
+  (auto-package-update-interval 7)
+  (auto-package-update-prompt-before-update t)
+  (auto-package-update-hide-results t)
+  :config
+  (auto-package-update-maybe)
+  (auto-package-update-at-time "10:00"))
+
+#+end_src
+
+* Keep directories clean
+All the temp and backup files that Emacs generates are put into "~/.cache/emacs" instead that along side the original files in the same directory.
+
+#+begin_src emacs-lisp
+
+;;;; Keep directories clean ------------------------------------------
+(use-package no-littering
+  :demand t
+  :init
+  (setq user-emacs-directory "~/.cache/emacs"))
+
+;; Define backup and auto-save paths with mmotion/ prefix
+(defvar mmotion/backup-dir (no-littering-expand-var-file-name "backup/"))
+(defvar mmotion/auto-save-dir (no-littering-expand-var-file-name "auto-save/"))
+
+;; Ensure the directories exist
+(dolist (dir (list mmotion/backup-dir mmotion/auto-save-dir))
+  (unless (file-exists-p dir)
+    (make-directory dir t)))
+
+;; Redirect auto-save and backup files to clean directories
+(setq auto-save-file-name-transforms `((".*" ,mmotion/auto-save-dir t)))
+(setq backup-directory-alist `(("." . ,mmotion/backup-dir)))
+
+;; Optional: prevent lockfiles like .#file.txt
+(setq create-lockfiles nil)
+
+#+end_src
+
+* Essentials
+Basic set up of Emacs' UI, removing the default toolbars, and setting up some system preferences.
+
+  #+begin_src emacs-lisp
+
+;;; Essentials ------------------------------------------
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(tooltip-mode -1)
+(set-fringe-mode 10)
+(menu-bar-mode -1)
+(setq visible-bell t)
+(setopt use-short-answers t)
+
+;;;; Persist history over Emacs restarts. Vertico sorts by history position.
+(savehist-mode 1)
+
+;;;; Turn on recentf-mode right after init, and keep its list alive
+(recentf-mode 1)
+(setq recentf-max-saved-items 200
+      recentf-auto-cleanup 'never)  ;; don’t remove dead entries
+(add-hook 'kill-emacs-hook #'recentf-save-list)
+
+;;;; Use system trash when deleting files
+(setq delete-by-moving-to-trash t)
+
+;;;; Tabs to spaces
+(setq-default indent-tabs-mode nil
+	            tab-width 2) 
+
+;;;; Column numbers
+(column-number-mode 1)
+(setq display-line-numbers-type 'relative)
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
+
+
+
+  #+end_src
+
+** Bookmarks
+Make sure that bookmarks are saved automatically and don't get erased.
+
+#+begin_src emacs-lisp
+
+;;;; Bookmarks
+(use-package bookmark
+  :ensure nil
+  :config
+  ;; Store bookmarks in a clean location
+  (setq bookmark-default-file (no-littering-expand-var-file-name "bookmarks"))
+  ;; Save bookmarks automatically
+  (setq bookmark-save-flag 1))
+
+#+end_src
+
+** Navigation
+Use ace-window to manipulate windows and navigate between them more efficiently.
+
+#+begin_src emacs-lisp
+
+;;;; Navigation
+(use-package ace-window)
+(global-set-key (kbd "M-o") 'ace-window)
+
+#+end_src
+
+* Fonts
+  #+begin_src emacs-lisp
+
+;;; Fonts ------------------------------------------------
+;;;; Define font constants for easier management
+(defvar mmotion/default-font "BlexMono Nerd Font")
+(defvar mmotion/variable-font "Work Sans")
+
+;; Base size for body text
+(defvar mmotion/base-font-size 120)
+
+;; Base size for variable pitch font
+(defvar mmotion/variable-font-size 130)
+
+;;;; Set font faces
+(set-face-attribute 'default nil
+                    :font mmotion/default-font
+                    :height mmotion/base-font-size)
+;; Make comments and docstrings italic
+(set-face-attribute 'font-lock-comment-face nil
+                    :slant 'italic)
+(set-face-attribute 'font-lock-comment-delimiter-face nil
+                    :slant 'italic)
+(set-face-attribute 'font-lock-doc-face nil
+                    :slant 'italic)
+;; Set the variable pitch face
+(set-face-attribute 'variable-pitch nil
+                    :font mmotion/variable-font
+                    :height mmotion/variable-font-size
+                    :weight 'normal)
+
+  #+end_src
+
+* Look & Feel
+** Themes
+   #+begin_src emacs-lisp
+
+;;; Look ------------------------------------------------
+;;;; ef-themes
+(use-package ef-themes
+  :defer nil
+  :config
+  ;; Optional: Set a default theme to load when Emacs starts
+  (load-theme 'ef-kassio t)  ; for a light theme
+  ;; (load-theme 'ef-owl t)   ; for a dark theme
+  )
+
+;;;; doom-themes
+(use-package doom-themes
+  :defer t)
+   #+end_src
+
+** Icons
+   #+begin_src emacs-lisp
+
+;;;; Use nerd-icons
+(use-package nerd-icons
+  :demand t)
+
+(use-package nerd-icons-completion
+  :after marginalia
+  :config
+  (nerd-icons-completion-mode)
+  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
+   #+end_src
+
+** Modeline
+   #+begin_src emacs-lisp
+
+;;;; Modeline
+(use-package doom-modeline
+  :hook (after-init . doom-modeline-mode)
+  :custom ((doom-modeline-height 20)
+           (doom-modeline-time t)
+           (doom-modeline-buffer-modification-icon t)
+           (doom-modeline-icon t)))
+   #+end_src
+
+** Emacs-dashboard
+   #+begin_src emacs-lisp
+
+;;;; Emacs-dashboard
+(use-package dashboard
+  :defer nil
+  :config
+  (dashboard-setup-startup-hook)
+  :custom
+  (dashboard-startup-banner 'logo)
+  (dashboard-center-content t)
+  (dashboard-display-icons-p t)
+  (dashboard-icon-type 'nerd-icons)
+  (dashboard-set-heading-icons t)
+  ;; (dashboard-modify-heading-icons '((recents   . "nf-oct-file")
+  ;;                                  (bookmarks . "nf-oct-bookmark")))
+  (dashboard-set-file-icons t)
+  (dashboard-items '((recents   . 5)
+                    (bookmarks . 10)
+                    (projects  . 5)
+                    (agenda    . 10))))
+
+  ;; Force refresh AFTER full startup completes
+  (add-hook 'emacs-startup-hook
+            (lambda ()
+              (dashboard-refresh-buffer)
+              (switch-to-buffer "*dashboard*")))
+
+   #+end_src
+
+** Indent Line Guides
+#+begin_src emacs-lisp
+
+;;;; Indent line guides
+(use-package indent-bars
+  :hook ((prog-mode) . indent-bars-mode)) ; or whichever modes you prefer
+
+#+end_src
+
+** Rainbow delimiters
+#+begin_src emacs-lisp
+
+;;;; Colorful parentheses to help mostly with elisp
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
+#+end_src
+
+** Helpful
+#+begin_src emacs-lisp
+
+;;;; Better front end for documentation
+(use-package helpful
+  :commands (helpful-callable
+             helpful-variable
+             helpful-command
+             helpful-key)
+  :bind
+  ( ;; remap the built-in help commands to Helpful
+    ([remap describe-function] . helpful-callable)
+    ([remap describe-variable] . helpful-variable)
+    ([remap describe-command]  . helpful-command)
+    ([remap describe-key]      . helpful-key)
+
+    ;; remap apropos to Consult’s version
+    ([remap apropos-command]   . consult-apropos)))
+
+#+end_src
+
+* Evil-mode
+  #+begin_src emacs-lisp
+
+;;; Evil Mode ------------------------------------------------
+;;;; Configure evil-mode
+(use-package evil
+  :demand t
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll t)
+  (setq evil-want-C-i-jump t)
+  (setq evil-undo-system 'undo-tree)
+  ;;:hook (evil-mode . rune/evil-hook)
+  :config
+  (evil-mode 1)
+  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+  (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+
+  ;; Use visual line motions even outside of visual-line-mode buffers
+  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+
+  (evil-set-initial-state 'messages-buffer-mode 'normal)
+  (evil-set-initial-state 'dashboard-mode 'normal)) 
+
+  #+end_src
+
+** Evil-collection
+   #+begin_src emacs-lisp
+
+;;;; Configure evil-collection
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
+
+   #+end_src
+
+** Evil-goggles
+   #+begin_src emacs-lisp
+
+;;;; Configure evil-goggles to show a highlight over a selection or yank
+(use-package evil-goggles
+  :after evil
+  :config
+  (evil-goggles-mode)
+
+  ;; optionally use diff-mode's faces; as a result, deleted text
+  ;; will be highlighed with `diff-removed` face which is typically
+  ;; some red color (as defined by the color theme)
+  ;; other faces such as `diff-added` will be used for other actions
+  (evil-goggles-use-diff-faces))
+
+   #+end_src
+
+** Evil-nerd-commenter
+   #+begin_src emacs-lisp
+
+;;;; Commenting
+(use-package evil-nerd-commenter
+  :bind ("C-g" . evilnc-comment-or-uncomment-lines))
+
+   #+end_src
+
+** Undo-tree
+#+begin_src emacs-lisp
+
+;;;; Fix the undo/redo to be vim-like
+(use-package undo-tree
+  :init
+  (global-undo-tree-mode 1)
+  :config
+  (setq undo-tree-visualizer-diff t)
+  (setq undo-tree-visualizer-timestamps t))
+
+#+end_src
+* Keybindings
+
+** General keybindings
+  #+begin_src emacs-lisp
+
+;;; Keybindings ------------------------------------------
+;;;; Make ESC quit prompts
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
+#+end_src
+
+** Which-key
+   #+begin_src emacs-lisp
+
+;;;; Which-key
+(use-package which-key
+  :defer 0
+  ;; :init (which-key-mode)
+  :diminish which-key-mode
+  :config
+  (which-key-mode)
+  (setq which-key-idle-delay 0.5
+        which-key-separator "   "
+        which-key-add-column-padding 1))
+
+   #+end_src
+
+** Toggle line-number-states function
+   #+begin_src emacs-lisp
+
+;;;; Toggle through line numbers styles
+(defvar mmotion/line-number-states '(nil t relative visual)
+  "States to cycle through for line numbers.")
+
+(defvar-local mmotion/current-line-number-index 0
+  "Current index in `mmmotion/line-number-states` for the current buffer.")
+
+(defun mmotion/cycle-line-numbers ()
+  "Cycle through different line number display modes, per buffer."
+  (interactive)
+  ;; Increment index and wrap around
+  (setq mmotion/current-line-number-index
+        (mod (1+ mmotion/current-line-number-index)
+             (length mmotion/line-number-states)))
+
+  ;; Set the display-line-numbers value
+  (setq display-line-numbers
+        (nth mmotion/current-line-number-index mmotion/line-number-states))
+
+  ;; Force UI update
+  (redraw-display)
+
+  ;; Show a message
+  (message "Line numbers: %s" display-line-numbers))
+
+   #+end_src
+
+** Hydras
+   #+begin_src emacs-lisp
+
+;;;; Define hydras
+(use-package hydra
+  :defer 0
+  :config
+
+;;;;; Scale Text
+  (defhydra hydra-text-scale (:timeout 4)
+    "scale text"
+    ("e" text-scale-increase "in")
+    ("i" text-scale-decrease "out")
+    ("r" (lambda () (interactive) (text-scale-set 0)) "reset")
+    ("f" nil "finished (or esc)" :exit t))
+
+;;;;; Scale olivetti margins
+  (defhydra hydra-olivetti-margins (:timeout 4)
+    "scale olivetti margins"
+    ("n" olivetti-expand "expand")
+    ("o" olivetti-shrink "shrink"))
+
+;;;;; Resize Windows
+  (defhydra hydra-resize-windows (:timeout 4)
+    "resize panels"
+    ("n" (lambda () (interactive) (shrink-window-horizontally 5)) "left")
+    ("o" (lambda () (interactive) (enlarge-window-horizontally 5)) "right")
+    ("e" (lambda () (interactive) (enlarge-window 5)) "down")
+    ("i" (lambda () (interactive) (shrink-window 5)) "up")
+    ("b" balance-windows "reset")
+    ("f" nil "finished (or esc)" :exit t)))
+   #+end_src
+
+** Define Sub-menus 
+   #+begin_src emacs-lisp
+
+;;;;; Define submenu keymaps
+(defvar-keymap mmotion/buffer-map 
+  :doc "Buffer operations submenu."
+  "k" #'kill-buffer
+  "n" #'previous-buffer
+  "o" #'next-buffer
+  "e" #'eval-buffer)
+
+(defvar-keymap mmotion/find-map
+  :doc "Find operations submenu."
+  "a" #'consult-org-agenda
+  "f" #'find-file
+  "g" #'consult-ripgrep
+  "l" #'consult-line
+  "o" #'consult-outline)
+
+(defvar-keymap mmotion/help-map
+  :doc "Help operations submenu."
+  "c" #'describe-command
+  "f" #'describe-function
+  "k" #'describe-key
+  "v" #'describe-variable)
+
+(defvar-keymap mmotion/notes-map
+  :doc "Notes operations submenu."
+  "a" #'org-roam-alias-add
+  "b" #'consult-org-roam-backlinks
+  "c" #'org-roam-capture
+  "d" #'org-roam-db-sync
+  "f" #'org-roam-node-find
+  "i" #'consult-org-roam-node-insert
+  "l" #'consult-org-roam-forward-links
+  "s" #'consult-org-roam-search
+  "t" #'org-roam-tag-add
+  "u" #'org-roam-ui-open)
+
+(defvar-keymap mmotion/org-map
+  :doc "Org-mode operations."
+  "a" #'org-agenda
+  "c" #'org-capture
+  "l" #'org-store-link
+  "r" #'org-refile
+  "p" #'org-refile-copy)
+
+(defvar-keymap mmotion/toggle-map
+  :doc "Toggle settings."
+  "c" #'tab-close
+  "l" #'mmotion/cycle-line-numbers
+  "n" #'tab-new
+  "o" #'hydra-olivetti-margins/body
+  "t" #'consult-theme
+  "r" #'tab-rename
+  "s" #'hydra-text-scale/body
+  "w" #'hydra-resize-windows/body)
+
+(defvar-keymap mmotion/window-map
+  :doc "Window operations."
+  "m" #'maximize-window
+  "r" #'balance-windows
+  "s" #'ace-swap-window
+  "w" #'ace-window
+  )
+
+;;;; Define leader keymap
+(defvar-keymap mmotion/leader-map
+  :doc "My global leader keymap."
+  ;; Direct keybindings
+  ":" #'execute-extended-command
+  "-" #'dired-jump
+  "SPC" #'consult-buffer
+  "," #'consult-recent-file
+  "." #'find-file)
+
+;;;; Add submenus to the leader keymap
+(keymap-set mmotion/leader-map "b" mmotion/buffer-map)
+(keymap-set mmotion/leader-map "f" mmotion/find-map)
+(keymap-set mmotion/leader-map "h" mmotion/help-map)
+(keymap-set mmotion/leader-map "n" mmotion/notes-map)
+(keymap-set mmotion/leader-map "o" mmotion/org-map)
+(keymap-set mmotion/leader-map "t" mmotion/toggle-map)
+(keymap-set mmotion/leader-map "w" mmotion/window-map)
+
+   #+end_src
+
+** Evil-mode integration
+   #+begin_src emacs-lisp
+
+;;;; Set up Evil integration
+(when (featurep 'evil)
+  ;; Clear existing bindings first
+  (define-key evil-normal-state-map (kbd "SPC") nil)
+  (define-key evil-motion-state-map (kbd "SPC") nil)
+  (define-key evil-visual-state-map (kbd "SPC") nil)
+  
+  ;; Set our leader map
+  (define-key evil-normal-state-map (kbd "SPC") mmotion/leader-map)
+  (define-key evil-motion-state-map (kbd "SPC") mmotion/leader-map)
+  (define-key evil-visual-state-map (kbd "SPC") mmotion/leader-map))
+
+;;;;; Make sure Evil properly integrates with our keybindings after it loads
+(with-eval-after-load 'evil
+  (add-hook 'evil-mode-hook
+            (lambda ()
+              (define-key evil-normal-state-map (kbd "SPC") mmotion/leader-map)
+              (define-key evil-motion-state-map (kbd "SPC") mmotion/leader-map)
+              (define-key evil-visual-state-map (kbd "SPC") mmotion/leader-map))))
+
+;;;; Global fallback binding for all modes
+(global-set-key (kbd "C-SPC") mmotion/leader-map)
+
+   #+end_src
+
+** Configure which-key descriptions
+   #+begin_src emacs-lisp
+
+;;;; Configure which-key descriptions
+(with-eval-after-load 'which-key
+  (which-key-add-keymap-based-replacements mmotion/leader-map
+    ":" "M-x"
+    "-" "Dired Jump"
+    "SPC" "Switch Buffer"
+    "b" "Buffer..."
+    "f" "Find..."
+    "h" "Help..."
+    "n" "Notes..."
+    "o" "Org..."
+    "t" "Toggle / Tabs..."
+    "w" "Window..."
+    "," "Recent Files"
+    "." "Find Files")
+  
+  (which-key-add-keymap-based-replacements mmotion/buffer-map
+    "k" "Kill Buffer"
+    "n" "Previous Buffer" 
+    "o" "Next Buffer"
+    "e" "Eval Buffer")
+
+  (which-key-add-keymap-based-replacements mmotion/find-map
+    "a" "Org-agenda headings"
+    "f" "Find files"
+    "g" "Ripgrep"
+    "l" "Line"
+    "o" "Outline headings")
+
+  (which-key-add-keymap-based-replacements mmotion/help-map
+    "c" "Describe command"
+    "f" "Describe function"
+    "k" "Describe key"
+    "v" "Describe variable")
+  
+  (which-key-add-keymap-based-replacements mmotion/notes-map
+    "a" "Add alias to node"
+    "b" "Select a backlink"
+    "c" "Org-roam capture"
+    "d" "Sync Org-roam db"
+    "f" "Find a note"
+    "l" "Select a forward link"
+    "s" "Search inside all notes"
+    "t" "Add a tag to a note"
+    "u" "Open Org-roam UI")
+
+  (which-key-add-keymap-based-replacements mmotion/org-map
+    "a" "Org Agenda"
+    "c" "Org Capture"
+    "l" "Org Store Link"
+    "r" "Org Refile"
+    "p" "Org Refile Copy")
+  
+  (which-key-add-keymap-based-replacements mmotion/toggle-map
+    "c" "Close current tab"
+    "l" "Toggle line numbers"
+    "n" "Create a new tab"
+    "o" "Resize Olivetti margins"
+    "r" "Rename current tab"
+    "s" "Scale Text"
+    "t" "Choose Theme"
+    "w" "Resize Windows")
+
+  (which-key-add-keymap-based-replacements mmotion/window-map
+    "m" "Maximize window"
+    "r" "Reset windows"
+    "w" "Switch window"
+    "s" "Swap windows"))
+
+   #+end_src
+
+* Completion & Selection Framework
+** Consult
+  #+begin_src emacs-lisp
+
+;;; Completion --------------------------------------------------
+;;;; Consult
+(use-package consult
+  :defer t
+  :bind (("C-s" . consult-line)
+         :map minibuffer-local-map
+         ("C-r" . consult-history)))
+
+(defun mmotion/minibuffer-backward-kill (arg)
+  "When minibuffer is completing a file name delete up to parent
+folder, otherwise delete a character backward"
+  (interactive "p")
+  (if minibuffer-completing-file-name
+      ;; Borrowed from https://github.com/raxod502/selectrum/issues/498#issuecomment-803283608
+      (if (string-match-p "/." (minibuffer-contents))
+          (zap-up-to-char (- arg) ?/)
+        (delete-minibuffer-contents))
+    (delete-backward-char arg)))
+
+  #+end_src
+
+** Vertico
+  #+begin_src emacs-lisp
+
+;;;; Vertico
+(use-package vertico
+  :demand t
+  :bind (:map minibuffer-local-map
+              ("<backspace>" . mmotion/minibuffer-backward-kill))
+  :custom
+  ;; (vertico-scroll-margin 0) ;; Different scroll margin
+  ;; (vertico-count 20) ;; Show more candidates
+  ;; (vertico-resize t) ;; Grow and shrink the Vertico minibuffer
+  (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'
+  :init
+  (vertico-mode 1))
+
+;;;; Emacs minibuffer configurations.
+(use-package emacs
+  :ensure nil
+  :custom
+  ;; Support opening new minibuffers from inside existing minibuffers.
+  (enable-recursive-minibuffers t)
+  ;; Hide commands in M-x which do not work in the current mode.  Vertico
+  ;; commands are hidden in normal buffers. This setting is useful beyond
+  ;; Vertico.
+  (read-extended-command-predicate #'command-completion-default-include-p)
+  ;; Do not allow the cursor in the minibuffer prompt
+  (minibuffer-prompt-properties
+   '(read-only t cursor-intangible t face minibuffer-prompt)))
+  #+end_src
+
+** Orderless
+  #+begin_src emacs-lisp
+
+;;;; Optionally use the `orderless' completion style.
+(use-package orderless
+  :after vertico
+  :custom
+  ;; Configure a custom style dispatcher (see the Consult wiki)
+  ;; (orderless-style-dispatchers '(+orderless-consult-dispatch orderless-affix-dispatch))
+  ;; (orderless-component-separator #'orderless-escapable-split-on-space)
+  (completion-styles '(orderless basic))
+  (completion-category-defaults nil)
+  (completion-category-overrides '((file (styles partial-completion)))))
+
+  #+end_src
+
+** Marginalia
+  #+begin_src emacs-lisp
+
+;;;; Enable rich annotations using the Marginalia package
+(use-package marginalia
+  :after vertico
+  ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
+  ;; available in the *Completions* buffer, add it to the
+  ;; `completion-list-mode-map'.
+  :bind (:map minibuffer-local-map
+              ("M-A" . marginalia-cycle))
+
+  ;; The :init section is always executed.
+  :init
+
+  ;; Marginalia must be activated in the :init section of use-package such that
+  ;; the mode gets enabled right away. Note that this forces loading the
+  ;; package.
+  (marginalia-mode))
+
+  #+end_src
+
+** Embark
+  #+begin_src emacs-lisp
+
+;;;; Embark
+(use-package embark
+  :bind
+  (("C-," . embark-act)
+   ("M-," . embark-dwim)
+   ("C-h B" . embark-bindings))
+
+  :init
+  (setq prefix-help-command #'embark-prefix-help-command)
+
+  :config
+  ;; Hide the mode line of the Embark live/completions buffers
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none)))))
+
+(use-package embark-consult
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
+
+  #+end_src
+
+** Corfu
+  #+begin_src emacs-lisp
+
+;;;; Corfu
+(use-package corfu
+  :demand t
+  :hook (org-mode . corfu-mode) ; Enable Corfu in Org buffers
+  ;; Optional customizations
+  :custom
+  (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
+  ;; (corfu-auto t)
+  ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
+  ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
+  ;; (corfu-preview-current nil)    ;; Disable current candidate preview
+  ;; (corfu-preselect 'prompt)      ;; Preselect the prompt
+  ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
+
+  ;; Enable Corfu only for certain modes. See also `global-corfu-modes'.
+  ;; :hook ((prog-mode . corfu-mode)
+  ;;        (shell-mode . corfu-mode)
+  ;;        (eshell-mode . corfu-mode))
+  :init
+  ;; Recommended: Enable Corfu globally.  Recommended since many modes provide
+  ;; Capfs and Dabbrev can be used globally (M-/).  See also the customization
+  ;; variable `global-corfu-modes' to exclude certain modes.
+  (global-corfu-mode)
+
+  ;; Enable optional extension modes:
+  ;; (corfu-history-mode)
+  ;; (corfu-popupinfo-mode)
+  )
+
+;; A few more useful configurations...
+(use-package emacs
+  :ensure nil
+  :custom
+  ;; TAB cycle if there are only few candidates
+  (completion-cycle-threshold 3)
+
+  ;; Enable indentation+completion using the TAB key.
+  ;; `completion-at-point' is often bound to M-TAB.
+  (tab-always-indent 'complete)
+
+  ;; Emacs 30 and newer: Disable Ispell completion function.
+  ;; Try `cape-dict' as an alternative.
+  (text-mode-ispell-word-completion nil)
+
+  ;; Hide commands in M-x which do not apply to the current mode.  Corfu
+  ;; commands are hidden, since they are not used via M-x. This setting is
+  ;; useful beyond Corfu.
+  (read-extended-command-predicate #'command-completion-default-include-p))
+
+  #+end_src
+
+** Cape
+Completion at point.
+
+  #+begin_src emacs-lisp
+
+;;;; Add extensions (cape)
+(use-package cape
+  ;; Bind prefix keymap providing all Cape commands under a mnemonic key.
+  ;; Press C-c p ? to for help.
+  :bind ("M-<tab>" . cape-prefix-map) ;; Alternative key: M-<tab>, M-p, M-+
+  ;; Alternatively bind Cape commands individually.
+  ;; :bind (("C-c p d" . cape-dabbrev)
+  ;;        ("C-c p h" . cape-history)
+  ;;        ("C-c p f" . cape-file)
+  ;;        ...)
+  :init
+  ;; Add to the global default value of `completion-at-point-functions' which is
+  ;; used by `completion-at-point'.  The order of the functions matters, the
+  ;; first function returning a result wins.  Note that the list of buffer-local
+  ;; completion functions takes precedence over the global list.
+  (add-hook 'completion-at-point-functions #'cape-dabbrev)
+  (add-hook 'completion-at-point-functions #'cape-file)
+  (add-hook 'completion-at-point-functions #'cape-elisp-block)
+  ;; (add-hook 'completion-at-point-functions #'cape-history)
+  ;; ...
+  )
+
+  #+end_src
+
+* Spellchecking
+  #+begin_src emacs-lisp
+
+;;; Spellchecking ----------------------------------------
+;; Use hunspell as the spell checker backend
+(setq ispell-program-name "hunspell")
+
+;; Set default dictionary (e.g. British English)
+(setq ispell-dictionary "en_GB")
+
+;; Tell Emacs where the dictionaries are (optional if system-wide)
+;; (setenv "DICTIONARY" "en_GB") ; optional
+
+;; Enable Flyspell globally in text modes
+(add-hook 'text-mode-hook #'flyspell-mode)
+
+;; For programming modes, only spell-check comments/strings
+(add-hook 'prog-mode-hook #'flyspell-prog-mode)
+
+;; Optional: nice popup correction UI
+(use-package flyspell-correct
+  :demand t
+  :bind (:map flyspell-mode-map
+              ("C-;" . flyspell-correct-wrapper))
+  :config
+  (evil-define-key 'normal 'global
+    "z=" #'flyspell-correct-at-point))
+
+;; Optional: function to switch dictionaries
+(defun mmotion/set-dictionary (lang)
+  "Switch Hunspell dictionary interactively."
+  (interactive
+   (list (completing-read "Dictionary: " '("en_US" "en_GB" "it_IT"))))
+  (setq ispell-dictionary lang)
+  (message "Switched dictionary to %s" lang))
+
+  #+end_src
+
+* Projectile
+#+begin_src emacs-lisp
+
+;;; Projectile ------------------------------------------------
+(use-package projectile
+  :diminish projectile-mode
+  :config (projectile-mode)
+  ;; :custom ((projectile-completion-system 'ivy))
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :init
+  ;; NOTE: Set this to the folder where you keep your Git repos!
+  (when (file-directory-p "~/Projects")
+    (setq projectile-project-search-path '(("~/.dotfiles")("~/Projects"))))
+  (setq projectile-switch-project-action #'projectile-dired))
+
+(use-package consult-projectile
+  :after (consult projectile)                        ;; wait for Consult & Projectile
+  :commands (consult-projectile                      ;; autoload these
+             consult-projectile-find-file)
+  :bind (("s-w" . consult-projectile)                ;; a standalone launcher
+  :map projectile-command-map
+         ("f"   . consult-projectile-find-file))     ;; C-c p f → find file via Consult
+  :init
+  ;; (Optional) tell Consult how to get your project root from Projectile:
+  (setq consult-project-root-function
+        (lambda () (when (fboundp 'projectile-project-root)
+                     (projectile-project-root)))))     ;; :contentReference[oaicite:0]{index=0}
+
+#+end_src
+
+* Magit
+#+begin_src emacs-lisp
+
+;;; Magit ----------------------------------------------------
+(use-package magit
+  :commands magit-status)
+
+#+end_src
+
+* Org-mode
+
+** Org-mode base settings
+  #+begin_src emacs-lisp
+
+;;; Org-mode -------------------------------------------------
+;;;; Org-mode base settings
+(defun mmotion/org-mode-setup ()
+  (org-indent-mode 1)
+  (variable-pitch-mode 1)
+  (visual-line-mode 1)
+  (setq org-adapt-indentation 'headline-data)
+  (setq evil-auto-indent 1)
+  (setq org-src-preserve-indentation t)
+  (setq org-return-follows-link t)
+
+  ;; Open file links in the same window
+  (setq org-link-frame-setup
+        '((file . find-file))) 
+
+  ;; Close all properties drawers when opening an org file
+  (when (derived-mode-p 'org-mode)
+    (save-excursion
+      (goto-char (point-min))
+      (org-cycle-hide-drawers 'all))))
+  #+end_src
+
+** Custom functions
+  #+begin_src emacs-lisp
+
+;;;; Function to create optional links for the companies in job applications
+(defun mmotion/org-capture-optional-link ()
+  "Create an org link with optional URL input."
+  (let ((url (read-string "Company URL (leave empty to skip): ")))
+    (if (string= url "")
+        (read-string "Company name (no link): ")
+      (format "[[%s][%s]]" 
+              url
+              (read-string "Company name: ")))))
+
+  #+end_src
+
+** Org-mode config
+   #+begin_src emacs-lisp
+
+(use-package org
+  :commands (org-capture org-agenda)
+  :hook (org-mode . mmotion/org-mode-setup)
+  :config
+;;;; Keep monospace for code blocks etc..
+  (custom-theme-set-faces
+   'user
+   '(org-block             ((t (:inherit fixed-pitch))))
+   '(org-code              ((t (:inherit (shadow fixed-pitch)))))
+   '(org-table             ((t (:inherit fixed-pitch))))
+   '(org-verbatim          ((t (:inherit (shadow fixed-pitch)))))
+   '(org-special-keyword   ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+   '(org-meta-line         ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+   '(org-indent            ((t (:inherit (org-hide fixed-pitch)))))
+   )
+
+  ;; ;;;; Different sizes for each heading
+  (defvar mmotion-heading-sizes
+    '(1.6 1.4 1.2 1.1 1.0))                    ; scale for levels 1–5 (based on major scale)
+
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (cl-loop for lvl from 1 to (length mmotion-heading-sizes)
+                       for sz in mmotion-heading-sizes
+                       do
+                       (set-face-attribute
+                        (intern (format "org-level-%d" lvl)) nil
+                        :family mmotion/variable-font
+                        :weight 'bold
+                        :height sz))
+              ;; Document title
+              (set-face-attribute 'org-document-title nil
+                                  :family mmotion/variable-font
+                                  :weight 'bold
+                                  :height 1.8)))
+
+;;;; Keep the TODOs size at baseline (not working...)
+  (with-eval-after-load 'org
+    (set-face-attribute 'org-todo nil
+                        :height 1.0
+                        :family mmotion/default-font
+                        :weight 'bold
+                        :inherit nil)
+    (add-hook 'org-mode-hook
+              (lambda ()
+                (evil-define-key 'normal org-mode-map (kbd "RET") 'org-open-at-point)))
+    )
+
+  :custom
+  (org-ellipsis " ▾")
+  (org-hide-emphasis-markers t)
+  (org-agenda-start-with-log-mode t)
+  (org-log-done 'time)
+  (org-pretty-entities t)
+  (org-startup-folded 'showeverything)
+  (org-hide-block-startup nil)
+  (org-log-into-drawer t)
+  (org-agenda-files '("~/Notes/orgfiles/todos.org"))
+  (org-refile-targets
+   '(("archive.org" :maxlevel . 1)
+     ("todos.org" :maxlevel . 2)))
+
+  ;; Save Org buffers after refiling!
+  (advice-add 'org-refile :after 'org-save-all-org-buffers)
+   #+end_src
+
+** Org Todo Keywords
+   #+begin_src emacs-lisp
+
+(org-todo-keywords
+ '((sequence "TODO(t)" "DOING(d)" "PROJ(p)" "|" "DONE(x!)")
+   (sequence "WAIT(w@)" "HOLD(h)" "IDEA(i)" "|" "COMPLETED(c!)" "CANCELLED(c!)" "KILLED(k!/@)")
+   ))
+   #+end_src
+
+** Org Capture Templates
+   #+begin_src emacs-lisp
+
+(org-capture-templates
+ `(("t" "Tasks / Ideas")
+   ("tt" "Task" entry (file+olp "~/Notes/orgfiles/todos.org" "Inbox")
+    "* TODO %?\n  %U\n" :empty-lines 1)
+   ("ti" "Idea" entry (file+olp "~/Notes/orgfiles/todos.org" "Inbox")
+    "* IDEA %?\n  %U\n" :empty-lines 1)
+   ("j" "Journal" entry
+    (file+olp+datetree "~/Notes/orgfiles/journal.org")
+    "\n* %<%H:%M> - Journal :journal:\n\n%?\n\n"
+    ;; :clock-in :clock-resume
+    :empty-lines 1)
+   ;; ("jm" "Meeting" entry
+   ;;  (file+olp+datetree "~/Notes/orgfiles/journal.org")
+   ;;  "* %<%H:%M> - %a :meetings:\n\n%?\n\n"
+   ;;  :clock-in :clock-resume
+   ;;  :empty-lines 1)
+
+   ("n" "Note" entry
+    (file+olp+datetree "~/Notes/orgfiles/notes.org")
+    "\n* %<%H:%M> - Notes :notes:\n\n%?\n\n"
+    :empty-lines 1)
+
+   ("a" "Add Job Application"
+    plain
+    (file+function "~/Notes/orgfiles/roam/20250517192333-job_hunting_spreadsheet.org" 
+                   (lambda () 
+                     (goto-char (point-min))
+                     (search-forward "#+TBLFM:") 
+                     (beginning-of-line)
+                     (forward-line -1)
+                     (end-of-line)
+                     (newline)))
+    ;; "| | %(format-time-string \"%Y-%m-%d :%H:%M\") | [[%^{Company URL}][%^{Company name}]] | [[%^{Listing's URL}][link to listing]] | %^{Status} | %^{Notes|-} |"
+    "| | %(format-time-string \"%Y-%m-%d :%H:%M\") | %(mmotion/org-capture-optional-link) | [[%^{Listing's URL}][link to listing]] | %^{Status} | %^{Notes|-} |"
+    :empty-lines 0))))
+
+;;;; Auto-generate row numbers after job listing capture
+(add-hook 'org-capture-after-finalize-hook
+          (lambda ()
+            (save-excursion
+              (with-current-buffer "20250517192333-job_hunting_spreadsheet.org"
+                (goto-char (point-min))
+                (when (search-forward "#+TBLFM:" nil t)
+                  (org-table-calc-current-TBLFM))))))
+   #+end_src
+
+** Evil-org
+#+begin_src emacs-lisp
+
+;;;; Activate evil-mode in org-mode (as in org-agenda)
+(use-package evil-org
+  :demand t
+  :after org
+  :hook (org-mode . evil-org-mode)
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
+
+#+end_src
+
+** TOC-org
+#+begin_src emacs-lisp
+
+;;;; toc-org
+(use-package toc-org
+  :commands toc-org-enable
+  :init (add-hook 'org-mode-hook 'toc-org-enable))
+
+#+end_src
+
+** Org Babel
+#+begin_src emacs-lisp
+
+;;;; Org babel
+;; active Babel languages
+(with-eval-after-load 'org
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t)
+   (C . t)
+   (js . t)))
+
+(push '("conf-unix" . conf-unix) org-src-lang-modes))
+
+#+end_src
+
+** Structure Templates
+#+begin_src emacs-lisp
+
+;;;; Structure templates
+(with-eval-after-load 'org
+(require 'org-tempo)
+
+(add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+(add-to-list 'org-structure-template-alist '("py" . "src python"))
+(add-to-list 'org-structure-template-alist '("js" . "src js :results output")))
+
+#+end_src
+
+* Org Styling
+** Better looking Bullet Points
+#+begin_src emacs-lisp
+
+;;; Org styling ------------------------------------------------
+;;;; Styling bullet points
+(use-package org-superstar
+  :hook (org-mode . org-superstar-mode)
+  :custom
+  (org-superstar-item-bullet-alist
+      '((?* . ?•)
+        (?+ . ?•)
+        (?- . ?•)))
+
+  (org-superstar-headline-bullets-list '("§" "⁖" "" "" "•" "•"))
+  ;; This is usually the default, but keep in mind it must be nil
+  (org-hide-leading-stars nil)
+  ;; This line is necessary	.
+  (org-superstar-leading-bullet ?\s))
+  ;; If you use Org Indent you also need to add this, otherwise the
+  ;; above has no effect while Indent is enabled.
+  ;; (setq org-indent-mode-turns-on-hiding-stars nil))
+
+#+end_src
+
+** Olivetti
+Typewriter-like look of the page (centring).
+#+begin_src emacs-lisp
+
+;;;; Olivetti (better centering and max line length)
+(use-package olivetti
+  :diminish
+  :hook ((text-mode   . olivetti-mode)   ; enable in text buffers
+         (markdown-mode . olivetti-mode) ; enable in Markdown
+         (eww-mode . olivetti-mode)      ; enable in eww browser
+         (org-mode    . olivetti-mode))  ; enable in Org
+  :custom
+  (olivetti-body-width 100)           ; set body width
+  (olivetti-style 'gancy)          ; use fringes for margins
+  )  
+
+#+end_src
+
+** Fancy Priorities Look
+#+begin_src emacs-lisp
+
+;;;; Fancy priorities look
+(use-package org-fancy-priorities
+  :hook (org-mode . org-fancy-priorities-mode)
+  :config
+  (setq org-fancy-priorities-list '("󰬈" "󰬉" "󰬊")))
+
+#+end_src
+
+* Org-roam
+#+begin_src emacs-lisp
+
+;;; Org-roam ---------------------------------------------------
+(use-package org-roam
+  :demand t
+  :custom
+  (org-roam-directory (file-truename "~/Notes/orgfiles/roam")
+   org-roam-completion-everywhere t)
+  :bind
+  (("C-c n l" . org-roam-buffer-toggle)
+   ("C-c n f" . org-roam-node-find)
+   ("C-c n g" . org-roam-graph)
+   ("C-c n i" . org-roam-node-insert)
+   ("C-c n c" . org-roam-capture))
+  :config
+  (setq org-roam-node-display-template
+        (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+  (org-roam-db-autosync-mode))
+
+(use-package org-roam-dailies
+  :ensure nil
+  :after org-roam
+  :no-require t
+  :bind (("C-c n j" . org-roam-dailies-capture-today))
+  :config
+  (require 'org-roam-dailies)
+  (setq org-roam-dailies-capture-templates
+        '(("d" "daily entry" entry
+           "* %<%H:%M>\n%?"
+           :if-new
+           (file+head "%<%Y-%m-%d>.org"
+                      "#+title: %<%Y-%m-%d>\n")))))
+
+#+end_src
+
+** Org-roam UI
+#+begin_src emacs-lisp
+
+;;;; Org-roam UI
+(use-package websocket
+    :after org-roam)
+
+(use-package org-roam-ui
+    :after org-roam ;; or :after org
+;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+;;         a hookable mode anymore, you're advised to pick something yourself
+;;         if you don't care about startup time, use
+;;  :hook (after-init . org-roam-ui-mode)
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
+
+#+end_src
+
+** Consult-org-roam
+#+begin_src emacs-lisp
+
+;;;; Consult-org-roam
+(use-package consult-org-roam
+   :after org-roam
+   :init
+   (require 'consult-org-roam)
+   ;; Activate the minor mode
+   (consult-org-roam-mode 1)
+   :custom
+   ;; Use `ripgrep' for searching with `consult-org-roam-search'
+   (consult-org-roam-grep-func #'consult-ripgrep)
+   ;; Configure a custom narrow key for `consult-buffer'
+   (consult-org-roam-buffer-narrow-key ?r)
+   ;; Display org-roam buffers right after non-org-roam buffers
+   ;; in consult-buffer (and not down at the bottom)
+   (consult-org-roam-buffer-after-buffers t)
+   :config
+   ;; Eventually suppress previewing for certain functions
+   (consult-customize
+    consult-org-roam-forward-links
+    :preview-key "M-.")
+   :bind
+   ;; Define some convenient keybindings as an addition
+   ("C-c n e" . consult-org-roam-file-find)
+   ("C-c n b" . consult-org-roam-backlinks)
+   ("C-c n B" . consult-org-roam-backlinks-recursive)
+   ("C-c n l" . consult-org-roam-forward-links)
+   ("C-c n r" . consult-org-roam-search))
+
+#+end_src
+
+* LSP mode
+#+begin_src emacs-lisp
+
+;;; LSP mode ---------------------------------------------------
+;;;; Breadcrumb
+(defun mmotion/lsp-mode-setup ()
+  (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+  (lsp-headerline-breadcrumb-mode))
+
+(use-package lsp-mode
+  :commands (lsp lsp-deferred)
+  :hook (lsp-mode . mmotion/lsp-mode-setup)
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :bind-keymap
+        ("C-c l" . lsp-command-map)
+  :hook ((js-mode       . lsp-deferred)
+         (js2-mode      . lsp-deferred)
+         (rjsx-mode     . lsp-deferred)
+         (typescript-mode . lsp-deferred)
+         (tsx-mode      . lsp-deferred))
+  :config
+  (lsp-enable-which-key-integration t)
+  (setq lsp-clients-typescript-server-args '("--stdio")))
+
+;;;; lsp-ui
+(use-package lsp-ui
+  :after lsp-mode
+  :hook (lsp-mode . lsp-ui-mode)
+  :custom
+  (lsp-ui-doc-enable t)
+  (lsp-ui-doc-position 'bottom)
+  (lsp-ui-sideline-enable t)
+  (lsp-ui-sideline-show-hover t)
+  (lsp-ui-peek-find-references t))
+
+;;;; Treemacs
+(use-package lsp-treemacs
+  :after lsp)
+
+#+end_src
+
+* Tree-sitter
+#+begin_src emacs-lisp
+
+;;; Tree-sitter ------------------------------------------------
+(use-package treesit
+  :ensure nil
+  :custom
+  (treesit-extra-load-path '("/usr/lib/tree-sitter"))
+  (treesit-font-lock-level 3)
+  (major-mode-remap-alist
+   '((python-mode . python-ts-mode)
+     (javascript-mode . js-ts-mode)
+     (js-mode . js-ts-mode)
+     (html-mode . html-ts-mode)
+     (css-mode . css-ts-mode)
+     (sh-mode . bash-ts-mode))))
+
+#+end_src
+
+* Terminal Emulators
+
+** Term
+#+begin_src emacs-lisp
+
+;;; Terminal emulators ----------------------------------------
+;;;; Term mode (not very usable if at all)
+(use-package term
+  :ensure nil
+  :commands term
+  :config
+  (setq explicit-shell-file-name "/usr/bin/fish")) ;; Change this to zsh, etc
+  ;;(setq explicit-zsh-args '())         ;; Use 'explicit-<shell>-args for shell-specific args
+
+  ;; Match the default Bash shell prompt.  Update this if you have a custom prompt
+  ;; (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *"))
+
+#+end_src
+
+** Vterm
+#+begin_src emacs-lisp
+
+;;;; vterm
+(use-package vterm
+  :commands vterm
+  :config
+  (setq vterm-max-scrollback 10000))
+
+#+end_src
+
+* Dired
+
+  #+begin_src emacs-lisp
+
+;;; Dired ------------------------------------------------------
+(use-package dired
+  :ensure nil
+  :commands (dired dired-jump)
+  :bind (("C-x C-j" . dired-jump))
+  :custom
+  (evil-collection-define-key 'normal 'dired-mode-map
+    "h" 'dired-up-directory
+    "l" 'dired-find-file)
+  (dired-dwim-target t)
+  (dired-kill-when-opening-new-dired-buffer t)
+  (dired-listing-switches "-agho --group-directories-first"))
+
+(with-eval-after-load 'dired
+  (require 'dired-x))
+
+(use-package nerd-icons-dired
+  :hook
+  (dired-mode . nerd-icons-dired-mode))
+
+(use-package dired-hide-dotfiles
+  :hook (dired-mode . dired-hide-dotfiles-mode)
+  :config
+  ;; Bind "g ." in Evil normal state within Dired
+  (evil-define-key 'normal dired-mode-map
+    "g." #'dired-hide-dotfiles-mode))
+
+(use-package dired-open
+  :after dired
+  ;; :commands (dired dired-jump)
+  :config
+  (setq dired-open-extensions
+        '(("png"  . "viewnior")
+          ("jpeg" . "viewnior")
+          ("jpg"  . "viewnior")
+	        ("pdf" . "zathura")
+	        ("epub" . "zathura")
+	        ("mp4" . "mpv")
+          ("mkv"  . "mpv"))))
+
+;;;; Restore leader key for dired buffers
+;; (with-eval-after-load 'dired
+;;   (define-key dired-mode-map (kbd "SPC") mmotion/leader-map))
+
+
+  #+end_src
+
+* Reset GC Threshold
+#+begin_src emacs-lisp
+
+;;; Reset gc threshold -----------------------------------------
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (setq gc-cons-threshold (* 2 1000 1000))))
+
+#+end_src
