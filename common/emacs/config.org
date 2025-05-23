@@ -368,6 +368,10 @@ I'd rather use =nerd-icons= than =all-the-icons=, much more reliable.
            (doom-modeline-buffer-modification-icon t)
            (doom-modeline-icon t)))
 
+(setq display-time-format "%H:%M"
+      display-time-default-load-average nil)
+
+(display-time-mode 1)
    #+end_src
 
 ** Emacs-dashboard
@@ -1611,9 +1615,7 @@ Typewriter-like look of the page (centring).
 #+begin_src emacs-lisp
 
 (use-package flycheck
-  :init (global-flycheck-mode))
-
-(add-hook 'lsp-mode-hook #'flycheck-mode)
+  :hook (prog-mode . flycheck-mode))
 
 #+end_src
 * Tree-sitter

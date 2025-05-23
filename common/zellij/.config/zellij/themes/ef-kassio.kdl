@@ -1,0 +1,15 @@
+themes {
+    ef-kassio {
+        bg "#fff7f7"
+        fg "#201f36"
+        red "#b00234"
+        green "#217a3c"
+        blue "#3c3bbe"
+        yellow "#9a6012"
+        magenta "#a01f64"
+        orange "#d06f30"
+        cyan "#2f5f9f"
+        black "#efe7e7"
+        white "#201f36"
+    }
+}
