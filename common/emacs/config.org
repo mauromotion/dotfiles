@@ -73,6 +73,8 @@
   - [[#org-roam-ui][Org-roam UI]]
   - [[#consult-org-roam][Consult-org-roam]]
 - [[#lsp-mode][LSP mode]]
+  - [[#lsp-mode-set-up][LSP mode set up]]
+  - [[#flycheck][Flycheck]]
 - [[#tree-sitter][Tree-sitter]]
 - [[#terminal-emulators][Terminal Emulators]]
   - [[#term][Term]]
@@ -663,9 +665,9 @@ Better front end for Emacs' documentation
 (defvar-keymap mmotion/help-map
   :doc "Help operations submenu."
   "c" #'describe-command
-  "d" #'describe-mode
   "f" #'describe-function
   "k" #'describe-key
+  "m" #'describe-mode
   "v" #'describe-variable)
     #+end_src
 
@@ -794,8 +796,8 @@ Better front end for Emacs' documentation
 
   (which-key-add-keymap-based-replacements mmotion/help-map
     "c" "Describe command"
-    "d" "Describe mode"
     "f" "Describe function"
+    "m" "Describe mode"
     "k" "Describe key"
     "v" "Describe variable")
   
@@ -1052,28 +1054,20 @@ Completion at point.
 
 ;;;; Add extensions (cape)
 (use-package cape
-  ;; Bind prefix keymap providing all Cape commands under a mnemonic key.
-  ;; Press C-c p ? to for help.
-  :bind ("M-<tab>" . cape-prefix-map) ;; Alternative key: M-<tab>, M-p, M-+
-  ;; Alternatively bind Cape commands individually.
-  ;; :bind (("C-c p d" . cape-dabbrev)
-  ;;        ("C-c p h" . cape-history)
-  ;;        ("C-c p f" . cape-file)
-  ;;        ...)
   :init
-  ;; Add to the global default value of `completion-at-point-functions' which is
-  ;; used by `completion-at-point'.  The order of the functions matters, the
-  ;; first function returning a result wins.  Note that the list of buffer-local
-  ;; completion functions takes precedence over the global list.
-  (add-hook 'completion-at-point-functions #'cape-dabbrev)
-  (add-hook 'completion-at-point-functions #'cape-file)
-  (add-hook 'completion-at-point-functions #'cape-elisp-block)
-  ;; (add-hook 'completion-at-point-functions #'cape-history)
-  ;; ...
-  )
+  (require 'cape) ;; Ensure the package is loaded
+  (defun mmotion/setup-completion ()
+    (setq-local completion-at-point-functions
+                (list (cape-capf-super
+                       #'lsp-completion-at-point
+                       #'cape-dabbrev
+                       #'cape-file
+                       #'python-completion-at-point))))
+  (add-hook 'prog-mode-hook #'mmotion/setup-completion)
+  (add-hook 'lsp-completion-mode-hook #'mmotion/setup-completion))
 
   #+end_src
-
+  
 * Spellchecking
   #+begin_src emacs-lisp
 
@@ -1118,28 +1112,28 @@ Completion at point.
 ;;; Projectile ------------------------------------------------
 (use-package projectile
   :diminish projectile-mode
-  :config (projectile-mode)
-  ;; :custom ((projectile-completion-system 'ivy))
-  :bind-keymap
-  ("C-c p" . projectile-command-map)
   :init
-  ;; NOTE: Set this to the folder where you keep your Git repos!
-  (when (file-directory-p "~/Projects")
-    (setq projectile-project-search-path '(("~/.dotfiles")("~/Projects"))))
-  (setq projectile-switch-project-action #'projectile-dired))
+  (setq projectile-indexing-method 'native
+        projectile-switch-project-action #'projectile-dired
+        projectile-project-search-path
+        '("~/Projects" "~/.dotfiles"))
+  :config
+  (projectile-mode)
+  :bind-keymap
+  ("C-c p" . projectile-command-map))
 
 (use-package consult-projectile
-  :after (consult projectile)                        ;; wait for Consult & Projectile
-  :commands (consult-projectile                      ;; autoload these
-             consult-projectile-find-file)
-  :bind (("s-w" . consult-projectile)                ;; a standalone launcher
-  :map projectile-command-map
-         ("f"   . consult-projectile-find-file))     ;; C-c p f → find file via Consult
+  :after (consult projectile)
+  :commands (consult-projectile consult-projectile-find-file)
+  :bind (("s-w" . consult-projectile)
+         :map projectile-command-map
+         ("f" . consult-projectile-find-file))
   :init
-  ;; (Optional) tell Consult how to get your project root from Projectile:
   (setq consult-project-root-function
-        (lambda () (when (fboundp 'projectile-project-root)
-                     (projectile-project-root)))))     ;; :contentReference[oaicite:0]{index=0}
+        (lambda ()
+          (when (and (fboundp 'projectile-project-p)
+                     (projectile-project-p))
+            (projectile-project-root)))))
 
 #+end_src
 
@@ -1260,7 +1254,7 @@ Completion at point.
    '(("archive.org" :maxlevel . 1)
      ("todos.org" :maxlevel . 2)))
 
-  ;; Save Org buffers after refiling!
+  ;; Save Org buffers after refiling
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
    #+end_src
 
@@ -1564,6 +1558,7 @@ Typewriter-like look of the page (centring).
 #+end_src
 
 * LSP mode
+** LSP mode set up
 #+begin_src emacs-lisp
 
 ;;; LSP mode ---------------------------------------------------
@@ -1579,13 +1574,18 @@ Typewriter-like look of the page (centring).
   (setq lsp-keymap-prefix "C-c l")
   :bind-keymap
         ("C-c l" . lsp-command-map)
-  :hook ((js-mode       . lsp-deferred)
-         (js2-mode      . lsp-deferred)
-         (rjsx-mode     . lsp-deferred)
-         (typescript-mode . lsp-deferred)
-         (tsx-mode      . lsp-deferred))
+  :hook ((css-mode
+          html-mode
+          js-mode
+          js2-mode
+          rjsx-mode
+          typescript-mode
+          tsx-mode
+          python-mode) . lsp-deferred)
   :config
+  (setq lsp-completion-provider :capf)
   (lsp-enable-which-key-integration t)
+  (setq lsp-enable-symbol-highlighting t)
   (setq lsp-clients-typescript-server-args '("--stdio")))
 
 ;;;; lsp-ui
@@ -1597,7 +1597,9 @@ Typewriter-like look of the page (centring).
   (lsp-ui-doc-position 'bottom)
   (lsp-ui-sideline-enable t)
   (lsp-ui-sideline-show-hover t)
-  (lsp-ui-peek-find-references t))
+  (lsp-ui-peek-find-references t)
+  (lsp-ui-sideline-ignore-duplicate t)
+  (lsp-ui-sideline-show-code-actions t))
 
 ;;;; Treemacs
 (use-package lsp-treemacs
@@ -1605,6 +1607,15 @@ Typewriter-like look of the page (centring).
 
 #+end_src
 
+** Flycheck
+#+begin_src emacs-lisp
+
+(use-package flycheck
+  :init (global-flycheck-mode))
+
+(add-hook 'lsp-mode-hook #'flycheck-mode)
+
+#+end_src
 * Tree-sitter
 #+begin_src emacs-lisp
 
@@ -1635,7 +1646,7 @@ Typewriter-like look of the page (centring).
   :ensure nil
   :commands term
   :config
-  (setq explicit-shell-file-name "/usr/bin/fish")) ;; Change this to zsh, etc
+  (setq explicit-shell-file-name "/usr/bin/sh")) ;; Change this to zsh, etc
   ;;(setq explicit-zsh-args '())         ;; Use 'explicit-<shell>-args for shell-specific args
 
   ;; Match the default Bash shell prompt.  Update this if you have a custom prompt
