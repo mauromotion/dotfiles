@@ -254,7 +254,10 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
   )
 ;;;; doom-themes
 (use-package doom-themes
-  :defer t)
+  :defer t
+  :config
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t ))
 
    #+end_src
 
@@ -1651,10 +1654,17 @@ Typewriter-like look of the page (centring).
 	        ("mp4" . "mpv")
           ("mkv"  . "mpv"))))
 
-;;;; Restore leader key for dired buffers
-;; (with-eval-after-load 'dired
-;;   (define-key dired-mode-map (kbd "SPC") mmotion/leader-map))
-
+;; Enable Dired Preview and make it Evil-friendly
+(use-package dired-preview
+  :ensure t
+  :hook (dired-mode . dired-preview-mode)
+  :config
+  (setq dired-preview-delay 0.2)
+  ;; Add Evil navigation commands to trigger preview
+  (dolist (cmd '(evil-next-line evil-previous-line))
+    (add-to-list 'dired-preview-trigger-commands cmd))
+  (dired-preview-global-mode 1))
+  
 
   #+end_src
 
