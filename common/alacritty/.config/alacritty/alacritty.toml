@@ -1,7 +1,7 @@
 general.live_config_reload = true
 
 general.import = [
-  "~/.config/alacritty/themes/modus-operandi-tinted-alacritty-theme.toml",
+  "~/.config/alacritty/themes/ef-kassio-alacritty-theme.toml",
   "~/.config/alacritty/fonts/BlexMono-alacritty-font.toml",
 ]
 

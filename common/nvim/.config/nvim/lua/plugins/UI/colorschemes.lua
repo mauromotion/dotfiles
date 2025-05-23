@@ -100,8 +100,8 @@ return {
 		priority = 1000,
 		config = function()
 			require("ef-themes").setup({
-				light = "ef-day", -- Ef-theme to select for light backgrounds
-				dark = "ef-dream", -- Ef-theme to select for dark backgrounds
+				light = "ef-kassio", -- Ef-theme to select for light backgrounds
+				dark = "ef-owl", -- Ef-theme to select for dark backgrounds
 				transparent = false,
 				styles = {
 					-- Set specific styles for specific highlight groups
