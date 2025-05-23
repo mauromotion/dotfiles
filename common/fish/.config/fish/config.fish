@@ -84,6 +84,9 @@ alias yt "ytfzf"
 ## Source Zoxide
 zoxide init fish | source
 
+# Use ripgrep with FZF, include hidden files and respect ignore files
+set -Ux FZF_DEFAULT_COMMAND 'rg --files --hidden --no-ignore-vcs --glob "!.git/*"'
+
 ## Starship prompt
 # set -x STARSHIP_CONFIG ~/.config/staship/starship.toml
 # starship init fish | source
