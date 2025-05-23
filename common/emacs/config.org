@@ -698,9 +698,12 @@ Better front end for Emacs' documentation
 (defvar-keymap mmotion/window-map
   :doc "Window operations."
   "b" #'balance-windows
+  "d" #'delete-window
   "m" #'maximize-window
   "r" #'hydra-resize-windows/body
-  "s" #'ace-swap-window
+  "i" #'ace-swap-window
+  "s" #'split-window-vertically
+  "v" #'split-window-horizontally
   "w" #'ace-window)
     #+end_src
 
@@ -796,11 +799,14 @@ Better front end for Emacs' documentation
     "t" "Choose Theme")
 
   (which-key-add-keymap-based-replacements mmotion/window-map
-    "m" "Maximize window"
     "b" "Reset windows"
-    "w" "Switch window"
+    "d" "Delete window"
+    "m" "Maximize window"
     "r" "Resize windows"
-    "s" "Swap windows"))
+    "i" "Swap windows"
+    "s" "Split window horizontally"
+    "v" "Split window vertically"
+    "w" "Switch window"))
 
    #+end_src
 
