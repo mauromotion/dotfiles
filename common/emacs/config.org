@@ -77,6 +77,11 @@
   - [[#vterm][Vterm]]
   - [[#vterm-toggle][Vterm-toggle]]
 - [[#dired][Dired]]
+  - [[#main-dired-config][Main dired config]]
+  - [[#nerd-icons-for-dired][Nerd icons for dired]]
+  - [[#hide-dotfiles][Hide dotfiles]]
+  - [[#set-up-programs-to-open-certain-files-from-dired][Set up programs to open certain files from dired]]
+  - [[#dired-preview][Dired preview]]
 - [[#reset-gc-threshold][Reset GC Threshold]]
 
 * General flow
@@ -487,6 +492,7 @@ Better front end for Emacs' documentation
   (which-key-mode)
   (setq which-key-idle-delay 0.5
         which-key-separator "   "
+        which-key-min-display-lines 10
         which-key-add-column-padding 1))
 
    #+end_src
@@ -637,6 +643,7 @@ Better front end for Emacs' documentation
   "l" #'mmotion/cycle-line-numbers
   "n" #'tab-new
   "o" #'hydra-olivetti-margins/body
+  ;; "p" #'dired-preview-mode
   "t" #'consult-theme
   "r" #'tab-rename
   "s" #'hydra-text-scale/body
@@ -752,6 +759,7 @@ Better front end for Emacs' documentation
     "l" "Toggle line numbers"
     "n" "Create a new tab"
     "o" "Resize Olivetti margins"
+    ;; "p" "Dired Preview"
     "r" "Rename current tab"
     "s" "Scale Text"
     "t" "Choose Theme"
@@ -1611,8 +1619,8 @@ Typewriter-like look of the page (centring).
 #+end_src
 
 * Dired
-
-  #+begin_src emacs-lisp
+** Main dired config
+   #+begin_src emacs-lisp
 
 ;;; Dired ------------------------------------------------------
 (use-package dired
@@ -1629,10 +1637,19 @@ Typewriter-like look of the page (centring).
 
 (with-eval-after-load 'dired
   (require 'dired-x))
+   #+end_src
+
+** Nerd icons for dired
+   #+begin_src emacs-lisp
 
 (use-package nerd-icons-dired
   :hook
   (dired-mode . nerd-icons-dired-mode))
+
+   #+end_src
+
+** Hide dotfiles
+   #+begin_src emacs-lisp
 
 (use-package dired-hide-dotfiles
   :hook (dired-mode . dired-hide-dotfiles-mode)
@@ -1640,6 +1657,10 @@ Typewriter-like look of the page (centring).
   ;; Bind "g ." in Evil normal state within Dired
   (evil-define-key 'normal dired-mode-map
     "g." #'dired-hide-dotfiles-mode))
+   #+end_src
+
+** Set up programs to open certain files from dired
+   #+begin_src emacs-lisp
 
 (use-package dired-open
   :after dired
@@ -1653,20 +1674,24 @@ Typewriter-like look of the page (centring).
 	        ("epub" . "zathura")
 	        ("mp4" . "mpv")
           ("mkv"  . "mpv"))))
+   #+end_src
+
+** Dired preview
+Disabled for now, I don't like it.
+
+   #+begin_src emacs-lisp :tangle no
 
 ;; Enable Dired Preview and make it Evil-friendly
 (use-package dired-preview
   :ensure t
-  :hook (dired-mode . dired-preview-mode)
+  ;; :hook (dired-mode . dired-preview-mode)
   :config
-  (setq dired-preview-delay 0.2)
+  (setq dired-preview-delay 0.1)
   ;; Add Evil navigation commands to trigger preview
   (dolist (cmd '(evil-next-line evil-previous-line))
-    (add-to-list 'dired-preview-trigger-commands cmd))
-  (dired-preview-global-mode 1))
-  
+    (add-to-list 'dired-preview-trigger-commands cmd)))
 
-  #+end_src
+   #+end_src
 
 * Reset GC Threshold
 #+begin_src emacs-lisp

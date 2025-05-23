@@ -84,9 +84,8 @@
                          nerd-icons-completion nerd-icons-dired
                          no-littering olivetti orderless org-download
                          org-fancy-priorities org-modern org-roam-ui
-                         org-superstar peep-dired rainbow-delimiters
-                         rainbow-mode toc-org undo-tree vertico
-                         vterm-toggle)))
+                         org-superstar rainbow-delimiters rainbow-mode
+                         toc-org undo-tree vertico vterm-toggle)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
