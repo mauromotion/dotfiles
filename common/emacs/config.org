@@ -8,11 +8,7 @@
 
 * Table of Contents :toc:
 - [[#general-flow][General flow]]
-- [[#startup-performance][Startup Performance]]
-- [[#bootstrap][Bootstrap]]
-  - [[#auto-tangle-on-save][Auto-tangle on save]]
 - [[#package-manager][Package Manager]]
-  - [[#set-up-packageel-and-the-package-archives][Set up package.el and the Package Archives]]
   - [[#auto-update-packages][Auto-Update Packages]]
 - [[#keep-directories-clean][Keep directories clean]]
 - [[#essentials][Essentials]]
@@ -87,87 +83,10 @@
 This literal configuration will work like this:
 - In =early-init.el= some basic initial UI settings are configured.
 - Then in =init.el= in order, there's the start up performance function, the whole use-package installation and setup, and a check that loads =config.el= if present on disk, or, if not present, it will tangle this =config.org= file so that =config.el= gets generated. And then =init.el= loads the whole configuration from =config.el=.
-- Here there's also a bootstrap function that auto-tangle this file when saved, so that =config.el= gets recreated with the new settings.
+- =init.el= will also auto-reload the config each time =config.org= is saved.
+- +Here there's also a bootstrap function that auto-tangle this file when saved, so that =config.el= gets recreated with the new settings.+
   
-* Startup Performance
-This is going statically into =init.el=, will set to not tangle, but keeping it here for reference.
-
-#+begin_src emacs-lisp :tangle no
-;; -*- lexical-binding: t; -*-
-
-;;; Startup Performance -----------------------------------
-(setq gc-cons-threshold (* 50 1000 1000))
-
-(defun mmotion/display-startup-time ()
-  (message "Emacs loaded in %s with %d garbage collections."
-           (format "%.2f seconds"
-                    (float-time
-                        (time-subtract after-init-time before-init-time)))
-            gcs-done))
-(add-hook 'emacs-startup-hook #'mmotion/display-startup-time)
-
-#+end_src
-
-* Bootstrap
-** Auto-tangle on save
-#+begin_src emacs-lisp
-
-(defvar mmotion/config-org
-  (file-truename (expand-file-name "config.org" user-emacs-directory))
-  "Resolved path to config.org.")
-
-(defvar mmotion/tangled-el
-  (expand-file-name "config.el" user-emacs-directory)
-  "Always tangle to Emacs runtime dir.")
-
-(defun mmotion/auto-tangle-and-load-config ()
-  "Tangle config.el to Emacs runtime dir."
-  (when (and buffer-file-name
-             (string= (file-truename buffer-file-name)
-                      mmotion/config-org))
-    (let ((org-confirm-babel-evaluate nil))
-      (message "[literate] Tangling %s → %s…" mmotion/config-org mmotion/tangled-el)
-      (org-babel-tangle-file mmotion/config-org mmotion/tangled-el)
-      (when (file-exists-p mmotion/tangled-el)
-        (load-file mmotion/tangled-el))
-      (message "[literate] Done."))))
-
-(add-hook 'after-save-hook #'mmotion/auto-tangle-and-load-config)
-
-#+end_src
-
 * Package Manager
-** Set up package.el and the Package Archives
-This is going statically into =init.el=, will set to not tangle, but keeping it here for reference.
-
-#+begin_src emacs-lisp :tangle no
-  
-;;; Initialize package sources ---------------------------
-(require 'package)
-
-(setq package-archives
-      '(("melpa"  . "https://melpa.org/packages/")
-        ("gnu"    . "https://elpa.gnu.org/packages/")
-        ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
-
-(package-initialize)
-
-;; Only refresh and install `use-package` if it's missing:
-(unless (package-installed-p 'use-package)
-  (message "Bootstrapping use-package…")
-  (package-refresh-contents)
-  (package-install    'use-package))
-
-;; Make sure `use-package` is loaded for the rest of the init:
-(eval-when-compile
-  (require 'use-package))
-
-;; Optional: auto-ensure all packages declared below
-(setq use-package-always-ensure t
-      use-package-verbose t)
-
-#+end_src
-
 ** Auto-Update Packages
 #+begin_src emacs-lisp
 
@@ -330,8 +249,8 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
   :defer nil
   :config
   ;; Optional: Set a default theme to load when Emacs starts
-  (load-theme 'ef-day t)  ; for a light theme
-  ;; (load-theme 'ef-owl t)   ; for a dark theme
+  ;; (load-theme 'ef-day t)  ; for a light theme
+  (load-theme 'ef-owl t)   ; for a dark theme
   )
 ;;;; doom-themes
 (use-package doom-themes
@@ -421,7 +340,6 @@ Visual indicators of indentation for code.
 #+begin_src emacs-lisp
 
 (use-package colorful-mode
-  ;; :diminish
   :custom
   (colorful-use-prefix nil)
   (colorful-only-strings 'only-prog)
