@@ -76,6 +76,7 @@
 - [[#terminal-emulators][Terminal Emulators]]
   - [[#term][Term]]
   - [[#vterm][Vterm]]
+  - [[#vterm-toggle][Vterm-toggle]]
 - [[#dired][Dired]]
 - [[#reset-gc-threshold][Reset GC Threshold]]
 
@@ -326,7 +327,7 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
   :defer nil
   :config
   ;; Optional: Set a default theme to load when Emacs starts
-  (load-theme 'ef-kassio t)  ; for a light theme
+  (load-theme 'ef-day t)  ; for a light theme
   ;; (load-theme 'ef-owl t)   ; for a dark theme
   )
 ;;;; doom-themes
@@ -689,7 +690,9 @@ Better front end for Emacs' documentation
   "o" #'hydra-olivetti-margins/body
   "t" #'consult-theme
   "r" #'tab-rename
-  "s" #'hydra-text-scale/body)
+  "s" #'hydra-text-scale/body
+  "v" #'vterm-toggle-cd)
+
     #+end_src
 
 *** [W]indows keybindings
@@ -796,7 +799,8 @@ Better front end for Emacs' documentation
     "o" "Resize Olivetti margins"
     "r" "Rename current tab"
     "s" "Scale Text"
-    "t" "Choose Theme")
+    "t" "Choose Theme"
+    "v" "Vterm toggle")
 
   (which-key-add-keymap-based-replacements mmotion/window-map
     "b" "Reset windows"
@@ -1619,6 +1623,28 @@ Typewriter-like look of the page (centring).
   :commands vterm
   :config
   (setq vterm-max-scrollback 10000))
+
+#+end_src
+
+** Vterm-toggle
+#+begin_src emacs-lisp
+(use-package vterm-toggle
+  :after vterm
+  :config
+  (setq vterm-toggle-fullscreen-p nil)
+  (add-to-list 'display-buffer-alist
+             '((lambda (buffer-or-name _)
+                   (let ((buffer (get-buffer buffer-or-name)))
+                     (with-current-buffer buffer
+                       (or (equal major-mode 'vterm-mode)
+                           (string-prefix-p vterm-buffer-name (buffer-name buffer))))))
+                (display-buffer-reuse-window display-buffer-at-bottom)
+                ;;(display-buffer-reuse-window display-buffer-in-direction)
+                ;;display-buffer-in-direction/direction/dedicated is added in emacs27
+                ;;(direction . bottom)
+                ;;(dedicated . t) ;dedicated is supported in emacs27
+                (reusable-frames . visible)
+                (window-height . 0.3))))
 
 #+end_src
 
