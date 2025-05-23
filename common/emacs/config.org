@@ -16,6 +16,7 @@
   - [[#auto-update-packages][Auto-Update Packages]]
 - [[#keep-directories-clean][Keep directories clean]]
 - [[#essentials][Essentials]]
+  - [[#ui-elements-commands-history-trash-dir-tabs][UI elements, commands history, trash dir, tabs.]]
   - [[#bookmarks][Bookmarks]]
   - [[#navigation][Navigation]]
 - [[#fonts][Fonts]]
@@ -85,7 +86,7 @@ This literal configuration will work like this:
 - Here there's also a bootstrap function that auto-tangle this file when saved, so that =config.el= gets recreated with the new settings.
   
 * Startup Performance
-This goes statically in =init.el=.
+This is going statically into =init.el=, will set to not tangle, but keeping it here for reference.
 
 #+begin_src emacs-lisp :tangle no
 ;; -*- lexical-binding: t; -*-
@@ -133,7 +134,8 @@ This goes statically in =init.el=.
 
 * Package Manager
 ** Set up package.el and the Package Archives
-This is going statically into =init.el=, will set to not tangle.
+This is going statically into =init.el=, will set to not tangle, but keeping it here for reference.
+
 #+begin_src emacs-lisp :tangle no
   
 ;;; Initialize package sources ---------------------------
@@ -207,6 +209,7 @@ All the temp and backup files that Emacs generates are put into "~/.cache/emacs"
 #+end_src
 
 * Essentials
+** UI elements, commands history, trash dir, tabs.
 Basic set up of Emacs' UI, removing the default toolbars, and setting up some system preferences.
 
   #+begin_src emacs-lisp
@@ -241,8 +244,6 @@ Basic set up of Emacs' UI, removing the default toolbars, and setting up some sy
 (setq display-line-numbers-type 'relative)
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 
-
-
   #+end_src
 
 ** Bookmarks
@@ -273,11 +274,19 @@ Use ace-window to manipulate windows and navigate between them more efficiently.
 #+end_src
 
 * Fonts
+For the moment I've settled on [[https://www.ibm.com/plex/][IBM Plex Mono ]]for my monospace font and [[https://weiweihuanghuang.github.io/Work-Sans/][Work Sans]] for my proportional spaced font.
+
+The Arch Linux packages are called respectively =ttf-ibm-plex= and =ttf-work-sans-variable=.
+
+For the monospace font I don't need the Nerd Font patched version on Emacs, since all the Nerd icons are installed by themselves with the =nerd-icons= package (see [[Icons]]).
+
+I'm also setting comments to be /italic/.
+
   #+begin_src emacs-lisp
 
 ;;; Fonts ------------------------------------------------
 ;;;; Define font constants for easier management
-(defvar mmotion/default-font "BlexMono Nerd Font")
+(defvar mmotion/default-font "IBM Plex Mono")
 (defvar mmotion/variable-font "Work Sans")
 
 ;; Base size for body text
@@ -307,6 +316,8 @@ Use ace-window to manipulate windows and navigate between them more efficiently.
 
 * Appearance
 ** Themes
+I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! Also keeping[[https://github.com/doomemacs/themes?tab=readme-ov-file#theme-list][ doom-themes]] here just because.
+
    #+begin_src emacs-lisp
 
 ;;; Look ------------------------------------------------
@@ -315,15 +326,18 @@ Use ace-window to manipulate windows and navigate between them more efficiently.
   :defer nil
   :config
   ;; Optional: Set a default theme to load when Emacs starts
-  ;; (load-theme 'ef-kassio t)  ; for a light theme
-  (load-theme 'ef-owl t)   ; for a dark theme
+  (load-theme 'ef-kassio t)  ; for a light theme
+  ;; (load-theme 'ef-owl t)   ; for a dark theme
   )
 ;;;; doom-themes
 (use-package doom-themes
   :defer t)
+
    #+end_src
 
 ** Icons
+I'd rather use =nerd-icons= than =all-the-icons=, much more reliable.
+
    #+begin_src emacs-lisp
 
 ;;;; Use nerd-icons
@@ -335,9 +349,11 @@ Use ace-window to manipulate windows and navigate between them more efficiently.
   :config
   (nerd-icons-completion-mode)
   (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
+
    #+end_src
 
 ** Modeline
+
    #+begin_src emacs-lisp
 
 ;;;; Modeline
@@ -347,9 +363,12 @@ Use ace-window to manipulate windows and navigate between them more efficiently.
            (doom-modeline-time t)
            (doom-modeline-buffer-modification-icon t)
            (doom-modeline-icon t)))
+
    #+end_src
 
 ** Emacs-dashboard
+Settings *must* be in =:custom= otherwise they won't work.
+
    #+begin_src emacs-lisp
 
 ;;;; Emacs-dashboard
@@ -380,6 +399,8 @@ Use ace-window to manipulate windows and navigate between them more efficiently.
    #+end_src
 
 ** Indent Line Guides
+Visual indicators of indentation for code.
+
 #+begin_src emacs-lisp
 
 ;;;; Indent line guides
@@ -389,6 +410,8 @@ Use ace-window to manipulate windows and navigate between them more efficiently.
 #+end_src
 
 ** Rainbow delimiters
+Colourful parentheses to help mostly with elisp.
+
 #+begin_src emacs-lisp
 
 ;;;; Colorful parentheses to help mostly with elisp
@@ -398,6 +421,8 @@ Use ace-window to manipulate windows and navigate between them more efficiently.
 #+end_src
 
 ** Helpful
+Better front end for Emacs' documentation
+
 #+begin_src emacs-lisp
 
 ;;;; Better front end for documentation
