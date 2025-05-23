@@ -26,6 +26,7 @@
   - [[#modeline][Modeline]]
   - [[#emacs-dashboard][Emacs-dashboard]]
   - [[#indent-line-guides][Indent Line Guides]]
+  - [[#colorful-mode][Colorful mode]]
   - [[#rainbow-delimiters][Rainbow delimiters]]
   - [[#helpful][Helpful]]
 - [[#evil-mode][Evil-mode]]
@@ -410,6 +411,21 @@ Visual indicators of indentation for code.
 
 #+end_src
 
+** Colorful mode
+#+begin_src emacs-lisp
+
+(use-package colorful-mode
+  ;; :diminish
+  :custom
+  (colorful-use-prefix nil)
+  (colorful-only-strings 'only-prog)
+  (css-fontify-colors nil)
+  :config
+  (global-colorful-mode t)
+  (add-to-list 'global-colorful-modes 'helpful-mode))
+
+#+end_src
+
 ** Rainbow delimiters
 Colourful parentheses to help mostly with elisp.
 
@@ -635,13 +651,19 @@ Better front end for Emacs' documentation
   "l" #'consult-line
   "o" #'consult-outline)
     #+end_src
-
+*** [G]it keybindings
+#+begin_src emacs-lisp
+(defvar-keymap mmotion/git-map
+  :doc "Git operations submenu."
+  "s" #'magit-status)
+#+end_src
 *** [H]elp keybindings
     #+begin_src emacs-lisp
 
 (defvar-keymap mmotion/help-map
   :doc "Help operations submenu."
   "c" #'describe-command
+  "d" #'describe-mode
   "f" #'describe-function
   "k" #'describe-key
   "v" #'describe-variable)
@@ -726,6 +748,7 @@ Better front end for Emacs' documentation
 ;;;; Add submenus to the leader keymap
 (keymap-set mmotion/leader-map "b" mmotion/buffer-map)
 (keymap-set mmotion/leader-map "f" mmotion/find-map)
+(keymap-set mmotion/leader-map "g" mmotion/git-map)
 (keymap-set mmotion/leader-map "h" mmotion/help-map)
 (keymap-set mmotion/leader-map "n" mmotion/notes-map)
 (keymap-set mmotion/leader-map "o" mmotion/org-map)
@@ -744,6 +767,7 @@ Better front end for Emacs' documentation
     "SPC" "Switch Buffer"
     "b" "Buffer..."
     "f" "Find..."
+    "g" "(ma)Git..."
     "h" "Help..."
     "n" "Notes..."
     "o" "Org..."
@@ -765,8 +789,12 @@ Better front end for Emacs' documentation
     "l" "Line"
     "o" "Outline headings")
 
+  (which-key-add-keymap-based-replacements mmotion/git-map
+    "s" "(ma)Git status")
+
   (which-key-add-keymap-based-replacements mmotion/help-map
     "c" "Describe command"
+    "d" "Describe mode"
     "f" "Describe function"
     "k" "Describe key"
     "v" "Describe variable")
