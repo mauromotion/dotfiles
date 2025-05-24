@@ -26,6 +26,7 @@
   - [[#rainbow-delimiters][Rainbow delimiters]]
   - [[#helpful][Helpful]]
 - [[#evil-mode][Evil-mode]]
+  - [[#main-setup][Main setup]]
   - [[#evil-collection][Evil-collection]]
   - [[#evil-goggles][Evil-goggles]]
   - [[#evil-nerd-commenter][Evil-nerd-commenter]]
@@ -33,7 +34,7 @@
 - [[#keybindings][Keybindings]]
   - [[#general-keybindings][General keybindings]]
   - [[#which-key][Which-key]]
-  - [[#toggle-line-number-states-function][Toggle line-number-states function]]
+  - [[#custom-functions][Custom functions]]
   - [[#hydras][Hydras]]
   - [[#define-sub-menus][Define Sub-menus]]
   - [[#configure-which-key-descriptions][Configure which-key descriptions]]
@@ -51,7 +52,7 @@
 - [[#magit][Magit]]
 - [[#org-mode][Org-mode]]
   - [[#org-mode-base-settings][Org-mode base settings]]
-  - [[#custom-functions][Custom functions]]
+  - [[#custom-functions-1][Custom functions]]
   - [[#org-mode-config][Org-mode config]]
   - [[#org-todo-keywords][Org Todo Keywords]]
   - [[#org-capture-templates][Org Capture Templates]]
@@ -150,6 +151,18 @@ Basic set up of Emacs' UI, removing the default toolbars, and setting up some sy
 (menu-bar-mode -1)
 (setq visible-bell t)
 (setopt use-short-answers t)
+(global-auto-revert-mode t)
+(delete-selection-mode 1) ; Delete selected text and replace it with typed text
+
+(electric-pair-mode 1) ; Autopairing
+;; The following prevents <> from auto-pairing when electric-pair-mode is on.
+;; Otherwise, org-tempo is broken when you try to <s TAB...
+(add-hook 'org-mode-hook
+  (lambda ()
+    (setq-local electric-pair-inhibit-predicate
+                (lambda (c)
+                  (or (char-equal c ?<)           ; inhibit “<”
+                      (electric-pair-default-inhibit c))))))
 
 ;;;; Persist history over Emacs restarts. Vertico sorts by history position.
 (savehist-mode 1)
@@ -261,6 +274,7 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
 (use-package doom-themes
   :defer t
   :config
+  (doom-themes-org-config)
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t ))
 
@@ -290,15 +304,15 @@ I'd rather use =nerd-icons= than =all-the-icons=, much more reliable.
 ;;;; Modeline
 (use-package doom-modeline
   :hook (after-init . doom-modeline-mode)
-  :custom ((doom-modeline-height 20)
-           (doom-modeline-time t)
-           (doom-modeline-buffer-modification-icon t)
-           (doom-modeline-icon t)))
+  :config
+  (setq doom-modeline-height 25
+        doom-modeline-bar-width 5
+        doom-modeline-window-width-limit 85
+        doom-modeline-persp-name t
+        doom-modeline-persp-icon t
+        doom-modeline-buffer-modification-icon t
+        doom-modeline-icon t))
 
-(setq display-time-format "%H:%M"
-      display-time-default-load-average nil)
-
-(display-time-mode 1)
    #+end_src
 
 ** Emacs-dashboard
@@ -393,6 +407,7 @@ Better front end for Emacs' documentation
 #+end_src
 
 * Evil-mode
+** Main setup
   #+begin_src emacs-lisp
 
 ;;; Evil Mode ------------------------------------------------
@@ -497,7 +512,8 @@ Better front end for Emacs' documentation
 
    #+end_src
 
-** Toggle line-number-states function
+** Custom functions
+*** Toggle line-number-states function
    #+begin_src emacs-lisp
 
 ;;;; Toggle through line numbers styles
@@ -599,6 +615,7 @@ Better front end for Emacs' documentation
   "f" #'describe-function
   "k" #'describe-key
   "m" #'describe-mode
+  "p" #'describe-package
   "v" #'describe-variable)
     #+end_src
 
@@ -727,11 +744,12 @@ Better front end for Emacs' documentation
     "s" "(ma)Git status")
 
   (which-key-add-keymap-based-replacements mmotion/help-map
-    "c" "Describe command"
-    "f" "Describe function"
-    "m" "Describe mode"
-    "k" "Describe key"
-    "v" "Describe variable")
+    "c" "Describe Command"
+    "f" "Describe Function"
+    "m" "Describe Mode"
+    "k" "Describe Key"
+    "p" "Describe Package"
+    "v" "Describe Variable")
   
   (which-key-add-keymap-based-replacements mmotion/notes-map
     "a" "Add alias to node"
