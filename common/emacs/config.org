@@ -708,6 +708,7 @@ Better front end for Emacs' documentation
     #+end_src
 
 ** Configure which-key descriptions
+
    #+begin_src emacs-lisp
 
 ;;;; Configure which-key descriptions
@@ -1161,7 +1162,7 @@ Completion at point.
 
   ;; ;;;; Different sizes for each heading
   (defvar mmotion-heading-sizes
-    '(1.6 1.4 1.2 1.1 1.0))                    ; scale for levels 1–5 (based on major scale)
+    '(1.8 1.6 1.4 1.2 1.1 1.0 0.8))
 
   (add-hook 'org-mode-hook
             (lambda ()
@@ -1177,7 +1178,7 @@ Completion at point.
               (set-face-attribute 'org-document-title nil
                                   :family mmotion/variable-font
                                   :weight 'bold
-                                  :height 1.8)))
+                                  :height 2)))
 
 ;;;; Keep the TODOs size at baseline (not working...)
   (with-eval-after-load 'org
