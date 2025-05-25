@@ -72,20 +72,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(auto-package-update cape colorful-mode consult-org-roam
-                         consult-projectile corfu dashboard
-                         dired-hide-dotfiles dired-open dired-preview
-                         doom-modeline doom-themes ef-themes
-                         embark-consult evil-collection evil-goggles
-                         evil-nerd-commenter evil-org flycheck
-                         flyspell-correct helpful indent-bars
-                         lsp-treemacs lsp-ui magit marginalia
-                         nerd-icons-completion nerd-icons-dired
-                         no-littering olivetti orderless org-download
-                         org-fancy-priorities org-modern org-roam-ui
-                         org-superstar rainbow-delimiters rainbow-mode
-                         toc-org undo-tree vertico vterm-toggle)))
+ '(package-selected-packages nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

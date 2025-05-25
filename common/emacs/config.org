@@ -67,6 +67,8 @@
   - [[#fancy-priorities-look][Fancy Priorities Look]]
   - [[#olivetti][Olivetti]]
 - [[#org-roam][Org-roam]]
+  - [[#main-org-roam-set-up][Main org-roam set up]]
+  - [[#org-roam-dailies-set-up][Org-roam dailies set up]]
   - [[#org-roam-ui][Org-roam UI]]
   - [[#consult-org-roam][Consult-org-roam]]
 - [[#lsp-mode][LSP mode]]
@@ -629,7 +631,7 @@ Better front end for Emacs' documentation
   "c" #'org-roam-capture
   "d" #'org-roam-db-sync
   "f" #'org-roam-node-find
-  "i" #'consult-org-roam-node-insert
+  "i" #'org-roam-node-insert
   "l" #'consult-org-roam-forward-links
   "s" #'consult-org-roam-search
   "t" #'org-roam-tag-add
@@ -955,7 +957,11 @@ folder, otherwise delete a character backward"
   ;; Optional customizations
   :custom
   (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
-  ;; (corfu-auto t)
+  (corfu-auto t)               ; enable auto popup
+  (corfu-auto-delay 0.2)       ; wait 0.2s before popping up
+  (corfu-auto-prefix 2)        ; only pop up after 2 chars
+  (corfu-max-width 80)         ; cap popup width
+  (corfu-max-length 20)        ; show at most 20 candidates
   ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
   ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
   ;; (corfu-preview-current nil)    ;; Disable current candidate preview
@@ -1012,6 +1018,7 @@ Completion at point.
     (setq-local completion-at-point-functions
                 (list (cape-capf-super
                        #'lsp-completion-at-point
+                       #'cape-symbol
                        #'cape-dabbrev
                        #'cape-file
                        #'python-completion-at-point))))
@@ -1178,7 +1185,7 @@ Completion at point.
               (set-face-attribute 'org-document-title nil
                                   :family mmotion/variable-font
                                   :weight 'bold
-                                  :height 2)))
+                                  :height 2.0)))
 
 ;;;; Keep the TODOs size at baseline (not working...)
   (with-eval-after-load 'org
@@ -1420,14 +1427,15 @@ Typewriter-like look of the page (centring).
 #+end_src
 
 * Org-roam
-#+begin_src emacs-lisp
+** Main org-roam set up
+  #+begin_src emacs-lisp
 
 ;;; Org-roam ---------------------------------------------------
 (use-package org-roam
   :demand t
   :custom
   (org-roam-directory (file-truename "~/Notes/orgfiles/roam")
-   org-roam-completion-everywhere t)
+                      org-roam-completion-everywhere nil)
   :bind
   (("C-c n l" . org-roam-buffer-toggle)
    ("C-c n f" . org-roam-node-find)
@@ -1438,6 +1446,10 @@ Typewriter-like look of the page (centring).
   (setq org-roam-node-display-template
         (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
   (org-roam-db-autosync-mode))
+
+  #+end_src
+** Org-roam dailies set up
+  #+begin_src emacs-lisp
 
 (use-package org-roam-dailies
   :ensure nil
@@ -1453,7 +1465,7 @@ Typewriter-like look of the page (centring).
            (file+head "%<%Y-%m-%d>.org"
                       "#+title: %<%Y-%m-%d>\n")))))
 
-#+end_src
+  #+end_src
 
 ** Org-roam UI
 #+begin_src emacs-lisp
