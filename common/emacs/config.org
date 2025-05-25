@@ -62,6 +62,7 @@
   - [[#org-download][Org download]]
   - [[#save-and-show-remote-images][Save and show remote images]]
   - [[#structure-templates][Structure Templates]]
+  - [[#highlight-todo][Highlight-todo]]
 - [[#org-styling][Org Styling]]
   - [[#org-superstar-bullet-points][Org-superstar (bullet points)]]
   - [[#fancy-priorities-look][Fancy Priorities Look]]
@@ -266,11 +267,11 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
 ;;; Look ------------------------------------------------
 ;;;; ef-themes
 (use-package ef-themes
-  :defer nil
-  :config
+  :defer t
+  ;; :config
   ;; Optional: Set a default theme to load when Emacs starts
   ;; (load-theme 'ef-day t)  ; for a light theme
-  (load-theme 'ef-owl t)   ; for a dark theme
+  ;; (load-theme 'ef-owl t)   ; for a dark theme
   )
 ;;;; doom-themes
 (use-package doom-themes
@@ -278,7 +279,10 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
   :config
   (doom-themes-org-config)
   (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t ))
+        doom-themes-enable-italic t )
+  (load-theme 'doom-city-lights t)
+  (setq doom-themes-treemacs-theme "doom-city-lights") ; use "doom-colors" for less minimal icon theme
+  (doom-themes-treemacs-config))
 
    #+end_src
 
@@ -1369,7 +1373,22 @@ Completion at point.
 (add-to-list 'org-structure-template-alist '("js" . "src js :results output")))
 
 #+end_src
-
+** Highlight-todo
+#+begin_src emacs-lisp
+(use-package hl-todo
+  :hook ((org-mode . hl-todo-mode)
+         (prog-mode . hl-todo-mode))
+  :config
+  (setq hl-todo-highlight-punctuation ":"
+        hl-todo-keyword-faces
+        `(("TODO"       font-lock-constant-face bold)
+          ("PROJ"       font-lock-keyword-face bold)
+          ("WAIT"     warning bold)
+          ("HOLD"       warning bold)
+          ("KILLED"      error bold)
+          ("CANCELLED"      error bold)
+          ("IDEA" success bold))))
+#+end_src
 * Org Styling
 
 ** Org-superstar (bullet points)
