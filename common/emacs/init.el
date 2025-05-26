@@ -86,7 +86,7 @@
                          lsp-treemacs lsp-ui magit marginalia
                          nerd-icons-completion nerd-icons-dired
                          no-littering olivetti orderless org-download
-                         org-fancy-priorities org-roam-ui
+                         org-fancy-priorities org-modern org-roam-ui
                          org-superstar rainbow-delimiters toc-org
                          undo-tree vertico vterm-toggle)))
 (custom-set-faces

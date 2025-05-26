@@ -66,7 +66,9 @@
 - [[#org-styling][Org Styling]]
   - [[#org-superstar-bullet-points][Org-superstar (bullet points)]]
   - [[#fancy-priorities-look][Fancy Priorities Look]]
+  - [[#org-modern][Org-modern]]
   - [[#olivetti][Olivetti]]
+  - [[#toggle-todos-and-checkboxes-with-ret][Toggle TODOs and checkboxes with RET]]
 - [[#org-roam][Org-roam]]
   - [[#main-org-roam-set-up][Main org-roam set up]]
   - [[#org-roam-dailies-set-up][Org-roam dailies set up]]
@@ -275,14 +277,12 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
   )
 ;;;; doom-themes
 (use-package doom-themes
-  :defer t
+  :defer nil
   :config
   (doom-themes-org-config)
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t )
-  (load-theme 'doom-city-lights t)
-  (setq doom-themes-treemacs-theme "doom-city-lights") ; use "doom-colors" for less minimal icon theme
-  (doom-themes-treemacs-config))
+  (load-theme 'doom-opera t))
 
    #+end_src
 
@@ -1427,6 +1427,38 @@ Completion at point.
 
 #+end_src
 
+** Org-modern
+I'm trying this out from time to time but I prefer my "custom" org-mode style. Set not to be tangled.
+
+#+begin_src emacs-lisp :tangle no
+(use-package org-modern)
+;; Add frame borders and window dividers
+(modify-all-frames-parameters
+ '((right-divider-width . 40)
+   (internal-border-width . 40)))
+(dolist (face '(window-divider
+                window-divider-first-pixel
+                window-divider-last-pixel))
+  (face-spec-reset-face face)
+  (set-face-foreground face (face-attribute 'default :background)))
+(set-face-background 'fringe (face-attribute 'default :background))
+
+(setq
+ ;; Edit settings
+ org-auto-align-tags nil
+ org-tags-column 0
+ org-catch-invisible-edits 'show-and-error
+ org-special-ctrl-a/e t
+ org-insert-heading-respect-content t
+
+ ;; Org styling, hide markup etc.
+ org-hide-emphasis-markers t
+ org-pretty-entities t
+ org-agenda-tags-column 0
+ org-ellipsis "…")
+(with-eval-after-load 'org (global-org-modern-mode))
+#+end_src
+
 ** Olivetti
 Typewriter-like look of the page (centring).
 #+begin_src emacs-lisp
@@ -1442,6 +1474,45 @@ Typewriter-like look of the page (centring).
   (olivetti-body-width 100)           ; set body width
   (olivetti-style 'gancy)          ; use fringes for margins
   )  
+
+#+end_src
+
+** Toggle TODOs and checkboxes with RET
+#+begin_src emacs-lisp
+
+(defun mmotion/org-smart-return ()
+  "In Org-mode, on RET:
+1. Toggle TODO↔DONE on headings.
+2. Toggle checkbox state on list items.
+3. Follow Org links.
+4. Otherwise insert newline + indent."
+  (interactive)
+  (cond
+   ;; 1) Heading TODO/DONE toggle
+   ((and (org-at-heading-p)
+         (member (org-get-todo-state) '("TODO" "DONE")))
+    (org-todo (if (string= (org-get-todo-state) "TODO") "DONE" "TODO")))
+   ;; 2) Checkbox toggle
+   ((org-at-item-checkbox-p)
+    (org-toggle-checkbox))
+   ;; 3) Org link follow
+   ((org-in-regexp org-link-bracket-re 1)
+    (org-open-at-point))
+   ;; 4) Default newline + indent
+   (t
+    (call-interactively 'org-return))))
+
+;; Rebind RET in Org + Evil (plain Emacs setup)
+(with-eval-after-load 'org
+  (define-key org-mode-map (kbd "RET") #mmotion/org-smart-return))
+
+(with-eval-after-load 'evil
+  (evil-define-key 'insert org-mode-map (kbd "RET") #mmotion/org-smart-return)
+  (evil-define-key 'normal org-mode-map (kbd "RET") #mmotion/org-smart-return))
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (local-set-key (kbd "RET") #mmotion/org-smart-return)))
 
 #+end_src
 
