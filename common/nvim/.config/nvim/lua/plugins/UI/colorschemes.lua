@@ -121,11 +121,12 @@ return {
 					-- Enable/Disable highlights for a module
 					-- See `h: ef-themes-modules` for the list of available modules
 					blink = true,
-					fzf = false,
+					fzf = true,
 					mini = true,
-					semantic_tokens = false,
-					snacks = false,
+					render_markdown = true,
+					semantic_tokens = true,
 					treesitter = true,
+					which_key = true,
 				},
 
 				--- Override any color from the ef-theme

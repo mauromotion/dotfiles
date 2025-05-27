@@ -1191,17 +1191,11 @@ Completion at point.
                                   :weight 'bold
                                   :height 2.0)))
 
-;;;; Keep the TODOs size at baseline (not working...)
-  (with-eval-after-load 'org
-    (set-face-attribute 'org-todo nil
-                        :height 1.0
-                        :family mmotion/default-font
-                        :weight 'bold
-                        :inherit nil)
-    (add-hook 'org-mode-hook
-              (lambda ()
-                (evil-define-key 'normal org-mode-map (kbd "RET") 'org-open-at-point)))
-    )
+ ;;;; Open links with RET 
+  ;; (with-eval-after-load 'org
+  ;;   (add-hook 'org-mode-hook
+  ;;             (lambda ()
+  ;;               (evil-define-key 'normal org-mode-map (kbd "RET") 'org-open-at-point))))
 
   :custom
   (org-ellipsis " ▾")
@@ -1504,15 +1498,15 @@ Typewriter-like look of the page (centring).
 
 ;; Rebind RET in Org + Evil (plain Emacs setup)
 (with-eval-after-load 'org
-  (define-key org-mode-map (kbd "RET") #mmotion/org-smart-return))
+  (define-key org-mode-map (kbd "RET") #'mmotion/org-smart-return))
 
 (with-eval-after-load 'evil
-  (evil-define-key 'insert org-mode-map (kbd "RET") #mmotion/org-smart-return)
-  (evil-define-key 'normal org-mode-map (kbd "RET") #mmotion/org-smart-return))
+  (evil-define-key 'insert org-mode-map (kbd "RET") #'mmotion/org-smart-return)
+  (evil-define-key 'normal org-mode-map (kbd "RET") #'mmotion/org-smart-return))
 
 (add-hook 'org-mode-hook
           (lambda ()
-            (local-set-key (kbd "RET") #mmotion/org-smart-return)))
+            (local-set-key (kbd "RET") #'mmotion/org-smart-return)))
 
 #+end_src
 
