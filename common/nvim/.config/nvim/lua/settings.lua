@@ -90,3 +90,6 @@ opt.viewoptions:remove("curdir")
 
 -- Style of the windows border
 o.winborder = "rounded"
+
+-- Set default theme as light
+o.background = "light"

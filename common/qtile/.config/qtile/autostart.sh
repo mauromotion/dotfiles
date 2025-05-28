@@ -51,7 +51,7 @@ if [[ "$HOSTNAME" == "eva-01" ]]; then
   xset -dpms & # Disable DPMS
   xset s off & # Disable screen blanking
   xbindkeys &
-  xidlehook --not-when-fullscreen --timer 600 "betterlockscreen -l dimblur" "" --timer 3600 "systemctl suspend" "" &
+  xidlehook --not-when-fullscreen --not-when-audio --timer 600 "betterlockscreen -l dimblur" "" --timer 3600 "systemctl suspend" "" &
   ~/.icc_color_profiles/load_icc_color_profiles.sh &
 
 elif [[ "$HOSTNAME" == "eva-03" ]]; then
@@ -69,6 +69,6 @@ elif [[ "$HOSTNAME" == "eva-03" ]]; then
   emacs --daemon &
   xbindkeys &
   kanata -c ~/.config/kanata/kanata.kbd &
-  xidlehook --not-when-fullscreen --timer 600 "betterlockscreen -l dimblur" "" --timer 3600 "systemctl suspend" "" &
+  xidlehook --not-when-fullscreen --not-when-audio --timer 600 "betterlockscreen -l dimblur" "" --timer 3600 "systemctl suspend" "" &
   ~/.icc_color_profiles/load_icc_color_profiles.sh &
 fi
