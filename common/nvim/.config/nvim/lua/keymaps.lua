@@ -89,7 +89,7 @@ vim.keymap.set("n", "<leader>bg", toggle_bg, {
 
 -- Diagnostics
 local lsp_group = vim.api.nvim_create_augroup("my.lsp", { clear = true })
-local diag_group = vim.api.nvim_create_augroup("line-diagnostics", { clear = true })
+-- local diag_group = vim.api.nvim_create_augroup("line-diagnostics", { clear = true })
 
 -- LSP mappings that are accessible only when an LSP attaches to a buffer
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -109,7 +109,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 			-- when the cursor moves, turn it back off
 			vim.api.nvim_create_autocmd("CursorMoved", {
-				group = diag_group,
+				group = vim.api.nvim_create_augroup("line-diagnostics", { clear = true }),
 				buffer = buf,
 				once = true, -- auto-clear this autocmd after it fires
 				callback = function()
