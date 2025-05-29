@@ -30,7 +30,7 @@
   - [[#evil-collection][Evil-collection]]
   - [[#evil-goggles][Evil-goggles]]
   - [[#evil-nerd-commenter][Evil-nerd-commenter]]
-  - [[#undo-tree][Undo-tree]]
+  - [[#undo-fu][Undo-Fu]]
 - [[#keybindings][Keybindings]]
   - [[#general-keybindings][General keybindings]]
   - [[#which-key][Which-key]]
@@ -430,7 +430,7 @@ Better front end for Emacs' documentation
   (setq evil-want-keybinding nil)
   (setq evil-want-C-u-scroll t)
   (setq evil-want-C-i-jump t)
-  (setq evil-undo-system 'undo-tree)
+  (setq evil-undo-system 'undo-fu)
   ;;:hook (evil-mode . rune/evil-hook)
   :config
   (evil-mode 1)
@@ -483,17 +483,32 @@ Better front end for Emacs' documentation
 
    #+end_src
 
-** Undo-tree
+** Undo-Fu
 #+begin_src emacs-lisp
-
-;;;; Fix the undo/redo to be vim-like
-(use-package undo-tree
-  :init
-  (global-undo-tree-mode 1)
+;;;; A modern alternative to undo-tree
+(use-package undo-fu
   :config
-  (setq undo-tree-visualizer-diff t)
-  (setq undo-tree-visualizer-timestamps t))
+  (global-unset-key (kbd "C-z"))
+  (global-set-key   (kbd "C-z")   #'undo-fu-only-undo)
+  (global-set-key   (kbd "C-S-z") #'undo-fu-only-redo))
 
+;; Set up dir for undo history using no-littering
+(defvar mmotion/undo-fu-session-dir
+  (no-littering-expand-var-file-name "undo-fu-session/"))
+
+(unless (file-exists-p mmotion/undo-fu-session-dir)
+  (make-directory mmotion/undo-fu-session-dir t))
+
+(use-package undo-fu-session
+  :after undo-fu
+  :init
+  ;; must be set before the package loads
+  (setq undo-fu-session-directory      mmotion/undo-fu-session-dir
+        undo-fu-session-compression    'gz       ; or 'bz2, 'xz, 'zst, nil
+        undo-fu-session-file-limit     100)
+  :config
+  ;; turn on global persistence only once everything’s in place
+  (undo-fu-session-global-mode))
 #+end_src
 * Keybindings
 
