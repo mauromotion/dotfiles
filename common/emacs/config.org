@@ -278,16 +278,20 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
 
 ;;;; doric-themes
 (use-package doric-themes
-  :defer t)
+  :defer nil
+  :config
+  (setq doric-themes-to-toggle '(doric-marble doric-obsidian)
 
+        (doric-themes-select 'doric-marble)))
+  
 ;;;; doom-themes
 (use-package doom-themes
-  :defer nil
+  :defer t
   :config
   (doom-themes-org-config)
   (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t )
-  (load-theme 'doom-opera t))
+        doom-themes-enable-italic t ))
+  ;; (load-theme 'doom-opera t))
 
    #+end_src
 
