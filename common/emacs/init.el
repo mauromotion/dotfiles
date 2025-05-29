@@ -79,8 +79,8 @@
    '(auto-package-update cape colorful-mode consult-org-roam
                          consult-projectile corfu dashboard
                          dired-hide-dotfiles dired-open doom-modeline
-                         doom-themes ef-themes embark-consult
-                         evil-collection evil-goggles
+                         doom-themes doric-themes ef-themes
+                         embark-consult evil-collection evil-goggles
                          evil-nerd-commenter evil-org flycheck
                          flyspell-correct helpful hl-todo indent-bars
                          lsp-treemacs lsp-ui magit marginalia

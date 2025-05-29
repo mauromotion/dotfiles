@@ -275,6 +275,11 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
   ;; (load-theme 'ef-day t)  ; for a light theme
   ;; (load-theme 'ef-owl t)   ; for a dark theme
   )
+
+;;;; doric-themes
+(use-package doric-themes
+  :defer t)
+
 ;;;; doom-themes
 (use-package doom-themes
   :defer nil
