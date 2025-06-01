@@ -1,0 +1,28 @@
+# Colors Doric-Marble
+[colors.normal]
+black = '#dedede'
+red = '#750000'
+green = '#056100'
+yellow = '#5f4602'
+blue = '#353362'
+magenta = '#553372'
+cyan = '#35485e'
+white = '#202020'
+[colors.bright]
+black = '#dedede'
+red = '#750000'
+green = '#056100'
+yellow = '#5f4602'
+blue = '#353362'
+magenta = '#553372'
+cyan = '#35485e'
+white = '#202020'
+[colors.cursor]
+cursor = '#403030'
+text = '#ededed'
+[colors.primary]
+background = '#ededed'
+foreground = '#202020'
+[colors.selection]
+background = '#b0b0b0'
+text = '#202020'

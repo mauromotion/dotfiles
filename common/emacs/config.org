@@ -280,9 +280,9 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
 (use-package doric-themes
   :defer nil
   :config
-  (setq doric-themes-to-toggle '(doric-marble doric-obsidian)
+  (setq doric-themes-to-toggle '(doric-marble doric-obsidian)))
 
-        (doric-themes-select 'doric-marble)))
+(doric-themes-select 'doric-marble)
   
 ;;;; doom-themes
 (use-package doom-themes
@@ -377,6 +377,7 @@ Visual indicators of indentation for code.
 #+begin_src emacs-lisp
 
 (use-package colorful-mode
+  :diminish
   :custom
   (colorful-use-prefix nil)
   (colorful-only-strings 'only-prog)
