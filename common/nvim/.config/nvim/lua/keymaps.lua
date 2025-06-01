@@ -96,8 +96,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	group = lsp_group,
 	callback = function(args)
 		local buf = args.buf
-		-- your map helper should set { buffer = buf }
-		map("n", "<leader>k", "<cmd>FzfLua diagnostics_document bufnr=0<CR>", "Show buffer diagnostics (FzfLua)")
 		map("n", "<leader>d", vim.diagnostic.open_float, "Show line diagnostics (float)")
 
 		map("n", "<leader>D", function()
