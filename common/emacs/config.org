@@ -313,7 +313,7 @@ I'd rather use =nerd-icons= than =all-the-icons=, much more reliable.
    #+end_src
 
 ** Modeline
-
+*** Doom-modeline
    #+begin_src emacs-lisp
 
 ;;;; Modeline
@@ -329,7 +329,6 @@ I'd rather use =nerd-icons= than =all-the-icons=, much more reliable.
         doom-modeline-icon t))
 
    #+end_src
-
 ** Emacs-dashboard
 Settings *must* be in =:custom= otherwise they won't work.
 

@@ -53,6 +53,22 @@ return {
 		dependencies = {
 			{
 				"neovim/nvim-lspconfig",
+				config = function()
+					-- Diagnostic signs
+					local x = vim.diagnostic.severity
+					vim.diagnostic.config({
+						virtual_text = false,
+						signs = {
+							text = {
+								[x.ERROR] = " ",
+								[x.WARN] = " ",
+								[x.INFO] = " ",
+								[x.HINT] = "󰠠 ",
+							},
+						},
+						underline = true,
+					})
+				end,
 			},
 		},
 		opts = {},
