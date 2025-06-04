@@ -14,6 +14,9 @@ processes=(
 	"nm-applet"
 	"blueman-applet"
 	"polkit-gnome-au"
+  "clipit"
+  "emacs"
+  "caffeine-ng"
 	"nextcloud"
 	"openrgb"
 	"xbindkeys"
@@ -34,16 +37,20 @@ done
 if [[ "$HOSTNAME" == "eva-01" ]]; then
 
 	picom -b &
-	# fastcompmgr -o 0.4 -r 12 -c -C &
 	nitrogen --restore &
 	udiskie -a -n -t &
 	/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 	nm-applet &
+  caffeine &
+  clipit &
+  emacs --daemon &
 	nextcloud --background &
 	openrgb --startminimized &
 	xset b 100 &
+  xset -dpms &
+  xset s off &
 	xbindkeys &
-	xidlehook --not-when-fullscreen --not-when-audio --timer 600 "betterlockscreen -l dimblur" "" --timer 3600 "systemctl suspend" "" &
+	xidlehook --not-when-fullscreen --timer 600 "betterlockscreen -l dimblur" "" --timer 3600 "systemctl suspend" "" &
 	~/.icc_color_profiles/load_icc_color_profiles.sh &
 
 elif [[ "$HOSTNAME" == "eva-03" ]]; then
@@ -54,9 +61,12 @@ elif [[ "$HOSTNAME" == "eva-03" ]]; then
 	/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 	nm-applet &
 	blueman-applet &
+  caffeine &
+  clipit &
+  emacs --daemon &
 	nextcloud --background &
 	xbindkeys &
 	kanata -c ~/.config/kanata/kanata.kbd &
-	xidlehook --not-when-fullscreen --not-when-audio --timer 600 "betterlockscreen -l dimblur" "" --timer 3600 "systemctl suspend" "" &
+	xidlehook --not-when-fullscreen --timer 600 "betterlockscreen -l dimblur" "" --timer 3600 "systemctl suspend" "" &
 	~/.icc_color_profiles/load_icc_color_profiles.sh &
 fi

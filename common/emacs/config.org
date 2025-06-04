@@ -12,7 +12,7 @@
   - [[#auto-update-packages][Auto-Update Packages]]
 - [[#keep-directories-clean][Keep directories clean]]
 - [[#essentials][Essentials]]
-  - [[#ui-elements-commands-history-trash-dir-tabs][UI elements, commands history, trash dir, tabs.]]
+  - [[#ui][UI]]
   - [[#bookmarks][Bookmarks]]
   - [[#navigation][Navigation]]
 - [[#fonts][Fonts]]
@@ -143,7 +143,8 @@ All the temp and backup files that Emacs generates are put into "~/.cache/emacs"
 #+end_src
 
 * Essentials
-** UI elements, commands history, trash dir, tabs.
+** UI
+elements, commands history, trash dir, tabs.
 Basic set up of Emacs' UI, removing the default toolbars, and setting up some system preferences.
 
   #+begin_src emacs-lisp
@@ -158,6 +159,10 @@ Basic set up of Emacs' UI, removing the default toolbars, and setting up some sy
 (setopt use-short-answers t)
 (global-auto-revert-mode t)
 (delete-selection-mode 1) ; Delete selected text and replace it with typed text
+;; Trying to fixe rendering issues within qtile
+(pixel-scroll-precision-mode 1)
+(setq frame-resize-pixelwise t
+      window-resize-pixelwise t)
 
 (electric-pair-mode 1) ; Autopairing
 ;; The following prevents <> from auto-pairing when electric-pair-mode is on.
@@ -328,7 +333,25 @@ I'd rather use =nerd-icons= than =all-the-icons=, much more reliable.
         doom-modeline-buffer-modification-icon t
         doom-modeline-icon t))
 
+(with-eval-after-load 'doom-modeline
+    (set-face-attribute 'mode-line nil :font "JetBrainsMono Nerd Font-12")
+    (set-face-attribute 'mode-line-inactive nil :font "JetBrainsMono Nerd Font-12"))
    #+end_src
+*** Mood-line
+#+begin_src emacs-lisp :tangle no
+
+(use-package mood-line
+
+  ;; Enable mood-line
+  :config
+  (mood-line-mode)
+
+  ;; Use pretty Fira Code-compatible glyphs
+  :custom
+  (setq mood-line-format mood-line-format-default-extended)
+  (mood-line-glyph-alist mood-line-glyphs-fira-code))
+
+#+end_src
 ** Emacs-dashboard
 Settings *must* be in =:custom= otherwise they won't work.
 

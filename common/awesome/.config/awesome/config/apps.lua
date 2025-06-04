@@ -1,8 +1,8 @@
 local _M = {
-	terminal = os.getenv("TERMINAL") or "wezterm",
+	terminal = os.getenv("TERMINAL") or "alacritty",
 	editor = os.getenv("EDITOR") or "vim",
-	browser = "firefox",
-	filebrowser = "thunar",
+	browser = "waterfox",
+	filebrowser = "nemo",
 }
 
 _M.editor_cmd = _M.terminal .. " -e " .. _M.editor

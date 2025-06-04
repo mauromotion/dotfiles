@@ -84,7 +84,7 @@ def desktop_toolbar():
             widget.Sep(foreground=colors["background"][1]),
             widget.PulseVolume(
                 unmute_format="  {volume}%",
-                foreground=colors["blue"][0],
+                foreground=colors["accent1"][0],
                 mute_format="  muted",
             ),
             widget.Sep(foreground=colors["background"][1]),
@@ -92,7 +92,7 @@ def desktop_toolbar():
                 location="Bromley,UK",
                 format="{icon} {main_temp:.1f}°{units_temperature} ({main_feels_like:.0f}°{units_temperature})",
                 update_interval=600,
-                foreground=colors["magenta"][0],
+                foreground=colors["foreground"][0],
                 mouse_callbacks={
                     "Button1": lazy.group["scratchpad"].dropdown_toggle("weather")
                 },
@@ -101,7 +101,7 @@ def desktop_toolbar():
             widget.KeyboardLayout(
                 configured_keyboards=["gb", "gb colemak_dh"],
                 display_map={"gb colemak_dh": "󰌌 gb_clmk-dh", "gb": "󰌌 gb"},
-                foreground=colors["foreground"][0],
+                foreground=colors["accent1"][0],
             ),
             widget.Sep(foreground=colors["background"][1]),
             widget.Systray(),
