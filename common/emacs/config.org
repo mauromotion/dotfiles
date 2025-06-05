@@ -1832,8 +1832,8 @@ Typewriter-like look of the page (centring).
         '(("png"  . "viewnior")
           ("jpeg" . "viewnior")
           ("jpg"  . "viewnior")
-	        ("pdf" . "zathura")
-	        ("epub" . "zathura")
+	        ;; ("pdf" . "zathura")
+	        ;; ("epub" . "zathura")
 	        ("mp4" . "mpv")
           ("mkv"  . "mpv"))))
    #+end_src

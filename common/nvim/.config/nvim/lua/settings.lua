@@ -89,7 +89,7 @@ vim.treesitter.language.register("markdown", "vimwiki")
 opt.viewoptions:remove("curdir")
 
 -- Style of the windows border
-o.winborder = "rounded"
+-- o.winborder = "rounded"
 
 -- Set default theme as light
 o.background = "light"
