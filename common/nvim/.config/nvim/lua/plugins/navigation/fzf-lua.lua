@@ -13,6 +13,8 @@ return {
 		--== Requires "which-key" plugin ==--
 		wk.add({
 			{ "<leader><Space>", "<CMD>FzfLua buffers<CR>", desc = "List open buffers" },
+			{ "<leader>,", "<CMD>FzfLua oldfiles<CR>", desc = "Fuzzy find recent files" },
+			{ "<leader>.", "<CMD>FzfLua files<CR>", desc = "Fuzzy find files in cwd" },
 			{ "<leader>f", group = "FzfLua" },
 			{ "<leader>fc", "<CMD>FzfLua grep_cword<CR>", desc = "Search for word under cursor" },
 			{ "<leader>ff", "<CMD>FzfLua files<CR>", desc = "Fuzzy find files in cwd" },

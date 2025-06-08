@@ -79,16 +79,20 @@
    '(auto-package-update cape colorful-mode consult-org-roam
                          consult-projectile corfu dashboard
                          dired-hide-dotfiles dired-open doom-modeline
-                         doom-themes ef-themes embark-consult
-                         evil-collection evil-goggles
+                         doom-themes doric-themes ef-themes
+                         embark-consult evil-collection evil-goggles
                          evil-nerd-commenter evil-org flycheck
                          flyspell-correct helpful hl-todo indent-bars
                          lsp-treemacs lsp-ui magit marginalia
-                         nerd-icons-completion nerd-icons-dired
-                         no-littering olivetti orderless org-download
-                         org-fancy-priorities org-modern org-roam-ui
-                         org-superstar rainbow-delimiters toc-org
-                         undo-tree vertico vterm-toggle)))
+                         mood-line nerd-icons-completion
+                         nerd-icons-dired no-littering olivetti
+                         orderless org-download org-fancy-priorities
+                         org-modern org-roam-ui org-superstar
+                         rainbow-delimiters toc-org undo-fu
+                         undo-fu-session vertico vterm-toggle))
+ '(package-vc-selected-packages
+   '((reader :url "https://codeberg.org/divyaranjan/emacs-reader" :make
+             "all"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

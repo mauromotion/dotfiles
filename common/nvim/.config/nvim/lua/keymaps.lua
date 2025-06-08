@@ -86,3 +86,37 @@ vim.keymap.set("n", "<leader>bg", toggle_bg, {
 --   noremap <silent> <c-\\> :<C-U>NvimTmuxNavigateLastActive<cr>
 --   noremap <silent> <c-n> :<C-U>NvimTmuxNavigateNext<cr>
 -- ]])
+
+-- Diagnostics
+local lsp_group = vim.api.nvim_create_augroup("my.lsp", { clear = true })
+-- local diag_group = vim.api.nvim_create_augroup("line-diagnostics", { clear = true })
+
+-- LSP mappings that are accessible only when an LSP attaches to a buffer
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = lsp_group,
+	callback = function(args)
+		local buf = args.buf
+		map("n", "<leader>d", vim.diagnostic.open_float, "Show line diagnostics (float)")
+
+		map("n", "<leader>D", function()
+			-- switch on inline diagnostics
+			vim.diagnostic.config({
+				virtual_lines = { current_line = true },
+				virtual_text = false,
+			})
+
+			-- when the cursor moves, turn it back off
+			vim.api.nvim_create_autocmd("CursorMoved", {
+				group = vim.api.nvim_create_augroup("line-diagnostics", { clear = true }),
+				buffer = buf,
+				once = true, -- auto-clear this autocmd after it fires
+				callback = function()
+					vim.diagnostic.config({
+						virtual_lines = false,
+						virtual_text = true,
+					})
+				end,
+			})
+		end, "Show line diagnostics (inline)")
+	end,
+})

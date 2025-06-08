@@ -3,17 +3,17 @@ size = 12
 # offset = { x = 0, y = 3 }
 
 [font.bold]
-family = "BlexMono Nerd Font"
+family = "RecMonoLinear Nerd Font"
 style = "Bold"
 
 [font.bold_italic]
-family = "BlexMono Nerd Font"
+family = "RecMonoLinear Nerd Font"
 style = "Bold Italic"
 
 [font.italic]
-family = "BlexMono Nerd Font"
+family = "RecMonoLinear Nerd Font"
 style = "Italic"
 
 [font.normal]
-family = "BlexMono Nerd Font"
+family = "RecMonoLinear Nerd Font"
 style = "Regular"

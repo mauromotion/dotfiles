@@ -12,7 +12,7 @@
   - [[#auto-update-packages][Auto-Update Packages]]
 - [[#keep-directories-clean][Keep directories clean]]
 - [[#essentials][Essentials]]
-  - [[#ui-elements-commands-history-trash-dir-tabs][UI elements, commands history, trash dir, tabs.]]
+  - [[#ui][UI]]
   - [[#bookmarks][Bookmarks]]
   - [[#navigation][Navigation]]
 - [[#fonts][Fonts]]
@@ -30,7 +30,7 @@
   - [[#evil-collection][Evil-collection]]
   - [[#evil-goggles][Evil-goggles]]
   - [[#evil-nerd-commenter][Evil-nerd-commenter]]
-  - [[#undo-tree][Undo-tree]]
+  - [[#undo-fu][Undo-Fu]]
 - [[#keybindings][Keybindings]]
   - [[#general-keybindings][General keybindings]]
   - [[#which-key][Which-key]]
@@ -143,7 +143,8 @@ All the temp and backup files that Emacs generates are put into "~/.cache/emacs"
 #+end_src
 
 * Essentials
-** UI elements, commands history, trash dir, tabs.
+** UI
+elements, commands history, trash dir, tabs.
 Basic set up of Emacs' UI, removing the default toolbars, and setting up some system preferences.
 
   #+begin_src emacs-lisp
@@ -158,6 +159,10 @@ Basic set up of Emacs' UI, removing the default toolbars, and setting up some sy
 (setopt use-short-answers t)
 (global-auto-revert-mode t)
 (delete-selection-mode 1) ; Delete selected text and replace it with typed text
+;; Trying to fixe rendering issues within qtile
+(pixel-scroll-precision-mode 1)
+(setq frame-resize-pixelwise t
+      window-resize-pixelwise t)
 
 (electric-pair-mode 1) ; Autopairing
 ;; The following prevents <> from auto-pairing when electric-pair-mode is on.
@@ -275,14 +280,23 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
   ;; (load-theme 'ef-day t)  ; for a light theme
   ;; (load-theme 'ef-owl t)   ; for a dark theme
   )
+
+;;;; doric-themes
+(use-package doric-themes
+  :defer nil
+  :config
+  (setq doric-themes-to-toggle '(doric-marble doric-obsidian)))
+
+(doric-themes-select 'doric-marble)
+  
 ;;;; doom-themes
 (use-package doom-themes
-  :defer nil
+  :defer t
   :config
   (doom-themes-org-config)
   (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t )
-  (load-theme 'doom-opera t))
+        doom-themes-enable-italic t ))
+  ;; (load-theme 'doom-opera t))
 
    #+end_src
 
@@ -304,7 +318,7 @@ I'd rather use =nerd-icons= than =all-the-icons=, much more reliable.
    #+end_src
 
 ** Modeline
-
+*** Doom-modeline
    #+begin_src emacs-lisp
 
 ;;;; Modeline
@@ -319,8 +333,25 @@ I'd rather use =nerd-icons= than =all-the-icons=, much more reliable.
         doom-modeline-buffer-modification-icon t
         doom-modeline-icon t))
 
+(with-eval-after-load 'doom-modeline
+    (set-face-attribute 'mode-line nil :font "JetBrainsMono Nerd Font-12")
+    (set-face-attribute 'mode-line-inactive nil :font "JetBrainsMono Nerd Font-12"))
    #+end_src
+*** Mood-line
+#+begin_src emacs-lisp :tangle no
 
+(use-package mood-line
+
+  ;; Enable mood-line
+  :config
+  (mood-line-mode)
+
+  ;; Use pretty Fira Code-compatible glyphs
+  :custom
+  (setq mood-line-format mood-line-format-default-extended)
+  (mood-line-glyph-alist mood-line-glyphs-fira-code))
+
+#+end_src
 ** Emacs-dashboard
 Settings *must* be in =:custom= otherwise they won't work.
 
@@ -368,6 +399,7 @@ Visual indicators of indentation for code.
 #+begin_src emacs-lisp
 
 (use-package colorful-mode
+  :diminish
   :custom
   (colorful-use-prefix nil)
   (colorful-only-strings 'only-prog)
@@ -425,7 +457,7 @@ Better front end for Emacs' documentation
   (setq evil-want-keybinding nil)
   (setq evil-want-C-u-scroll t)
   (setq evil-want-C-i-jump t)
-  (setq evil-undo-system 'undo-tree)
+  (setq evil-undo-system 'undo-fu)
   ;;:hook (evil-mode . rune/evil-hook)
   :config
   (evil-mode 1)
@@ -478,17 +510,32 @@ Better front end for Emacs' documentation
 
    #+end_src
 
-** Undo-tree
+** Undo-Fu
 #+begin_src emacs-lisp
-
-;;;; Fix the undo/redo to be vim-like
-(use-package undo-tree
-  :init
-  (global-undo-tree-mode 1)
+;;;; A modern alternative to undo-tree
+(use-package undo-fu
   :config
-  (setq undo-tree-visualizer-diff t)
-  (setq undo-tree-visualizer-timestamps t))
+  (global-unset-key (kbd "C-z"))
+  (global-set-key   (kbd "C-z")   #'undo-fu-only-undo)
+  (global-set-key   (kbd "C-S-z") #'undo-fu-only-redo))
 
+;; Set up dir for undo history using no-littering
+(defvar mmotion/undo-fu-session-dir
+  (no-littering-expand-var-file-name "undo-fu-session/"))
+
+(unless (file-exists-p mmotion/undo-fu-session-dir)
+  (make-directory mmotion/undo-fu-session-dir t))
+
+(use-package undo-fu-session
+  :after undo-fu
+  :init
+  ;; must be set before the package loads
+  (setq undo-fu-session-directory      mmotion/undo-fu-session-dir
+        undo-fu-session-compression    'gz       ; or 'bz2, 'xz, 'zst, nil
+        undo-fu-session-file-limit     100)
+  :config
+  ;; turn on global persistence only once everything’s in place
+  (undo-fu-session-global-mode))
 #+end_src
 * Keybindings
 
@@ -1191,17 +1238,11 @@ Completion at point.
                                   :weight 'bold
                                   :height 2.0)))
 
-;;;; Keep the TODOs size at baseline (not working...)
-  (with-eval-after-load 'org
-    (set-face-attribute 'org-todo nil
-                        :height 1.0
-                        :family mmotion/default-font
-                        :weight 'bold
-                        :inherit nil)
-    (add-hook 'org-mode-hook
-              (lambda ()
-                (evil-define-key 'normal org-mode-map (kbd "RET") 'org-open-at-point)))
-    )
+ ;;;; Open links with RET 
+  ;; (with-eval-after-load 'org
+  ;;   (add-hook 'org-mode-hook
+  ;;             (lambda ()
+  ;;               (evil-define-key 'normal org-mode-map (kbd "RET") 'org-open-at-point))))
 
   :custom
   (org-ellipsis " ▾")
@@ -1504,15 +1545,15 @@ Typewriter-like look of the page (centring).
 
 ;; Rebind RET in Org + Evil (plain Emacs setup)
 (with-eval-after-load 'org
-  (define-key org-mode-map (kbd "RET") #mmotion/org-smart-return))
+  (define-key org-mode-map (kbd "RET") #'mmotion/org-smart-return))
 
 (with-eval-after-load 'evil
-  (evil-define-key 'insert org-mode-map (kbd "RET") #mmotion/org-smart-return)
-  (evil-define-key 'normal org-mode-map (kbd "RET") #mmotion/org-smart-return))
+  (evil-define-key 'insert org-mode-map (kbd "RET") #'mmotion/org-smart-return)
+  (evil-define-key 'normal org-mode-map (kbd "RET") #'mmotion/org-smart-return))
 
 (add-hook 'org-mode-hook
           (lambda ()
-            (local-set-key (kbd "RET") #mmotion/org-smart-return)))
+            (local-set-key (kbd "RET") #'mmotion/org-smart-return)))
 
 #+end_src
 
@@ -1791,8 +1832,8 @@ Typewriter-like look of the page (centring).
         '(("png"  . "viewnior")
           ("jpeg" . "viewnior")
           ("jpg"  . "viewnior")
-	        ("pdf" . "zathura")
-	        ("epub" . "zathura")
+	        ;; ("pdf" . "zathura")
+	        ;; ("epub" . "zathura")
 	        ("mp4" . "mpv")
           ("mkv"  . "mpv"))))
    #+end_src
