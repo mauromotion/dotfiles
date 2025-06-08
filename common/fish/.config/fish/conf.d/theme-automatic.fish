@@ -1,7 +1,7 @@
 # ef-day Color Palette
 set -l foreground white
 set -l selection black --bold
-set -l comment brblack
+set -l comment black --dim
 set -l black black
 set -l red red
 set -l green green

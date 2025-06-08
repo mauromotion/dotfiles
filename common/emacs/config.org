@@ -268,8 +268,8 @@ I'm also setting comments to be /italic/.
 * Appearance
 ** Themes
 I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! Also keeping[[https://github.com/doomemacs/themes?tab=readme-ov-file#theme-list][ doom-themes]] here just because.
-
-   #+begin_src emacs-lisp
+*** Ef-themes
+#+begin_src emacs-lisp
 
 ;;; Look ------------------------------------------------
 ;;;; ef-themes
@@ -280,25 +280,32 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
   ;; (load-theme 'ef-day t)  ; for a light theme
   ;; (load-theme 'ef-owl t)   ; for a dark theme
   )
+#+end_src
+
+*** Doric-theme
+#+begin_src emacs-lisp
 
 ;;;; doric-themes
 (use-package doric-themes
-  :defer nil
+  :defer t
   :config
   (setq doric-themes-to-toggle '(doric-marble doric-obsidian)))
 
-(doric-themes-select 'doric-marble)
-  
+;; (doric-themes-select 'doric-marble)
+#+end_src
+
+*** Doom-themes
+#+begin_src emacs-lisp
+
 ;;;; doom-themes
 (use-package doom-themes
-  :defer t
+  :defer nil
   :config
   (doom-themes-org-config)
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t ))
-  ;; (load-theme 'doom-opera t))
-
-   #+end_src
+(load-theme 'doom-earl-grey t)
+#+end_src
 
 ** Icons
 I'd rather use =nerd-icons= than =all-the-icons=, much more reliable.
@@ -636,6 +643,7 @@ Better front end for Emacs' documentation
 ;;;;; Define submenu keymaps
 (defvar-keymap mmotion/buffer-map 
   :doc "Buffer operations submenu."
+  "i" #'ibuffer
   "k" #'kill-buffer
   "n" #'previous-buffer
   "o" #'next-buffer
@@ -782,6 +790,7 @@ Better front end for Emacs' documentation
     "." "Find Files")
   
   (which-key-add-keymap-based-replacements mmotion/buffer-map
+    "i" "iBuffer list"
     "k" "Kill Buffer"
     "n" "Previous Buffer" 
     "o" "Next Buffer"
