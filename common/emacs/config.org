@@ -289,9 +289,9 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
 (use-package doric-themes
   :defer nil
   :config
-  (setq doric-themes-to-toggle '(doric-earth doric-obsidian)))
+  (setq doric-themes-to-toggle '(doric-marble doric-obsidian)))
 
-(doric-themes-select 'doric-earth)
+(doric-themes-select 'doric-marble)
 #+end_src
 
 *** Doom-themes
@@ -1383,9 +1383,10 @@ Completion at point.
   (setq org-download-method 'directory)
   ;; Set a global default image directory
   (setq-default org-download-image-dir (expand-file-name "~/Notes/plain_orgfiles/orgfiles/images"))
-  ;; Create the directory if it doesn't exist
-  (unless (file-directory-p org-download-image-dir)
-    (make-directory org-download-image-dir t))
+  ;; Only try to create if the decrypted mountpoint is present
+  (when (file-directory-p "~/Notes/plain_orgfiles/orgfiles")
+    (unless (file-directory-p org-download-image-dir)
+      (make-directory org-download-image-dir nil)))
   :config
   ;; Keybinding to paste clipboard images
   (define-key org-mode-map (kbd "C-c C-p") #'org-download-clipboard))
@@ -1396,8 +1397,9 @@ Completion at point.
 
 (defvar mmotion/org-image-cache-dir (expand-file-name "~/Notes/plain_orgfiles/orgfiles/images/"))
 
-(unless (file-directory-p mmotion/org-image-cache-dir)
-  (make-directory mmotion/org-image-cache-dir t))
+(when (file-directory-p "~/Notes/plain_orgfiles/orgfiles")
+  (unless (file-directory-p mmotion/org-image-cache-dir)
+    (make-directory mmotion/org-image-cache-dir t)))
 
 (defun mmotion/org-insert-image-from-url (url)
   "Download image from URL, save to cache, insert link, and display inline."
