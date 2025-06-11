@@ -77,6 +77,7 @@
 - [[#lsp-mode][LSP mode]]
   - [[#lsp-mode-set-up][LSP mode set up]]
   - [[#flycheck][Flycheck]]
+  - [[#rjsx-mode-reactjs][Rjsx-mode (ReactJS)]]
 - [[#tree-sitter][Tree-sitter]]
 - [[#terminal-emulators][Terminal Emulators]]
   - [[#term][Term]]
@@ -1135,7 +1136,8 @@ Completion at point.
   (setq projectile-indexing-method 'native
         projectile-switch-project-action #'projectile-dired
         projectile-project-search-path
-        '("~/Projects" "~/.dotfiles"))
+        '(("~/Projects" . 2)
+           "~/.dotfiles"))
   :config
   (projectile-mode)
   :bind-keymap
@@ -1361,13 +1363,22 @@ Completion at point.
 ;;;; Org babel
 ;; active Babel languages
 (with-eval-after-load 'org
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((python . t)
-   (C . t)
-   (js . t)))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t)
+     (C . t)
+     (js . t)))
 
-(push '("conf-unix" . conf-unix) org-src-lang-modes))
+  (push '("conf-unix" . conf-unix) org-src-lang-modes)
+
+  ;; Use rjsx-mode for js blocks
+  (defun my/org-src-lang-to-mode (lang)
+    (if (string= lang "js")
+        'rjsx-mode
+      (org-src--get-lang-mode lang)))
+  (advice-add 'org-src--get-lang-mode :override #'my/org-src-lang-to-mode))
+
+(setq org-src-fontify-natively t)
 
 #+end_src
 
@@ -1622,13 +1633,13 @@ Typewriter-like look of the page (centring).
 ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
 ;;         a hookable mode anymore, you're advised to pick something yourself
 ;;         if you don't care about startup time, use
-    :hook (after-init . org-roam-ui-mode)
+    ;; :hook (after-init . org-roam-ui-mode)
     :config
     (setq org-roam-ui-sync-theme nil
           org-roam-ui-follow t
           org-roam-ui-update-on-save t
           org-roam-ui-theme "homage-white"
-          org-roam-ui-open-on-start t))
+          org-roam-ui-open-on-start nil))
 
 #+end_src
 
@@ -1720,6 +1731,18 @@ Typewriter-like look of the page (centring).
 
 (use-package flycheck
   :hook (prog-mode . flycheck-mode))
+
+#+end_src
+
+** Rjsx-mode (ReactJS)
+#+begin_src emacs-lisp
+
+(use-package rjsx-mode
+  :mode ("\\.jsx\\'" . rjsx-mode)
+  :hook (rjsx-mode . (lambda ()
+                       (setq js-indent-level 2)))
+  :config
+  (setq-default indent-tabs-mode nil))
 
 #+end_src
 * Tree-sitter
