@@ -275,12 +275,27 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
 ;;; Look ------------------------------------------------
 ;;;; ef-themes
 (use-package ef-themes
-  :defer t
-  ;; :config
-  ;; Optional: Set a default theme to load when Emacs starts
-  ;; (load-theme 'ef-day t)  ; for a light theme
-  ;; (load-theme 'ef-owl t)   ; for a dark theme
-  )
+  :defer nil
+  :config
+  (setq ef-themes-to-toggle '(ef-kassio ef-owl))
+  (setq ef-themes-headings ; read the manual's entry or the doc string
+      '((0 variable-pitch light 1.9)
+        (1 variable-pitch light 1.8)
+        (2 variable-pitch regular 1.7)
+        (3 variable-pitch regular 1.6)
+        (4 variable-pitch regular 1.5)
+        (5 variable-pitch 1.4) ; absence of weight means `bold'
+        (6 variable-pitch 1.3)
+        (7 variable-pitch 1.2)
+        (t variable-pitch 1.1)))
+;; They are nil by default...
+  (setq ef-themes-mixed-fonts t
+      ef-themes-variable-pitch-ui t)
+;; Disable all other themes to avoid awkward blending:
+  (mapc #'disable-theme custom-enabled-themes)
+;; Optional: Set a default theme to load when Emacs starts
+  (load-theme 'ef-kassio t))
+
 #+end_src
 
 *** Doric-theme
@@ -288,11 +303,11 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
 
 ;;;; doric-themes
 (use-package doric-themes
-  :defer nil
+  :defer t
   :config
   (setq doric-themes-to-toggle '(doric-marble doric-obsidian)))
 
-(doric-themes-select 'doric-marble)
+;; (doric-themes-select 'doric-marble)
 #+end_src
 
 *** Doom-themes
