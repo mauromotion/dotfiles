@@ -271,7 +271,7 @@ default_shell "fish"
 // Choose the theme that is specified in the themes section.
 // Default: default
 //
-theme "zenbones-light"
+theme "ef-kassio"
 
 // The name of the default layout to load on startup
 // Default: "default"

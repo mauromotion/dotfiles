@@ -287,11 +287,11 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
 
 ;;;; doric-themes
 (use-package doric-themes
-  :defer t
+  :defer nil
   :config
-  (setq doric-themes-to-toggle '(doric-marble doric-obsidian)))
+  (setq doric-themes-to-toggle '(doric-earth doric-obsidian)))
 
-;; (doric-themes-select 'doric-marble)
+(doric-themes-select 'doric-earth)
 #+end_src
 
 *** Doom-themes
@@ -299,12 +299,12 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
 
 ;;;; doom-themes
 (use-package doom-themes
-  :defer nil
+  :defer t
   :config
   (doom-themes-org-config)
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t ))
-(load-theme 'doom-earl-grey t)
+;; (load-theme 'doom-earl-grey t)
 #+end_src
 
 ** Icons
@@ -1262,7 +1262,9 @@ Completion at point.
   (org-startup-folded 'showeverything)
   (org-hide-block-startup nil)
   (org-log-into-drawer t)
-  (org-agenda-files '("~/Notes/orgfiles/todos.org"))
+  (org-agenda-files '("~/Notes/plain_orgfiles/orgfiles/todos.org"
+                      "~/Notes/plain_orgfiles/orgfiles/notes.org"
+                      "~/Notes/plain_orgfiles/orgfiles/journal.org"))
   (org-refile-targets
    '(("archive.org" :maxlevel . 1)
      ("todos.org" :maxlevel . 2)))
@@ -1285,29 +1287,29 @@ Completion at point.
 
 (org-capture-templates
  `(("t" "Tasks / Ideas")
-   ("tt" "Task" entry (file+olp "~/Notes/orgfiles/todos.org" "Inbox")
+   ("tt" "Task" entry (file+olp "~/Notes/plain_orgfiles/orgfiles/todos.org" "Inbox")
     "* TODO %?\n  %U\n" :empty-lines 1)
-   ("ti" "Idea" entry (file+olp "~/Notes/orgfiles/todos.org" "Inbox")
+   ("ti" "Idea" entry (file+olp "~/Notes/plain_orgfiles/orgfiles/todos.org" "Inbox")
     "* IDEA %?\n  %U\n" :empty-lines 1)
    ("j" "Journal" entry
-    (file+olp+datetree "~/Notes/orgfiles/journal.org")
+    (file+olp+datetree "~/Notes/plain_orgfiles/orgfiles/journal.org")
     "\n* %<%H:%M> - Journal :journal:\n\n%?\n\n"
     ;; :clock-in :clock-resume
     :empty-lines 1)
    ;; ("jm" "Meeting" entry
-   ;;  (file+olp+datetree "~/Notes/orgfiles/journal.org")
+   ;;  (file+olp+datetree "~/Notes/plain_orgfiles/orgfiles/journal.org")
    ;;  "* %<%H:%M> - %a :meetings:\n\n%?\n\n"
    ;;  :clock-in :clock-resume
    ;;  :empty-lines 1)
 
    ("n" "Note" entry
-    (file+olp+datetree "~/Notes/orgfiles/notes.org")
+    (file+olp+datetree "~/Notes/plain_orgfiles/orgfiles/notes.org")
     "\n* %<%H:%M> - Notes :notes:\n\n%?\n\n"
     :empty-lines 1)
 
    ("a" "Add Job Application"
     plain
-    (file+function "~/Notes/orgfiles/roam/20250517192333-job_hunting_spreadsheet.org" 
+    (file+function "~/Notes/plain_orgfiles/orgfiles/roam/20250517192333-job_hunting_spreadsheet.org" 
                    (lambda () 
                      (goto-char (point-min))
                      (search-forward "#+TBLFM:") 
@@ -1380,7 +1382,7 @@ Completion at point.
   ;; Force the method to 'directory
   (setq org-download-method 'directory)
   ;; Set a global default image directory
-  (setq-default org-download-image-dir (expand-file-name "~/Notes/orgfiles/images"))
+  (setq-default org-download-image-dir (expand-file-name "~/Notes/plain_orgfiles/orgfiles/images"))
   ;; Create the directory if it doesn't exist
   (unless (file-directory-p org-download-image-dir)
     (make-directory org-download-image-dir t))
@@ -1392,7 +1394,7 @@ Completion at point.
 ** Save and show remote images
 #+begin_src emacs-lisp
 
-(defvar mmotion/org-image-cache-dir (expand-file-name "~/Notes/orgfiles/images/"))
+(defvar mmotion/org-image-cache-dir (expand-file-name "~/Notes/plain_orgfiles/orgfiles/images/"))
 
 (unless (file-directory-p mmotion/org-image-cache-dir)
   (make-directory mmotion/org-image-cache-dir t))
@@ -1574,7 +1576,7 @@ Typewriter-like look of the page (centring).
 (use-package org-roam
   :demand t
   :custom
-  (org-roam-directory (file-truename "~/Notes/orgfiles/roam")
+  (org-roam-directory (file-truename "~/Notes/plain_orgfiles/orgfiles/roam")
                       org-roam-completion-everywhere nil)
   :bind
   (("C-c n l" . org-roam-buffer-toggle)
@@ -1606,7 +1608,6 @@ Typewriter-like look of the page (centring).
                       "#+title: %<%Y-%m-%d>\n")))))
 
   #+end_src
-
 ** Org-roam UI
 #+begin_src emacs-lisp
 
@@ -1619,11 +1620,12 @@ Typewriter-like look of the page (centring).
 ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
 ;;         a hookable mode anymore, you're advised to pick something yourself
 ;;         if you don't care about startup time, use
-;;  :hook (after-init . org-roam-ui-mode)
+    :hook (after-init . org-roam-ui-mode)
     :config
-    (setq org-roam-ui-sync-theme t
+    (setq org-roam-ui-sync-theme nil
           org-roam-ui-follow t
           org-roam-ui-update-on-save t
+          org-roam-ui-theme "homage-white"
           org-roam-ui-open-on-start t))
 
 #+end_src

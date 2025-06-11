@@ -26,7 +26,7 @@ groups = [
     Group(
         "4",
         label=icons[3],
-        matches=[Match(wm_class=re.compile(r"^(telegram\-desktop|signal|discord)$"))],
+        matches=[Match(wm_class=re.compile(r"^(Telegram|signal|discord)$"))],
     ),
     Group("5", label=icons[4], matches=[Match(wm_class="logseq")]),
     Group(
