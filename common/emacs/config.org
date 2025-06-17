@@ -77,6 +77,7 @@
 - [[#lsp-mode][LSP mode]]
   - [[#lsp-mode-set-up][LSP mode set up]]
   - [[#flycheck][Flycheck]]
+  - [[#rjsx-mode-reactjs][Rjsx-mode (ReactJS)]]
 - [[#tree-sitter][Tree-sitter]]
 - [[#terminal-emulators][Terminal Emulators]]
   - [[#term][Term]]
@@ -274,12 +275,27 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
 ;;; Look ------------------------------------------------
 ;;;; ef-themes
 (use-package ef-themes
-  :defer t
-  ;; :config
-  ;; Optional: Set a default theme to load when Emacs starts
-  ;; (load-theme 'ef-day t)  ; for a light theme
-  ;; (load-theme 'ef-owl t)   ; for a dark theme
-  )
+  :defer nil
+  :config
+  (setq ef-themes-to-toggle '(ef-kassio ef-owl))
+  (setq ef-themes-headings ; read the manual's entry or the doc string
+      '((0 variable-pitch light 1.9)
+        (1 variable-pitch light 1.8)
+        (2 variable-pitch regular 1.7)
+        (3 variable-pitch regular 1.6)
+        (4 variable-pitch regular 1.5)
+        (5 variable-pitch 1.4) ; absence of weight means `bold'
+        (6 variable-pitch 1.3)
+        (7 variable-pitch 1.2)
+        (t variable-pitch 1.1)))
+;; They are nil by default...
+  (setq ef-themes-mixed-fonts t
+      ef-themes-variable-pitch-ui t)
+;; Disable all other themes to avoid awkward blending:
+  (mapc #'disable-theme custom-enabled-themes)
+;; Optional: Set a default theme to load when Emacs starts
+  (ef-themes-select 'ef-kassio))
+
 #+end_src
 
 *** Doric-theme
@@ -287,11 +303,11 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
 
 ;;;; doric-themes
 (use-package doric-themes
-  :defer nil
+  :defer t
   :config
-  (setq doric-themes-to-toggle '(doric-earth doric-obsidian)))
+  (setq doric-themes-to-toggle '(doric-marble doric-obsidian)))
 
-(doric-themes-select 'doric-earth)
+;; (doric-themes-select 'doric-marble)
 #+end_src
 
 *** Doom-themes
@@ -1135,7 +1151,8 @@ Completion at point.
   (setq projectile-indexing-method 'native
         projectile-switch-project-action #'projectile-dired
         projectile-project-search-path
-        '("~/Projects" "~/.dotfiles"))
+        '(("~/Projects" . 2)
+           "~/.dotfiles"))
   :config
   (projectile-mode)
   :bind-keymap
@@ -1228,24 +1245,24 @@ Completion at point.
    )
 
   ;; ;;;; Different sizes for each heading
-  (defvar mmotion-heading-sizes
-    '(1.8 1.6 1.4 1.2 1.1 1.0 0.8))
+  ;; (defvar mmotion-heading-sizes
+  ;;   '(1.8 1.6 1.4 1.2 1.1 1.0 0.8))
 
-  (add-hook 'org-mode-hook
-            (lambda ()
-              (cl-loop for lvl from 1 to (length mmotion-heading-sizes)
-                       for sz in mmotion-heading-sizes
-                       do
-                       (set-face-attribute
-                        (intern (format "org-level-%d" lvl)) nil
-                        :family mmotion/variable-font
-                        :weight 'bold
-                        :height sz))
-              ;; Document title
-              (set-face-attribute 'org-document-title nil
-                                  :family mmotion/variable-font
-                                  :weight 'bold
-                                  :height 2.0)))
+  ;; (add-hook 'org-mode-hook
+  ;;           (lambda ()
+  ;;             (cl-loop for lvl from 1 to (length mmotion-heading-sizes)
+  ;;                      for sz in mmotion-heading-sizes
+  ;;                      do
+  ;;                      (set-face-attribute
+  ;;                       (intern (format "org-level-%d" lvl)) nil
+  ;;                       :family mmotion/variable-font
+  ;;                       :weight 'bold
+  ;;                       :height sz))
+  ;;             ;; Document title
+  ;;             (set-face-attribute 'org-document-title nil
+  ;;                                 :family mmotion/variable-font
+  ;;                                 :weight 'bold
+  ;;                                 :height 2.0)))
 
  ;;;; Open links with RET 
   ;; (with-eval-after-load 'org
@@ -1361,13 +1378,22 @@ Completion at point.
 ;;;; Org babel
 ;; active Babel languages
 (with-eval-after-load 'org
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((python . t)
-   (C . t)
-   (js . t)))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t)
+     (C . t)
+     (js . t)))
 
-(push '("conf-unix" . conf-unix) org-src-lang-modes))
+  (push '("conf-unix" . conf-unix) org-src-lang-modes)
+
+  ;; Use rjsx-mode for js blocks
+  (defun my/org-src-lang-to-mode (lang)
+    (if (string= lang "js")
+        'rjsx-mode
+      (org-src--get-lang-mode lang)))
+  (advice-add 'org-src--get-lang-mode :override #'my/org-src-lang-to-mode))
+
+(setq org-src-fontify-natively t)
 
 #+end_src
 
@@ -1383,9 +1409,10 @@ Completion at point.
   (setq org-download-method 'directory)
   ;; Set a global default image directory
   (setq-default org-download-image-dir (expand-file-name "~/Notes/plain_orgfiles/orgfiles/images"))
-  ;; Create the directory if it doesn't exist
-  (unless (file-directory-p org-download-image-dir)
-    (make-directory org-download-image-dir t))
+  ;; Only try to create if the decrypted mountpoint is present
+  (when (file-directory-p "~/Notes/plain_orgfiles/orgfiles")
+    (unless (file-directory-p org-download-image-dir)
+      (make-directory org-download-image-dir nil)))
   :config
   ;; Keybinding to paste clipboard images
   (define-key org-mode-map (kbd "C-c C-p") #'org-download-clipboard))
@@ -1396,8 +1423,9 @@ Completion at point.
 
 (defvar mmotion/org-image-cache-dir (expand-file-name "~/Notes/plain_orgfiles/orgfiles/images/"))
 
-(unless (file-directory-p mmotion/org-image-cache-dir)
-  (make-directory mmotion/org-image-cache-dir t))
+(when (file-directory-p "~/Notes/plain_orgfiles/orgfiles")
+  (unless (file-directory-p mmotion/org-image-cache-dir)
+    (make-directory mmotion/org-image-cache-dir t)))
 
 (defun mmotion/org-insert-image-from-url (url)
   "Download image from URL, save to cache, insert link, and display inline."
@@ -1620,13 +1648,13 @@ Typewriter-like look of the page (centring).
 ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
 ;;         a hookable mode anymore, you're advised to pick something yourself
 ;;         if you don't care about startup time, use
-    :hook (after-init . org-roam-ui-mode)
+    ;; :hook (after-init . org-roam-ui-mode)
     :config
     (setq org-roam-ui-sync-theme nil
           org-roam-ui-follow t
           org-roam-ui-update-on-save t
           org-roam-ui-theme "homage-white"
-          org-roam-ui-open-on-start t))
+          org-roam-ui-open-on-start nil))
 
 #+end_src
 
@@ -1718,6 +1746,18 @@ Typewriter-like look of the page (centring).
 
 (use-package flycheck
   :hook (prog-mode . flycheck-mode))
+
+#+end_src
+
+** Rjsx-mode (ReactJS)
+#+begin_src emacs-lisp
+
+(use-package rjsx-mode
+  :mode ("\\.jsx\\'" . rjsx-mode)
+  :hook (rjsx-mode . (lambda ()
+                       (setq js-indent-level 2)))
+  :config
+  (setq-default indent-tabs-mode nil))
 
 #+end_src
 * Tree-sitter
