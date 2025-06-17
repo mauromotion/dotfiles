@@ -19,12 +19,13 @@ def laptop_toolbar():
         [
             widget.GroupBox(
                 # font="Font Awesome 6 Free Medium",
-                # fontsize=18,
+                font="NotoSansM Nerd Font Medium",
+                # fontsize=14,
                 highlight_method="line",
                 borderwidth=2,
                 active=colors["accent2"][0],
                 inactive=colors["black"][1],
-                this_current_screen_border=colors["accent2"][0],
+                this_current_screen_border=colors["accent1"][0],
                 rounded=False,
                 block_highlight_text_color=colors["accent1"][0],
                 foreground=colors["black"][1],
@@ -66,18 +67,18 @@ def laptop_toolbar():
             widget.Sep(foreground=colors["background"][1]),
             widget.PulseVolume(
                 unmute_format="  {volume}%",
-                foreground=colors["blue"][0],
+                foreground=colors["accent1"][0],
                 mute_format="  muted",
             ),
             widget.Sep(foreground=colors["background"][1]),
             widget.Backlight(
                 backlight_name="intel_backlight",
                 format="󰃠 {percent:2.0%}",
-                foreground=colors["foreground"][1],
+                foreground=colors["accent1"][0],
             ),
             widget.Sep(foreground=colors["background"][1]),
             widget.Battery(
-                foreground=colors["accent2"][0],
+                foreground=colors["foreground"][1],
                 format="{char} {percent:2.0%}",
                 charge_char="󰢝",
                 discharge_char="󰁿",
@@ -88,16 +89,16 @@ def laptop_toolbar():
                 location="Bromley,UK",
                 format="{icon} {main_temp:.1f}°{units_temperature}",
                 update_interval=600,
-                foreground=colors["green"][0],
+                foreground=colors["foreground"][0],
                 mouse_callbacks={
                     "Button1": lazy.group["scratchpad"].dropdown_toggle("weather")
                 },
             ),
             widget.Sep(foreground=colors["background"][1]),
             widget.KeyboardLayout(
-                configured_keyboards=["gb colemak_dh", "gb"],
+                configured_keyboards=["gb", "gb colemak_dh"],
                 display_map={"gb colemak_dh": "󰌌 gb_clmk-dh", "gb": "󰌌 gb"},
-                foreground=colors["foreground"][0],
+                foreground=colors["accent1"][0],
             ),
             widget.Sep(foreground=colors["background"][1]),
             widget.Systray(),
