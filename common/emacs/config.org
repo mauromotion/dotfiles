@@ -294,7 +294,7 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
 ;; Disable all other themes to avoid awkward blending:
   (mapc #'disable-theme custom-enabled-themes)
 ;; Optional: Set a default theme to load when Emacs starts
-  (load-theme 'ef-kassio t))
+  (ef-themes-select 'ef-kassio))
 
 #+end_src
 
@@ -1245,24 +1245,24 @@ Completion at point.
    )
 
   ;; ;;;; Different sizes for each heading
-  (defvar mmotion-heading-sizes
-    '(1.8 1.6 1.4 1.2 1.1 1.0 0.8))
+  ;; (defvar mmotion-heading-sizes
+  ;;   '(1.8 1.6 1.4 1.2 1.1 1.0 0.8))
 
-  (add-hook 'org-mode-hook
-            (lambda ()
-              (cl-loop for lvl from 1 to (length mmotion-heading-sizes)
-                       for sz in mmotion-heading-sizes
-                       do
-                       (set-face-attribute
-                        (intern (format "org-level-%d" lvl)) nil
-                        :family mmotion/variable-font
-                        :weight 'bold
-                        :height sz))
-              ;; Document title
-              (set-face-attribute 'org-document-title nil
-                                  :family mmotion/variable-font
-                                  :weight 'bold
-                                  :height 2.0)))
+  ;; (add-hook 'org-mode-hook
+  ;;           (lambda ()
+  ;;             (cl-loop for lvl from 1 to (length mmotion-heading-sizes)
+  ;;                      for sz in mmotion-heading-sizes
+  ;;                      do
+  ;;                      (set-face-attribute
+  ;;                       (intern (format "org-level-%d" lvl)) nil
+  ;;                       :family mmotion/variable-font
+  ;;                       :weight 'bold
+  ;;                       :height sz))
+  ;;             ;; Document title
+  ;;             (set-face-attribute 'org-document-title nil
+  ;;                                 :family mmotion/variable-font
+  ;;                                 :weight 'bold
+  ;;                                 :height 2.0)))
 
  ;;;; Open links with RET 
   ;; (with-eval-after-load 'org
