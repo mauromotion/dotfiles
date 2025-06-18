@@ -8,19 +8,20 @@ HOSTNAME=$(get_host)
 
 # Kill already existing processes to avoid duplication
 processes=(
-  "dunst"
-  "picom"
-  "udiskie"
-  "nm-applet"
   "blueman-applet"
-  "polkit-gnome-au"
-  "clipit"
   "caffeine-ng"
+  "clipit"
+  "dunst"
+  "kanata"
   "nextcloud"
+  "nm-applet"
   "openrgb"
+  "picom"
+  "polkit-gnome-au"
+  "syncthingtray"
+  "udiskie"
   "xbindkeys"
   "xidlehook"
-  "kanata"
 )
 
 for proc in "${processes[@]}"; do
@@ -35,37 +36,39 @@ done
 
 if [[ "$HOSTNAME" == "eva-01" ]]; then
 
-  dunst -b &
-  picom -b &
-  nitrogen --restore &
-  udiskie -a -n -t &
   /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-  nm-applet &
   caffeine &
   clipit &
+  dunst -b &
   nextcloud --background &
+  nitrogen --restore &
+  nm-applet &
   openrgb --startminimized &
-  xset b 100 & # system bell volume
-  xset -dpms & # Disable DPMS
-  xset s off & # Disable screen blanking
+  picom -b &
+  syncthingtray &
+  udiskie -a -n -t &
   xbindkeys &
   xidlehook --not-when-fullscreen --timer 600 "betterlockscreen -l dimblur" "" --timer 3600 "systemctl suspend" "" &
+  xset -dpms & # Disable DPMS
+  xset b 100 & # system bell volume
+  xset s off & # Disable screen blanking
   ~/.icc_color_profiles/load_icc_color_profiles.sh &
 
 elif [[ "$HOSTNAME" == "eva-03" ]]; then
 
-  dunst -b &
-  picom -b &
-  nitrogen --restore &
-  udiskie -a -n -t &
   /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-  nm-applet &
+  blueman-applet &
   caffeine &
   clipit &
-  blueman-applet &
-  nextcloud --background &
-  xbindkeys &
+  dunst -b &
   kanata -c ~/.config/kanata/kanata.kbd &
+  nextcloud --background &
+  nitrogen --restore &
+  nm-applet &
+  picom -b &
+  syncthingtray &
+  udiskie -a -n -t &
+  xbindkeys &
   xidlehook --not-when-fullscreen --timer 600 "betterlockscreen -l dimblur" "" --timer 3600 "systemctl suspend" "" &
   ~/.icc_color_profiles/load_icc_color_profiles.sh &
 fi
