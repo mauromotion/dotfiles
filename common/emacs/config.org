@@ -1,3 +1,4 @@
+
 #+TITLE: Mauro's GNU Emacs Config
 #+AUTHOR: Mauro Di Ianni (mmotion)
 #+EMAIL: hello@mauromotion.com
@@ -277,7 +278,7 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
 (use-package ef-themes
   :defer nil
   :config
-  (setq ef-themes-to-toggle '(ef-kassio ef-owl))
+  (setq ef-themes-to-toggle '(ef-day ef-owl))
   (setq ef-themes-headings ; read the manual's entry or the doc string
       '((0 variable-pitch light 1.9)
         (1 variable-pitch light 1.8)
@@ -294,7 +295,7 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
 ;; Disable all other themes to avoid awkward blending:
   (mapc #'disable-theme custom-enabled-themes)
 ;; Optional: Set a default theme to load when Emacs starts
-  (ef-themes-select 'ef-kassio))
+  (ef-themes-select 'ef-day))
 
 #+end_src
 

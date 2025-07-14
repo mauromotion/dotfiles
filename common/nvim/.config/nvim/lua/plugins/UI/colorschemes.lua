@@ -100,7 +100,7 @@ return {
 		priority = 999,
 		config = function()
 			require("ef-themes").setup({
-				light = "ef-kassio", -- Ef-theme to select for light backgrounds
+				light = "ef-day", -- Ef-theme to select for light backgrounds
 				dark = "ef-dream", -- Ef-theme to select for dark backgrounds
 				transparent = false,
 				styles = {

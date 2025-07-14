@@ -8,6 +8,7 @@ return {
 	},
 	config = function()
 		require("markview").setup({
+			experimental = { check_rtp_message = false },
 			preview = {
 				filetypes = { "markdown", "vimwiki" },
 			},
