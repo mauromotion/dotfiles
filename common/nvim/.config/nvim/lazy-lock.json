@@ -17,7 +17,7 @@
   "markdown-preview.nvim": { "branch": "master", "commit": "a923f5fc5ba36a3b17e289dc35dc17f66d0548ee" },
   "marks.nvim": { "branch": "master", "commit": "f353e8c08c50f39e99a9ed474172df7eddd89b72" },
   "markview.nvim": { "branch": "main", "commit": "d5d37102d24c3d5d032b01263855081b6850509b" },
-  "mason-lspconfig.nvim": { "branch": "main", "commit": "acb2d97a5c5e3f58156cb387fdf6035c34cd2768" },
+  "mason-lspconfig.nvim": { "branch": "main", "commit": "bc743e4f3dc4b6d22b0a9e0b68a6664d93f8a694" },
   "mason-tool-installer.nvim": { "branch": "main", "commit": "517ef5994ef9d6b738322664d5fdd948f0fdeb46" },
   "mason.nvim": { "branch": "main", "commit": "8024d64e1330b86044fed4c8494ef3dcd483a67c" },
   "mini.animate": { "branch": "main", "commit": "10cc793c7589db42b11353e7186f6e3e19f19072" },
