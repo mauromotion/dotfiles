@@ -71,10 +71,10 @@
   - [[#olivetti][Olivetti]]
   - [[#toggle-todos-and-checkboxes-with-ret][Toggle TODOs and checkboxes with RET]]
 - [[#org-roam][Org-roam]]
-  - [[#main-org-roam-set-up][Main org-roam set up]]
   - [[#org-roam-dailies-set-up][Org-roam dailies set up]]
   - [[#org-roam-ui][Org-roam UI]]
   - [[#consult-org-roam][Consult-org-roam]]
+- [[#denote][Denote]]
 - [[#lsp-mode][LSP mode]]
   - [[#lsp-mode-set-up][LSP mode set up]]
   - [[#flycheck][Flycheck]]
@@ -1598,7 +1598,8 @@ Typewriter-like look of the page (centring).
 #+end_src
 
 * Org-roam
-** Main org-roam set up
+Main org-roam set up.
+
   #+begin_src emacs-lisp
 
 ;;; Org-roam ---------------------------------------------------
@@ -1692,6 +1693,58 @@ Typewriter-like look of the page (centring).
 
 #+end_src
 
+* Denote
+#+begin_src emacs-lisp
+;;; Denote ----------------------------------------------------
+(use-package denote
+  :ensure t
+  :hook (dired-mode . denote-dired-mode)
+  ;; :bind
+  ;; (("C-c n n" . denote)
+  ;;  ("C-c n r" . denote-rename-file)
+  ;;  ("C-c n l" . denote-link)
+  ;;  ("C-c n b" . denote-backlinks)
+  ;;  ("C-c n d" . denote-dired)
+  ;;  ("C-c n g" . denote-grep))
+  :config
+  (setq denote-directory (expand-file-name "~/Notes/plain_orgfiles/orgfiles/denote/"))
+
+  ;; Automatically rename Denote buffers when opening them so that
+  ;; instead of their long file name they have, for example, a literal
+  ;; "[D]" followed by the file's title.  Read the doc string of
+  ;; `denote-rename-buffer-format' for how to modify this.
+  (denote-rename-buffer-mode 1))
+
+;;;; Denote-org
+(use-package denote-org
+  :ensure t
+  :commands
+  ;; I list the commands here so that you can discover them more
+  ;; easily.  You might want to bind the most frequently used ones to
+  ;; the `org-mode-map'.
+  ( denote-org-link-to-heading
+    denote-org-backlinks-for-heading
+
+    denote-org-extract-org-subtree
+
+    denote-org-convert-links-to-file-type
+    denote-org-convert-links-to-denote-type
+
+    denote-org-dblock-insert-files
+    denote-org-dblock-insert-links
+    denote-org-dblock-insert-backlinks
+    denote-org-dblock-insert-missing-links
+    denote-org-dblock-insert-files-as-headings))
+
+;;;; Consult-denote
+(use-package consult-denote
+  :ensure t
+  ;; :bind
+  ;; (("C-c n f" . consult-denote-find)
+  ;;  ("C-c n g" . consult-denote-grep))
+  :config
+  (consult-denote-mode 1))
+#+end_src
 * LSP mode
 ** LSP mode set up
 #+begin_src emacs-lisp
