@@ -75,22 +75,7 @@
  '(custom-safe-themes
    '("7ec8fd456c0c117c99e3a3b16aaf09ed3fb91879f6601b1ea0eeaee9c6def5d9"
      default))
- '(package-selected-packages
-   '(auto-package-update cape colorful-mode consult-denote
-                         consult-org-roam consult-projectile corfu
-                         dashboard denote denote-org
-                         dired-hide-dotfiles dired-open doom-modeline
-                         doom-themes doric-themes ef-themes
-                         embark-consult evil-collection evil-goggles
-                         evil-nerd-commenter evil-org flycheck
-                         flyspell-correct helpful hl-todo indent-bars
-                         lsp-treemacs lsp-ui magit marginalia
-                         mood-line nerd-icons-completion
-                         nerd-icons-dired no-littering olivetti
-                         orderless org-download org-fancy-priorities
-                         org-modern org-roam-ui org-superstar
-                         rainbow-delimiters rjsx-mode toc-org undo-fu
-                         undo-fu-session vertico vterm-toggle))
+ '(package-selected-packages nil)
  '(package-vc-selected-packages
    '((reader :url "https://codeberg.org/divyaranjan/emacs-reader" :make
              "all"))))

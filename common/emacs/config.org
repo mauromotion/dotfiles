@@ -697,8 +697,8 @@ Better front end for Emacs' documentation
   "v" #'describe-variable)
     #+end_src
 
-*** [N]otes keybindings
-    #+begin_src emacs-lisp
+*** [N]otes keybindings (org-roam)
+    #+begin_src emacs-lisp :tangle no
 
 (defvar-keymap mmotion/notes-map
   :doc "Notes operations submenu."
@@ -712,6 +712,21 @@ Better front end for Emacs' documentation
   "s" #'consult-org-roam-search
   "t" #'org-roam-tag-add
   "u" #'org-roam-ui-open)
+    #+end_src
+
+*** [N]otes keybindings (denote)
+    #+begin_src emacs-lisp
+
+(defvar-keymap mmotion/notes-map
+  :doc "Notes operations submenu."
+  "b" #'denote-backlinks
+  "d" #'denote-dired
+  "f" #'consult-denote-find
+  "g" #'consult-denote-grep
+  "l" #'denote-link
+  "n" #'denote
+  "r" #'denote-rename-file
+  "t" #'denote-rename-file-keywords)
     #+end_src
 
 *** [O]rg keybindings
@@ -831,17 +846,29 @@ Better front end for Emacs' documentation
     "p" "Describe Package"
     "v" "Describe Variable")
   
-  (which-key-add-keymap-based-replacements mmotion/notes-map
-    "a" "Add alias to node"
-    "b" "Select a backlink"
-    "c" "Org-roam capture"
-    "d" "Sync Org-roam db"
-    "f" "Find a note"
-    "l" "Select a forward link"
-    "s" "Search inside all notes"
-    "t" "Add a tag to a note"
-    "u" "Open Org-roam UI")
+  ;; Org-roam
+  ;; (which-key-add-keymap-based-replacements mmotion/notes-map
+  ;;   "a" "Add alias to node"
+  ;;   "b" "Select a backlink"
+  ;;   "c" "Org-roam capture"
+  ;;   "d" "Sync Org-roam db"
+  ;;   "f" "Find a note"
+  ;;   "l" "Select a forward link"
+  ;;   "s" "Search inside all notes"
+  ;;   "t" "Add a tag to a note"
+  ;;   "u" "Open Org-roam UI")
 
+  ;; Denote
+  (which-key-add-keymap-based-replacements mmotion/notes-map
+    "b" "Show note's backlinks"
+    "d" "Filter notes in Dired"
+    "f" "Find a note"
+    "g" "Grep inside note"
+    "l" "Insert link to note"
+    "n" "Create a new note"
+    "r" "Rename a note"
+    "t" "Change note's keywords")
+  
   (which-key-add-keymap-based-replacements mmotion/org-map
     "a" "Org Agenda"
     "c" "Org Capture"
@@ -1327,7 +1354,7 @@ Completion at point.
 
    ("a" "Add Job Application"
     plain
-    (file+function "~/Notes/plain_orgfiles/orgfiles/roam/20250517192333-job_hunting_spreadsheet.org" 
+    (file+function "~/Notes/plain_orgfiles/orgfiles/denote/20250711T100844--job-hunting-spreadsheet__career_webdev.org" 
                    (lambda () 
                      (goto-char (point-min))
                      (search-forward "#+TBLFM:") 
@@ -1343,7 +1370,7 @@ Completion at point.
 (add-hook 'org-capture-after-finalize-hook
           (lambda ()
             (save-excursion
-              (with-current-buffer "20250517192333-job_hunting_spreadsheet.org"
+              (with-current-buffer "20250711T100844--job-hunting-spreadsheet__career_webdev.org"
                 (goto-char (point-min))
                 (when (search-forward "#+TBLFM:" nil t)
                   (org-table-calc-current-TBLFM))))))
@@ -1600,7 +1627,7 @@ Typewriter-like look of the page (centring).
 * Org-roam
 Main org-roam set up.
 
-  #+begin_src emacs-lisp
+  #+begin_src emacs-lisp :tangle no
 
 ;;; Org-roam ---------------------------------------------------
 (use-package org-roam
@@ -1621,7 +1648,7 @@ Main org-roam set up.
 
   #+end_src
 ** Org-roam dailies set up
-  #+begin_src emacs-lisp
+  #+begin_src emacs-lisp :tangle no
 
 (use-package org-roam-dailies
   :ensure nil
@@ -1639,7 +1666,7 @@ Main org-roam set up.
 
   #+end_src
 ** Org-roam UI
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 
 ;;;; Org-roam UI
 (use-package websocket
@@ -1661,7 +1688,7 @@ Main org-roam set up.
 #+end_src
 
 ** Consult-org-roam
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 
 ;;;; Consult-org-roam
 (use-package consult-org-roam
