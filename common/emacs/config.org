@@ -248,6 +248,9 @@ I'm also setting comments to be /italic/.
 ;; Base size for variable pitch font
 (defvar mmotion/variable-font-size 130)
 
+;; Line spacing
+;; (setq-local line-spacing 0.2)
+
 ;;;; Set font faces
 (set-face-attribute 'default nil
                     :font mmotion/default-font
@@ -1339,11 +1342,11 @@ Completion at point.
     "* TODO %?\n  %U\n" :empty-lines 1)
    ("ti" "Idea" entry (file+olp "~/Notes/plain_orgfiles/orgfiles/todos.org" "Inbox")
     "* IDEA %?\n  %U\n" :empty-lines 1)
-   ("j" "Journal" entry
-    (file+olp+datetree "~/Notes/plain_orgfiles/orgfiles/journal.org")
-    "\n* %<%H:%M> - Journal :journal:\n\n%?\n\n"
-    ;; :clock-in :clock-resume
-    :empty-lines 1)
+   ;; ("j" "Journal" entry
+   ;;  (file+olp+datetree "~/Notes/plain_orgfiles/orgfiles/journal.org")
+   ;;  "\n* %<%H:%M> - Journal :journal:\n\n%?\n\n"
+   ;;  ;; :clock-in :clock-resume
+   ;;  :empty-lines 1)
    ;; ("jm" "Meeting" entry
    ;;  (file+olp+datetree "~/Notes/plain_orgfiles/orgfiles/journal.org")
    ;;  "* %<%H:%M> - %a :meetings:\n\n%?\n\n"
@@ -1775,6 +1778,33 @@ Main org-roam set up.
   ;;  ("C-c n g" . consult-denote-grep))
   :config
   (consult-denote-mode 1))
+
+;;;; Denote journal
+(use-package denote-journal
+  :ensure t
+  ;; Bind those to some key for your convenience.
+  :commands ( denote-journal-new-entry
+              denote-journal-new-or-existing-entry
+              denote-journal-link-or-create-entry )
+  :hook (calendar-mode . denote-journal-calendar-mode)
+  :config
+  ;; Use the "journal" subdirectory of the `denote-directory'.  Set this
+  ;; to nil to use the `denote-directory' instead.
+  (setq denote-journal-directory
+        (expand-file-name "journal" denote-directory))
+  ;; Default keyword for new journal entries. It can also be a list of
+  ;; strings.
+  (setq denote-journal-keyword "journal")
+  ;; Read the doc string of `denote-journal-title-format'.
+  (setq denote-journal-title-format 'day-date-month-year))
+
+(with-eval-after-load 'org-capture
+  (add-to-list 'org-capture-templates
+               '("j" "Journal" entry
+                 (file denote-journal-path-to-new-or-existing-entry)
+                 "* %(format-time-string \"%H:%M\") %?\n%i\n%a"
+                 :kill-buffer t
+                 :empty-lines 1)))
 #+end_src
 * LSP mode
 ** LSP mode set up
