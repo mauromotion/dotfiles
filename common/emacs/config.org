@@ -1,4 +1,3 @@
-
 #+TITLE: Mauro's GNU Emacs Config
 #+AUTHOR: Mauro Di Ianni (mmotion)
 #+EMAIL: hello@mauromotion.com
@@ -77,6 +76,7 @@
 - [[#denote][Denote]]
   - [[#denote-main-config][Denote main config]]
   - [[#denote-org][Denote-org]]
+  - [[#consult-notes][Consult-notes]]
   - [[#consult-denote][Consult-denote]]
   - [[#denote-journal][Denote-journal]]
 - [[#lsp-mode][LSP mode]]
@@ -729,8 +729,8 @@ Better front end for Emacs' documentation
   "b" #'denote-backlinks
   "d" #'denote-dired
   "e" #'denote-org-extract-org-subtree
-  "f" #'consult-denote-find
-  "g" #'consult-denote-grep
+  "f" #'consult-notes
+  "g" #'consult-notes-search-in-all-notes
   "l" #'denote-link
   "n" #'denote
   "r" #'denote-rename-file
@@ -1780,8 +1780,24 @@ Main org-roam set up.
     denote-org-dblock-insert-files-as-headings))
    #+end_src
 
+** Consult-notes
+#+begin_src emacs-lisp
+;;;; Consult-notes
+(use-package consult-notes
+  :commands (consult-notes
+             consult-notes-search-in-all-notes)
+  :config
+  (setq consult-notes-file-dir-sources
+        '(("Denote" ?n "~/Notes/plain_orgfiles/orgfiles/denote/"))) ;; Set notes dir(s)
+  (consult-notes-org-headings-mode)
+  (when (locate-library "denote")
+    (consult-notes-denote-mode)))
+  ;; Search only for text files in denote dir
+ ;; (setq consult-notes-denote-files-function (function denote-directory-text-only-files)))
+#+end_src
+
 ** Consult-denote
-   #+begin_src emacs-lisp
+   #+begin_src emacs-lisp :tangle no
 
 ;;;; Consult-denote
 (use-package consult-denote
@@ -1791,6 +1807,7 @@ Main org-roam set up.
   ;;  ("C-c n g" . consult-denote-grep))
   :config
   (consult-denote-mode 1))
+
    #+end_src
 
 ** Denote-journal
