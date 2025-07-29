@@ -38,7 +38,7 @@
   - [[#custom-functions][Custom functions]]
   - [[#hydras][Hydras]]
   - [[#define-sub-menus][Define Sub-menus]]
-  - [[#configure-which-key-descriptions][Configure which-key descriptions]]
+  - [[#configure-which-key-description][Configure which-key description]]
   - [[#evil-mode-integration][Evil-mode integration]]
 - [[#completion--selection-framework][Completion & Selection Framework]]
   - [[#consult][Consult]]
@@ -721,6 +721,7 @@ Better front end for Emacs' documentation
   :doc "Notes operations submenu."
   "b" #'denote-backlinks
   "d" #'denote-dired
+  "e" #'denote-org-extract-org-subtree
   "f" #'consult-denote-find
   "g" #'consult-denote-grep
   "l" #'denote-link
@@ -800,7 +801,8 @@ Better front end for Emacs' documentation
 (keymap-set mmotion/leader-map "w" mmotion/window-map)
     #+end_src
 
-** Configure which-key descriptions
+** Configure which-key description
+s
 
    #+begin_src emacs-lisp
 
@@ -862,8 +864,9 @@ Better front end for Emacs' documentation
   (which-key-add-keymap-based-replacements mmotion/notes-map
     "b" "Show note's backlinks"
     "d" "Filter notes in Dired"
+    "e" "Create a new note from current subtree"
     "f" "Find a note"
-    "g" "Grep inside note"
+    "g" "Grep inside all notes"
     "l" "Insert link to note"
     "n" "Create a new note"
     "r" "Rename a note"
@@ -1735,6 +1738,7 @@ Main org-roam set up.
   ;;  ("C-c n g" . denote-grep))
   :config
   (setq denote-directory (expand-file-name "~/Notes/plain_orgfiles/orgfiles/denote/"))
+  (setq denote-known-keywords nil)
 
   ;; Automatically rename Denote buffers when opening them so that
   ;; instead of their long file name they have, for example, a literal
