@@ -75,6 +75,10 @@
   - [[#org-roam-ui][Org-roam UI]]
   - [[#consult-org-roam][Consult-org-roam]]
 - [[#denote][Denote]]
+  - [[#denote-main-config][Denote main config]]
+  - [[#denote-org][Denote-org]]
+  - [[#consult-denote][Consult-denote]]
+  - [[#denote-journal][Denote-journal]]
 - [[#lsp-mode][LSP mode]]
   - [[#lsp-mode-set-up][LSP mode set up]]
   - [[#flycheck][Flycheck]]
@@ -1727,7 +1731,8 @@ Main org-roam set up.
 #+end_src
 
 * Denote
-#+begin_src emacs-lisp
+** Denote main config
+  #+begin_src emacs-lisp
 ;;; Denote ----------------------------------------------------
 (use-package denote
   :ensure t
@@ -1748,6 +1753,10 @@ Main org-roam set up.
   ;; "[D]" followed by the file's title.  Read the doc string of
   ;; `denote-rename-buffer-format' for how to modify this.
   (denote-rename-buffer-mode 1))
+  #+end_src
+
+** Denote-org
+   #+begin_src emacs-lisp
 
 ;;;; Denote-org
 (use-package denote-org
@@ -1769,6 +1778,10 @@ Main org-roam set up.
     denote-org-dblock-insert-backlinks
     denote-org-dblock-insert-missing-links
     denote-org-dblock-insert-files-as-headings))
+   #+end_src
+
+** Consult-denote
+   #+begin_src emacs-lisp
 
 ;;;; Consult-denote
 (use-package consult-denote
@@ -1778,6 +1791,10 @@ Main org-roam set up.
   ;;  ("C-c n g" . consult-denote-grep))
   :config
   (consult-denote-mode 1))
+   #+end_src
+
+** Denote-journal
+   #+begin_src emacs-lisp
 
 ;;;; Denote journal
 (use-package denote-journal
@@ -1805,7 +1822,8 @@ Main org-roam set up.
                  "* %(format-time-string \"%H:%M\") %?\n%i\n%a"
                  :kill-buffer t
                  :empty-lines 1)))
-#+end_src
+   #+end_src
+
 * LSP mode
 ** LSP mode set up
 #+begin_src emacs-lisp
