@@ -67,10 +67,10 @@
 - [[#org-styling][Org Styling]]
   - [[#org-superstar-bullet-points][Org-superstar (bullet points)]]
   - [[#fancy-priorities-look][Fancy Priorities Look]]
-  - [[#org-modern][Org-modern]]
+  - [[#org-modern-not-in-use][Org-modern (not in use)]]
   - [[#olivetti][Olivetti]]
   - [[#toggle-todos-and-checkboxes-with-ret][Toggle TODOs and checkboxes with RET]]
-- [[#org-roam][Org-roam]]
+- [[#org-roam-not-in-use][Org-roam (not in use)]]
   - [[#org-roam-dailies-set-up][Org-roam dailies set up]]
   - [[#org-roam-ui][Org-roam UI]]
   - [[#consult-org-roam][Consult-org-roam]]
@@ -93,7 +93,7 @@
   - [[#nerd-icons-for-dired][Nerd icons for dired]]
   - [[#hide-dotfiles][Hide dotfiles]]
   - [[#set-up-programs-to-open-certain-files-from-dired][Set up programs to open certain files from dired]]
-  - [[#dired-preview][Dired preview]]
+  - [[#dired-preview-not-in-use][Dired preview (not in use)]]
 - [[#reset-gc-threshold][Reset GC Threshold]]
 
 * General flow
@@ -368,7 +368,7 @@ I'd rather use =nerd-icons= than =all-the-icons=, much more reliable.
     (set-face-attribute 'mode-line nil :font "JetBrainsMono Nerd Font-12")
     (set-face-attribute 'mode-line-inactive nil :font "JetBrainsMono Nerd Font-12"))
    #+end_src
-*** Mood-line
+*** Mood-line (not in use)
 #+begin_src emacs-lisp :tangle no
 
 (use-package mood-line
@@ -704,7 +704,7 @@ Better front end for Emacs' documentation
   "v" #'describe-variable)
     #+end_src
 
-*** [N]otes keybindings (org-roam)
+*** [N]otes keybindings (org-roam not in use)
     #+begin_src emacs-lisp :tangle no
 
 (defvar-keymap mmotion/notes-map
@@ -1545,7 +1545,7 @@ Completion at point.
 
 #+end_src
 
-** Org-modern
+** Org-modern (not in use)
 I'm trying this out from time to time but I prefer my "custom" org-mode style. Set not to be tangled.
 
 #+begin_src emacs-lisp :tangle no
@@ -1634,7 +1634,7 @@ Typewriter-like look of the page (centring).
 
 #+end_src
 
-* Org-roam
+* Org-roam (not in use)
 Main org-roam set up.
 
   #+begin_src emacs-lisp :tangle no
@@ -2022,7 +2022,7 @@ Main org-roam set up.
           ("mkv"  . "mpv"))))
    #+end_src
 
-** Dired preview
+** Dired preview (not in use)
 Disabled for now, I don't like it.
 
    #+begin_src emacs-lisp :tangle no
