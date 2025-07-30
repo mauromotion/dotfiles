@@ -1788,7 +1788,9 @@ Main org-roam set up.
              consult-notes-search-in-all-notes)
   :config
   (setq consult-notes-file-dir-sources
-        '(("Denote" ?n "~/Notes/plain_orgfiles/orgfiles/denote/"))) ;; Set notes dir(s)
+        '(("Denote" ?n "~/Notes/plain_orgfiles/orgfiles/denote/")
+          ("Journal" ?j "~/Notes/plain_orgfiles/orgfiles/denote/journal/")
+)) ;; Set notes dir(s)
   (consult-notes-org-headings-mode)
   (when (locate-library "denote")
     (consult-notes-denote-mode)))

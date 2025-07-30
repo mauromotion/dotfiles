@@ -28,7 +28,7 @@ local language_servers = {
 	"marksman",
 	"ruff",
 	"sqlls",
-	"tailwindcss",
+	-- "tailwindcss",
 	"taplo",
 	"ts_ls",
 	"yamlls",
@@ -39,18 +39,15 @@ local allMasonPkgs = vim.iter({ language_servers, tools }):flatten():totable()
 
 return {
 	{
-		"whoissethdaniel/mason-tool-installer.nvim",
+		"mason-org/mason-lspconfig.nvim",
+		opts = {},
 		dependencies = {
 			{ "mason-org/mason.nvim", opts = {} },
-		},
-		opts = { ensure_installed = allMasonPkgs },
-	},
-
-	-- This plugin bridges the gap between installed LSP's via Mason and their configuration as provided by nvim-lspconfig.
-	-- From Mason 2.0 and nvim 0.11 onwards, this plugin will automatically enable all installed servers via vim.lsp.enable
-	{
-		"mason-org/mason-lspconfig.nvim",
-		dependencies = {
+			{
+				"whoissethdaniel/mason-tool-installer.nvim",
+				dependencies = {},
+				opts = { ensure_installed = allMasonPkgs },
+			},
 			{
 				"neovim/nvim-lspconfig",
 				config = function()
@@ -71,6 +68,5 @@ return {
 				end,
 			},
 		},
-		opts = {},
 	},
 }
