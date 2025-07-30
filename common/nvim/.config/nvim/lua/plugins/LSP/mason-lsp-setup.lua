@@ -28,7 +28,7 @@ local language_servers = {
 	"marksman",
 	"ruff",
 	"sqlls",
-	-- "tailwindcss",
+	"tailwindcss",
 	"taplo",
 	"ts_ls",
 	"yamlls",

@@ -1,4 +1,7 @@
 return {
+	on_init = function(client)
+		client.offset_encoding = "utf-16"
+	end,
 	settings = {
 		root_dir = function(fname)
 			local root_pattern =
