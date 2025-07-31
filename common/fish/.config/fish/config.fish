@@ -81,6 +81,11 @@ alias wiki "nvim -c VimwikiIndex"
 alias y "yazi"
 alias yt "ytfzf"
 
+## For tmux
+if test -n "$TMUX"
+    set -gx TERM tmux-256color
+end
+
 ## Source Zoxide
 zoxide init fish | source
 

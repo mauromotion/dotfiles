@@ -1333,8 +1333,18 @@ Completion at point.
 
 (org-todo-keywords
  '((sequence "TODO(t)" "DOING(d)" "PROJ(p)" "|" "DONE(x!)")
-   (sequence "WAIT(w@)" "HOLD(h)" "IDEA(i)" "|" "COMPLETED(c!)" "CANCELLED(c!)" "KILLED(k!/@)")
+   (sequence "WAIT(w@)" "HOLD(h!)" "IDEA(i)" "|" "COMPLETED(c!)" "CANCELLED(c!)" "KILLED(k!/@)")
    ))
+
+(defun mmotion/org-agenda-skip-hold ()
+  "Skip entries that are in HOLD state."
+  (org-agenda-skip-entry-if 'todo '("HOLD")))
+
+(setq org-agenda-custom-commands
+      '(("a" "Agenda"
+         ((agenda "" ((org-agenda-skip-function #'mmotion/org-agenda-skip-hold)))
+          (alltodo "" ((org-agenda-skip-function #'mmotion/org-agenda-skip-hold)))))))
+
    #+end_src
 
 ** Org Capture Templates

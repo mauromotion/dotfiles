@@ -78,14 +78,14 @@ vim.keymap.set("n", "<leader>bg", toggle_bg, {
 -- map("x", "<leader>p", '"_dP')
 
 -- Nvim-tmux-navigation
--- vim.cmd([[
---   noremap <silent> <c-h> :<C-U>NvimTmuxNavigateLeft<cr>
---   noremap <silent> <c-j> :<C-U>NvimTmuxNavigateDown<cr>
---   noremap <silent> <c-k> :<C-U>NvimTmuxNavigateUp<cr>
---   noremap <silent> <c-l> :<C-U>NvimTmuxNavigateRight<cr>
---   noremap <silent> <c-\\> :<C-U>NvimTmuxNavigateLastActive<cr>
---   noremap <silent> <c-n> :<C-U>NvimTmuxNavigateNext<cr>
--- ]])
+vim.cmd([[
+  noremap <silent> <c-h> :<C-U>NvimTmuxNavigateLeft<cr>
+  noremap <silent> <c-j> :<C-U>NvimTmuxNavigateDown<cr>
+  noremap <silent> <c-k> :<C-U>NvimTmuxNavigateUp<cr>
+  noremap <silent> <c-l> :<C-U>NvimTmuxNavigateRight<cr>
+  noremap <silent> <c-\\> :<C-U>NvimTmuxNavigateLastActive<cr>
+  noremap <silent> <c-n> :<C-U>NvimTmuxNavigateNext<cr>
+]])
 
 -- Diagnostics
 local lsp_group = vim.api.nvim_create_augroup("my.lsp", { clear = true })
