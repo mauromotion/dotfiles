@@ -242,14 +242,11 @@ I'm also setting comments to be /italic/.
   #+begin_src emacs-lisp
 
 ;;; Fonts ------------------------------------------------
-;;;; Define font constants for easier management
+
+;; Define font names and sizes
 (defvar mmotion/default-font "IBM Plex Mono")
 (defvar mmotion/variable-font "Work Sans")
-
-;; Base size for body text
 (defvar mmotion/base-font-size 120)
-
-;; Base size for variable pitch font
 (defvar mmotion/variable-font-size 130)
 
 ;; Line spacing
@@ -273,7 +270,7 @@ I'm also setting comments to be /italic/.
                     :weight 'normal)
 
   #+end_src
-
+  
 * Appearance
 ** Themes
 I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! Also keeping[[https://github.com/doomemacs/themes?tab=readme-ov-file#theme-list][ doom-themes]] here just because.
@@ -667,11 +664,12 @@ Better front end for Emacs' documentation
 ;;;;; Define submenu keymaps
 (defvar-keymap mmotion/buffer-map 
   :doc "Buffer operations submenu."
+  "e" #'eval-buffer
   "i" #'ibuffer
   "k" #'kill-buffer
   "n" #'previous-buffer
   "o" #'next-buffer
-  "e" #'eval-buffer)
+  "r" #'revert-buffer)
 
     #+end_src
 *** [F]ind keybindings
@@ -1537,10 +1535,10 @@ Completion at point.
   ;; This is usually the default, but keep in mind it must be nil
   (org-hide-leading-stars nil)
   ;; This line is necessary	.
-  (org-superstar-leading-bullet ?\s))
+  (org-superstar-leading-bullet ?\s)
   ;; If you use Org Indent you also need to add this, otherwise the
   ;; above has no effect while Indent is enabled.
-  ;; (setq org-indent-mode-turns-on-hiding-stars nil))
+  (setq org-indent-mode-turns-on-hiding-stars nil))
 
 #+end_src
 
