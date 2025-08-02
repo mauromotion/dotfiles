@@ -57,7 +57,7 @@ return {
 		lazy = false,
 		priority = 1000,
 		config = function()
-			local p = require("poimandres.palette")
+			-- local p = require("poimandres.palette")
 			require("poimandres").setup({
 				disable_background = false,
 				highlight_groups = {

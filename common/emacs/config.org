@@ -52,10 +52,10 @@
 - [[#magit][Magit]]
 - [[#org-mode][Org-mode]]
   - [[#org-mode-base-settings][Org-mode base settings]]
-  - [[#custom-functions-1][Custom functions]]
+  - [[#org-mode-custom-functions][Org-mode custom functions]]
   - [[#org-mode-config][Org-mode config]]
-  - [[#org-todo-keywords][Org Todo Keywords]]
-  - [[#org-capture-templates][Org Capture Templates]]
+  - [[#org-mode-todo-keywords][Org-mode Todo Keywords]]
+  - [[#org-mode-capture-templates][Org-mode Capture Templates]]
   - [[#evil-org][Evil-org]]
   - [[#toc-org][TOC-org]]
   - [[#org-babel][Org Babel]]
@@ -202,7 +202,7 @@ Basic set up of Emacs' UI, removing the default toolbars, and setting up some sy
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 
   #+end_src
-
+  
 ** Bookmarks
 Make sure that bookmarks are saved automatically and don't get erased.
 
@@ -297,9 +297,9 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
   (setq ef-themes-mixed-fonts t
       ef-themes-variable-pitch-ui t)
 ;; Disable all other themes to avoid awkward blending:
-  (mapc #'disable-theme custom-enabled-themes)
+  (mapc #'disable-theme custom-enabled-themes))
 ;; Optional: Set a default theme to load when Emacs starts
-  (ef-themes-select 'ef-kassio))
+  ;; (ef-themes-select 'ef-kassio))
 
 #+end_src
 
@@ -312,7 +312,7 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
   :config
   (setq doric-themes-to-toggle '(doric-marble doric-obsidian)))
 
-;; (doric-themes-select 'doric-marble)
+(doric-themes-select 'doric-marble)
 #+end_src
 
 *** Doom-themes
@@ -325,7 +325,7 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
   (doom-themes-org-config)
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t ))
-;; (load-theme 'doom-earl-grey t)
+;; (load-theme 'doom-city-lights t)
 #+end_src
 
 ** Icons
@@ -347,7 +347,7 @@ I'd rather use =nerd-icons= than =all-the-icons=, much more reliable.
 
 ** Modeline
 *** Doom-modeline
-   #+begin_src emacs-lisp
+   #+begin_src emacs-lisp :tangle no
 
 ;;;; Modeline
 (use-package doom-modeline
@@ -366,7 +366,7 @@ I'd rather use =nerd-icons= than =all-the-icons=, much more reliable.
     (set-face-attribute 'mode-line-inactive nil :font "JetBrainsMono Nerd Font-12"))
    #+end_src
 *** Mood-line (not in use)
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle yes
 
 (use-package mood-line
 
@@ -1246,10 +1246,10 @@ Completion at point.
       (org-cycle-hide-drawers 'all))))
   #+end_src
 
-** Custom functions
+** Org-mode custom functions
   #+begin_src emacs-lisp
 
-;;;; Function to create optional links for the companies in job applications
+;;;; Create optional links for the companies in job applications
 (defun mmotion/org-capture-optional-link ()
   "Create an org link with optional URL input."
   (let ((url (read-string "Company URL (leave empty to skip): ")))
@@ -1259,6 +1259,29 @@ Completion at point.
               url
               (read-string "Company name: ")))))
 
+;;;; Set up headings sizes
+(defvar mmotion-heading-sizes
+  '(1.8 1.6 1.4 1.2 1.1 1.0 0.8))
+
+(defun mmotion/set-heading-fonts ()
+  (cl-loop for lvl from 1 to (length mmotion-heading-sizes)
+           for sz in mmotion-heading-sizes
+           do (set-face-attribute
+               (intern (format "org-level-%d" lvl)) nil
+               :family mmotion/variable-font
+               :weight 'bold
+               :height sz))
+  (set-face-attribute 'org-document-title nil
+                      :family mmotion/variable-font
+                      :weight 'bold
+                      :height 2.0))
+
+ ;;;; Open links with RET 
+  ;; (with-eval-after-load 'org
+  ;;   (add-hook 'org-mode-hook
+  ;;             (lambda ()
+  ;;               (evil-define-key 'normal org-mode-map (kbd "RET") 'org-open-at-point))))
+
   #+end_src
 
 ** Org-mode config
@@ -1266,9 +1289,10 @@ Completion at point.
 
 (use-package org
   :commands (org-capture org-agenda)
-  :hook (org-mode . mmotion/org-mode-setup)
+  :hook ((org-mode . mmotion/org-mode-setup)
+         (org-mode . mmotion/set-heading-fonts))
   :config
-;;;; Keep monospace for code blocks etc..
+  ;;;; Keep monospace for code blocks etc..
   (custom-theme-set-faces
    'user
    '(org-block             ((t (:inherit fixed-pitch))))
@@ -1277,34 +1301,7 @@ Completion at point.
    '(org-verbatim          ((t (:inherit (shadow fixed-pitch)))))
    '(org-special-keyword   ((t (:inherit (font-lock-comment-face fixed-pitch)))))
    '(org-meta-line         ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-   '(org-indent            ((t (:inherit (org-hide fixed-pitch)))))
-   )
-
-  ;; ;;;; Different sizes for each heading
-  ;; (defvar mmotion-heading-sizes
-  ;;   '(1.8 1.6 1.4 1.2 1.1 1.0 0.8))
-
-  ;; (add-hook 'org-mode-hook
-  ;;           (lambda ()
-  ;;             (cl-loop for lvl from 1 to (length mmotion-heading-sizes)
-  ;;                      for sz in mmotion-heading-sizes
-  ;;                      do
-  ;;                      (set-face-attribute
-  ;;                       (intern (format "org-level-%d" lvl)) nil
-  ;;                       :family mmotion/variable-font
-  ;;                       :weight 'bold
-  ;;                       :height sz))
-  ;;             ;; Document title
-  ;;             (set-face-attribute 'org-document-title nil
-  ;;                                 :family mmotion/variable-font
-  ;;                                 :weight 'bold
-  ;;                                 :height 2.0)))
-
- ;;;; Open links with RET 
-  ;; (with-eval-after-load 'org
-  ;;   (add-hook 'org-mode-hook
-  ;;             (lambda ()
-  ;;               (evil-define-key 'normal org-mode-map (kbd "RET") 'org-open-at-point))))
+   '(org-indent            ((t (:inherit (org-hide fixed-pitch))))))
 
   :custom
   (org-ellipsis " ▾")
@@ -1316,23 +1313,24 @@ Completion at point.
   (org-hide-block-startup nil)
   (org-log-into-drawer t)
   (org-agenda-files '("~/Notes/plain_orgfiles/orgfiles/todos.org"
-                      "~/Notes/plain_orgfiles/orgfiles/notes.org"
-                      "~/Notes/plain_orgfiles/orgfiles/journal.org"))
-  (org-refile-targets
-   '(("archive.org" :maxlevel . 1)
-     ("todos.org" :maxlevel . 2)))
+                      "~/Notes/plain_orgfiles/orgfiles/notes.org"))
+ (org-refile-targets
+   '(("~/Notes/plain_orgfiles/orgfiles/todos.org" :maxlevel . 2)))
+  (org-refile-use-outline-path t)
+  (org-outline-path-complete-in-steps nil)
+  (org-refile-allow-creating-parent-nodes 'confirm)
 
   ;; Save Org buffers after refiling
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
+
    #+end_src
 
-** Org Todo Keywords
+** Org-mode Todo Keywords
    #+begin_src emacs-lisp
 
-(org-todo-keywords
- '((sequence "TODO(t)" "DOING(d)" "PROJ(p)" "|" "DONE(x!)")
-   (sequence "WAIT(w@)" "HOLD(h!)" "IDEA(i)" "|" "COMPLETED(c!)" "CANCELLED(c!)" "KILLED(k!/@)")
-   ))
+  (org-todo-keywords
+   '((sequence "TODO(t)" "DOING(d)" "PROJ(p)" "|" "DONE(x!)")
+     (sequence "WAIT(w@)" "HOLD(h!)" "IDEA(i)" "|" "COMPLETED(c!)" "CANCELLED(c!)" "KILLED(k!/@)"))))
 
 (defun mmotion/org-agenda-skip-hold ()
   "Skip entries that are in HOLD state."
@@ -1345,53 +1343,52 @@ Completion at point.
 
    #+end_src
 
-** Org Capture Templates
+** Org-mode Capture Templates
    #+begin_src emacs-lisp
+;;;; Set up for job application's spreadsheet capture
+;;;;; Path to the Org file containing the job applications spreadsheet
+(defvar mmotion/job-spreadsheet-file  "~/Notes/plain_orgfiles/orgfiles/denote/20250711T100844--job-hunting-spreadsheet__career_webdev.org")
 
-(org-capture-templates
+(defun mmotion/goto-job-table-insertion-point ()
+  "Move point to just before #+TBLFM: in the job spreadsheet to insert a new row."
+  (goto-char (point-min))
+  (when (search-forward "#+TBLFM:" nil t)
+    (beginning-of-line)
+    (forward-line -1)
+    (end-of-line)
+    (newline)))
+
+(defun mmotion/recalculate-job-table-formulas ()
+  "Recalculate table formulas in the job spreadsheet after capture."
+  (let ((buf (find-buffer-visiting mmotion/job-spreadsheet-file)))
+    (when buf
+      (with-current-buffer buf
+        (goto-char (point-min))
+        (when (search-forward "#+TBLFM:" nil t)
+          (org-table-calc-current-TBLFM))))))
+
+;;;; Org-capture Templates
+(setq org-capture-templates
  `(("t" "Tasks / Ideas")
    ("tt" "Task" entry (file+olp "~/Notes/plain_orgfiles/orgfiles/todos.org" "Inbox")
     "* TODO %?\n  %U\n" :empty-lines 1)
    ("ti" "Idea" entry (file+olp "~/Notes/plain_orgfiles/orgfiles/todos.org" "Inbox")
     "* IDEA %?\n  %U\n" :empty-lines 1)
-   ;; ("j" "Journal" entry
-   ;;  (file+olp+datetree "~/Notes/plain_orgfiles/orgfiles/journal.org")
-   ;;  "\n* %<%H:%M> - Journal :journal:\n\n%?\n\n"
-   ;;  ;; :clock-in :clock-resume
-   ;;  :empty-lines 1)
-   ;; ("jm" "Meeting" entry
-   ;;  (file+olp+datetree "~/Notes/plain_orgfiles/orgfiles/journal.org")
-   ;;  "* %<%H:%M> - %a :meetings:\n\n%?\n\n"
-   ;;  :clock-in :clock-resume
-   ;;  :empty-lines 1)
-
    ("n" "Note" entry
     (file+olp+datetree "~/Notes/plain_orgfiles/orgfiles/notes.org")
     "\n* %<%H:%M> - Notes :notes:\n\n%?\n\n"
     :empty-lines 1)
 
-   ("a" "Add Job Application"
-    plain
-    (file+function "~/Notes/plain_orgfiles/orgfiles/denote/20250711T100844--job-hunting-spreadsheet__career_webdev.org" 
-                   (lambda () 
-                     (goto-char (point-min))
-                     (search-forward "#+TBLFM:") 
-                     (beginning-of-line)
-                     (forward-line -1)
-                     (end-of-line)
-                     (newline)))
-    ;; "| | %(format-time-string \"%Y-%m-%d :%H:%M\") | [[%^{Company URL}][%^{Company name}]] | [[%^{Listing's URL}][link to listing]] | %^{Status} | %^{Notes|-} |"
-    "| | %(format-time-string \"%Y-%m-%d :%H:%M\") | %(mmotion/org-capture-optional-link) | [[%^{Listing's URL}][link to listing]] | %^{Status} | %^{Notes|-} |"
-    :empty-lines 0))))
+("a" "Add Job Application"
+ plain
+ (file+function mmotion/job-spreadsheet-file
+                mmotion/goto-job-table-insertion-point)
+ "| | %(format-time-string \"%Y-%m-%d :%H:%M\") | %(mmotion/org-capture-optional-link) | [[%^{Listing's URL}][link to listing]] | %^{Status} | %^{Notes|-} |"
+ :empty-lines 0)))
 
-;;;; Auto-generate row numbers after job listing capture
-(add-hook 'org-capture-after-finalize-hook
-          (lambda ()
-            (save-excursion
-              (with-current-buffer "20250711T100844--job-hunting-spreadsheet__career_webdev.org"
-                (goto-char (point-min))
-                (when (search-forward "#+TBLFM:" nil t)
-                  (org-table-calc-current-TBLFM))))))
+;;;;; Hook to trigger formula recalculation for job appication's spreadsheet
+(add-hook 'org-capture-after-finalize-hook #'mmotion/recalculate-job-table-formulas)
+
    #+end_src
 
 ** Evil-org
