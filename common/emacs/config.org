@@ -283,16 +283,16 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
   :defer nil
   :config
   (setq ef-themes-to-toggle '(ef-kassio ef-owl))
-  (setq ef-themes-headings ; read the manual's entry or the doc string
-      '((0 variable-pitch light 1.9)
-        (1 variable-pitch light 1.8)
-        (2 variable-pitch regular 1.7)
-        (3 variable-pitch regular 1.6)
-        (4 variable-pitch regular 1.5)
-        (5 variable-pitch 1.4) ; absence of weight means `bold'
-        (6 variable-pitch 1.3)
-        (7 variable-pitch 1.2)
-        (t variable-pitch 1.1)))
+  ;; (setq ef-themes-headings ; read the manual's entry or the doc string
+  ;;     '((0 variable-pitch light 2)
+  ;;       (1 variable-pitch light 1.8)
+  ;;       (2 variable-pitch regular 1.7)
+  ;;       (3 variable-pitch regular 1.6)
+  ;;       (4 variable-pitch regular 1.5)
+  ;;       (5 variable-pitch 1.4) ; absence of weight means `bold'
+  ;;       (6 variable-pitch 1.3)
+  ;;       (7 variable-pitch 1.2)
+  ;;       (t variable-pitch 1.1)))
 ;; They are nil by default...
   (setq ef-themes-mixed-fonts t
       ef-themes-variable-pitch-ui t)
@@ -1259,22 +1259,35 @@ Completion at point.
               url
               (read-string "Company name: ")))))
 
-;;;; Set up headings sizes
-(defvar mmotion-heading-sizes
-  '(1.8 1.6 1.4 1.2 1.1 1.0 0.8))
+;;;; Set up headings sizes and weights (based on ef-themes' Prot config)
+(defvar mmotion-heading-config
+  '((org-document-title :family variable-pitch :weight light :height 1.9)
+    (org-level-1        :family variable-pitch :weight light :height 1.8)
+    (org-level-2        :family variable-pitch :weight regular :height 1.7)
+    (org-level-3        :family variable-pitch :weight regular :height 1.6)
+    (org-level-4        :family variable-pitch :weight regular :height 1.5)
+    (org-level-5        :family variable-pitch :weight bold :height 1.4)
+    (org-level-6        :family variable-pitch :weight bold :height 1.3)
+    (org-level-7        :family variable-pitch :weight bold :height 1.2)
+    (org-level-8        :family variable-pitch :weight bold :height 1.1)))
 
 (defun mmotion/set-heading-fonts ()
-  (cl-loop for lvl from 1 to (length mmotion-heading-sizes)
-           for sz in mmotion-heading-sizes
-           do (set-face-attribute
-               (intern (format "org-level-%d" lvl)) nil
-               :family mmotion/variable-font
-               :weight 'bold
-               :height sz))
-  (set-face-attribute 'org-document-title nil
-                      :family mmotion/variable-font
-                      :weight 'bold
-                      :height 2.0))
+  (dolist (heading mmotion-heading-config)
+    (let ((face (car heading))
+          (attrs (cdr heading)))
+      (apply #'set-face-attribute face nil
+             ;; Replace 'variable-pitch with actual font family
+             (plist-put attrs :family mmotion/variable-font)))))
+
+;;:: Add hook to reapply font settings after theme changes
+(defun mmotion/reapply-org-fonts-after-theme-change (&rest _)
+  "Reapply org font settings after theme change."
+  (when (fboundp 'mmotion/set-heading-fonts)
+    (mmotion/set-heading-fonts)))
+
+;;;; Hook into theme loading functions
+(advice-add 'load-theme :after #'mmotion/reapply-org-fonts-after-theme-change)
+(advice-add 'enable-theme :after #'mmotion/reapply-org-fonts-after-theme-change)
 
  ;;;; Open links with RET 
   ;; (with-eval-after-load 'org
