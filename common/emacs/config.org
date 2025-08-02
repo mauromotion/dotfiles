@@ -69,10 +69,6 @@
   - [[#org-modern-not-in-use][Org-modern (not in use)]]
   - [[#olivetti][Olivetti]]
   - [[#toggle-todos-and-checkboxes-with-ret][Toggle TODOs and checkboxes with RET]]
-- [[#org-roam-not-in-use][Org-roam (not in use)]]
-  - [[#org-roam-dailies-set-up][Org-roam dailies set up]]
-  - [[#org-roam-ui][Org-roam UI]]
-  - [[#consult-org-roam][Consult-org-roam]]
 - [[#denote][Denote]]
   - [[#denote-main-config][Denote main config]]
   - [[#denote-org][Denote-org]]
@@ -702,23 +698,6 @@ Better front end for Emacs' documentation
   "v" #'describe-variable)
     #+end_src
 
-*** [N]otes keybindings (org-roam not in use)
-    #+begin_src emacs-lisp :tangle no
-
-(defvar-keymap mmotion/notes-map
-  :doc "Notes operations submenu."
-  "a" #'org-roam-alias-add
-  "b" #'consult-org-roam-backlinks
-  "c" #'org-roam-capture
-  "d" #'org-roam-db-sync
-  "f" #'org-roam-node-find
-  "i" #'org-roam-node-insert
-  "l" #'consult-org-roam-forward-links
-  "s" #'consult-org-roam-search
-  "t" #'org-roam-tag-add
-  "u" #'org-roam-ui-open)
-    #+end_src
-
 *** [N]otes keybindings (denote)
     #+begin_src emacs-lisp
 
@@ -747,7 +726,8 @@ Better front end for Emacs' documentation
   "l" #'org-store-link
   "r" #'org-refile
   "p" #'org-refile-copy
-  "s" #'org-schedule)
+  "s" #'org-schedule
+  "u" #'org-dblock-update)
     #+end_src
 
 *** [T]oggle and [T]abs keybindings
@@ -853,19 +833,6 @@ s
     "p" "Describe Package"
     "v" "Describe Variable")
   
-  ;; Org-roam
-  ;; (which-key-add-keymap-based-replacements mmotion/notes-map
-  ;;   "a" "Add alias to node"
-  ;;   "b" "Select a backlink"
-  ;;   "c" "Org-roam capture"
-  ;;   "d" "Sync Org-roam db"
-  ;;   "f" "Find a note"
-  ;;   "l" "Select a forward link"
-  ;;   "s" "Search inside all notes"
-  ;;   "t" "Add a tag to a note"
-  ;;   "u" "Open Org-roam UI")
-
-  ;; Denote
   (which-key-add-keymap-based-replacements mmotion/notes-map
     "b" "Show note's backlinks"
     "d" "Filter notes in Dired"
@@ -885,7 +852,8 @@ s
     "l" "Org Store Link"
     "r" "Org Refile"
     "p" "Org Refile Copy"
-    "s" "Add a Schedule")
+    "s" "Add a Schedule"
+    "u" "Update a dblock")
   
   (which-key-add-keymap-based-replacements mmotion/toggle-map
     "c" "Close current tab"
@@ -1649,102 +1617,6 @@ Typewriter-like look of the page (centring).
 (add-hook 'org-mode-hook
           (lambda ()
             (local-set-key (kbd "RET") #'mmotion/org-smart-return)))
-
-#+end_src
-
-* Org-roam (not in use)
-Main org-roam set up.
-
-  #+begin_src emacs-lisp :tangle no
-
-;;; Org-roam ---------------------------------------------------
-(use-package org-roam
-  :demand t
-  :custom
-  (org-roam-directory (file-truename "~/Notes/plain_orgfiles/orgfiles/roam")
-                      org-roam-completion-everywhere nil)
-  :bind
-  (("C-c n l" . org-roam-buffer-toggle)
-   ("C-c n f" . org-roam-node-find)
-   ("C-c n g" . org-roam-graph)
-   ("C-c n i" . org-roam-node-insert)
-   ("C-c n c" . org-roam-capture))
-  :config
-  (setq org-roam-node-display-template
-        (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
-  (org-roam-db-autosync-mode))
-
-  #+end_src
-** Org-roam dailies set up
-  #+begin_src emacs-lisp :tangle no
-
-(use-package org-roam-dailies
-  :ensure nil
-  :after org-roam
-  :no-require t
-  :bind (("C-c n j" . org-roam-dailies-capture-today))
-  :config
-  (require 'org-roam-dailies)
-  (setq org-roam-dailies-capture-templates
-        '(("d" "daily entry" entry
-           "* %<%H:%M>\n%?"
-           :if-new
-           (file+head "%<%Y-%m-%d>.org"
-                      "#+title: %<%Y-%m-%d>\n")))))
-
-  #+end_src
-** Org-roam UI
-#+begin_src emacs-lisp :tangle no
-
-;;;; Org-roam UI
-(use-package websocket
-    :after org-roam)
-
-(use-package org-roam-ui
-    :after org-roam ;; or :after org
-;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
-;;         a hookable mode anymore, you're advised to pick something yourself
-;;         if you don't care about startup time, use
-    ;; :hook (after-init . org-roam-ui-mode)
-    :config
-    (setq org-roam-ui-sync-theme nil
-          org-roam-ui-follow t
-          org-roam-ui-update-on-save t
-          org-roam-ui-theme "homage-white"
-          org-roam-ui-open-on-start nil))
-
-#+end_src
-
-** Consult-org-roam
-#+begin_src emacs-lisp :tangle no
-
-;;;; Consult-org-roam
-(use-package consult-org-roam
-   :after org-roam
-   :init
-   (require 'consult-org-roam)
-   ;; Activate the minor mode
-   (consult-org-roam-mode 1)
-   :custom
-   ;; Use `ripgrep' for searching with `consult-org-roam-search'
-   (consult-org-roam-grep-func #'consult-ripgrep)
-   ;; Configure a custom narrow key for `consult-buffer'
-   (consult-org-roam-buffer-narrow-key ?r)
-   ;; Display org-roam buffers right after non-org-roam buffers
-   ;; in consult-buffer (and not down at the bottom)
-   (consult-org-roam-buffer-after-buffers t)
-   :config
-   ;; Eventually suppress previewing for certain functions
-   (consult-customize
-    consult-org-roam-forward-links
-    :preview-key "M-.")
-   :bind
-   ;; Define some convenient keybindings as an addition
-   ("C-c n e" . consult-org-roam-file-find)
-   ("C-c n b" . consult-org-roam-backlinks)
-   ("C-c n B" . consult-org-roam-backlinks-recursive)
-   ("C-c n l" . consult-org-roam-forward-links)
-   ("C-c n r" . consult-org-roam-search))
 
 #+end_src
 
