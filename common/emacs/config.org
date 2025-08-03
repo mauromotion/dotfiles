@@ -1,3 +1,4 @@
+
 #+TITLE: Mauro's GNU Emacs Config
 #+AUTHOR: Mauro Di Ianni (mmotion)
 #+EMAIL: hello@mauromotion.com
@@ -59,9 +60,8 @@
   - [[#org-mode-capture-templates][Org-mode Capture Templates]]
   - [[#evil-org][Evil-org]]
   - [[#toc-org][TOC-org]]
-  - [[#org-babel][Org Babel]]
-  - [[#org-download][Org download]]
-  - [[#save-and-show-remote-images][Save and show remote images]]
+  - [[#org-babel][Org-Babel]]
+  - [[#org-download][Org-download]]
   - [[#structure-templates][Structure Templates]]
   - [[#highlight-todo][Highlight-todo]]
 - [[#org-styling][Org Styling]]
@@ -334,7 +334,7 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
 (use-package circadian
   :ensure t
   :config
-  (setq circadian-themes '((:sunrise . doric-marble)
+  (setq circadian-themes '((:sunrise . doric-earth)
                            (:sunset  . doric-obsidian)))
   (circadian-setup))
 #+end_src
@@ -1410,7 +1410,7 @@ Completion at point.
 
 #+end_src
 
-** Org Babel
+** Org-Babel
 #+begin_src emacs-lisp
 
 ;;;; Org babel
@@ -1435,49 +1435,40 @@ Completion at point.
 
 #+end_src
 
-** Org download
+** Org-download
 #+begin_src emacs-lisp
 
-(eval-when-compile
-  (declare-function url-handler-file-remote-p "url-handlers"))
+;; Custom filename function for org-download to use denote's file naming scheme.
+(defun mmotion/org-download-file-format-function (filename)
+  "Generate Denote-style filename for org-download."
+  (let* ((extension (file-name-extension filename))
+         (base-name (file-name-sans-extension (file-name-nondirectory filename)))
+         (keywords (read-string "Keywords (space-separated): " "image"))
+         (timestamp (format-time-string "%Y%m%dT%H%M%S"))
+         (clean-title (replace-regexp-in-string "[^a-zA-Z0-9-]" "-" 
+                                               (downcase base-name)))
+         (clean-keywords (mapconcat (lambda (kw) 
+                                     (replace-regexp-in-string "[^a-zA-Z0-9]" "" 
+                                                              (downcase kw)))
+                                   (split-string keywords) "_")))
+    (format "%s==resources--%s__%s.%s" timestamp clean-title clean-keywords extension)))
 
 (use-package org-download
   :init
-  ;; Force the method to 'directory
   (setq org-download-method 'directory)
-  ;; Set a global default image directory
-  (setq-default org-download-image-dir (expand-file-name "~/Notes/plain_orgfiles/orgfiles/images"))
-  ;; Only try to create if the decrypted mountpoint is present
+  (setq-default org-download-image-dir (expand-file-name "~/Notes/plain_orgfiles/orgfiles/denote/attachments/"))
+  (setq org-download-heading-lvl nil)  ; This prevents subdirectory creation
+  (setq org-download-file-format-function #'mmotion/org-download-file-format-function)
   (when (file-directory-p "~/Notes/plain_orgfiles/orgfiles")
     (unless (file-directory-p org-download-image-dir)
       (make-directory org-download-image-dir nil)))
   :config
-  ;; Keybinding to paste clipboard images
-  (define-key org-mode-map (kbd "C-c C-p") #'org-download-clipboard))
+  (define-key org-mode-map (kbd "C-c C-p") #'org-download-clipboard)  ; clipboard
+  (define-key org-mode-map (kbd "C-c C-i") #'org-download-image)      ; URL
+  (define-key org-mode-map (kbd "C-c C-f") #'org-download-yank))      ; local file
 
 #+end_src
-** Save and show remote images
-#+begin_src emacs-lisp
 
-(defvar mmotion/org-image-cache-dir (expand-file-name "~/Notes/plain_orgfiles/orgfiles/images/"))
-
-(when (file-directory-p "~/Notes/plain_orgfiles/orgfiles")
-  (unless (file-directory-p mmotion/org-image-cache-dir)
-    (make-directory mmotion/org-image-cache-dir t)))
-
-(defun mmotion/org-insert-image-from-url (url)
-  "Download image from URL, save to cache, insert link, and display inline."
-  (interactive "sImage URL: ")
-  (let* ((filename (file-name-nondirectory (url-filename (url-generic-parse-url url))))
-         (local-path (expand-file-name filename mmotion/org-image-cache-dir)))
-    (url-copy-file url local-path t)
-    (insert (format "[[file:%s]]" local-path))
-    (org-display-inline-images)))
-
-(with-eval-after-load 'org
-  (define-key org-mode-map (kbd "C-c C-i") #'mmotion/org-insert-image-from-url))
-
-#+end_src
 ** Structure Templates
 #+begin_src emacs-lisp
 
@@ -1640,17 +1631,15 @@ Typewriter-like look of the page (centring).
 ;;; Denote ----------------------------------------------------
 (use-package denote
   :ensure t
-  :hook (dired-mode . denote-dired-mode)
-  ;; :bind
-  ;; (("C-c n n" . denote)
-  ;;  ("C-c n r" . denote-rename-file)
-  ;;  ("C-c n l" . denote-link)
-  ;;  ("C-c n b" . denote-backlinks)
-  ;;  ("C-c n d" . denote-dired)
-  ;;  ("C-c n g" . denote-grep))
+  ;; :hook (dired-mode . denote-dired-mode)
   :config
   (setq denote-directory (expand-file-name "~/Notes/plain_orgfiles/orgfiles/denote/"))
   (setq denote-known-keywords nil)
+  ;; Dired fontifies denote files only in denote's default dir and its subdirs
+  (setq denote-dired-directories (list denote-directory))
+  (setq denote-dired-directories-include-subdirectories t)
+
+ (add-hook 'dired-mode-hook #'denote-dired-mode-in-directories)
 
   ;; Automatically rename Denote buffers when opening them so that
   ;; instead of their long file name they have, for example, a literal
