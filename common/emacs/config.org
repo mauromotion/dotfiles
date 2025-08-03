@@ -18,6 +18,7 @@
 - [[#fonts][Fonts]]
 - [[#appearance][Appearance]]
   - [[#themes][Themes]]
+  - [[#circadian][Circadian]]
   - [[#icons][Icons]]
   - [[#modeline][Modeline]]
   - [[#emacs-dashboard][Emacs-dashboard]]
@@ -324,6 +325,19 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
 ;; (load-theme 'doom-city-lights t)
 #+end_src
 
+** Circadian
+#+begin_src emacs-lisp
+;;;; Set dark or light theme based on the time of the day
+(setq calendar-latitude 51.406422)
+(setq calendar-longitude 0.004860)
+
+(use-package circadian
+  :ensure t
+  :config
+  (setq circadian-themes '((:sunrise . doric-marble)
+                           (:sunset  . doric-obsidian)))
+  (circadian-setup))
+#+end_src
 ** Icons
 I'd rather use =nerd-icons= than =all-the-icons=, much more reliable.
 
