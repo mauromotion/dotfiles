@@ -20,7 +20,7 @@
 - [[#appearance][Appearance]]
   - [[#themes][Themes]]
   - [[#circadian][Circadian]]
-  - [[#icons][Icons]]
+  - [[#nerd-icons][Nerd-icons]]
   - [[#modeline][Modeline]]
   - [[#emacs-dashboard][Emacs-dashboard]]
   - [[#indent-line-guides][Indent Line Guides]]
@@ -64,7 +64,7 @@
   - [[#org-download][Org-download]]
   - [[#structure-templates][Structure Templates]]
   - [[#highlight-todo][Highlight-todo]]
-- [[#org-styling][Org Styling]]
+- [[#org-mode-styling][Org-mode Styling]]
   - [[#org-superstar-bullet-points][Org-superstar (bullet points)]]
   - [[#fancy-priorities-look][Fancy Priorities Look]]
   - [[#org-modern-not-in-use][Org-modern (not in use)]]
@@ -87,7 +87,7 @@
   - [[#vterm-toggle][Vterm-toggle]]
 - [[#dired][Dired]]
   - [[#main-dired-config][Main dired config]]
-  - [[#nerd-icons-for-dired][Nerd icons for dired]]
+  - [[#nerd-icons-for-dired][Nerd-icons for Dired]]
   - [[#hide-dotfiles][Hide dotfiles]]
   - [[#set-up-programs-to-open-certain-files-from-dired][Set up programs to open certain files from dired]]
   - [[#dired-preview-not-in-use][Dired preview (not in use)]]
@@ -162,12 +162,12 @@ Basic set up of Emacs' UI, removing the default toolbars, and setting up some sy
 (setopt use-short-answers t)
 (global-auto-revert-mode t)
 (delete-selection-mode 1) ; Delete selected text and replace it with typed text
-;; Trying to fixe rendering issues within qtile
-(pixel-scroll-precision-mode 1)
-(setq frame-resize-pixelwise t
-      window-resize-pixelwise t)
 
-(electric-pair-mode 1) ; Autopairing
+;;;; Smooth scrolling
+(pixel-scroll-precision-mode 1)
+
+;;;; Autopairing
+(electric-pair-mode 1)
 ;; The following prevents <> from auto-pairing when electric-pair-mode is on.
 ;; Otherwise, org-tempo is broken when you try to <s TAB...
 (add-hook 'org-mode-hook
@@ -338,14 +338,21 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
                            (:sunset  . doric-obsidian)))
   (circadian-setup))
 #+end_src
-** Icons
+** Nerd-icons
 I'd rather use =nerd-icons= than =all-the-icons=, much more reliable.
 
    #+begin_src emacs-lisp
 
 ;;;; Use nerd-icons
 (use-package nerd-icons
-  :demand t)
+  :demand t
+  :config
+  (when (display-graphic-p)
+    ;; Configure fontset for all frames and contexts
+    (set-fontset-font t 'unicode "Symbols Nerd Font Mono" nil 'append)
+    (set-fontset-font "fontset-default" 'unicode "Symbols Nerd Font Mono" nil 'append)
+    ;; Also set for current frame
+    (set-fontset-font (frame-parameter nil 'font) 'unicode "Symbols Nerd Font Mono" nil 'append)))
 
 (use-package nerd-icons-completion
   :after marginalia
@@ -722,13 +729,14 @@ Better front end for Emacs' documentation
   "e" #'denote-org-extract-org-subtree
   "f" #'consult-notes
   "g" #'consult-notes-search-in-all-notes
+  "j" #'mmotion/open-today-journal
   "l" #'denote-link
   "n" #'denote
   "r" #'denote-rename-file
   "t" #'denote-rename-file-keywords)
     #+end_src
 
-*** [O]rg keybindings
+*** [O]rg-mode keybindings
     #+begin_src emacs-lisp
 
 (defvar-keymap mmotion/org-map
@@ -737,14 +745,17 @@ Better front end for Emacs' documentation
   "c" #'org-capture
   "d" #'org-deadline
   "i" #'mmotion/org-insert-image-from-url
-  "l" #'org-store-link
+  "l" #'org-insert-link
+  "L" #'org-store-link
   "r" #'org-refile
   "p" #'org-refile-copy
   "s" #'org-schedule
-  "u" #'org-dblock-update)
+  "u" #'org-update-all-dblocks)
+
     #+end_src
 
-*** [T]oggle and [T]abs keybindings
+*** [T]oggle and [T]ab
+s keybindings
     #+begin_src emacs-lisp
 
 (defvar-keymap mmotion/toggle-map
@@ -787,7 +798,8 @@ Better front end for Emacs' documentation
   "-" #'dired-jump
   "SPC" #'consult-buffer
   "," #'consult-recent-file
-  "." #'find-file)
+  "." #'find-file
+  "c" #'calendar)
 
 ;;;; Add submenus to the leader keymap
 (keymap-set mmotion/leader-map "b" mmotion/buffer-map)
@@ -853,6 +865,7 @@ s
     "e" "Create a new note from current subtree"
     "f" "Find a note"
     "g" "Grep inside all notes"
+    "j" "Open today's journal"
     "l" "Insert link to note"
     "n" "Create a new note"
     "r" "Rename a note"
@@ -1216,6 +1229,7 @@ Completion at point.
   (setq evil-auto-indent 1)
   (setq org-src-preserve-indentation t)
   (setq org-return-follows-link t)
+  (setq org-attach-directory "~/Notes/plain_orgfiles/orgfiles/denote/attachments/")
 
   ;; Open file links in the same window
   (setq org-link-frame-setup
@@ -1498,7 +1512,7 @@ Completion at point.
           ("CANCELLED"      error bold)
           ("IDEA" success bold))))
 #+end_src
-* Org Styling
+* Org-mode Styling
 
 ** Org-superstar (bullet points)
 
@@ -1530,7 +1544,8 @@ Completion at point.
 
 ;;;; Fancy priorities look
 (use-package org-fancy-priorities
-  :hook (org-mode . org-fancy-priorities-mode)
+  :hook
+  (org-mode . org-fancy-priorities-mode)
   :config
   (setq org-fancy-priorities-list '("󰬈" "󰬉" "󰬊")))
 
@@ -1727,13 +1742,24 @@ Typewriter-like look of the page (centring).
   ;; Read the doc string of `denote-journal-title-format'.
   (setq denote-journal-title-format 'day-date-month-year))
 
+(with-eval-after-load 'calendar
+  (evil-define-key 'normal calendar-mode-map
+    (kbd "RET") #'denote-journal-calendar-new-or-existing
+    (kbd "SPC") #'denote-journal-calendar-new-or-existing))
+
 (with-eval-after-load 'org-capture
   (add-to-list 'org-capture-templates
                '("j" "Journal" entry
                  (file denote-journal-path-to-new-or-existing-entry)
-                 "* %(format-time-string \"%H:%M\") %?\n%i\n%a"
+                 "* %(format-time-string \"%H:%M\") %?\n%i"
                  :kill-buffer t
                  :empty-lines 1)))
+
+(defun mmotion/open-today-journal ()
+  "Open or create today's journal entry directly (not via capture)."
+  (interactive)
+  (let ((today-file (denote-journal-path-to-new-or-existing-entry)))
+    (find-file today-file)))
    #+end_src
 
 * LSP mode
@@ -1897,7 +1923,7 @@ Typewriter-like look of the page (centring).
   (require 'dired-x))
    #+end_src
 
-** Nerd icons for dired
+** Nerd-icons for Dired
    #+begin_src emacs-lisp
 
 (use-package nerd-icons-dired

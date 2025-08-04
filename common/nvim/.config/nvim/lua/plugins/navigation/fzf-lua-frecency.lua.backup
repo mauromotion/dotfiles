@@ -1,0 +1,8 @@
+return {
+	"elanmed/fzf-lua-frecency.nvim",
+	config = {
+		function()
+			require("fzf-lua-frecency").frecency()
+		end,
+	},
+}
