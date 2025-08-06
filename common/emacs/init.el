@@ -7,6 +7,15 @@
 ;; 2) Startup Performance
 (setq gc-cons-threshold (* 50 1000 1000))
 
+;; Redirect Emacs customizations to a machine-local file
+(setq custom-file (expand-file-name "var/custom.el"
+  (expand-file-name "emacs"
+    (or (getenv "XDG_CACHE_HOME") "~/.cache"))))
+
+;; Load customizations if the file exists
+(when (file-exists-p custom-file)
+  (load custom-file))
+
 (defun mmotion/display-startup-time ()
   (message "Emacs loaded in %s with %d garbage collections."
            (format "%.2f seconds"
@@ -66,50 +75,3 @@
                        (string= (file-truename buffer-file-name)
                                 mmotion/config-org))
               (mmotion/reload-literate-config))))
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("7ec8fd456c0c117c99e3a3b16aaf09ed3fb91879f6601b1ea0eeaee9c6def5d9"
-     default))
- '(package-selected-packages
-   '(auto-package-update cape circadian colorful-mode consult-notes
-                         consult-org-roam consult-projectile corfu
-                         dashboard denote-journal denote-org
-                         dired-hide-dotfiles dired-open doom-modeline
-                         doom-themes doric-themes ef-themes
-                         embark-consult evil-collection evil-goggles
-                         evil-nerd-commenter evil-org flycheck
-                         flyspell-correct helpful hl-todo indent-bars
-                         lsp-treemacs lsp-ui magit marginalia
-                         mood-line nerd-icons-completion
-                         nerd-icons-dired no-littering olivetti
-                         orderless org-download org-fancy-priorities
-                         org-modern org-roam-ui org-superstar
-                         rainbow-delimiters rjsx-mode toc-org undo-fu
-                         undo-fu-session vertico vterm-toggle))
- '(package-vc-selected-packages
-   '((reader :url "https://codeberg.org/divyaranjan/emacs-reader" :make
-             "all"))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(evil-goggles-change-face ((t (:inherit diff-removed))))
- '(evil-goggles-delete-face ((t (:inherit diff-removed))))
- '(evil-goggles-paste-face ((t (:inherit diff-added))))
- '(evil-goggles-undo-redo-add-face ((t (:inherit diff-added))))
- '(evil-goggles-undo-redo-change-face ((t (:inherit diff-changed))))
- '(evil-goggles-undo-redo-remove-face ((t (:inherit diff-removed))))
- '(evil-goggles-yank-face ((t (:inherit diff-changed))))
- '(org-block ((t (:inherit fixed-pitch))))
- '(org-code ((t (:inherit (shadow fixed-pitch)))))
- '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
- '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
- '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
- '(org-table ((t (:inherit fixed-pitch))))
- '(org-verbatim ((t (:inherit (shadow fixed-pitch))))))

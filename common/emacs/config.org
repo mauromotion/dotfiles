@@ -1,4 +1,3 @@
-
 #+TITLE: Mauro's GNU Emacs Config
 #+AUTHOR: Mauro Di Ianni (mmotion)
 #+EMAIL: hello@mauromotion.com
@@ -8,7 +7,6 @@
 #+PROPERTY: header-args :tangle config.el
 
 * Table of Contents :toc:
-- [[#general-flow][General flow]]
 - [[#package-manager][Package Manager]]
   - [[#auto-update-packages][Auto-Update Packages]]
 - [[#keep-directories-clean][Keep directories clean]]
@@ -74,8 +72,8 @@
   - [[#denote-main-config][Denote main config]]
   - [[#denote-org][Denote-org]]
   - [[#consult-notes][Consult-notes]]
-  - [[#consult-denote][Consult-denote]]
   - [[#denote-journal][Denote-journal]]
+  - [[#denote-explore][Denote-explore]]
 - [[#lsp-mode][LSP mode]]
   - [[#lsp-mode-set-up][LSP mode set up]]
   - [[#flycheck][Flycheck]]
@@ -93,7 +91,8 @@
   - [[#dired-preview-not-in-use][Dired preview (not in use)]]
 - [[#reset-gc-threshold][Reset GC Threshold]]
 
-* General flow
+*
+General flow
 This literal configuration will work like this:
 - In =early-init.el= some basic initial UI settings are configured.
 - Then in =init.el= in order, there's the start up performance function, the whole use-package installation and setup, and a check that loads =config.el= if present on disk, or, if not present, it will tangle this =config.org= file so that =config.el= gets generated. And then =init.el= loads the whole configuration from =config.el=.
@@ -335,7 +334,7 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
   :ensure t
   :config
   (setq circadian-themes '((:sunrise . doric-earth)
-                           (:sunset  . doric-obsidian)))
+                           (:sunset  . doric-fire)))
   (circadian-setup))
 #+end_src
 ** Nerd-icons
@@ -1706,20 +1705,6 @@ Typewriter-like look of the page (centring).
  ;; (setq consult-notes-denote-files-function (function denote-directory-text-only-files)))
 #+end_src
 
-** Consult-denote
-   #+begin_src emacs-lisp :tangle no
-
-;;;; Consult-denote
-(use-package consult-denote
-  :ensure t
-  ;; :bind
-  ;; (("C-c n f" . consult-denote-find)
-  ;;  ("C-c n g" . consult-denote-grep))
-  :config
-  (consult-denote-mode 1))
-
-   #+end_src
-
 ** Denote-journal
    #+begin_src emacs-lisp
 
@@ -1762,6 +1747,13 @@ Typewriter-like look of the page (centring).
     (find-file today-file)))
    #+end_src
 
+** Denote-explore
+#+begin_src emacs-lisp
+
+;;;; Denote-explore
+(use-package denote-explore)
+
+#+end_src
 * LSP mode
 ** LSP mode set up
 #+begin_src emacs-lisp
@@ -1882,23 +1874,24 @@ Typewriter-like look of the page (centring).
 
 ** Vterm-toggle
 #+begin_src emacs-lisp
-(use-package vterm-toggle
-  :after vterm
-  :config
-  (setq vterm-toggle-fullscreen-p nil)
-  (add-to-list 'display-buffer-alist
-             '((lambda (buffer-or-name _)
-                   (let ((buffer (get-buffer buffer-or-name)))
-                     (with-current-buffer buffer
-                       (or (equal major-mode 'vterm-mode)
-                           (string-prefix-p vterm-buffer-name (buffer-name buffer))))))
-                (display-buffer-reuse-window display-buffer-at-bottom)
-                ;;(display-buffer-reuse-window display-buffer-in-direction)
-                ;;display-buffer-in-direction/direction/dedicated is added in emacs27
-                ;;(direction . bottom)
-                ;;(dedicated . t) ;dedicated is supported in emacs27
-                (reusable-frames . visible)
-                (window-height . 0.3))))
+  ;;;; Vterm-toggle
+  (use-package vterm-toggle
+    :after vterm
+    :config
+    (setq vterm-toggle-fullscreen-p nil)
+    (add-to-list 'display-buffer-alist
+               '((lambda (buffer-or-name _)
+                     (let ((buffer (get-buffer buffer-or-name)))
+                       (with-current-buffer buffer
+                         (or (equal major-mode 'vterm-mode)
+                             (string-prefix-p vterm-buffer-name (buffer-name buffer))))))
+                  (display-buffer-reuse-window display-buffer-at-bottom)
+                  ;;(display-buffer-reuse-window display-buffer-in-direction)
+                  ;;display-buffer-in-direction/direction/dedicated is added in emacs27
+                  ;;(direction . bottom)
+                  ;;(dedicated . t) ;dedicated is supported in emacs27
+                  (reusable-frames . visible)
+                  (window-height . 0.3))))
 
 #+end_src
 
