@@ -1,0 +1,18 @@
+---- ** Material ** ----
+return {
+	"marko-cerovac/material.nvim",
+	lazy = false,
+	priority = 1000,
+	config = function()
+		require("material.").setup({
+			styles = {
+				comments = { italic = true },
+				keywords = { italic = true },
+			},
+			plugins = { "mini", "fidget", "flash", "gitsigns", "indent-blankline", "trouble", "which-key" },
+			lualine_style = "stealth",
+		})
+		vim.g.material_style = "oceanic"
+		vim.cmd([[colorscheme material]])
+	end,
+}

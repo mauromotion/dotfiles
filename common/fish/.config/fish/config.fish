@@ -40,6 +40,7 @@ abbr --add pym python3 manage.py
 abbr --add pymr python3 manage.py runserver
 abbr --add refl sudo reflector -c \'United Kingdom\' -a 6 --sort rate --save /etc/pacman.d/mirrorlist
 abbr --add src source ~/.config/fish/config.fish
+abbr --add tree eza -T --color=always --icons
 abbr --add vst mullvad status
 abbr --add vup mullvad connect
 abbr --add vdw mullvad disconnect
@@ -51,7 +52,6 @@ alias cp "cp -i"
 alias del "trash-put -i"
 alias df "df -H"
 alias diary "nvim +VimwikiIndex +VimwikiDiaryIndex"
-alias etree "eza -T --color=always --icons | less -R"
 alias glog "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --date=short"
 alias grep "grep --color=auto"
 alias icat "kitty +kitten icat"

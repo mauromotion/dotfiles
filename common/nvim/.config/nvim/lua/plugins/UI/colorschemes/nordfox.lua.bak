@@ -1,0 +1,21 @@
+---- ** NordFox ** ----
+return {
+	"edeneast/nightfox.nvim",
+	lazy = false,
+	priority = 1000,
+	config = function()
+		require("nightfox").setup({
+			options = {
+				transparent = true,
+				dim_inactive = false,
+				styles = {
+					comments = "italic",
+					keywords = "italic,bold",
+					types = "italic,bold",
+				},
+			},
+		})
+		-- apply colorscheme
+		vim.cmd([[colorscheme nordfox]])
+	end,
+}

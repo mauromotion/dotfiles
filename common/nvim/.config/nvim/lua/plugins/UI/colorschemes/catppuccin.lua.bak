@@ -1,0 +1,20 @@
+---- ** Catppuccin ** ----
+return {
+	"catppuccin/nvim",
+	lazy = false,
+	priority = 1000,
+	name = "catppuccin",
+	config = function()
+		require("catppuccin").setup({
+			flavour = "mocha",
+			transparent_background = false,
+			styles = {
+				comments = { "italic" },
+				keywords = { "italic, bold" },
+				types = { "italic, bold" },
+			},
+		})
+		-- apply colorscheme
+		vim.cmd([[colorscheme catppuccin]])
+	end,
+}

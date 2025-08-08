@@ -1340,14 +1340,14 @@ Completion at point.
    '((sequence "TODO(t)" "DOING(d)" "PROJ(p)" "|" "DONE(x!)")
      (sequence "WAIT(w@)" "HOLD(h!)" "IDEA(i)" "|" "COMPLETED(c!)" "CANCELLED(C!)" "KILLED(k!/@)"))))
 
-(defun mmotion/org-agenda-skip-hold ()
-  "Skip entries that are in HOLD state."
-  (org-agenda-skip-entry-if 'todo '("HOLD")))
+;; (defun mmotion/org-agenda-skip-hold ()
+;;   "Skip entries that are in HOLD state."
+;;   (org-agenda-skip-entry-if 'todo '("HOLD")))
 
-(setq org-agenda-custom-commands
-      '(("a" "Agenda"
-         ((agenda "" ((org-agenda-skip-function #'mmotion/org-agenda-skip-hold)))
-          (alltodo "" ((org-agenda-skip-function #'mmotion/org-agenda-skip-hold)))))))
+;; (setq org-agenda-custom-commands
+;;       '(("a" "Agenda"
+;;          ((agenda "" ((org-agenda-skip-function #'mmotion/org-agenda-skip-hold)))
+;;           (alltodo "" ((org-agenda-skip-function #'mmotion/org-agenda-skip-hold)))))))
 
    #+end_src
 
