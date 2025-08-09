@@ -12,10 +12,10 @@ white = "#4F5E68"
 
 [colors.cursor]
 cursor = "#2C363C"
-text = "#F0EDEC"
+text = "#E8E4E3"
 
 [colors.normal]
-black = "#F0EDEC"
+black = "#E8E4E3"
 blue = "#286486"
 cyan = "#3B8992"
 green = "#4F6C31"
@@ -25,5 +25,5 @@ white = "#2C363C"
 yellow = "#944927"
 
 [colors.primary]
-background = "#F0EDEC"
+background = "#E8E4E3"
 foreground = "#2C363C"

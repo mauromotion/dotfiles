@@ -1,4 +1,5 @@
 #+TITLE: Mauro's GNU Emacs Config
+r
 #+AUTHOR: Mauro Di Ianni (mmotion)
 #+EMAIL: hello@mauromotion.com
 #+DESCRIPTION: Mauro's personal Emacs configuration
@@ -76,9 +77,7 @@
   - [[#denote-explore][Denote-explore]]
 - [[#tree-sitter][Tree-sitter]]
 - [[#lsp-mode][LSP mode]]
-  - [[#lsp-mode-set-up][LSP mode set up]]
   - [[#flycheck][Flycheck]]
-  - [[#rjsx-mode-reactjs][Rjsx-mode (ReactJS)]]
 - [[#formatting][Formatting]]
 - [[#terminal-emulators][Terminal Emulators]]
   - [[#term][Term]]
@@ -1454,13 +1453,10 @@ Completion at point.
      (js . t)))
 
   (push '("conf-unix" . conf-unix) org-src-lang-modes)
-
-  ;; Use rjsx-mode for js blocks
-  (defun my/org-src-lang-to-mode (lang)
-    (if (string= lang "js")
-        'rjsx-mode
-      (org-src--get-lang-mode lang)))
-  (advice-add 'org-src--get-lang-mode :override #'my/org-src-lang-to-mode))
+  ;; Add JSX support using js-mode
+  (push '("jsx" . js) org-src-lang-modes)
+  ;; Enable JSX syntax in js-mode
+  (setq js-jsx-syntax t))
 
 (setq org-src-fontify-natively t)
 
@@ -1613,8 +1609,10 @@ Typewriter-like look of the page (centring).
          (org-mode    . olivetti-mode))  ; enable in Org
   :custom
   (olivetti-body-width 100)           ; set body width
-  (olivetti-style 'gancy)          ; use fringes for margins
-  )  
+  (olivetti-style 'fancy)          ; use fringes for margins
+  :config
+  ;; Disable olivetti in astro-ts-mode
+  (add-hook 'astro-ts-mode-hook (lambda () (olivetti-mode -1))))
 
 #+end_src
 
@@ -1787,21 +1785,57 @@ Typewriter-like look of the page (centring).
    '((python-mode . python-ts-mode)
      (javascript-mode . js-ts-mode)
      (js-mode . js-ts-mode)
+     (astro-mode . astro-ts-mode)
      (html-mode . html-ts-mode)
      (css-mode . css-ts-mode)
      (sh-mode . bash-ts-mode))))
 
+;;;;; Astro support
+(use-package treesit-auto
+  :ensure t
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode))
+
+(use-package astro-ts-mode
+  :ensure t
+  :mode "\\.astro\\'")
+
 #+end_src
 
 * LSP mode
-** LSP mode set up
-#+begin_src emacs-lisp 
+**
+LSP mode set up
+#+begin_src emacs-lisp
 
 ;;; LSP mode ---------------------------------------------------
 ;;;; Breadcrumb
 (defun mmotion/lsp-mode-setup ()
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
   (lsp-headerline-breadcrumb-mode))
+
+;;;; Emmet mode
+(use-package emmet-mode
+  :ensure t
+  :hook ((html-ts-mode . emmet-mode)
+         (css-ts-mode . emmet-mode)
+         (astro-ts-mode . emmet-mode)
+         (js-ts-mode . emmet-mode))
+  :bind (("C-j" . emmet-expand-line))
+  :config
+  ;; Enable JSX support for your JS/TS modes
+  (add-to-list 'emmet-jsx-major-modes 'js-ts-mode)
+  (add-to-list 'emmet-jsx-major-modes 'astro-ts-mode)
+  
+;; Add emmet to completion-at-point functions
+  (defun my/setup-emmet-completion ()
+    (add-to-list 'completion-at-point-functions 'emmet-completion-at-point-function))
+  
+  (add-hook 'astro-ts-mode-hook #'my/setup-emmet-completion)
+  (add-hook 'html-ts-mode-hook #'my/setup-emmet-completion))
+  
 
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
@@ -1814,10 +1848,14 @@ Typewriter-like look of the page (centring).
           html-mode
           js-mode
           js2-mode
-          rjsx-mode
           typescript-mode
           tsx-mode
-          python-mode) . lsp-deferred))
+          python-mode
+          ;; Add tree-sitter modes to LSP
+          html-ts-mode
+          css-ts-mode
+          js-ts-mode
+          astro-ts-mode) . lsp-deferred))
   :config
   (setq lsp-completion-provider :capf)
   (setq lsp-completion-enable t)        ; Ensure completion is enabled
@@ -1827,7 +1865,13 @@ Typewriter-like look of the page (centring).
   (setq lsp-enable-completion-at-point t)
   (lsp-enable-which-key-integration t)
   (setq lsp-enable-symbol-highlighting t)
-  (setq lsp-clients-typescript-server-args '("--stdio")))
+  (setq lsp-clients-typescript-server-args '("--stdio"))
+  ;; Ensure TypeScript server handles JSX in JS files
+  (setq lsp-typescript-preferences-include-package-json-auto-imports "on")
+  ;; Add language ID mappings for emmet-ls support
+  (add-to-list 'lsp-language-id-configuration '(astro-ts-mode . "astro"))
+  (add-to-list 'lsp-language-id-configuration '(html-ts-mode . "html"))
+  (add-to-list 'lsp-language-id-configuration '(css-ts-mode . "css")))
 
 ;;;; lsp-ui
 (use-package lsp-ui
@@ -1862,17 +1906,6 @@ Typewriter-like look of the page (centring).
 
 #+end_src
 
-** Rjsx-mode (ReactJS)
-#+begin_src emacs-lisp 
-
-(use-package rjsx-mode
-  :mode ("\\.jsx\\'" . rjsx-mode)
-  :hook (rjsx-mode . (lambda ()
-                       (setq js-indent-level 2)))
-  :config
-  (setq-default indent-tabs-mode nil))
-
-#+end_src
 * Formatting
 #+begin_src emacs-lisp
 ;;; APHELEIA
