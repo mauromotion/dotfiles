@@ -76,7 +76,12 @@ r
   - [[#denote-journal][Denote-journal]]
   - [[#denote-explore][Denote-explore]]
 - [[#tree-sitter][Tree-sitter]]
+- [[#web-development][Web development]]
+  - [[#astro-support][Astro support]]
+  - [[#emmet-support][Emmet support]]
 - [[#lsp-mode][LSP mode]]
+  - [[#lsp-mode-set-up][LSP mode set up]]
+  - [[#teemacs][Teemacs]]
   - [[#flycheck][Flycheck]]
 - [[#formatting][Formatting]]
 - [[#terminal-emulators][Terminal Emulators]]
@@ -1773,7 +1778,7 @@ Typewriter-like look of the page (centring).
 #+end_src
 
 * Tree-sitter
-#+begin_src emacs-lisp
+  #+begin_src emacs-lisp
 
 ;;; Tree-sitter ------------------------------------------------
 (use-package treesit
@@ -1789,6 +1794,10 @@ Typewriter-like look of the page (centring).
      (html-mode . html-ts-mode)
      (css-mode . css-ts-mode)
      (sh-mode . bash-ts-mode))))
+  #+end_src
+* Web development
+** Astro support
+  #+begin_src emacs-lisp
 
 ;;;;; Astro support
 (use-package treesit-auto
@@ -1803,18 +1812,9 @@ Typewriter-like look of the page (centring).
   :ensure t
   :mode "\\.astro\\'")
 
-#+end_src
-
-* LSP mode
-**
-LSP mode set up
+  #+end_src
+** Emmet support
 #+begin_src emacs-lisp
-
-;;; LSP mode ---------------------------------------------------
-;;;; Breadcrumb
-(defun mmotion/lsp-mode-setup ()
-  (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
-  (lsp-headerline-breadcrumb-mode))
 
 ;;;; Emmet mode
 (use-package emmet-mode
@@ -1836,26 +1836,37 @@ LSP mode set up
   (add-hook 'astro-ts-mode-hook #'my/setup-emmet-completion)
   (add-hook 'html-ts-mode-hook #'my/setup-emmet-completion))
   
+#+end_src
+
+* LSP mode
+** LSP mode set up
+   #+begin_src emacs-lisp
+
+;;; LSP mode ---------------------------------------------------
+;;;; Breadcrumb
+(defun mmotion/lsp-mode-setup ()
+  (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+  (lsp-headerline-breadcrumb-mode))
 
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
   :init
   (setq lsp-keymap-prefix "C-c l")
   :bind-keymap
-        ("C-c l" . lsp-command-map)
+  ("C-c l" . lsp-command-map)
   :hook ((lsp-mode . mmotion/lsp-mode-setup)
          ((css-mode
-          html-mode
-          js-mode
-          js2-mode
-          typescript-mode
-          tsx-mode
-          python-mode
-          ;; Add tree-sitter modes to LSP
-          html-ts-mode
-          css-ts-mode
-          js-ts-mode
-          astro-ts-mode) . lsp-deferred))
+           html-mode
+           js-mode
+           js2-mode
+           typescript-mode
+           tsx-mode
+           python-mode
+           ;; Add tree-sitter modes to LSP
+           html-ts-mode
+           css-ts-mode
+           js-ts-mode
+           astro-ts-mode) . lsp-deferred))
   :config
   (setq lsp-completion-provider :capf)
   (setq lsp-completion-enable t)        ; Ensure completion is enabled
@@ -1885,13 +1896,16 @@ LSP mode set up
   (lsp-ui-peek-find-references t)
   (lsp-ui-sideline-ignore-duplicate t)
   (lsp-ui-sideline-show-code-actions t))
+   #+end_src
+
+** Teemacs
+   #+begin_src emacs-lisp
 
 ;;;; Treemacs
 (use-package lsp-treemacs
   :after lsp)
 
-
-#+end_src
+   #+end_src
 
 ** Flycheck
 #+begin_src emacs-lisp
