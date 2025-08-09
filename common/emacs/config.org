@@ -74,11 +74,12 @@
   - [[#consult-notes][Consult-notes]]
   - [[#denote-journal][Denote-journal]]
   - [[#denote-explore][Denote-explore]]
+- [[#tree-sitter][Tree-sitter]]
 - [[#lsp-mode][LSP mode]]
   - [[#lsp-mode-set-up][LSP mode set up]]
   - [[#flycheck][Flycheck]]
   - [[#rjsx-mode-reactjs][Rjsx-mode (ReactJS)]]
-- [[#tree-sitter][Tree-sitter]]
+- [[#formatting][Formatting]]
 - [[#terminal-emulators][Terminal Emulators]]
   - [[#term][Term]]
   - [[#vterm][Vterm]]
@@ -1059,8 +1060,6 @@ folder, otherwise delete a character backward"
 ;;;; Corfu
 (use-package corfu
   :demand t
-  :hook (org-mode . corfu-mode) ; Enable Corfu in Org buffers
-  ;; Optional customizations
   :custom
   (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
   (corfu-auto t)               ; enable auto popup
@@ -1079,10 +1078,10 @@ folder, otherwise delete a character backward"
   ;;        (shell-mode . corfu-mode)
   ;;        (eshell-mode . corfu-mode))
   :init
-  ;; Recommended: Enable Corfu globally.  Recommended since many modes provide
-  ;; Capfs and Dabbrev can be used globally (M-/).  See also the customization
+  ;; Recommended: Enable Corfu globally. Recommended since many modes provide
+  ;; Capfs and Dabbrev can be used globally (M-/). See also the customization
   ;; variable `global-corfu-modes' to exclude certain modes.
-  (global-corfu-mode)
+  (global-corfu-mode 1)
 
   ;; Enable optional extension modes:
   ;; (corfu-history-mode)
@@ -1104,7 +1103,7 @@ folder, otherwise delete a character backward"
   ;; Try `cape-dict' as an alternative.
   (text-mode-ispell-word-completion nil)
 
-  ;; Hide commands in M-x which do not apply to the current mode.  Corfu
+  ;; Hide commands in M-x which do not apply to the current mode. Corfu
   ;; commands are hidden, since they are not used via M-x. This setting is
   ;; useful beyond Corfu.
   (read-extended-command-predicate #'command-completion-default-include-p))
@@ -1114,7 +1113,7 @@ folder, otherwise delete a character backward"
 ** Cape
 Completion at point.
 
-  #+begin_src emacs-lisp
+  #+begin_src emacs-lisp :tangle no
 
 ;;;; Add extensions (cape)
 (use-package cape
@@ -1131,6 +1130,24 @@ Completion at point.
   (add-hook 'prog-mode-hook #'mmotion/setup-completion)
   (add-hook 'lsp-completion-mode-hook #'mmotion/setup-completion))
 
+  #+end_src
+
+  #+begin_src emacs-lisp
+(use-package cape
+  :init
+  ;; Add to default completion functions globally
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-symbol)
+  (add-to-list 'completion-at-point-functions #'python-completion-at-point)
+  
+  ;; For programming modes, ensure LSP completion is first
+  (defun mmotion/lsp-cape-setup ()
+    (setq-local completion-at-point-functions
+                (append (list #'lsp-completion-at-point)
+                        completion-at-point-functions)))
+  
+  (add-hook 'lsp-mode-hook #'mmotion/lsp-cape-setup))
   #+end_src
   
 * Spellchecking
@@ -1178,8 +1195,9 @@ Completion at point.
 (use-package projectile
   :diminish projectile-mode
   :init
-  (setq projectile-indexing-method 'native
+  (setq projectile-indexing-method 'alien
         projectile-switch-project-action #'projectile-dired
+        projectile-ignored-projects (list (expand-file-name "~"))
         projectile-project-search-path
         '(("~/Projects" . 2)
            "~/.dotfiles"))
@@ -1657,7 +1675,7 @@ Typewriter-like look of the page (centring).
 
   ;; Automatically rename Denote buffers when opening them so that
   ;; instead of their long file name they have, for example, a literal
-  ;; "[D]" followed by the file's title.  Read the doc string of
+  ;; "[D]" followed by the file's title. Read the doc string of
   ;; `denote-rename-buffer-format' for how to modify this.
   (denote-rename-buffer-mode 1))
   #+end_src
@@ -1670,7 +1688,7 @@ Typewriter-like look of the page (centring).
   :ensure t
   :commands
   ;; I list the commands here so that you can discover them more
-  ;; easily.  You might want to bind the most frequently used ones to
+  ;; easily. You might want to bind the most frequently used ones to
   ;; the `org-mode-map'.
   ( denote-org-link-to-heading
     denote-org-backlinks-for-heading
@@ -1717,7 +1735,7 @@ Typewriter-like look of the page (centring).
               denote-journal-link-or-create-entry )
   :hook (calendar-mode . denote-journal-calendar-mode)
   :config
-  ;; Use the "journal" subdirectory of the `denote-directory'.  Set this
+  ;; Use the "journal" subdirectory of the `denote-directory'. Set this
   ;; to nil to use the `denote-directory' instead.
   (setq denote-journal-directory
         (expand-file-name "journal" denote-directory))
@@ -1745,6 +1763,7 @@ Typewriter-like look of the page (centring).
   (interactive)
   (let ((today-file (denote-journal-path-to-new-or-existing-entry)))
     (find-file today-file)))
+
    #+end_src
 
 ** Denote-explore
@@ -1754,9 +1773,29 @@ Typewriter-like look of the page (centring).
 (use-package denote-explore)
 
 #+end_src
+
+* Tree-sitter
+#+begin_src emacs-lisp
+
+;;; Tree-sitter ------------------------------------------------
+(use-package treesit
+  :ensure nil
+  :custom
+  (treesit-extra-load-path '("/usr/lib/tree-sitter"))
+  (treesit-font-lock-level 3)
+  (major-mode-remap-alist
+   '((python-mode . python-ts-mode)
+     (javascript-mode . js-ts-mode)
+     (js-mode . js-ts-mode)
+     (html-mode . html-ts-mode)
+     (css-mode . css-ts-mode)
+     (sh-mode . bash-ts-mode))))
+
+#+end_src
+
 * LSP mode
 ** LSP mode set up
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp 
 
 ;;; LSP mode ---------------------------------------------------
 ;;;; Breadcrumb
@@ -1766,21 +1805,26 @@ Typewriter-like look of the page (centring).
 
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
-  :hook (lsp-mode . mmotion/lsp-mode-setup)
   :init
   (setq lsp-keymap-prefix "C-c l")
   :bind-keymap
         ("C-c l" . lsp-command-map)
-  :hook ((css-mode
+  :hook ((lsp-mode . mmotion/lsp-mode-setup)
+         ((css-mode
           html-mode
           js-mode
           js2-mode
           rjsx-mode
           typescript-mode
           tsx-mode
-          python-mode) . lsp-deferred)
+          python-mode) . lsp-deferred))
   :config
   (setq lsp-completion-provider :capf)
+  (setq lsp-completion-enable t)        ; Ensure completion is enabled
+  (setq lsp-completion-show-detail t)   ; Show completion details
+  (setq lsp-completion-show-kind t)     ; Show completion kind
+  ;; Disable company-specific features
+  (setq lsp-enable-completion-at-point t)
   (lsp-enable-which-key-integration t)
   (setq lsp-enable-symbol-highlighting t)
   (setq lsp-clients-typescript-server-args '("--stdio")))
@@ -1802,18 +1846,24 @@ Typewriter-like look of the page (centring).
 (use-package lsp-treemacs
   :after lsp)
 
+
 #+end_src
 
 ** Flycheck
 #+begin_src emacs-lisp
 
 (use-package flycheck
-  :hook (prog-mode . flycheck-mode))
+  :ensure t
+  :hook (prog-mode . flycheck-mode)
+      ;; :init (global-flycheck-mode)
+      :bind (:map flycheck-mode-map
+                  ("M-n" . flycheck-next-error) ; optional but recommended error navigation
+                  ("M-p" . flycheck-previous-error)))
 
 #+end_src
 
 ** Rjsx-mode (ReactJS)
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp 
 
 (use-package rjsx-mode
   :mode ("\\.jsx\\'" . rjsx-mode)
@@ -1823,32 +1873,30 @@ Typewriter-like look of the page (centring).
   (setq-default indent-tabs-mode nil))
 
 #+end_src
-* Tree-sitter
+* Formatting
 #+begin_src emacs-lisp
-
-;;; Tree-sitter ------------------------------------------------
-(use-package treesit
-  :ensure nil
-  :custom
-  (treesit-extra-load-path '("/usr/lib/tree-sitter"))
-  (treesit-font-lock-level 3)
-  (major-mode-remap-alist
-   '((python-mode . python-ts-mode)
-     (javascript-mode . js-ts-mode)
-     (js-mode . js-ts-mode)
-     (html-mode . html-ts-mode)
-     (css-mode . css-ts-mode)
-     (sh-mode . bash-ts-mode))))
-
+;;; APHELEIA
+;; auto-format different source code files extremely intelligently
+;; https://github.com/radian-software/apheleia
+(use-package apheleia
+  :ensure apheleia
+  :diminish ""
+  :defines
+  apheleia-formatters
+  apheleia-mode-alist
+  :functions
+  apheleia-global-mode
+  :config
+  (setf (alist-get 'prettier-json apheleia-formatters)
+        '("prettier" "--stdin-filepath" filepath))
+  (apheleia-global-mode +1))
 #+end_src
-
 * Terminal Emulators
 
 ** Term
 #+begin_src emacs-lisp
 
 ;;; Terminal emulators ----------------------------------------
-;;;; Term mode (not very usable if at all)
 (use-package term
   :ensure nil
   :commands term

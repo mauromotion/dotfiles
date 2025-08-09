@@ -1,8 +1,8 @@
 -- ** ef-themes ** ----
 return {
 	"oonamo/ef-themes.nvim",
-	lazy = false,
-	priority = 1000,
+	lazy = true,
+	priority = 999,
 	config = function()
 		require("ef-themes").setup({
 			light = "ef-kassio", -- Ef-theme to select for light backgrounds
