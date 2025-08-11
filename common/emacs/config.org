@@ -311,9 +311,9 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
 (use-package doric-themes
   :defer t
   :config
-  (setq doric-themes-to-toggle '(doric-marble doric-obsidian)))
+  (setq doric-themes-to-toggle '(doric-earth doric-fire)))
 
-(doric-themes-select 'doric-marble)
+;; (doric-themes-select 'doric-marble)
 #+end_src
 
 *** Doom-themes
@@ -737,6 +737,7 @@ Better front end for Emacs' documentation
   "l" #'denote-link
   "n" #'denote
   "r" #'denote-rename-file
+  "s" #'denote-signature
   "t" #'denote-rename-file-keywords)
     #+end_src
 
@@ -873,6 +874,7 @@ s
     "l" "Insert link to note"
     "n" "Create a new note"
     "r" "Rename a note"
+    "s" "Creat a new note with signature"
     "t" "Change note's keywords")
   
   (which-key-add-keymap-based-replacements mmotion/org-map
