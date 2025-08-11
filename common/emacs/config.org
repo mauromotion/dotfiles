@@ -1,5 +1,4 @@
 #+TITLE: Mauro's GNU Emacs Config
-r
 #+AUTHOR: Mauro Di Ianni (mmotion)
 #+EMAIL: hello@mauromotion.com
 #+DESCRIPTION: Mauro's personal Emacs configuration
@@ -38,7 +37,7 @@ r
   - [[#custom-functions][Custom functions]]
   - [[#hydras][Hydras]]
   - [[#define-sub-menus][Define Sub-menus]]
-  - [[#configure-which-key-description][Configure which-key description]]
+  - [[#configure-which-key-descriptions][Configure which-key descriptions]]
   - [[#evil-mode-integration][Evil-mode integration]]
 - [[#completion--selection-framework][Completion & Selection Framework]]
   - [[#consult][Consult]]
@@ -679,9 +678,8 @@ Better front end for Emacs' documentation
    #+end_src
 
 ** Define Sub-menus 
-*** [B]uffer keybindings
+*** Buffer keybindings
     #+begin_src emacs-lisp
-
 ;;;;; Define submenu keymaps
 (defvar-keymap mmotion/buffer-map 
   :doc "Buffer operations submenu."
@@ -693,9 +691,8 @@ Better front end for Emacs' documentation
   "r" #'revert-buffer)
 
     #+end_src
-*** [F]ind keybindings
+*** Find keybindings
     #+begin_src emacs-lisp
-
 (defvar-keymap mmotion/find-map
   :doc "Find operations submenu."
   "a" #'consult-org-agenda
@@ -704,15 +701,14 @@ Better front end for Emacs' documentation
   "l" #'consult-line
   "o" #'consult-outline)
     #+end_src
-*** [G]it keybindings
+*** Git keybindings
 #+begin_src emacs-lisp
 (defvar-keymap mmotion/git-map
   :doc "Git operations submenu."
   "s" #'magit-status)
 #+end_src
-*** [H]elp keybindings
+*** Help keybindings
     #+begin_src emacs-lisp
-
 (defvar-keymap mmotion/help-map
   :doc "Help operations submenu."
   "c" #'describe-command
@@ -722,8 +718,50 @@ Better front end for Emacs' documentation
   "p" #'describe-package
   "v" #'describe-variable)
     #+end_src
+*** LSP keybindings
+#+begin_src emacs-lisp
 
-*** [N]otes keybindings (denote)
+(defvar-keymap mmotion/lsp-map
+  :doc "LSP operations submenu."
+  ;; Core LSP Functions
+  "r" #'lsp-rename
+  "f" #'lsp-format-buffer
+  "F" #'lsp-format-region
+  "a" #'lsp-execute-code-action
+  "o" #'lsp-organize-imports
+  ;; Navigation
+  "d" #'lsp-find-definition
+  "D" #'lsp-find-declaration
+  "i" #'lsp-find-implementation
+  "t" #'lsp-find-type-definition
+  "R" #'lsp-find-references
+  "s" #'consult-lsp-symbols
+  ;; Information & Help
+  "h" #'lsp-describe-thing-at-point
+  "H" #'lsp-signature-help
+  "k" #'lsp-describe-session
+  ;; Workspace Management
+  "w a" #'lsp-workspace-folders-add
+  "w r" #'lsp-workspace-folders-remove
+  "w l" #'lsp-workspace-folders-open
+  ;; Server Control
+  "S r" #'lsp-workspace-restart
+  "S s" #'lsp-workspace-shutdown
+  "S S" #'lsp
+  ;; Diagnostics (Errors/Warnings)
+  "e l" #'lsp-treemacs-errors-list
+  "e n" #'flycheck-next-error
+  "e p" #'flycheck-previous-error
+  "e e" #'flycheck-explain-error-at-point
+  ;; LSP UI specific
+  "u d" #'lsp-ui-peek-find-definitions
+  "u r" #'lsp-ui-peek-find-references
+  "u i" #'lsp-ui-imenu
+  "u s" #'lsp-ui-sideline-mode
+)
+   
+#+end_src
+*** Notes keybindings (denote)
     #+begin_src emacs-lisp
 
 (defvar-keymap mmotion/notes-map
@@ -741,7 +779,7 @@ Better front end for Emacs' documentation
   "t" #'denote-rename-file-keywords)
     #+end_src
 
-*** [O]rg-mode keybindings
+*** Org-mode keybindings
     #+begin_src emacs-lisp
 
 (defvar-keymap mmotion/org-map
@@ -759,8 +797,7 @@ Better front end for Emacs' documentation
 
     #+end_src
 
-*** [T]oggle and [T]ab
-s keybindings
+*** Toggle and Tabs keybindings
     #+begin_src emacs-lisp
 
 (defvar-keymap mmotion/toggle-map
@@ -777,9 +814,8 @@ s keybindings
 
     #+end_src
 
-*** [W]indows keybindings
+*** Windows keybindings
     #+begin_src emacs-lisp
-
 (defvar-keymap mmotion/window-map
   :doc "Window operations."
   "b" #'balance-windows
@@ -794,7 +830,6 @@ s keybindings
 
 *** Leader keybindings
     #+begin_src emacs-lisp
-
 ;;;; Define leader keymap
 (defvar-keymap mmotion/leader-map
   :doc "My global leader keymap."
@@ -811,15 +846,14 @@ s keybindings
 (keymap-set mmotion/leader-map "f" mmotion/find-map)
 (keymap-set mmotion/leader-map "g" mmotion/git-map)
 (keymap-set mmotion/leader-map "h" mmotion/help-map)
+(keymap-set mmotion/leader-map "l" mmotion/lsp-map)
 (keymap-set mmotion/leader-map "n" mmotion/notes-map)
 (keymap-set mmotion/leader-map "o" mmotion/org-map)
 (keymap-set mmotion/leader-map "t" mmotion/toggle-map)
 (keymap-set mmotion/leader-map "w" mmotion/window-map)
     #+end_src
 
-** Configure which-key description
-s
-
+** Configure which-key descriptions
    #+begin_src emacs-lisp
 
 ;;;; Configure which-key descriptions
@@ -832,6 +866,11 @@ s
     "f" "Find..."
     "g" "(ma)Git..."
     "h" "Help..."
+    "l" "LSP..."
+    "l e" "Diagnosticts..."
+    "l S" "LSP Server..."
+    "l w" "Workspace..."
+    "l u" "LSP UI..."
     "n" "Notes..."
     "o" "Org..."
     "t" "Toggle / Tabs..."
@@ -857,12 +896,43 @@ s
     "s" "(ma)Git status")
 
   (which-key-add-keymap-based-replacements mmotion/help-map
-    "c" "Describe Command"
-    "f" "Describe Function"
-    "m" "Describe Mode"
-    "k" "Describe Key"
-    "p" "Describe Package"
-    "v" "Describe Variable")
+    "c" "Describe command"
+    "f" "Describe function"
+    "m" "Describe mode"
+    "k" "Describe key"
+    "p" "Describe package"
+    "v" "Describe variable")
+
+ (which-key-add-keymap-based-replacements mmotion/lsp-map
+    "r" "Rename symbol"
+    "f" "Format buffer"
+    "F" "Format region"
+    "a" "Code actions"
+    "o" "Organize imports"
+    "d" "Go to definition"
+    "D" "Go to declaration"
+    "i" "Go to implementation"
+    "t" "Go to type definiton"
+    "R" "Find references"
+    "s" "Workspace symbols (consult)"
+    "h" "Show documentation"
+    "H" "Show signature help"
+    "k" "LSP session info"
+    "w a" "Add workspace folder"
+    "w r" "Remove workspace folder"
+    "w l" "List workspace folders"
+    "S r" "Restart LSP server"
+    "S s" "Shutdown LSP server"
+    "S S" "Start LSP"
+    "e l" "List all errors"
+    "e n" "Next error"
+    "e p" "Previous error"
+    "e e" "Explain error"
+    "u d" "Peek definition"
+    "u r" "Peek references"
+    "u i" "Imenu with LSP"
+    "u s" "Toggle sideline"
+  )
   
   (which-key-add-keymap-based-replacements mmotion/notes-map
     "b" "Show note's backlinks"
@@ -1118,6 +1188,38 @@ folder, otherwise delete a character backward"
 
 ** Cape
 Completion at point.
+#+begin_src emacs-lisp
+(use-package cape
+  :ensure t
+  :config  ;; Use :config instead of :init to ensure cape is loaded
+  ;; Setup completion functions with proper LSP integration
+  (defun mmotion/setup-lsp-completion ()
+    "Setup completion functions for LSP modes with Cape extensions."
+    (setq-local completion-at-point-functions
+                (list #'lsp-completion-at-point  ;; LSP first for best results
+                      #'cape-dabbrev             ;; Dynamic abbreviations
+                      #'cape-file                ;; File name completion
+                      #'cape-symbol              ;; Symbol completion
+                      #'cape-keyword)))          ;; Language keyword completion
+  
+  (defun mmotion/setup-general-completion ()
+    "Setup completion functions for non-LSP modes."
+    (setq-local completion-at-point-functions
+                (list #'cape-dabbrev
+                      #'cape-file
+                      #'cape-symbol
+                      #'cape-keyword)))
+  
+  ;; Add hooks
+  (add-hook 'lsp-completion-mode-hook #'mmotion/setup-lsp-completion)
+  (add-hook 'prog-mode-hook #'mmotion/setup-general-completion))
+  
+  ;; Optional: Add some useful Cape bindings
+  ;; :bind (("C-c p d" . cape-dabbrev)
+  ;;        ("C-c p f" . cape-file)
+  ;;        ("C-c p s" . cape-symbol)
+  ;;        ("C-c p k" . cape-keyword)))
+#+end_src
 
   #+begin_src emacs-lisp :tangle no
 
@@ -1138,7 +1240,7 @@ Completion at point.
 
   #+end_src
 
-  #+begin_src emacs-lisp
+  #+begin_src emacs-lisp :tangle no
 (use-package cape
   :init
   ;; Add to default completion functions globally
@@ -1897,7 +1999,13 @@ Typewriter-like look of the page (centring).
   (lsp-ui-sideline-show-hover t)
   (lsp-ui-peek-find-references t)
   (lsp-ui-sideline-ignore-duplicate t)
-  (lsp-ui-sideline-show-code-actions t))
+  (lsp-ui-sideline-show-code-actions nil))
+
+;;;; Consult-lsp
+(use-package consult-lsp
+  :ensure t
+  :after (consult lsp-mode))
+
    #+end_src
 
 ** Teemacs
