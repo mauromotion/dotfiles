@@ -147,6 +147,7 @@ keys = [
                 foreground=colors["foreground"][0],
                 selected_background=colors["accent1"][0],
                 selected_foreground=colors["background"][0],
+                dmenu_bottom=True,
             )
         ),
         desc="Launch Dmenu Launcher",

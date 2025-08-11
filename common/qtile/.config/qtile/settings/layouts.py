@@ -13,8 +13,8 @@ from .theme import colors
 layouts = [
     layout.Columns(
         border_normal=colors["background"][0],
-        border_focus=colors["foreground"][0],
-        border_focus_stack=[colors["cyan"][0], colors["blue"][0]],
+        border_focus=colors["blue"][0],
+        border_focus_stack=[colors["cyan"][0], colors["green"][0]],
         border_width=1,
         # initial_ratio=1.618,
         # margin=6,
@@ -29,7 +29,7 @@ layouts = [
         bg_color=colors["background"][0],
     ),
     layout.Floating(
-        border_focus=colors["accent1"][0], border_normal=colors["background"][0]
+        border_focus=colors["blue"][0], border_normal=colors["background"][0]
     ),
     # layout.Matrix(),
     # layout.MonadTall(
@@ -71,6 +71,7 @@ floating_layout = layout.Floating(
         Match(wm_class="mpv"),
         Match(wm_class="Nitrogen"),
         Match(wm_class="org.cryptomator.launcher.Cryptomator$MainApp"),
+        Match(wm_class="protonvpn-app"),
         Match(wm_class="vlc"),
     ],
     border_focus=colors["foreground"][0],

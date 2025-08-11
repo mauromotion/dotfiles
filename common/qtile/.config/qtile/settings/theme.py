@@ -2,6 +2,7 @@ import json
 import os
 
 """ _Available themes_: 
+    doom-one
     catppuccin, 
     gruvbox-material-dark, 
     gruvbox-material-light, 

@@ -1,7 +1,7 @@
 # ef-day Color Palette
 set -l foreground white
 set -l selection black --bold
-set -l comment black --dim
+set -l comment white --dim
 set -l black black
 set -l red red
 set -l green green
@@ -74,10 +74,10 @@ end
 
 # FZF theme
 set -gx FZF_DEFAULT_OPTS '
-  --color=fg:#201f36,fg+:#776f79,bg:-1,bg+:#efe7e7
-  --color=hl:#b00234,hl+:#217a3c,info:#a01f64,marker:#2f5f9f
-  --color=prompt:#201f36,spinner:#9a6012,pointer:#2f5f9f,header:#a01f64
-  --color=border:#776f79,label:#201f36,query:#2f5f9f
+  --color=fg:#2C363C,fg+:#4F5E68,bg:-1,bg+:#CFC1BA
+  --color=hl:#A8334C,hl+:#4F6C31,info:#88507D,marker:#3B8992
+  --color=prompt:#2C363C,spinner:#2C363C,pointer:#3B8992,header:#88507D
+  --color=border:#4F5E68,label:#2C363C,query:#3b8992
   --border="rounded"
   --border-label="fzf"
   --border-label-pos="0"

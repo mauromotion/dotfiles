@@ -92,4 +92,8 @@ opt.viewoptions:remove("curdir")
 -- o.winborder = "rounded"
 
 -- Set default theme as light
-o.background = "light"
+-- o.background = "light"
+
+if os.getenv("theme") == "light" then
+	vim.o.background = "light"
+end

@@ -26,6 +26,7 @@ require("lazy").setup({
 	{ import = "plugins.navigation" },
 	{ import = "plugins.treesitter" },
 	{ import = "plugins.UI" },
+	{ import = "plugins.UI.colorschemes" },
 	{ import = "plugins.utilities" },
 })
 -- Keybindings
