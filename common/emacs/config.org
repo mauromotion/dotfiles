@@ -11,7 +11,7 @@
   - [[#auto-update-packages][Auto-Update Packages]]
 - [[#keep-directories-clean][Keep directories clean]]
 - [[#essentials][Essentials]]
-  - [[#ui][UI]]
+  - [[#ui-elements-commands-history-trash-dir-tabs][UI elements, commands history, trash dir, tabs.]]
   - [[#bookmarks][Bookmarks]]
   - [[#navigation][Navigation]]
 - [[#fonts][Fonts]]
@@ -149,8 +149,7 @@ All the temp and backup files that Emacs generates are put into "~/.cache/emacs"
 #+end_src
 
 * Essentials
-** UI
-elements, commands history, trash dir, tabs.
+** UI elements, commands history, trash dir, tabs.
 Basic set up of Emacs' UI, removing the default toolbars, and setting up some system preferences.
 
   #+begin_src emacs-lisp
@@ -200,6 +199,7 @@ Basic set up of Emacs' UI, removing the default toolbars, and setting up some sy
 (column-number-mode 1)
 (setq display-line-numbers-type 'relative)
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
+(add-hook 'astro-ts-mode-hook #'display-line-numbers-mode)
 
   #+end_src
   
@@ -867,8 +867,8 @@ Better front end for Emacs' documentation
     "g" "(ma)Git..."
     "h" "Help..."
     "l" "LSP..."
-    "l e" "Diagnosticts..."
     "l S" "LSP Server..."
+    "l e" "Diagnosticts..."
     "l w" "Workspace..."
     "l u" "LSP UI..."
     "n" "Notes..."
