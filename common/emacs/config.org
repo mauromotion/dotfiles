@@ -1797,14 +1797,14 @@ Typewriter-like look of the page (centring).
              consult-notes-search-in-all-notes)
   :config
   (setq consult-notes-file-dir-sources
-        '(("Denote" ?n "~/Notes/plain_orgfiles/orgfiles/denote/")
-          ("Journal" ?j "~/Notes/plain_orgfiles/orgfiles/denote/journal/")
-)) ;; Set notes dir(s)
-  (consult-notes-org-headings-mode)
+          '(("Journal" ?j "~/Notes/plain_orgfiles/orgfiles/denote/journal/")))
+
+  ;; (consult-notes-org-headings-mode)
   (when (locate-library "denote")
-    (consult-notes-denote-mode)))
+    (consult-notes-denote-mode))
+
   ;; Search only for text files in denote dir
- ;; (setq consult-notes-denote-files-function (function denote-directory-text-only-files)))
+(setq consult-notes-denote-files-function (lambda () (denote-directory-files nil t t))))
 #+end_src
 
 ** Denote-journal
