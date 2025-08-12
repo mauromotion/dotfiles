@@ -73,7 +73,7 @@
   - [[#denote-journal][Denote-journal]]
   - [[#denote-explore][Denote-explore]]
 - [[#programming][Programming]]
-  - [[#projectile][Projectile]]
+  - [[#project][Project]]
   - [[#magit][Magit]]
   - [[#tree-sitter][Tree-sitter]]
   - [[#web-development][Web development]]
@@ -796,6 +796,19 @@ Better front end for Emacs' documentation
 
     #+end_src
 
+*** [P] Project keybindings
+#+begin_src emacs-lisp
+(defvar-keymap mmotion/project-map
+  :doc "Project operations."
+  "b" #'consult-project-buffer
+  "d" #'project-dired
+  "f" #'project-find-file
+  "g" #'project-find-regexp
+  "k" #'project-kill-buffers
+  "p" #'project-switch-project
+  "s" #'project-shell
+)
+#+end_src
 *** [T] Toggle and Tabs keybindings
     #+begin_src emacs-lisp
 
@@ -849,6 +862,7 @@ Better front end for Emacs' documentation
 (keymap-set mmotion/leader-map "l" mmotion/lsp-map)
 (keymap-set mmotion/leader-map "n" mmotion/notes-map)
 (keymap-set mmotion/leader-map "o" mmotion/org-map)
+(keymap-set mmotion/leader-map "p" mmotion/project-map)
 (keymap-set mmotion/leader-map "t" mmotion/toggle-map)
 (keymap-set mmotion/leader-map "w" mmotion/window-map)
     #+end_src
@@ -875,6 +889,7 @@ Better front end for Emacs' documentation
     "l u" "LSP UI..."
     "n" "Notes..."
     "o" "Org..."
+    "p" "Project..."
     "t" "Toggle / Tabs..."
     "w" "Window..."
     "," "Recent Files"
@@ -959,6 +974,16 @@ Better front end for Emacs' documentation
     "p" "Org Refile Copy"
     "s" "Add a Schedule"
     "u" "Update a dblock")
+
+ (which-key-add-keymap-based-replacements mmotion/project-map
+    "b" "Project's buffers"
+    "d" "Project dired"
+    "f" "Project find file"
+    "g" "Project find with regexp"
+    "k" "Project kill buffers"
+    "p" "Switch project"
+    "s" "Project shell"
+  )
   
   (which-key-add-keymap-based-replacements mmotion/toggle-map
     "c" "Close current tab"
@@ -1019,9 +1044,16 @@ Better front end for Emacs' documentation
 ;;;; Consult
 (use-package consult
   :defer t
+  :after project
   :bind (("C-s" . consult-line)
          :map minibuffer-local-map
-         ("C-r" . consult-history)))
+         ("C-r" . consult-history))
+:config
+  ;; Tell consult to use project.el for project detection
+  (setq consult-project-function 
+        (lambda (_may-prompt)
+          (when-let ((project (project-current)))
+            (project-root project)))))
 
 (defun mmotion/minibuffer-backward-kill (arg)
   "When minibuffer is completing a file name delete up to parent
@@ -1827,39 +1859,33 @@ Typewriter-like look of the page (centring).
 #+end_src
 
 * Programming
-** Projectile
+** Project
 #+begin_src emacs-lisp
-
-;;; Projectile ------------------------------------------------
-(use-package projectile
-  :diminish projectile-mode
-  :init
-  (setq projectile-indexing-method 'alien
-        projectile-switch-project-action #'projectile-dired
-        projectile-ignored-projects (list (expand-file-name "~"))
-        projectile-project-search-path
-        '(("~/Projects" . 2)
-           "~/.dotfiles"))
+;;;; Built-in project.el configuration
+(use-package project
+  :ensure nil
   :config
-  (projectile-mode)
-  :bind-keymap
-  ("C-c p" . projectile-command-map))
-
-(use-package consult-projectile
-  :after (consult projectile)
-  :commands (consult-projectile consult-projectile-find-file)
-  :bind (("s-w" . consult-projectile)
-         :map projectile-command-map
-         ("f" . consult-projectile-find-file))
-  :init
-  (setq consult-project-root-function
-        (lambda ()
-          (when (and (fboundp 'projectile-project-p)
-                     (projectile-project-p))
-            (projectile-project-root)))))
-
+  ;; ;; Auto-discover projects in your search paths
+  ;; (when (file-directory-p "~/Projects")
+  ;;   (project-remember-projects-under "~/Projects" t))
+  
+  ;; Set default action when switching projects (like your projectile-dired setup)
+  (setq project-vc-ignores '("node_modules/"))
+  (setq project-switch-commands
+        '((project-dired "Open Dired" ?d)
+          (project-find-file "Find file" ?f)
+          (project-find-regexp "Find regexp" ?g)
+          (project-shell "Shell" ?s)))
+  
+  :bind
+  ;; Main project commands with C-c p prefix (matching your setup)
+  (("C-c p p" . project-switch-project)
+   ("C-c p f" . project-find-file)
+   ("C-c p d" . project-dired)
+   ("C-c p g" . project-find-regexp)
+   ("C-c p s" . project-shell)
+   ("C-c p k" . project-kill-buffers)))
 #+end_src
-
 ** Magit
 #+begin_src emacs-lisp
 
@@ -2098,12 +2124,17 @@ Typewriter-like look of the page (centring).
   :commands (dired dired-jump)
   :bind (("C-x C-j" . dired-jump))
   :custom
-  (evil-collection-define-key 'normal 'dired-mode-map
-    "h" 'dired-up-directory
-    "l" 'dired-find-file)
   (dired-dwim-target t)
   (dired-kill-when-opening-new-dired-buffer t)
   (dired-listing-switches "-agho --group-directories-first"))
+  :config
+  (evil-collection-define-key 'normal 'dired-mode-map
+    "h" 'dired-up-directory
+    "l" 'dired-find-file)
+
+;;;;; Fix leader key in dired buffers
+(with-eval-after-load 'dired
+  (evil-define-key 'normal dired-mode-map (kbd "SPC") nil))
 
 (with-eval-after-load 'dired
   (require 'dired-x))
