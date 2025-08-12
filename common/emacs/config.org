@@ -14,8 +14,8 @@
   - [[#ui-elements-commands-history-trash-dir-tabs][UI elements, commands history, trash dir, tabs.]]
   - [[#bookmarks][Bookmarks]]
   - [[#navigation][Navigation]]
-- [[#fonts][Fonts]]
 - [[#appearance][Appearance]]
+  - [[#fonts][Fonts]]
   - [[#themes][Themes]]
   - [[#circadian][Circadian]]
   - [[#nerd-icons][Nerd-icons]]
@@ -48,8 +48,6 @@
   - [[#corfu][Corfu]]
   - [[#cape][Cape]]
 - [[#spellchecking][Spellchecking]]
-- [[#projectile][Projectile]]
-- [[#magit][Magit]]
 - [[#org-mode][Org-mode]]
   - [[#org-mode-base-settings][Org-mode base settings]]
   - [[#org-mode-custom-functions][Org-mode custom functions]]
@@ -74,15 +72,13 @@
   - [[#consult-notes][Consult-notes]]
   - [[#denote-journal][Denote-journal]]
   - [[#denote-explore][Denote-explore]]
-- [[#tree-sitter][Tree-sitter]]
-- [[#web-development][Web development]]
-  - [[#astro-support][Astro support]]
-  - [[#emmet-support][Emmet support]]
-- [[#lsp-mode][LSP mode]]
-  - [[#lsp-mode-set-up][LSP mode set up]]
-  - [[#teemacs][Teemacs]]
-  - [[#flycheck][Flycheck]]
-- [[#formatting][Formatting]]
+- [[#programming][Programming]]
+  - [[#projectile][Projectile]]
+  - [[#magit][Magit]]
+  - [[#tree-sitter][Tree-sitter]]
+  - [[#web-development][Web development]]
+  - [[#lsp-mode][LSP mode]]
+  - [[#formatting][Formatting]]
 - [[#terminal-emulators][Terminal Emulators]]
   - [[#term][Term]]
   - [[#vterm][Vterm]]
@@ -201,6 +197,9 @@ Basic set up of Emacs' UI, removing the default toolbars, and setting up some sy
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 (add-hook 'astro-ts-mode-hook #'display-line-numbers-mode)
 
+;;;; Prettify symbols
+(global-prettify-symbols-mode t)
+
   #+end_src
   
 ** Bookmarks
@@ -230,7 +229,8 @@ Use ace-window to manipulate windows and navigate between them more efficiently.
 
 #+end_src
 
-* Fonts
+* Appearance
+** Fonts
 For the moment I've settled on [[https://www.ibm.com/plex/][IBM Plex Mono ]]for my monospace font and [[https://weiweihuanghuang.github.io/Work-Sans/][Work Sans]] for my proportional spaced font.
 
 The Arch Linux packages are called respectively =ttf-ibm-plex= and =ttf-work-sans-variable=.
@@ -251,6 +251,7 @@ I'm also setting comments to be /italic/.
 
 ;; Line spacing
 ;; (setq-local line-spacing 0.2)
+(setq-default line-spacing 0.2)
 
 ;;;; Set font faces
 (set-face-attribute 'default nil
@@ -271,7 +272,6 @@ I'm also setting comments to be /italic/.
 
   #+end_src
   
-* Appearance
 ** Themes
 I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! Also keeping[[https://github.com/doomemacs/themes?tab=readme-ov-file#theme-list][ doom-themes]] here just because.
 *** Ef-themes
@@ -366,7 +366,7 @@ I'd rather use =nerd-icons= than =all-the-icons=, much more reliable.
    #+end_src
 
 ** Modeline
-*** Doom-modeline
+*** Doom-modeline (not in use)
    #+begin_src emacs-lisp :tangle no
 
 ;;;; Modeline
@@ -385,7 +385,7 @@ I'd rather use =nerd-icons= than =all-the-icons=, much more reliable.
     (set-face-attribute 'mode-line nil :font "JetBrainsMono Nerd Font-12")
     (set-face-attribute 'mode-line-inactive nil :font "JetBrainsMono Nerd Font-12"))
    #+end_src
-*** Mood-line (not in use)
+*** Mood-line
 #+begin_src emacs-lisp :tangle yes
 
 (use-package mood-line
@@ -434,7 +434,6 @@ Settings *must* be in =:custom= otherwise they won't work.
 
 ** Indent Line Guides
 Visual indicators of indentation for code.
-
 #+begin_src emacs-lisp
 
 ;;;; Indent line guides
@@ -442,7 +441,6 @@ Visual indicators of indentation for code.
   :hook ((prog-mode) . indent-bars-mode)) ; or whichever modes you prefer
 
 #+end_src
-
 ** Colorful mode
 #+begin_src emacs-lisp
 
@@ -460,7 +458,6 @@ Visual indicators of indentation for code.
 
 ** Rainbow delimiters
 Colourful parentheses to help mostly with elisp.
-
 #+begin_src emacs-lisp
 
 ;;;; Colorful parentheses to help mostly with elisp
@@ -471,7 +468,6 @@ Colourful parentheses to help mostly with elisp.
 
 ** Helpful
 Better front end for Emacs' documentation
-
 #+begin_src emacs-lisp
 
 ;;;; Better front end for documentation
@@ -586,13 +582,17 @@ Better front end for Emacs' documentation
   (undo-fu-session-global-mode))
 #+end_src
 * Keybindings
-
 ** General keybindings
   #+begin_src emacs-lisp
 
 ;;; Keybindings ------------------------------------------
 ;;;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
+;;;; Use hippie-expand instead of dabbrev-expand
+(use-package hippie-exp
+  :bind*
+  ("M-/" . hippie-expand))
 
 #+end_src
 
@@ -676,9 +676,8 @@ Better front end for Emacs' documentation
     ("b" balance-windows "reset")
     ("f" nil "finished (or esc)" :exit t)))
    #+end_src
-
 ** Define Sub-menus 
-*** Buffer keybindings
+*** [B] Buffer keybindings
     #+begin_src emacs-lisp
 ;;;;; Define submenu keymaps
 (defvar-keymap mmotion/buffer-map 
@@ -691,7 +690,7 @@ Better front end for Emacs' documentation
   "r" #'revert-buffer)
 
     #+end_src
-*** Find keybindings
+*** [F] Find keybindings
     #+begin_src emacs-lisp
 (defvar-keymap mmotion/find-map
   :doc "Find operations submenu."
@@ -701,13 +700,13 @@ Better front end for Emacs' documentation
   "l" #'consult-line
   "o" #'consult-outline)
     #+end_src
-*** Git keybindings
+*** [G] Git keybindings
 #+begin_src emacs-lisp
 (defvar-keymap mmotion/git-map
   :doc "Git operations submenu."
   "s" #'magit-status)
 #+end_src
-*** Help keybindings
+*** [H] Help keybindings
     #+begin_src emacs-lisp
 (defvar-keymap mmotion/help-map
   :doc "Help operations submenu."
@@ -718,7 +717,7 @@ Better front end for Emacs' documentation
   "p" #'describe-package
   "v" #'describe-variable)
     #+end_src
-*** LSP keybindings
+*** [L] LSP keybindings
 #+begin_src emacs-lisp
 
 (defvar-keymap mmotion/lsp-map
@@ -761,7 +760,7 @@ Better front end for Emacs' documentation
 )
    
 #+end_src
-*** Notes keybindings (denote)
+*** [N] Notes keybindings (denote)
     #+begin_src emacs-lisp
 
 (defvar-keymap mmotion/notes-map
@@ -779,7 +778,7 @@ Better front end for Emacs' documentation
   "t" #'denote-rename-file-keywords)
     #+end_src
 
-*** Org-mode keybindings
+*** [O] Org-mode keybindings
     #+begin_src emacs-lisp
 
 (defvar-keymap mmotion/org-map
@@ -797,7 +796,7 @@ Better front end for Emacs' documentation
 
     #+end_src
 
-*** Toggle and Tabs keybindings
+*** [T] Toggle and Tabs keybindings
     #+begin_src emacs-lisp
 
 (defvar-keymap mmotion/toggle-map
@@ -814,7 +813,7 @@ Better front end for Emacs' documentation
 
     #+end_src
 
-*** Windows keybindings
+*** [W] Windows keybindings
     #+begin_src emacs-lisp
 (defvar-keymap mmotion/window-map
   :doc "Window operations."
@@ -828,7 +827,7 @@ Better front end for Emacs' documentation
   "w" #'ace-window)
     #+end_src
 
-*** Leader keybindings
+*** <space> Leader key keybindings
     #+begin_src emacs-lisp
 ;;;; Define leader keymap
 (defvar-keymap mmotion/leader-map
@@ -839,7 +838,8 @@ Better front end for Emacs' documentation
   "SPC" #'consult-buffer
   "," #'consult-recent-file
   "." #'find-file
-  "c" #'calendar)
+  "c" #'calendar
+  "d" #'dictionary)
 
 ;;;; Add submenus to the leader keymap
 (keymap-set mmotion/leader-map "b" mmotion/buffer-map)
@@ -863,6 +863,8 @@ Better front end for Emacs' documentation
     "-" "Dired Jump"
     "SPC" "Switch Buffer"
     "b" "Buffer..."
+    "c" "Calendar"
+    "d" "Dictionary"
     "f" "Find..."
     "g" "(ma)Git..."
     "h" "Help..."
@@ -1008,7 +1010,6 @@ Better front end for Emacs' documentation
 (global-set-key (kbd "C-SPC") mmotion/leader-map)
 
    #+end_src
-
 
 * Completion & Selection Framework
 ** Consult
@@ -1220,46 +1221,9 @@ Completion at point.
   ;;        ("C-c p s" . cape-symbol)
   ;;        ("C-c p k" . cape-keyword)))
 #+end_src
-
-  #+begin_src emacs-lisp :tangle no
-
-;;;; Add extensions (cape)
-(use-package cape
-  :init
-  (require 'cape) ;; Ensure the package is loaded
-  (defun mmotion/setup-completion ()
-    (setq-local completion-at-point-functions
-                (list (cape-capf-super
-                       #'lsp-completion-at-point
-                       #'cape-symbol
-                       #'cape-dabbrev
-                       #'cape-file
-                       #'python-completion-at-point))))
-  (add-hook 'prog-mode-hook #'mmotion/setup-completion)
-  (add-hook 'lsp-completion-mode-hook #'mmotion/setup-completion))
-
-  #+end_src
-
-  #+begin_src emacs-lisp :tangle no
-(use-package cape
-  :init
-  ;; Add to default completion functions globally
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  (add-to-list 'completion-at-point-functions #'cape-file)
-  (add-to-list 'completion-at-point-functions #'cape-symbol)
-  (add-to-list 'completion-at-point-functions #'python-completion-at-point)
-  
-  ;; For programming modes, ensure LSP completion is first
-  (defun mmotion/lsp-cape-setup ()
-    (setq-local completion-at-point-functions
-                (append (list #'lsp-completion-at-point)
-                        completion-at-point-functions)))
-  
-  (add-hook 'lsp-mode-hook #'mmotion/lsp-cape-setup))
-  #+end_src
-  
 * Spellchecking
-  #+begin_src emacs-lisp
+*** ispell
+  #+begin_src emacs-lisp :tangle yes
 
 ;;; Spellchecking ----------------------------------------
 ;; Use hunspell as the spell checker backend
@@ -1296,48 +1260,29 @@ Completion at point.
 
   #+end_src
 
-* Projectile
-#+begin_src emacs-lisp
-
-;;; Projectile ------------------------------------------------
-(use-package projectile
-  :diminish projectile-mode
-  :init
-  (setq projectile-indexing-method 'alien
-        projectile-switch-project-action #'projectile-dired
-        projectile-ignored-projects (list (expand-file-name "~"))
-        projectile-project-search-path
-        '(("~/Projects" . 2)
-           "~/.dotfiles"))
+*** jinx (not in use)
+#+begin_src emacs-lisp :tangle no
+(use-package jinx
+  :hook
+  (emacs-startup . global-jinx-mode)
+  :bind
+  ("C-c s s" . jinx-correct)
+  ("C-c s l" . jinx-languages)
   :config
-  (projectile-mode)
-  :bind-keymap
-  ("C-c p" . projectile-command-map))
-
-(use-package consult-projectile
-  :after (consult projectile)
-  :commands (consult-projectile consult-projectile-find-file)
-  :bind (("s-w" . consult-projectile)
-         :map projectile-command-map
-         ("f" . consult-projectile-find-file))
-  :init
-  (setq consult-project-root-function
-        (lambda ()
-          (when (and (fboundp 'projectile-project-p)
-                     (projectile-project-p))
-            (projectile-project-root)))))
-
+  (setq jinx-languages "en_US en_GB it_IT"))
 #+end_src
-
-* Magit
+*** Dictionary
 #+begin_src emacs-lisp
-
-;;; Magit ----------------------------------------------------
-(use-package magit
-  :commands magit-status)
-
+;;;; Use built-in dictionary-el
+(use-package dictionary
+  :ensure nil
+  :defer t
+  :bind
+  ("C-c s d" . dictionary-search)
+  :config
+  (setq dictionary-server "dict.org"
+        dictionary-use-single-buffer t))
 #+end_src
-
 * Org-mode
 
 ** Org-mode base settings
@@ -1881,7 +1826,50 @@ Typewriter-like look of the page (centring).
 
 #+end_src
 
-* Tree-sitter
+* Programming
+** Projectile
+#+begin_src emacs-lisp
+
+;;; Projectile ------------------------------------------------
+(use-package projectile
+  :diminish projectile-mode
+  :init
+  (setq projectile-indexing-method 'alien
+        projectile-switch-project-action #'projectile-dired
+        projectile-ignored-projects (list (expand-file-name "~"))
+        projectile-project-search-path
+        '(("~/Projects" . 2)
+           "~/.dotfiles"))
+  :config
+  (projectile-mode)
+  :bind-keymap
+  ("C-c p" . projectile-command-map))
+
+(use-package consult-projectile
+  :after (consult projectile)
+  :commands (consult-projectile consult-projectile-find-file)
+  :bind (("s-w" . consult-projectile)
+         :map projectile-command-map
+         ("f" . consult-projectile-find-file))
+  :init
+  (setq consult-project-root-function
+        (lambda ()
+          (when (and (fboundp 'projectile-project-p)
+                     (projectile-project-p))
+            (projectile-project-root)))))
+
+#+end_src
+
+** Magit
+#+begin_src emacs-lisp
+
+;;; Magit ----------------------------------------------------
+(use-package magit
+  :commands magit-status)
+
+#+end_src
+
+** Tree-sitter
   #+begin_src emacs-lisp
 
 ;;; Tree-sitter ------------------------------------------------
@@ -1899,8 +1887,8 @@ Typewriter-like look of the page (centring).
      (css-mode . css-ts-mode)
      (sh-mode . bash-ts-mode))))
   #+end_src
-* Web development
-** Astro support
+** Web development
+*** Astro support
   #+begin_src emacs-lisp
 
 ;;;;; Astro support
@@ -1917,7 +1905,7 @@ Typewriter-like look of the page (centring).
   :mode "\\.astro\\'")
 
   #+end_src
-** Emmet support
+*** Emmet support
 #+begin_src emacs-lisp
 
 ;;;; Emmet mode
@@ -1942,8 +1930,8 @@ Typewriter-like look of the page (centring).
   
 #+end_src
 
-* LSP mode
-** LSP mode set up
+** LSP mode
+*** LSP mode set up
    #+begin_src emacs-lisp
 
 ;;; LSP mode ---------------------------------------------------
@@ -2008,7 +1996,7 @@ Typewriter-like look of the page (centring).
 
    #+end_src
 
-** Teemacs
+*** Teemacs
    #+begin_src emacs-lisp
 
 ;;;; Treemacs
@@ -2017,7 +2005,7 @@ Typewriter-like look of the page (centring).
 
    #+end_src
 
-** Flycheck
+*** Flycheck
 #+begin_src emacs-lisp
 
 (use-package flycheck
@@ -2030,7 +2018,7 @@ Typewriter-like look of the page (centring).
 
 #+end_src
 
-* Formatting
+** Formatting
 #+begin_src emacs-lisp
 ;;; APHELEIA
 ;; auto-format different source code files extremely intelligently
