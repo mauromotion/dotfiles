@@ -2019,6 +2019,20 @@ Typewriter-like look of the page (centring).
 (use-package consult-lsp
   :ensure t
   :after (consult lsp-mode))
+;;;; Python
+(use-package lsp-jedi
+  :ensure t)
+
+(setq major-mode-remap-alist
+      '((python-mode . python-ts-mode)))
+
+(use-package pyvenv
+  :after python-ts-mode
+  :defer t)
+
+(use-package pyvenv-auto
+  :defer t
+  :hook ((python-mode python-ts-mode) . pyvenv-auto-run))
 
    #+end_src
 
