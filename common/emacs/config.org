@@ -7,6 +7,7 @@
 #+PROPERTY: header-args :tangle config.el
 
 * Table of Contents :toc:
+- [[#general-flow][General flow]]
 - [[#package-manager][Package Manager]]
   - [[#auto-update-packages][Auto-Update Packages]]
 - [[#keep-directories-clean][Keep directories clean]]
@@ -72,6 +73,12 @@
   - [[#consult-notes][Consult-notes]]
   - [[#denote-journal][Denote-journal]]
   - [[#denote-explore][Denote-explore]]
+- [[#dired][Dired]]
+  - [[#main-dired-config][Main dired config]]
+  - [[#nerd-icons-for-dired][Nerd-icons for Dired]]
+  - [[#hide-dotfiles][Hide dotfiles]]
+  - [[#set-up-programs-to-open-certain-files-from-dired][Set up programs to open certain files from dired]]
+  - [[#dired-preview-not-in-use][Dired preview (not in use)]]
 - [[#programming][Programming]]
   - [[#project][Project]]
   - [[#magit][Magit]]
@@ -83,22 +90,13 @@
   - [[#term][Term]]
   - [[#vterm][Vterm]]
   - [[#vterm-toggle][Vterm-toggle]]
-- [[#dired][Dired]]
-  - [[#main-dired-config][Main dired config]]
-  - [[#nerd-icons-for-dired][Nerd-icons for Dired]]
-  - [[#hide-dotfiles][Hide dotfiles]]
-  - [[#set-up-programs-to-open-certain-files-from-dired][Set up programs to open certain files from dired]]
-  - [[#dired-preview-not-in-use][Dired preview (not in use)]]
 - [[#reset-gc-threshold][Reset GC Threshold]]
 
-*
-General flow
+* General flow
 This literal configuration will work like this:
 - In =early-init.el= some basic initial UI settings are configured.
 - Then in =init.el= in order, there's the start up performance function, the whole use-package installation and setup, and a check that loads =config.el= if present on disk, or, if not present, it will tangle this =config.org= file so that =config.el= gets generated. And then =init.el= loads the whole configuration from =config.el=.
 - =init.el= will also auto-reload the config each time =config.org= is saved.
-- +Here there's also a bootstrap function that auto-tangle this file when saved, so that =config.el= gets recreated with the new settings.+
-  
 * Package Manager
 ** Auto-Update Packages
 #+begin_src emacs-lisp
@@ -114,10 +112,8 @@ This literal configuration will work like this:
   (auto-package-update-at-time "10:00"))
 
 #+end_src
-
 * Keep directories clean
 All the temp and backup files that Emacs generates are put into "~/.cache/emacs" instead that along side the original files in the same directory.
-
 #+begin_src emacs-lisp
 
 ;;;; Keep directories clean ------------------------------------------
@@ -143,11 +139,9 @@ All the temp and backup files that Emacs generates are put into "~/.cache/emacs"
 (setq create-lockfiles nil)
 
 #+end_src
-
 * Essentials
 ** UI elements, commands history, trash dir, tabs.
 Basic set up of Emacs' UI, removing the default toolbars, and setting up some system preferences.
-
   #+begin_src emacs-lisp
 
 ;;; Essentials ------------------------------------------
@@ -201,10 +195,8 @@ Basic set up of Emacs' UI, removing the default toolbars, and setting up some sy
 (global-prettify-symbols-mode t)
 
   #+end_src
-  
 ** Bookmarks
 Make sure that bookmarks are saved automatically and don't get erased.
-
 #+begin_src emacs-lisp
 
 ;;;; Bookmarks
@@ -217,18 +209,19 @@ Make sure that bookmarks are saved automatically and don't get erased.
   (setq bookmark-save-flag 1))
 
 #+end_src
-
 ** Navigation
-Use ace-window to manipulate windows and navigate between them more efficiently.
-
+Use ace-window to manipulate windows and navigate between them more efficiently, and Avy to jump to any word or line on the page with a char-based decision tree.
 #+begin_src emacs-lisp
 
 ;;;; Navigation
+;;;;; Ace-window
 (use-package ace-window)
 (global-set-key (kbd "M-o") 'ace-window)
 
-#+end_src
+;;;;; Avy
+(use-package avy)
 
+#+end_src
 * Appearance
 ** Fonts
 For the moment I've settled on [[https://www.ibm.com/plex/][IBM Plex Mono ]]for my monospace font and [[https://weiweihuanghuang.github.io/Work-Sans/][Work Sans]] for my proportional spaced font.
@@ -271,7 +264,6 @@ I'm also setting comments to be /italic/.
                     :weight 'normal)
 
   #+end_src
-  
 ** Themes
 I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! Also keeping[[https://github.com/doomemacs/themes?tab=readme-ov-file#theme-list][ doom-themes]] here just because.
 *** Ef-themes
@@ -595,7 +587,6 @@ Better front end for Emacs' documentation
   ("M-/" . hippie-expand))
 
 #+end_src
-
 ** Which-key
    #+begin_src emacs-lisp
 
@@ -612,7 +603,6 @@ Better front end for Emacs' documentation
         which-key-add-column-padding 1))
 
    #+end_src
-
 ** Custom functions
 *** Toggle line-number-states function
    #+begin_src emacs-lisp
@@ -643,7 +633,6 @@ Better front end for Emacs' documentation
   (message "Line numbers: %s" display-line-numbers))
 
    #+end_src
-
 ** Hydras
    #+begin_src emacs-lisp
 
@@ -700,11 +689,14 @@ Better front end for Emacs' documentation
   "l" #'consult-line
   "o" #'consult-outline)
     #+end_src
-*** [G] Git keybindings
+*** [G] Go to keybindings (avy)
 #+begin_src emacs-lisp
-(defvar-keymap mmotion/git-map
-  :doc "Git operations submenu."
-  "s" #'magit-status)
+(defvar-keymap mmotion/goto-map
+  :doc "Go to operations submenu."
+  "c" #'avy-goto-char-2
+  "w" #'avy-goto-word-1
+  "l" #'avy-goto-line
+)
 #+end_src
 *** [H] Help keybindings
     #+begin_src emacs-lisp
@@ -760,6 +752,12 @@ Better front end for Emacs' documentation
 )
    
 #+end_src
+*** [M] Magit keybindings
+#+begin_src emacs-lisp
+(defvar-keymap mmotion/magit-map
+  :doc "Git operations submenu."
+  "s" #'magit-status)
+#+end_src
 *** [N] Notes keybindings (denote)
     #+begin_src emacs-lisp
 
@@ -777,7 +775,6 @@ Better front end for Emacs' documentation
   "s" #'denote-signature
   "t" #'denote-rename-file-keywords)
     #+end_src
-
 *** [O] Org-mode keybindings
     #+begin_src emacs-lisp
 
@@ -795,7 +792,6 @@ Better front end for Emacs' documentation
   "u" #'org-update-all-dblocks)
 
     #+end_src
-
 *** [P] Project keybindings
 #+begin_src emacs-lisp
 (defvar-keymap mmotion/project-map
@@ -825,7 +821,6 @@ Better front end for Emacs' documentation
   "v" #'vterm-toggle-cd)
 
     #+end_src
-
 *** [W] Windows keybindings
     #+begin_src emacs-lisp
 (defvar-keymap mmotion/window-map
@@ -839,7 +834,6 @@ Better front end for Emacs' documentation
   "v" #'split-window-horizontally
   "w" #'ace-window)
     #+end_src
-
 *** <space> Leader key keybindings
     #+begin_src emacs-lisp
 ;;;; Define leader keymap
@@ -857,16 +851,16 @@ Better front end for Emacs' documentation
 ;;;; Add submenus to the leader keymap
 (keymap-set mmotion/leader-map "b" mmotion/buffer-map)
 (keymap-set mmotion/leader-map "f" mmotion/find-map)
-(keymap-set mmotion/leader-map "g" mmotion/git-map)
+(keymap-set mmotion/leader-map "g" mmotion/goto-map)
 (keymap-set mmotion/leader-map "h" mmotion/help-map)
 (keymap-set mmotion/leader-map "l" mmotion/lsp-map)
+(keymap-set mmotion/leader-map "m" mmotion/magit-map)
 (keymap-set mmotion/leader-map "n" mmotion/notes-map)
 (keymap-set mmotion/leader-map "o" mmotion/org-map)
 (keymap-set mmotion/leader-map "p" mmotion/project-map)
 (keymap-set mmotion/leader-map "t" mmotion/toggle-map)
 (keymap-set mmotion/leader-map "w" mmotion/window-map)
     #+end_src
-
 ** Configure which-key descriptions
    #+begin_src emacs-lisp
 
@@ -880,13 +874,14 @@ Better front end for Emacs' documentation
     "c" "Calendar"
     "d" "Dictionary"
     "f" "Find..."
-    "g" "(ma)Git..."
+    "g" "Go to..."
     "h" "Help..."
     "l" "LSP..."
     "l S" "LSP Server..."
     "l e" "Diagnosticts..."
     "l w" "Workspace..."
     "l u" "LSP UI..."
+    "m" "Magit..."
     "n" "Notes..."
     "o" "Org..."
     "p" "Project..."
@@ -909,8 +904,11 @@ Better front end for Emacs' documentation
     "l" "Line"
     "o" "Outline headings")
 
-  (which-key-add-keymap-based-replacements mmotion/git-map
-    "s" "(ma)Git status")
+  (which-key-add-keymap-based-replacements mmotion/goto-map
+    "c" "Go to character"
+    "w" "Go to word"
+    "l" "Go to line"
+  )
 
   (which-key-add-keymap-based-replacements mmotion/help-map
     "c" "Describe command"
@@ -950,6 +948,9 @@ Better front end for Emacs' documentation
     "u i" "Imenu with LSP"
     "u s" "Toggle sideline"
   )
+
+  (which-key-add-keymap-based-replacements mmotion/magit-map
+    "s" "(ma)Git status")
   
   (which-key-add-keymap-based-replacements mmotion/notes-map
     "b" "Show note's backlinks"
@@ -1007,7 +1008,6 @@ Better front end for Emacs' documentation
     "w" "Switch window"))
 
    #+end_src
-
 ** Evil-mode integration
    #+begin_src emacs-lisp
 
@@ -1035,7 +1035,6 @@ Better front end for Emacs' documentation
 (global-set-key (kbd "C-SPC") mmotion/leader-map)
 
    #+end_src
-
 * Completion & Selection Framework
 ** Consult
   #+begin_src emacs-lisp
@@ -1316,7 +1315,6 @@ Completion at point.
         dictionary-use-single-buffer t))
 #+end_src
 * Org-mode
-
 ** Org-mode base settings
   #+begin_src emacs-lisp
 
@@ -1612,7 +1610,6 @@ Completion at point.
           ("IDEA" success bold))))
 #+end_src
 * Org-mode Styling
-
 ** Org-superstar (bullet points)
 
 #+begin_src emacs-lisp
@@ -1763,7 +1760,6 @@ Typewriter-like look of the page (centring).
   ;; `denote-rename-buffer-format' for how to modify this.
   (denote-rename-buffer-mode 1))
   #+end_src
-
 ** Denote-org
    #+begin_src emacs-lisp
 
@@ -1788,7 +1784,6 @@ Typewriter-like look of the page (centring).
     denote-org-dblock-insert-missing-links
     denote-org-dblock-insert-files-as-headings))
    #+end_src
-
 ** Consult-notes
 #+begin_src emacs-lisp
 ;;;; Consult-notes
@@ -1806,7 +1801,6 @@ Typewriter-like look of the page (centring).
   ;; Search only for text files in denote dir
 (setq consult-notes-denote-files-function (lambda () (denote-directory-files nil t t))))
 #+end_src
-
 ** Denote-journal
    #+begin_src emacs-lisp
 
@@ -1849,7 +1843,6 @@ Typewriter-like look of the page (centring).
     (find-file today-file)))
 
    #+end_src
-
 ** Denote-explore
 #+begin_src emacs-lisp
 
@@ -1857,7 +1850,80 @@ Typewriter-like look of the page (centring).
 (use-package denote-explore)
 
 #+end_src
+* Dired
+** Main dired config
+   #+begin_src emacs-lisp
 
+;;; Dired ------------------------------------------------------
+(use-package dired
+  :ensure nil
+  :commands (dired dired-jump)
+  :bind (("C-x C-j" . dired-jump))
+  :custom
+  (dired-dwim-target t)
+  (dired-kill-when-opening-new-dired-buffer t)
+  (dired-listing-switches "-agho --group-directories-first"))
+  :config
+  (evil-collection-define-key 'normal 'dired-mode-map
+    "h" 'dired-up-directory
+    "l" 'dired-find-file)
+
+;;;;; Fix leader key in dired buffers
+(with-eval-after-load 'dired
+  (evil-define-key 'normal dired-mode-map (kbd "SPC") nil))
+
+(with-eval-after-load 'dired
+  (require 'dired-x))
+   #+end_src
+** Nerd-icons for Dired
+   #+begin_src emacs-lisp
+
+(use-package nerd-icons-dired
+  :hook
+  (dired-mode . nerd-icons-dired-mode))
+
+   #+end_src
+** Hide dotfiles
+   #+begin_src emacs-lisp
+
+(use-package dired-hide-dotfiles
+  :hook (dired-mode . dired-hide-dotfiles-mode)
+  :config
+  ;; Bind "g ." in Evil normal state within Dired
+  (evil-define-key 'normal dired-mode-map
+    "g." #'dired-hide-dotfiles-mode))
+   #+end_src
+** Set up programs to open certain files from dired
+   #+begin_src emacs-lisp
+
+(use-package dired-open
+  :after dired
+  ;; :commands (dired dired-jump)
+  :config
+  (setq dired-open-extensions
+        '(("png"  . "viewnior")
+          ("jpeg" . "viewnior")
+          ("jpg"  . "viewnior")
+	        ;; ("pdf" . "zathura")
+	        ;; ("epub" . "zathura")
+	        ("mp4" . "mpv")
+          ("mkv"  . "mpv"))))
+   #+end_src
+** Dired preview (not in use)
+Disabled for now, I don't like it.
+   #+begin_src emacs-lisp :tangle no
+
+;; Enable Dired Preview and make it Evil-friendly
+(use-package dired-preview
+  :ensure t
+  ;; :hook (dired-mode . dired-preview-mode)
+  :config
+  (setq dired-preview-delay 0.1)
+  ;; Add Evil navigation commands to trigger preview
+  (dolist (cmd '(evil-next-line evil-previous-line))
+    (add-to-list 'dired-preview-trigger-commands cmd)))
+
+   #+end_src
 * Programming
 ** Project
 #+begin_src emacs-lisp
@@ -1894,10 +1960,8 @@ Typewriter-like look of the page (centring).
   :commands magit-status)
 
 #+end_src
-
 ** Tree-sitter
   #+begin_src emacs-lisp
-
 ;;; Tree-sitter ------------------------------------------------
 (use-package treesit
   :ensure nil
@@ -1955,7 +2019,6 @@ Typewriter-like look of the page (centring).
   (add-hook 'html-ts-mode-hook #'my/setup-emmet-completion))
   
 #+end_src
-
 ** LSP mode
 *** LSP mode set up
    #+begin_src emacs-lisp
@@ -2035,7 +2098,6 @@ Typewriter-like look of the page (centring).
   :hook ((python-mode python-ts-mode) . pyvenv-auto-run))
 
    #+end_src
-
 *** Teemacs
    #+begin_src emacs-lisp
 
@@ -2127,86 +2189,6 @@ Typewriter-like look of the page (centring).
                   (window-height . 0.3))))
 
 #+end_src
-
-* Dired
-** Main dired config
-   #+begin_src emacs-lisp
-
-;;; Dired ------------------------------------------------------
-(use-package dired
-  :ensure nil
-  :commands (dired dired-jump)
-  :bind (("C-x C-j" . dired-jump))
-  :custom
-  (dired-dwim-target t)
-  (dired-kill-when-opening-new-dired-buffer t)
-  (dired-listing-switches "-agho --group-directories-first"))
-  :config
-  (evil-collection-define-key 'normal 'dired-mode-map
-    "h" 'dired-up-directory
-    "l" 'dired-find-file)
-
-;;;;; Fix leader key in dired buffers
-(with-eval-after-load 'dired
-  (evil-define-key 'normal dired-mode-map (kbd "SPC") nil))
-
-(with-eval-after-load 'dired
-  (require 'dired-x))
-   #+end_src
-
-** Nerd-icons for Dired
-   #+begin_src emacs-lisp
-
-(use-package nerd-icons-dired
-  :hook
-  (dired-mode . nerd-icons-dired-mode))
-
-   #+end_src
-
-** Hide dotfiles
-   #+begin_src emacs-lisp
-
-(use-package dired-hide-dotfiles
-  :hook (dired-mode . dired-hide-dotfiles-mode)
-  :config
-  ;; Bind "g ." in Evil normal state within Dired
-  (evil-define-key 'normal dired-mode-map
-    "g." #'dired-hide-dotfiles-mode))
-   #+end_src
-
-** Set up programs to open certain files from dired
-   #+begin_src emacs-lisp
-
-(use-package dired-open
-  :after dired
-  ;; :commands (dired dired-jump)
-  :config
-  (setq dired-open-extensions
-        '(("png"  . "viewnior")
-          ("jpeg" . "viewnior")
-          ("jpg"  . "viewnior")
-	        ;; ("pdf" . "zathura")
-	        ;; ("epub" . "zathura")
-	        ("mp4" . "mpv")
-          ("mkv"  . "mpv"))))
-   #+end_src
-
-** Dired preview (not in use)
-Disabled for now, I don't like it.
-
-   #+begin_src emacs-lisp :tangle no
-
-;; Enable Dired Preview and make it Evil-friendly
-(use-package dired-preview
-  :ensure t
-  ;; :hook (dired-mode . dired-preview-mode)
-  :config
-  (setq dired-preview-delay 0.1)
-  ;; Add Evil navigation commands to trigger preview
-  (dolist (cmd '(evil-next-line evil-previous-line))
-    (add-to-list 'dired-preview-trigger-commands cmd)))
-
-   #+end_src
 
 * Reset GC Threshold
 #+begin_src emacs-lisp
