@@ -18,7 +18,6 @@
 - [[#appearance][Appearance]]
   - [[#fonts][Fonts]]
   - [[#themes][Themes]]
-  - [[#circadian][Circadian]]
   - [[#nerd-icons][Nerd-icons]]
   - [[#modeline][Modeline]]
   - [[#emacs-dashboard][Emacs-dashboard]]
@@ -265,7 +264,7 @@ I'm also setting comments to be /italic/.
 
   #+end_src
 ** Themes
-I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! Also keeping[[https://github.com/doomemacs/themes?tab=readme-ov-file#theme-list][ doom-themes]] here just because.
+I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]] and [[https://protesilaos.com/codelog/2025-05-27-emacs-doric-themes-0-1-0/][doric-themes]]!  Also keeping[[https://github.com/doomemacs/themes?tab=readme-ov-file#theme-list][ doom-themes]] here, just because.
 *** Ef-themes
 #+begin_src emacs-lisp
 
@@ -295,7 +294,7 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
 
 #+end_src
 
-*** Doric-theme
+*** Doric-themes
 #+begin_src emacs-lisp
 
 ;;;; doric-themes
@@ -320,7 +319,8 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
 ;; (load-theme 'doom-city-lights t)
 #+end_src
 
-** Circadian
+*** Circadian
+Set dark or light theme based on the time of the day.
 #+begin_src emacs-lisp
 ;;;; Set dark or light theme based on the time of the day
 (setq calendar-latitude 51.406422)
@@ -329,8 +329,8 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
 (use-package circadian
   :ensure t
   :config
-  (setq circadian-themes '((:sunrise . doric-earth)
-                           (:sunset  . doric-fire)))
+  (setq circadian-themes '((:sunrise . ef-kassio)
+                           (:sunset  . ef-owl)))
   (circadian-setup))
 #+end_src
 ** Nerd-icons
