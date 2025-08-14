@@ -138,55 +138,55 @@ All the temp and backup files that Emacs generates are put into "~/.cache/emacs"
 ** UI elements, commands history, trash dir, tabs.
 Basic set up of Emacs' UI, removing the default toolbars, and setting up some system preferences.
   #+begin_src emacs-lisp
-;;; Essentials ------------------------------------------
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
-(tooltip-mode -1)
-(set-fringe-mode 10)
-(menu-bar-mode -1)
-(setq visible-bell t)
-(setopt use-short-answers t)
-(global-auto-revert-mode t)
-(delete-selection-mode 1) ; Delete selected text and replace it with typed text
+    ;;; Essentials ------------------------------------------
+    (scroll-bar-mode -1)
+    (tool-bar-mode -1)
+    (tooltip-mode -1)
+    (set-fringe-mode 10)
+    (menu-bar-mode -1)
+    (setq visible-bell t)
+    (setopt use-short-answers t)
+    (global-auto-revert-mode t)
+    (delete-selection-mode 1) ; Delete selected text and replace it with typed text
 
-;;;; Smooth scrolling
-(pixel-scroll-precision-mode 1)
+    ;;;; Smooth scrolling
+    (pixel-scroll-precision-mode 1)
 
-;;;; Autopairing
-(electric-pair-mode 1)
-;; The following prevents <> from auto-pairing when electric-pair-mode is on.
-;; Otherwise, org-tempo is broken when you try to <s TAB...
-(add-hook 'org-mode-hook
-  (lambda ()
-    (setq-local electric-pair-inhibit-predicate
-                (lambda (c)
-                  (or (char-equal c ?<)           ; inhibit “<”
-                      (electric-pair-default-inhibit c))))))
+    ;;;; Autopairing
+    (electric-pair-mode 1)
+    ;; The following prevents <> from auto-pairing when electric-pair-mode is on.
+    ;; Otherwise, org-tempo is broken when you try to "<s" TAB...
+    (add-hook 'org-mode-hook
+      (lambda ()
+        (setq-local electric-pair-inhibit-predicate
+                    (lambda (c)
+                      (or (char-equal c ?<)
+                          (electric-pair-default-inhibit c))))))
 
-;;;; Persist history over Emacs restarts. Vertico sorts by history position.
-(savehist-mode 1)
+    ;;;; Persist history over Emacs restarts. Vertico sorts by history position.
+    (savehist-mode 1)
 
-;;;; Turn on recentf-mode right after init, and keep its list alive
-(recentf-mode 1)
-(setq recentf-max-saved-items 200
-      recentf-auto-cleanup 'never)  ;; don’t remove dead entries
-(add-hook 'kill-emacs-hook #'recentf-save-list)
+    ;;;; Turn on recentf-mode right after init, and keep its list alive
+    (recentf-mode 1)
+    (setq recentf-max-saved-items 200
+          recentf-auto-cleanup 'never)  ;; don’t remove dead entries
+    (add-hook 'kill-emacs-hook #'recentf-save-list)
 
-;;;; Use system trash when deleting files
-(setq delete-by-moving-to-trash t)
+    ;;;; Use system trash when deleting files
+    (setq delete-by-moving-to-trash t)
 
-;;;; Tabs to spaces
-(setq-default indent-tabs-mode nil
-	            tab-width 2) 
+    ;;;; Tabs to spaces
+    (setq-default indent-tabs-mode nil
+    	            tab-width 2) 
 
-;;;; Column numbers
-(column-number-mode 1)
-(setq display-line-numbers-type 'relative)
-(add-hook 'prog-mode-hook #'display-line-numbers-mode)
-(add-hook 'astro-ts-mode-hook #'display-line-numbers-mode)
+    ;;;; Column numbers
+    (column-number-mode 1)
+    (setq display-line-numbers-type 'relative)
+    (add-hook 'prog-mode-hook #'display-line-numbers-mode)
+    (add-hook 'astro-ts-mode-hook #'display-line-numbers-mode)
 
-;;;; Prettify symbols
-(global-prettify-symbols-mode t)
+    ;;;; Prettify symbols
+    (global-prettify-symbols-mode t)
   #+end_src
 ** Bookmarks
 Make sure that bookmarks are saved automatically and don't get erased.
@@ -580,7 +580,7 @@ Display keybindings.
   (message "Line numbers: %s" display-line-numbers))
    #+end_src
 ** Hydras
-Nested keybindings.
+Keybindings with functions to be able to do things repeatedly like changing the size of a window or text.
    #+begin_src emacs-lisp
 ;;;; Define hydras
 (use-package hydra
@@ -632,7 +632,8 @@ Nested keybindings.
   "f" #'find-file
   "g" #'consult-ripgrep
   "l" #'consult-line
-  "o" #'consult-outline)
+  "o" #'consult-outline
+  "r" #'consult-recent-file)
     #+end_src
 *** [G] Go to keybindings (avy)
 #+begin_src emacs-lisp
@@ -836,7 +837,8 @@ Nested keybindings.
     "f" "Find files"
     "g" "Ripgrep"
     "l" "Line"
-    "o" "Outline headings")
+    "o" "Outline headings"
+    "r" "Recent files")
 
   (which-key-add-keymap-based-replacements mmotion/goto-map
     "c" "Go to character"
@@ -1085,55 +1087,56 @@ Run commands onto completion candidates.
 ** Corfu
 COmpletion in Region FUnction (pop up for autocompletion).
   #+begin_src emacs-lisp
-;;;; Corfu
-(use-package corfu
-  :demand t
-  :custom
-  (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
-  (corfu-auto t)               ; enable auto popup
-  (corfu-auto-delay 0.2)       ; wait 0.2s before popping up
-  (corfu-auto-prefix 2)        ; only pop up after 2 chars
-  (corfu-max-width 80)         ; cap popup width
-  (corfu-max-length 20)        ; show at most 20 candidates
-  ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
-  ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
-  ;; (corfu-preview-current nil)    ;; Disable current candidate preview
-  ;; (corfu-preselect 'prompt)      ;; Preselect the prompt
-  ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
+    ;;;; Corfu
+    (use-package corfu
+      :demand t
+      :custom
+      (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
+      (corfu-auto t)               ; enable auto popup
+      (corfu-auto-delay 0.2)       ; wait 0.2s before popping up
+      (corfu-auto-prefix 2)        ; only pop up after 2 chars
+      (corfu-max-width 80)         ; cap popup width
+      (corfu-max-length 20)        ; show at most 20 candidates
+      ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
+      ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
+      ;; (corfu-preview-current nil)    ;; Disable current candidate preview
+      ;; (corfu-preselect 'prompt)      ;; Preselect the prompt
+      ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
 
-  ;; Enable Corfu only for certain modes. See also `global-corfu-modes'.
-  ;; :hook ((prog-mode . corfu-mode)
-  ;;        (shell-mode . corfu-mode)
-  ;;        (eshell-mode . corfu-mode))
-  :init
-  ;; Recommended: Enable Corfu globally. Recommended since many modes provide
-  ;; Capfs and Dabbrev can be used globally (M-/). See also the customization
-  ;; variable `global-corfu-modes' to exclude certain modes.
-  (global-corfu-mode 1)
+      ;; Enable Corfu only for certain modes. See also `global-corfu-modes'.
+      ;; :hook ((prog-mode . corfu-mode)
+      ;;        (shell-mode . corfu-mode)
+      ;;        (eshell-mode . corfu-mode))
+      :init
+      ;; Recommended: Enable Corfu globally. Recommended since many modes provide
+      ;; Capfs and Dabbrev can be used globally (M-/). See also the customization
+      ;; variable `global-corfu-modes' to exclude certain modes.
+      (global-corfu-mode 1)
 
-  ;; Enable optional extension modes:
-  ;; (corfu-history-mode)
-  ;; (corfu-popupinfo-mode))
+      ;; Enable optional extension modes:
+      ;; (corfu-history-mode)
+      ;; (corfu-popupinfo-mode)
+      )
 
-;; A few more useful configurations...
-(use-package emacs
-  :ensure nil
-  :custom
-  ;; TAB cycle if there are only few candidates
-  (completion-cycle-threshold 3)
+    ;; A few more useful configurations...
+    (use-package emacs
+      :ensure nil
+      :custom
+      ;; TAB cycle if there are only few candidates
+      (completion-cycle-threshold 3)
 
-  ;; Enable indentation+completion using the TAB key.
-  ;; `completion-at-point' is often bound to M-TAB.
-  (tab-always-indent 'complete)
+      ;; Enable indentation+completion using the TAB key.
+      ;; `completion-at-point' is often bound to M-TAB.
+      (tab-always-indent 'complete)
 
-  ;; Emacs 30 and newer: Disable Ispell completion function.
-  ;; Try `cape-dict' as an alternative.
-  (text-mode-ispell-word-completion nil)
+      ;; Emacs 30 and newer: Disable Ispell completion function.
+      ;; Try `cape-dict' as an alternative.
+      (text-mode-ispell-word-completion nil)
 
-  ;; Hide commands in M-x which do not apply to the current mode. Corfu
-  ;; commands are hidden, since they are not used via M-x. This setting is
-  ;; useful beyond Corfu.
-  (read-extended-command-predicate #'command-completion-default-include-p))
+      ;; Hide commands in M-x which do not apply to the current mode. Corfu
+      ;; commands are hidden, since they are not used via M-x. This setting is
+      ;; useful beyond Corfu.
+      (read-extended-command-predicate #'command-completion-default-include-p))
   #+end_src
 ** Cape
 Completion at point.
@@ -1578,17 +1581,17 @@ Typewriter-like look of the page (centring).
 4. Otherwise insert newline + indent."
   (interactive)
   (cond
-   ;; 1) Heading TODO/DONE toggle
+   ;; 1. Heading TODO/DONE toggle
    ((and (org-at-heading-p)
          (member (org-get-todo-state) '("TODO" "DONE")))
     (org-todo (if (string= (org-get-todo-state) "TODO") "DONE" "TODO")))
-   ;; 2) Checkbox toggle
+   ;; 2. Checkbox toggle
    ((org-at-item-checkbox-p)
     (org-toggle-checkbox))
-   ;; 3) Org link follow
+   ;; 3. Org link follow
    ((org-in-regexp org-link-bracket-re 1)
     (org-open-at-point))
-   ;; 4) Default newline + indent
+   ;; 4. Default newline + indent
    (t
     (call-interactively 'org-return))))
 
@@ -1981,16 +1984,12 @@ Disabled for now, I don't like it.
 * Terminal Emulators
 ** Term
 #+begin_src emacs-lisp
-;;; Terminal emulators ----------------------------------------
-(use-package term
-  :ensure nil
-  :commands term
-  :config
-  (setq explicit-shell-file-name "/usr/bin/sh")) ;; Change this to zsh, etc
-  ;;(setq explicit-zsh-args '())         ;; Use 'explicit-<shell>-args for shell-specific args
-
-  ;; Match the default Bash shell prompt.  Update this if you have a custom prompt
-  ;; (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *"))
+  ;;; Terminal emulators ----------------------------------------
+  (use-package term
+    :ensure nil
+    :commands term
+    :config
+    (setq explicit-shell-file-name "/usr/bin/sh")) ;; Change this to zsh, etc
 #+end_src
 ** Vterm
 #+begin_src emacs-lisp
