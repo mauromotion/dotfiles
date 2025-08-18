@@ -1775,9 +1775,14 @@ Typewriter-like look of the page (centring).
   (dired-kill-when-opening-new-dired-buffer t)
   (dired-listing-switches "-agho --group-directories-first"))
   :config
+  (defun my-dired-sort-by-size ()
+  (interactive)
+  (dired-sort-other "-alS"))
+
   (evil-collection-define-key 'normal 'dired-mode-map
     "h" 'dired-up-directory
-    "l" 'dired-find-file)
+    "l" 'dired-find-file
+    "s" 'my-dired-sort-by-size)
 
 ;;;;; Fix leader key in dired buffers
 (with-eval-after-load 'dired
