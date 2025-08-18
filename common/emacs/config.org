@@ -48,6 +48,8 @@
   - [[#corfu][Corfu]]
   - [[#cape][Cape]]
 - [[#spellchecking][Spellchecking]]
+- [[#email][Email]]
+  - [[#mu4e][mu4e]]
 - [[#org-mode][Org-mode]]
   - [[#org-mode-base-settings][Org-mode base settings]]
   - [[#org-mode-custom-functions][Org-mode custom functions]]
@@ -258,7 +260,7 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]] an
 ;;; Themes ------------------------------------------------
 ;;;; ef-themes
 (use-package ef-themes
-  :defer nil
+  :defer t
   :config
   (setq ef-themes-to-toggle '(ef-kassio ef-owl))
   ;; (setq ef-themes-headings ; read the manual's entry or the doc string
@@ -306,7 +308,7 @@ Set dark or light theme based on the time of the day.
 (use-package circadian
   :ensure t
   :config
-  (setq circadian-themes '((:sunrise . ef-kassio)
+  (setq circadian-themes '((:sunrise . ef-day)
                            (:sunset  . ef-owl)))
   (circadian-setup))
 #+end_src
@@ -345,10 +347,9 @@ I'd rather use =nerd-icons= than =all-the-icons=, much more reliable.
         doom-modeline-persp-icon t
         doom-modeline-buffer-modification-icon t
         doom-modeline-icon t))
-
 (with-eval-after-load 'doom-modeline
-    (set-face-attribute 'mode-line nil :font "JetBrainsMono Nerd Font-12")
-    (set-face-attribute 'mode-line-inactive nil :font "JetBrainsMono Nerd Font-12"))
+    (set-face-attribute 'mode-line nil :font "BlexMono Nerd Font-12")
+    (set-face-attribute 'mode-line-inactive nil :font "BlexMono Nerd Font-12"))
    #+end_src
 *** Mood-line
 #+begin_src emacs-lisp :tangle yes
@@ -374,7 +375,7 @@ Settings *must* be in =:custom= otherwise they won't work.
   :config
   (dashboard-setup-startup-hook)
   :custom
-  (dashboard-startup-banner 'logo)
+  (dashboard-startup-banner 3)
   (dashboard-center-content t)
   (dashboard-display-icons-p t)
   (dashboard-icon-type 'nerd-icons)
@@ -995,7 +996,6 @@ folder, otherwise delete a character backward"
           (zap-up-to-char (- arg) ?/)
         (delete-minibuffer-contents))
     (delete-backward-char arg)))
-
   #+end_src
 
 ** Vertico
@@ -1230,6 +1230,54 @@ Completion at point.
   :config
   (setq dictionary-server "dict.org"
         dictionary-use-single-buffer t))
+#+end_src
+* Email
+** mu4e
+#+begin_src emacs-lisp :tangle yes
+(use-package mu4e
+  :ensure nil
+  :ensure-system-package mu
+  :custom
+  (user-mail-address "mauro@disroot.org")
+  (user-full-name "Mauro")
+  (mu4e-attachment-dir "~/Maildir/attachments/disroot")
+  (mu4e-compose-signature-auto-include nil)
+  (mu4e-drafts-folder "/Drafts")
+  (mu4e-get-mail-command "mbsync -a")
+  (mu4e-maildir "~/Maildir/disroot")
+  (mu4e-refile-folder "/Archive")
+  (mu4e-sent-folder "/Sent")
+  (mu4e-maildir-shortcuts
+   '(("/Inbox" . ?i)
+     ("/Trash" . ?t)
+     ("/Drafts" . ?d)
+     ("/Sent" . ?s)))
+  (mu4e-trash-folder "/Trash")
+  (mu4e-update-interval 300)
+  (mu4e-use-fancy-chars t)
+  (mu4e-view-show-addresses t)
+  (mu4e-view-show-images t)
+  (mu4e-view-use-gnus t)
+  (mu4e-sent-messages-behavior 'sent)
+  :config
+  ;; HTML renderer
+  (setq mm-text-html-renderer 'gnus-w3m)
+
+  ;; SMTP configuration for Disroot
+  (setq smtpmail-smtp-server "disroot.org"
+        smtpmail-smtp-service 587
+        smtpmail-stream-type 'starttls
+        smtpmail-auth-credentials "~/.authinfo.gpg"
+        send-mail-function 'smtpmail-send-it
+        message-send-mail-function 'smtpmail-send-it
+        gnus-select-method '(nnimap "disroot.org"))
+
+  ;; Enable debugging
+  (setq smtpmail-debug-info t
+        smtpmail-debug-verb t)
+
+  ;; Add browser action
+  (add-to-list 'mu4e-view-actions '("view in browser" . mu4e-action-view-in-browser)))
 #+end_src
 * Org-mode
 ** Org-mode base settings
@@ -1765,6 +1813,7 @@ Typewriter-like look of the page (centring).
           ("jpg"  . "viewnior")
 	        ;; ("pdf" . "zathura")
 	        ;; ("epub" . "zathura")
+          ("mp3" . "mpv --force-window --keep-open")
 	        ("mp4" . "mpv")
           ("mkv"  . "mpv"))))
    #+end_src
@@ -1781,6 +1830,7 @@ Disabled for now, I don't like it.
   (dolist (cmd '(evil-next-line evil-previous-line))
     (add-to-list 'dired-preview-trigger-commands cmd)))
    #+end_src
+   
 * Programming
 ** Project
 #+begin_src emacs-lisp
