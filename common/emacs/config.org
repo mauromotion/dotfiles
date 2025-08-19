@@ -1,5 +1,4 @@
 #+TITLE: Mauro's GNU Emacs Config
-r
 #+AUTHOR: Mauro Di Ianni (mmotion)
 #+EMAIL: hello@mauromotion.com
 #+DESCRIPTION: Mauro's personal Emacs configuration
@@ -8,17 +7,17 @@ r
 #+PROPERTY: header-args :tangle config.el
 
 * Table of Contents :toc:
+- [[#general-flow][General flow]]
 - [[#package-manager][Package Manager]]
   - [[#auto-update-packages][Auto-Update Packages]]
 - [[#keep-directories-clean][Keep directories clean]]
 - [[#essentials][Essentials]]
-  - [[#ui][UI]]
+  - [[#ui-elements-commands-history-trash-dir-tabs][UI elements, commands history, trash dir, tabs.]]
   - [[#bookmarks][Bookmarks]]
   - [[#navigation][Navigation]]
-- [[#fonts][Fonts]]
 - [[#appearance][Appearance]]
+  - [[#fonts][Fonts]]
   - [[#themes][Themes]]
-  - [[#circadian][Circadian]]
   - [[#nerd-icons][Nerd-icons]]
   - [[#modeline][Modeline]]
   - [[#emacs-dashboard][Emacs-dashboard]]
@@ -38,7 +37,7 @@ r
   - [[#custom-functions][Custom functions]]
   - [[#hydras][Hydras]]
   - [[#define-sub-menus][Define Sub-menus]]
-  - [[#configure-which-key-description][Configure which-key description]]
+  - [[#configure-which-key-descriptions][Configure which-key descriptions]]
   - [[#evil-mode-integration][Evil-mode integration]]
 - [[#completion--selection-framework][Completion & Selection Framework]]
   - [[#consult][Consult]]
@@ -49,8 +48,8 @@ r
   - [[#corfu][Corfu]]
   - [[#cape][Cape]]
 - [[#spellchecking][Spellchecking]]
-- [[#projectile][Projectile]]
-- [[#magit][Magit]]
+- [[#email][Email]]
+  - [[#mu4e][mu4e]]
 - [[#org-mode][Org-mode]]
   - [[#org-mode-base-settings][Org-mode base settings]]
   - [[#org-mode-custom-functions][Org-mode custom functions]]
@@ -75,39 +74,33 @@ r
   - [[#consult-notes][Consult-notes]]
   - [[#denote-journal][Denote-journal]]
   - [[#denote-explore][Denote-explore]]
-- [[#tree-sitter][Tree-sitter]]
-- [[#web-development][Web development]]
-  - [[#astro-support][Astro support]]
-  - [[#emmet-support][Emmet support]]
-- [[#lsp-mode][LSP mode]]
-  - [[#lsp-mode-set-up][LSP mode set up]]
-  - [[#teemacs][Teemacs]]
-  - [[#flycheck][Flycheck]]
-- [[#formatting][Formatting]]
-- [[#terminal-emulators][Terminal Emulators]]
-  - [[#term][Term]]
-  - [[#vterm][Vterm]]
-  - [[#vterm-toggle][Vterm-toggle]]
 - [[#dired][Dired]]
   - [[#main-dired-config][Main dired config]]
   - [[#nerd-icons-for-dired][Nerd-icons for Dired]]
   - [[#hide-dotfiles][Hide dotfiles]]
   - [[#set-up-programs-to-open-certain-files-from-dired][Set up programs to open certain files from dired]]
   - [[#dired-preview-not-in-use][Dired preview (not in use)]]
+- [[#programming][Programming]]
+  - [[#project][Project]]
+  - [[#magit][Magit]]
+  - [[#tree-sitter][Tree-sitter]]
+  - [[#web-development][Web development]]
+  - [[#lsp-mode][LSP mode]]
+  - [[#formatting][Formatting]]
+- [[#terminal-emulators][Terminal Emulators]]
+  - [[#term][Term]]
+  - [[#vterm][Vterm]]
+  - [[#vterm-toggle][Vterm-toggle]]
 - [[#reset-gc-threshold][Reset GC Threshold]]
 
-*
-General flow
+* General flow
 This literal configuration will work like this:
 - In =early-init.el= some basic initial UI settings are configured.
 - Then in =init.el= in order, there's the start up performance function, the whole use-package installation and setup, and a check that loads =config.el= if present on disk, or, if not present, it will tangle this =config.org= file so that =config.el= gets generated. And then =init.el= loads the whole configuration from =config.el=.
 - =init.el= will also auto-reload the config each time =config.org= is saved.
-- +Here there's also a bootstrap function that auto-tangle this file when saved, so that =config.el= gets recreated with the new settings.+
-  
 * Package Manager
 ** Auto-Update Packages
 #+begin_src emacs-lisp
-
 ;;;; Auto-update packages
 (use-package auto-package-update
   :custom
@@ -117,14 +110,10 @@ This literal configuration will work like this:
   :config
   (auto-package-update-maybe)
   (auto-package-update-at-time "10:00"))
-
 #+end_src
-
 * Keep directories clean
 All the temp and backup files that Emacs generates are put into "~/.cache/emacs" instead that along side the original files in the same directory.
-
 #+begin_src emacs-lisp
-
 ;;;; Keep directories clean ------------------------------------------
 (use-package no-littering
   :demand t
@@ -146,69 +135,64 @@ All the temp and backup files that Emacs generates are put into "~/.cache/emacs"
 
 ;; Optional: prevent lockfiles like .#file.txt
 (setq create-lockfiles nil)
-
 #+end_src
-
 * Essentials
-** UI
-elements, commands history, trash dir, tabs.
+** UI elements, commands history, trash dir, tabs.
 Basic set up of Emacs' UI, removing the default toolbars, and setting up some system preferences.
-
   #+begin_src emacs-lisp
+    ;;; Essentials ------------------------------------------
+    (scroll-bar-mode -1)
+    (tool-bar-mode -1)
+    (tooltip-mode -1)
+    (set-fringe-mode 10)
+    (menu-bar-mode -1)
+    (setq visible-bell t)
+    (setopt use-short-answers t)
+    (global-auto-revert-mode t)
+    (delete-selection-mode 1) ; Delete selected text and replace it with typed text
 
-;;; Essentials ------------------------------------------
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
-(tooltip-mode -1)
-(set-fringe-mode 10)
-(menu-bar-mode -1)
-(setq visible-bell t)
-(setopt use-short-answers t)
-(global-auto-revert-mode t)
-(delete-selection-mode 1) ; Delete selected text and replace it with typed text
+    ;;;; Smooth scrolling
+    (pixel-scroll-precision-mode 1)
 
-;;;; Smooth scrolling
-(pixel-scroll-precision-mode 1)
+    ;;;; Autopairing
+    (electric-pair-mode 1)
+    ;; The following prevents <> from auto-pairing when electric-pair-mode is on.
+    ;; Otherwise, org-tempo is broken when you try to "<s" TAB...
+    (add-hook 'org-mode-hook
+      (lambda ()
+        (setq-local electric-pair-inhibit-predicate
+                    (lambda (c)
+                      (or (char-equal c ?<)
+                          (electric-pair-default-inhibit c))))))
 
-;;;; Autopairing
-(electric-pair-mode 1)
-;; The following prevents <> from auto-pairing when electric-pair-mode is on.
-;; Otherwise, org-tempo is broken when you try to <s TAB...
-(add-hook 'org-mode-hook
-  (lambda ()
-    (setq-local electric-pair-inhibit-predicate
-                (lambda (c)
-                  (or (char-equal c ?<)           ; inhibit “<”
-                      (electric-pair-default-inhibit c))))))
+    ;;;; Persist history over Emacs restarts. Vertico sorts by history position.
+    (savehist-mode 1)
 
-;;;; Persist history over Emacs restarts. Vertico sorts by history position.
-(savehist-mode 1)
+    ;;;; Turn on recentf-mode right after init, and keep its list alive
+    (recentf-mode 1)
+    (setq recentf-max-saved-items 200
+          recentf-auto-cleanup 'never)  ;; don’t remove dead entries
+    (add-hook 'kill-emacs-hook #'recentf-save-list)
 
-;;;; Turn on recentf-mode right after init, and keep its list alive
-(recentf-mode 1)
-(setq recentf-max-saved-items 200
-      recentf-auto-cleanup 'never)  ;; don’t remove dead entries
-(add-hook 'kill-emacs-hook #'recentf-save-list)
+    ;;;; Use system trash when deleting files
+    (setq delete-by-moving-to-trash t)
 
-;;;; Use system trash when deleting files
-(setq delete-by-moving-to-trash t)
+    ;;;; Tabs to spaces
+    (setq-default indent-tabs-mode nil
+    	            tab-width 2) 
 
-;;;; Tabs to spaces
-(setq-default indent-tabs-mode nil
-	            tab-width 2) 
+    ;;;; Column numbers
+    (column-number-mode 1)
+    (setq display-line-numbers-type 'relative)
+    (add-hook 'prog-mode-hook #'display-line-numbers-mode)
+    (add-hook 'astro-ts-mode-hook #'display-line-numbers-mode)
 
-;;;; Column numbers
-(column-number-mode 1)
-(setq display-line-numbers-type 'relative)
-(add-hook 'prog-mode-hook #'display-line-numbers-mode)
-
+    ;;;; Prettify symbols
+    (global-prettify-symbols-mode t)
   #+end_src
-  
 ** Bookmarks
 Make sure that bookmarks are saved automatically and don't get erased.
-
 #+begin_src emacs-lisp
-
 ;;;; Bookmarks
 (use-package bookmark
   :ensure nil
@@ -217,21 +201,20 @@ Make sure that bookmarks are saved automatically and don't get erased.
   (setq bookmark-default-file (no-littering-expand-var-file-name "bookmarks"))
   ;; Save bookmarks automatically
   (setq bookmark-save-flag 1))
-
 #+end_src
-
 ** Navigation
-Use ace-window to manipulate windows and navigate between them more efficiently.
-
+Use ace-window to manipulate windows and navigate between them more efficiently, and Avy to jump to any word or line on the page with a char-based decision tree.
 #+begin_src emacs-lisp
-
 ;;;; Navigation
+;;;;; Ace-window
 (use-package ace-window)
 (global-set-key (kbd "M-o") 'ace-window)
 
+;;;;; Avy
+(use-package avy)
 #+end_src
-
-* Fonts
+* Appearance
+** Fonts
 For the moment I've settled on [[https://www.ibm.com/plex/][IBM Plex Mono ]]for my monospace font and [[https://weiweihuanghuang.github.io/Work-Sans/][Work Sans]] for my proportional spaced font.
 
 The Arch Linux packages are called respectively =ttf-ibm-plex= and =ttf-work-sans-variable=.
@@ -241,7 +224,6 @@ For the monospace font I don't need the Nerd Font patched version on Emacs, sinc
 I'm also setting comments to be /italic/.
 
   #+begin_src emacs-lisp
-
 ;;; Fonts ------------------------------------------------
 
 ;; Define font names and sizes
@@ -252,6 +234,7 @@ I'm also setting comments to be /italic/.
 
 ;; Line spacing
 ;; (setq-local line-spacing 0.2)
+(setq-default line-spacing 0.2)
 
 ;;;; Set font faces
 (set-face-attribute 'default nil
@@ -269,19 +252,15 @@ I'm also setting comments to be /italic/.
                     :font mmotion/variable-font
                     :height mmotion/variable-font-size
                     :weight 'normal)
-
   #+end_src
-  
-* Appearance
 ** Themes
-I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! Also keeping[[https://github.com/doomemacs/themes?tab=readme-ov-file#theme-list][ doom-themes]] here just because.
+I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]] and [[https://protesilaos.com/codelog/2025-05-27-emacs-doric-themes-0-1-0/][doric-themes]]!  Also keeping[[https://github.com/doomemacs/themes?tab=readme-ov-file#theme-list][ doom-themes]] here, just because.
 *** Ef-themes
 #+begin_src emacs-lisp
-
-;;; Look ------------------------------------------------
+;;; Themes ------------------------------------------------
 ;;;; ef-themes
 (use-package ef-themes
-  :defer nil
+  :defer t
   :config
   (setq ef-themes-to-toggle '(ef-kassio ef-owl))
   ;; (setq ef-themes-headings ; read the manual's entry or the doc string
@@ -299,26 +278,17 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
       ef-themes-variable-pitch-ui t)
 ;; Disable all other themes to avoid awkward blending:
   (mapc #'disable-theme custom-enabled-themes))
-;; Optional: Set a default theme to load when Emacs starts
-  ;; (ef-themes-select 'ef-kassio))
-
 #+end_src
-
-*** Doric-theme
+*** Doric-themes
 #+begin_src emacs-lisp
-
 ;;;; doric-themes
 (use-package doric-themes
   :defer t
   :config
   (setq doric-themes-to-toggle '(doric-earth doric-fire)))
-
-;; (doric-themes-select 'doric-marble)
 #+end_src
-
 *** Doom-themes
 #+begin_src emacs-lisp
-
 ;;;; doom-themes
 (use-package doom-themes
   :defer t
@@ -328,8 +298,8 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
         doom-themes-enable-italic t ))
 ;; (load-theme 'doom-city-lights t)
 #+end_src
-
-** Circadian
+*** Circadian
+Set dark or light theme based on the time of the day.
 #+begin_src emacs-lisp
 ;;;; Set dark or light theme based on the time of the day
 (setq calendar-latitude 51.406422)
@@ -338,15 +308,13 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]]! A
 (use-package circadian
   :ensure t
   :config
-  (setq circadian-themes '((:sunrise . doric-earth)
-                           (:sunset  . doric-fire)))
+  (setq circadian-themes '((:sunrise . ef-day)
+                           (:sunset  . ef-owl)))
   (circadian-setup))
 #+end_src
 ** Nerd-icons
 I'd rather use =nerd-icons= than =all-the-icons=, much more reliable.
-
    #+begin_src emacs-lisp
-
 ;;;; Use nerd-icons
 (use-package nerd-icons
   :demand t
@@ -363,14 +331,12 @@ I'd rather use =nerd-icons= than =all-the-icons=, much more reliable.
   :config
   (nerd-icons-completion-mode)
   (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
-
    #+end_src
-
 ** Modeline
-*** Doom-modeline
+*** Doom-modeline (not in use)
    #+begin_src emacs-lisp :tangle no
-
-;;;; Modeline
+;;;; Modeline -----------------------------------
+;;;;; Doom-modeline
 (use-package doom-modeline
   :hook (after-init . doom-modeline-mode)
   :config
@@ -381,14 +347,13 @@ I'd rather use =nerd-icons= than =all-the-icons=, much more reliable.
         doom-modeline-persp-icon t
         doom-modeline-buffer-modification-icon t
         doom-modeline-icon t))
-
 (with-eval-after-load 'doom-modeline
-    (set-face-attribute 'mode-line nil :font "JetBrainsMono Nerd Font-12")
-    (set-face-attribute 'mode-line-inactive nil :font "JetBrainsMono Nerd Font-12"))
+    (set-face-attribute 'mode-line nil :font "BlexMono Nerd Font-12")
+    (set-face-attribute 'mode-line-inactive nil :font "BlexMono Nerd Font-12"))
    #+end_src
-*** Mood-line (not in use)
+*** Mood-line
 #+begin_src emacs-lisp :tangle yes
-
+;;;;; Mood-line
 (use-package mood-line
 
   ;; Enable mood-line
@@ -399,20 +364,18 @@ I'd rather use =nerd-icons= than =all-the-icons=, much more reliable.
   :custom
   (setq mood-line-format mood-line-format-default-extended)
   (mood-line-glyph-alist mood-line-glyphs-fira-code))
-
 #+end_src
 ** Emacs-dashboard
 Settings *must* be in =:custom= otherwise they won't work.
 
    #+begin_src emacs-lisp
-
 ;;;; Emacs-dashboard
 (use-package dashboard
   :defer nil
   :config
   (dashboard-setup-startup-hook)
   :custom
-  (dashboard-startup-banner 'logo)
+  (dashboard-startup-banner 3)
   (dashboard-center-content t)
   (dashboard-display-icons-p t)
   (dashboard-icon-type 'nerd-icons)
@@ -430,23 +393,17 @@ Settings *must* be in =:custom= otherwise they won't work.
             (lambda ()
               (dashboard-refresh-buffer)
               (switch-to-buffer "*dashboard*")))
-
    #+end_src
-
 ** Indent Line Guides
 Visual indicators of indentation for code.
-
 #+begin_src emacs-lisp
-
 ;;;; Indent line guides
 (use-package indent-bars
   :hook ((prog-mode) . indent-bars-mode)) ; or whichever modes you prefer
-
 #+end_src
-
 ** Colorful mode
+Preview colours in buffers in real time.
 #+begin_src emacs-lisp
-
 (use-package colorful-mode
   :diminish
   :custom
@@ -456,25 +413,17 @@ Visual indicators of indentation for code.
   :config
   (global-colorful-mode t)
   (add-to-list 'global-colorful-modes 'helpful-mode))
-
 #+end_src
-
 ** Rainbow delimiters
 Colourful parentheses to help mostly with elisp.
-
 #+begin_src emacs-lisp
-
 ;;;; Colorful parentheses to help mostly with elisp
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
-
 #+end_src
-
 ** Helpful
 Better front end for Emacs' documentation
-
 #+begin_src emacs-lisp
-
 ;;;; Better front end for documentation
 (use-package helpful
   :commands (helpful-callable
@@ -490,13 +439,11 @@ Better front end for Emacs' documentation
 
     ;; remap apropos to Consult’s version
     ([remap apropos-command]   . consult-apropos)))
-
 #+end_src
-
 * Evil-mode
+Vim-like modal editing.
 ** Main setup
   #+begin_src emacs-lisp
-
 ;;; Evil Mode ------------------------------------------------
 ;;;; Configure evil-mode
 (use-package evil
@@ -519,23 +466,19 @@ Better front end for Emacs' documentation
 
   (evil-set-initial-state 'messages-buffer-mode 'normal)
   (evil-set-initial-state 'dashboard-mode 'normal)) 
-
   #+end_src
-
 ** Evil-collection
+A collection of Evil bindings for the parts of Emacs that Evil does not cover properly by default, such as help-mode, M-x calendar, Eshell and more.
    #+begin_src emacs-lisp
-
 ;;;; Configure evil-collection
 (use-package evil-collection
   :after evil
   :config
   (evil-collection-init))
-
    #+end_src
-
 ** Evil-goggles
+Configure evil-goggles to show a highlight over a selection or yank.
    #+begin_src emacs-lisp
-
 ;;;; Configure evil-goggles to show a highlight over a selection or yank
 (use-package evil-goggles
   :after evil
@@ -547,19 +490,15 @@ Better front end for Emacs' documentation
   ;; some red color (as defined by the color theme)
   ;; other faces such as `diff-added` will be used for other actions
   (evil-goggles-use-diff-faces))
-
    #+end_src
-
 ** Evil-nerd-commenter
    #+begin_src emacs-lisp
-
 ;;;; Commenting
 (use-package evil-nerd-commenter
   :bind ("C-g" . evilnc-comment-or-uncomment-lines))
-
    #+end_src
-
 ** Undo-Fu
+A modern alternative to undo-tree.
 #+begin_src emacs-lisp
 ;;;; A modern alternative to undo-tree
 (use-package undo-fu
@@ -587,19 +526,20 @@ Better front end for Emacs' documentation
   (undo-fu-session-global-mode))
 #+end_src
 * Keybindings
-
 ** General keybindings
   #+begin_src emacs-lisp
-
 ;;; Keybindings ------------------------------------------
 ;;;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
+;;;; Use hippie-expand instead of dabbrev-expand
+(use-package hippie-exp
+  :bind*
+  ("M-/" . hippie-expand))
 #+end_src
-
 ** Which-key
+Display keybindings.
    #+begin_src emacs-lisp
-
 ;;;; Which-key
 (use-package which-key
   :defer 0
@@ -611,13 +551,10 @@ Better front end for Emacs' documentation
         which-key-separator "   "
         which-key-min-display-lines 10
         which-key-add-column-padding 1))
-
    #+end_src
-
 ** Custom functions
 *** Toggle line-number-states function
    #+begin_src emacs-lisp
-
 ;;;; Toggle through line numbers styles
 (defvar mmotion/line-number-states '(nil t relative visual)
   "States to cycle through for line numbers.")
@@ -642,12 +579,10 @@ Better front end for Emacs' documentation
 
   ;; Show a message
   (message "Line numbers: %s" display-line-numbers))
-
    #+end_src
-
 ** Hydras
+Keybindings with functions to be able to do things repeatedly like changing the size of a window or text.
    #+begin_src emacs-lisp
-
 ;;;; Define hydras
 (use-package hydra
   :defer 0
@@ -677,11 +612,9 @@ Better front end for Emacs' documentation
     ("b" balance-windows "reset")
     ("f" nil "finished (or esc)" :exit t)))
    #+end_src
-
 ** Define Sub-menus 
-*** [B]uffer keybindings
+*** [B] Buffer keybindings
     #+begin_src emacs-lisp
-
 ;;;;; Define submenu keymaps
 (defvar-keymap mmotion/buffer-map 
   :doc "Buffer operations submenu."
@@ -691,28 +624,28 @@ Better front end for Emacs' documentation
   "n" #'previous-buffer
   "o" #'next-buffer
   "r" #'revert-buffer)
-
     #+end_src
-*** [F]ind keybindings
+*** [F] Find keybindings
     #+begin_src emacs-lisp
-
 (defvar-keymap mmotion/find-map
   :doc "Find operations submenu."
   "a" #'consult-org-agenda
   "f" #'find-file
   "g" #'consult-ripgrep
   "l" #'consult-line
-  "o" #'consult-outline)
+  "o" #'consult-outline
+  "r" #'consult-recent-file)
     #+end_src
-*** [G]it keybindings
+*** [G] Go to keybindings (avy)
 #+begin_src emacs-lisp
-(defvar-keymap mmotion/git-map
-  :doc "Git operations submenu."
-  "s" #'magit-status)
+(defvar-keymap mmotion/goto-map
+  :doc "Go to operations submenu."
+  "c" #'avy-goto-char-2
+  "w" #'avy-goto-word-1
+  "l" #'avy-goto-line)
 #+end_src
-*** [H]elp keybindings
+*** [H] Help keybindings
     #+begin_src emacs-lisp
-
 (defvar-keymap mmotion/help-map
   :doc "Help operations submenu."
   "c" #'describe-command
@@ -722,10 +655,54 @@ Better front end for Emacs' documentation
   "p" #'describe-package
   "v" #'describe-variable)
     #+end_src
-
-*** [N]otes keybindings (denote)
+*** [L] LSP keybindings
+#+begin_src emacs-lisp
+(defvar-keymap mmotion/lsp-map
+  :doc "LSP operations submenu."
+  ;; Core LSP Functions
+  "r" #'lsp-rename
+  "f" #'lsp-format-buffer
+  "F" #'lsp-format-region
+  "a" #'lsp-execute-code-action
+  "o" #'lsp-organize-imports
+  ;; Navigation
+  "d" #'lsp-find-definition
+  "D" #'lsp-find-declaration
+  "i" #'lsp-find-implementation
+  "t" #'lsp-find-type-definition
+  "R" #'lsp-find-references
+  "s" #'consult-lsp-symbols
+  ;; Information & Help
+  "h" #'lsp-describe-thing-at-point
+  "H" #'lsp-signature-help
+  "k" #'lsp-describe-session
+  ;; Workspace Management
+  "w a" #'lsp-workspace-folders-add
+  "w r" #'lsp-workspace-folders-remove
+  "w l" #'lsp-workspace-folders-open
+  ;; Server Control
+  "S r" #'lsp-workspace-restart
+  "S s" #'lsp-workspace-shutdown
+  "S S" #'lsp
+  ;; Diagnostics (Errors/Warnings)
+  "e l" #'lsp-treemacs-errors-list
+  "e n" #'flycheck-next-error
+  "e p" #'flycheck-previous-error
+  "e e" #'flycheck-explain-error-at-point
+  ;; LSP UI specific
+  "u d" #'lsp-ui-peek-find-definitions
+  "u r" #'lsp-ui-peek-find-references
+  "u i" #'lsp-ui-imenu
+  "u s" #'lsp-ui-sideline-mode)
+#+end_src
+*** [M] Magit keybindings
+#+begin_src emacs-lisp
+(defvar-keymap mmotion/magit-map
+  :doc "Git operations submenu."
+  "s" #'magit-status)
+#+end_src
+*** [N] Notes keybindings (denote)
     #+begin_src emacs-lisp
-
 (defvar-keymap mmotion/notes-map
   :doc "Notes operations submenu."
   "b" #'denote-backlinks
@@ -740,10 +717,8 @@ Better front end for Emacs' documentation
   "s" #'denote-signature
   "t" #'denote-rename-file-keywords)
     #+end_src
-
-*** [O]rg-mode keybindings
+*** [O] Org-mode keybindings
     #+begin_src emacs-lisp
-
 (defvar-keymap mmotion/org-map
   :doc "Org-mode operations."
   "a" #'org-agenda
@@ -756,13 +731,21 @@ Better front end for Emacs' documentation
   "p" #'org-refile-copy
   "s" #'org-schedule
   "u" #'org-update-all-dblocks)
-
     #+end_src
-
-*** [T]oggle and [T]ab
-s keybindings
+*** [P] Project keybindings
+#+begin_src emacs-lisp
+(defvar-keymap mmotion/project-map
+  :doc "Project operations."
+  "b" #'consult-project-buffer
+  "d" #'project-dired
+  "f" #'project-find-file
+  "g" #'project-find-regexp
+  "k" #'project-kill-buffers
+  "p" #'project-switch-project
+  "s" #'project-shell)
+#+end_src
+*** [T] Toggle and Tabs keybindings
     #+begin_src emacs-lisp
-
 (defvar-keymap mmotion/toggle-map
   :doc "Toggle settings."
   "c" #'tab-close
@@ -774,12 +757,9 @@ s keybindings
   "r" #'tab-rename
   "s" #'hydra-text-scale/body
   "v" #'vterm-toggle-cd)
-
     #+end_src
-
-*** [W]indows keybindings
+*** [W] Windows keybindings
     #+begin_src emacs-lisp
-
 (defvar-keymap mmotion/window-map
   :doc "Window operations."
   "b" #'balance-windows
@@ -791,10 +771,8 @@ s keybindings
   "v" #'split-window-horizontally
   "w" #'ace-window)
     #+end_src
-
-*** Leader keybindings
+*** <space> Leader key keybindings
     #+begin_src emacs-lisp
-
 ;;;; Define leader keymap
 (defvar-keymap mmotion/leader-map
   :doc "My global leader keymap."
@@ -804,24 +782,24 @@ s keybindings
   "SPC" #'consult-buffer
   "," #'consult-recent-file
   "." #'find-file
-  "c" #'calendar)
+  "c" #'calendar
+  "d" #'dictionary)
 
 ;;;; Add submenus to the leader keymap
 (keymap-set mmotion/leader-map "b" mmotion/buffer-map)
 (keymap-set mmotion/leader-map "f" mmotion/find-map)
-(keymap-set mmotion/leader-map "g" mmotion/git-map)
+(keymap-set mmotion/leader-map "g" mmotion/goto-map)
 (keymap-set mmotion/leader-map "h" mmotion/help-map)
+(keymap-set mmotion/leader-map "l" mmotion/lsp-map)
+(keymap-set mmotion/leader-map "m" mmotion/magit-map)
 (keymap-set mmotion/leader-map "n" mmotion/notes-map)
 (keymap-set mmotion/leader-map "o" mmotion/org-map)
+(keymap-set mmotion/leader-map "p" mmotion/project-map)
 (keymap-set mmotion/leader-map "t" mmotion/toggle-map)
 (keymap-set mmotion/leader-map "w" mmotion/window-map)
     #+end_src
-
-** Configure which-key description
-s
-
+** Configure which-key descriptions
    #+begin_src emacs-lisp
-
 ;;;; Configure which-key descriptions
 (with-eval-after-load 'which-key
   (which-key-add-keymap-based-replacements mmotion/leader-map
@@ -829,11 +807,20 @@ s
     "-" "Dired Jump"
     "SPC" "Switch Buffer"
     "b" "Buffer..."
+    "c" "Calendar"
+    "d" "Dictionary"
     "f" "Find..."
-    "g" "(ma)Git..."
+    "g" "Go to..."
     "h" "Help..."
+    "l" "LSP..."
+    "l S" "LSP Server..."
+    "l e" "Diagnosticts..."
+    "l w" "Workspace..."
+    "l u" "LSP UI..."
+    "m" "Magit..."
     "n" "Notes..."
     "o" "Org..."
+    "p" "Project..."
     "t" "Toggle / Tabs..."
     "w" "Window..."
     "," "Recent Files"
@@ -851,18 +838,54 @@ s
     "f" "Find files"
     "g" "Ripgrep"
     "l" "Line"
-    "o" "Outline headings")
+    "o" "Outline headings"
+    "r" "Recent files")
 
-  (which-key-add-keymap-based-replacements mmotion/git-map
-    "s" "(ma)Git status")
+  (which-key-add-keymap-based-replacements mmotion/goto-map
+    "c" "Go to character"
+    "w" "Go to word"
+    "l" "Go to line")
 
   (which-key-add-keymap-based-replacements mmotion/help-map
-    "c" "Describe Command"
-    "f" "Describe Function"
-    "m" "Describe Mode"
-    "k" "Describe Key"
-    "p" "Describe Package"
-    "v" "Describe Variable")
+    "c" "Describe command"
+    "f" "Describe function"
+    "m" "Describe mode"
+    "k" "Describe key"
+    "p" "Describe package"
+    "v" "Describe variable")
+
+ (which-key-add-keymap-based-replacements mmotion/lsp-map
+    "r" "Rename symbol"
+    "f" "Format buffer"
+    "F" "Format region"
+    "a" "Code actions"
+    "o" "Organize imports"
+    "d" "Go to definition"
+    "D" "Go to declaration"
+    "i" "Go to implementation"
+    "t" "Go to type definiton"
+    "R" "Find references"
+    "s" "Workspace symbols (consult)"
+    "h" "Show documentation"
+    "H" "Show signature help"
+    "k" "LSP session info"
+    "w a" "Add workspace folder"
+    "w r" "Remove workspace folder"
+    "w l" "List workspace folders"
+    "S r" "Restart LSP server"
+    "S s" "Shutdown LSP server"
+    "S S" "Start LSP"
+    "e l" "List all errors"
+    "e n" "Next error"
+    "e p" "Previous error"
+    "e e" "Explain error"
+    "u d" "Peek definition"
+    "u r" "Peek references"
+    "u i" "Imenu with LSP"
+    "u s" "Toggle sideline")
+
+  (which-key-add-keymap-based-replacements mmotion/magit-map
+    "s" "(ma)Git status")
   
   (which-key-add-keymap-based-replacements mmotion/notes-map
     "b" "Show note's backlinks"
@@ -887,6 +910,16 @@ s
     "p" "Org Refile Copy"
     "s" "Add a Schedule"
     "u" "Update a dblock")
+
+ (which-key-add-keymap-based-replacements mmotion/project-map
+    "b" "Project's buffers"
+    "d" "Project dired"
+    "f" "Project find file"
+    "g" "Project find with regexp"
+    "k" "Project kill buffers"
+    "p" "Switch project"
+    "s" "Project shell"
+  )
   
   (which-key-add-keymap-based-replacements mmotion/toggle-map
     "c" "Close current tab"
@@ -908,12 +941,9 @@ s
     "s" "Split window horizontally"
     "v" "Split window vertically"
     "w" "Switch window"))
-
    #+end_src
-
 ** Evil-mode integration
    #+begin_src emacs-lisp
-
 ;;;; Set up Evil integration
 (when (featurep 'evil)
   ;; Clear existing bindings first
@@ -936,21 +966,25 @@ s
 
 ;;;; Global fallback binding for all modes
 (global-set-key (kbd "C-SPC") mmotion/leader-map)
-
    #+end_src
-
-
 * Completion & Selection Framework
 ** Consult
+Search and navigation commands.
   #+begin_src emacs-lisp
-
 ;;; Completion --------------------------------------------------
 ;;;; Consult
 (use-package consult
   :defer t
+  :after project
   :bind (("C-s" . consult-line)
          :map minibuffer-local-map
-         ("C-r" . consult-history)))
+         ("C-r" . consult-history))
+:config
+  ;; Tell consult to use project.el for project detection
+  (setq consult-project-function 
+        (lambda (_may-prompt)
+          (when-let ((project (project-current)))
+            (project-root project)))))
 
 (defun mmotion/minibuffer-backward-kill (arg)
   "When minibuffer is completing a file name delete up to parent
@@ -962,12 +996,11 @@ folder, otherwise delete a character backward"
           (zap-up-to-char (- arg) ?/)
         (delete-minibuffer-contents))
     (delete-backward-char arg)))
-
   #+end_src
 
 ** Vertico
+Vertical completion UI.
   #+begin_src emacs-lisp
-
 ;;;; Vertico
 (use-package vertico
   :demand t
@@ -995,10 +1028,9 @@ folder, otherwise delete a character backward"
   (minibuffer-prompt-properties
    '(read-only t cursor-intangible t face minibuffer-prompt)))
   #+end_src
-
 ** Orderless
+Orderless completion style to match candidates in any order.
   #+begin_src emacs-lisp
-
 ;;;; Optionally use the `orderless' completion style.
 (use-package orderless
   :after vertico
@@ -1009,12 +1041,10 @@ folder, otherwise delete a character backward"
   (completion-styles '(orderless basic))
   (completion-category-defaults nil)
   (completion-category-overrides '((file (styles partial-completion)))))
-
   #+end_src
-
 ** Marginalia
+Rich annotation into completion results.
   #+begin_src emacs-lisp
-
 ;;;; Enable rich annotations using the Marginalia package
 (use-package marginalia
   :after vertico
@@ -1031,22 +1061,18 @@ folder, otherwise delete a character backward"
   ;; the mode gets enabled right away. Note that this forces loading the
   ;; package.
   (marginalia-mode))
-
   #+end_src
-
 ** Embark
+Run commands onto completion candidates.
   #+begin_src emacs-lisp
-
 ;;;; Embark
 (use-package embark
   :bind
   (("C-," . embark-act)
    ("M-," . embark-dwim)
    ("C-h B" . embark-bindings))
-
   :init
   (setq prefix-help-command #'embark-prefix-help-command)
-
   :config
   ;; Hide the mode line of the Embark live/completions buffers
   (add-to-list 'display-buffer-alist
@@ -1057,108 +1083,98 @@ folder, otherwise delete a character backward"
 (use-package embark-consult
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
-
   #+end_src
-
 ** Corfu
+COmpletion in Region FUnction (pop up for autocompletion).
   #+begin_src emacs-lisp
+    ;;;; Corfu
+    (use-package corfu
+      :demand t
+      :custom
+      (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
+      (corfu-auto t)               ; enable auto popup
+      (corfu-auto-delay 0.2)       ; wait 0.2s before popping up
+      (corfu-auto-prefix 2)        ; only pop up after 2 chars
+      (corfu-max-width 80)         ; cap popup width
+      (corfu-max-length 20)        ; show at most 20 candidates
+      ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
+      ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
+      ;; (corfu-preview-current nil)    ;; Disable current candidate preview
+      ;; (corfu-preselect 'prompt)      ;; Preselect the prompt
+      ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
 
-;;;; Corfu
-(use-package corfu
-  :demand t
-  :custom
-  (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
-  (corfu-auto t)               ; enable auto popup
-  (corfu-auto-delay 0.2)       ; wait 0.2s before popping up
-  (corfu-auto-prefix 2)        ; only pop up after 2 chars
-  (corfu-max-width 80)         ; cap popup width
-  (corfu-max-length 20)        ; show at most 20 candidates
-  ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
-  ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
-  ;; (corfu-preview-current nil)    ;; Disable current candidate preview
-  ;; (corfu-preselect 'prompt)      ;; Preselect the prompt
-  ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
+      ;; Enable Corfu only for certain modes. See also `global-corfu-modes'.
+      ;; :hook ((prog-mode . corfu-mode)
+      ;;        (shell-mode . corfu-mode)
+      ;;        (eshell-mode . corfu-mode))
+      :init
+      ;; Recommended: Enable Corfu globally. Recommended since many modes provide
+      ;; Capfs and Dabbrev can be used globally (M-/). See also the customization
+      ;; variable `global-corfu-modes' to exclude certain modes.
+      (global-corfu-mode 1)
 
-  ;; Enable Corfu only for certain modes. See also `global-corfu-modes'.
-  ;; :hook ((prog-mode . corfu-mode)
-  ;;        (shell-mode . corfu-mode)
-  ;;        (eshell-mode . corfu-mode))
-  :init
-  ;; Recommended: Enable Corfu globally. Recommended since many modes provide
-  ;; Capfs and Dabbrev can be used globally (M-/). See also the customization
-  ;; variable `global-corfu-modes' to exclude certain modes.
-  (global-corfu-mode 1)
+      ;; Enable optional extension modes:
+      ;; (corfu-history-mode)
+      ;; (corfu-popupinfo-mode)
+      )
 
-  ;; Enable optional extension modes:
-  ;; (corfu-history-mode)
-  ;; (corfu-popupinfo-mode)
-  )
+    ;; A few more useful configurations...
+    (use-package emacs
+      :ensure nil
+      :custom
+      ;; TAB cycle if there are only few candidates
+      (completion-cycle-threshold 3)
 
-;; A few more useful configurations...
-(use-package emacs
-  :ensure nil
-  :custom
-  ;; TAB cycle if there are only few candidates
-  (completion-cycle-threshold 3)
+      ;; Enable indentation+completion using the TAB key.
+      ;; `completion-at-point' is often bound to M-TAB.
+      (tab-always-indent 'complete)
 
-  ;; Enable indentation+completion using the TAB key.
-  ;; `completion-at-point' is often bound to M-TAB.
-  (tab-always-indent 'complete)
+      ;; Emacs 30 and newer: Disable Ispell completion function.
+      ;; Try `cape-dict' as an alternative.
+      (text-mode-ispell-word-completion nil)
 
-  ;; Emacs 30 and newer: Disable Ispell completion function.
-  ;; Try `cape-dict' as an alternative.
-  (text-mode-ispell-word-completion nil)
-
-  ;; Hide commands in M-x which do not apply to the current mode. Corfu
-  ;; commands are hidden, since they are not used via M-x. This setting is
-  ;; useful beyond Corfu.
-  (read-extended-command-predicate #'command-completion-default-include-p))
-
+      ;; Hide commands in M-x which do not apply to the current mode. Corfu
+      ;; commands are hidden, since they are not used via M-x. This setting is
+      ;; useful beyond Corfu.
+      (read-extended-command-predicate #'command-completion-default-include-p))
   #+end_src
-
 ** Cape
 Completion at point.
-
-  #+begin_src emacs-lisp :tangle no
-
-;;;; Add extensions (cape)
+#+begin_src emacs-lisp
 (use-package cape
-  :init
-  (require 'cape) ;; Ensure the package is loaded
-  (defun mmotion/setup-completion ()
+  :ensure t
+  :config  ;; Use :config instead of :init to ensure cape is loaded
+  ;; Setup completion functions with proper LSP integration
+  (defun mmotion/setup-lsp-completion ()
+    "Setup completion functions for LSP modes with Cape extensions."
     (setq-local completion-at-point-functions
-                (list (cape-capf-super
-                       #'lsp-completion-at-point
-                       #'cape-symbol
-                       #'cape-dabbrev
-                       #'cape-file
-                       #'python-completion-at-point))))
-  (add-hook 'prog-mode-hook #'mmotion/setup-completion)
-  (add-hook 'lsp-completion-mode-hook #'mmotion/setup-completion))
-
-  #+end_src
-
-  #+begin_src emacs-lisp
-(use-package cape
-  :init
-  ;; Add to default completion functions globally
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  (add-to-list 'completion-at-point-functions #'cape-file)
-  (add-to-list 'completion-at-point-functions #'cape-symbol)
-  (add-to-list 'completion-at-point-functions #'python-completion-at-point)
+                (list #'lsp-completion-at-point  ;; LSP first for best results
+                      #'cape-dabbrev             ;; Dynamic abbreviations
+                      #'cape-file                ;; File name completion
+                      #'cape-symbol              ;; Symbol completion
+                      #'cape-keyword)))          ;; Language keyword completion
   
-  ;; For programming modes, ensure LSP completion is first
-  (defun mmotion/lsp-cape-setup ()
+  (defun mmotion/setup-general-completion ()
+    "Setup completion functions for non-LSP modes."
     (setq-local completion-at-point-functions
-                (append (list #'lsp-completion-at-point)
-                        completion-at-point-functions)))
+                (list #'cape-dabbrev
+                      #'cape-file
+                      #'cape-symbol
+                      #'cape-keyword)))
   
-  (add-hook 'lsp-mode-hook #'mmotion/lsp-cape-setup))
-  #+end_src
+  ;; Add hooks
+  (add-hook 'lsp-completion-mode-hook #'mmotion/setup-lsp-completion)
+  (add-hook 'prog-mode-hook #'mmotion/setup-general-completion))
   
+  ;; Optional: Add some useful Cape bindings
+  ;; :bind (("C-c p d" . cape-dabbrev)
+  ;;        ("C-c p f" . cape-file)
+  ;;        ("C-c p s" . cape-symbol)
+  ;;        ("C-c p k" . cape-keyword)))
+#+end_src
 * Spellchecking
-  #+begin_src emacs-lisp
-
+*** ispell
+  #+begin_src emacs-lisp :tangle yes
 ;;; Spellchecking ----------------------------------------
 ;; Use hunspell as the spell checker backend
 (setq ispell-program-name "hunspell")
@@ -1191,57 +1207,82 @@ Completion at point.
    (list (completing-read "Dictionary: " '("en_US" "en_GB" "it_IT"))))
   (setq ispell-dictionary lang)
   (message "Switched dictionary to %s" lang))
-
   #+end_src
-
-* Projectile
-#+begin_src emacs-lisp
-
-;;; Projectile ------------------------------------------------
-(use-package projectile
-  :diminish projectile-mode
-  :init
-  (setq projectile-indexing-method 'alien
-        projectile-switch-project-action #'projectile-dired
-        projectile-ignored-projects (list (expand-file-name "~"))
-        projectile-project-search-path
-        '(("~/Projects" . 2)
-           "~/.dotfiles"))
+*** jinx (not in use)
+#+begin_src emacs-lisp :tangle no
+(use-package jinx
+  :hook
+  (emacs-startup . global-jinx-mode)
+  :bind
+  ("C-c s s" . jinx-correct)
+  ("C-c s l" . jinx-languages)
   :config
-  (projectile-mode)
-  :bind-keymap
-  ("C-c p" . projectile-command-map))
-
-(use-package consult-projectile
-  :after (consult projectile)
-  :commands (consult-projectile consult-projectile-find-file)
-  :bind (("s-w" . consult-projectile)
-         :map projectile-command-map
-         ("f" . consult-projectile-find-file))
-  :init
-  (setq consult-project-root-function
-        (lambda ()
-          (when (and (fboundp 'projectile-project-p)
-                     (projectile-project-p))
-            (projectile-project-root)))))
-
+  (setq jinx-languages "en_US en_GB it_IT"))
 #+end_src
-
-* Magit
+*** Dictionary
 #+begin_src emacs-lisp
-
-;;; Magit ----------------------------------------------------
-(use-package magit
-  :commands magit-status)
-
+;;;; Use built-in dictionary-el
+(use-package dictionary
+  :ensure nil
+  :defer t
+  :bind
+  ("C-c s d" . dictionary-search)
+  :config
+  (setq dictionary-server "dict.org"
+        dictionary-use-single-buffer t))
 #+end_src
+* Email
+** mu4e
+#+begin_src emacs-lisp :tangle yes
+(use-package mu4e
+  :ensure nil
+  :ensure-system-package mu
+  :custom
+  (user-mail-address "mauro@disroot.org")
+  (user-full-name "Mauro")
+  (mu4e-attachment-dir "~/Maildir/attachments/disroot")
+  (mu4e-compose-signature-auto-include nil)
+  (mu4e-drafts-folder "/Drafts")
+  (mu4e-get-mail-command "mbsync -a")
+  (mu4e-maildir "~/Maildir/disroot")
+  (mu4e-refile-folder "/Archive")
+  (mu4e-sent-folder "/Sent")
+  (mu4e-maildir-shortcuts
+   '(("/Inbox" . ?i)
+     ("/Trash" . ?t)
+     ("/Drafts" . ?d)
+     ("/Sent" . ?s)))
+  (mu4e-trash-folder "/Trash")
+  (mu4e-update-interval 300)
+  (mu4e-use-fancy-chars t)
+  (mu4e-view-show-addresses t)
+  (mu4e-view-show-images t)
+  (mu4e-view-use-gnus t)
+  (mu4e-sent-messages-behavior 'sent)
+  :config
+  ;; HTML renderer
+  (setq mm-text-html-renderer 'gnus-w3m)
 
+  ;; SMTP configuration for Disroot
+  (setq smtpmail-smtp-server "disroot.org"
+        smtpmail-smtp-service 587
+        smtpmail-stream-type 'starttls
+        smtpmail-auth-credentials "~/.authinfo.gpg"
+        send-mail-function 'smtpmail-send-it
+        message-send-mail-function 'smtpmail-send-it
+        gnus-select-method '(nnimap "disroot.org"))
+
+  ;; Enable debugging
+  (setq smtpmail-debug-info t
+        smtpmail-debug-verb t)
+
+  ;; Add browser action
+  (add-to-list 'mu4e-view-actions '("view in browser" . mu4e-action-view-in-browser)))
+#+end_src
 * Org-mode
-
 ** Org-mode base settings
   #+begin_src emacs-lisp
-
-;;; Org-mode -------------------------------------------------
+;;; Org-mode -----------------------------------------
 ;;;; Org-mode base settings
 (defun mmotion/org-mode-setup ()
   (org-indent-mode 1)
@@ -1267,7 +1308,6 @@ Completion at point.
 
 ** Org-mode custom functions
   #+begin_src emacs-lisp
-
 ;;;; Create optional links for the companies in job applications
 (defun mmotion/org-capture-optional-link ()
   "Create an org link with optional URL input."
@@ -1313,12 +1353,9 @@ Completion at point.
   ;;   (add-hook 'org-mode-hook
   ;;             (lambda ()
   ;;               (evil-define-key 'normal org-mode-map (kbd "RET") 'org-open-at-point))))
-
   #+end_src
-
 ** Org-mode config
    #+begin_src emacs-lisp
-
 (use-package org
   :commands (org-capture org-agenda)
   :hook ((org-mode . mmotion/org-mode-setup)
@@ -1354,27 +1391,13 @@ Completion at point.
 
   ;; Save Org buffers after refiling
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
-
    #+end_src
-
 ** Org-mode Todo Keywords
    #+begin_src emacs-lisp
-
   (org-todo-keywords
    '((sequence "TODO(t)" "DOING(d)" "PROJ(p)" "|" "DONE(x!)")
      (sequence "WAIT(w@)" "HOLD(h!)" "IDEA(i)" "|" "COMPLETED(c!)" "CANCELLED(C!)" "KILLED(k!/@)"))))
-
-;; (defun mmotion/org-agenda-skip-hold ()
-;;   "Skip entries that are in HOLD state."
-;;   (org-agenda-skip-entry-if 'todo '("HOLD")))
-
-;; (setq org-agenda-custom-commands
-;;       '(("a" "Agenda"
-;;          ((agenda "" ((org-agenda-skip-function #'mmotion/org-agenda-skip-hold)))
-;;           (alltodo "" ((org-agenda-skip-function #'mmotion/org-agenda-skip-hold)))))))
-
    #+end_src
-
 ** Org-mode Capture Templates
    #+begin_src emacs-lisp
 ;;;; Set up for job application's spreadsheet capture
@@ -1420,12 +1443,10 @@ Completion at point.
 
 ;;;;; Hook to trigger formula recalculation for job appication's spreadsheet
 (add-hook 'org-capture-after-finalize-hook #'mmotion/recalculate-job-table-formulas)
-
    #+end_src
-
 ** Evil-org
+Activate evil-mode in org-mode (as in org-agenda).
 #+begin_src emacs-lisp
-
 ;;;; Activate evil-mode in org-mode (as in org-agenda)
 (use-package evil-org
   :demand t
@@ -1434,22 +1455,17 @@ Completion at point.
   :config
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
-
 #+end_src
-
 ** TOC-org
+Table Of Content.
 #+begin_src emacs-lisp
-
 ;;;; toc-org
 (use-package toc-org
   :commands toc-org-enable
   :init (add-hook 'org-mode-hook 'toc-org-enable))
-
 #+end_src
-
 ** Org-Babel
 #+begin_src emacs-lisp
-
 ;;;; Org babel
 ;; active Babel languages
 (with-eval-after-load 'org
@@ -1466,12 +1482,9 @@ Completion at point.
   (setq js-jsx-syntax t))
 
 (setq org-src-fontify-natively t)
-
 #+end_src
-
 ** Org-download
 #+begin_src emacs-lisp
-
 ;; Custom filename function for org-download to use denote's file naming scheme.
 (defun mmotion/org-download-file-format-function (filename)
   "Generate Denote-style filename for org-download."
@@ -1500,12 +1513,9 @@ Completion at point.
   (define-key org-mode-map (kbd "C-c C-p") #'org-download-clipboard)  ; clipboard
   (define-key org-mode-map (kbd "C-c C-i") #'org-download-image)      ; URL
   (define-key org-mode-map (kbd "C-c C-f") #'org-download-yank))      ; local file
-
 #+end_src
-
 ** Structure Templates
 #+begin_src emacs-lisp
-
 ;;;; Structure templates
 (with-eval-after-load 'org
 (require 'org-tempo)
@@ -1514,7 +1524,6 @@ Completion at point.
 (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
 (add-to-list 'org-structure-template-alist '("py" . "src python"))
 (add-to-list 'org-structure-template-alist '("js" . "src js :results output")))
-
 #+end_src
 ** Highlight-todo
 #+begin_src emacs-lisp
@@ -1533,11 +1542,8 @@ Completion at point.
           ("IDEA" success bold))))
 #+end_src
 * Org-mode Styling
-
 ** Org-superstar (bullet points)
-
 #+begin_src emacs-lisp
-
 ;;; Org styling ------------------------------------------------
 ;;;; Styling bullet points
 (use-package org-superstar
@@ -1556,24 +1562,18 @@ Completion at point.
   ;; If you use Org Indent you also need to add this, otherwise the
   ;; above has no effect while Indent is enabled.
   (setq org-indent-mode-turns-on-hiding-stars nil))
-
 #+end_src
-
 ** Fancy Priorities Look
 #+begin_src emacs-lisp
-
 ;;;; Fancy priorities look
 (use-package org-fancy-priorities
   :hook
   (org-mode . org-fancy-priorities-mode)
   :config
   (setq org-fancy-priorities-list '("󰬈" "󰬉" "󰬊")))
-
 #+end_src
-
 ** Org-modern (not in use)
 I'm trying this out from time to time but I prefer my "custom" org-mode style. Set not to be tangled.
-
 #+begin_src emacs-lisp :tangle no
 (use-package org-modern)
 ;; Add frame borders and window dividers
@@ -1602,11 +1602,9 @@ I'm trying this out from time to time but I prefer my "custom" org-mode style. S
  org-ellipsis "…")
 (with-eval-after-load 'org (global-org-modern-mode))
 #+end_src
-
 ** Olivetti
 Typewriter-like look of the page (centring).
 #+begin_src emacs-lisp
-
 ;;;; Olivetti (better centering and max line length)
 (use-package olivetti
   :diminish
@@ -1620,12 +1618,9 @@ Typewriter-like look of the page (centring).
   :config
   ;; Disable olivetti in astro-ts-mode
   (add-hook 'astro-ts-mode-hook (lambda () (olivetti-mode -1))))
-
 #+end_src
-
 ** Toggle TODOs and checkboxes with RET
 #+begin_src emacs-lisp
-
 (defun mmotion/org-smart-return ()
   "In Org-mode, on RET:
 1. Toggle TODO↔DONE on headings.
@@ -1634,17 +1629,17 @@ Typewriter-like look of the page (centring).
 4. Otherwise insert newline + indent."
   (interactive)
   (cond
-   ;; 1) Heading TODO/DONE toggle
+   ;; 1. Heading TODO/DONE toggle
    ((and (org-at-heading-p)
          (member (org-get-todo-state) '("TODO" "DONE")))
     (org-todo (if (string= (org-get-todo-state) "TODO") "DONE" "TODO")))
-   ;; 2) Checkbox toggle
+   ;; 2. Checkbox toggle
    ((org-at-item-checkbox-p)
     (org-toggle-checkbox))
-   ;; 3) Org link follow
+   ;; 3. Org link follow
    ((org-in-regexp org-link-bracket-re 1)
     (org-open-at-point))
-   ;; 4) Default newline + indent
+   ;; 4. Default newline + indent
    (t
     (call-interactively 'org-return))))
 
@@ -1659,9 +1654,7 @@ Typewriter-like look of the page (centring).
 (add-hook 'org-mode-hook
           (lambda ()
             (local-set-key (kbd "RET") #'mmotion/org-smart-return)))
-
 #+end_src
-
 * Denote
 ** Denote main config
   #+begin_src emacs-lisp
@@ -1684,10 +1677,8 @@ Typewriter-like look of the page (centring).
   ;; `denote-rename-buffer-format' for how to modify this.
   (denote-rename-buffer-mode 1))
   #+end_src
-
 ** Denote-org
    #+begin_src emacs-lisp
-
 ;;;; Denote-org
 (use-package denote-org
   :ensure t
@@ -1709,7 +1700,6 @@ Typewriter-like look of the page (centring).
     denote-org-dblock-insert-missing-links
     denote-org-dblock-insert-files-as-headings))
    #+end_src
-
 ** Consult-notes
 #+begin_src emacs-lisp
 ;;;; Consult-notes
@@ -1718,19 +1708,17 @@ Typewriter-like look of the page (centring).
              consult-notes-search-in-all-notes)
   :config
   (setq consult-notes-file-dir-sources
-        '(("Denote" ?n "~/Notes/plain_orgfiles/orgfiles/denote/")
-          ("Journal" ?j "~/Notes/plain_orgfiles/orgfiles/denote/journal/")
-)) ;; Set notes dir(s)
-  (consult-notes-org-headings-mode)
-  (when (locate-library "denote")
-    (consult-notes-denote-mode)))
-  ;; Search only for text files in denote dir
- ;; (setq consult-notes-denote-files-function (function denote-directory-text-only-files)))
-#+end_src
+          '(("Journal" ?j "~/Notes/plain_orgfiles/orgfiles/denote/journal/")))
 
+  ;; (consult-notes-org-headings-mode)
+  (when (locate-library "denote")
+    (consult-notes-denote-mode))
+
+  ;; Search only for text files in denote dir
+(setq consult-notes-denote-files-function (lambda () (denote-directory-files nil t t))))
+#+end_src
 ** Denote-journal
    #+begin_src emacs-lisp
-
 ;;;; Denote journal
 (use-package denote-journal
   :ensure t
@@ -1768,20 +1756,122 @@ Typewriter-like look of the page (centring).
   (interactive)
   (let ((today-file (denote-journal-path-to-new-or-existing-entry)))
     (find-file today-file)))
-
    #+end_src
-
 ** Denote-explore
 #+begin_src emacs-lisp
-
 ;;;; Denote-explore
 (use-package denote-explore)
-
 #+end_src
+* Dired
+** Main dired config
+   #+begin_src emacs-lisp
+;;; Dired ------------------------------------------------------
+(use-package dired
+  :ensure nil
+  :commands (dired dired-jump)
+  :bind (("C-x C-j" . dired-jump))
+  :custom
+  (dired-dwim-target t)
+  (dired-kill-when-opening-new-dired-buffer t)
+  (dired-listing-switches "-agho --group-directories-first"))
+  :config
+  (defun my-dired-sort-by-size ()
+  (interactive)
+  (dired-sort-other "-alS"))
 
-* Tree-sitter
+  (evil-collection-define-key 'normal 'dired-mode-map
+    "h" 'dired-up-directory
+    "l" 'dired-find-file
+    "s" 'my-dired-sort-by-size)
+
+;;;;; Fix leader key in dired buffers
+(with-eval-after-load 'dired
+  (evil-define-key 'normal dired-mode-map (kbd "SPC") nil))
+
+(with-eval-after-load 'dired
+  (require 'dired-x))
+   #+end_src
+** Nerd-icons for Dired
+   #+begin_src emacs-lisp
+(use-package nerd-icons-dired
+  :hook
+  (dired-mode . nerd-icons-dired-mode))
+   #+end_src
+** Hide dotfiles
+   #+begin_src emacs-lisp
+(use-package dired-hide-dotfiles
+  :hook (dired-mode . dired-hide-dotfiles-mode)
+  :config
+  ;; Bind "g ." in Evil normal state within Dired
+  (evil-define-key 'normal dired-mode-map
+    "g." #'dired-hide-dotfiles-mode))
+   #+end_src
+** Set up programs to open certain files from dired
+   #+begin_src emacs-lisp
+(use-package dired-open
+  :after dired
+  ;; :commands (dired dired-jump)
+  :config
+  (setq dired-open-extensions
+        '(("png"  . "viewnior")
+          ("jpeg" . "viewnior")
+          ("jpg"  . "viewnior")
+	        ;; ("pdf" . "zathura")
+	        ;; ("epub" . "zathura")
+          ("mp3" . "mpv --force-window --keep-open")
+	        ("mp4" . "mpv")
+          ("mkv"  . "mpv"))))
+   #+end_src
+** Dired preview (not in use)
+Disabled for now, I don't like it.
+   #+begin_src emacs-lisp :tangle no
+;; Enable Dired Preview and make it Evil-friendly
+(use-package dired-preview
+  :ensure t
+  ;; :hook (dired-mode . dired-preview-mode)
+  :config
+  (setq dired-preview-delay 0.1)
+  ;; Add Evil navigation commands to trigger preview
+  (dolist (cmd '(evil-next-line evil-previous-line))
+    (add-to-list 'dired-preview-trigger-commands cmd)))
+   #+end_src
+   
+* Programming
+** Project
+#+begin_src emacs-lisp
+;;;; Built-in project.el configuration
+(use-package project
+  :ensure nil
+  :config
+  ;; ;; Auto-discover projects in your search paths
+  ;; (when (file-directory-p "~/Projects")
+  ;;   (project-remember-projects-under "~/Projects" t))
+  
+  ;; Set default action when switching projects (like your projectile-dired setup)
+  (setq project-vc-ignores '("node_modules/"))
+  (setq project-switch-commands
+        '((project-dired "Open Dired" ?d)
+          (project-find-file "Find file" ?f)
+          (project-find-regexp "Find regexp" ?g)
+          (project-shell "Shell" ?s)))
+  
+  :bind
+  ;; Main project commands with C-c p prefix (matching your setup)
+  (("C-c p p" . project-switch-project)
+   ("C-c p f" . project-find-file)
+   ("C-c p d" . project-dired)
+   ("C-c p g" . project-find-regexp)
+   ("C-c p s" . project-shell)
+   ("C-c p k" . project-kill-buffers)))
+#+end_src
+** Magit
+#+begin_src emacs-lisp
+;;; Magit ----------------------------------------------------
+(use-package magit
+  :commands magit-status)
+#+end_src
+** Tree-sitter
   #+begin_src emacs-lisp
-
 ;;; Tree-sitter ------------------------------------------------
 (use-package treesit
   :ensure nil
@@ -1797,10 +1887,9 @@ Typewriter-like look of the page (centring).
      (css-mode . css-ts-mode)
      (sh-mode . bash-ts-mode))))
   #+end_src
-* Web development
-** Astro support
+** Web development
+*** Astro support
   #+begin_src emacs-lisp
-
 ;;;;; Astro support
 (use-package treesit-auto
   :ensure t
@@ -1813,11 +1902,9 @@ Typewriter-like look of the page (centring).
 (use-package astro-ts-mode
   :ensure t
   :mode "\\.astro\\'")
-
   #+end_src
-** Emmet support
+*** Emmet support
 #+begin_src emacs-lisp
-
 ;;;; Emmet mode
 (use-package emmet-mode
   :ensure t
@@ -1837,13 +1924,10 @@ Typewriter-like look of the page (centring).
   
   (add-hook 'astro-ts-mode-hook #'my/setup-emmet-completion)
   (add-hook 'html-ts-mode-hook #'my/setup-emmet-completion))
-  
 #+end_src
-
-* LSP mode
-** LSP mode set up
+** LSP mode
+*** LSP mode set up
    #+begin_src emacs-lisp
-
 ;;; LSP mode ---------------------------------------------------
 ;;;; Breadcrumb
 (defun mmotion/lsp-mode-setup ()
@@ -1897,21 +1981,35 @@ Typewriter-like look of the page (centring).
   (lsp-ui-sideline-show-hover t)
   (lsp-ui-peek-find-references t)
   (lsp-ui-sideline-ignore-duplicate t)
-  (lsp-ui-sideline-show-code-actions t))
+  (lsp-ui-sideline-show-code-actions nil))
+
+;;;; Consult-lsp
+(use-package consult-lsp
+  :ensure t
+  :after (consult lsp-mode))
+;;;; Python
+(use-package lsp-jedi
+  :ensure t)
+
+(setq major-mode-remap-alist
+      '((python-mode . python-ts-mode)))
+
+(use-package pyvenv
+  :after python-ts-mode
+  :defer t)
+
+(use-package pyvenv-auto
+  :defer t
+  :hook ((python-mode python-ts-mode) . pyvenv-auto-run))
    #+end_src
-
-** Teemacs
+*** Teemacs
    #+begin_src emacs-lisp
-
 ;;;; Treemacs
 (use-package lsp-treemacs
   :after lsp)
-
    #+end_src
-
-** Flycheck
+*** Flycheck
 #+begin_src emacs-lisp
-
 (use-package flycheck
   :ensure t
   :hook (prog-mode . flycheck-mode)
@@ -1919,10 +2017,8 @@ Typewriter-like look of the page (centring).
       :bind (:map flycheck-mode-map
                   ("M-n" . flycheck-next-error) ; optional but recommended error navigation
                   ("M-p" . flycheck-previous-error)))
-
 #+end_src
-
-* Formatting
+** Formatting
 #+begin_src emacs-lisp
 ;;; APHELEIA
 ;; auto-format different source code files extremely intelligently
@@ -1941,34 +2037,23 @@ Typewriter-like look of the page (centring).
   (apheleia-global-mode +1))
 #+end_src
 * Terminal Emulators
-
 ** Term
 #+begin_src emacs-lisp
-
-;;; Terminal emulators ----------------------------------------
-(use-package term
-  :ensure nil
-  :commands term
-  :config
-  (setq explicit-shell-file-name "/usr/bin/sh")) ;; Change this to zsh, etc
-  ;;(setq explicit-zsh-args '())         ;; Use 'explicit-<shell>-args for shell-specific args
-
-  ;; Match the default Bash shell prompt.  Update this if you have a custom prompt
-  ;; (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *"))
-
+  ;;; Terminal emulators ----------------------------------------
+  (use-package term
+    :ensure nil
+    :commands term
+    :config
+    (setq explicit-shell-file-name "/usr/bin/sh")) ;; Change this to zsh, etc
 #+end_src
-
 ** Vterm
 #+begin_src emacs-lisp
-
 ;;;; vterm
 (use-package vterm
   :commands vterm
   :config
   (setq vterm-max-scrollback 10000))
-
 #+end_src
-
 ** Vterm-toggle
 #+begin_src emacs-lisp
   ;;;; Vterm-toggle
@@ -1989,90 +2074,11 @@ Typewriter-like look of the page (centring).
                   ;;(dedicated . t) ;dedicated is supported in emacs27
                   (reusable-frames . visible)
                   (window-height . 0.3))))
-
 #+end_src
-
-* Dired
-** Main dired config
-   #+begin_src emacs-lisp
-
-;;; Dired ------------------------------------------------------
-(use-package dired
-  :ensure nil
-  :commands (dired dired-jump)
-  :bind (("C-x C-j" . dired-jump))
-  :custom
-  (evil-collection-define-key 'normal 'dired-mode-map
-    "h" 'dired-up-directory
-    "l" 'dired-find-file)
-  (dired-dwim-target t)
-  (dired-kill-when-opening-new-dired-buffer t)
-  (dired-listing-switches "-agho --group-directories-first"))
-
-(with-eval-after-load 'dired
-  (require 'dired-x))
-   #+end_src
-
-** Nerd-icons for Dired
-   #+begin_src emacs-lisp
-
-(use-package nerd-icons-dired
-  :hook
-  (dired-mode . nerd-icons-dired-mode))
-
-   #+end_src
-
-** Hide dotfiles
-   #+begin_src emacs-lisp
-
-(use-package dired-hide-dotfiles
-  :hook (dired-mode . dired-hide-dotfiles-mode)
-  :config
-  ;; Bind "g ." in Evil normal state within Dired
-  (evil-define-key 'normal dired-mode-map
-    "g." #'dired-hide-dotfiles-mode))
-   #+end_src
-
-** Set up programs to open certain files from dired
-   #+begin_src emacs-lisp
-
-(use-package dired-open
-  :after dired
-  ;; :commands (dired dired-jump)
-  :config
-  (setq dired-open-extensions
-        '(("png"  . "viewnior")
-          ("jpeg" . "viewnior")
-          ("jpg"  . "viewnior")
-	        ;; ("pdf" . "zathura")
-	        ;; ("epub" . "zathura")
-	        ("mp4" . "mpv")
-          ("mkv"  . "mpv"))))
-   #+end_src
-
-** Dired preview (not in use)
-Disabled for now, I don't like it.
-
-   #+begin_src emacs-lisp :tangle no
-
-;; Enable Dired Preview and make it Evil-friendly
-(use-package dired-preview
-  :ensure t
-  ;; :hook (dired-mode . dired-preview-mode)
-  :config
-  (setq dired-preview-delay 0.1)
-  ;; Add Evil navigation commands to trigger preview
-  (dolist (cmd '(evil-next-line evil-previous-line))
-    (add-to-list 'dired-preview-trigger-commands cmd)))
-
-   #+end_src
-
 * Reset GC Threshold
 #+begin_src emacs-lisp
-
 ;;; Reset gc threshold -----------------------------------------
 (add-hook 'emacs-startup-hook
           (lambda ()
             (setq gc-cons-threshold (* 2 1000 1000))))
-
 #+end_src
