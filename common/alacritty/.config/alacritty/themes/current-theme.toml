@@ -1,26 +1,29 @@
-# Zenbones Dark
+# Zenbones Light
 
 [colors.bright]
-black = "#403833"
-red = "#E8838F"
-green = "#8BAE68"
-yellow = "#D68C67"
-blue = "#61ABDA"
-magenta = "#CF86C1"
-cyan = "#65B8C1"
-white = "#888F94"
+black = "#CFC1BA"
+red = "#94253E"
+green = "#3F5A22"
+yellow = "#803D1C"
+blue = "#1D5573"
+magenta = "#7B3B70"
+cyan = "#2B747C"
+white = "#4F5E68"
+
 [colors.cursor]
-cursor = "#C4CACF"
-text = "#1C1917"
+cursor = "#2C363C"
+text = "#E8E4E3"
+
 [colors.normal]
-black = "#1C1917"
-blue = "#6099C0"
-cyan = "#66A5AD"
-green = "#819B69"
-magenta = "#B279A7"
-red = "#DE6E7C"
-white = "#B4BDC3"
-yellow = "#B77E64"
+black = "#E8E4E3"
+blue = "#286486"
+cyan = "#3B8992"
+green = "#4F6C31"
+magenta = "#88507D"
+red = "#A8334C"
+white = "#2C363C"
+yellow = "#944927"
+
 [colors.primary]
-background = "#1C1917"
-foreground = "#B4BDC3"
+background = "#E8E4E3"
+foreground = "#2C363C"

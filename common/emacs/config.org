@@ -1,4 +1,4 @@
-#+TITLE: Mauro's GNU Emacs Config
+#+TITLE: Mauro's GNU Emacs Configuration
 #+AUTHOR: Mauro Di Ianni (mmotion)
 #+EMAIL: hello@mauromotion.com
 #+DESCRIPTION: Mauro's personal Emacs configuration
@@ -68,6 +68,7 @@
   - [[#org-modern-not-in-use][Org-modern (not in use)]]
   - [[#olivetti][Olivetti]]
   - [[#toggle-todos-and-checkboxes-with-ret][Toggle TODOs and checkboxes with RET]]
+  - [[#prettify-symbols-mode][Prettify-symbols-mode]]
 - [[#denote][Denote]]
   - [[#denote-main-config][Denote main config]]
   - [[#denote-org][Denote-org]]
@@ -1242,17 +1243,17 @@ Completion at point.
   (user-full-name "Mauro")
   (mu4e-attachment-dir "~/Maildir/attachments/disroot")
   (mu4e-compose-signature-auto-include nil)
-  (mu4e-drafts-folder "/Drafts")
+  (mu4e-drafts-folder "/disroot/Drafts")
   (mu4e-get-mail-command "mbsync -a")
-  (mu4e-maildir "~/Maildir/disroot")
-  (mu4e-refile-folder "/Archive")
-  (mu4e-sent-folder "/Sent")
+  (mu4e-maildir "~/Maildir")
+  (mu4e-refile-folder "/disroot/Archive")
+  (mu4e-sent-folder "/disroot/Sent")
   (mu4e-maildir-shortcuts
-   '(("/Inbox" . ?i)
-     ("/Trash" . ?t)
-     ("/Drafts" . ?d)
-     ("/Sent" . ?s)))
-  (mu4e-trash-folder "/Trash")
+   '(("/disroot/Inbox" . ?i)
+     ("/disroot/Trash" . ?t)
+     ("/disroot/Drafts" . ?d)
+     ("/disroot/Sent" . ?s)))
+  (mu4e-trash-folder "/disroot/Trash")
   (mu4e-update-interval 300)
   (mu4e-use-fancy-chars t)
   (mu4e-view-show-addresses t)
@@ -1654,6 +1655,15 @@ Typewriter-like look of the page (centring).
 (add-hook 'org-mode-hook
           (lambda ()
             (local-set-key (kbd "RET") #'mmotion/org-smart-return)))
+#+end_src
+** Prettify-symbols-mode
+#+begin_src emacs-lisp
+(add-hook 'org-mode-hook (lambda ()
+  (push '("[ ]" . "☐") prettify-symbols-alist)
+  (push '("[X]" . "☑") prettify-symbols-alist)
+  (push '("[-]" . "❍") prettify-symbols-alist)
+  (prettify-symbols-mode)))
+
 #+end_src
 * Denote
 ** Denote main config
