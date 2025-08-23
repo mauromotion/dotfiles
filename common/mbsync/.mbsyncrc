@@ -24,3 +24,28 @@ Create Both
 Sync All
 Expunge Both
 SyncState *
+
+# IMAPAccount mailbox
+# Host imap.mailbox.org
+# User maurodiianni@mailbox.org
+# PassCmd "gpg2 -q --for-your-eyes-only --no-tty -d ~/Sync/.mbsyncpass-mailbox.txt.gpg"
+# Port 993
+# TLSType IMAPS
+# TLSVersions +1.2
+
+# IMAPStore mailbox-remote
+# Account mailbox
+
+# MaildirStore mailbox-local
+# Path ~/Maildir/mailbox/
+# Inbox ~/Maildir/mailbox/Inbox
+# SubFolders Verbatim
+
+# Channel mailbox
+# Far :mailbox-remote:
+# Near :mailbox-local:
+# Patterns *
+# Create Both
+# Sync All
+# Expunge Both
+# SyncState *
