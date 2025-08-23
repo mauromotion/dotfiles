@@ -82,8 +82,8 @@
   - [[#set-up-programs-to-open-certain-files-from-dired][Set up programs to open certain files from dired]]
   - [[#dired-preview-not-in-use][Dired preview (not in use)]]
 - [[#reading-documents][Reading documents]]
-  - [[#pdf-tools][PDF tools]]
-  - [[#nov-for-epubs][Nov for epubs]]
+  - [[#pdf-tools][PDF-tools]]
+  - [[#nov-epub-reader][Nov EPUB reader]]
 - [[#programming][Programming]]
   - [[#project][Project]]
   - [[#magit][Magit]]
@@ -1851,7 +1851,7 @@ Disabled for now, I don't like it.
    #+end_src
     
 * Reading documents
-** PDF tools
+** PDF-tools
 Open PDF files in Emacs.
 #+begin_src emacs-lisp
 (use-package pdf-tools
@@ -1990,7 +1990,7 @@ Open PDF files in Emacs.
   ;; Remember last viewed position in PDFs
   (save-place-mode 1))
 #+end_src
-** Nov for epubs
+** Nov EPUB reader
 #+begin_src emacs-lisp
 ;; EPUB reader with nov.el
 (use-package nov
