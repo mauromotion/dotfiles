@@ -81,6 +81,7 @@
   - [[#hide-dotfiles][Hide dotfiles]]
   - [[#set-up-programs-to-open-certain-files-from-dired][Set up programs to open certain files from dired]]
   - [[#dired-preview-not-in-use][Dired preview (not in use)]]
+- [[#pdf-tools][PDF tools]]
 - [[#programming][Programming]]
   - [[#project][Project]]
   - [[#magit][Magit]]
@@ -1845,7 +1846,72 @@ Disabled for now, I don't like it.
   (dolist (cmd '(evil-next-line evil-previous-line))
     (add-to-list 'dired-preview-trigger-commands cmd)))
    #+end_src
-   
+    
+* PDF tools
+Open PDF files in Emacs.
+#+begin_src emacs-lisp
+(use-package pdf-tools
+  :mode ("\\.pdf\\'" . pdf-view-mode)
+  :init
+  ;; Initialize pdf-tools as early as possible
+  (pdf-tools-install t t t)
+  :config
+  ;; Better default settings
+  (setq-default pdf-view-display-size 'fit-height)
+  
+  ;; Hooks for pdf-view-mode
+  (add-hook 'pdf-view-mode-hook
+            (lambda ()
+              ;; Hide cursor in PDF view (multiple methods for robustness)
+              (setq-local cursor-type nil)
+              (setq-local cursor-in-non-selected-windows nil)
+              (setq-local blink-cursor-mode nil)
+              (internal-show-cursor nil nil)
+              ;; Disable line numbers if enabled globally
+              (when (bound-and-true-p display-line-numbers-mode)
+                (display-line-numbers-mode -1))
+              ;; Disable linum mode if enabled
+              (when (bound-and-true-p linum-mode)
+                (linum-mode -1))
+              ;; Turn off CUA mode to fix copy functionality
+              (when (bound-and-true-p cua-mode)
+                (cua-mode -1))
+              ;; Make sure we're in the right display size
+              (pdf-view-fit-height-to-window)))
+  
+  ;; Better default settings
+  (setq pdf-view-midnight-colors '("#ffffff" . "#000000")) ; White on black for midnight mode
+  (setq pdf-view-resize-factor 1.1) ; Fine-grained zooming
+  
+  ;; Smooth scrolling
+  (setq pdf-view-continuous t)
+  
+  ;; Auto-revert PDFs when they change on disk
+  (add-hook 'pdf-view-mode-hook 'auto-revert-mode)
+  
+  ;; Optional: Bind some useful keys
+  :bind (:map pdf-view-mode-map
+              ("C-s" . isearch-forward)
+              ("C-r" . isearch-backward)
+              ("j" . pdf-view-next-line-or-next-page)
+              ("k" . pdf-view-previous-line-or-previous-page)
+              ("h" . image-backward-hscroll)
+              ("l" . image-forward-hscroll)
+              ("G" . pdf-view-last-page)
+              ("g" . pdf-view-first-page)
+              ("o" . pdf-occur)
+              ("+" . pdf-view-enlarge)
+              ("-" . pdf-view-shrink)
+              ("0" . pdf-view-scale-reset)
+              ("m" . pdf-view-midnight-minor-mode)))
+
+;; Optional: Better integration with other packages
+(use-package saveplace-pdf-view
+  :after pdf-tools
+  :config
+  ;; Remember last viewed position in PDFs
+  (save-place-mode 1))
+#+end_src
 * Programming
 ** Project
 #+begin_src emacs-lisp

@@ -42,7 +42,8 @@ set hydro_color_prompt $foreground
 set hydro_color_error $red
 set hydro_color_duration $yellow
 set hydro_multiline true
-set hydro_symbol_prompt "𝝺" 
+set hydro_symbol_prompt " " 
+# set hydro_symbol_prompt "𝝺" 
 
 # Colored man pages
 set -g man_blink -o $red
