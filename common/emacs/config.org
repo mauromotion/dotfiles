@@ -81,7 +81,9 @@
   - [[#hide-dotfiles][Hide dotfiles]]
   - [[#set-up-programs-to-open-certain-files-from-dired][Set up programs to open certain files from dired]]
   - [[#dired-preview-not-in-use][Dired preview (not in use)]]
-- [[#pdf-tools][PDF tools]]
+- [[#reading-documents][Reading documents]]
+  - [[#pdf-tools][PDF tools]]
+  - [[#nov-for-epubs][Nov for epubs]]
 - [[#programming][Programming]]
   - [[#project][Project]]
   - [[#magit][Magit]]
@@ -1613,6 +1615,7 @@ Typewriter-like look of the page (centring).
   :hook ((text-mode   . olivetti-mode)   ; enable in text buffers
          (markdown-mode . olivetti-mode) ; enable in Markdown
          (eww-mode . olivetti-mode)      ; enable in eww browser
+         (nov-mode . olivetti-mode)      ; enable in nov epub reader
          (org-mode    . olivetti-mode))  ; enable in Org
   :custom
   (olivetti-body-width 100)           ; set body width
@@ -1847,7 +1850,8 @@ Disabled for now, I don't like it.
     (add-to-list 'dired-preview-trigger-commands cmd)))
    #+end_src
     
-* PDF tools
+* Reading documents
+** PDF tools
 Open PDF files in Emacs.
 #+begin_src emacs-lisp
 (use-package pdf-tools
@@ -1889,21 +1893,95 @@ Open PDF files in Emacs.
   ;; Auto-revert PDFs when they change on disk
   (add-hook 'pdf-view-mode-hook 'auto-revert-mode)
   
-  ;; Optional: Bind some useful keys
+  ;; Evil-friendly keybindings
   :bind (:map pdf-view-mode-map
-              ("C-s" . isearch-forward)
-              ("C-r" . isearch-backward)
+              ;; Navigation (Vim-like)
               ("j" . pdf-view-next-line-or-next-page)
               ("k" . pdf-view-previous-line-or-previous-page)
               ("h" . image-backward-hscroll)
               ("l" . image-forward-hscroll)
+              ("J" . pdf-view-next-page)
+              ("K" . pdf-view-previous-page)
               ("G" . pdf-view-last-page)
-              ("g" . pdf-view-first-page)
-              ("o" . pdf-occur)
+              
+              ;; Zooming
               ("+" . pdf-view-enlarge)
               ("-" . pdf-view-shrink)
+              ("=" . pdf-view-enlarge)
               ("0" . pdf-view-scale-reset)
-              ("m" . pdf-view-midnight-minor-mode)))
+              
+              ;; Search (Evil-like)
+              ("/" . isearch-forward)
+              ("?" . isearch-backward)
+              ("n" . isearch-repeat-forward)
+              ("N" . isearch-repeat-backward)
+              
+              ;; Other useful bindings
+              ("o" . pdf-occur)
+              ("O" . pdf-outline)
+              ("m" . pdf-view-midnight-minor-mode)
+              ("r" . pdf-view-revert-buffer)
+              ("t" . pdf-annot-add-text-annotation)
+              ("d" . pdf-annot-delete)
+              
+              ;; Dual-page viewing
+              ("C-c d" . pdf-dual-page-view)
+              ("C-c s" . pdf-single-page-view))
+  
+  ;; Evil-specific keybindings
+  :config
+  ;; Set up Evil keybindings properly
+  (with-eval-after-load 'evil
+    (evil-define-key 'normal pdf-view-mode-map
+      "gg" 'pdf-view-first-page
+      "G" 'pdf-view-last-page
+      "j" 'pdf-view-next-line-or-next-page
+      "k" 'pdf-view-previous-line-or-previous-page
+      "h" 'image-backward-hscroll
+      "l" 'image-forward-hscroll
+      "J" 'pdf-view-next-page
+      "K" 'pdf-view-previous-page
+      "/" 'isearch-forward
+      "?" 'isearch-backward
+      "n" 'isearch-repeat-forward
+      "N" 'isearch-repeat-backward
+      "zz" 'pdf-view-fit-height-to-window
+      "zw" 'pdf-view-fit-width-to-window
+      "zp" 'pdf-view-fit-page-to-window
+      "+" 'pdf-view-enlarge
+      "=" 'pdf-view-enlarge
+      "-" 'pdf-view-shrink
+      "0" 'pdf-view-scale-reset
+      "o" 'pdf-occur
+      "O" 'pdf-outline
+      "m" 'pdf-view-midnight-minor-mode
+      "r" 'pdf-view-revert-buffer)))
+
+;; Functions for dual-page viewing
+(defun pdf-dual-page-view ()
+  "Open current PDF in dual-page view (side by side windows)."
+  (interactive)
+  (let ((current-page (pdf-view-current-page))
+        (pdf-buffer (current-buffer)))
+    ;; Split window vertically (side by side)
+    (split-window-right)
+    ;; Go to next page in the right window
+    (other-window 1)
+    (switch-to-buffer pdf-buffer)
+    (pdf-view-goto-page (1+ current-page))
+    ;; Go back to left window
+    (other-window 1)
+    ;; Fit both windows
+    (pdf-view-fit-width-to-window)
+    (other-window 1)
+    (pdf-view-fit-width-to-window)
+    (other-window 1)))
+
+(defun pdf-single-page-view ()
+  "Return to single page view."
+  (interactive)
+  (delete-other-windows)
+  (pdf-view-fit-height-to-window))
 
 ;; Optional: Better integration with other packages
 (use-package saveplace-pdf-view
@@ -1911,6 +1989,88 @@ Open PDF files in Emacs.
   :config
   ;; Remember last viewed position in PDFs
   (save-place-mode 1))
+#+end_src
+** Nov for epubs
+#+begin_src emacs-lisp
+;; EPUB reader with nov.el
+(use-package nov
+  :mode ("\\.epub\\'" . nov-mode)
+  :config
+  ;; Basic settings
+  (setq nov-save-place-file (locate-user-emacs-file "nov-places"))
+  
+  ;; Better reading experience
+  (setq nov-text-width 80)  ; Comfortable reading width
+  
+  ;; Hook for nov-mode
+  (add-hook 'nov-mode-hook
+            (lambda ()
+              ;; Improved typography
+              (face-remap-add-relative 'variable-pitch :family "Georgia" :height 1.2)
+              ;; Better line spacing
+              (setq-local line-spacing 0.2)
+              ;; Center text for better reading
+              (visual-line-mode 1)
+              ;; Hide cursor like in PDFs
+              (setq-local cursor-type nil)
+              ;; Disable line numbers
+              (when (bound-and-true-p display-line-numbers-mode)
+                (display-line-numbers-mode -1))))
+  
+  ;; Evil-friendly keybindings  
+  :bind (:map nov-mode-map
+              ;; Navigation (Vim-like)
+              ("j" . nov-scroll-up-line)
+              ("k" . nov-scroll-down-line) 
+              ("J" . nov-next-document)
+              ("K" . nov-previous-document)
+              ("h" . nov-history-back)
+              ("l" . nov-history-forward)
+              ("G" . end-of-buffer)
+              
+              ;; Zooming/scaling
+              ("+" . text-scale-increase)
+              ("-" . text-scale-decrease)
+              ("=" . text-scale-increase)
+              ("0" . text-scale-adjust)
+              
+              ;; Search
+              ("/" . isearch-forward)
+              ("?" . isearch-backward)
+              ("n" . isearch-repeat-forward)
+              ("N" . isearch-repeat-backward))
+  
+  ;; Evil-specific keybindings
+  :config
+  ;; Set up Evil keybindings properly for nov-mode
+  (with-eval-after-load 'evil
+    (evil-define-key 'normal nov-mode-map
+      "gg" 'beginning-of-buffer
+      "G" 'end-of-buffer
+      "j" 'nov-scroll-up-line
+      "k" 'nov-scroll-down-line
+      "J" 'nov-next-document
+      "K" 'nov-previous-document
+      "h" 'nov-history-back
+      "l" 'nov-history-forward
+      "/" 'isearch-forward
+      "?" 'isearch-backward
+      "n" 'isearch-repeat-forward
+      "N" 'isearch-repeat-backward
+      ;; Chapter navigation using different keys
+      (kbd "C-j") 'nov-next-document
+      (kbd "C-k") 'nov-previous-document
+      ;; Table of contents and view commands
+      "gt" 'nov-goto-toc
+      "gT" 'nov-goto-toc
+      "gs" 'nov-view-source
+      "gc" 'nov-view-content-source
+      "gr" 'nov-render-document
+      ;; Text scaling
+      "+" 'text-scale-increase
+      "=" 'text-scale-increase
+      "-" 'text-scale-decrease
+      "0" 'text-scale-adjust)))
 #+end_src
 * Programming
 ** Project
