@@ -734,7 +734,8 @@ Keybindings with functions to be able to do things repeatedly like changing the 
   "r" #'org-refile
   "p" #'org-refile-copy
   "s" #'org-schedule
-  "u" #'org-update-all-dblocks)
+  "u" #'org-update-all-dblocks
+  "v" #'visible-mode)
     #+end_src
 *** [P] Project keybindings
 #+begin_src emacs-lisp
@@ -913,7 +914,8 @@ Keybindings with functions to be able to do things repeatedly like changing the 
     "r" "Org Refile"
     "p" "Org Refile Copy"
     "s" "Add a Schedule"
-    "u" "Update a dblock")
+    "u" "Update a dblock"
+    "v" "Toggle concealing")
 
  (which-key-add-keymap-based-replacements mmotion/project-map
     "b" "Project's buffers"
@@ -922,8 +924,7 @@ Keybindings with functions to be able to do things repeatedly like changing the 
     "g" "Project find with regexp"
     "k" "Project kill buffers"
     "p" "Switch project"
-    "s" "Project shell"
-  )
+    "s" "Project shell")
   
   (which-key-add-keymap-based-replacements mmotion/toggle-map
     "c" "Close current tab"
