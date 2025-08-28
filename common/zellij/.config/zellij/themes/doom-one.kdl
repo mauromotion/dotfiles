@@ -1,0 +1,16 @@
+themes {
+    doom-one {
+        bg "#282c34"
+        fg "#bbc2cf"
+        red "#ff6c6b"
+        green "#98be65"
+        blue "#51afef"
+        yellow "#ecbe7b"
+        magenta "#c678dd"
+        orange "#F29250"
+        cyan "#46d9ff"
+        black "#282c34"
+        white "#bbc2cf"
+    }
+}
+
