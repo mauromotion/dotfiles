@@ -1090,7 +1090,7 @@ Run commands onto completion candidates.
   (embark-collect-mode . consult-preview-at-point-mode))
   #+end_src
 ** Corfu
-COmpletion in Region FUnction (pop up for autocompletion).
+Completion in Region FUnction (pop up for autocompletion).
   #+begin_src emacs-lisp
     ;;;; Corfu
     (use-package corfu
@@ -1144,6 +1144,9 @@ COmpletion in Region FUnction (pop up for autocompletion).
       (read-extended-command-predicate #'command-completion-default-include-p))
   #+end_src
 ** Cape
+   :PROPERTIES:
+   :ID:       89a63754-5eb1-4649-a5ce-8c8ffbbf7ae6
+   :END:
 Completion at point.
 #+begin_src emacs-lisp
 (use-package cape
@@ -1159,23 +1162,24 @@ Completion at point.
                       #'cape-symbol              ;; Symbol completion
                       #'cape-keyword)))          ;; Language keyword completion
   
-  (defun mmotion/setup-general-completion ()
-    "Setup completion functions for non-LSP modes."
-    (setq-local completion-at-point-functions
-                (list #'cape-dabbrev
-                      #'cape-file
-                      #'cape-symbol
-                      #'cape-keyword)))
+(defun mmotion/setup-general-completion ()
+  "Setup completion functions for non-LSP modes."
+  (setq-local completion-at-point-functions
+              (list #'cape-file
+                    #'cape-dabbrev
+                    #'cape-symbol
+                    #'cape-keyword)))
   
   ;; Add hooks
   (add-hook 'lsp-completion-mode-hook #'mmotion/setup-lsp-completion)
-  (add-hook 'prog-mode-hook #'mmotion/setup-general-completion))
+  (add-hook 'prog-mode-hook #'mmotion/setup-general-completion)
+  (add-hook 'text-mode-hook #'mmotion/setup-general-completion)
   
   ;; Optional: Add some useful Cape bindings
-  ;; :bind (("C-c p d" . cape-dabbrev)
-  ;;        ("C-c p f" . cape-file)
-  ;;        ("C-c p s" . cape-symbol)
-  ;;        ("C-c p k" . cape-keyword)))
+  :bind (("C-c c d" . cape-dabbrev)
+         ("C-c c f" . cape-file)
+         ("C-c c s" . cape-symbol)
+         ("C-c c k" . cape-keyword)))
 #+end_src
 * Spellchecking
 *** ispell
@@ -2156,11 +2160,11 @@ Open PDF files in Emacs.
   (add-to-list 'emmet-jsx-major-modes 'astro-ts-mode)
   
 ;; Add emmet to completion-at-point functions
-  (defun my/setup-emmet-completion ()
+  (defun mmotion/setup-emmet-completion ()
     (add-to-list 'completion-at-point-functions 'emmet-completion-at-point-function))
   
-  (add-hook 'astro-ts-mode-hook #'my/setup-emmet-completion)
-  (add-hook 'html-ts-mode-hook #'my/setup-emmet-completion))
+  (add-hook 'astro-ts-mode-hook #'mmotion/setup-emmet-completion)
+  (add-hook 'html-ts-mode-hook #'mmotion/setup-emmet-completion))
 #+end_src
 ** LSP mode
 *** LSP mode set up
