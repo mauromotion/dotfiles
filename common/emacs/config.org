@@ -312,8 +312,8 @@ Set dark or light theme based on the time of the day.
 (use-package circadian
   :ensure t
   :config
-  (setq circadian-themes '((:sunrise . ef-day)
-                           (:sunset  . ef-owl)))
+  (setq circadian-themes '((:sunrise . doom-nova)
+                           (:sunset  . doom-one)))
   (circadian-setup))
 #+end_src
 ** Nerd-icons
@@ -379,7 +379,7 @@ Settings *must* be in =:custom= otherwise they won't work.
   :config
   (dashboard-setup-startup-hook)
   :custom
-  (dashboard-startup-banner 3)
+  (dashboard-startup-banner 'logo)
   (dashboard-center-content t)
   (dashboard-display-icons-p t)
   (dashboard-icon-type 'nerd-icons)
@@ -1266,10 +1266,10 @@ Completion at point.
   (mu4e-refile-folder "/disroot/Archive")
   (mu4e-sent-folder "/disroot/Sent")
   (mu4e-maildir-shortcuts
-   '(("/disroot/Inbox" . ?i)
-     ("/disroot/Trash" . ?t)
-     ("/disroot/Drafts" . ?d)
-     ("/disroot/Sent" . ?s)))
+   '(("/Inbox" . ?i)
+     ("/Trash" . ?t)
+     ("/Drafts" . ?d)
+     ("/Sent" . ?s)))
   (mu4e-trash-folder "/disroot/Trash")
   (mu4e-update-interval 300)
   (mu4e-use-fancy-chars t)

@@ -2364,7 +2364,9 @@ map ctrl+shift+l neighboring_window right
 
 #: }}}
 
+
+
 # BEGIN_KITTY_THEME
-# zenbones_light
+# OneDark-Pro
 include current-theme.conf
 # END_KITTY_THEME
