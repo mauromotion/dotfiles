@@ -536,10 +536,6 @@ A modern alternative to undo-tree.
 ;;;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
-;;;; Use hippie-expand instead of dabbrev-expand
-(use-package hippie-exp
-  :bind*
-  ("M-/" . hippie-expand))
 #+end_src
 ** Which-key
 Display keybindings.
@@ -1151,7 +1147,7 @@ Completion at point.
 #+begin_src emacs-lisp
 (use-package cape
   :ensure t
-  :config  ;; Use :config instead of :init to ensure cape is loaded
+  :config
   ;; Setup completion functions with proper LSP integration
   (defun mmotion/setup-lsp-completion ()
     "Setup completion functions for LSP modes with Cape extensions."
@@ -1161,25 +1157,38 @@ Completion at point.
                       #'cape-file                ;; File name completion
                       #'cape-symbol              ;; Symbol completion
                       #'cape-keyword)))          ;; Language keyword completion
+
+  (defun mmotion/setup-text-completion ()
+    "Setup completion functions for text modes (org, markdown, etc)."
+    (setq-local completion-at-point-functions
+                (list #'cape-file
+                      #'cape-dabbrev)))
+
+  (defun mmotion/setup-prog-completion ()
+    "Setup completion functions for non-LSP programming modes."
+    (setq-local completion-at-point-functions
+                (list #'cape-dabbrev
+                      #'cape-file
+                      #'cape-symbol
+                      #'cape-keyword)))
   
-(defun mmotion/setup-general-completion ()
-  "Setup completion functions for non-LSP modes."
-  (setq-local completion-at-point-functions
-              (list #'cape-file
-                    #'cape-dabbrev
-                    #'cape-symbol
-                    #'cape-keyword)))
+  (defun mmotion/dabbrev-completion ()
+    "Complete word using dabbrev via completion-at-point (with corfu menu)."
+    (interactive)
+    (let ((completion-at-point-functions '(cape-dabbrev)))
+      (completion-at-point)))
   
   ;; Add hooks
   (add-hook 'lsp-completion-mode-hook #'mmotion/setup-lsp-completion)
-  (add-hook 'prog-mode-hook #'mmotion/setup-general-completion)
-  (add-hook 'text-mode-hook #'mmotion/setup-general-completion)
+  (add-hook 'prog-mode-hook #'mmotion/setup-prog-completion)  ;; Programming modes
+  (add-hook 'text-mode-hook #'mmotion/setup-text-completion)  ;; Text modes (org, markdown)
   
-  ;; Optional: Add some useful Cape bindings
+  ;; Manual completion bindings
   :bind (("C-c c d" . cape-dabbrev)
          ("C-c c f" . cape-file)
          ("C-c c s" . cape-symbol)
-         ("C-c c k" . cape-keyword)))
+         ("C-c c k" . cape-keyword)
+         ("M-/" . mmotion/dabbrev-completion)))
 #+end_src
 * Spellchecking
 *** ispell
