@@ -61,6 +61,7 @@
   - [[#org-babel][Org-Babel]]
   - [[#org-download][Org-download]]
   - [[#structure-templates][Structure Templates]]
+  - [[#org-block-capf][org-block-capf]]
   - [[#highlight-todo][Highlight-todo]]
 - [[#org-mode-styling][Org-mode Styling]]
   - [[#org-superstar-bullet-points][Org-superstar (bullet points)]]
@@ -1543,6 +1544,16 @@ Table Of Content.
 (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
 (add-to-list 'org-structure-template-alist '("py" . "src python"))
 (add-to-list 'org-structure-template-alist '("js" . "src js :results output")))
+#+end_src
+** org-block-capf
+Auto-completion for code blocks in org-mode
+
+#+begin_src emacs-lisp
+(use-package org-block-capf
+  :vc (:url "https://github.com/xenodium/org-block-capf")
+  :hook (org-mode . (lambda ()
+                      (add-hook 'completion-at-point-functions
+                                'org-block-capf nil t))))
 #+end_src
 ** Highlight-todo
 #+begin_src emacs-lisp

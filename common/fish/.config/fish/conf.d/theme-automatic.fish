@@ -38,11 +38,11 @@ set -g fish_pager_color_description $comment
 set hydro_color_pwd $foreground
 set hydro_color_git $comment
 set hydro_color_start $yellow
-set hydro_color_prompt $green
+set hydro_color_prompt $magenta
 set hydro_color_error $red
 set hydro_color_duration $yellow
 set hydro_multiline true
-set hydro_symbol_prompt " " 
+# set hydro_symbol_prompt " " 
 # set hydro_symbol_prompt "𝝺" 
 
 # Colored man pages
@@ -73,18 +73,26 @@ switch $fish_bind_mode
   set_color $foreground
 end
 
-# FZF theme
+# FZF theme dark theme (doom-one)
 set -gx FZF_DEFAULT_OPTS '
-  --color=fg:#2C363C,fg+:#4F5E68,bg:-1,bg+:#CFC1BA
-  --color=hl:#A8334C,hl+:#4F6C31,info:#88507D,marker:#3B8992
-  --color=prompt:#2C363C,spinner:#2C363C,pointer:#3B8992,header:#88507D
-  --color=border:#4F5E68,label:#2C363C,query:#3b8992
-  --border="rounded"
-  --border-label="fzf"
-  --border-label-pos="0"
-  --preview-window="border-rounded"
-  --prompt="> "
-  --marker=">"
-  --pointer="◆"
-  --separator="─"
-  --scrollbar="│"'
+--color=fg:#bbc2cf,bg:#282a36,hl:#c678dd --color=fg+:#bbc2cf,bg:-1,bg+:#44475a,hl+:#c678dd --color=info:#ecbe7b,prompt:#98be65,pointer:#51afef --color=marker:#51afef,spinner:#ecbe7b,header:#c678dd'
+
+# FZF theme dark theme (dracula)
+# set -gx FZF_DEFAULT_OPTS '
+# --color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
+
+# FZF theme light theme (zenbones)
+# set -gx FZF_DEFAULT_OPTS '
+#   --color=fg:#2C363C,fg+:#4F5E68,bg:-1,bg+:#CFC1BA
+#   --color=hl:#A8334C,hl+:#4F6C31,info:#88507D,marker:#3B8992
+#   --color=prompt:#2C363C,spinner:#2C363C,pointer:#3B8992,header:#88507D
+#   --color=border:#4F5E68,label:#2C363C,query:#3b8992
+#   --border="rounded"
+#   --border-label="fzf"
+#   --border-label-pos="0"
+#   --preview-window="border-rounded"
+#   --prompt="> "
+#   --marker=">"
+#   --pointer="◆"
+#   --separator="─"
+#   --scrollbar="│"'
