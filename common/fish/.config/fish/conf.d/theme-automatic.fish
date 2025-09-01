@@ -35,7 +35,7 @@ set -g fish_pager_color_completion $foreground
 set -g fish_pager_color_description $comment
 
 # Hydro prompt styling
-set hydro_color_pwd $foreground
+set hydro_color_pwd $blue
 set hydro_color_git $comment
 set hydro_color_start $yellow
 set hydro_color_prompt $magenta

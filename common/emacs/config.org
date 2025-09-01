@@ -50,6 +50,8 @@
 - [[#spellchecking][Spellchecking]]
 - [[#email][Email]]
   - [[#mu4e][mu4e]]
+- [[#rss][RSS]]
+  - [[#elfeed][Elfeed]]
 - [[#org-mode][Org-mode]]
   - [[#org-mode-base-settings][Org-mode base settings]]
   - [[#org-mode-custom-functions][Org-mode custom functions]]
@@ -1299,6 +1301,18 @@ Completion at point.
   ;; Add browser action
   (add-to-list 'mu4e-view-actions '("view in browser" . mu4e-action-view-in-browser)))
 #+end_src
+* RSS
+** Elfeed
+#+begin_src elisp :lexical no
+(use-package elfeed)
+
+;; Better UI
+(use-package elfeed-goodies
+  :ensure t
+  :config
+  (elfeed-goodies/setup)
+  (setq elfeed-goodies/entry-pane-size 0.5))
+#+end_src
 * Org-mode
 ** Org-mode base settings
   #+begin_src emacs-lisp
@@ -1642,6 +1656,7 @@ Typewriter-like look of the page (centring).
          (markdown-mode . olivetti-mode) ; enable in Markdown
          (eww-mode . olivetti-mode)      ; enable in eww browser
          (nov-mode . olivetti-mode)      ; enable in nov epub reader
+         (elfeed-show-mode . olivetti-mode) ; enable in elfeed
          (org-mode    . olivetti-mode))  ; enable in Org
   :custom
   (olivetti-body-width 100)           ; set body width
@@ -1859,6 +1874,7 @@ Typewriter-like look of the page (centring).
 	        ;; ("pdf" . "zathura")
 	        ;; ("epub" . "zathura")
           ("mp3" . "mpv --force-window --keep-open")
+          ("flac" . "mpv --force-window --keep-open")
 	        ("mp4" . "mpv")
           ("mkv"  . "mpv"))))
    #+end_src
@@ -1909,6 +1925,7 @@ Customise ibuffer's look with categories and icons.
   (setq ibuffer-saved-filter-groups
         '(("Main"
            ("Directories" (mode . dired-mode))
+           ("Browser" (mode . eww-mode))
            ("Python" (or
                       (mode . python-ts-mode)
                       (mode . c-mode)
