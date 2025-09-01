@@ -64,13 +64,16 @@ for i in groups:
     )
 
 # Add a scratchpad terminal
+
+terminal_scratchpad = "alacritty --class scratchpad"
+
 groups.append(
     ScratchPad(
         "scratchpad",
         [
             DropDown(
                 "term",
-                terminal,
+                "alacritty --class scratchpad",
                 opacity=0.9,
                 width=0.8,
                 height=0.6,

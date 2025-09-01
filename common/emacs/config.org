@@ -306,8 +306,8 @@ Set dark or light theme based on the time of the day.
 (use-package circadian
   :ensure t
   :config
-  (setq circadian-themes '((:sunrise . doom-flatwhite)
-                           (:sunset  . doom-one)))
+  (setq circadian-themes '((:sunrise . doric-beach)
+                           (:sunset  . doric-valley)))
   (circadian-setup))
 #+end_src
 ** Nerd-icons
@@ -769,7 +769,8 @@ Keybindings with functions to be able to do things repeatedly like changing the 
   ;; "p" #'dired-preview-mode
   "t" #'consult-theme
   "r" #'tab-rename
-  "s" #'hydra-text-scale/body)
+  "s" #'hydra-text-scale/body
+  "v" #'variable-pitch-mode)
     #+end_src
 *** [W] Windows keybindings
     #+begin_src emacs-lisp
@@ -949,7 +950,8 @@ Keybindings with functions to be able to do things repeatedly like changing the 
     ;; "p" "Dired Preview"
     "r" "Rename current tab"
     "s" "Scale Text"
-    "t" "Choose Theme")
+    "t" "Choose Theme"
+    "v" "Variable pitch mode toggle")
 
   (which-key-add-keymap-based-replacements mmotion/window-map
     "b" "Reset windows"
@@ -1324,6 +1326,7 @@ IRC chat client.
 (use-package circe
   :commands (circe)
   :config
+  (setq circe-reduce-lurker-spam t) 
   (setq circe-network-options
         '(("Libera Chat"
            :tls t
@@ -1421,12 +1424,17 @@ RSS reader.
 #+begin_src elisp :lexical no
 (use-package elfeed)
 
+;; Org integration for feed management
+(use-package elfeed-org
+	:config
+	(elfeed-org)
+	(setq rmh-elfeed-org-files (list "~/Notes/plain_orgfiles/orgfiles/elfeed.org")))
+
 ;; Better UI
 (use-package elfeed-goodies
-  :ensure t
   :config
   (elfeed-goodies/setup)
-  (setq elfeed-goodies/entry-pane-size 0.5))
+  (setq elfeed-goodies/entry-pane-size 0.7))
 #+end_src
 * Org-mode
 ** Org-mode base settings
@@ -2143,7 +2151,15 @@ Customise ibuffer's look with categories and icons.
 #+begin_src emacs-lisp
 ;;; Magit ----------------------------------------------------
 (use-package magit
-  :commands magit-status)
+  :commands magit-status
+  :config
+    (setq magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+
+;; Show changes in fringe
+(use-package git-gutter
+  :hook (prog-mode . git-gutter-mode)
+  :config
+  (setq git-gutter:update-interval 0.02))
 #+end_src
 ** Tree-sitter
   #+begin_src emacs-lisp
