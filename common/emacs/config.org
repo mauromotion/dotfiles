@@ -50,6 +50,8 @@
 - [[#spellchecking][Spellchecking]]
 - [[#email][Email]]
   - [[#mu4e][mu4e]]
+- [[#irc][IRC]]
+  - [[#circe][Circe]]
 - [[#rss][RSS]]
   - [[#elfeed][Elfeed]]
 - [[#org-mode][Org-mode]]
@@ -584,6 +586,13 @@ Display keybindings.
   ;; Show a message
   (message "Line numbers: %s" display-line-numbers))
    #+end_src
+*** Circe IRC connection 
+#+begin_src elisp
+ (defun circe-libera ()
+  "Connect to Libera Chat via Circe."
+  (interactive)
+  (circe "Libera Chat")) 
+#+end_src
 ** Hydras
 Keybindings with functions to be able to do things repeatedly like changing the size of a window or text.
    #+begin_src emacs-lisp
@@ -617,9 +626,21 @@ Keybindings with functions to be able to do things repeatedly like changing the 
     ("f" nil "finished (or esc)" :exit t)))
    #+end_src
 ** Define Sub-menus 
+*** [A] Apps keybindings
+#+begin_src elisp
+;;;;; Define submenu keymaps
+(defvar-keymap mmotion/apps-map
+  :doc "Apps operations submenu."
+  "b" #'eww
+  "c" #'calendar
+  "d" #'dictionary
+  "i" #'circe-libera ;; IRC
+  "m" #'mu4e ;; Mail
+  "r" #'elfeed ;; RSS
+  "t" #'vterm-toggle-cd) ;; Terminal
+#+end_src
 *** [B] Buffer keybindings
     #+begin_src emacs-lisp
-;;;;; Define submenu keymaps
 (defvar-keymap mmotion/buffer-map 
   :doc "Buffer operations submenu."
   "e" #'eval-buffer
@@ -760,8 +781,7 @@ Keybindings with functions to be able to do things repeatedly like changing the 
   ;; "p" #'dired-preview-mode
   "t" #'consult-theme
   "r" #'tab-rename
-  "s" #'hydra-text-scale/body
-  "v" #'vterm-toggle-cd)
+  "s" #'hydra-text-scale/body)
     #+end_src
 *** [W] Windows keybindings
     #+begin_src emacs-lisp
@@ -786,11 +806,10 @@ Keybindings with functions to be able to do things repeatedly like changing the 
   "-" #'dired-jump
   "SPC" #'consult-buffer
   "," #'consult-recent-file
-  "." #'find-file
-  "c" #'calendar
-  "d" #'dictionary)
+  "." #'find-file)
 
 ;;;; Add submenus to the leader keymap
+(keymap-set mmotion/leader-map "a" mmotion/apps-map)
 (keymap-set mmotion/leader-map "b" mmotion/buffer-map)
 (keymap-set mmotion/leader-map "f" mmotion/find-map)
 (keymap-set mmotion/leader-map "g" mmotion/goto-map)
@@ -811,9 +830,8 @@ Keybindings with functions to be able to do things repeatedly like changing the 
     ":" "M-x"
     "-" "Dired Jump"
     "SPC" "Switch Buffer"
+    "a" "Apps..."
     "b" "Buffer..."
-    "c" "Calendar"
-    "d" "Dictionary"
     "f" "Find..."
     "g" "Go to..."
     "h" "Help..."
@@ -831,6 +849,15 @@ Keybindings with functions to be able to do things repeatedly like changing the 
     "," "Recent Files"
     "." "Find Files")
   
+  (which-key-add-keymap-based-replacements mmotion/apps-map
+    "b" "Browser"
+    "c" "Calendar"
+    "d" "Dictionary"
+    "i" "IRC chat"
+    "m" "Mail"
+    "r" "RSS"
+    "t" "Terminal"
+  )
   (which-key-add-keymap-based-replacements mmotion/buffer-map
     "i" "iBuffer list"
     "k" "Kill Buffer"
@@ -934,8 +961,7 @@ Keybindings with functions to be able to do things repeatedly like changing the 
     ;; "p" "Dired Preview"
     "r" "Rename current tab"
     "s" "Scale Text"
-    "t" "Choose Theme"
-    "v" "Vterm toggle")
+    "t" "Choose Theme")
 
   (which-key-add-keymap-based-replacements mmotion/window-map
     "b" "Reset windows"
@@ -1301,6 +1327,25 @@ Completion at point.
   ;; Add browser action
   (add-to-list 'mu4e-view-actions '("view in browser" . mu4e-action-view-in-browser)))
 #+end_src
+* IRC
+IRC chat client.
+** Circe
+#+begin_src elisp
+(use-package circe
+  :commands (circe)
+  :config
+  (setq circe-network-options
+        '(("Libera Chat"
+           :tls t
+           :nick "mmotion"
+           :sasl-username "mauromotion"
+           :sasl-password (lambda (&rest _)
+                          (auth-source-pick-first-password
+                           :host "irc.libera.chat"
+                           :user "mauromotion"))
+           :port 6697
+           :channels ("#systemcrafters")))))
+#+end_src
 * RSS
 ** Elfeed
 #+begin_src elisp :lexical no
@@ -1657,6 +1702,7 @@ Typewriter-like look of the page (centring).
          (eww-mode . olivetti-mode)      ; enable in eww browser
          (nov-mode . olivetti-mode)      ; enable in nov epub reader
          (elfeed-show-mode . olivetti-mode) ; enable in elfeed
+         ;; (ibuffer-mode . olivetti-mode)  ; enable in ibuffer
          (org-mode    . olivetti-mode))  ; enable in Org
   :custom
   (olivetti-body-width 100)           ; set body width
@@ -1925,6 +1971,9 @@ Customise ibuffer's look with categories and icons.
   (setq ibuffer-saved-filter-groups
         '(("Main"
            ("Directories" (mode . dired-mode))
+           ("IRC" (or
+                   (mode . circe-channel-mode)
+                   (mode . circe-server-mode)))
            ("Browser" (mode . eww-mode))
            ("Python" (or
                       (mode . python-ts-mode)
