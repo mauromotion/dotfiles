@@ -2045,6 +2045,9 @@ Customise ibuffer's look with categories and icons.
                    (mode . circe-channel-mode)
                    (mode . circe-server-mode)))
            ("Browser" (mode . eww-mode))
+           ("Documents" (or 
+                           (mode . nov-mode)
+                           (mode . pdf-view-mode)))
            ("Python" (or
                       (mode . python-ts-mode)
                       (mode . c-mode)
