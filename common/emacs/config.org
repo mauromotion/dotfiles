@@ -741,10 +741,12 @@ Keybindings with functions to be able to do things repeatedly like changing the 
   "l" #'org-insert-link
   "L" #'org-store-link
   "r" #'org-refile
+  "n" #'org-narrow-to-subtree
   "p" #'org-refile-copy
   "s" #'org-schedule
   "u" #'org-update-all-dblocks
-  "v" #'visible-mode)
+  "v" #'visible-mode
+  "w" #'widen)
     #+end_src
 *** [P] Project keybindings
 #+begin_src emacs-lisp
@@ -928,10 +930,12 @@ Keybindings with functions to be able to do things repeatedly like changing the 
     "i" "Insert image from URL"
     "l" "Org Store Link"
     "r" "Org Refile"
+    "n" "Narrow to subtree"
     "p" "Org Refile Copy"
     "s" "Add a Schedule"
     "u" "Update a dblock"
-    "v" "Toggle concealing")
+    "v" "Toggle concealing"
+    "w" "Widen (undo narrowing)")
 
  (which-key-add-keymap-based-replacements mmotion/project-map
     "b" "Project's buffers"
@@ -1431,10 +1435,10 @@ RSS reader.
 	(setq rmh-elfeed-org-files (list "~/Notes/plain_orgfiles/orgfiles/elfeed.org")))
 
 ;; Better UI
-;; (use-package elfeed-goodies
-;;   :config
-;;   (elfeed-goodies/setup)
-;;   (setq elfeed-goodies/entry-pane-size 0.7))
+(use-package elfeed-goodies
+  :config
+  (elfeed-goodies/setup)
+  (setq elfeed-goodies/entry-pane-size 0.7))
 
 ;; Make sure articles use variable pitch font, and make it larger
 (add-hook 'elfeed-show-mode-hook 
