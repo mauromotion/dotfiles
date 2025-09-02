@@ -1431,10 +1431,16 @@ RSS reader.
 	(setq rmh-elfeed-org-files (list "~/Notes/plain_orgfiles/orgfiles/elfeed.org")))
 
 ;; Better UI
-(use-package elfeed-goodies
-  :config
-  (elfeed-goodies/setup)
-  (setq elfeed-goodies/entry-pane-size 0.7))
+;; (use-package elfeed-goodies
+;;   :config
+;;   (elfeed-goodies/setup)
+;;   (setq elfeed-goodies/entry-pane-size 0.7))
+
+;; Make sure articles use variable pitch font, and make it larger
+(add-hook 'elfeed-show-mode-hook 
+          (lambda () 
+            (variable-pitch-mode 1)
+            (text-scale-set 0.6)))
 #+end_src
 * Org-mode
 ** Org-mode base settings
@@ -1787,7 +1793,10 @@ Typewriter-like look of the page (centring).
   (olivetti-style 'fancy)          ; use fringes for margins
   :config
   ;; Disable olivetti in astro-ts-mode
-  (add-hook 'astro-ts-mode-hook (lambda () (olivetti-mode -1))))
+  (add-hook 'astro-ts-mode-hook (lambda () (olivetti-mode -1)))
+  ;; Custom width for elfeed articles
+  (add-hook 'elfeed-show-mode-hook (lambda () (olivetti-set-width 80))))
+
 #+end_src
 *** Toggle TODOs and checkboxes with RET
 #+begin_src emacs-lisp
