@@ -148,6 +148,7 @@ Basic set up of Emacs' UI, removing the default toolbars, and setting up some sy
     (setopt use-short-answers t)
     (global-auto-revert-mode t)
     (delete-selection-mode 1) ; Delete selected text and replace it with typed text
+    (auto-save-visited-mode 1)
 
     ;;;; Smooth scrolling
     (pixel-scroll-precision-mode 1)
@@ -1011,15 +1012,32 @@ Search and navigation commands.
           (when-let ((project (project-current)))
             (project-root project)))))
 
-(defun mmotion/minibuffer-backward-kill (arg)
-  "When minibuffer is completing a file name delete up to parent
-folder, otherwise delete a character backward"
+;; (defun mmotion/minibuffer-backward-kill (arg)
+;;   "When minibuffer is completing a file name delete up to parent
+;; folder, otherwise delete a character backward"
+;;   (interactive "p")
+;;   (if minibuffer-completing-file-name
+;;       ;; Borrowed from https://github.com/raxod502/selectrum/issues/498#issuecomment-803283608
+;;       (if (string-match-p "/." (minibuffer-contents))
+;;           (zap-up-to-char (- arg) ?/)
+;;         (delete-minibuffer-contents))
+;;     (delete-backward-char arg)))
+
+(defun mmotion/minibuffer-backward-kill-alt (arg)
+  "When minibuffer is completing a file name, delete up to parent
+folder at word boundaries, otherwise delete a single character."
   (interactive "p")
   (if minibuffer-completing-file-name
-      ;; Borrowed from https://github.com/raxod502/selectrum/issues/498#issuecomment-803283608
-      (if (string-match-p "/." (minibuffer-contents))
-          (zap-up-to-char (- arg) ?/)
-        (delete-minibuffer-contents))
+      (let ((contents (minibuffer-contents)))
+        (cond
+         ;; No slash in path or at word boundary - delete to parent folder
+         ((or (not (string-match-p "/." contents))
+              (looking-back "\\b" 1))
+          (if (string-match-p "/." contents)
+              (zap-up-to-char (- arg) ?/)
+            (delete-minibuffer-contents)))
+         ;; In middle of word - delete single character  
+         (t (delete-backward-char arg))))
     (delete-backward-char arg)))
   #+end_src
 
@@ -1540,7 +1558,8 @@ RSS reader.
    '(org-indent            ((t (:inherit (org-hide fixed-pitch))))))
 
   :custom
-  (org-ellipsis " ▾")
+  ;; (org-ellipsis " ▾")
+  (org-ellipsis " …")
   (org-hide-emphasis-markers t)
   (org-agenda-start-with-log-mode t)
   (org-log-done 'time)

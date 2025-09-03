@@ -4,7 +4,7 @@ return {
 	-- optional for icon support
 	dependencies = { "echasnovski/mini.icons", "rktjmp/lush.nvim" },
 	config = function()
-		require("fzf-lua").setup({ "telescope" })
+		require("fzf-lua").setup({ "default" })
 
 		-- Keymaps
 		local wk = require("which-key")
