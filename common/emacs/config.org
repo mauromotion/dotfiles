@@ -148,7 +148,7 @@ Basic set up of Emacs' UI, removing the default toolbars, and setting up some sy
     (setopt use-short-answers t)
     (global-auto-revert-mode t)
     (delete-selection-mode 1) ; Delete selected text and replace it with typed text
-    (auto-save-visited-mode 1)
+    ;; (auto-save-visited-mode 1)
 
     ;;;; Smooth scrolling
     (pixel-scroll-precision-mode 1)
@@ -663,6 +663,7 @@ Keybindings with functions to be able to do things repeatedly like changing the 
 (defvar-keymap mmotion/help-map
   :doc "Help operations submenu."
   "c" #'describe-command
+  "e" #'info-emacs-manual
   "f" #'describe-function
   "k" #'describe-key
   "m" #'describe-mode
@@ -872,6 +873,7 @@ Keybindings with functions to be able to do things repeatedly like changing the 
 
   (which-key-add-keymap-based-replacements mmotion/help-map
     "c" "Describe command"
+    "e" "Emacs manual"
     "f" "Describe function"
     "m" "Describe mode"
     "k" "Describe key"
