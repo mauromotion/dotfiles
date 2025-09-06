@@ -139,7 +139,7 @@ All the temp and backup files that Emacs generates are put into "~/.cache/emacs"
 Basic set up of Emacs' UI, removing the default toolbars, and setting up some system preferences.
   #+begin_src emacs-lisp
     ;;; Essentials ------------------------------------------
-    (scroll-bar-mode -1)
+    (scroll-bar-mode 1)
     (tool-bar-mode -1)
     (tooltip-mode -1)
     (set-fringe-mode 10)
@@ -533,7 +533,7 @@ A modern alternative to undo-tree.
 
 #+end_src
 ** Which-key
-Display keybindings.
+Display keybindings while typing them.
    #+begin_src emacs-lisp
 ;;;; Which-key
 (use-package which-key
@@ -577,10 +577,10 @@ Display keybindings.
    #+end_src
 *** Circe IRC connection 
 #+begin_src elisp
- (defun circe-libera ()
-  "Connect to Libera Chat via Circe."
-  (interactive)
-  (circe "Libera Chat")) 
+(defun circe-libera ()
+ "Connect to Libera Chat via Circe."
+ (interactive)
+ (circe "Libera Chat")) 
 #+end_src
 ** Hydras
 Keybindings with functions to be able to do things repeatedly like changing the size of a window or text.
@@ -789,7 +789,7 @@ Keybindings with functions to be able to do things repeatedly like changing the 
   "v" #'split-window-horizontally
   "w" #'ace-window)
     #+end_src
-*** <space> Leader key keybindings
+*** [space] Leader key keybindings
     #+begin_src emacs-lisp
 ;;;; Define leader keymap
 (defvar-keymap mmotion/leader-map
@@ -1014,33 +1014,6 @@ Search and navigation commands.
           (when-let ((project (project-current)))
             (project-root project)))))
 
-;; (defun mmotion/minibuffer-backward-kill (arg)
-;;   "When minibuffer is completing a file name delete up to parent
-;; folder, otherwise delete a character backward"
-;;   (interactive "p")
-;;   (if minibuffer-completing-file-name
-;;       ;; Borrowed from https://github.com/raxod502/selectrum/issues/498#issuecomment-803283608
-;;       (if (string-match-p "/." (minibuffer-contents))
-;;           (zap-up-to-char (- arg) ?/)
-;;         (delete-minibuffer-contents))
-;;     (delete-backward-char arg)))
-
-(defun mmotion/minibuffer-backward-kill-alt (arg)
-  "When minibuffer is completing a file name, delete up to parent
-folder at word boundaries, otherwise delete a single character."
-  (interactive "p")
-  (if minibuffer-completing-file-name
-      (let ((contents (minibuffer-contents)))
-        (cond
-         ;; No slash in path or at word boundary - delete to parent folder
-         ((or (not (string-match-p "/." contents))
-              (looking-back "\\b" 1))
-          (if (string-match-p "/." contents)
-              (zap-up-to-char (- arg) ?/)
-            (delete-minibuffer-contents)))
-         ;; In middle of word - delete single character  
-         (t (delete-backward-char arg))))
-    (delete-backward-char arg)))
   #+end_src
 
 ** Vertico
@@ -1049,8 +1022,6 @@ Vertical completion UI.
 ;;;; Vertico
 (use-package vertico
   :demand t
-  :bind (:map minibuffer-local-map
-              ("<backspace>" . mmotion/minibuffer-backward-kill))
   :custom
   ;; (vertico-scroll-margin 0) ;; Different scroll margin
   ;; (vertico-count 20) ;; Show more candidates
@@ -1455,16 +1426,40 @@ RSS reader.
 	(setq rmh-elfeed-org-files (list "~/Notes/plain_orgfiles/orgfiles/elfeed.org")))
 
 ;; Better UI
-(use-package elfeed-goodies
-  :config
-  (elfeed-goodies/setup)
-  (setq elfeed-goodies/entry-pane-size 0.7))
+;; (use-package elfeed-goodies
+;;   :config
+;;   (elfeed-goodies/setup)
+;;   (setq elfeed-goodies/entry-pane-size 0.7))
 
 ;; Make sure articles use variable pitch font, and make it larger
 (add-hook 'elfeed-show-mode-hook 
           (lambda () 
             (variable-pitch-mode 1)
             (text-scale-set 0.6)))
+
+;; Better youtube integration
+(use-package mpv)
+
+(use-package elfeed-tube
+  :after elfeed
+  :demand t
+  :config
+  ;; (setq elfeed-tube-auto-save-p nil) ; default value
+  ;; (setq elfeed-tube-auto-fetch-p t)  ; default value
+  (elfeed-tube-setup)
+
+  :bind (:map elfeed-show-mode-map
+         ("F" . elfeed-tube-fetch)
+         ([remap save-buffer] . elfeed-tube-save)
+         :map elfeed-search-mode-map
+         ("F" . elfeed-tube-fetch)
+         ([remap save-buffer] . elfeed-tube-save)))
+
+(use-package elfeed-tube-mpv
+  :bind (:map elfeed-show-mode-map
+              ("C-c C-f" . elfeed-tube-mpv-follow-mode)
+              ("C-c C-w" . elfeed-tube-mpv-where)))
+
 #+end_src
 * Org-mode
 ** Org-mode base settings
@@ -1472,6 +1467,7 @@ RSS reader.
 ;;; Org-mode -----------------------------------------
 ;;;; Org-mode base settings
 (defun mmotion/org-mode-setup ()
+  "Set up org-mode base settings"
   (org-indent-mode 1)
   (variable-pitch-mode 1)
   (visual-line-mode 1)
@@ -1518,11 +1514,11 @@ RSS reader.
     (org-level-8        :family variable-pitch :weight bold :height 1.1)))
 
 (defun mmotion/set-heading-fonts ()
+  "Set up the various pitch sizes for each heading"
   (dolist (heading mmotion-heading-config)
     (let ((face (car heading))
           (attrs (cdr heading)))
       (apply #'set-face-attribute face nil
-             ;; Replace 'variable-pitch with actual font family
              (plist-put attrs :family mmotion/variable-font)))))
 
 ;;:: Add hook to reapply font settings after theme changes
@@ -1812,6 +1808,7 @@ Typewriter-like look of the page (centring).
          (nov-mode . olivetti-mode)      ; enable in nov epub reader
          (elfeed-show-mode . olivetti-mode) ; enable in elfeed
          ;; (ibuffer-mode . olivetti-mode)  ; enable in ibuffer
+         (circe-channel-mode . olivetti-mode) ; enable in IRC
          (org-mode    . olivetti-mode))  ; enable in Org
   :custom
   (olivetti-body-width 100)           ; set body width
@@ -2243,8 +2240,8 @@ Customise ibuffer's look with categories and icons.
   (add-to-list 'emmet-jsx-major-modes 'js-ts-mode)
   (add-to-list 'emmet-jsx-major-modes 'astro-ts-mode)
   
-;; Add emmet to completion-at-point functions
   (defun mmotion/setup-emmet-completion ()
+  "Add emmet to completion-at-point functions"
     (add-to-list 'completion-at-point-functions 'emmet-completion-at-point-function))
   
   (add-hook 'astro-ts-mode-hook #'mmotion/setup-emmet-completion)
@@ -2255,7 +2252,8 @@ Customise ibuffer's look with categories and icons.
    #+begin_src emacs-lisp
 ;;; LSP mode ---------------------------------------------------
 ;;;; Breadcrumb
-(defun mmotion/lsp-mode-setup ()
+(defun mmotion/setup-lsp-breadcrumb ()
+  "Set up the LSP breadcrumb segments"
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
   (lsp-headerline-breadcrumb-mode))
 
@@ -2265,7 +2263,7 @@ Customise ibuffer's look with categories and icons.
   (setq lsp-keymap-prefix "C-c l")
   :bind-keymap
   ("C-c l" . lsp-command-map)
-  :hook ((lsp-mode . mmotion/lsp-mode-setup)
+  :hook ((lsp-mode . mmotion/setup-lsp-breadcrumb)
          ((css-mode
            html-mode
            js-mode

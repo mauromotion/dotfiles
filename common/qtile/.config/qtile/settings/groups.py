@@ -13,7 +13,7 @@ from .keys import keys, mod, terminal
 from .icons import abbrev, dots, font_awesome, mixed_geo, moons, numbers, text
 
 # Choose the icons set to use
-icons = moons
+icons = text
 
 # Groups (workspaces)
 groups = [
