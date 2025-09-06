@@ -767,9 +767,10 @@ Keybindings with functions to be able to do things repeatedly like changing the 
   "a" #'org-agenda
   "c" #'org-capture
   "d" #'org-deadline
+  "h" #'org-next-link
   "i" #'mmotion/org-insert-image-from-url
-  "l" #'org-insert-link
-  "L" #'org-store-link
+  "l" #'org-previous-link
+  "L" #'org-insert-link
   "r" #'org-refile
   "n" #'org-narrow-to-subtree
   "p" #'org-refile-copy
@@ -958,8 +959,10 @@ Keybindings with functions to be able to do things repeatedly like changing the 
     "a" "Org Agenda"
     "c" "Org Capture"
     "d" "Add a Deadline"
+    "h" "Go to next link"
     "i" "Insert image from URL"
-    "l" "Org Store Link"
+    "l" "Go to previous link"
+    "L" "Insert link"
     "r" "Org Refile"
     "n" "Narrow to subtree"
     "p" "Org Refile Copy"
