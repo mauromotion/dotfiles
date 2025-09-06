@@ -1417,7 +1417,13 @@ Open PDF files in Emacs.
 *** Elfeed
 RSS reader.
 #+begin_src elisp :lexical no
-(use-package elfeed)
+(use-package elfeed
+  :config
+  (define-key elfeed-search-mode-map (kbd "C-<return>")
+    (lambda ()
+      (interactive)
+      (let ((elfeed-show-entry-switch 'switch-to-buffer-other-window))
+        (call-interactively 'elfeed-search-show-entry)))))
 
 ;; Org integration for feed management
 (use-package elfeed-org
@@ -1457,8 +1463,14 @@ RSS reader.
 
 (use-package elfeed-tube-mpv
   :bind (:map elfeed-show-mode-map
+              ("C-c C-m" . elfeed-tube-mpv)
               ("C-c C-f" . elfeed-tube-mpv-follow-mode)
               ("C-c C-w" . elfeed-tube-mpv-where)))
+
+  ;; Launch mpv with "g m" from a YouTube feed
+  (with-eval-after-load 'evil-collection-elfeed
+    (evil-define-key 'normal elfeed-show-mode-map (kbd "g m") 'elfeed-tube-mpv)
+    (evil-define-key 'normal elfeed-search-mode-map (kbd "g m") 'elfeed-tube-mpv))
 
 #+end_src
 * Org-mode
