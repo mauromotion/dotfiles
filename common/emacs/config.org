@@ -1425,6 +1425,10 @@ RSS reader.
       (let ((elfeed-show-entry-switch 'switch-to-buffer-other-window))
         (call-interactively 'elfeed-search-show-entry)))))
 
+;; Binding elfeed-update to "g u"
+(with-eval-after-load 'evil-collection-elfeed
+  (evil-define-key 'normal elfeed-search-mode-map (kbd "g u") 'elfeed-update))
+
 ;; Org integration for feed management
 (use-package elfeed-org
 	:config
