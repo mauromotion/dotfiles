@@ -25,6 +25,7 @@
   - [[#colorful-mode][Colorful mode]]
   - [[#rainbow-delimiters][Rainbow delimiters]]
   - [[#helpful][Helpful]]
+  - [[#spacious-padding][Spacious padding]]
 - [[#evil-mode][Evil-mode]]
   - [[#main-setup][Main setup]]
   - [[#evil-collection][Evil-collection]]
@@ -139,7 +140,7 @@ All the temp and backup files that Emacs generates are put into "~/.cache/emacs"
 Basic set up of Emacs' UI, removing the default toolbars, and setting up some system preferences.
   #+begin_src emacs-lisp
     ;;; Essentials ------------------------------------------
-    (scroll-bar-mode 1)
+    (scroll-bar-mode -1)
     (tool-bar-mode -1)
     (tooltip-mode -1)
     (set-fringe-mode 10)
@@ -438,6 +439,33 @@ Better front end for Emacs' documentation
 
     ;; remap apropos to Consult’s version
     ([remap apropos-command]   . consult-apropos)))
+#+end_src
+** Spacious padding
+#+begin_src elisp :lexical no
+(use-package spacious-padding
+  :config
+  ;; These are the default values, but I keep them here for visibility.
+  (setq spacious-padding-widths
+        '( :internal-border-width 20
+           :header-line-width 1
+           :mode-line-width 3
+           :tab-width 2
+           :right-divider-width 30
+           :scroll-bar-width 8
+           :fringe-width 8))
+  
+  ;; Read the doc string of `spacious-padding-subtle-mode-line' as it
+  ;; is very flexible and provides several examples.
+  ;; (setq spacious-padding-subtle-mode-line
+  ;;       '(:mode-line-active error :mode-line-inactive shadow))
+  ;; (setq spacious-padding-subtle-frame-lines
+  ;;       `( :mode-line-active 'default
+  ;;          :mode-line-inactive vertical-border))
+  
+  (spacious-padding-mode 1)
+  
+  ;; Set a key binding if you need to toggle spacious padding.
+  (define-key global-map (kbd "<f8>") #'spacious-padding-mode))
 #+end_src
 * Evil-mode
 Vim-like modal editing.
@@ -770,7 +798,7 @@ Keybindings with functions to be able to do things repeatedly like changing the 
   "l" #'mmotion/cycle-line-numbers
   "n" #'tab-new
   "o" #'hydra-olivetti-margins/body
-  ;; "p" #'dired-preview-mode
+  "p" #'spacious-padding-mode
   "t" #'consult-theme
   "r" #'tab-rename
   "s" #'hydra-text-scale/body
@@ -954,7 +982,7 @@ Keybindings with functions to be able to do things repeatedly like changing the 
     "l" "Toggle line numbers"
     "n" "Create a new tab"
     "o" "Resize Olivetti margins"
-    ;; "p" "Dired Preview"
+    "p" "Toggle Spacious-padding"
     "r" "Rename current tab"
     "s" "Scale Text"
     "t" "Choose Theme"
@@ -2017,6 +2045,12 @@ Typewriter-like look of the page (centring).
 
 (with-eval-after-load 'dired
   (require 'dired-x))
+
+;; Header line customisation
+(add-hook 'dired-mode-hook
+          (lambda ()
+            (setq header-line-format
+                  '(:eval (concat "📁 " default-directory)))))
    #+end_src
 *** Nerd-icons for Dired
    #+begin_src emacs-lisp
