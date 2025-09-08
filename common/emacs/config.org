@@ -25,6 +25,7 @@
   - [[#colorful-mode][Colorful mode]]
   - [[#rainbow-delimiters][Rainbow delimiters]]
   - [[#helpful][Helpful]]
+  - [[#spacious-padding][Spacious padding]]
 - [[#evil-mode][Evil-mode]]
   - [[#main-setup][Main setup]]
   - [[#evil-collection][Evil-collection]]
@@ -148,6 +149,7 @@ Basic set up of Emacs' UI, removing the default toolbars, and setting up some sy
     (setopt use-short-answers t)
     (global-auto-revert-mode t)
     (delete-selection-mode 1) ; Delete selected text and replace it with typed text
+    ;; (auto-save-visited-mode 1)
 
     ;;;; Smooth scrolling
     (pixel-scroll-precision-mode 1)
@@ -306,8 +308,8 @@ Set dark or light theme based on the time of the day.
 (use-package circadian
   :ensure t
   :config
-  (setq circadian-themes '((:sunrise . doom-flatwhite)
-                           (:sunset  . doom-one)))
+  (setq circadian-themes '((:sunrise . doric-beach)
+                           (:sunset  . doric-valley)))
   (circadian-setup))
 #+end_src
 ** Nerd-icons
@@ -438,6 +440,34 @@ Better front end for Emacs' documentation
     ;; remap apropos to Consult’s version
     ([remap apropos-command]   . consult-apropos)))
 #+end_src
+** Spacious padding
+Control padding of Emacs' various elements.
+#+begin_src elisp :lexical no
+(use-package spacious-padding
+  :config
+  ;; These are the default values, but I keep them here for visibility.
+  (setq spacious-padding-widths
+        '( :internal-border-width 20
+           :header-line-width 1
+           :mode-line-width 3
+           :tab-width 2
+           :right-divider-width 30
+           :scroll-bar-width 8
+           :fringe-width 8))
+  
+  ;; Read the doc string of `spacious-padding-subtle-mode-line' as it
+  ;; is very flexible and provides several examples.
+  ;; (setq spacious-padding-subtle-mode-line
+  ;;       '(:mode-line-active error :mode-line-inactive shadow))
+  ;; (setq spacious-padding-subtle-frame-lines
+  ;;       `( :mode-line-active 'default
+  ;;          :mode-line-inactive vertical-border))
+  
+  (spacious-padding-mode 1)
+  
+  ;; Set a key binding if you need to toggle spacious padding.
+  (define-key global-map (kbd "<f8>") #'spacious-padding-mode))
+#+end_src
 * Evil-mode
 Vim-like modal editing.
 ** Main setup
@@ -532,7 +562,7 @@ A modern alternative to undo-tree.
 
 #+end_src
 ** Which-key
-Display keybindings.
+Display keybindings while typing them.
    #+begin_src emacs-lisp
 ;;;; Which-key
 (use-package which-key
@@ -576,10 +606,10 @@ Display keybindings.
    #+end_src
 *** Circe IRC connection 
 #+begin_src elisp
- (defun circe-libera ()
-  "Connect to Libera Chat via Circe."
-  (interactive)
-  (circe "Libera Chat")) 
+(defun circe-libera ()
+ "Connect to Libera Chat via Circe."
+ (interactive)
+ (circe "Libera Chat")) 
 #+end_src
 ** Hydras
 Keybindings with functions to be able to do things repeatedly like changing the size of a window or text.
@@ -662,6 +692,7 @@ Keybindings with functions to be able to do things repeatedly like changing the 
 (defvar-keymap mmotion/help-map
   :doc "Help operations submenu."
   "c" #'describe-command
+  "e" #'info-emacs-manual
   "f" #'describe-function
   "k" #'describe-key
   "m" #'describe-mode
@@ -737,14 +768,17 @@ Keybindings with functions to be able to do things repeatedly like changing the 
   "a" #'org-agenda
   "c" #'org-capture
   "d" #'org-deadline
+  "h" #'org-next-link
   "i" #'mmotion/org-insert-image-from-url
-  "l" #'org-insert-link
-  "L" #'org-store-link
+  "l" #'org-previous-link
+  "L" #'org-insert-link
   "r" #'org-refile
+  "n" #'org-narrow-to-subtree
   "p" #'org-refile-copy
   "s" #'org-schedule
   "u" #'org-update-all-dblocks
-  "v" #'visible-mode)
+  "v" #'visible-mode
+  "w" #'widen)
     #+end_src
 *** [P] Project keybindings
 #+begin_src emacs-lisp
@@ -766,10 +800,11 @@ Keybindings with functions to be able to do things repeatedly like changing the 
   "l" #'mmotion/cycle-line-numbers
   "n" #'tab-new
   "o" #'hydra-olivetti-margins/body
-  ;; "p" #'dired-preview-mode
+  "p" #'spacious-padding-mode
   "t" #'consult-theme
   "r" #'tab-rename
-  "s" #'hydra-text-scale/body)
+  "s" #'hydra-text-scale/body
+  "v" #'variable-pitch-mode)
     #+end_src
 *** [W] Windows keybindings
     #+begin_src emacs-lisp
@@ -784,7 +819,7 @@ Keybindings with functions to be able to do things repeatedly like changing the 
   "v" #'split-window-horizontally
   "w" #'ace-window)
     #+end_src
-*** <space> Leader key keybindings
+*** [space] Leader key keybindings
     #+begin_src emacs-lisp
 ;;;; Define leader keymap
 (defvar-keymap mmotion/leader-map
@@ -868,6 +903,7 @@ Keybindings with functions to be able to do things repeatedly like changing the 
 
   (which-key-add-keymap-based-replacements mmotion/help-map
     "c" "Describe command"
+    "e" "Emacs manual"
     "f" "Describe function"
     "m" "Describe mode"
     "k" "Describe key"
@@ -924,13 +960,17 @@ Keybindings with functions to be able to do things repeatedly like changing the 
     "a" "Org Agenda"
     "c" "Org Capture"
     "d" "Add a Deadline"
+    "h" "Go to next link"
     "i" "Insert image from URL"
-    "l" "Org Store Link"
+    "l" "Go to previous link"
+    "L" "Insert link"
     "r" "Org Refile"
+    "n" "Narrow to subtree"
     "p" "Org Refile Copy"
     "s" "Add a Schedule"
     "u" "Update a dblock"
-    "v" "Toggle concealing")
+    "v" "Toggle concealing"
+    "w" "Widen (undo narrowing)")
 
  (which-key-add-keymap-based-replacements mmotion/project-map
     "b" "Project's buffers"
@@ -946,10 +986,11 @@ Keybindings with functions to be able to do things repeatedly like changing the 
     "l" "Toggle line numbers"
     "n" "Create a new tab"
     "o" "Resize Olivetti margins"
-    ;; "p" "Dired Preview"
+    "p" "Toggle Spacious-padding"
     "r" "Rename current tab"
     "s" "Scale Text"
-    "t" "Choose Theme")
+    "t" "Choose Theme"
+    "v" "Variable pitch mode toggle")
 
   (which-key-add-keymap-based-replacements mmotion/window-map
     "b" "Reset windows"
@@ -1005,16 +1046,6 @@ Search and navigation commands.
           (when-let ((project (project-current)))
             (project-root project)))))
 
-(defun mmotion/minibuffer-backward-kill (arg)
-  "When minibuffer is completing a file name delete up to parent
-folder, otherwise delete a character backward"
-  (interactive "p")
-  (if minibuffer-completing-file-name
-      ;; Borrowed from https://github.com/raxod502/selectrum/issues/498#issuecomment-803283608
-      (if (string-match-p "/." (minibuffer-contents))
-          (zap-up-to-char (- arg) ?/)
-        (delete-minibuffer-contents))
-    (delete-backward-char arg)))
   #+end_src
 
 ** Vertico
@@ -1023,8 +1054,6 @@ Vertical completion UI.
 ;;;; Vertico
 (use-package vertico
   :demand t
-  :bind (:map minibuffer-local-map
-              ("<backspace>" . mmotion/minibuffer-backward-kill))
   :custom
   ;; (vertico-scroll-margin 0) ;; Different scroll margin
   ;; (vertico-count 20) ;; Show more candidates
@@ -1324,6 +1353,7 @@ IRC chat client.
 (use-package circe
   :commands (circe)
   :config
+  (setq circe-reduce-lurker-spam t) 
   (setq circe-network-options
         '(("Libera Chat"
            :tls t
@@ -1419,14 +1449,81 @@ Open PDF files in Emacs.
 *** Elfeed
 RSS reader.
 #+begin_src elisp :lexical no
-(use-package elfeed)
+(use-package elfeed
+  :config
+  (setq elfeed-search-face-alist
+      '((elfeed-search-unread-title-face)
+        (unread (:weight bold))
+        (youtube (:foreground "firebrick"))
+        (blog (:foreground "forest green"))
+        (gaming (:foreground "dark goldenrod"))
+        (tech (:foreground "steel blue"))
+        (emacs (:foreground "medium orchid"))))
+  (define-key elfeed-search-mode-map (kbd "C-<return>")
+    (lambda ()
+      (interactive)
+      (let ((elfeed-show-entry-switch 'switch-to-buffer-other-window))
+        (call-interactively 'elfeed-search-show-entry)))))
+
+;; Toggle "star" on an entry
+(defun elfeed-toggle-star ()
+  "Toggle the 'star' tag on the current Elfeed entry."
+  (interactive)
+  (elfeed-search-toggle-all 'star))
+
+(evil-define-key 'normal elfeed-search-mode-map (kbd "t s") 'elfeed-toggle-star)
+
+;; Binding elfeed-update to "g u"
+(with-eval-after-load 'evil-collection-elfeed
+  (evil-define-key 'normal elfeed-search-mode-map (kbd "g U") 'elfeed-update))
+
+;; Org integration for feed management
+(use-package elfeed-org
+	:config
+	(elfeed-org)
+	(setq rmh-elfeed-org-files (list "~/Notes/plain_orgfiles/orgfiles/elfeed.org")))
 
 ;; Better UI
-(use-package elfeed-goodies
-  :ensure t
+;; (use-package elfeed-goodies
+;;   :config
+;;   (elfeed-goodies/setup)
+;;   (setq elfeed-goodies/entry-pane-size 0.7))
+
+;; Make sure articles use variable pitch font, and make it larger
+(add-hook 'elfeed-show-mode-hook 
+          (lambda () 
+            (variable-pitch-mode 1)
+            (text-scale-set 0.6)))
+
+;; Better youtube integration
+(use-package mpv)
+
+(use-package elfeed-tube
+  :after elfeed
+  :demand t
   :config
-  (elfeed-goodies/setup)
-  (setq elfeed-goodies/entry-pane-size 0.5))
+  ;; (setq elfeed-tube-auto-save-p nil) ; default value
+  ;; (setq elfeed-tube-auto-fetch-p t)  ; default value
+  (elfeed-tube-setup)
+
+  :bind (:map elfeed-show-mode-map
+         ("F" . elfeed-tube-fetch)
+         ([remap save-buffer] . elfeed-tube-save)
+         :map elfeed-search-mode-map
+         ("F" . elfeed-tube-fetch)
+         ([remap save-buffer] . elfeed-tube-save)))
+
+(use-package elfeed-tube-mpv
+  :bind (:map elfeed-show-mode-map
+              ("C-c C-m" . elfeed-tube-mpv)
+              ("C-c C-f" . elfeed-tube-mpv-follow-mode)
+              ("C-c C-w" . elfeed-tube-mpv-where)))
+
+  ;; Launch mpv with "g m" from a YouTube feed
+  (with-eval-after-load 'evil-collection-elfeed
+    (evil-define-key 'normal elfeed-show-mode-map (kbd "g m") 'elfeed-tube-mpv)
+    (evil-define-key 'normal elfeed-search-mode-map (kbd "g m") 'elfeed-tube-mpv))
+
 #+end_src
 * Org-mode
 ** Org-mode base settings
@@ -1434,6 +1531,7 @@ RSS reader.
 ;;; Org-mode -----------------------------------------
 ;;;; Org-mode base settings
 (defun mmotion/org-mode-setup ()
+  "Set up org-mode base settings"
   (org-indent-mode 1)
   (variable-pitch-mode 1)
   (visual-line-mode 1)
@@ -1480,11 +1578,11 @@ RSS reader.
     (org-level-8        :family variable-pitch :weight bold :height 1.1)))
 
 (defun mmotion/set-heading-fonts ()
+  "Set up the various pitch sizes for each heading"
   (dolist (heading mmotion-heading-config)
     (let ((face (car heading))
           (attrs (cdr heading)))
       (apply #'set-face-attribute face nil
-             ;; Replace 'variable-pitch with actual font family
              (plist-put attrs :family mmotion/variable-font)))))
 
 ;;:: Add hook to reapply font settings after theme changes
@@ -1522,7 +1620,8 @@ RSS reader.
    '(org-indent            ((t (:inherit (org-hide fixed-pitch))))))
 
   :custom
-  (org-ellipsis " ▾")
+  ;; (org-ellipsis " ▾")
+  (org-ellipsis " …")
   (org-hide-emphasis-markers t)
   (org-agenda-start-with-log-mode t)
   (org-log-done 'time)
@@ -1773,13 +1872,17 @@ Typewriter-like look of the page (centring).
          (nov-mode . olivetti-mode)      ; enable in nov epub reader
          (elfeed-show-mode . olivetti-mode) ; enable in elfeed
          ;; (ibuffer-mode . olivetti-mode)  ; enable in ibuffer
+         (circe-channel-mode . olivetti-mode) ; enable in IRC
          (org-mode    . olivetti-mode))  ; enable in Org
   :custom
   (olivetti-body-width 100)           ; set body width
   (olivetti-style 'fancy)          ; use fringes for margins
   :config
   ;; Disable olivetti in astro-ts-mode
-  (add-hook 'astro-ts-mode-hook (lambda () (olivetti-mode -1))))
+  (add-hook 'astro-ts-mode-hook (lambda () (olivetti-mode -1)))
+  ;; Custom width for elfeed articles
+  (add-hook 'elfeed-show-mode-hook (lambda () (olivetti-set-width 80))))
+
 #+end_src
 *** Toggle TODOs and checkboxes with RET
 #+begin_src emacs-lisp
@@ -1962,6 +2065,12 @@ Typewriter-like look of the page (centring).
 
 (with-eval-after-load 'dired
   (require 'dired-x))
+
+;; Header line customisation
+(add-hook 'dired-mode-hook
+          (lambda ()
+            (setq header-line-format
+                  '(:eval (concat "📁 " default-directory)))))
    #+end_src
 *** Nerd-icons for Dired
    #+begin_src emacs-lisp
@@ -2143,7 +2252,15 @@ Customise ibuffer's look with categories and icons.
 #+begin_src emacs-lisp
 ;;; Magit ----------------------------------------------------
 (use-package magit
-  :commands magit-status)
+  :commands magit-status
+  :config
+    (setq magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+
+;; Show changes in fringe
+(use-package git-gutter
+  :hook (prog-mode . git-gutter-mode)
+  :config
+  (setq git-gutter:update-interval 0.02))
 #+end_src
 ** Tree-sitter
   #+begin_src emacs-lisp
@@ -2193,8 +2310,8 @@ Customise ibuffer's look with categories and icons.
   (add-to-list 'emmet-jsx-major-modes 'js-ts-mode)
   (add-to-list 'emmet-jsx-major-modes 'astro-ts-mode)
   
-;; Add emmet to completion-at-point functions
   (defun mmotion/setup-emmet-completion ()
+  "Add emmet to completion-at-point functions"
     (add-to-list 'completion-at-point-functions 'emmet-completion-at-point-function))
   
   (add-hook 'astro-ts-mode-hook #'mmotion/setup-emmet-completion)
@@ -2205,7 +2322,8 @@ Customise ibuffer's look with categories and icons.
    #+begin_src emacs-lisp
 ;;; LSP mode ---------------------------------------------------
 ;;;; Breadcrumb
-(defun mmotion/lsp-mode-setup ()
+(defun mmotion/setup-lsp-breadcrumb ()
+  "Set up the LSP breadcrumb segments"
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
   (lsp-headerline-breadcrumb-mode))
 
@@ -2215,7 +2333,7 @@ Customise ibuffer's look with categories and icons.
   (setq lsp-keymap-prefix "C-c l")
   :bind-keymap
   ("C-c l" . lsp-command-map)
-  :hook ((lsp-mode . mmotion/lsp-mode-setup)
+  :hook ((lsp-mode . mmotion/setup-lsp-breadcrumb)
          ((css-mode
            html-mode
            js-mode

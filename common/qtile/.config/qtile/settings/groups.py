@@ -13,7 +13,7 @@ from .keys import keys, mod, terminal
 from .icons import abbrev, dots, font_awesome, mixed_geo, moons, numbers, text
 
 # Choose the icons set to use
-icons = numbers
+icons = text
 
 # Groups (workspaces)
 groups = [
@@ -64,13 +64,16 @@ for i in groups:
     )
 
 # Add a scratchpad terminal
+
+terminal_scratchpad = "alacritty --class scratchpad"
+
 groups.append(
     ScratchPad(
         "scratchpad",
         [
             DropDown(
                 "term",
-                terminal,
+                "alacritty --class scratchpad",
                 opacity=0.9,
                 width=0.8,
                 height=0.6,
