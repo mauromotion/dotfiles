@@ -441,6 +441,7 @@ Better front end for Emacs' documentation
     ([remap apropos-command]   . consult-apropos)))
 #+end_src
 ** Spacious padding
+Control padding of Emacs' various elements.
 #+begin_src elisp :lexical no
 (use-package spacious-padding
   :config
@@ -1450,15 +1451,31 @@ RSS reader.
 #+begin_src elisp :lexical no
 (use-package elfeed
   :config
+  (setq elfeed-search-face-alist
+      '((elfeed-search-unread-title-face)
+        (unread (:weight bold))
+        (youtube (:foreground "firebrick"))
+        (blog (:foreground "forest green"))
+        (gaming (:foreground "dark goldenrod"))
+        (tech (:foreground "steel blue"))
+        (emacs (:foreground "medium orchid"))))
   (define-key elfeed-search-mode-map (kbd "C-<return>")
     (lambda ()
       (interactive)
       (let ((elfeed-show-entry-switch 'switch-to-buffer-other-window))
         (call-interactively 'elfeed-search-show-entry)))))
 
+;; Toggle "star" on an entry
+(defun elfeed-toggle-star ()
+  "Toggle the 'star' tag on the current Elfeed entry."
+  (interactive)
+  (elfeed-search-toggle-all 'star))
+
+(evil-define-key 'normal elfeed-search-mode-map (kbd "t s") 'elfeed-toggle-star)
+
 ;; Binding elfeed-update to "g u"
 (with-eval-after-load 'evil-collection-elfeed
-  (evil-define-key 'normal elfeed-search-mode-map (kbd "g u") 'elfeed-update))
+  (evil-define-key 'normal elfeed-search-mode-map (kbd "g U") 'elfeed-update))
 
 ;; Org integration for feed management
 (use-package elfeed-org
