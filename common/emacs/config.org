@@ -61,6 +61,7 @@
   - [[#org-mode-custom-functions][Org-mode custom functions]]
   - [[#org-mode-config][Org-mode config]]
   - [[#org-mode-todo-keywords][Org-mode Todo Keywords]]
+  - [[#org-mode-file-types-associations][Org-mode file types associations]]
   - [[#org-mode-capture-templates][Org-mode Capture Templates]]
   - [[#evil-org][Evil-org]]
   - [[#toc-org][TOC-org]]
@@ -140,6 +141,7 @@ All the temp and backup files that Emacs generates are put into "~/.cache/emacs"
 Basic set up of Emacs' UI, removing the default toolbars, and setting up some system preferences.
   #+begin_src emacs-lisp
     ;;; Essentials ------------------------------------------
+    (server-start) ;; Start emacs in server mode
     (scroll-bar-mode -1)
     (tool-bar-mode -1)
     (tooltip-mode -1)
@@ -1621,7 +1623,7 @@ RSS reader.
 
   :custom
   ;; (org-ellipsis " ▾")
-  (org-ellipsis " …")
+  (org-ellipsis "…")
   (org-hide-emphasis-markers t)
   (org-agenda-start-with-log-mode t)
   (org-log-done 'time)
@@ -1646,6 +1648,11 @@ RSS reader.
    '((sequence "TODO(t)" "DOING(d)" "PROJ(p)" "|" "DONE(x!)")
      (sequence "WAIT(w@)" "HOLD(h!)" "IDEA(i)" "|" "COMPLETED(c!)" "CANCELLED(C!)" "KILLED(k!/@)"))))
    #+end_src
+** Org-mode file types associations
+#+begin_src elisp :lexical no
+  (add-to-list 'org-file-apps '("\\.mp4\\'" . "mpv %s"))
+  (add-to-list 'org-file-apps '("\\.mkv\\'" . "mpv %s"))
+#+end_src
 ** Org-mode Capture Templates
    #+begin_src emacs-lisp
 ;;;; Set up for job application's spreadsheet capture
@@ -1875,7 +1882,7 @@ Typewriter-like look of the page (centring).
          (circe-channel-mode . olivetti-mode) ; enable in IRC
          (org-mode    . olivetti-mode))  ; enable in Org
   :custom
-  (olivetti-body-width 100)           ; set body width
+  (olivetti-body-width 110)           ; set body width
   (olivetti-style 'fancy)          ; use fringes for margins
   :config
   ;; Disable olivetti in astro-ts-mode

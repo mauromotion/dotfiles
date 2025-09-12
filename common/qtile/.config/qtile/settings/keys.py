@@ -154,6 +154,13 @@ keys = [
     ),
     # Terminal
     Key([mod, "shift"], "Return", lazy.spawn(terminal), desc="Launch Terminal"),
+    # Emacs
+    Key(
+        [mod, "shift"],
+        "e",
+        lazy.spawn("emacsclient -c"),
+        desc="Launch Emacs client",
+    ),
     # Browser
     Key([mod], "b", lazy.spawn(browser), desc="Launch Browser"),
     # File Explorer
