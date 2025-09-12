@@ -158,7 +158,7 @@ keys = [
     Key(
         [mod, "shift"],
         "e",
-        lazy.spawn("emacsclient -c"),
+        lazy.spawn("emacsclient -c -e '(dashboard-open)'"),
         desc="Launch Emacs client",
     ),
     # Browser
