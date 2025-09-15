@@ -16,7 +16,7 @@ configuration{
 
 // @theme "/home/mauromotion/.config/rofi/poimandres.rasi"
 
-@theme "/home/mauromotion/.config/rofi/neutral.rasi"
+//@theme "/home/mauromotion/.config/rofi/neutral.rasi"
 
 //@theme "/usr/share/rofi/themes/gruvbox-light-soft.rasi"
 
@@ -27,3 +27,7 @@ configuration{
 // @theme "/usr/share/rofi/themes/Arc.rasi"
 
 // @theme "/usr/share/rofi/themes/Arc.rasi"
+
+//@theme "/home/mauromotion/.local/share/rofi/themes/rounded-nord-dark.rasi"
+
+@theme "/home/mauromotion/.local/share/rofi/themes/rounded-gray-dark.rasi"
