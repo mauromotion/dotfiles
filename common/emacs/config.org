@@ -311,7 +311,7 @@ Set dark or light theme based on the time of the day.
   :ensure t
   :config
   (setq circadian-themes '((:sunrise . doric-beach)
-                           (:sunset  . doom-opera)))
+                           (:sunset  . doric-valley)))
   (circadian-setup))
 #+end_src
 ** Nerd-icons
