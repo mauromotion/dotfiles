@@ -7,7 +7,7 @@
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    
   caps a    s    d    f    g    h    j    k    l    ;    '    ret
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft           up
+  lsft 102d    z    x    c    v    b    n    m    ,    .    /    rsft           up
   lctl lmet lalt           spc            ralt prnt rctl pgup left down rght pgdn
 )
 
@@ -52,9 +52,9 @@
 (deflayer base
   @esc-mod f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  @layout-switch home end  ins  del
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    f    ;    b    j    l    u    y    p    [    ]    
-  @caps-mod @a-mod @s-mod @d-mod @f-mod g    m    @j-mod @k-mod @l-mod @;-mod '    ret
-  lsft z    x    c    d    v    k    h    ,    .    /    rsft           up
+  tab  q    w    f    p    b    j    l    u    y    ;    [    ]    
+  @caps-mod @a-mod @s-mod @d-mod @f-mod g    m    @j-mod @k-mod @l-mod @;-mod '  ret
+  lsft z    x    c    d    v    102d    k    h    ,    .    /    rsft           up
   lctl lmet lalt           @spc-mod       ralt prnt rctl pgup left down rght pgdn
 )
 
@@ -63,8 +63,8 @@
   @esc-mod f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  @layout-switch home end  ins  del
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    
-  @caps-mod a    s    d    f    g    h    j    k    l    ;    '    ret
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft           up
+  @caps-mod a    s    d    f    g    h    j    k    l    ;    '   ret
+  lsft 102d    z    x    c    v    b    n    m    ,    .    /    rsft           up
   lctl lmet lalt           spc            ralt prnt rctl pgup left down rght pgdn
 )
 
@@ -74,6 +74,6 @@
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _    
   _    @a-arrow @s-arrow @d-arrow @f-arrow _    _    @j-arrow @k-arrow @l-arrow @;-arrow _    _
-  _    _    _    _    _    _    _    _    _    _    _    _              _
-  _    _    _    _              @spc-arrow         _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _              _
+  _       _    _              @spc-arrow         _    _    _    _    _    _    _    _
 )

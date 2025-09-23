@@ -61,7 +61,7 @@ elif [[ "$HOSTNAME" == "eva-03" ]]; then
   caffeine &
   clipit &
   dunst -b &
-  kanata -c ~/.config/kanata/kanata.kbd &
+  kanata -c ~/.config/kanata/kanata-full-colemak_dh.kbd &
   nextcloud --background &
   nitrogen --restore &
   nm-applet &
