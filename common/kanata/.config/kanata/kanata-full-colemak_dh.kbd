@@ -1,0 +1,89 @@
+(defcfg
+  process-unmapped-keys yes)
+
+;; Full keyboard layout - you'll need to expand this based on your actual keyboard
+(defsrc
+  esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+(defvar
+  tap-time 220
+  hold-time 220
+)
+
+;; Your existing home row mods adapted for Colemak-DH positions
+(defalias
+  ;; Left hand home row mods (Colemak-DH: a r s t)
+  a-mod (tap-hold $tap-time $hold-time a lmet)
+  r-mod (tap-hold $tap-time $hold-time r lalt) 
+  s-mod (tap-hold $tap-time $hold-time s lctl)
+  t-mod (tap-hold $tap-time $hold-time t lsft)
+  
+  ;; Right hand home row mods (Colemak-DH: n e i o)  
+  n-mod (tap-hold $tap-time $hold-time n rsft)
+  e-mod (tap-hold $tap-time $hold-time e rctl)
+  i-mod (tap-hold $tap-time $hold-time i ralt)
+  o-mod (tap-hold $tap-time $hold-time o rmet)
+  
+  ;; Space with arrow layer toggle
+  spc-mod (tap-hold $tap-time $hold-time spc (layer-toggle arrows))
+  
+  ;; Your custom mapping: physical p becomes ; in Colemak-DH
+  p-semicolon ;
+  
+  ;; Caps/Esc swap
+  caps-mod esc
+  esc-mod caps
+  
+  ;; Layer toggle key (you can bind this to any key you want)
+  layout-toggle (layer-toggle qwerty)
+)
+
+;; Arrow layer aliases adapted for Colemak-DH positions
+(defalias
+  ;; Left hand arrows (using same physical positions as your original)
+  a-arrow home    ;; a stays a
+  r-arrow pgup    ;; was s-arrow
+  s-arrow pgdn    ;; was d-arrow  
+  t-arrow end     ;; was f-arrow
+  
+  ;; Right hand arrows
+  n-arrow left    ;; was j-arrow
+  e-arrow down    ;; was k-arrow
+  i-arrow up      ;; was l-arrow
+  o-arrow right   ;; was ;-arrow
+  
+  ;; Other keys in arrow layer
+  spc-arrow _
+)
+
+;; QWERTY layer (passthrough - for when you want to temporarily use QWERTY)
+(deflayer qwerty
+  esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  @caps-mod a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt @layout-toggle rctl
+)
+
+;; Colemak-DH base layer with your home row mods and custom p→; mapping
+(deflayer base
+  @esc-mod  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    f    @p-semicolon  b    j    l    u    y    ;    [    ]    \
+  @caps-mod @a-mod @r-mod @s-mod @t-mod g    m    @n-mod @e-mod @i-mod @o-mod '    ret
+  lsft z    x    c    d    v    k    h    ,    .    /    rsft
+  lctl lmet lalt           @spc-mod       ralt @layout-toggle rctl
+)
+
+;; Arrow layer
+(deflayer arrows
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    @a-arrow @r-arrow @s-arrow @t-arrow _    _    @n-arrow @e-arrow @i-arrow @o-arrow _    _
+  _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _              @spc-arrow         _    _    _
+)

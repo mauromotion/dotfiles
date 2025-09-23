@@ -37,6 +37,7 @@ groups = [
     Group("7", label=icons[6], matches=[Match(wm_class="steam")], layout="floating"),
     Group("8", label=icons[7]),
     Group("9", label=icons[8]),
+    Group("0", label=icons[9]),
 ]
 
 for i in groups:
