@@ -1,13 +1,14 @@
 (defcfg
   process-unmapped-keys yes)
 
-;; Start with all keys your keyboard actually has
+;; Your actual ThinkPad X1 Carbon keyboard layout
 (defsrc
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  home end  ins  del
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    
   caps a    s    d    f    g    h    j    k    l    ;    '    ret
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl lmet lalt           spc            ralt rmet menu rctl
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft           up
+  lctl fn   lmet lalt           spc            ralt prnt rctl pgup left down rght pgdn
 )
 
 (defvar
@@ -16,66 +17,63 @@
 )
 
 (defalias
-  ;; Home row mods on QWERTY positions that will output Colemak-DH
-  a-mod (tap-hold $tap-time $hold-time a lmet)      ;; a→a 
-  s-mod (tap-hold $tap-time $hold-time r lalt)      ;; s→r
-  d-mod (tap-hold $tap-time $hold-time s lctl)      ;; d→s  
-  f-mod (tap-hold $tap-time $hold-time t lsft)      ;; f→t
-  j-mod (tap-hold $tap-time $hold-time n rsft)      ;; j→n
-  k-mod (tap-hold $tap-time $hold-time e rctl)      ;; k→e
-  l-mod (tap-hold $tap-time $hold-time i ralt)      ;; l→i
-  ;-mod (tap-hold $tap-time $hold-time o rmet)      ;; ;→o
+  ;; Your original home row mods adapted for Colemak-DH
+  a-mod (tap-hold $tap-time $hold-time a lmet)      ;; a stays a
+  s-mod (tap-hold $tap-time $hold-time r lalt)      ;; s becomes r in Colemak
+  d-mod (tap-hold $tap-time $hold-time s lctl)      ;; d becomes s in Colemak  
+  f-mod (tap-hold $tap-time $hold-time t lsft)      ;; f becomes t in Colemak
+  j-mod (tap-hold $tap-time $hold-time n rsft)      ;; j becomes n in Colemak
+  k-mod (tap-hold $tap-time $hold-time e rctl)      ;; k becomes e in Colemak
+  l-mod (tap-hold $tap-time $hold-time i ralt)      ;; l becomes i in Colemak  
+  ;-mod (tap-hold $tap-time $hold-time o rmet)      ;; ; becomes o in Colemak
   
-  ;; Space with arrow layer
   spc-mod (tap-hold $tap-time $hold-time spc (layer-toggle arrows))
-  
-  ;; Your custom p→; mapping
-  p-custom ;
-  
-  ;; Caps/Esc swap
   caps-mod esc
   esc-mod caps
   
-  ;; Layer switching
-  colemak-toggle (layer-toggle colemak)
+  ;; Use F12 to toggle between layouts
+  layout-switch (layer-toggle qwerty)
 )
 
-;; Arrow aliases using same physical positions as before
 (defalias
-  a-arrow home    ;; a key 
-  s-arrow pgup    ;; s key
-  d-arrow pgdn    ;; d key  
-  f-arrow end     ;; f key
-  j-arrow left    ;; j key
-  k-arrow down    ;; k key
-  l-arrow up      ;; l key
-  ;-arrow right   ;; ; key
+  ;; Arrow layer using same physical positions as your original config
+  a-arrow home
+  s-arrow pgup  
+  d-arrow pgdn
+  f-arrow end
+  j-arrow left
+  k-arrow down
+  l-arrow up
+  ;-arrow right
   spc-arrow _
 )
 
-;; Base layer - pure QWERTY passthrough
+;; Base layer: Colemak-DH with your custom p→; mapping
 (deflayer base
+  @esc-mod f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  @layout-switch home end  ins  del
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    f    ;    b    j    l    u    y    p    [    ]    
+  @caps-mod @a-mod @s-mod @d-mod @f-mod g    m    @j-mod @k-mod @l-mod @;-mod '    ret
+  lsft z    x    c    d    v    k    h    ,    .    /    rsft           up
+  lctl fn   lmet lalt           @spc-mod       ralt prnt rctl pgup left down rght pgdn
+)
+
+;; QWERTY layer for when you need standard layout
+(deflayer qwerty  
+  @esc-mod f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  @layout-switch home end  ins  del
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    
-  @caps-mod @a-mod @s-mod @d-mod @f-mod g    h    @j-mod @k-mod @l-mod @;-mod '    ret
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl lmet lalt           @spc-mod       ralt @colemak-toggle menu rctl
+  @caps-mod a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft           up
+  lctl fn   lmet lalt           spc            ralt prnt rctl pgup left down rght pgdn
 )
 
-;; Colemak-DH layer
-(deflayer colemak  
-  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    f    @p-custom b    j    l    u    y    ;    [    ]    
-  @caps-mod @a-mod @s-mod @d-mod @f-mod g    m    @j-mod @k-mod @l-mod @;-mod '    ret
-  lsft z    x    c    d    v    k    h    ,    .    /    rsft
-  lctl lmet lalt           @spc-mod       ralt @colemak-toggle menu rctl
-)
-
-;; Arrow layer - works on both base and colemak
+;; Arrow layer
 (deflayer arrows
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _    
   _    @a-arrow @s-arrow @d-arrow @f-arrow _    _    @j-arrow @k-arrow @l-arrow @;-arrow _    _
-  _    _    _    _    _    _    _    _    _    _    _    _
-  _    _    _              @spc-arrow         _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _              _
+  _    _    _    _              @spc-arrow         _    _    _    _    _    _    _    _
 )
