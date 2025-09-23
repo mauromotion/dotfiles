@@ -8,7 +8,7 @@
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    
   caps a    s    d    f    g    h    j    k    l    ;    '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft           up
-  lctl fn   lmet lalt           spc            ralt prnt rctl pgup left down rght pgdn
+  lctl lmet lalt           spc            ralt prnt rctl pgup left down rght pgdn
 )
 
 (defvar
@@ -55,7 +55,7 @@
   tab  q    w    f    ;    b    j    l    u    y    p    [    ]    
   @caps-mod @a-mod @s-mod @d-mod @f-mod g    m    @j-mod @k-mod @l-mod @;-mod '    ret
   lsft z    x    c    d    v    k    h    ,    .    /    rsft           up
-  lctl fn   lmet lalt           @spc-mod       ralt prnt rctl pgup left down rght pgdn
+  lctl lmet lalt           @spc-mod       ralt prnt rctl pgup left down rght pgdn
 )
 
 ;; QWERTY layer for when you need standard layout
@@ -65,7 +65,7 @@
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    
   @caps-mod a    s    d    f    g    h    j    k    l    ;    '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft           up
-  lctl fn   lmet lalt           spc            ralt prnt rctl pgup left down rght pgdn
+  lctl lmet lalt           spc            ralt prnt rctl pgup left down rght pgdn
 )
 
 ;; Arrow layer
