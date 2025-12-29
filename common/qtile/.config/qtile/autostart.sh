@@ -45,7 +45,7 @@ if [[ "$HOSTNAME" == "eva-01" ]]; then
   nm-applet &
   openrgb --startminimized &
   picom -b &
-  syncthingtray &
+  syncthingtray-qt6 &
   udiskie -a -n -t &
   xbindkeys &
   xidlehook --not-when-fullscreen --timer 600 "betterlockscreen -l dimblur" "" --timer 3600 "systemctl suspend" "" &
@@ -66,7 +66,7 @@ elif [[ "$HOSTNAME" == "eva-03" ]]; then
   nitrogen --restore &
   nm-applet &
   picom -b &
-  syncthingtray &
+  syncthingtray-qt6 &
   udiskie -a -n -t &
   xbindkeys &
   xidlehook --not-when-fullscreen --timer 600 "betterlockscreen -l dimblur" "" --timer 3600 "systemctl suspend" "" &

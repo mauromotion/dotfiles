@@ -25,6 +25,8 @@ set fish_greeting
 #     echo
 # end
 
+# Enable fzf keybindings
+fzf --fish | source
 
 ## Aliases & abbreviations
 abbr --add bash env -i HOME=$HOME PATH=\"/usr/bin:$(echo $PATH)\" TERM=$TERM /usr/bin/bash --noprofile --norc

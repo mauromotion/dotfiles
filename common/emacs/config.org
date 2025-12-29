@@ -310,8 +310,8 @@ Set dark or light theme based on the time of the day.
 (use-package circadian
   :ensure t
   :config
-  (setq circadian-themes '((:sunrise . doric-beach)
-                           (:sunset  . doric-valley)))
+  (setq circadian-themes '((:sunrise . ef-kassio)
+                           (:sunset  . ef-owl)))
   (circadian-setup))
 #+end_src
 ** Nerd-icons
@@ -344,14 +344,15 @@ I'd rather use =nerd-icons= than =all-the-icons=, much more reliable.
   :config
   (setq doom-modeline-height 25
         doom-modeline-bar-width 5
+        nerd-icons-scale-factor 1.1
         doom-modeline-window-width-limit 85
         doom-modeline-persp-name t
         doom-modeline-persp-icon t
         doom-modeline-buffer-modification-icon t
         doom-modeline-icon t))
 (with-eval-after-load 'doom-modeline
-    (set-face-attribute 'mode-line nil :font "BlexMono Nerd Font-12")
-    (set-face-attribute 'mode-line-inactive nil :font "BlexMono Nerd Font-12"))
+    (set-face-attribute 'mode-line nil :font "NotoSansM Nerd Font-12")
+    (set-face-attribute 'mode-line-inactive nil :font "NotoSansM Nerd Font-12"))
    #+end_src
 *** Mood-line
 #+begin_src emacs-lisp :tangle yes
@@ -970,7 +971,7 @@ Keybindings with functions to be able to do things repeatedly like changing the 
     "n" "Narrow to subtree"
     "p" "Org Refile Copy"
     "s" "Add a Schedule"
-    "u" "Update a dblock"
+    "u" "Update all dblocks"
     "v" "Toggle concealing"
     "w" "Widen (undo narrowing)")
 
