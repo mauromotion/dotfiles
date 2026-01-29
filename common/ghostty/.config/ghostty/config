@@ -1,8 +1,7 @@
-theme = zenwritten_light
+theme = "Doom One"
 background-opacity = 0.95
 window-decoration = false
 gtk-titlebar = false
-gtk-adwaita = false
 window-padding-x = 2
 window-padding-balance = true
 window-theme = ghostty
