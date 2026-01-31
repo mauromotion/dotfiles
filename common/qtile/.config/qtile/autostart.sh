@@ -45,6 +45,7 @@ if [[ "$HOSTNAME" == "eva-01" ]]; then
   nm-applet &
   openrgb --startminimized &
   picom -b &
+  protonvpn connect --p2p &
   syncthingtray-qt6 &
   udiskie -a -n -t &
   xbindkeys &
