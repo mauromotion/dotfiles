@@ -14,16 +14,16 @@ fish_vi_key_bindings
 
 set fish_greeting
 ## Greeting message
-# function fish_greeting
-#     echo --------------------------------
-#     echo ┌┬┐┌─┐┬ ┬┬─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌┐┌
-#     echo │││├─┤│ │├┬┘│ │││││ │ │ ││ ││││
-#     echo ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘
-#     echo --------- Fish Shell -----------
-#     echo
-#     echo The time is (set_color yellow; date +%T; set_color normal) and this machine is called $hostname
-#     echo
-# end
+function fish_greeting
+    echo --------------------------------
+    echo ┌┬┐┌─┐┬ ┬┬─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌┐┌
+    echo │││├─┤│ │├┬┘│ │││││ │ │ ││ ││││
+    echo ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘
+    echo --------- Fish Shell -----------
+    echo
+    echo The time is (set_color yellow; date +%T; set_color normal)and you are piloting(set_color green) $hostname (set_color normal)
+    echo
+end
 
 # Enable fzf keybindings
 fzf --fish | source
