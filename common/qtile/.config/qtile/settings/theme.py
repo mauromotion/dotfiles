@@ -4,6 +4,7 @@ import os
 """ _Available themes_: 
     doom-one
     catppuccin, 
+    everforest,
     gruvbox-material-dark, 
     gruvbox-material-light, 
     material-lighter,

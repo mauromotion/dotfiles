@@ -21,7 +21,7 @@ function fish_greeting
     echo ┴ ┴┴ ┴└─┘┴└─└─┘┴ ┴└─┘ ┴ ┴└─┘┘└┘
     echo --------- Fish Shell -----------
     echo
-    echo The time is (set_color yellow; date +%T; set_color normal)and you are piloting(set_color green) $hostname (set_color normal)
+    echo The time is (set_color yellow; date +%T; set_color normal) and you are piloting(set_color green) $hostname (set_color normal)
     echo
 end
 
