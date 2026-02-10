@@ -17,8 +17,8 @@ layouts = [
         border_focus_stack=[colors["cyan"][0], colors["green"][0]],
         border_width=1,
         # initial_ratio=1.618,
-        # margin=6,
-        # margin_on_single=25,
+        margin=8,
+        margin_on_single=60,
     ),
     layout.Max(),
     layout.TreeTab(

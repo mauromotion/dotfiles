@@ -38,9 +38,25 @@ shadow-offset-y = 0;
 # shadow-color = "#000000"
 
 # Specify a list of conditions of windows that should have no shadow.
-# DEPRECATED: shadow-exclude is deprecated, use rules instead
-# These exclusions are now in the rules section below
+#
+# examples:
+#   shadow-exclude = "n:e:Notification";
+#
 # shadow-exclude = []
+shadow-exclude = [
+  "name = 'Notification'",
+  "name = 'Telegram-desktop'",
+  "class_g = 'Conky'",
+  "class_g ?= 'Notify-osd'",
+  "class_g ?= 'Dunst'",
+  "class_g ?= 'Firefox'",
+  "class_g ?= 'Firefox-developer-edition'",
+  "class_g ?= 'Freetube'",
+  "class_g ?= 'Alacritty'",
+  "class_g ?= 'Logseq'",
+  "class_g = 'Cairo-clock'",
+  # "_GTK_FRAME_EXTENTS@:c"
+];
 
 # Specify a list of conditions of windows that should have no shadow painted over, such as a dock window.
 # clip-shadow-above = []
@@ -100,8 +116,7 @@ fade-delta = 4
 
 # Let inactive opacity set by -i override the '_NET_WM_WINDOW_OPACITY' values of windows.
 # inactive-opacity-override = true
-# DEPRECATED: This option has been removed in newer picom versions
-# inactive-opacity-override = false;
+inactive-opacity-override = false;
 
 # Default opacity for active windows. (0.0 - 1.0, defaults to 1.0)
 # active-opacity = 1.0
@@ -110,9 +125,8 @@ fade-delta = 4
 # inactive-dim = 0.0
 
 # Specify a list of conditions of windows that should never be considered focused.
-# DEPRECATED: focus-exclude is deprecated, use rules instead
-# This exclusion is now in the rules section below
 # focus-exclude = []
+focus-exclude = [ "class_g = 'Cairo-clock'" ];
 
 # Use fixed inactive dim value, instead of adjusting according to window opacity.
 # inactive-dim-fixed = 1.0
@@ -137,9 +151,10 @@ fade-delta = 4
 corner-radius = 0
 
 # Exclude conditions for rounded corners.
-# DEPRECATED: rounded-corners-exclude is deprecated, use rules instead
-# These exclusions are now in the rules section below
-# rounded-corners-exclude = []
+rounded-corners-exclude = [
+  "window_type = 'dock'",
+  "window_type = 'desktop'"
+];
 
 
 #################################
@@ -148,7 +163,6 @@ corner-radius = 0
 
 
 # Parameters for background blurring, see the *BLUR* section for more information.
-# FIXED: Uncommented blur-method as it's required when using blur
 blur-method = "gaussian";
 blur-size = 20
 blur-deviation = 5
@@ -181,9 +195,12 @@ blur-kern = "3x3box";
 
 
 # Exclude conditions for background blur.
-# DEPRECATED: blur-background-exclude is deprecated, use rules instead
-# These exclusions are now in the rules section below
 # blur-background-exclude = []
+blur-background-exclude = [
+  "window_type = 'dock'",
+  "window_type = 'desktop'",
+  # "_GTK_FRAME_EXTENTS@:c"
+];
 
 #################################
 #       General Settings        #
@@ -195,7 +212,7 @@ blur-kern = "3x3box";
 # Daemonize process. Fork to background after initialization. Causes issues with certain (badly-written) drivers.
 # daemon = false
 
-# Specify the backend to use: `xrender`, `glx`, or `egl`.
+# Specify the backend to use: `xrender`, `glx`, or `xr_glx_hybrid`.
 # `xrender` is the default one.
 #
 # backend = "glx"
@@ -210,14 +227,13 @@ vsync = true;
 
 # Try to detect WM windows (a non-override-redirect window with no
 # child that has 'WM_STATE') and mark them as active.
-# DEPRECATED: This option has been removed in newer picom versions
+#
 # mark-wmwin-focused = false
-# mark-wmwin-focused = true;
+mark-wmwin-focused = true;
 
 # Mark override-redirect windows that doesn't have a child window with 'WM_STATE' focused.
-# DEPRECATED: This option has been removed in newer picom versions
 # mark-ovredir-focused = false
-# mark-ovredir-focused = true;
+mark-ovredir-focused = true;
 
 # Try to detect windows with rounded corners and don't consider them
 # shaped windows. The accuracy is not very high, unfortunately.
@@ -371,97 +387,51 @@ log-level = "warn";
 # Write process ID to a file.
 # write-pid-path = "/path/to/your/log/file"
 
-#################################
-#     Window Rules (NEW)        #
-#################################
-
-# REPLACED wintypes section with new rules syntax
-# The old wintypes section is deprecated in newer picom versions
-# All exclude options have been converted to rules
-rules: (
-  # Shadow exclusions (converted from shadow-exclude)
-  {
-    match = "name = 'Notification' || "
-            "name = 'Telegram-desktop' || "
-            "class_g = 'Conky' || "
-            "class_g ?= 'Notify-osd' || "
-            "class_g ?= 'Dunst' || "
-            "class_g ?= 'Firefox' || "
-            "class_g ?= 'Firefox-developer-edition' || "
-            "class_g ?= 'Freetube' || "
-            "class_g ?= 'Alacritty' || "
-            "class_g ?= 'Logseq' || "
-            "class_g = 'Cairo-clock'";
-    shadow = false;
-  },
-  # Focus exclusions (converted from focus-exclude)
-  {
-    match = "class_g = 'Cairo-clock'";
-    focus = false;
-  },
-  # Blur exclusions (converted from blur-background-exclude)
-  {
-    match = "window_type = 'dock' || "
-            "window_type = 'desktop'";
-    blur-background = false;
-  },
-  # Rounded corners exclusions (converted from rounded-corners-exclude)
-  {
-    match = "window_type = 'dock' || "
-            "window_type = 'desktop'";
-    corner-radius = 0;
-  },
-  # Tooltip windows
-  {
-    match = "window_type = 'tooltip'";
-    fade = true;
-    shadow = true;
-    opacity = 1.00;
-    focus = true;
-    full-shadow = false;
-  },
-  # Dock windows
-  {
-    match = "window_type = 'dock'";
-    shadow = false;
-    clip-shadow-above = true;
-  },
-  # DND (drag and drop) windows
-  {
-    match = "window_type = 'dnd'";
-    shadow = false;
-  },
-  # Popup menu windows
-  {
-    match = "window_type = 'popup_menu'";
-    opacity = 1.0;
-  },
-  # Dropdown menu windows
-  {
-    match = "window_type = 'dropdown_menu'";
-    opacity = 1.0;
-  },
-  # Scratchpad animation rule (from your original config)
-  {
-    match = "class_i = 'scratchpad'";
-    animations = (
-      {
-        triggers = [ "open", "show" ];
-        preset = "slide-in";
-        direction = "up";
-      },
-      {
-        triggers = [ "close", "hide" ];
-        preset = "slide-out";
-        direction = "up";
-        duration = 0.1;
-      },
-    )
-  },
-)
+# Window type settings
+#
+# 'WINDOW_TYPE' is one of the 15 window types defined in EWMH standard:
+#     "unknown", "desktop", "dock", "toolbar", "menu", "utility",
+#     "splash", "dialog", "normal", "dropdown_menu", "popup_menu",
+#     "tooltip", "notification", "combo", and "dnd".
+#
+# Following per window-type options are available: ::
+#
+#   fade, shadow:::
+#     Controls window-type-specific shadow and fade settings.
+#
+#   opacity:::
+#     Controls default opacity of the window type.
+#
+#   focus:::
+#     Controls whether the window of this type is to be always considered focused.
+#     (By default, all window types except "normal" and "dialog" has this on.)
+#
+#   full-shadow:::
+#     Controls whether shadow is drawn under the parts of the window that you
+#     normally won't be able to see. Useful when the window has parts of it
+#     transparent, and you want shadows in those areas.
+#
+#   clip-shadow-above:::
+#     Controls whether shadows that would have been drawn above the window should
+#     be clipped. Useful for dock windows that should have no shadow painted on top.
+#
+#   redir-ignore:::
+#     Controls whether this type of windows should cause screen to become
+#     redirected again after been unredirected. If you have unredir-if-possible
+#     set, and doesn't want certain window to cause unnecessary screen redirection,
+#     you can set this to `true`.
+#
+wintypes:
+{
+  tooltip = { fade = true; shadow = true; opacity = 1.00; focus = true; full-shadow = false; };
+  dock = { shadow = false; clip-shadow-above = true; }
+  dnd = { shadow = false; }
+  popup_menu = { opacity = 1.0; }
+  dropdown_menu = { opacity = 1.0; }
+};
 
 #################################
-#     Animation Settings        #
+#     Animation Settings    #
 #################################
 
 animations = (
@@ -533,3 +503,20 @@ animations = (
     shadow-offset-y = "offset-y";
   }
 )
+
+rules = (
+        { match = "class_i = 'scratchpad'"; animations = (
+                { triggers = [ "open", "show" ];
+                  preset = "slide-in";
+                  direction = "up";
+                },
+
+                { triggers = [ "close", "hide" ];
+                  preset = "slide-out";
+                  direction = "up";
+                  duration = 0.1;
+                },
+                )
+        },
+)
+

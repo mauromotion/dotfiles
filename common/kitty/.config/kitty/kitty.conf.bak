@@ -1063,7 +1063,7 @@ tab_powerline_style round
 
 #: The foreground and background colors.
 
-background_opacity 1
+background_opacity 0.97
 
 #: The opacity of the background. A number between zero and one, where
 #: one is opaque and zero is fully transparent. This will only work if
@@ -2367,6 +2367,6 @@ map ctrl+shift+l neighboring_window right
 
 
 # BEGIN_KITTY_THEME
-# Monokai
+# Fideloper
 include current-theme.conf
 # END_KITTY_THEME
