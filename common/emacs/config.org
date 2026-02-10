@@ -112,29 +112,31 @@ This literal configuration will work like this:
   (auto-package-update-at-time "10:00"))
 #+end_src
 * Keep directories clean
-All the temp and backup files that Emacs generates are put into "~/.cache/emacs" instead that along side the original files in the same directory.
+All the temp and backup files that Emacs generates are put into "~/.cache/emacs" instead of alongside the original files.
 #+begin_src emacs-lisp
 ;;;; Keep directories clean ------------------------------------------
+
 (use-package no-littering
   :demand t
-  :init
-  (setq user-emacs-directory "~/.cache/emacs"))
+  :config
+  ;; Set the main Emacs directory for no-littering
+  (setq user-emacs-directory "~/.cache/emacs")
 
-;; Define backup and auto-save paths with mmotion/ prefix
-(defvar mmotion/backup-dir (no-littering-expand-var-file-name "backup/"))
-(defvar mmotion/auto-save-dir (no-littering-expand-var-file-name "auto-save/"))
+  ;; Define backup and auto-save paths with mmotion/ prefix
+  (defvar mmotion/backup-dir (no-littering-expand-var-file-name "backup/"))
+  (defvar mmotion/auto-save-dir (no-littering-expand-var-file-name "auto-save/"))
 
-;; Ensure the directories exist
-(dolist (dir (list mmotion/backup-dir mmotion/auto-save-dir))
-  (unless (file-exists-p dir)
-    (make-directory dir t)))
+  ;; Ensure the directories exist
+  (dolist (dir (list mmotion/backup-dir mmotion/auto-save-dir))
+    (unless (file-exists-p dir)
+      (make-directory dir t)))
 
-;; Redirect auto-save and backup files to clean directories
-(setq auto-save-file-name-transforms `((".*" ,mmotion/auto-save-dir t)))
-(setq backup-directory-alist `(("." . ,mmotion/backup-dir)))
+  ;; Redirect auto-save and backup files to clean directories
+  (setq auto-save-file-name-transforms `((".*" ,mmotion/auto-save-dir t)))
+  (setq backup-directory-alist `(("." . ,mmotion/backup-dir)))
 
-;; Optional: prevent lockfiles like .#file.txt
-(setq create-lockfiles nil)
+  ;; Optional: prevent lockfiles like .#file.txt
+  (setq create-lockfiles nil))
 #+end_src
 * Essentials
 ** UI elements, commands history, trash dir, tabs.
@@ -290,7 +292,7 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]] an
   (setq doric-themes-to-toggle '(doric-earth doric-fire)))
 #+end_src
 *** Doom-themes
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp 
 ;;;; doom-themes
 (use-package doom-themes
   :defer t
@@ -608,7 +610,7 @@ Display keybindings while typing them.
   (message "Line numbers: %s" display-line-numbers))
    #+end_src
 *** Circe IRC connection 
-#+begin_src elisp
+#+begin_src elisp :tangle no
 (defun circe-libera ()
  "Connect to Libera Chat via Circe."
  (interactive)
@@ -1303,7 +1305,7 @@ Completion at point.
 ** Email
 *** mu4e
 Email client (requires installing =mu= and =mbsync=, and setting up =mbsync= on each machine)
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (use-package mu4e
   :ensure nil
   :ensure-system-package mu
@@ -1352,7 +1354,7 @@ Email client (requires installing =mu= and =mbsync=, and setting up =mbsync= on 
 ** IRC
 *** Circe
 IRC chat client.
-#+begin_src elisp
+#+begin_src elisp :tangle no
 (use-package circe
   :commands (circe)
   :config
@@ -1372,7 +1374,7 @@ IRC chat client.
 * Reading
 ** PDF-tools
 Open PDF files in Emacs.
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package pdf-tools
   :mode ("\\.pdf\\'" . pdf-view-mode)
   :init
@@ -1422,7 +1424,7 @@ Open PDF files in Emacs.
   (save-place-mode 1))
 #+end_src
 ** Nov EPUB reader
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 ;; EPUB reader with nov.el
 (use-package nov
   :mode ("\\.epub\\'" . nov-mode)
@@ -2327,7 +2329,7 @@ Customise ibuffer's look with categories and icons.
 #+end_src
 ** LSP mode
 *** LSP mode set up
-   #+begin_src emacs-lisp
+   #+begin_src emacs-lisp 
 ;;; LSP mode ---------------------------------------------------
 ;;;; Breadcrumb
 (defun mmotion/setup-lsp-breadcrumb ()
@@ -2403,8 +2405,8 @@ Customise ibuffer's look with categories and icons.
   :defer t
   :hook ((python-mode python-ts-mode) . pyvenv-auto-run))
    #+end_src
-*** Teemacs
-   #+begin_src emacs-lisp
+*** Treemacs
+   #+begin_src emacs-lisp :tangle no
 ;;;; Treemacs
 (use-package lsp-treemacs
   :after lsp)
