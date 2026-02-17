@@ -18,7 +18,7 @@ layouts = [
         border_width=1,
         # initial_ratio=1.618,
         margin=8,
-        margin_on_single=60,
+        margin_on_single=120,
     ),
     layout.Max(),
     layout.TreeTab(

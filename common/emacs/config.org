@@ -264,24 +264,17 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]] an
 ;;; Themes ------------------------------------------------
 ;;;; ef-themes
 (use-package ef-themes
-  :defer t
+  :demand t
+  :init
+  (ef-themes-take-over-modus-themes-mode 1)
   :config
-  (setq ef-themes-to-toggle '(ef-kassio ef-owl))
-  ;; (setq ef-themes-headings ; read the manual's entry or the doc string
-  ;;     '((0 variable-pitch light 2)
-  ;;       (1 variable-pitch light 1.8)
-  ;;       (2 variable-pitch regular 1.7)
-  ;;       (3 variable-pitch regular 1.6)
-  ;;       (4 variable-pitch regular 1.5)
-  ;;       (5 variable-pitch 1.4) ; absence of weight means `bold'
-  ;;       (6 variable-pitch 1.3)
-  ;;       (7 variable-pitch 1.2)
-  ;;       (t variable-pitch 1.1)))
+  (setq modus-themes-to-toggle '(ef-elea-light ef-elea-dark))
 ;; They are nil by default...
-  (setq ef-themes-mixed-fonts t
-      ef-themes-variable-pitch-ui t)
+  (setq modus-themes-mixed-fonts t
+      modus-themes-variable-pitch-ui t))
 ;; Disable all other themes to avoid awkward blending:
-  (mapc #'disable-theme custom-enabled-themes))
+  ;; (mapc #'disable-theme custom-enabled-themes)
+ ;; (modus-themes-load-theme 'ef-elea-dark))
 #+end_src
 *** Doric-themes
 #+begin_src emacs-lisp
@@ -304,7 +297,7 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]] an
 #+end_src
 *** Circadian
 Set dark or light theme based on the time of the day.
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle yes
 ;;;; Set dark or light theme based on the time of the day
 (setq calendar-latitude 51.406422)
 (setq calendar-longitude 0.004860)
@@ -312,8 +305,8 @@ Set dark or light theme based on the time of the day.
 (use-package circadian
   :ensure t
   :config
-  (setq circadian-themes '((:sunrise . ef-kassio)
-                           (:sunset  . ef-owl)))
+  (setq circadian-themes '((:sunrise . ef-elea-light)
+                           (:sunset  . ef-elea-dark)))
   (circadian-setup))
 #+end_src
 ** Nerd-icons
@@ -610,7 +603,7 @@ Display keybindings while typing them.
   (message "Line numbers: %s" display-line-numbers))
    #+end_src
 *** Circe IRC connection 
-#+begin_src elisp :tangle no
+#+begin_src elisp :tangle yes
 (defun circe-libera ()
  "Connect to Libera Chat via Circe."
  (interactive)
@@ -781,6 +774,7 @@ Keybindings with functions to be able to do things repeatedly like changing the 
   "n" #'org-narrow-to-subtree
   "p" #'org-refile-copy
   "s" #'org-schedule
+  "t" #'org-todo
   "u" #'org-update-all-dblocks
   "v" #'visible-mode
   "w" #'widen)
@@ -973,6 +967,7 @@ Keybindings with functions to be able to do things repeatedly like changing the 
     "n" "Narrow to subtree"
     "p" "Org Refile Copy"
     "s" "Add a Schedule"
+    "t" "Change Todo status"
     "u" "Update all dblocks"
     "v" "Toggle concealing"
     "w" "Widen (undo narrowing)")
@@ -1354,7 +1349,7 @@ Email client (requires installing =mu= and =mbsync=, and setting up =mbsync= on 
 ** IRC
 *** Circe
 IRC chat client.
-#+begin_src elisp :tangle no
+#+begin_src elisp :tangle yes
 (use-package circe
   :commands (circe)
   :config
@@ -1374,7 +1369,7 @@ IRC chat client.
 * Reading
 ** PDF-tools
 Open PDF files in Emacs.
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (use-package pdf-tools
   :mode ("\\.pdf\\'" . pdf-view-mode)
   :init
@@ -1424,7 +1419,7 @@ Open PDF files in Emacs.
   (save-place-mode 1))
 #+end_src
 ** Nov EPUB reader
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 ;; EPUB reader with nov.el
 (use-package nov
   :mode ("\\.epub\\'" . nov-mode)
@@ -1590,7 +1585,7 @@ RSS reader.
       (apply #'set-face-attribute face nil
              (plist-put attrs :family mmotion/variable-font)))))
 
-;;:: Add hook to reapply font settings after theme changes
+;;;; Add hook to reapply font settings after theme changes
 (defun mmotion/reapply-org-fonts-after-theme-change (&rest _)
   "Reapply org font settings after theme change."
   (when (fboundp 'mmotion/set-heading-fonts)
@@ -1609,7 +1604,7 @@ RSS reader.
 ** Org-mode config
    #+begin_src emacs-lisp
 (use-package org
-  :commands (org-capture org-agenda)
+  ;; :commands (org-capture org-agenda)
   :hook ((org-mode . mmotion/org-mode-setup)
          (org-mode . mmotion/set-heading-fonts))
   :config
@@ -1630,6 +1625,7 @@ RSS reader.
   (org-hide-emphasis-markers t)
   (org-agenda-start-with-log-mode t)
   (org-log-done 'time)
+  (org-fontify-quote-and-verse-blocks t)
   (org-pretty-entities t)
   (org-startup-folded 'showeverything)
   (org-hide-block-startup nil)
@@ -1938,6 +1934,30 @@ Typewriter-like look of the page (centring).
   (push '("[-]" . "❍") prettify-symbols-alist)
   (prettify-symbols-mode)))
 
+#+end_src
+*** Stylize quote blocks
+#+begin_src elisp :lexical no
+ (defun mmotion/set-org-quote-face ()
+  "Style org quote blocks with theme-aware subtle background."
+  (let ((bg (face-attribute 'default :background)))
+    (set-face-attribute 'org-quote nil
+                        :inherit 'variable-pitch
+                        :slant 'italic
+                        :background (face-attribute 'org-block-begin-line :background)
+                        :extend t))) 
+
+;; Call it after org loads
+(add-hook 'org-mode-hook #'mmotion/set-org-quote-face)
+
+;; And after theme changes (add to your existing advice)
+(advice-add 'load-theme :after #'mmotion/set-org-quote-face)
+(advice-add 'enable-theme :after #'mmotion/set-org-quote-face)
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (font-lock-add-keywords nil
+              '(("^[ \t]*\\(#\\+begin_quote\\).*$" 1 '(face org-meta-line display "❝"))
+                ("^[ \t]*\\(#\\+end_quote\\).*$" 1 '(face org-meta-line display "❞"))))))
 #+end_src
 * Note taking & Journaling
 ** Denote
