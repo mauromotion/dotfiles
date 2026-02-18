@@ -1937,14 +1937,13 @@ Typewriter-like look of the page (centring).
 #+end_src
 *** Stylize quote blocks
 #+begin_src elisp :lexical no
- (defun mmotion/set-org-quote-face ()
+ (defun mmotion/set-org-quote-face (&rest _)
   "Style org quote blocks with theme-aware subtle background."
-  (let ((bg (face-attribute 'default :background)))
     (set-face-attribute 'org-quote nil
                         :inherit 'variable-pitch
                         :slant 'italic
                         :background (face-attribute 'org-block-begin-line :background)
-                        :extend t))) 
+                        :extend t)) 
 
 ;; Call it after org loads
 (add-hook 'org-mode-hook #'mmotion/set-org-quote-face)
