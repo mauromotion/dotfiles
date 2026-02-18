@@ -100,7 +100,7 @@ This literal configuration will work like this:
 - =init.el= will also auto-reload the config each time =config.org= is saved.
 * Package Manager
 ** Auto-Update Packages
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 ;;;; Auto-update packages
 (use-package auto-package-update
   :custom
@@ -1434,9 +1434,9 @@ Open PDF files in Emacs.
   (add-hook 'nov-mode-hook
             (lambda ()
               ;; Improved typography
-              (face-remap-add-relative 'variable-pitch :family "Georgia" :height 1.2)
+              (face-remap-add-relative 'variable-pitch :family "Work Sans" :height 1.1)
               ;; Better line spacing
-              (setq-local line-spacing 0.2)
+              (setq-local line-spacing 0.1)
               ;; Center text for better reading
               (visual-line-mode 1)
               ;; Hide cursor like in PDFs
