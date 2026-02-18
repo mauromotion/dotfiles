@@ -67,6 +67,7 @@
   - [[#toc-org][TOC-org]]
   - [[#org-babel][Org-Babel]]
   - [[#org-download][Org-download]]
+  - [[#org-inline-animated-gifs][Org inline animated gifs]]
   - [[#structure-templates][Structure Templates]]
   - [[#org-block-capf][org-block-capf]]
   - [[#highlight-todo][Highlight-todo]]
@@ -767,7 +768,7 @@ Keybindings with functions to be able to do things repeatedly like changing the 
   "c" #'org-capture
   "d" #'org-deadline
   "h" #'org-next-link
-  "i" #'mmotion/org-insert-image-from-url
+  "i" #'org-download-image
   "l" #'org-previous-link
   "L" #'org-insert-link
   "r" #'org-refile
@@ -1768,6 +1769,16 @@ Table Of Content.
   (define-key org-mode-map (kbd "C-c C-i") #'org-download-image)      ; URL
   (define-key org-mode-map (kbd "C-c C-f") #'org-download-yank))      ; local file
 #+end_src
+** Org inline animated gifs
+Org-inline-anim plays animated GIF or PNG inline in Org buffers.
+#+begin_src elisp :lexical no
+ (use-package org-inline-anim
+  :config
+  (setq org-inline-anim-loop t))
+
+(add-hook 'org-mode-hook #'org-inline-anim-mode)
+#+end_src
+
 ** Structure Templates
 #+begin_src emacs-lisp
 ;;;; Structure templates
@@ -1937,7 +1948,7 @@ Typewriter-like look of the page (centring).
 #+end_src
 *** Stylize quote blocks
 #+begin_src elisp :lexical no
- (defun mmotion/set-org-quote-face (&rest _)
+ (defun mmotion/set-org-quote-face ()
   "Style org quote blocks with theme-aware subtle background."
     (set-face-attribute 'org-quote nil
                         :inherit 'variable-pitch
