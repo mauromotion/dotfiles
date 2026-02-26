@@ -298,7 +298,7 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]] an
 #+end_src
 *** Circadian
 Set dark or light theme based on the time of the day.
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp
 ;;;; Set dark or light theme based on the time of the day
 (setq calendar-latitude 51.406422)
 (setq calendar-longitude 0.004860)

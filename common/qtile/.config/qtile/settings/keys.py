@@ -13,7 +13,7 @@ from .theme import colors
 
 mod = "mod4"
 terminal = "alacritty"  # "wezterm start --always-new-process"
-browser = "zen_browser"
+browser = "zen-browser"
 file_explorer = "nemo"
 
 
