@@ -1481,8 +1481,8 @@ RSS reader.
 ;; Org integration for feed management
 (use-package elfeed-org
 	:config
-	(elfeed-org)
-	(setq rmh-elfeed-org-files (list "~/Notes/plain_orgfiles/orgfiles/elfeed.org")))
+	(setq rmh-elfeed-org-files (list "~/Notes/plain_orgfiles/orgfiles/elfeed.org"))
+	(elfeed-org))
 
 ;; Better UI
 ;; (use-package elfeed-goodies
