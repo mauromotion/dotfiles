@@ -272,10 +272,10 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]] an
   (setq modus-themes-to-toggle '(ef-elea-light ef-elea-dark))
 ;; They are nil by default...
   (setq modus-themes-mixed-fonts t
-      modus-themes-variable-pitch-ui t))
+      modus-themes-variable-pitch-ui t)
 ;; Disable all other themes to avoid awkward blending:
   ;; (mapc #'disable-theme custom-enabled-themes)
- ;; (modus-themes-load-theme 'ef-elea-dark))
+ (modus-themes-load-theme 'ef-elea-dark))
 #+end_src
 *** Doric-themes
 #+begin_src emacs-lisp
@@ -295,20 +295,6 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]] an
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t ))
 ;; (load-theme 'doom-city-lights t)
-#+end_src
-*** Circadian
-Set dark or light theme based on the time of the day.
-#+begin_src emacs-lisp
-;;;; Set dark or light theme based on the time of the day
-(setq calendar-latitude 51.406422)
-(setq calendar-longitude 0.004860)
-
-(use-package circadian
-  :ensure t
-  :config
-  (setq circadian-themes '((:sunrise . ef-elea-light)
-                           (:sunset  . ef-elea-dark)))
-  (circadian-setup))
 #+end_src
 ** Nerd-icons
 I'd rather use =nerd-icons= than =all-the-icons=, much more reliable.
@@ -1948,7 +1934,7 @@ Typewriter-like look of the page (centring).
 #+end_src
 *** Stylize quote blocks
 #+begin_src elisp :lexical no
- (defun mmotion/set-org-quote-face ()
+ (defun mmotion/set-org-quote-face (&rest _)
   "Style org quote blocks with theme-aware subtle background."
     (set-face-attribute 'org-quote nil
                         :inherit 'variable-pitch
