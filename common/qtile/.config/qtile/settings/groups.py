@@ -10,10 +10,10 @@ from libqtile.config import Group, Match, ScratchPad, DropDown, Key
 from libqtile.lazy import lazy
 
 from .keys import keys, mod, terminal
-from .icons import abbrev, dots, font_awesome, mixed_geo, moons, numbers, text
+from .icons import abbrev, dots, font_awesome, mixed_geo, moons, numbers, text, nerd
 
 # Choose the icons set to use
-icons = numbers
+icons = nerd
 
 # Groups (workspaces)
 groups = [
@@ -37,7 +37,7 @@ groups = [
     Group("7", label=icons[6], matches=[Match(wm_class="steam")], layout="floating"),
     Group("8", label=icons[7]),
     Group("9", label=icons[8]),
-    Group("0", label=icons[9]),
+    # Group("0", label=icons[9]),
 ]
 
 for i in groups:
