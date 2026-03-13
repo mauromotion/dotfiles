@@ -1,0 +1,72 @@
+## name: evergarden spring green
+## author: comfysage
+## license: GPL-3.0
+## blurb: a comfy colorscheme for cozy morning coding
+
+[colors.primary]
+background = "#2b3438"
+foreground = "#f8f9e8"
+dim_foreground = "#96b4aa"
+bright_foreground = "#f8f9e8"
+
+[colors.cursor]
+text = "#1c2225"
+cursor = "#cbe3b3"
+
+[colors.vi_mode_cursor]
+text = "#1c2225"
+cursor = "#cbe3b3"
+
+[colors.search.matches]
+foreground = "#f7a182"
+background = "#1c2225"
+
+[colors.search.focused_match]
+foreground = "#1c2225"
+background = "#f7a182"
+
+[colors.footer_bar]
+foreground = "#839e9a"
+background = "#1c2225"
+
+[colors.hints.start]
+foreground = "#1c2225"
+background = "#f5d098"
+
+[colors.hints.end]
+foreground = "#1c2225"
+background = "#96b4aa"
+
+[colors.selection]
+text = "#f8f9e8"
+background = "#3e4a4f"
+
+[colors.normal]
+black = "#2b3438"
+red = "#f57f82"
+green = "#cbe3b3"
+yellow = "#f5d098"
+blue = "#b2caed"
+magenta = "#f3c0e5"
+cyan = "#b3e3ca"
+white = "#f8f9e8"
+
+[colors.bright]
+black = "#343e43"
+red = "#f57f82"
+green = "#cbe3b3"
+yellow = "#f5d098"
+blue = "#b2caed"
+magenta = "#f3c0e5"
+cyan = "#b3e3ca"
+white = "#96b4aa"
+
+[colors.dim]
+black = "#2b3438"
+red = "#f57f82"
+green = "#cbe3b3"
+yellow = "#f5d098"
+blue = "#b2caed"
+magenta = "#f3c0e5"
+cyan = "#b3e3ca"
+white = "#f8f9e8"
