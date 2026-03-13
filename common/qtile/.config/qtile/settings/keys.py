@@ -135,22 +135,29 @@ keys = [
         ),
         desc="Launch Rofi Power Menu",
     ),
-    # Dmenu
+    # # Dmenu
+    # Key(
+    #     [mod],
+    #     "d",
+    #     lazy.run_extension(
+    #         ext.DmenuRun(
+    #             dmenu_prompt=">",
+    #             dmenu_font="Noto Sans Mono",
+    #             background=colors["background"][0],
+    #             foreground=colors["foreground"][0],
+    #             selected_background=colors["accent1"][0],
+    #             selected_foreground=colors["background"][0],
+    #             dmenu_bottom=True,
+    #         )
+    #     ),
+    #     desc="Launch Dmenu Launcher",
+    # ),
+    # Dired
     Key(
-        [mod],
+        [mod, "shift"],
         "d",
-        lazy.run_extension(
-            ext.DmenuRun(
-                dmenu_prompt=">",
-                dmenu_font="Noto Sans Mono",
-                background=colors["background"][0],
-                foreground=colors["foreground"][0],
-                selected_background=colors["accent1"][0],
-                selected_foreground=colors["background"][0],
-                dmenu_bottom=True,
-            )
-        ),
-        desc="Launch Dmenu Launcher",
+        lazy.spawn("emacsclient -c -e '(dired \"~/\")'"),
+        desc="Launch Dired",
     ),
     # Terminal
     Key([mod, "shift"], "Return", lazy.spawn(terminal), desc="Launch Terminal"),
@@ -164,8 +171,7 @@ keys = [
     # Browser
     Key([mod], "b", lazy.spawn(browser), desc="Launch Browser"),
     # File Explorer
-    # Key([mod, "shift"], "f", lazy.spawn(file_explorer), desc="Launch File Explorer"),
-    Key([mod, "shift"], "f", lazy.spawn("emacsclient -c -e '(dired \"~/\")'"), desc="Launch File Explorer"),
+    Key([mod, "shift"], "f", lazy.spawn(file_explorer), desc="Launch File Explorer"),
     # Toggle between different layouts
     Key([mod], "space", lazy.next_layout(), desc="Toggle Between Layouts"),
     Key(
