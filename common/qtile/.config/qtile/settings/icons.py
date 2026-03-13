@@ -6,8 +6,8 @@ font_awesome = [
     "\uf249 ",
     "\uf144 ",
     "\uf1b6 ",
-    "\uf03e ",
-    "\uf0fe ",
+    "\uf07b ",
+    "\uf064 ",
 ]
 
 numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
@@ -18,8 +18,8 @@ mixed_geo = ["", "", "󱨊", "", "", "󱨊", "", "", "󱨊", "
 
 moons = ["", "", "", "", "", "", "", "", ""]
 
-text = ["home", "mail", "dev", "chat", "notes", "media", "games", "files", "tor"]
+text = ["home", "mail", "devl", "chat", "docs", "media", "games", "files", "torr"]
 
-abbrev = ["hom", "eml", "dev", "cht", "not", "med", "gam", "fil", "tor"]
+abbrev = ["hom", "eml", "dev", "cht", "doc", "med", "gam", "fil", "tor"]
 
 nerd = [" ", "󰇮 ", " ", "󰭹 ", " ", " ", "󰊖 ", " ", "󰚌 "]

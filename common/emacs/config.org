@@ -2094,6 +2094,7 @@ Typewriter-like look of the page (centring).
 
 ;; Header line customisation
 (add-hook 'dired-mode-hook
+          'dired-hide-details-mode
           (lambda ()
             (setq header-line-format
                   '(:eval (concat "📁 " default-directory)))))
