@@ -164,7 +164,8 @@ keys = [
     # Browser
     Key([mod], "b", lazy.spawn(browser), desc="Launch Browser"),
     # File Explorer
-    Key([mod, "shift"], "f", lazy.spawn(file_explorer), desc="Launch File Explorer"),
+    # Key([mod, "shift"], "f", lazy.spawn(file_explorer), desc="Launch File Explorer"),
+    Key([mod, "shift"], "f", lazy.spawn("emacsclient -c -e '(dired \"~/\")'"), desc="Launch File Explorer"),
     # Toggle between different layouts
     Key([mod], "space", lazy.next_layout(), desc="Toggle Between Layouts"),
     Key(
