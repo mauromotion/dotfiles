@@ -22,4 +22,4 @@ text = ["home", "mail", "devl", "chat", "docs", "media", "games", "files", "torr
 
 abbrev = ["hom", "eml", "dev", "cht", "doc", "med", "gam", "fil", "tor"]
 
-nerd = [" ", "󰇮 ", " ", "󰭹 ", " ", " ", "󰊖 ", " ", "󰚌 "]
+nerd = ["1: ", "2:󰇮 ", "3: ", "4:󰭹 ", "5: ", "6: ", "7:󰊖 ", "8: ", "9:󰚌 "]

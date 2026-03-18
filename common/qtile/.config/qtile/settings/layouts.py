@@ -12,10 +12,10 @@ from .theme import colors
 # Layouts configs
 layouts = [
     layout.Columns(
-        border_normal=colors["background"][0],
-        border_focus=colors["blue"][0],
-        border_focus_stack=[colors["cyan"][0], colors["green"][0]],
-        border_width=1,
+        border_normal=colors["background"][1],
+        border_focus=colors["green"][0],
+        border_focus_stack=[colors["magenta"][0], colors["green"][0]],
+        border_width=2,
         # initial_ratio=1.618,
         margin=8,
         margin_on_single=60,
@@ -29,7 +29,9 @@ layouts = [
         bg_color=colors["background"][0],
     ),
     layout.Floating(
-        border_focus=colors["blue"][0], border_normal=colors["background"][0]
+        border_focus=colors["green"][0],
+        border_normal=colors["background"][0],
+        border_width=2,
     ),
     # layout.Matrix(),
     # layout.MonadTall(
@@ -76,5 +78,5 @@ floating_layout = layout.Floating(
     ],
     border_focus=colors["foreground"][0],
     border_normal=colors["background"][0],
-    border_width=1,
+    border_width=2,
 )
