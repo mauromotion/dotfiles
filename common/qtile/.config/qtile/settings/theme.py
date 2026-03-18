@@ -5,6 +5,7 @@ import os
     doom-one
     catppuccin, 
     everforest,
+    evergarden,
     gruvbox-material-dark, 
     gruvbox-material-light, 
     material-lighter,
