@@ -1,6 +1,7 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
+	branch = "main",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		"nvim-treesitter-textobjects",
@@ -51,7 +52,7 @@ return {
 		},
 	},
 	config = function(_, opts)
-		require("nvim-treesitter.configs").setup(opts) -- merges everything
+		require("nvim-treesitter").setup(opts)
 		require("treesitter-context").setup()
 		require("nvim-ts-autotag").setup()
 	end,

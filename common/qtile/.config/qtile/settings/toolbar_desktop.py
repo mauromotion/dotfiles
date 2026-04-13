@@ -89,6 +89,7 @@ def desktop_toolbar():
             ),
             widget.Sep(foreground=colors["background"][1]),
             widget.OpenWeather(
+                app_key="a0532c4b6edfd8495b5f863c21afccd9",
                 location="Bromley,UK",
                 format="{icon} {main_temp:.1f}°{units_temperature} ({main_feels_like:.0f}°{units_temperature})",
                 update_interval=600,

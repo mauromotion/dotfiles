@@ -272,18 +272,19 @@ I love Prot's [[https://protesilaos.com/emacs/ef-themes-pictures][ef-themes]] an
   (setq modus-themes-to-toggle '(ef-elea-light ef-elea-dark))
 ;; They are nil by default...
   (setq modus-themes-mixed-fonts t
-      modus-themes-variable-pitch-ui t)
+      modus-themes-variable-pitch-ui t))
 ;; Disable all other themes to avoid awkward blending:
   ;; (mapc #'disable-theme custom-enabled-themes)
- (modus-themes-load-theme 'ef-elea-dark))
+ ;; (modus-themes-load-theme 'ef-elea-dark))
 #+end_src
 *** Doric-themes
 #+begin_src emacs-lisp
 ;;;; doric-themes
 (use-package doric-themes
-  :defer t
+  :demand t
   :config
-  (setq doric-themes-to-toggle '(doric-earth doric-fire)))
+  (setq doric-themes-to-toggle '(doric-coral doric-obsidian))
+  (doric-themes-select 'doric-coral))
 #+end_src
 *** Doom-themes
 #+begin_src emacs-lisp 

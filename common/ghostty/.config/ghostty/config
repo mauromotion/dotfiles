@@ -1,6 +1,6 @@
 theme = "Doom One"
 background-opacity = 0.95
-window-decoration = false
+window-decoration = true
 gtk-titlebar = false
 window-padding-x = 2
 window-padding-balance = true
